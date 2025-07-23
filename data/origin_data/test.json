@@ -1,0 +1,85 @@
+{
+  "Sentence_Scanning": [
+    ["1","Minimize the total operational cost,...","Defines the objective function (no feasibility constraint)"],
+    ["2","The base cost is 80 units per generator per period for...","Parameter definitions for objective (no constraint)"],
+    ["3","The variable cost is 4 units per MW for Type 0 and...","Parameter definitions for objective (no constraint)"],
+    ["4","The startup cost is 353 units for Type 0 generators,...","Parameter definitions for objective (no constraint)"],
+    ["5","The total power output from all generators must meet...","Demand‐satisfaction constraint"],
+    ["6","Each generator type has a minimum and maximum power...","Generation output‐bounds constraints"],
+    ["7","The total maximum possible output from all generators must...","Reserve‐margin constraint"],
+    ["8","For example, in Period 0, the total maximum output...","Illustrative example of reserve‐margin (no new constraint)"],
+    ["9","The number of generators operating in each period cannot...","Capacity‐limit on operating units"],
+    ["10","The number of generators started in a period is limited...","Startup‐limit constraint"],
+    ["11","For example, in Period 1, the number of Type 0 generators...","Illustrative example of startup limit (no new constraint)"],
+    ["12","This rule applies similarly for Type 1 and Type 2...","Clarification of startup‐limit applicability (no new constraint)"],
+    ["13","The goal is to determine the optimal number of generators...","Restates objective & decision variables (no constraint)"]
+  ],
+  "Variables_List": [
+    {
+      "symbol": "u_{0,t}",
+      "Meaning": "Number of Type 0 generators online in period t",
+      "Type": "integer",
+      "Range ": "0 ≤ u_{0,t} ≤ 5, for t=0…4"
+    },
+    {
+      "symbol": "u_{1,t}",
+      "Meaning": "Number of Type 1 generators online in period t",
+      "Type": "integer",
+      "Range ": "0 ≤ u_{1,t} ≤ 2, for t=0…4"
+    },
+    {
+      "symbol": "u_{2,t}",
+      "Meaning": "Number of Type 2 generators online in period t",
+      "Type": "integer",
+      "Range ": "0 ≤ u_{2,t} ≤ 1, for t=0…4"
+    },
+    {
+      "symbol": "p_{0,t}",
+      "Meaning": "Total power output of Type 0 generators in period t (MW)",
+      "Type": "continuous",
+      "Range ": "35 u_{0,t} ≤ p_{0,t} ≤ 126 u_{0,t}, for t=0…4"
+    },
+    {
+      "symbol": "p_{1,t}",
+      "Meaning": "Total power output of Type 1 generators in period t (MW)",
+      "Type": "continuous",
+      "Range ": "35 u_{1,t} ≤ p_{1,t} ≤ 130 u_{1,t}, for t=0…4"
+    },
+    {
+      "symbol": "p_{2,t}",
+      "Meaning": "Total power output of Type 2 generators in period t (MW)",
+      "Type": "continuous",
+      "Range ": "35 u_{2,t} ≤ p_{2,t} ≤ 125 u_{2,t}, for t=0…4"
+    },
+    {
+      "symbol": "s_{0,t}",
+      "Meaning": "Number of Type 0 generators started in period t",
+      "Type": "integer",
+      "Range ": "0 ≤ s_{0,t} ≤ u_{0,t} – u_{0,t-1}, t=1…4; 0 ≤ s_{0,0} ≤ u_{0,0}"
+    },
+    {
+      "symbol": "s_{1,t}",
+      "Meaning": "Number of Type 1 generators started in period t",
+      "Type": "integer",
+      "Range ": "0 ≤ s_{1,t} ≤ u_{1,t} – u_{1,t-1}, t=1…4; 0 ≤ s_{1,0} ≤ u_{1,0}"
+    },
+    {
+      "symbol": "s_{2,t}",
+      "Meaning": "Number of Type 2 generators started in period t",
+      "Type": "integer",
+      "Range ": "0 ≤ s_{2,t} ≤ u_{2,t} – u_{2,t-1}, t=1…4; 0 ≤ s_{2,0} ≤ u_{2,0}"
+    }
+  ],
+  "Constraint_Table":[
+    ["Demand satisfaction","∑_{i=0}^2 p_{i,t} ≥ D_t, ∀t=0…4","sentence numbers:5"],
+    ["Generation output bounds","35 u_{0,t} ≤ p_{0,t} ≤ 126 u_{0,t}; 35 u_{1,t} ≤ p_{1,t} ≤ 130 u_{1,t}; 35 u_{2,t} ≤ p_{2,t} ≤ 125 u_{2,t}, ∀t","sentence numbers:6"],
+    ["Reserve margin","∑_{i=0}^2 max_i·u_{i,t} ≥ 1.15·D_t, ∀t (max₀=126, max₁=130, max₂=125)","sentence numbers:7"],
+    ["Unit capacity limit","0 ≤ u_{0,t} ≤ 5; 0 ≤ u_{1,t} ≤ 2; 0 ≤ u_{2,t} ≤ 1, ∀t","sentence numbers:9"],
+    ["Startup limit","0 ≤ s_{i,t} ≤ u_{i,t} – u_{i,t-1}, ∀i∈{0,1,2}, t=1…4; and 0 ≤ s_{i,0} ≤ u_{i,0}","sentence numbers:10-12"]
+  ],
+  "Objective": {
+    "Objective_sentence":"Minimize the total operational cost,...",
+    "Mathematical_expressions":"Minimize ∑_{t=0}^4 [(80·u_{0,t}+78·u_{1,t}+80·u_{2,t}) + (4·p_{0,t}+4·p_{1,t}+3·p_{2,t}) + (353·s_{0,t}+349·s_{1,t}+351·s_{2,t})]"
+  },
+  "Problem_Type":"MILP",
+}
