@@ -9,27 +9,27 @@ powers (greater than 2), fractions & fractional powers, and exponentials & logar
 aspect, and a horizontal line indicates that this aspect is not covered.(b) NExTOR’s Statistics.(c) NORA and Shared Context
 Mechanism.
 
-![contribution](D:\LLMProject\git_NORA\NExT\pic\contribution.png)
+![contribution](pic\contribution.png)
 
 ## Fig 2: NORA Framework
 
-![framework](D:\LLMProject\git_NORA\NExT\pic\framework.png)
+![framework](pic\framework.png)
 
 ## Fig 3: NETA
 
 NExTOR synthesis method. This synthesis method first collect data from 3 primary channel, and comprises 3 core
 step:(b)Forward step, (c)NExT step and (d)Verification step, based on 4 Guiding Principles
 
-![sysMethod](D:\LLMProject\git_NORA\NExT\pic\sysMethod.png)
+![sysMethod](pic\sysMethod.png)
 
 ## Table 1: Main Result
 
 Accuracy (pass@1) comparison across multiple datasets and methods.
 
-![result](D:\LLMProject\git_NORA\NExT\pic\result.png)
+![result](pic\result.png)
 
 ## Figure 4: Ablation Study.
 
 The left line is a line graph showing the difference between the module in the ablation study andNORA. The further to the left, the greater the difference.
 
-![AblationStudy](D:\LLMProject\git_NORA\NExT\pic\AblationStudy.png)
+![AblationStudy](pic\AblationStudy.png)
