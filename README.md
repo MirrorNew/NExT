@@ -25,7 +25,7 @@ This synthesis method first (a) collects data from three primary channels, and t
  The left line is a line graph showing the difference between the module
 in the ablation study and NORA. The further to the left, the greater the difference.
 
-![AblationStudy](D:\LLMProject\git_NORA\NExT\pic\AblationStudy.png)
+![AblationStudy](pic\AblationStudy.png)
 
 ## Figure 4: NEXTOR’s Statistics.
 
