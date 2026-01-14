@@ -4,7 +4,7 @@ Automating the translation of Operations Research (OR) problems from natural lan
 
 ## Figure 1: The Nonlinear Semantic Gap in LLM Optimization Modeling
 
-![motivation](pic/S1_new_motivation.pdf)
+![motivation](pic/S1_new_motivation.png)
 
 ## Figure 2: LLM Nonlinear Optimization Modeling in Existing Methods.
 
@@ -13,21 +13,22 @@ Containing piecewise functions or conditional costs.
 
 (b) Proportion of 3 types of errors: type I: modeling semantic errors, type II: nonlinear code semantic errors, type III: other code writing errors
 
-![observation](pic/S3_observation.pdf)
+![observation](pic/S3_observation.png)
 
 ## Figure 3: NEDTree framework.
 
 Our approach comprises three parts: (a) Sentence-by-Sentence Extraction, (b)Mapping from Modeling Semantic to NED-Tree, and (c) Mapping from NED-Tree to Coding Semantic. The aim is to align modeling semantics with code semantics.
 
-![framework](pic/S4_framework.pdf)
+![framework](pic/S4_framework.png)
 
 ## Figure 4: Ablation study of NEDTree on NEXTOR benchmark. 
 
 he left line is a line graph showing the difference between the module in the ablation study and NEDTree. The further to the left, the greater the difference.
 
-![AblationStudy](pic/S5_AblationStudy.pdf)
+![AblationStudy](pic/S5_AblationStudy.png)
 
 ## Figure 5: Case Study
 
-![case_study](pic/S5_case_study.pdf)
+![case_study](pic/S5_case_study.png)
+
 
