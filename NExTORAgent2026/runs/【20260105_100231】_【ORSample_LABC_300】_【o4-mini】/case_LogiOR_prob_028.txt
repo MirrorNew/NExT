@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A small bakery operates in four towns: Greenville, Springfield, Riverside, and Hilltop. The bakery produces fresh bread and then distributes it to local stores located in Maplewood, Oakdale, Pineville, Cedarhurst, and Brookside. The number of loaves each bakery can supply is shown in Table 1. The number of loaves each store requires to meet daily customer demand is shown in Table 2. The distances (in kilometers) between bakeries and stores are shown in Table 3.\n\nAssume that, in the absence of additional conditions, the delivery cost (in dollars) per loaf is equal to the square root of the distance between the origin and destination towns; however, the following nonlinear cost rule is also introduced: if, on a given delivery route (i.e., transportation from a fixed bakery to a fixed store), the number of loaves transported in one day exceeds 150, then an additional fixed fee of 200 dollars is added to the total transportation cost on that route (for example, if the number of loaves shipped from Riverside to Maplewood is 151, then the total transportation cost for the Riverside-to-Maplewood route that day equals $\\sqrt{\\text{distance}} \\times 151 + 200$ dollars).\n\nSubject to satisfying all store demands, determine an optimal distribution plan that minimizes the total transportation cost.\n\nTable 1: Bread supply at each bakery  \n| Bakery        | Supply (loaves) |\n|--------------|------------------|\n| Greenville   | 200              |\n| Springfield  | 150              |\n| Riverside    | 250              |\n| Hilltop      | 180              |\n\nTable 2: Bread demand at each store  \n| Store        | Demand (loaves) |\n|--------------|------------------|\n| Maplewood    | 120              |\n| Oakdale      | 100              |\n| Pineville    | 130              |\n| Cedarhurst   | 90               |\n| Brookside    | 80               |\n\nTable 3: Distances (km) between bakeries and stores  \n| Origin / Destination | Maplewood | Oakdale | Pineville | Cedarhurst | Brookside |\n|----------------------|-----------|---------|-----------|------------|-----------|\n| Greenville           | 10        | 15      | 20        | 25         | 30        |\n| Springfield          | 12        | 8       | 18        | 22         | 28        |\n| Riverside            | 14        | 10      | 16        | 20         | 26        |\n| Hilltop              | 16        | 12      | 14        | 18         | 24        |",
+    "answer": 1947.670525618807,
+    "index": "LogiOR_prob_028",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 假设每条面包的配送成本（以美元计）等于起点和终点城镇之间距离的平方根，确定一种最优配送方案，使在满足所有商店需求的前提下，总运输成本最小。 修改后相关描述: 假设在没有额外条件时，每条面包的配送成本（以美元计）等于起点和终点城镇之间距离的平方根；但同时引入如下非线性成本规则：如果某一条配送路径（即从某一固定面包房到某一固定商店的运输）在一天内运输的面包条数超过 150 条，则在该条配送路径的总运输成本上额外增加 200 美元的固定费用（例如从 Riverside 运往 Maplewood 的面包条数若为 151 条，则 Riverside 到 Maplewood 这一条路径当天的总运输成本等于距离的平方根乘以 151 再加上 200 美元）。在满足所有商店需求的前提下，确定一种最优配送方案，使总运输成本最小。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_028\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_036.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1947.670525619"
+    ],
+    "time_seconds": 37.32027740000922,
+    "total_tokens": 2463
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1947.670525619"
+    ],
+    "ground_truth": 1947.670525618807
+  }
+}

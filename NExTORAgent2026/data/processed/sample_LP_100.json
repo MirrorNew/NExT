@@ -1,0 +1,902 @@
+{
+    "prob_001": {
+        "description": "Suppose a certain animal needs at least $700 \\mathrm{~g}$ of protein, $30 \\mathrm{~g}$ of minerals, and $100 \\mathrm{mg}$ of vitamins daily. There are 5 types of feed available, and the nutritional content and price per gram of each type of feed are shown in Table 1-5:\nTry to formulate a linear programming model that meets the animal's growth needs while minimizing the cost of selecting the feed.\nTable 1-6\n| Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) | Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) |\n|------|-------------|--------------|---------------|--------------|------|-------------|--------------|---------------|--------------|\n| 1    | 3           | 1            | 0.5           | 0.2          | 4    | 6           | 2            | 2             | 0.3          |\n| 2    | 2           | 0.5          | 1             | 0.7          | 5    | 18          | 0.5          | 0.8           | 0.8          |\n| 3    | 1           | 0.2          | 0.2           | 0.4          |      |             |              |               |              |",
+        "ground_truth": 32.43589743589744,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_029",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_029\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_029\\code.py"
+    },
+    "prob_002": {
+        "description": "Tom and Jerry just bought a farm in Sunshine Valley, and they are considering using it to plant corn, wheat, soybeans, and sorghum. The profit per acre for planting corn is $1500, the profit per acre for planting wheat is $1200, the profit per acre for planting soybeans is $1800, and the profit per acre for planting sorghum is $1600. To maximize their profit, how many acres of land should they allocate to each crop? Tom and Jerry’s farm has a total area of 100 acres.\n\nThe land area used for planting corn must be at least twice the land area used for planting wheat.\n\nThe land area used for planting soybeans must be at least half the land area used for planting sorghum.\n\nThe land area used for planting wheat must be three times the land area used for planting sorghum.",
+        "ground_truth": 180000,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_012",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_012\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_012\\code.py"
+    },
+    "prob_003": {
+        "description": "There are $\\mathrm{A}$ and $\\mathrm{B}$ two products, both requiring two successive chemical reaction processes. Each unit of product $\\mathrm{A}$ needs 2 hours for the first process and 3 hours for the second process. Each unit of product $\\mathrm{B}$ needs 3 hours for the first process and 4 hours for the second process. Available time for the first process is 16 hours, and available time for the second process is 24 hours.\n\nFor each unit of product $\\mathrm{B}$ produced, 2 units of by-product $\\mathrm{C}$ are generated simultaneously, requiring no additional cost. By-product $\\mathrm{C}$ can be sold up to 5 units, and the rest must be disposed of at a cost of 2 yuan per unit.\n\nEach unit of product $\\mathrm{A}$ sold yields a profit of 4 yuan, each unit of product $\\mathrm{B}$ yields a profit of 10 yuan, and each unit of by-product $\\mathrm{C}$ sold yields a profit of 3 yuan.\n\nIn order to maximize total profit, establish the linear programming model for this problem.",
+        "ground_truth": 57.0,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_074",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_074\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_074\\code.py"
+    },
+    "prob_004": {
+        "description": "A wealthy noble passed away, leaving the following inheritance:\n\n- A painting by Caillebotte: $25000\n- A bust of Diocletian: $5000\n- A Yuan dynasty Chinese vase: $20000\n- A 911 Porsche: $40000\n- Three diamonds: each $12000\n- A Louis XV sofa: $3000\n- Two very precious Jack Russell racing dogs: each $3000 (will stipulates they must not be separated)\n- A sculpture from 200 AD: $10000\n- A sailing boat: $15000\n- A Harley Davidson motorcycle: $10000\n- A piece of furniture once belonging to Cavour: $13000,\n\nwhich must be shared between two sons. How to minimize the difference in value between the two parts?",
+        "ground_truth": 1000,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_032",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_032\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_032\\code.py"
+    },
+    "prob_005": {
+        "description": "A factory produces three types of products, I, II, and III. Each product requires two processing stages, A and B. It is assumed that the factory has two types of equipment to complete the A processing stage, denoted as A1 and A2; and two types of equipment to complete the B processing stage, denoted as B1 and B2. Product I can be processed on any type of A equipment, but for the B processing stage, it can only be processed on B1 equipment; Product III can only be processed on A2 and B2 equipment. The processing time per piece, raw material cost, sales price of products, effective machine hours for various equipment, and costs of equipment at full capacity are given in Table 1-18. The requirement is to arrange the optimal production plan so that the factory's profit is maximized.\n\nTable 1-18\n| Equipment   | Product I | Product II | Product III | Effective Machine Hours | Cost of Equipment at Full Capacity (Yuan) |\n|-------------|-----------|------------|-------------|------------------------|-------------------------------------------|\n| A1          | 5         | 10         |             | 10000                 | 321                                       |\n| A2          | 7         | 9          | 12          | 4000                  | 250                                       |\n| B1          | 6         | 8          |             | 7000                  | 783                                       |\n| B2          | 4         |            | 11          | 4000                  | 200                                       |\n| B3          | 7         |            |             |                       |                                           |\n| Raw Material Cost (Yuan/Piece) | 0.25      | 0.35       | 0.50       |                        |                                           |\n| Unit Price (Yuan/Piece)        | 1.25      | 2.00       | 2.80       |                        |                                           |",
+        "ground_truth": 712.875,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_030",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_030\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_030\\code.py"
+    },
+    "prob_006": {
+        "description": "A company uses steel and aluminum as raw materials to produce two products (A and B). A single unit of product A requires 6 kg of steel, 8 kg of aluminum, 11 hours of labor, and yields a profit of 5000 yuan (excluding worker overtime pay). A single unit of product B requires 12 kg of steel, 20 kg of aluminum, 24 hours of labor, and yields a profit of 11000 yuan (excluding worker overtime pay). The company currently has 200 kg of steel, 300 kg of aluminum, and 300 hours of labor available. If workers need to work overtime, the overtime pay is 100 yuan per hour. Please develop a production plan to maximize the company's profit and minimize worker overtime.",
+        "ground_truth": 165900.0,
+        "problem_type": "MILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_097",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_097\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_097\\code.py"
+    },
+    "prob_007": {
+        "description": "A company plans to produce 3 types of products $A_{1}, A_{2}, A_{3}$. It can produce for 22 days in a month. The following table gives the maximum demand (unit $=100 \\mathrm{~kg}$), price ($\\$ / 100 \\mathrm{Kg}$), production cost (per 100Kg product), and production quota (the maximum number of 100kg units that can be produced in one day if all production lines are devoted to this product).\n\n| Product | $A_{1}$ | $A_{2}$ | $A_{3}$ |\n| :---: | :---: | :---: | :---: |\n| Maximum Demand | 5300 | 4500 | 5400 |\n| Selling Price | $124$ | $109$ | $115$ |\n| Production Cost | $73.30$ | $52.90$ | $65.40$ |\n| Production Quota | 500 | 450 | 550 |\n\nThe fixed activation cost of the production line is as follows:\n\n| Product | $A_{1}$ | $A_{2}$ | $A_{3}$ |\n| :---: | :---: | :---: | :---: |\n| Activation Cost | $170000$ | $150000$ | $100000$ |\n\nMinimum production batch:\n\n$$\n\\begin{array}{c|ccc}\nProduct & A_{1} & A_{2} & A_{3} \\\\\n\\hline\nMinimum Batch & 20 & 20 & 16\n\\end{array}\n$$\n\nPlease formulate an operations research model to determine a production plan that maximizes total revenue while accommodating fixed activation costs and minimum production batch constraints.",
+        "ground_truth": 270290.0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_021",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_021\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_021\\code.py"
+    },
+    "prob_008": {
+        "description": "A beverage factory produces a kind of beverage to meet market demand. According to market forecasts, the sales department of the factory has determined the demand for the beverage for the next 4 weeks. The planning department, based on the actual situation of the factory, has provided the production capacity and production cost for the next 4 weeks, as shown in Table 1. When there is a surplus of beverages after meeting the demand each week, a storage cost of 0.2 thousand yuan per week per thousand boxes of beverages needs to be paid. How should the production plan be arranged to minimize the total cost (the sum of production cost and storage cost) over the four weeks while meeting the weekly market demand?\n\nTable 1 Beverage Production and Demand Data:\n\n\\begin{tabular}{c|c|c|c}\n\\hline \nWeek & Demand/1000 boxes & Production Capacity/1000 boxes & Cost per 1000 boxes/1000 yuan \\\\\n\\hline \n1 & 15 & 30 & 5.0 \\\\\n\\hline \n2 & 25 & 40 & 5.1 \\\\\n\\hline \n3 & 35 & 45 & 5.4 \\\\\n\\hline \n4 & 25 & 20 & 5.5 \\\\\n\\hline \nTotal & 100 & 135 & \\\\\n\\hline\n\\end{tabular}",
+        "ground_truth": 528.0,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_094",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_094\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_094\\code.py"
+    },
+    "prob_009": {
+        "description": "Bright Future Toys wants to build and sell robots, model cars, building blocks, and dolls. The profit for each robot sold is $15, for each model car sold is $8, for each set of building blocks sold is $12, and for each doll sold is $5. How many types of toys should Bright Future Toys manufacture to maximize profit?\nThere are 1200 units of plastic available. Each robot requires 30 units of plastic, each model car requires 10 units of plastic, each set of building blocks requires 20 units of plastic, and each doll requires 15 units of plastic.\n\nThere are 800 units of electronic components available. Each robot requires 8 units of electronic components, each model car requires 5 units of electronic components, each set of building blocks requires 3 units of electronic components, and each doll requires 2 units of electronic components.\n\nIf Bright Future Toys manufactures robots, they will not manufacture dolls.\n\nHowever, if they manufacture model cars, they will also manufacture building blocks.\n\nThe number of dolls manufactured cannot exceed the number of model cars manufactured.",
+        "ground_truth": 956,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_019",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_019\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_019\\code.py"
+    },
+    "prob_010": {
+        "description": "The famous Traveling Salesman Problem (TSP) in operations research can be described as follows: A traveling salesman departs from a certain city, visits two other cities to sell merchandise, and must visit each city exactly once before returning to the original starting city. The distances between the cities are provided in the table below.\n| City |    1    |    2    |    3    |    4    |\n| ---- | ------ | ------ | ------ | ------ |\n| 1    | 0    | 10   | 20   | 12   |\n| 2    | 10   | 0    | 5    | 10   |\n| 3    | 20   | 5    | 0    | 8    |\n| 4    | 15   | 12   | 8    | 0    |\n\nWhat route should the salesman choose to travel in order to minimize the total distance? Try to formulate an integer programming model for this problem.",
+        "ground_truth": 35.0,
+        "problem_type": "MILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_069",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_069\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_069\\code.py"
+    },
+    "prob_011": {
+        "description": "A store wants to clear out 200 shirts and 100 pairs of pants from last season. They decide to introduce two promotional packages, A and B. Package A includes one shirt and two pairs of pants, priced at £30. Package B includes three shirts and one pair of pants, priced at £50. The store does not want to sell fewer than 20 A packages and 10 B packages. How many of each package do they need to sell to maximize the revenue from the promotion?\n\nTry to establish a model for this problem.",
+        "ground_truth": 3600.0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_089",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_089\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_089\\code.py"
+    },
+    "prob_012": {
+        "description": "A candy factory uses raw materials A, B, and C to process three different brands of candies, A, B, and C. It is known that the content of A, B, and C in each brand of candy, the cost of raw materials, the monthly limit of each raw material, and the unit processing fee and selling price of the three brands of candies are shown in Table 1-7.\n\nTable 1-7\n\n| Item            | A               | B               | C               | Raw Material Cost (Yuan/kg) | Monthly Limit (kg) |\n|:----------------|:---------------|:---------------|:---------------|:-----------------------------|:-------------------|\n| A               | ≥ 60%          | ≥ 15%          |                | 2.00                        | 2000               |\n| B               |                |                |                | 1.50                        | 2500               |\n| C               | ≤ 20%          | ≤ 60%          | ≤ 50%          | 1.00                        | 1200               |\n| Processing Fee (Yuan/kg) | 0.50         | 0.40           | 0.30           |                             |                     |\n| Selling Price (Yuan/kg)   | 3.40         | 2.85           | 2.25           |                             |                     |\n\nHow many kilograms of each of the three brands of candies should the factory produce each month to maximize the profit?",
+        "ground_truth": 6160.0,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_058",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_058\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_058\\code.py"
+    },
+    "prob_013": {
+        "description": "A furniture store can choose to order chairs from three different manufacturers: A, B, and C. The cost of ordering each chair from manufacturer A is $50, from manufacturer B is $45, and from manufacturer C is $40. The store needs to minimize the total cost of the order.\n\nAdditionally, each order from manufacturer A will include 15 chairs, while each order from manufacturers B and C will include 10 chairs. The number of orders must be an integer. The store needs to order at least 100 chairs.\n\nEach order from manufacturer A will include 15 chairs, while each order from manufacturers B and C will include 10 chairs. The store needs to order at most 500 chairs.\n\nIf the store decides to order chairs from manufacturer A, it must also order at least 10 chairs from manufacturer B.\n\nFurthermore, if the store decides to order chairs from manufacturer B, it must also order chairs from manufacturer C.",
+        "ground_truth": 4000,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_018",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_018\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_018\\code.py"
+    },
+    "prob_014": {
+        "description": "A farmer needs to transport 1000 units of fresh produce from the farm to a nearby market. The farmer has three transportation options: a horse, a bicycle, and a handcart. Since both the bicycle and handcart are very physically demanding, the farmer wants to choose only one of these two transportation methods. The horse generates 80 units of pollution per trip, the bicycle generates 0 units of pollution, and the handcart generates 0 units of pollution. The total amount of pollution generated by all trips must not exceed 1000 units. At least 8 trips must be made using the horse. The horse, bicycle, and handcart can carry 55 units, 30 units, and 40 units of produce per trip respectively. The farmer needs to ensure that the total amount of transported produce is at least 1000 units.",
+        "ground_truth": 640.0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_062",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_062\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_062\\code.py"
+    },
+    "prob_015": {
+        "description": "A store has formulated a purchase and sales plan for a certain product from July to December. It is known that the warehouse capacity must not exceed 500 units, with 200 units in stock at the end of June. Thereafter, purchases are made at the beginning of each month. Assume the purchase and selling prices of this product for each month are shown in Table 1-21. How much should be purchased and sold each month to maximize the total revenue?\n\nTable 1-21\n| Month | 7  | 8  | 9  | 10 | 11 | 12 |\n|-------|----|----|----|----|----|----|\n| Buy   | 28 | 24 | 25 | 27 | 23 | 23 |\n| Sell  | 29 | 24 | 26 | 28 | 22 | 25 |",
+        "ground_truth": 9100.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_049",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_049\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_049\\code.py"
+    },
+    "prob_016": {
+        "description": "A convenience supermarket is planning to open several chain stores in a newly built residential area in the northwest suburb of the city. For shopping convenience, the distance from any residential area to one of the chain stores should not exceed $800 \\mathrm{~m}$. Table 5-1 shows the new residential areas and the residential areas within a radius of $800 \\mathrm{~m}$ from each of them. Question: What is the minimum number of chain stores the supermarket needs to build among the mentioned residential areas, and in which residential areas should they be built?\n\n| Area Code | Residential Areas within $800 \\mathrm{~m}$ Radius |\n|-----------|---------------------------------------------------|\n| A         | A, C, E, G, H, I                                  |\n| B         | B, H, I                                           |\n| C         | A, C, G, H, I                                     |\n| D         | D, J                                              |\n| E         | A, E, G                                           |\n| F         | F, J, K                                           |\n| G         | A, C, E, G                                        |\n| H         | A, B, C, H, I                                     |\n| I         | A, B, C, H, I                                     |\n| J         | D, F, J, K, L                                     |\n| K         | F, J, K, L                                        |\n| L         | J, K, L                                           |",
+        "ground_truth": 3,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_009",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_009\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_009\\code.py"
+    },
+    "prob_017": {
+        "description": "Haus Toys can manufacture and sell toy trucks, toy airplanes, toy boats, and toy trains. The profit for each truck sold is $5, each airplane $10, each boat $8, and each train $7. How many types of toys should Haus Toys manufacture to maximize profits?\n\nThere are 890 units of wood available. Each truck requires 12 units, each airplane 20 units, each boat 15 units, and each train 10 units.\n\nThere are 500 units of steel available. Each airplane requires 3 units, each boat 5 units, each train 4 units, and each truck 6 units.\n\nIf Haus Toys manufactures trucks, they will not manufacture trains.\n\nHowever, if they manufacture boats, they will also manufacture airplanes.\n\nThe number of toy boats manufactured cannot exceed the number of toy trains manufactured.",
+        "ground_truth": 623,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_008",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_008\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_008\\code.py"
+    },
+    "prob_018": {
+        "description": "A company is producing two products (X and Y). The resources required for the production of X and Y are divided into two parts: machine time for automated processing and craftsman time for manual finishing. The table below shows the number of minutes required for each product:\n\n| Item | Machine Time (minutes) | Craftsman Time (minutes) |\n| :---: | :---: | :---: |\n| X | 13 | 20 |\n| Y | 19 | 29 |\n\nThe company has 40 hours of machine time available in the next working week, but only 35 hours of craftsman time. The cost of machine time is £10 per hour, and the cost of craftsman time is £2 per hour. Idle time for machines and craftsmen incurs no cost. For each product produced (all products produced will be sold), the revenue for product X is £20, and the revenue for product Y is £30. The company has a specific contract that requires 10 units of product X to be produced for a customer each week. Formulate a model for this problem.",
+        "ground_truth": 1861.466666667,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_084",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_084\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_084\\code.py"
+    },
+    "prob_019": {
+        "description": "Someone has a fund of 300,000 yuan and has the following investment projects in the next three years:\n(1) Investment can be made at the beginning of each year within three years, with an annual profit of 20% of the investment amount, and the principal and interest can be used for investment in the following year;\n(2) Investment is only allowed at the beginning of the first year, and it can be recovered at the end of the second year, with the total principal and interest amounting to 150% of the investment amount, but the investment limit is no more than 150,000 yuan;\n(3) Investment is allowed at the beginning of the second year within three years, and it can be recovered at the end of the third year, with the total principal and interest amounting to 160% of the investment amount, and the investment limit is 200,000 yuan;\n(4) Investment is allowed at the beginning of the third year within three years, and it can be recovered in one year with a profit of 40%, and the investment limit is 100,000 yuan.\nChapter One: Linear Programming and Simplex Method\nTry to determine an investment plan for this person that maximizes the principal and interest at the end of the third year.",
+        "ground_truth": 580000,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_027",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_027\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_027\\code.py"
+    },
+    "prob_020": {
+        "description": "A school is preparing a trip for 400 students. The transportation company has 10 buses with 50 seats each and 8 minibuses with 40 seats each, but only 9 drivers are available. The rental cost for a bus is £800, and the rental cost for a minibus is £600. Calculate how many of each type of bus should be used to achieve the lowest cost.\n\nTry to formulate a model for this problem.",
+        "ground_truth": 6200.0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_091",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_091\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_091\\code.py"
+    },
+    "prob_021": {
+        "description": "A master's student in Operations Research at a certain university is required to select two courses in mathematics, two in operations research, and two in computer science from a total of seven courses: Calculus, Operations Research, Data Structures, Management Statistics, Computer Simulation, Computer Programming, and Forecasting. Some courses belong to only one category: Calculus falls under Mathematics, Computer Programming under Computer Science. However, some courses fall under multiple categories: Operations Research can be considered both Operations Research and Mathematics, Data Structures both Computer Science and Mathematics, Management Statistics both Mathematics and Operations Research, Computer Simulation both Computer Science and Operations Research, and Forecasting both Operations Research and Mathematics. Courses that fall under multiple categories can fulfill the requirement of both categories simultaneously. Additionally, some courses have prerequisites: Computer Simulation or Data Structures requires Computer Programming first, Management Statistics requires Calculus first, and Forecasting requires Management Statistics first. The question is: What is the minimum number of courses a master's student must take, and which specific courses, to meet the above requirements?",
+        "ground_truth": 4.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_054",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_054\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_054\\code.py"
+    },
+    "prob_022": {
+        "description": "A company needs to decide whether to hire some of the five candidates to join their R&D team. The salary requirements for candidates F, G, H, I, and J are $12,000, $15,000, $18,000, $5,000, and $10,000 respectively. The company wants to minimize the total amount paid to candidates without exceeding the budget.\n\nThe company's budget is $40,000 and they wish to hire a maximum of 4 new employees.\n\nThe skill levels of the candidates are as follows:\nCandidate F: Level 2\nCandidate G: Level 3\nCandidate H: Level 4\nCandidate I: Level 1\nCandidate J: Level 2\n\nThe company needs to ensure that the total skill level of the hired employees is at least 8.\n\nThe project management experience years of each candidate are as follows:\nCandidate F: 1 year\nCandidate G: 2 years\nCandidate H: 2 years\nCandidate I: 5 years\nCandidate J: 4 years\n\nThey hope the total project management experience of the team is at least 8 years.\n\nDue to the similar technical background of candidates G and J, the company can choose at most one of them.",
+        "ground_truth": 38000.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_063",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_063\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_063\\code.py"
+    },
+    "prob_023": {
+        "description": "A timber storage and transport company has a large warehouse for storing and transporting timber for sale. Due to seasonal price fluctuations, the company purchases timber at the beginning of each quarter, with part of it being sold within the quarter and part being stored for future sales. It is known that the maximum storage capacity of the company’s warehouse is 200,000 m³, and the storage cost is $(a+b u)$ yuan/m³, where $a=70$, $b=100$, and $u$ is the storage time (in quarters). The purchase and sale prices for each quarter and the estimated maximum sales volumes are shown in Table 1-18.\n\nTable 1-18\n| Quarter | Purchase Price (10,000 yuan/10,000 m²) | Sale Price (10,000 yuan/10,000 m²) | Estimated Maximum Sales Volume (10,000 m³) |\n|---------|----------------------------------------|------------------------------------|---------------------------------------------|\n| Winter  | 410                                    | 425                                | 100                                         |\n| Spring  | 430                                    | 440                                | 140                                         |\n| Summer  | 460                                    | 465                                | 200                                         |\n| Autumn  | 450                                    | 455                                | 160                                         |\n\nSince timber is not suitable for long-term storage, all inventory should be sold by the end of autumn. Try to establish a linear programming model for this problem to maximize the company's annual profit.",
+        "ground_truth": 4700.0,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_075",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_075\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_075\\code.py"
+    },
+    "prob_024": {
+        "description": "A product can be processed on any one of the four devices: A, B, C, or D. The preparation completion costs when each device is enabled, the unit production cost for the product, and the maximum processing capacity of each device are shown in Table 5-7. If 2000 units of the product need to be produced, how can the total cost be minimized? Try to establish a mathematical model.\n\nTable 5-7\n| Device | Prep Completion Cost (Yuan) | Unit Production Cost (Yuan/Unit) | Maximum Processing Capacity (Units) |\n|--------|------------------------------|----------------------------------|------------------------------------|\n| A      | 1000                         | 20                               | 900                                |\n| B      | 920                          | 24                               | 1000                               |\n| C      | 800                          | 16                               | 1200                               |\n| D      | 700                          | 28                               | 1600                               |",
+        "ground_truth": 37000.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_060",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_060\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_060\\code.py"
+    },
+    "prob_025": {
+        "description": "A factory produces three types of products: I, II, and III. Each product needs to go through two processing procedures, A and B. The factory has two pieces of equipment that can complete process A, denoted as A1 and A2; it has three pieces of equipment that complete process B, denoted as B1, B2, and B3. Product I can be processed on any equipment for A and B; Product II can be processed on any A equipment but only on B1 for process B; Product III can only be processed on A2 and B2. Given the unit processing time on various machines, raw material costs, product sale prices, effective machine hours, and the costs of operating the machines at full capacity as shown in Table 1-4, the task is to arrange the optimal production plan to maximize the factory's profit.\n\nTable 1-4\n| Equipment  | Product I | Product II | Product III | Effective Machine Hours | Operating Costs at Full Capacity (Yuan) |\n|------------|-----------|------------|-------------|--------------------------|------------------------------------------|\n| A1         | 5         | 10         |             | 6000                     | 300                                      |\n| A2         | 7         | 9          | 12          | 10000                    | 321                                      |\n| B1         | 6         | 8          |             | 4000                     | 250                                      |\n| B2         | 4         |            | 11          | 7000                     | 783                                      |\n| B3         | 7         |            |             | 4000                     | 200                                      |\n| Raw Material Cost (Yuan/Unit) | 0.25 | 0.35       | 0.50       |                          |                                          |\n| Unit Price (Yuan/Unit)        | 1.25 | 2.00       | 2.80       |                          |                                          |",
+        "ground_truth": 1146.57,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_026",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_026\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_026\\code.py"
+    },
+    "prob_026": {
+        "description": "Healthy Pet Foods Company produces two types of dog food: Meaties and Yummies. Each pack of Meaties contains 2 pounds of grains and 3 pounds of meat; each pack of Yummies contains 3 pounds of grains and 1.5 pounds of meat. The company believes it can sell any quantity of dog food that it can produce. Meaties sell for $2.80 per pack, and Yummies sell for $2.00 per pack. The company's production is subject to several constraints. First, a maximum of 400,000 pounds of grains can be purchased each month at a price of $0.20 per pound of grains. A maximum of 300,000 pounds of meat can be purchased each month at a price of $0.50 per pound of meat. Additionally, a special machine is required to produce Meaties, with a monthly capacity of 90,000 packs. The variable costs for mixing and packaging dog food are $0.25 per pack (Meaties) and $0.20 per pack (Yummies). Detailed information is provided in Table B-1.\n\n**Table B-1 Healthy Pet Foods Data**\n\n|                    | Meaties      | Yummies    |\n|--------------------|--------------|------------|\n| Price per pack     | $2.80        | $2.00      |\n| Raw materials      |              |            |\n| - Grains           | 2.0 lbs      | 3.0 lbs    |\n| - Meat             | 3.0 lbs      | 1.5 lbs    |\n| Variable cost      | $0.25/pack   | $0.20/pack |\n| Resources          |              |            |\n| Meaties capacity   | 90,000 packs/month |       |\n| Monthly available grains | 400,000 lbs |      |\n| Monthly available meat | 300,000 lbs |        |\n\nAssume you are the manager of the dog food department at Healthy Pet Foods Company. Your salary is based on the department's profit, so you will try to maximize profit. How should you operate the department to maximize both the profit and your salary?",
+        "ground_truth": 77500.0,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_085",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_085\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_085\\code.py"
+    },
+    "prob_027": {
+        "description": "A factory produces two models of microcomputers, A and B. Each model requires the same two processes. The processing time, sales profit, and the factory’s maximum weekly processing capacity for each model are shown in Table 3.1.\n\nTable 3.1\n\n| Process | Model | | Maximum Weekly Processing Capacity |\n| :---: | :---: | :---: | :---: |\n| | $A$ | $B$ | |\n| I (hours/unit) | 4 | 6 | 150 |\n| II (hours/unit) | 3 | 2 | 70 |\n| Profit (yuan/unit) | 300 | 450 | |\n\nGiven the factory's business goals:\n\n$p_{1}$: The total weekly profit should not be less than 10,000 yuan;\n\n$p_{2}$: Due to contract requirements, at least 10 units of model A and at least 15 units of model B must be produced each week;\n\n$p_{3}$: The processing time for Process I should be exactly 150 hours per week, and the processing time for Process II should ideally be fully utilized, with potential for appropriate overtime;\n\n$p_{4}$: If products are produced during overtime in Process II, the profit per unit is reduced by 20 yuan for model A and 25 yuan for model B, and the maximum overtime for Process II is 30 hours per week. Formulate the mathematical model for this problem.",
+        "ground_truth": 11250.0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_047",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_047\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_047\\code.py"
+    },
+    "prob_028": {
+        "description": "The Li family has 5 children: Alice, Bob, Charlie, Diana, and Ella. The cost to take Alice is $1000, Bob is $900, Charlie is $600, Diana is $500, and Ella is $700. Which children should the couple take to minimize the total cost of taking the children?\n\nThey can take up to 3 children on the upcoming trip.\n\nBob is the youngest, so the Li family will definitely take him.\n\nIf the couple takes Alice, they will not take Diana because Alice does not get along with her.\n\nIf the couple takes Bob, they will not take Charlie because Bob does not get along with him.\n\nIf they take Charlie, they must also take Diana.\n\nIf they take Diana, they must also take Ella.\n\nDespite the cost, the Li family has decided to take at least two children.",
+        "ground_truth": 1600.0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "IndustryOR_prob_072",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_072\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_072\\code.py"
+    },
+    "prob_029": {
+        "description": "The number of nurses required in each time period over 24 hours at a certain hospital is as follows: 2:00-6:00 - 10 people, 6:00-10:00 - 15 people, 10:00-14:00 - 25 people, 14:00-18:00 - 20 people, 18:00-22:00 - 18 people, 22:00-2:00 - 12 people. Nurses start shifts in 6 batches at 2:00, 6:00, 10:00, 14:00, 18:00, and 22:00 and work continuously for 8 hours. Please determine: If the hospital can hire contract nurses with the same working hours as regular nurses, and if the pay for regular nurses is 10 yuan/hour and for contract nurses is 15 yuan/hour, should the hospital hire contract nurses and if so, how many?",
+        "ground_truth": 4240.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_050",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_050\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_050\\code.py"
+    },
+    "prob_030": {
+        "description": "A company blends two types of crude oil (A and B) to produce two types of gasoline (Type I and Type II). The minimum proportion of crude oil A in gasoline Types I and II is 50% and 60%, respectively. The selling prices are 4800 yuan/t and 5600 yuan/t, respectively. The company has current inventories of 500 t of crude oil A and 1000 t of crude oil B, and they can purchase up to 1500 t of crude oil A from the market. The market price for crude oil A is: 10,000 yuan/t for purchases up to 500 t; 8,000 yuan/t for the portion exceeding 500 t but not exceeding 1000 t; 6,000 yuan/t for the portion exceeding 1000 t. How should the company plan its purchasing and processing of crude oil?",
+        "ground_truth": 5000000.0,
+        "problem_type": "MILP",
+        "problem_size": "Small",
+        "index": "IndustryOR_prob_093",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_093\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_093\\code.py"
+    },
+    "prob_031": {
+        "description": "An airport has two available gates (G1, G2) and needs to assign three flights (F1: 10:00-11:00, F2: 10:30-11:30, F3: 11:15-12:30, F4: 10:45-11:45) to these gates. Flights assigned to the same gate must have non-overlapping time intervals, and the goal is to minimize flight delays, where each 1-minute delay beyond the scheduled departure time incurs a cost of 1 unit. How should the flights be assigned to the gates to achieve this objective?",
+        "ground_truth": 30.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_002",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_002\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_002\\code.py"
+    },
+    "prob_032": {
+        "description": "LogiTrans operates two distribution centers to manage the shipment of three types of goods to various regional hubs. Each distribution center can be staffed by up to seven logistics coordinators at a time. Coordinators are paid $500 per week at distribution center 1 and $900 per week at distribution center 2. Activating a distribution center for a week incurs a fixed cost of $1,000 for center 1 and $2,000 for center 2. During a week at a distribution center, each coordinator can process the number of shipments of each type of goods as shown in Table as follows:\n\n| Goods Type \\ Distribution Center | Center 1 | Center 2 |\n|----------------------------------|----------|----------|\n| Type 1                           | 20       | 25       |\n| Type 2                           | 18       | 22       |\n| Type 3                           | 15       | 20       |\n\nEach week, LogiTrans must ensure that at least 120 shipments of goods type 1, at least 150 shipments of goods type 2, and at least 200 shipments of goods type 3 are processed. How to minimize the total cost of meeting weekly shipment demands?",
+        "ground_truth": 11000.0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "LogiOR_prob_030",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_030\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_030\\code.py"
+    },
+    "prob_033": {
+        "description": "LogiTech’s main distribution center is organized into two key areas: a packaging area located at coordinates (0, 0) and a loading dock located at coordinates (800, 600) (distances are in meters). The company must determine where to locate a sorting facility and a storage facility to minimize the daily cost of moving goods through the center. All movement within the distribution center is restricted to either east–west or north–south directions.  \n\nThe number of daily trips between the areas are as follows:  \n\n| From/To          | Packaging Area | Loading Dock | Sorting Facility | Storage Facility |  \n|-------------------|----------------|--------------|-------------------|------------------|  \n| Packaging Area    | -              | 20           | 15                | 10               |  \n| Loading Dock      | 20             | -            | 25                | 30               |  \n| Sorting Facility  | 15             | 25           | -                 | 40               |  \n| Storage Facility  | 10             | 30           | 40                | -                |  \n\nThe cost of moving goods is $0.50 per meter per trip. The sorting facility and storage facility must be located within the boundaries of the distribution center, which spans from (0, 0) to (1000, 1000). And any two areas among the four areas are at least 100 units apart.\n\nHow should LogiTech locate the sorting and storage facilities to minimize daily transportation costs?",
+        "ground_truth": 70000.0,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "LogiOR_prob_049",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_049\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_049\\code.py"
+    },
+    "prob_034": {
+        "description": "LogiFlow Solutions manages the distribution of two types of packages: Standard and Express. Each package must be transported entirely by air freight or entirely by ground shipping. A total of 150 cubic meters of air freight capacity and 210 cubic meters of ground shipping capacity are available. A Standard package requires either 17 cubic meters of air freight or 30 cubic meters of ground shipping, while an Express package requires either 5 cubic meters of air freight or 13 cubic meters of ground shipping. Each Standard package generates $40 in revenue, and each Express package generates $15 in revenue. How to maximize LogiFlow Solutions' total revenue from package distribution?",
+        "ground_truth": 730,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "LogiOR_prob_042",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_042\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_042\\code.py"
+    },
+    "prob_035": {
+        "description": "LogiCorp operates a logistics network that ships two types of products: Basic and Advanced. The raw materials needed to produce these products can be purchased for $5 per unit. Processing 1 unit of raw material requires 2 hours of warehouse labor. Each unit of processed raw material yields 2 units of Basic Product and 3 units of Advanced Product. Basic Product can be sold for $10/unit, and Advanced Product can be sold for $12/unit. LogiCorp also has the option of further processing Basic and Advanced Products to produce Premium Basic and Premium Advanced, which sell for $20/unit and $25/unit, respectively. Each unit of Basic Product processed further requires an additional 3 hours of warehouse labor and $5 processing cost, yielding 1 unit of Premium Basic. Each unit of Advanced Product processed further requires an additional 4 hours of warehouse labor and $6 processing cost, yielding 1 unit of Premium Advanced. Each year, LogiCorp has 8,000 hours of warehouse labor available and can purchase up to 3,000 units of raw material. How can LogiCorp maximize its profits? Assume that the cost of warehouse labor is a fixed cost, raw materials can only be purchased in whole units.",
+        "ground_truth": 348500,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "LogiOR_prob_037",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_037\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_037\\code.py"
+    },
+    "prob_036": {
+        "description": "A small-scale bakery operates in four towns: Greenville, Springfield, Riverside, and Hilltop. The bakery produces fresh bread, which is then delivered to local stores located in Maplewood, Oakdale, Pineville, Cedarhurst, and Brookside. The number of loaves of bread available at each bakery is provided in Table 1. Each store requires a specific number of loaves to meet daily customer demand, as shown in Table 2. The distances (in kilometers) between the bakeries and stores are given in Table 3.  Assuming the delivery cost (in USD) for each loaf of bread is calculated as the square root of the distance between the origin and destination towns, determine the optimal delivery schedule that minimizes total transportation costs while meeting all store requirements.  \n\nTable 1: Bread Availability at Bakeries  \n| Bakery       | Loaves Available |  \n|--------------|------------------|  \n| Greenville   | 200              |  \n| Springfield  | 150              |  \n| Riverside    | 250              |  \n| Hilltop      | 180              |  \n\nTable 2: Bread Requirements at Stores  \n| Store        | Loaves Required |  \n|--------------|-----------------|  \n| Maplewood    | 120             |  \n| Oakdale      | 100             |  \n| Pineville    | 130             |  \n| Cedarhurst   | 90              |  \n| Brookside    | 80              |  \n\nTable 3: Distances Between Bakeries and Stores (km)  \n| From / To    | Maplewood | Oakdale | Pineville | Cedarhurst | Brookside |  \n|--------------|-----------|---------|-----------|------------|-----------|  \n| Greenville   | 10        | 15      | 20        | 25         | 30        |  \n| Springfield  | 12        | 8       | 18        | 22         | 28        |  \n| Riverside    | 14        | 10      | 16        | 20         | 26        |  \n| Hilltop      | 16        | 12      | 14        | 18         | 24        |",
+        "ground_truth": 1947.670525618807,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_028",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_028\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_028\\code.py"
+    },
+    "prob_037": {
+        "description": "A fruit processing company, NatureBounty, specializes in producing two product lines: packaged fresh apples and bottled apple juice. NatureBounty grades apples on a scale of 1 (poor) to 10 (excellent). The company currently has 90,000 lbs of grade 7 apples and 110,000 lbs of grade 4 apples in inventory. To maintain product quality, the average grade of apples sold in packages must be at least 5, and the average grade of apples used for juice production must be at least 6. Additionally, the company has a production capacity constraint: it can process no more than 150,000 lbs of apples in total due to equipment limitations. Each pound of apples used for juice generates a revenue of $1.10 and incurs a variable cost of $0.80. Each pound of apples sold in packages generates a revenue of $0.35 and incurs a variable cost of $0.12. The company also has a marketing constraint: at least 20% of the total processed apples must be sold in packages to meet market demand. How to help NatureBounty maximize its profit while adhering to all constraints.",
+        "ground_truth": 42900.0,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "LogiOR_prob_033",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_033\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_033\\code.py"
+    },
+    "prob_038": {
+        "description": "A logistics company needs to optimize its warehouse storage by selecting a subset of products to store that maximizes profit while considering space constraints and product compatibility. The warehouse has a total capacity of 500 cubic meters. There are 8 products available, each with a specific volume, profit, and compatibility restrictions (some products cannot be stored together due to safety or regulatory reasons). The products and their attributes are as follows:\n\n| Product ID | Volume (m³) | Profit ($) | Incompatible Products |\n|------------|-------------|------------|------------------------|\n| 1          | 80          | 1200       | 3, 5                   |\n| 2          | 60          | 900        | 4                      |\n| 3          | 40          | 700        | 1, 6                   |\n| 4          | 70          | 1100       | 2, 7                   |\n| 5          | 50          | 800        | 1                      |\n| 6          | 30          | 500        | 3                      |\n| 7          | 90          | 1300       | 4                      |\n| 8          | 20          | 300        | None                   |",
+        "ground_truth": 4200.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_057",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_057\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_057\\code.py"
+    },
+    "prob_039": {
+        "description": "You are in charge of GreenTech Manufacturing, a company that produces eco-friendly packaging materials from recycled paper. The company produces two types of packaging: Premium and Standard. Premium packaging sells for $15 per ton and must have an average quality score of at least 9. Standard packaging sells for $8 per ton and must have an average quality score of at least 7. The maximum demand is 2,500 tons of Premium packaging and 800 tons of Standard packaging per month. \n\nRecycled paper can be processed using one of three methods. The yield and cost per ton for each method are shown in the table below. For example, processing one ton of recycled paper using Method 1 costs $4.20 and yields 0.3 tons of quality score 6, 0.4 tons of quality score 8, and 0.3 tons of quality score 10. These costs include the expenses of acquiring the recycled paper. Before being converted into packaging materials, quality scores 6 and 8 can be enhanced through a refinement process. For $1.20 per ton, one ton of quality score 6 can be upgraded to quality score 8. For $1.80 per ton, one ton of quality score 8 can be upgraded to quality score 10. How can GreenTech Manufacturing maximize its monthly profit while meeting quality and demand requirements?\n\n| Processing Method | Cost per Ton ($) | Yield (Quality 6) | Yield (Quality 8) | Yield (Quality 10) |  \n|--------------------|-------------------|--------------------|--------------------|---------------------|  \n| Method 1           | 4.20              | 0.3                | 0.4                | 0.3                 |  \n| Method 2           | 3.80              | 0.5                | 0.3                | 0.2                 |  \n| Method 3           | 4.50              | 0.2                | 0.5                | 0.3                 |",
+        "ground_truth": 28864.0,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_045",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_045\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_045\\code.py"
+    },
+    "prob_040": {
+        "description": "A regional grocery chain is launching a new energy drink product and needs to optimally allocate initial stock to its stores. There are 6 stores (S1-S6) with varying characteristics. Each store has a known customer traffic (daily visits: S1-1200, S2-800, S3-1500, S4-900, S5-1100, S6-700), shelf space allocation (units: S1-50, S2-30, S3-60, S4-35, S5-45, S6-25), and historical sales similarity score for similar products (0-1 scale: S1-0.8, S2-0.6, S3-0.9, S4-0.7, S5-0.75, S6-0.5). The warehouse has 300 units available for initial distribution. There are two types of display setups: standard (costs $5 per store) and promotional (costs $15 per store but increases effective shelf space by 20%). The total display budget is $120. The goal is to maximize expected product exposure, calculated as: (customer traffic) × (units allocated) × (sales similarity score).",
+        "ground_truth": 253590.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_077",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_077\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_077\\code.py"
+    },
+    "prob_041": {
+        "description": "A logistics company needs to arrange forklifts for a newly built warehouse to meet daily operational demands. The forklift requirements for the warehouse over the next 7 weeks are 6, 9, 12, 8, 5, 7 and 4. The logistics company plans to lease forklifts from a rental company, which offers the following leasing options:\n\n1. Long-term forklift rental: The lease term is fixed at 7 weeks, with a rental cost of 240 yuan per week. Forklifts under long-term lease are available for the entire lease period.\n2. Short-term forklift rental: The lease term is flexible, available on a weekly basis, with a rental cost of 390 yuan per week. Short-term leased forklifts are only available during the week they are leased.\n3. Shared forklifts: These are vehicles jointly leased with other warehouses, but they are only available in weeks 2, 4, and 5. The rental cost is 220 yuan per week.\n4. Promotional forklifts: These forklifts can be leased at a discounted rate during the last 4 weeks, with a rental cost of 190 yuan per week. A maximum of 2 promotional forklifts can be leased per week.\n\nPlease design a leasing plan that fully meets the warehouse's forklift requirements over the next 7 weeks while minimizing the total leasing cost.",
+        "ground_truth": 14110.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_021",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_021\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_021\\code.py"
+    },
+    "prob_042": {
+        "description": "In a city planning scenario, it is necessary to select locations for public transport stations to serve a set of 15 passenger demand points, with 5 potential station locations available. The distance from each demand point to each potential station is known, and a demand point is considered \"\"covered\"\" by a station only if the distance between them is no more than 300 meters. What is the minimum number of stations that need to be selected to ensure all demand points are covered?\nThe distance matrix between each demand point and each potential station is as follows:\n| demand node\\stop | 1    | 2    | 3    | 4    | 5    |\n|-----------|------|------|------|------|------|\n| 1         | 389  | 515  | 170  | 143  | 617  |\n| 2         | 562  | 678  | 265  | 640  | 629  |\n| 3         | 206  | 594  | 180  | 564  | 683  |\n| 4         | 574  | 105  | 311  | 99   | 550  |\n| 5         | 616  | 490  | 99   | 473  | 682  |\n| 6         | 571  | 258  | 494  | 749  | 61   |\n| 7         | 573  | 234  | 207  | 635  | 318  |\n| 8         | 70   | 53   | 399  | 740  | 494  |\n| 9         | 229  | 190  | 550  | 654  | 394  |\n| 10        | 50   | 56   | 459  | 143  | 478  |\n| 11        | 95   | 378  | 507  | 647  | 135  |\n| 12        | 767  | 200  | 569  | 689  | 621  |\n| 13        | 729  | 333  | 91   | 86   | 386  |\n| 14        | 633  | 163  | 562  | 184  | 384  |\n| 15        | 67   | 515  | 224  | 502  | 345  |",
+        "ground_truth": 3.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_009",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_009\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_009\\code.py"
+    },
+    "prob_043": {
+        "description": "A manufacturing company operates three production facilities (1, 2, and 3) that produce two types of components (X and Y). Each facility generates waste during production, which can be treated to reduce environmental impact. Treating the waste incurs a cost and reduces the amount of pollutants emitted. It costs $12 to treat a ton of waste from facility 1, and each ton treated reduces the amount of pollutant X by 0.15 ton and the amount of pollutant Y by 0.35 ton. It costs $8 to treat a ton of waste from facility 2, and each ton treated reduces the amount of pollutant X by 0.25 ton and the amount of pollutant Y by 0.20 ton. It costs $18 to treat a ton of waste from facility 3, and each ton treated reduces the amount of pollutant X by 0.30 ton and the amount of pollutant Y by 0.40 ton. The company aims to reduce the amount of pollutant X by at least 25 tons and the amount of pollutant Y by at least 35 tons. How to minimize the total cost of treating waste while meeting the pollution reduction targets?",
+        "ground_truth": 1269.5652173913045,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "LogiOR_prob_032",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_032\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_032\\code.py"
+    },
+    "prob_044": {
+        "description": "# Problem Description:\nA mining company operates three ore processing plants (P1, P2, P3) with monthly processing capacities of 8000, 10000, and 12000 tons respectively. The company sources ore from four different mines (M1, M2, M3, M4) with available quantities of 6000, 9000, 7000, and 5000 tons per month. \n\nEach ore type has different characteristics:\n- Metal recovery rates: M1=85%, M2=92%, M3=78%, M4=88%\n- Processing costs per ton: M1=$12, M2=$18, M3=$10, M4=$15\n- Sulfur content (impurity): M1=1.2%, M2=0.8%, M3=2.1%, M4=1.5%\n- Maximum allowed average sulfur content across all plants: 1.5%\n\nTransportation costs per ton from mines to plants:\n|       | P1  | P2  | P3  |\n|-------|-----|-----|-----|\n|   M1  | $4  | $6  | $5  |\n|   M2  | $7  | $5  | $8  |\n|   M3  | $3  | $4  | $6  |\n|   M4  | $8  | $6  | $7  |\n\nThe company needs to determine the optimal ore allocation from mines to plants to maximize total metal recovery while keeping total costs under $500,000 and meeting all operational constraints.",
+        "ground_truth": 22933.33333,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_076",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_076\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_076\\code.py"
+    },
+    "prob_045": {
+        "description": "Global Freight Solutions (GFS), a logistics company, needs to transport goods across three regions using services from three shipping providers. Each provider offers different cost structures and service mixes for large, medium, and small shipments, as detailed in Table as follows:\n\n| Supplier | Cost Per Shipment ($) | Percent Large | Percent Medium | Percent Small |\n|----------|-----------------------|---------------|----------------|---------------|\n| 1        | 5.2                   | 45            | 35             | 20            |\n| 2        | 4.7                   | 30            | 45             | 25            |\n| 3        | 3.5                   | 15            | 20             | 65            |\n\nGFS must fulfill a minimum monthly demand of at least 500 large shipments, 300 medium shipments, and 300 small shipments while minimizing total costs. Additionally, due to capacity constraints, no more than 700 shipments can be contracted from any single provider each month. Determine what the lowest possible cost is.",
+        "ground_truth": 6553.7,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "LogiOR_prob_031",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_031\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_031\\code.py"
+    },
+    "prob_046": {
+        "description": "CargoLink Logistics operates two types of delivery vehicles: Type X and Type Y. New environmental regulations require that the average carbon emissions of all vehicles deployed over the next three years cannot exceed 40 grams per kilometer annually. Each Type X vehicle generates $25,000 in revenue, costs $18,000 to operate, and emits 70 grams of carbon per kilometer. Each Type Y vehicle generates $20,000 in revenue, costs $16,000 to operate, and emits 30 grams of carbon per kilometer. Due to fleet capacity constraints, CargoLink can deploy a maximum of 400 vehicles each year. The maximum number of each vehicle type that can be deployed annually is shown in the table below. For example, at most, 350 Type X vehicles can be deployed in year 3. How can CargoLink Logistics maximize its total profit over the next three years while complying with environmental regulations?\n\n| Year | Maximum Type X Vehicles | Maximum Type Y Vehicles |  \n|------|--------------------------|--------------------------|  \n| 1    | 300                      | 250                      |  \n| 2    | 320                      | 280                      |  \n| 3    | 350                      | 300                      |",
+        "ground_truth": 5252000.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_044",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_044\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_044\\code.py"
+    },
+    "prob_047": {
+        "description": "HealthSupply Co. manages a medical supply chain that must fulfill demand for two types of products, Vaccine X and Vaccine Y, over the next two quarters, with demands of 100 doses of Vaccine X and 200 doses of Vaccine Y in Quarter 1, and 300 doses of Vaccine X and 100 doses of Vaccine Y in Quarter 2. The company can produce a maximum of 1,500 doses per quarter, with each dose of Vaccine X requiring 4 liters of raw biochemical material and each dose of Vaccine Y requiring 3 liters. The cost of raw material is $300 per liter in Quarter 1 and $450 per liter in Quarter 2, with a maximum purchase limit of 2,500 liters per quarter, and material can only be used in the quarter it is purchased. At the start of Quarter 1, the company has an inventory of 200 doses of Vaccine X and 300 doses of Vaccine Y, and a storage cost of $100 per dose is assessed at the end of each quarter for remaining inventory. Additionally, the company must meet a regulatory requirement that the vaccines produced each quarter have an average efficacy rate of at least 90%, with Vaccine X having an efficacy rate of 85% and Vaccine Y having an efficacy rate of 95%. How to meet the demand and regulatory requirements at minimum cost, including raw material and storage costs.",
+        "ground_truth": 460000,
+        "problem_type": "MILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_039",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_039\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_039\\code.py"
+    },
+    "prob_048": {
+        "description": "A national e-commerce company operates three distribution centers in the Metro region. Each center currently stores different quantities of standard and premium products as shown below:\n\n| Distribution Center | Standard Products | Premium Products |\n|---------------------|-------------------|------------------|\n| Center 1            | 150               | 30               |\n| Center 2            | 250               | 100              |\n| Center 3            | 300               | 70               |\n\nThe company plans to open three retail fulfillment hubs that will serve customers with same-day delivery. Corporate policy requires that each fulfillment hub must maintain exactly 300 products in total inventory, and each hub must stock the same number of premium products to ensure consistent customer experience across all locations. The shipping distances (in kilometers) between distribution centers and fulfillment hubs are shown as follows:\n\n| From / To           | Hub 1 | Hub 2 | Hub 3 |\n|---------------------|-------|-------|-------|\n| Center 1            | 0     | 12    | 18    |\n| Center 2            | 12    | 0     | 15    |\n| Center 3            | 18    | 15    | 0     |\n\nWhat is the minimum total transportation distance required to move the products under the company's inventory requirements?",
+        "ground_truth": 1440.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_027",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_027\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_027\\code.py"
+    },
+    "prob_049": {
+        "description": "A company has three industries located in different locations and needs to deliver goods to five shops in different locations. The delivery costs from the first industry to the shops are 4, 9, 2, 6, and 5, respectively, with a storage capacity of 60. The delivery costs from the second industry to the shops are 2, 6, 1, 7, and 9, respectively, with a storage capacity of 30. The delivery costs from the third industry to the shops are 2, 4, 9, 8, and 3, respectively, with a storage capacity of 45. The demands of the five shops are 15, 35, 20, 5, and 40. How can the goods be transported to minimize the cost?",
+        "ground_truth": 405.0,
+        "problem_type": "ILP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_005",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_005\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_005\\code.py"
+    },
+    "prob_050": {
+        "description": "Green Energy Solutions specializes in producing two types of renewable fuel: bioethanol and biodiesel. The company has 8,000 liters of feedstock A and 12,000 liters of feedstock B in stock. The quality rating of each feedstock is as follows: feedstock A—12; feedstock B—6. Bioethanol must have an average quality rating of at least 10, while biodiesel must have an average quality rating of at least 8. The demand for each product is driven by marketing efforts. Each dollar spent on marketing bioethanol generates 8 liters of demand, and each dollar spent on marketing biodiesel generates 15 liters of demand. Bioethanol is sold for $30 per liter, and biodiesel is sold for $25 per liter. Help Green Energy Solutions maximize its profit. Assume that the company cannot purchase additional feedstock of either type.",
+        "ground_truth": 518433.33333333,
+        "problem_type": "LP",
+        "problem_size": "Small",
+        "index": "LogiOR_prob_034",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_034\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_034\\code.py"
+    },
+    "prob_051": {
+        "description": "A post office is buying stamping machines and they can buy a dual or single model stamping machine. A dual model stamping machine can stamp 50 letters per minute while a single model stamping machine can stamp 30 letters per minute. The dual model stamping machine requires 20 units of glue per minute while the single model stamping machine requires 15 units of glue per minute. Since the single model stamping machine is quieter, the number of single model stamping machines must be more than the number of dual model stamping machines. Further, the post office wants to make sure they can stamp at least 300 letters per minute and use at most 135 units of glue per minute. How many of each stamping machine should they purchase to minimize the total number of stamping machines?",
+        "ground_truth": 8,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_066",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_066\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_066\\code.py"
+    },
+    "prob_052": {
+        "description": "Calcium and Magnesium are found in two health supplements, health supplement A and health supplement B. One serving of health supplement A contains 30 grams of Calcium and 50 grams of Magnesium. One serving of health supplement B contains 60 grams of Calcium and 10 grams of Magnesium. The cost per health supplement for health supplement A is $14 and the cost per health supplement for health supplement B is $25. A patient must consume these two health supplements every day to get at least 400 grams of Calcium and 50 grams of Magnesium. Determine how much servings of each supplement the patient needs to minimize her daily cost.",
+        "ground_truth": 166.66666666666669,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_197",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\code.py"
+    },
+    "prob_053": {
+        "description": "There are two processes, process A and process B, to plate a coin with gold. Process A requires 3 units of gold, 2 wires, and can plate 5 coins. Process B requires 5 units of gold, 3 wires, and can plate 7 coins. There are 500 units of gold and 300 wires available. How many processes of each type should be run to maximize the total number of coins that can be plated?",
+        "ground_truth": 750,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_042",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_042\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_042\\code.py"
+    },
+    "prob_054": {
+        "description": "A meal service company delivers meals to customers either on electric bikes or scooters. A bike can hold 8 meals and requires 3 units of charge. A scooter can hold 5 meals and requires 2 units of charge. Since the city is more friendly towards scooters, at most 30% of the electric vehicles can be bikes and at least 20 scooters must be used. If the company only has 200 units of charge available, how many of each vehicle should be used to maximize the number of meals that can be delivered?",
+        "ground_truth": 513,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_154",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_154\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_154\\code.py"
+    },
+    "prob_055": {
+        "description": "A meat processing plant uses two machines, a meat slicer and a meat packer, to make their hams and pork ribs. To produce one batch of hams requires 4 hours on the meat slicer and 2.5 hours on the meat packer. To produce one batch of pork ribs requires 2 hours on the meat slicer and 3.5 hours on the meat packer. Each machine runs for at most 4000 hours per year. If the profit per batch of hams is $150 and the profit per batch of pork ribs is $300, how many batches of each should be made to maximize profit?",
+        "ground_truth": 342857.14285714284,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_189",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_189\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_189\\code.py"
+    },
+    "prob_056": {
+        "description": "A science show preforms two different demonstrations, demonstration 1 and demonstration 2. In demonstration 1, 10 units of mint and 20 units of the active ingredient is used to make 25 units of minty foam. In demonstration 2, 12 units of mint and 15 units of the active ingredient is used to make 18 units of minty foam. In addition, demonstration 1 creates 5 units of black tar while demonstration 2 creates 3 units of black tar. The show has available 120 units of mint and 100 units of active ingredients. If at most 50 units of black tar can be produced, how many of each demonstration should be done to maximize the amount of minty foam produced?",
+        "ground_truth": 125,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_101",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_101\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_101\\code.py"
+    },
+    "prob_057": {
+        "description": "A bakery bakes bagels and croissants. A batch of bagels can be made using 2 hours of oven time and 0.25 hours of pastry chef time. A batch of croissants is more complicated, so while they take 1 hour of oven time, they take 2 hours of pastry chef time. In a day, the bakery has at most 70 hours available for the oven and 32 pastry chef hours available. Using all the available capacity, what is the maximum profit the bakery can generate assuming the profit per batch is $20 and $40 respectively for a batch of bagels and a batch of croissants.",
+        "ground_truth": 1072,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_036",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_036\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_036\\code.py"
+    },
+    "prob_058": {
+        "description": "Ayse produces a plant growth compound by mixing two types of fertilizer: C and Y. This growth compound must contain at least 5 units of nitrous oxide and 8 units of vitamin mix. Fertilizer C and Y cost $2 and $3 per kg respectively. Fertilizer C contains 1.5 units of nitrous oxide per kg and 3 units of vitamin mix per kg. Fertilizer Y contains 5 units of nitrous oxide per kg and 1 unit of vitamin mix per kg. Determine the minimum cost of Ayse's compound.",
+        "ground_truth": 5.851851851851852,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_023",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_023\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_023\\code.py"
+    },
+    "prob_059": {
+        "description": "A patient in the hospital can take two different pain killers, pain killer 1 and pain killer 2. Per dose, pain killer 1 delivers 0.5 units of medicine to the legs and 0.8 units of medicine to the back. Per dose, pain killer 2 delivers 0.7 units of medicine to the legs and 0.4 units of medicine to the back. In, addition pain killer 1 deliver 0.3 units of sleeping medicine and pain killer 2 delivers 0.6 units of sleeping medicine. At most 8 units of sleep medicine should be delivered and at least 4 units of medicine should be delivered to the legs. How many doses of each should be taken to maximize the amount of medicine delivered to the back?",
+        "ground_truth": 20.8,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_119",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_119\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_119\\code.py"
+    },
+    "prob_060": {
+        "description": "A man takes two supplements to get his daily iron and calcium requirements. A pill of supplement A has 5 units of iron and 10 units of calcium. A pill of supplement B contains 4 units of iron and 15 units of calcium.  The man needs a minimum of 40 units of iron and 50 units of calcium per day. If the cost per pill of supplement A is $2 and the cost per pill of supplement B is  $3, how many of each should he buy to minimize costs?",
+        "ground_truth": 16,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_201",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_201\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_201\\code.py"
+    },
+    "prob_061": {
+        "description": "A water company sells water in glass and plastic bottles. A glass bottle can hole 500 ml of water while a plastic bottle can hold 750 ml of water. Because most customer prefer plastic bottles, the number of plastic bottles must be at least 3 times the number of glass bottles. However, there must be at least 20 glass bottles. If the company has available 250000 ml of water, how many of each bottle should be made to maximize the total number of bottles?",
+        "ground_truth": 363,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_077",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_077\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_077\\code.py"
+    },
+    "prob_062": {
+        "description": "A handmade sports equipment manufacturing company makes basketballs and footballs. Basketballs require 5 units of materials and 1 hour to make whereas footballs require 3 units of materials and 2 hours to make. The manufacturing company has available 1500 units of materials and their workers working at max capacity can work for at most 750 hours. Since basketballs sell better, there must be at least three times as many basketballs as footballs but the manufacturing company would like at least 50 footballs. How many of each should the manufacturing company make to maximize the total number of sports equipment produced?",
+        "ground_truth": 333,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_256",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_256\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_256\\code.py"
+    },
+    "prob_063": {
+        "description": "A electronics store sells premium desktops with more power as well as regular desktops for everyday use. Each premium desktop costs the store $2000 to make and yields a profit of $500. Each regular desktop costs the store $1000 to make and yields a profit of $300. The store sells at most 200 desktops each month and wants to spend at most $300000 on making the desktops. How many of each should be made and sold to maximize profit?",
+        "ground_truth": 80000,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_020",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_020\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_020\\code.py"
+    },
+    "prob_064": {
+        "description": "An oil and gas company has two types of pipes, a high-volume and a low-volume one. Every day, the high-volume pipe allows 10000 US gallons and it is recommended that 12 technicians closely monitor the pipes to ensure that it is functioning properly. Each day, the low-volume pipe allows 5000 US gallons and 5 technicians should closely monitor for safety reasons. Every day, the oil and gas company needs to meet the demands of at least 150000 US gallons of gas and they have 160 technicians that are on their staff. Since the high-volume pipe has a higher risk of environmental damage, at most 35 percent of the pipes can be high-volume ones. Additionally, there must be a minimum of 8 low-volume pipes. How many of each pipe types should be used to reduce the total number of pipes required?",
+        "ground_truth": 25,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_222",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_222\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_222\\code.py"
+    },
+    "prob_065": {
+        "description": "A shipping company can purchase regular and hybrid vans to make deliveries. A regular van can deliver 500 packages per day and produces 200 units of pollutants. A hybrid van can deliver 300 packages per day and produces 100 units of pollutants. Due to a new environmental law, they can produce at most 7000 units of pollutants per day. However, the company needs to be able to deliver at least 20000 packages per day. How many of each type of van should they buy to minimize the total number of vans needed?",
+        "ground_truth": 60,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_062",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_062\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_062\\code.py"
+    },
+    "prob_066": {
+        "description": "A food delivery person can either have shifts on bikes or scooters. A shift on a bike can deliver 10 orders, takes 5 units of energy, and brings in $50 on tips because it is faster. A shift on a scooter can deliver 7 orders, takes 6 units of energy, and brings in $43 on tips.  The delivery person has available 40 shifts a month and has 230 units of energy and must bring at least 320 orders. He must have at least 5 shifts on a scooter because bikes are harder to get. How many shifts on each type of transportation should the delivery person schedule to maximize tips received?",
+        "ground_truth": 1965,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_225",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_225\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_225\\code.py"
+    },
+    "prob_067": {
+        "description": "A car manufacturer makes two types of car oils: Oil Max and Oil Max Pro. A container of Oil Max contains 46 grams of substance A, 43 grams of substance B and 56 grams of substance C. A container of Oil Max Pro contains 13 grams of substance A, 4 grams of substance B and 45 grams of substance C. The car manufacturer has 1345 grams of substance A, 346 grams of substance B, 1643 grams of substance C. In addition, the profit per container of Oil Max is $10 and the profit per container of Oil Max Pro is $15. How many containers of each of oil should the car manufacturer make to maximize profit?",
+        "ground_truth": 540,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_025",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_025\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_025\\code.py"
+    },
+    "prob_068": {
+        "description": "A sailor can eat either a crab cakes or a lobster roll for his meals. He needs to ensure he gets at least 80 units of vitamin A and 100 units of vitamin C. Each crab cake contains 5 units of vitamin A and 7 units of vitamin C. Each lobster roll contains 8 units of vitamin A and 4 units of vitamin C. In addition, since lobster is more expensive, at most 40% of his meals should be lobster rolls. If each crab cake contains 4 units of unsaturated fat and each lobster roll contains 6 units of unsaturated fat, how many of each should he eat to minimize his unsaturated fat intake?",
+        "ground_truth": 64,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_100",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_100\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_100\\code.py"
+    },
+    "prob_069": {
+        "description": "A man fishes in a 250 acre lake and can catch fish either using a net or fishing line. For each acre of the lake, using a net will catch 8 fish and requires 4 units of bait but also causes 2 units of pain for the fisherman. For each acre of the lake, using a fishing line will catch 5 fish and requires 3 units of bait but also causes 1 unit of pain for the fisherman. The fisherman has available 800 units of bait and can tolerate at most 350 units of pain. For how many acres each should he use each fishing method to maximize the amount of fish he can catch?",
+        "ground_truth": 1500,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_074",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_074\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_074\\code.py"
+    },
+    "prob_070": {
+        "description": "A woman on a diet needs to eat two types of meal preps, a smoothie and a protein bar. Each smoothie contains 2 units of protein and 300 calories. Each protein bar contains 7 units of protein and 250 calories. The woman must eat 2 times more protein bars than smoothies. If the woman can consume at most 2000 calories, how many of each should she eat or drink to maximize her protein intake?",
+        "ground_truth": 56,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_259",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_259\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_259\\code.py"
+    },
+    "prob_071": {
+        "description": "A corn farmer sends his corn to the city by either tractor or car.  A tractor can carry 40 kg of corn while a car can carry 20 kg of corn. Since tractors are very slow, the number of cars used has to be at least twice the number of tractors used. If at least 500 kg of corn need to be sent to the city, minimize the total number of tractors and cars needed.",
+        "ground_truth": 19,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_166",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_166\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_166\\code.py"
+    },
+    "prob_072": {
+        "description": "An extremely large ski resort is looking into purchasing two types of ski lifts, a densely-seated one and a loosely-seated one. The densely-seated ski lift is able to bring 45 guests up the slopes every minute whereas the loosely-seated ski lift can transport 20 guests every minute.  The densely-seated ski lift uses 30 units of electricity and the loosely-seated lift uses 22 units of electricity. There must be at least five loosely-seated ski lifts because they move slower and are friendlier for beginners. The ski resort needs at least 1000 guests every minute to make a profit and has available 940 units of electricity. How many of each type of ski lifts should they plan to install to minimize the total number of ski lifts needed?",
+        "ground_truth": 25,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_217",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_217\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_217\\code.py"
+    },
+    "prob_073": {
+        "description": "A doctor recommends her patient eat more fish and chicken to increase her protein and iron intake. Each fish meal contains 10 units of protein and 12 units of iron. Each chicken meal contains 15 units of protein and 8 units of iron. The patient needs to consume at least 130 units of protein and 120 units of iron. Since the chicken meal is less expensive, the patient prefers to consume at least twice as many chicken meals as fish meals. If each fish meal contains 7 units of fat and each chicken meal contains 10 units of fat, how many meals of each should she eat to minimize her fat intake?",
+        "ground_truth": 118,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_096",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_096\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_096\\code.py"
+    },
+    "prob_074": {
+        "description": "A woodshop can purchase two types of saws, a miter saw and a circular saw. A miter saw can cut 50 planks of wood and produces 60 units of sawdust per day. A circular saw can cut 70 planks of wood and produces 100 units of sawdust per day. The woodshop must cut at least 1500 planks of wood per day. However, to avoid too much pollution in the woodshop they can produce at most 2000 units of sawdust per day. How many of each type of saw should be purchased to minimize the total number of saws needed?",
+        "ground_truth": 26,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_043",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_043\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_043\\code.py"
+    },
+    "prob_075": {
+        "description": "A pharmaceutical company makes skin cream in batches, a regular batch and premium batch, to sell to hospitals. The regular batch requires 50 units of medicinal ingredients and 40 units of rehydration product. A premium batch requires 40 units of medicinal ingredients and 60 units of rehydration product. The company has available 3000 units of medicinal ingredients and 3500 units of rehydration product. Since the premium batch sells better, the number of regular batches must be less than the number of premium batches. In addition, the company must make at least 10 regular batches. If a regular batch can treat 50 people and a premium batch can treat 30 people, how many of each batch should be made to maximize the number of people that can be treated?",
+        "ground_truth": 2650,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_097",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_097\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_097\\code.py"
+    },
+    "prob_076": {
+        "description": "A scientist in the arctic needs to get enough vitamin D and vitamin C in his diet by drinking orange and apple juice. Each box of orange juice contains 10 units of vitamin D and 8 units of vitamin C. Each box of apple juice contains 12 units of vitamin D and 6 units of vitamin C. Since the scientist prefers apple juice, he must drink at least 3 times as many apple juice boxes and orange juice boxes. However, he must also drink at least 3 orange juice boxes. To avoid a vitamin C overdose, the scientist can consume at most 300 units of vitamin C. How many of each juice box should he drink to maximize his total vitamin D intake?",
+        "ground_truth": 582,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_093",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_093\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_093\\code.py"
+    },
+    "prob_077": {
+        "description": "A bakery makes almond and pistachio croissants. An almond croissant requires 5 units of butter and 8 units of flour. A pistachio croissant requires 3 units of butter and 6 units of flour. The bakery has available 600 units of butter and 800 units of flour. Since the almond croissant is more popular, at least 3 times as many almond croissants should be made as pistachio croissants. If making an almond croissant takes 12 minutes and making a pistachio croissant takes 10 minutes, how many of each should be made to minimize the total production time?",
+        "ground_truth": 0,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_055",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_055\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_055\\code.py"
+    },
+    "prob_078": {
+        "description": "A construction company in the tropics uses cows and elephants to carry bricks. A cow can carry 20 bricks on its back while an elephant can carry 50 bricks on its back. To avoid having elephants create too much traffic, the number of elephant cannot exceed the number of cows. In addition, there can be at most twice the number of cows as elephants. If the company needs to transport at least 1000 bricks, find the minimum number of animals, cows and elephants, that can be used..",
+        "ground_truth": 29,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_175",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_175\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_175\\code.py"
+    },
+    "prob_079": {
+        "description": "A hot dog company can build two types of butcher shops, a small shop and a large shop. A small shop can make 30 hot dogs per day and requires 2 workers. A large shop can make 70 hot dogs per day and requires 4 workers. The company must make at least 500 hot dogs per day but they only have available 30 workers. How many of each butcher shop should the company build to minimize the total number of butcher shops?",
+        "ground_truth": 8,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_071",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_071\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_071\\code.py"
+    },
+    "prob_080": {
+        "description": "A snow removal company removes snow from neighborhoods using small trucks and large trucks. A small truck requires 2 people to shovel the snow and can carry 30 units of snow. A large truck require 4 people to shovel the snow and car carry 50 units of snow. The company has available 30 people. In addition, because some neighbourhood don’t allow big trucks, at least 10 trucks must be small. There must be at least 3 large trucks as well and the number of small trucks must be twice as much as the number of large trucks. How many of each truck should be used to maximize the total amount of snow that can be transported?",
+        "ground_truth": null,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_183",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_183\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_183\\code.py"
+    },
+    "prob_081": {
+        "description": "A chemical company is transporting their hydrogen using two different methods, high pressure tube trailers and liquefied hydrogen tankers. The first method is a high-pressure tube trailer which can transport 50 cubic meters each per trip at a cost of $500. The second method is using liquefied hydrogen tankers which can transport 30 cubic meters each per trip at a cost of $200. The company needs to transport at least 1000 cubic meters of hydrogen and they have budget of $3750 available. In addition, the number of transports done by the high pressure tube trailer method has to be less than the number of transports done by the liquefied hydrogen tanker method. How many of each transportation method should they use to minimize the total number of trips?",
+        "ground_truth": null,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_178",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_178\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_178\\code.py"
+    },
+    "prob_082": {
+        "description": "A water salesman collects water from a glacier and transports it in either small or large kegs. A small keg can hold 40 liters of water while a large keg can hold 100 liters of water. The salesman has available at most 30 small kegs and 10 large kegs. Since small kegs are easier to carry, at least twice as may small kegs must be used than large kegs. If he can transport at most 25 kegs total and at least 5 kegs must be large, how many of each should he use to maximize the total amount of glacial water he can transport?",
+        "ground_truth": 1480,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_169",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_169\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_169\\code.py"
+    },
+    "prob_083": {
+        "description": "A candy store mixes regular candy and sour candy to prepare two products, regular mix and sour surprise mix. Each kilogram of the regular mix contains 0.8 kg of regular candy and 0.2 kg of sour candy. The profit per kilogram of the regular mix is $3. Each kilogram of the sour surprise mix contains 0.1 kg of regular candy and 0.9 kg of sour candy. The profit per kilogram of the sour surprise mix is $5. The candy store has 80 kg of regular candy and 60 kg of sour candy available. How many kilograms of each type of candy mix should be created to maximize profits?",
+        "ground_truth": 511.4285714285714,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_018",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_018\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_018\\code.py"
+    },
+    "prob_084": {
+        "description": "A snack exporter sends snacks to his customer in small and large suitcases. A small suitcase can hold 50 snacks while a large suitcase can hold 80 snacks. Most customer prefer small suitcases, and so at least twice as many small suitcases must be used as large suitcases. The exporter has available at most 70 small suitcases and 50 large suitcases. If he must send at least 15 large suitcases and can send  at most 70 suitcases in total, how many of each should he send to maximize the total number of snacks that can be delivered?",
+        "ground_truth": 4190,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_159",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_159\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_159\\code.py"
+    },
+    "prob_085": {
+        "description": "There are two ways to extract a metal from mined ores. The first way is to use process J and the second is process P. Process J can extract 5 units of metal using 8 units of water and produces 3 units of pollution. Process P can extract 9 units of metal using 6 units of water and produces 5 units of pollution. There can be at most 1500 units of water 1350 units of pollution. How many of each type of processes should be performed to maximize the amount of metal extracted?",
+        "ground_truth": 2250,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_247",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_247\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_247\\code.py"
+    },
+    "prob_086": {
+        "description": "A new fast food place makes wraps and platters. Each wrap requires 5 units of meat and 3 units of rice. Each platter requires 7 units of meant and 5 units of rice. While each wrap takes 10 minutes to make, each platter takes 8 minutes to make. The fast food place must use at least 3000 units of meat and 2500 units of rice. Since wraps are easier to eat on the go, at least 3 times as many wraps need to be made as platter. How many of each should the fast food place make to minimize the total production time?",
+        "ground_truth": 6794,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_045",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_045\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_045\\code.py"
+    },
+    "prob_087": {
+        "description": "An international goods exporter uses ships and planes to transport goods. A ship can take 40 containers worth of goods and uses 500 liters of fuel per trip. A plane can take 20 containers worth of goods and uses 300 liters of fuel per trip. The company needs to transport at least 500 containers worth of goods. In addition, there can be at most 10 plane trips made and a minimum of 50% of the trips made must be by ship. How many of each trip should be made to minimize the total amount of fuel consumed?",
+        "ground_truth": 6300,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_140",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_140\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_140\\code.py"
+    },
+    "prob_088": {
+        "description": "An appliance company sells and installs refrigerators and stoves. Each refrigerator takes 60 minutes of mover time and 20 minutes of setup time. Each stove takes 45 minutes of mover time and 25 minutes of setup time. The company has available 20000 minutes of mover time and 13000 minutes of setup time. If the profit per refrigerator is $400 and the profit per stove is $260, how many of each should they sell in order to maximize profit?",
+        "ground_truth": 133200,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_190",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_190\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_190\\code.py"
+    },
+    "prob_089": {
+        "description": "A grilled cheese shop sells a light and heavy grilled cheese sandwich. A light grilled cheese sandwich requires 2 slices of bread and 3 slices of cheese. A heavy grilled cheese sandwich requires 3 slices of bread and 5 slices of cheese. Since most people who come to the store love grilled cheese, the store must make at least 3 times as many heavy grilled cheese sandwiches as light grilled cheese sandwiches. The store has available 300 slices of bread and 500 slices of cheese. If a light grilled cheese sandwich takes 10 minutes to make and a heavy grilled cheese sandwich takes 15 minutes to make, how many of each should they make to minimize the total production time?",
+        "ground_truth": 0,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_065",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_065\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_065\\code.py"
+    },
+    "prob_090": {
+        "description": "An autobody shop needs to purchase two types of car jacks, an automatic electric one, or a gas-powered one. The automatic electric one can process 5 cars every hour and uses 6 units of electricity whereas the gas-powered one can process 4 cars each hour using 7 units of gas. Since there is a limit to how many automatic electric ones there can be due to the limited number of power outlets, the shop must use less than 15 automatic electric ones. The shop can use at most 50 units of electricity and 80 units of gas. How many of each type of jack should the shop purchase to maximize the amount of cars processed every hour?",
+        "ground_truth": 84,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_244",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_244\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_244\\code.py"
+    },
+    "prob_091": {
+        "description": "In a science club, there are two tables that can be set up to make slime. At table 1, 3 units of powder and 5 units of glue are used to make 4 units of slime. At table 2, 8 units of powder and 6 units of glue are used to make 5 units of slime. However, table 1 produces 2 units of mess while table 2 produces 4 units of mess. The science club has available 100 units of powder and 90 units of glue.  If at most 30 units of mess can be made, how many of each table should be set up to maximize the amount of slime produced?",
+        "ground_truth": 60,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_121",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_121\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_121\\code.py"
+    },
+    "prob_092": {
+        "description": "A taxi company will purchase vehicles to rent to their drivers. They are interested in purchasing either motorcycles or sedans. A motorcycle can transport 30 people, produces 4 units of pollution, and earns the taxi company $100 per shift. A sedan can transport 70 people, produces 15 units of pollution and earns the company $225 per shift. Because not every customer is comfortable with a motorcycle, at most 25% of vehicles can be motorcycles. Additionally, the company has committed to producing less than 200 units of pollution. The company needs to transport at least 1200 people every shift. How many of each type of vehicle should be used to maximize the total earnings for the taxi company per shift?",
+        "ground_truth": null,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_250",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_250\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_250\\code.py"
+    },
+    "prob_093": {
+        "description": "An airport buys two types of vehicles, a 4-wheeler and 3-wheeler, to help move luggage. A 4-wheeler vehicle can move 60 luggage per day and produces 30 units of pollutant per day. A 3-wheeler vehicle can move 40 luggage per day and produces 15 units of pollutant per day. The airport needs to be able to move at least 1000 luggage per day. To avoid over-polluting the airport, they can produce at most 430 units of pollutant per day. How many of each vehicle should the airport buy to minimize the total number of vehicles needed.  ",
+        "ground_truth": 22,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_072",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_072\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_072\\code.py"
+    },
+    "prob_094": {
+        "description": "A village hosts a banquet and provides bike and car transportation for everyone. A bike can take 3 people while a car can take 5 people. Since cars are more expensive, at most 40% of the vehicles can be cars. If the village needs to transport at least 500 people, how many of each vehicle should be used to minimize the total number of bikes needed?",
+        "ground_truth": 80,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_167",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_167\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_167\\code.py"
+    },
+    "prob_095": {
+        "description": "A shipping company need to transport packages by either truck or car. A truck can transport 50 packages per trip while a car can transport 30 packages per trip. In addition, a truck uses 20 liters of gas per trip while a car uses 15 liters of gas per trip. There can be at most 5 truck trips made and at least 30% of all the trips must be made by car. The company needs to transport at least 500 packages. How many of each transportation should they use to minimize the total amount of gas consumed?",
+        "ground_truth": 230,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_180",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_180\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_180\\code.py"
+    },
+    "prob_096": {
+        "description": "An oil and gas company is sending their oil to the port using containers and trucks. A container can hold 30 units of oil while a truck can hold 40 units of oil. Due to government restrictions, the number of trucks used has to at most half the number of containers used. If at least 2000 units of oil need to be sent to the port and at least 15 containers need to be used, minimize the total number of containers and trucks needed.",
+        "ground_truth": 60,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_146",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_146\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_146\\code.py"
+    },
+    "prob_097": {
+        "description": "A bakery makes fiber supplemented brownies and lemon squares. Each brownie requires 5 units of chocolate mix and 4 units of fiber. Each lemon square requires 7 units of lemon mix and 6 units of fiber. Lemon squares sell much faster and thus the number of lemon squares made must be larger than the number of brownies made. However, to please all customers, at least 40% of the items made must be brownies. If the bakery has 2500 units of chocolate mix and 3300 units of lemon mix, how many of each should be made to minimize the total amount of fiber needed?",
+        "ground_truth": 26.000000000000007,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_058",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_058\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_058\\code.py"
+    },
+    "prob_098": {
+        "description": "A grape farmer transports his grapes in either small crates or large crates. A small crate can take 200 grapes while a large crate can take 500.  Because his customers prefer smaller crates, at least 3 times as many small crates must be used than large crates. The farmer has available at most 100 small crates and at most 50 large crates. In addition, his truck can take at most 60 crates total and he must use at least 10 large crates. How many of each crate should he use to maximize the total number of grapes he can transport?",
+        "ground_truth": 16500,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_179",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_179\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_179\\code.py"
+    },
+    "prob_099": {
+        "description": "An office is buying printers for their headquarters, a premium model and regular model. The premium model can print 30 pages per minute while the regular model can print 20 pages per minute. In addition, the premium model requires 4 units of ink per minute while the regular model requires 3 units of ink per minute. The office wants to make sure that at least 200 pages can be printed per minute and that at most 35 units of ink are used per minute.  Since the premium model is more user friendly, the number regular printers must be less than the number of premium printers. How many of each printer should be bought to minimize the total number of printers in the office?",
+        "ground_truth": 7,
+        "problem_type": "ILP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_086",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_086\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_086\\code.py"
+    },
+    "prob_100": {
+        "description": "A flooring company produces engineered laminate planks and carpets. The chief marketer reports an expected demand of at least 15,000 square feet of laminate planks and 5,000 square feet of carpets each week. The shipping contract requires a total of at least 50,000 square feet of products each week. However, due to a shortage of raw materials, no more than 40,000 square feet of laminate planks and 20,000 square feet of carpets can be produced weekly. If a square foot of laminate planks produces a $2.1 profit and a square foot of carpets yields a $3.3 profit, how many of each type of product should be made weekly to maximize the company's profit?",
+        "ground_truth": 150000,
+        "problem_type": "LP",
+        "problem_size": "Toy",
+        "index": "NLP4LP_prob_200",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_200\\model.txt",
+        "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_200\\code.py"
+    }
+}

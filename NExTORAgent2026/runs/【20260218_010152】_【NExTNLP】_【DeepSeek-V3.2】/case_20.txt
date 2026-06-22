@@ -1,0 +1,246 @@
+{
+  "entry": {
+    "index": 20,
+    "question": "In the logistics industry, optimizing transportation costs is one of the core challenges of supply chain management. Many large retail companies, such as Rhode Island Pharmaceuticals or Rhein Life Pharmaceuticals, face the problem of how to efficiently allocate inventory to meet customer needs in different regions. As the transportation volume increases, the cost often increases nonlinearly, which may be caused by vehicle load restrictions, reduced fuel efficiency, or congestion effects on transportation routes. For example, when a truck is close to full, the transportation cost of each additional unit of goods will increase significantly, and this phenomenon can be approximately modeled by a quadratic function. By analyzing the cost structure of transportation paths from different warehouses to customers, logistics optimization algorithms are able to develop the most economical distribution plan, thereby reducing overall operating costs. \n\nRhode Island Pharmaceuticals uses a similar transportation optimization model in its Kazdale distribution network. The company has two main regional warehouses in Dongguo and Longmen, which are responsible for distributing electronic products to customers in Wishdale City and Huatian City. Due to the differences in fuel prices, tolls, and transportation efficiency of different transportation routes, Rhode Island Pharmaceuticals uses a quadratic cost function to more accurately estimate transportation costs. For example, the transportation cost from the Dongguk warehouse to the customers in Huatian City will increase rapidly as the freight volume increases, reflecting the impact of highway congestion and additional dispatching costs. Through mathematical optimization technology, the shipment volume of each warehouse can be dynamically adjusted to ensure that the overall logistics cost is minimized while meeting customer needs and improving operational efficiency. \n\nA company has 2 warehouses (sufficient supply) supplying 2 customers. It needs to determine the shipment volume from each warehouse to each customer to meet demand and minimize transportation costs. Customers 1 and 2 have demands of 80 and 70 units respectively, and the maximum supply of warehouses 1 and 2 is 100 units each. The transportation cost increases quadratically with the increase of freight volume, and is approximated by a quadratic function: \n\nWarehouse 1->Customer 1: $0.01x_{11}^2 + 2x_{11}$ \n\nWarehouse 1->Customer 2: $0.01x_{12}^2 + 3x_{12}$ \n\nWarehouse 2->Customer 1: $0.02x_{21}^2 + 2.5x_{21}$ \n\nWarehouse 2->Customer 2: $0.02x_{22}^2 + 1.5x_{22}$. \n\nThe design variable is the volume of each route $x_{ij}$. Constraints: meet customer demand (the total amount received by each customer is equal to its demand) and warehouse supply constraints (the total amount sent by each warehouse does not exceed 100), and $x_{ij}\\ge0$. Give the minimum transportation cost.",
+    "answer": 402.83,
+    "Parameters_List": [
+      {
+        "Name": "m",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "n",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "d",
+        "Type": "list",
+        "Value": [
+          80,
+          70
+        ]
+      },
+      {
+        "Name": "s_max",
+        "Type": "list",
+        "Value": [
+          100,
+          100
+        ]
+      },
+      {
+        "Name": "cost_quad",
+        "Type": "list",
+        "Value": [
+          [
+            0.01,
+            0.01
+          ],
+          [
+            0.02,
+            0.02
+          ]
+        ]
+      },
+      {
+        "Name": "cost_lin",
+        "Type": "list",
+        "Value": [
+          [
+            2.0,
+            3.0
+          ],
+          [
+            2.5,
+            1.5
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the logistics industry, optimizing...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Many large retail companies, such...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "As the transportation volume increases,...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "For example, when a truck is close...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "By analyzing the cost structure...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Rhode Island Pharmaceuticals uses...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The company has two main regional...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Due to the differences in fuel...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "For example, the transportation cost...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Through mathematical optimization technology,...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "A company has 2 warehouses (sufficient...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "It needs to determine the shipment...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Customers 1 and 2 have demands of...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "The transportation cost increases quadratically...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Warehouse 1→Customer 1: 0.01 x₁₁² + 2 x₁₁",
+        "No constraints"
+      ],
+      [
+        "16",
+        "Warehouse 1→Customer 2: 0.01 x₁₂² + 3 x₁₂",
+        "No constraints"
+      ],
+      [
+        "17",
+        "Warehouse 2→Customer 1: 0.02 x₂₁² + 2.5 x₂₁",
+        "No constraints"
+      ],
+      [
+        "18",
+        "Warehouse 2→Customer 2: 0.02 x₂₂² + 1.5 x₂₂",
+        "No constraints"
+      ],
+      [
+        "19",
+        "The design variable is the volume...",
+        "No constraints"
+      ],
+      [
+        "20",
+        "Constraints: meet customer demand...",
+        "Demand1: x11+x21=80; Demand2: x12+x22=70; Supply1: x11+x12≤100; Supply2: x21+x22≤100; Nonnegativity: x11,x12,x21,x22≥0"
+      ],
+      [
+        "21",
+        "Give the minimum transportation cost.",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x11",
+        "Meaning": "shipment volume from warehouse 1 to customer 1",
+        "Type": "continuous",
+        "Range ": "[0,100]"
+      },
+      {
+        "symbol": "x12",
+        "Meaning": "shipment volume from warehouse 1 to customer 2",
+        "Type": "continuous",
+        "Range ": "[0,100]"
+      },
+      {
+        "symbol": "x21",
+        "Meaning": "shipment volume from warehouse 2 to customer 1",
+        "Type": "continuous",
+        "Range ": "[0,100]"
+      },
+      {
+        "symbol": "x22",
+        "Meaning": "shipment volume from warehouse 2 to customer 2",
+        "Type": "continuous",
+        "Range ": "[0,100]"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Demand_Customer1",
+        "x11 + x21 = 80",
+        "sentence numbers:20"
+      ],
+      [
+        "Demand_Customer2",
+        "x12 + x22 = 70",
+        "sentence numbers:20"
+      ],
+      [
+        "Supply_Warehouse1",
+        "x11 + x12 ≤ 100",
+        "sentence numbers:20"
+      ],
+      [
+        "Supply_Warehouse2",
+        "x21 + x22 ≤ 100",
+        "sentence numbers:20"
+      ],
+      [
+        "Nonnegativity",
+        "x11, x12, x21, x22 ≥ 0",
+        "sentence numbers:20"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize total transportation cost.",
+      "Mathematical_expressions": "Z = 0.01 x11^2 + 2 x11 + 0.01 x12^2 + 3 x12 + 0.02 x21^2 + 2.5 x21 + 0.02 x22^2 + 1.5 x22"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "402.833333",
+      "402.83"
+    ],
+    "time_seconds": 52.01692870000261,
+    "total_tokens": 6620
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "402.833333",
+      "402.83"
+    ],
+    "ground_truth": 402.83
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "The post office is purchasing stamping machines. They can buy either dual-type stamping machines or single-type stamping machines. A dual-type stamping machine can stamp 50 letters per minute, while a single-type stamping machine can stamp 30 letters per minute. A dual-type stamping machine requires 20 units of glue per minute, while a single-type stamping machine requires 15 units of glue per minute. Because the single-type stamping machines are quieter, the number of single-type stamping machines must be greater than the number of dual-type stamping machines. In addition, the post office wants to ensure that they can stamp at least 300 letters per minute, and that the ratio of the total glue used per minute by the single-type stamping machines to the total glue used per minute by the dual-type stamping machines does not exceed 9 to 8 (i.e., the total glue used per minute by the single-type stamping machines divided by the total glue used per minute by the dual-type stamping machines is no greater than $9/8$). How many stamping machines of each type should they purchase to minimize the total number of stamping machines?",
+    "answer": 9.0,
+    "index": "NLP4LP_prob_066",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 此外，邮局希望确保他们每分钟至少可以盖章 300 封信件，并且每分钟最多使用 135 个单位的胶水。 修改后相关描述: 此外，邮局希望确保他们每分钟至少可以盖章 300 封信件，并且单型号盖章机每分钟使用的胶水总量与双型号盖章机每分钟使用的胶水总量的比值不超过 9 比 8（即单型号盖章机每分钟使用的胶水总量除以双型号盖章机每分钟使用的胶水总量不大于 9/8）。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_066\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_051.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "9.0"
+    ],
+    "time_seconds": 15.117469300006633,
+    "total_tokens": 1470
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "9.0"
+    ],
+    "ground_truth": 9.0
+  }
+}

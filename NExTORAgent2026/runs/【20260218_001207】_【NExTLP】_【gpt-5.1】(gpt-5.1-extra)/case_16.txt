@@ -1,0 +1,382 @@
+{
+  "entry": {
+    "index": 16,
+    "question": "Dongjiang Communication Group is the largest urban network operator in South China. In recent years, due to the expansion of 5G business, it needs to restructure the base station layout in the core urban area. The company plans to select eight candidate sites in Fenghuang New City to build base stations to form an efficient cellular network. The area contains 10 high-density user areas (numbered 1-10), and each area has different coverage priorities due to differences in population density and commercial value. Due to municipal planning restrictions, base station facilities must be compatible with underground optical cable transportation network nodes, and the total construction budget is 160(unit: ten thousand yuan). The engineering team needs to design the optimal site plan for all coverage efficiency areas while meeting the signal superposition redundancy requirements. \n\n**Supply side**, candidate base station sites have heterogeneous deployment conditions. The optical cable interface capacity of sites 1-8 is the same, but due to the approval of municipal land use, a maximum of 5 sites can be selected for construction, with an average construction period of 1 year. **Demand side**, the coverage benefit weights of each user area have been calculated through census data and commercial traffic models, among which area 10 has the highest priority due to the presence of a cross-border logistics data center. Signal coverage depends on the topological relationship between base stations and user areas as described in the table. For example, site 1 can radiate areas 1, 2, and 5 at the same time, and the signal of site 6 can penetrate the subway tunnel structure of areas 5, 7, 8, and 10. The same is true for other areas. **Additional constraints**, engineering specifications require that if a area is covered by multiple base stations, its coverage benefit is still calculated as a single coverage, and the coverage status of each area must strictly correspond to the deployment of its service base station. In addition, historical data shows that there is an electromagnetic interference risk between areas 8, 9, and 10, which needs to be carefully evaluated and can be covered by at most one base station. \n\nThe cost of each base station includes the cost of infrastructure construction and the cost of population service. The population service cost is designed to cover all base stations in the area, and the basic population service cost is 0.5 yuan/person. If an area is covered by multiple base stations at the same time, the population service fee will be diluted by multiple base stations on average because the network information is spread to each base station. At the same time, if there is a subway in a certain area, it may be necessary to build additional subway coverage equipment (the cost of this equipment is 1, unit: ten thousand yuan) during construction. This equipment can further reduce the total basic population service cost of the area by 0.1 yuan/person. \n\n It is required that all areas be covered and the total cost be provided. \n\nData table \n\n**Table 1: Base station coverage relationship** \n\n| Base station number | Coverable user area number | Base station construction cost |\n| -------- | -------------------- | ------------ |\n| 1 | 1,2,5 | 27 |\n| 2 | 2,3,6 | 25 |\n| 3 | 1,4,7 | 25 |\n| 4 | 3,5,6,7 | 30 |\n| 5 | 4,6,8,9 | 30 |\n| 6 | 5,7,8,10 | 30 |\n| 7 | 8,9,10 | 25 |\n| 8 | 9,10 | 20 |\n\n**Table 2: User area situation (Unit: ten thousand people)** \n\n| Area number | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |\n| ---------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| Population | 4 | 8 | 5 | 10 | 12 | 7 | 9 | 3 | 6 | 11 |\n| Is there a subway? | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 |",
+    "answer": 139.2,
+    "Parameters_List": [
+      {
+        "Name": "num_candidate_sites",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "num_user_areas",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "max_selected_sites",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "total_budget",
+        "Type": "float",
+        "Value": 160.0
+      },
+      {
+        "Name": "average_construction_period_years",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "base_population_service_cost_per_person_yuan",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "subway_equipment_cost_ten_thousand_yuan",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "subway_equipment_reduction_per_person_yuan",
+        "Type": "float",
+        "Value": 0.1
+      },
+      {
+        "Name": "interference_areas",
+        "Type": "list",
+        "Value": [
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name": "Table_1_BaseStationCoverageRelationship_base_station_numbers",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "Name": "Table_1_BaseStationCoverageRelationship_coverable_user_areas",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            2,
+            5
+          ],
+          [
+            2,
+            3,
+            6
+          ],
+          [
+            1,
+            4,
+            7
+          ],
+          [
+            3,
+            5,
+            6,
+            7
+          ],
+          [
+            4,
+            6,
+            8,
+            9
+          ],
+          [
+            5,
+            7,
+            8,
+            10
+          ],
+          [
+            8,
+            9,
+            10
+          ],
+          [
+            9,
+            10
+          ]
+        ]
+      },
+      {
+        "Name": "Table_1_BaseStationCoverageRelationship_construction_costs",
+        "Type": "list",
+        "Value": [
+          27.0,
+          25.0,
+          25.0,
+          30.0,
+          30.0,
+          30.0,
+          25.0,
+          20.0
+        ]
+      },
+      {
+        "Name": "Table_2_UserAreaSituation_area_numbers",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name": "Table_2_UserAreaSituation_population_ten_thousand_people",
+        "Type": "list",
+        "Value": [
+          4.0,
+          8.0,
+          5.0,
+          10.0,
+          12.0,
+          7.0,
+          9.0,
+          3.0,
+          6.0,
+          11.0
+        ]
+      },
+      {
+        "Name": "Table_2_UserAreaSituation_has_subway",
+        "Type": "list",
+        "Value": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "There are 8 candidate...",
+        "Defines 8 stations and a max of 5 selected: ∑_{i=1}^8 x_i ≤ 5"
+      ],
+      [
+        "2",
+        "The total construction budget...",
+        "Defines total cost budget constraint: Total_Cost ≤ 160"
+      ],
+      [
+        "3",
+        "There are 10 user areas...",
+        "Defines 10 areas and full coverage requirement: y_j = 1, ∑_{i∈C(j)} a_{ij} ≥ 1"
+      ],
+      [
+        "4",
+        "Coverage relations between base...",
+        "Defines feasible (i,j) pairs and sets C(j) for coverage/assignment constraints"
+      ],
+      [
+        "5",
+        "If an area is covered by multiple...",
+        "Clarifies benefit counted once; no extra constraint for cost model"
+      ],
+      [
+        "6",
+        "Areas 8, 9, and 10 can...",
+        "Interference constraint: each of areas 8,9,10 can be covered by at most one station, ∑_{i∈C(j)} a_{ij} ≤ 1"
+      ],
+      [
+        "7",
+        "Base station construction costs...",
+        "Provides construction cost parameters for objective"
+      ],
+      [
+        "8",
+        "Population of each area and...",
+        "Provides population parameters P_j and subway indicators I_subway(j)"
+      ],
+      [
+        "9",
+        "Population service cost is 0.5...",
+        "Defines population service cost rule: 0.5 yuan/person (split if multiple stations)"
+      ],
+      [
+        "10",
+        "If an area has a subway...",
+        "Defines optional subway equipment variable z_j, cost 1 and cost reduction 0.1 yuan/person"
+      ],
+      [
+        "11",
+        "The optical cable interface capacity...",
+        "States equal capacity; no additional constraints"
+      ],
+      [
+        "12",
+        "The goal is to cover all...",
+        "Defines objective: minimize total cost under constraints"
+      ],
+      [
+        "13",
+        "Area 10 has highest priority...",
+        "Priority note; no additional constraints since all areas must be covered"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_i",
+        "Meaning": "1 if base station i (i=1..8) is constructed; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "i = 1,…,8"
+      },
+      {
+        "symbol": "y_j",
+        "Meaning": "1 if user area j (j=1..10) is covered; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "j = 1,…,10"
+      },
+      {
+        "symbol": "z_j",
+        "Meaning": "1 if subway coverage equipment is installed in subway area j; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "j ∈ {4,5,10}"
+      },
+      {
+        "symbol": "a_{ij}",
+        "Meaning": "1 if area j is assigned to (served by) station i that can cover j; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "For all feasible coverage pairs (i,j) from Table 1"
+      },
+      {
+        "symbol": "P_j",
+        "Meaning": "Population (in ten thousand people) of area j",
+        "Type": "continuous",
+        "Range ": "Given constants: P_1=4, P_2=8, P_3=5, P_4=10, P_5=12, P_6=7, P_7=9, P_8=3, P_9=6, P_10=11"
+      },
+      {
+        "symbol": "I_subway(j)",
+        "Meaning": "Indicator parameter: 1 if area j has subway, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "I_subway(4)=1, I_subway(5)=1, I_subway(10)=1, others 0"
+      },
+      {
+        "symbol": "C(j)",
+        "Meaning": "Set of stations that can cover area j (from Table 1)",
+        "Type": "set",
+        "Range ": "C(1)={1,3}, C(2)={1,2}, C(3)={2,4}, C(4)={3,5}, C(5)={1,4,6}, C(6)={2,4,5}, C(7)={3,4,6}, C(8)={5,6,7}, C(9)={5,7,8}, C(10)={6,7,8}"
+      },
+      {
+        "symbol": "k_j",
+        "Meaning": "Number of stations serving area j, k_j = ∑_{i∈C(j)} a_{ij}",
+        "Type": "integer",
+        "Range ": "j = 1,…,10; k_j ≥ 1"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Station selection limit",
+        "∑_{i=1}^8 x_i ≤ 5",
+        "sentence numbers:1"
+      ],
+      [
+        "Budget constraint",
+        "Total_Cost ≤ 160",
+        "sentence numbers:2,12"
+      ],
+      [
+        "Assignment only if station built",
+        "a_{ij} ≤ x_i  for all feasible (i,j)",
+        "sentence numbers:1,4"
+      ],
+      [
+        "Full coverage of each area",
+        "∑_{i∈C(j)} a_{ij} ≥ 1  for all j = 1,…,10",
+        "sentence numbers:3,4"
+      ],
+      [
+        "Coverage status definition",
+        "y_j ≤ ∑_{i∈C(j)} a_{ij},  y_j = 1  for all j",
+        "sentence numbers:3,12"
+      ],
+      [
+        "Interference constraint for area 8",
+        "∑_{i∈C(8)} a_{i,8} ≤ 1",
+        "sentence numbers:6"
+      ],
+      [
+        "Interference constraint for area 9",
+        "∑_{i∈C(9)} a_{i,9} ≤ 1",
+        "sentence numbers:6"
+      ],
+      [
+        "Interference constraint for area 10",
+        "∑_{i∈C(10)} a_{i,10} ≤ 1",
+        "sentence numbers:6"
+      ],
+      [
+        "Subway equipment only in subway areas",
+        "z_j = 0 for j ∉ {4,5,10}",
+        "sentence numbers:8,10"
+      ],
+      [
+        "Subway equipment linked to coverage",
+        "z_j ≤ y_j  for j ∈ {4,5,10}",
+        "sentence numbers:3,10"
+      ],
+      [
+        "Definition of k_j",
+        "k_j = ∑_{i∈C(j)} a_{ij}  for all j",
+        "sentence numbers:4,9"
+      ],
+      [
+        "Binary variable domains",
+        "x_i, y_j, z_j, a_{ij} ∈ {0,1}",
+        "sentence numbers:1,3,6,9,10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The goal is to cover all user areas and minimize the total cost including construction, population service, and subway equipment cost under all constraints.",
+      "Mathematical_expressions": "Minimize  Total_Cost = Construction_Cost + Population_Service_Cost + Subway_Equipment_Cost\nwhere\nConstruction_Cost = 27 x_1 + 25 x_2 + 25 x_3 + 30 x_4 + 30 x_5 + 30 x_6 + 25 x_7 + 20 x_8,\nSubway_Equipment_Cost = z_4 + z_5 + z_10,\nPopulation_Service_Cost = ∑_{j=1}^{10} P_j · (0.5 − 0.1 · z_j · I_subway(j))"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "137.2"
+    ],
+    "time_seconds": 71.35884119999537,
+    "total_tokens": 51763
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "137.2"
+    ],
+    "ground_truth": 139.2
+  }
+}

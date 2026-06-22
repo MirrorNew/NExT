@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A fruit processing company, NatureBounty, specializes in producing two product lines: packaged fresh apples and bottled apple juice. NatureBounty grades apples on a scale from 1 (poor) to 10 (excellent). The company currently has 90,000 pounds of grade-7 apples and 110,000 pounds of grade-4 apples in inventory. To maintain product quality, apples sold as packaged fresh fruit must have an average grade of at least 5, and apples used for juice production must have an average grade of at least 6.\n\nIn addition, the company is subject to a processing capacity limit: due to equipment limitations, it can process at most 150,000 pounds of apples in total. Each pound of apples used for juice generates $1.10$ in revenue and incurs $0.80$ in variable cost; each pound of apples sold in packaged form generates $0.35$ in revenue and incurs $0.12$ in variable cost. The company also faces a marketing constraint: to meet market demand, at least $20\\%$ of the total processed apples must be sold in packaged form.\n\nMoreover, the company has a piecewise cost rule for juice production: if the quantity of apples used for juice production does not exceed 80,000 pounds, then only the aforementioned variable cost of $0.80$ per pound is incurred; however, if the quantity of apples used for juice production exceeds 80,000 pounds, then starting from the 80,001st pound up to the total quantity used for juice, in addition to still paying the variable cost of $0.80$ per pound, the company must also pay a one-time additional fixed cost of $10{,}000$ for overtime and equipment depreciation.\n\nHow should NatureBounty maximize profit subject to all constraints?",
+    "answer": 40100.0,
+    "index": "LogiOR_prob_033",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 此外，公司还受到生产能力的限制：由于设备限制，总共最多只能加工 150,000 磅苹果。每一磅用于榨汁的苹果可产生 1.10 美元的收入，并产生 0.80 美元的变动成本；每一磅以包装形式售出的苹果可产生 0.35 美元的收入，并产生 0.12 美元的变动成本。公司还受到一项营销约束：为满足市场需求，总加工苹果中至少有 20% 必须以包装形式销售。 修改后相关描述: 此外，公司还受到生产能力的限制：由于设备限制，总共最多只能加工 150,000 磅苹果。每一磅用于榨汁的苹果可产生 1.10 美元的收入，并产生 0.80 美元的变动成本；每一磅以包装形式售出的苹果可产生 0.35 美元的收入，并产生 0.12 美元的变动成本。公司还受到一项营销约束：为满足市场需求，总加工苹果中至少有 20% 必须以包装形式销售。另外，公司在榨汁生产上还有一项分段式成本规则：如果用于榨汁生产的苹果数量不超过 80,000 磅，则仅需承担前述每磅 0.80 美元的变动成本；但如果用于榨汁生产的苹果数量超过 80,000 磅，那么从第 80,001 磅起直到全部用于榨汁的数量，除了每磅仍然需要支付 0.80 美元的变动成本外，公司还必须一次性额外支付 10,000 美元的加班和设备折旧固定成本。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_033\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_037.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "40100.0"
+    ],
+    "time_seconds": 37.553752399995574,
+    "total_tokens": 2583
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "40100.0"
+    ],
+    "ground_truth": 40100.0
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "entry": {
+    "index": 25,
+    "question": "Tiantian Food Company is a chain enterprise focusing on high-end baked goods. Its Tiantian Workshop factory is responsible for the supply of snacks in many cities across the country. Due to the increase in market demand for light luxury desserts this year, the company has launched two new products based on the original product line, named Product I and Product II. The pre-sale response of these two new products across the country has been enthusiastic, especially Product I, which is expected to have high sales due to its unique taste.\n\nIn order to ensure smooth delivery, the factory cooperated with several large logistics companies to build a transportation network from the factory to major sales outlets. The transportation network design not only takes into account the transportation speed, but also introduces considerations of resource consumption and cost optimization. In addition, due to the long procurement cycle of raw materials, the factory's monthly supply of raw materials is currently limited. The company's senior management requires the production department to maximize this month's wholesale revenue while meeting supply constraints and sales expectations, while preparing for market expansion next month. Zhang made good production capacity and resource reserves. \n\nIn terms of supply, the monthly supply of raw materials A and B in the first month is 6 tons and 8 tons respectively, and the procurement costs of the two are 9,900 yuan/ton and 6,600 yuan/ton respectively. Each product consumes different amounts of raw materials during the production process. In the first month, the product factory must make production decisions within the raw material limit. \n\nIn terms of demand, according to the market department's estimate, the sales volume of product II in the first month cannot exceed 2,000 boxes, and the sales volume of product II must not exceed the sales volume of product I by more than 1,000 boxes. The goal is to make the plan to maximize wholesale revenue in the first month. \n\nIn the second month, under the plan to maximize wholesale revenue in the first month, the overall market demand continues to grow by 25%, the raw material supply is sufficient, and the production arrangement can be adjusted according to demand, but the goal is to maximize the surplus (wholesale revenue minus raw material expenditure). \n\nData table\n\n| Raw materials/products | I | II | Monthly supply (t) | Unit price (thousand yuan/t) |\n| ---------------------- | ---- | ---- | ------------ | ------------- |\n| A | 1 | 2 | 6 | 9.9 |\n| B | 2 | 1 | 8 | 6.6 |\n| Wholesale price (thousand yuan/thousand boxes) | 30 | 20 | - | |\n\nBased on the above scenario and description, please give the total profit for the two months after calculation. ",
+    "answer": 40.25,
+    "Parameters_List": [
+      {
+        "Name": "supply_A",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "supply_B",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "procurement_cost_A",
+        "Type": "integer",
+        "Value": 9900
+      },
+      {
+        "Name": "procurement_cost_B",
+        "Type": "integer",
+        "Value": 6600
+      },
+      {
+        "Name": "consumption",
+        "Type": "tuple",
+        "Value": {
+          "A": {
+            "I": 1,
+            "II": 2
+          },
+          "B": {
+            "I": 2,
+            "II": 1
+          }
+        }
+      },
+      {
+        "Name": "unit_price_material",
+        "Type": "tuple",
+        "Value": {
+          "A": 9.9,
+          "B": 6.6
+        }
+      },
+      {
+        "Name": "wholesale_price",
+        "Type": "tuple",
+        "Value": {
+          "I": 30,
+          "II": 20
+        }
+      },
+      {
+        "Name": "demand_upper_II",
+        "Type": "integer",
+        "Value": 2000
+      },
+      {
+        "Name": "demand_diff_limit",
+        "Type": "integer",
+        "Value": 1000
+      },
+      {
+        "Name": "demand_growth",
+        "Type": "float",
+        "Value": 0.25
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Tiantian Food Company is...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Its Tiantian Workshop factory...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Due to the increase in market...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The pre-sale response of these...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "In order to ensure smooth...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The transportation network design...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "In addition, due to the long...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The company's senior management...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Zhang made good production...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "In terms of supply, the monthly...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Each product consumes different...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "In the first month, the product...",
+        "Raw material usage constraints for month 1"
+      ],
+      [
+        "13",
+        "In terms of demand, according...",
+        "Demand cap and ratio constraints for month 1"
+      ],
+      [
+        "14",
+        "The goal is to make the plan...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "In the second month, under the plan...",
+        "Demand cap and ratio constraints for month 2"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "Production and sales of Product I in month 1 (thousand boxes)",
+        "Type": "continuous",
+        "Range ": "x1 ≥ 0"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "Production and sales of Product II in month 1 (thousand boxes)",
+        "Type": "continuous",
+        "Range ": "x2 ≥ 0"
+      },
+      {
+        "symbol": "y1",
+        "Meaning": "Production and sales of Product I in month 2 (thousand boxes)",
+        "Type": "continuous",
+        "Range ": "y1 ≥ 0"
+      },
+      {
+        "symbol": "y2",
+        "Meaning": "Production and sales of Product II in month 2 (thousand boxes)",
+        "Type": "continuous",
+        "Range ": "y2 ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Raw A limit (month 1)",
+        "1*x1 + 2*x2 ≤ 6",
+        "sentence numbers:10,12"
+      ],
+      [
+        "Raw B limit (month 1)",
+        "2*x1 + 1*x2 ≤ 8",
+        "sentence numbers:10,12"
+      ],
+      [
+        "Demand cap II (month 1)",
+        "x2 ≤ 2",
+        "sentence numbers:13"
+      ],
+      [
+        "II vs I ratio (month 1)",
+        "x2 - x1 ≤ 1",
+        "sentence numbers:13"
+      ],
+      [
+        "Demand cap II (month 2)",
+        "y2 ≤ 2.5",
+        "sentence numbers:15"
+      ],
+      [
+        "II vs I ratio (month 2)",
+        "y2 - y1 ≤ 1",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Month 1: maximize wholesale revenue; Month 2: maximize surplus (wholesale revenue minus raw material expenditure).",
+      "Mathematical_expressions": "z1 = 30*x1 + 20*x2; z2 = 30*y1 + 20*y2 - [9.9*(1*y1 + 2*y2) + 6.6*(2*y1 + 1*y2)]"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0"
+    ],
+    "time_seconds": 84.0060114999942,
+    "total_tokens": 6073
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "0.0"
+    ],
+    "ground_truth": 40.25
+  }
+}

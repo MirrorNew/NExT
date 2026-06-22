@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A construction company in a tropical region uses cows and elephants to transport bricks. One cow can carry 20 bricks on its back, and one elephant can carry 50 bricks on its back. To avoid excessive traffic congestion caused by elephants, the number of elephants cannot exceed the number of cows. In addition, considering that dispatching efficiency decreases when the number of animals is large, the company applies a nonlinear modification to the original constraint: the condition “the number of cows is at most twice the number of elephants” is replaced by “after applying a $1.2$-th power correction to the ratio of the number of cows to the number of elephants, it still cannot exceed $2$,” i.e., in natural-language terms: replace “the number of cows does not exceed twice the number of elephants” with “use the $1.2$-th power of the ratio of the number of cows to the number of elephants as the corrected ratio index; this corrected ratio index cannot exceed $2$ and cannot be less than $1.1$.” If the company needs to transport at least 1000 bricks, determine the minimum total number of animals (cows and elephants) that can be used subject to these conditions.",
+    "answer": 30.0,
+    "index": "NLP4LP_prob_175",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 此外，奶牛的数量至多只能是大象数量的两倍。 修改后相关描述: 此外，考虑到在动物数量较多时调度效率会有所下降，公司对最初的约束进行了非线性修正：奶牛的数量至多只能是大象数量的两倍这一条件被改为“奶牛数量与大象数量的比值在进行 1.2 次幂修正后，仍然不能超过 2”，即用自然语言表述为：将“奶牛数量不超过大象数量的两倍”改为“将奶牛数量与大象数量的比值的 1.2 次幂作为修正后的比例指标，该修正后比例指标不能超过 2，且不能低于1.1”。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_175\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_078.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "30.0"
+    ],
+    "time_seconds": 22.58527260000119,
+    "total_tokens": 2861
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "30.0"
+    ],
+    "ground_truth": 30.0
+  }
+}

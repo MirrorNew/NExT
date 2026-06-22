@@ -1,0 +1,440 @@
+{
+  "entry": {
+    "index": 35,
+    "question": "Dongfang City is a regional transportation hub city. Its core urban area presents a typical radial road network structure, and the main public facilities are distributed along the historical axis. According to the annual report on urban transportation development, the regional bus system undertakes more than 45% of the city's commuting travel needs, but there are structural problems such as overlapping routes and uneven resource allocation. In the latest plan, the Municipal Transportation Commission proposed a \"public transportation priority\" strategy, requiring the optimization of backbone routes connecting transportation hubs, educational and medical facilities and commercial areas. The 12 currently operating bus routes were formed in different historical periods. Some routes still retain the characteristics of commuting in industrial areas 20 years ago, which is not well matched with the current passenger flow distribution. This route optimization is a key link in the implementation of the \"Public Transportation Service Efficiency Improvement Plan\", which directly affects citizens' travel experience and urban carbon emission indicators. Scientific route adjustments can not only improve vehicle utilization efficiency, but also alleviate congestion on trunk roads during peak hours, and lay the foundation for the subsequent construction of smart bus systems. The project results will serve as a model for dynamic optimization of bus lines and provide a replicable decision-making model for similar cities. \n\nThe street map of Dongfang City is shown in Figure C-15. In the figure, ①, ②, …, ⑨ are the locations of the railway station, long-distance bus station, government, university, municipal hospital, commercial center, etc. There are 17 main streets in total. Due to the difference in pedestrian density of each street, the passing interval time (once in each direction) of the street map of Dongfang City is required to be shown in Table C-36. \n\n| Street | Required bus interval (min) |\n| ---- | ----------------------- |\n| ①② | 10 |\n| ①④ | 10 |\n| ①⑦ | 15 |\n| ②③ | 10 |\n| ②④ | 10 |\n| ③④ | 15 |\n| ③⑤ | 15 |\n| ③⑥ | 15 |\n| ④⑤ | 10 |\n| ④⑦ | 15 |\n| ④⑧ | 10 |\n| ⑤⑥ | 10 |\n| ⑤⑧ | 15 |\n| ⑥⑧ | 20 |\n| ⑦⑧ | 20 |\n| ⑦⑨ | 20 |\n| ⑧⑨ | 20 |\n\nThe city's original planned design of 12 bus routes is shown in Table C-37\n\nTable C-37\n\n| Route Code | Route |\n| -------- | ----------------- |\n| 1 | ① ⇄ ② ⇄ ③ ⇄ ⑥ |\n| 2 | ① ⇄ ④ ⇄ ⑤ ⇄ ⑥ |\n| 3 | ① ⇄ ④ ⇄ ⑧ ⇄ ⑨ |\n| 4 | ① ⇄ ② ⇄ ④ ⇄ ⑦ ⇄ ⑨ |\n| 5 | ① ⇄ ② ⇄ ③ ⇄ ⑤ ⇄ ⑧ |\n| 6 | ① ⇄ ⑦ ⇄ ⑨ ⇄ ⑧ ⇄ ⑥ |\n| 7 | ③ ⇄ ④ ⇄ ⑧ ⇄ ⑥ |\n| 8 | ② ⇄ ④ ⇄ ⑦ ⇄ ⑧ |\n| 9 | ⑦ ⇄ ④ ⇄ ③ ⇄ ⑥ |\n| 10 | ② ⇄ ③ ⇄ ⑤ ⇄ ⑥ |\n| 11 | ③ ⇄ ④ ⇄ ⑤ ⇄ ⑧ ⇄ ⑨ |\n| 12 | ① ⇄ ⑦ ⇄ ⑧ ⇄ ⑤ ⇄ ⑥ |\n\nFigure C-15 Street map of Dongfang City \n\n```mermaid\ngraph TD\n 1 --- 2\n 1 --- 4\n 1 --- 7\n 2 --- 3\n 2 --- 4\n 3 --- 5\n 3 --- 6\n 4 --- 3\n 4 --- 5\n 4 --- 8\n 5 --- 6\n 7 --- 4\n 7 --- 8\n 7 --- 9\n 8 --- 5\n 8 --- 6\n 9 --- 8\n```\n\nIt is known that the travel time of each route is 25 minutes, and it takes 5 minutes to rest at each terminal before returning, that is, one round trip per hour. It is required to determine which routes should be opened in the end. Suppose the number of vehicles equipped for each of the 12 routes is $x_1,x_2,...,x_{12}$, and how many buses should be configured for each route to meet the traffic density requirements of each street? After solving, give the total number of vehicles as the answer.",
+    "answer": 30.0,
+    "Parameters_List": [
+      {
+        "Name": "num_routes",
+        "Type": "integer",
+        "Value": 12
+      },
+      {
+        "Name": "nodes",
+        "Type": "list",
+        "Value": [
+          "①",
+          "②",
+          "③",
+          "④",
+          "⑤",
+          "⑥",
+          "⑦",
+          "⑧",
+          "⑨"
+        ]
+      },
+      {
+        "Name": "num_streets",
+        "Type": "integer",
+        "Value": 17
+      },
+      {
+        "Name": "travel_time",
+        "Type": "integer",
+        "Value": 25
+      },
+      {
+        "Name": "rest_time",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "round_trip_time",
+        "Type": "integer",
+        "Value": 60
+      },
+      {
+        "Name": "intervals",
+        "Type": "tuple",
+        "Value": {
+          "①②": 10,
+          "①④": 10,
+          "①⑦": 15,
+          "②③": 10,
+          "②④": 10,
+          "③④": 15,
+          "③⑤": 15,
+          "③⑥": 15,
+          "④⑤": 10,
+          "④⑦": 15,
+          "④⑧": 10,
+          "⑤⑥": 10,
+          "⑤⑧": 15,
+          "⑥⑧": 20,
+          "⑦⑧": 20,
+          "⑦⑨": 20,
+          "⑧⑨": 20
+        }
+      },
+      {
+        "Name": "routes",
+        "Type": "list",
+        "Value": [
+          null,
+          [
+            "①",
+            "②",
+            "③",
+            "⑥"
+          ],
+          [
+            "①",
+            "④",
+            "⑤",
+            "⑥"
+          ],
+          [
+            "①",
+            "④",
+            "⑧",
+            "⑨"
+          ],
+          [
+            "①",
+            "②",
+            "④",
+            "⑦",
+            "⑨"
+          ],
+          [
+            "①",
+            "②",
+            "③",
+            "⑤",
+            "⑧"
+          ],
+          [
+            "①",
+            "⑦",
+            "⑨",
+            "⑧",
+            "⑥"
+          ],
+          [
+            "③",
+            "④",
+            "⑧",
+            "⑥"
+          ],
+          [
+            "②",
+            "④",
+            "⑦",
+            "⑧"
+          ],
+          [
+            "⑦",
+            "④",
+            "③",
+            "⑥"
+          ],
+          [
+            "②",
+            "③",
+            "⑤",
+            "⑥"
+          ],
+          [
+            "③",
+            "④",
+            "⑤",
+            "⑧",
+            "⑨"
+          ],
+          [
+            "①",
+            "⑦",
+            "⑧",
+            "⑤",
+            "⑥"
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Dongfang City is a regional...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Its core urban area presents...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "According to the annual report...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In the latest plan, the...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The 12 currently operating...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Some routes still retain...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "This route optimization is a...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Scientific route adjustments can...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The project results will serve...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The street map of Dongfang...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "In the figure, ①, ②, …...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "There are 17 main streets...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Due to the difference in...",
+        "No direct constraint (parameter definition: required intervals)"
+      ],
+      [
+        "14",
+        "Table C-36: Street | Required...",
+        "17 interval constraints: sum_{i∈R(j)} x_i ≥ 60/T_j"
+      ],
+      [
+        "15",
+        "The city’s original planned design...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "Table C-37: Routes 1–12 and...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "It is known that the travel time...",
+        "Auxiliary relation: frequency = x_i"
+      ],
+      [
+        "18",
+        "It is required to determine which...",
+        "No constraints"
+      ],
+      [
+        "19",
+        "Suppose the number of vehicles...",
+        "Decision variables defined: x_1,…,x_12 integer ≥0"
+      ],
+      [
+        "20",
+        "After solving, give the total...",
+        "Objective defined: minimize total vehicles"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x₁",
+        "Meaning": "Number of buses assigned to route 1",
+        "Type": "integer",
+        "Range ": "x₁ ≥ 0"
+      },
+      {
+        "symbol": "x₂",
+        "Meaning": "Number of buses assigned to route 2",
+        "Type": "integer",
+        "Range ": "x₂ ≥ 0"
+      },
+      {
+        "symbol": "x₃",
+        "Meaning": "Number of buses assigned to route 3",
+        "Type": "integer",
+        "Range ": "x₃ ≥ 0"
+      },
+      {
+        "symbol": "x₄",
+        "Meaning": "Number of buses assigned to route 4",
+        "Type": "integer",
+        "Range ": "x₄ ≥ 0"
+      },
+      {
+        "symbol": "x₅",
+        "Meaning": "Number of buses assigned to route 5",
+        "Type": "integer",
+        "Range ": "x₅ ≥ 0"
+      },
+      {
+        "symbol": "x₆",
+        "Meaning": "Number of buses assigned to route 6",
+        "Type": "integer",
+        "Range ": "x₆ ≥ 0"
+      },
+      {
+        "symbol": "x₇",
+        "Meaning": "Number of buses assigned to route 7",
+        "Type": "integer",
+        "Range ": "x₇ ≥ 0"
+      },
+      {
+        "symbol": "x₈",
+        "Meaning": "Number of buses assigned to route 8",
+        "Type": "integer",
+        "Range ": "x₈ ≥ 0"
+      },
+      {
+        "symbol": "x₉",
+        "Meaning": "Number of buses assigned to route 9",
+        "Type": "integer",
+        "Range ": "x₉ ≥ 0"
+      },
+      {
+        "symbol": "x₁₀",
+        "Meaning": "Number of buses assigned to route 10",
+        "Type": "integer",
+        "Range ": "x₁₀ ≥ 0"
+      },
+      {
+        "symbol": "x₁₁",
+        "Meaning": "Number of buses assigned to route 11",
+        "Type": "integer",
+        "Range ": "x₁₁ ≥ 0"
+      },
+      {
+        "symbol": "x₁₂",
+        "Meaning": "Number of buses assigned to route 12",
+        "Type": "integer",
+        "Range ": "x₁₂ ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Interval_1_2",
+        "x₁ + x₄ + x₅ ≥ 6",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_1_4",
+        "x₂ + x₃ ≥ 6",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_1_7",
+        "x₆ + x₁₂ ≥ 4",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_2_3",
+        "x₁ + x₅ + x₁₀ ≥ 6",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_2_4",
+        "x₄ + x₈ ≥ 6",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_3_4",
+        "x₇ + x₉ + x₁₁ ≥ 4",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_3_5",
+        "x₅ + x₁₀ ≥ 4",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_3_6",
+        "x₁ + x₉ ≥ 4",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_4_5",
+        "x₂ + x₁₁ ≥ 6",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_4_7",
+        "x₄ + x₈ + x₉ ≥ 4",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_4_8",
+        "x₃ + x₇ ≥ 6",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_5_6",
+        "x₂ + x₁₀ + x₁₂ ≥ 6",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_5_8",
+        "x₅ + x₁₁ + x₁₂ ≥ 4",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_6_8",
+        "x₆ + x₇ ≥ 3",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_7_8",
+        "x₈ + x₁₂ ≥ 3",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_7_9",
+        "x₄ + x₆ ≥ 3",
+        "sentence numbers:14"
+      ],
+      [
+        "Interval_8_9",
+        "x₃ + x₆ + x₁₁ ≥ 3",
+        "sentence numbers:14"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "After solving, give the total number of vehicles as the answer.",
+      "Mathematical_expressions": "Min Z = x₁ + x₂ + ⋯ + x₁₂"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "30.0"
+    ],
+    "time_seconds": 83.62915440000506,
+    "total_tokens": 20786
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "30.0"
+    ],
+    "ground_truth": 30.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A chemical company transports hydrogen using two different methods: high-pressure tube trailers and liquid hydrogen tank trucks. The first method uses high-pressure tube trailers; each trip can carry 50 cubic meters, with a fixed cost of \\$500 per trip. The second method uses liquid hydrogen tank trucks; each trip can carry 30 cubic meters, with a fixed cost of \\$200 per trip. The company needs to transport at least 1000 cubic meters of hydrogen, and the available budget is \\$3750. In addition, the number of high-pressure tube trailer trips must be less than the number of liquid hydrogen tank truck trips.\n\nNow, the company introduces a new operational rule when scheduling transportation: the total “effective transportation cost” is no longer simply the sum of the numbers of trips for all vehicles, but instead accounts for the interaction between different transportation modes. Let the number of high-pressure tube trailer trips be $x$ (and there must be at least two high-pressure tube trailers), and let the number of liquid hydrogen tank truck trips be $y$. The company defines the total effective transportation cost as a nonlinear metric whose value equals a coefficient 2 multiplied by the number of high-pressure tube trailer trips $x$, multiplied by the number of liquid hydrogen tank truck trips $y$, multiplied by the total number of trips of the two methods $(x+y)$. That is, total effective transportation cost $= 2 \\times x \\times y \\times (x+y)$.\n\nThe company wishes, subject to the hydrogen transport volume being at least 1000 cubic meters, the total actual expenditure $(500x + 200y)$ not exceeding \\$9750, and the number of high-pressure tube trailer trips being less than the number of liquid hydrogen tank truck trips, to minimize this nonlinear total effective transportation cost $2 \\times x \\times y \\times (x+y)$ as much as possible. How many trips of each transportation method should be used, respectively, in order to minimize this nonlinear total effective transportation cost?",
+    "answer": 3840.0,
+    "index": "NLP4LP_prob_178",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 他们应当分别使用每种运输方式多少次以使总运输次数最少？, 修改后相关描述: 公司定义总的有效运输成本为一个非线性的指标，其数值等于一个系数 2 乘以高压管式拖车次数 x，再乘以液态氢罐车次数 y，再乘以两种方式的总运输次数 (x + y)，即总的有效运输成本 = 2 × x × y × (x + y)。在满足所有约束的前提下，他们应当分别使用每种运输方式多少次，以使该非线性的总有效运输成本最小？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_178\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_081.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 44.58037969999714,
+    "total_tokens": 3821
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 3840.0
+  }
+}

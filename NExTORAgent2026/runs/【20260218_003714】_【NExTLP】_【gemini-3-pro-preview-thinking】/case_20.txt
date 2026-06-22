@@ -1,0 +1,366 @@
+{
+  "entry": {
+    "index": 20,
+    "question": "The consultant team of the Nutrition and Health Management Center recently accepted a commission from a newly established healthy meal catering company to help it design a \"one-week fat-reducing energy package\" plan for obese people that can meet strict nutritional needs and control costs. The company purchased four energy packages with different ratios (A, B, C, D), and ate them with fresh vegetables. The energy packages are ready to eat after opening the bag and cannot be stored, while vegetables can be purchased and cut and eaten as needed. The company hopes to reduce the total weekly cost as much as possible while ensuring that there is at least one day of \"motivational meal\" with calorie relaxation in a week (to increase the motivation of customers to continue to stick to it). The consultant team needs to establish a linear programming model and provide a procurement and allocation plan based on the ingredients, costs and nutritional catering requirements of each energy package provided by the company. The company's goal is to minimize the total cost of the week under multiple constraints such as meeting the upper and lower limits of nutrition and calories, the purchase amount of the package and the daily intake limit, so as to provide a standardized formula for subsequent large-scale market launch.\n\nFor a certain obese customer group, the company provides this customer with Plan to consume a diet consisting of 5 types of food every day to meet nutritional needs and control calories and fat. The optional foods and their calories, protein, fat and vitamin C content per 100 grams are shown in the following table. Nutritional requirements and restrictions: at least 2000 kcal of calories, at least 50 grams of protein, at least 100 mg of vitamin C, and no more than 70 grams of fat. To ensure a balanced diet, vegetables are required to be no less than 100 grams, chicken is no more than 300 grams, and beans are no more than 400 grams. At the same time, the total calories should not exceed 2500 kcal. \n\nBuy fresh vegetables first, and you can weigh and cut them at will each time, but the energy pack must be eaten immediately after opening. If you want to meet the supply for a week, how many bags of energy packs should be purchased, and how many grams of vegetables should be purchased? What packs should be allocated to customers for each day of the week? How many bags are there respectively? \n\nIncentive meals can only appear once in a week. The upper and lower limits of the calories on the incentive meal day are 500 kcal higher than the above. The rest of the days are based on the daily intake standards. At the same time, due to health reasons, the energy packs consumed every day are limited in weekly and daily energy packs. The limits are as follows:\n\n| Limit type | Pack A | Pack B | Pack C | Pack D | Vegetables |\n| -------------- | ---- | ---- | ---- | ---- | -------- |\n| Minimum weekly purchase quantity | 3 | 1 | 1 | 5 | Unlimited |\n| Daily delivery limit | 2 | 5 | 5 | 1 | Spontaneous purchase |\n\nBased on the above scenario and description, please establish the corresponding linear programming model and give the calculated total weekly cost.\n\n| Food/pack | Rice (g) | Chicken (g) | Beans (g) | Milk (g) |\n| -------- | ------ | ------ | ------ | ------ |\n| **Pack A** | 25 | 50 | 0 | 0 |\n| **Pack B** | 25 | 40 | 0 | 0 |\n| **C pack** | 10 | 20 | 20 | 0 |\n| **D pack** | 0 | 0 | 0 | 50 |\n| **Vegetables** | – | – | – | – |\n\n| Ingredients | Calories (kcal) | Protein (g) | Fat (g) | Vitamin C (mg) | Cost (yuan/100g) |\n| ---- | ------------ | ------------ | ---------- | --------------- | --------------- |\n| Rice | 360 | 6 | 1 | 0 | 0.50 |\n| Chicken | 200 | 20 | 15 | 0 | 2.00 |\n| Beans | 150 | 8 | 1 | 5 | 1.00 |\n| Milk | 60 | 3 | 4 | 5 | 1.50 |\n| Vegetables | 50 | 2 | 0 | 20 | 1.00 |",
+    "answer": 154.815,
+    "Parameters_List": [
+      {
+        "Name": "motivational_meal_days_min",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "calorie_min",
+        "Type": "integer",
+        "Value": 2000
+      },
+      {
+        "Name": "calorie_max",
+        "Type": "integer",
+        "Value": 2500
+      },
+      {
+        "Name": "protein_min",
+        "Type": "integer",
+        "Value": 50
+      },
+      {
+        "Name": "vitamin_C_min",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "fat_max",
+        "Type": "integer",
+        "Value": 70
+      },
+      {
+        "Name": "vegetables_min",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "chicken_max",
+        "Type": "integer",
+        "Value": 300
+      },
+      {
+        "Name": "beans_max",
+        "Type": "integer",
+        "Value": 400
+      },
+      {
+        "Name": "incentive_meal_days",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "incentive_day_cal_min",
+        "Type": "integer",
+        "Value": 2500
+      },
+      {
+        "Name": "incentive_day_cal_max",
+        "Type": "integer",
+        "Value": 3000
+      },
+      {
+        "Name": "table_1_limits",
+        "Type": "tuple",
+        "Value": {
+          "minimum_weekly_purchase_quantity": {
+            "Pack A": 3,
+            "Pack B": 1,
+            "Pack C": 1,
+            "Pack D": 5,
+            "Vegetables": null
+          },
+          "daily_delivery_limit": {
+            "Pack A": 2,
+            "Pack B": 5,
+            "Pack C": 5,
+            "Pack D": 1,
+            "Vegetables": null
+          }
+        }
+      },
+      {
+        "Name": "table_2_pack_composition",
+        "Type": "tuple",
+        "Value": {
+          "Pack A": {
+            "Rice": 25,
+            "Chicken": 50,
+            "Beans": 0,
+            "Milk": 0
+          },
+          "Pack B": {
+            "Rice": 25,
+            "Chicken": 40,
+            "Beans": 0,
+            "Milk": 0
+          },
+          "Pack C": {
+            "Rice": 10,
+            "Chicken": 20,
+            "Beans": 20,
+            "Milk": 0
+          },
+          "Pack D": {
+            "Rice": 0,
+            "Chicken": 0,
+            "Beans": 0,
+            "Milk": 50
+          },
+          "Vegetables": {
+            "Rice": null,
+            "Chicken": null,
+            "Beans": null,
+            "Milk": null
+          }
+        }
+      },
+      {
+        "Name": "table_3_nutrient_and_cost",
+        "Type": "tuple",
+        "Value": {
+          "Rice": {
+            "Calories": 360,
+            "Protein": 6,
+            "Fat": 1,
+            "Vitamin C": 0,
+            "Cost": 0.5
+          },
+          "Chicken": {
+            "Calories": 200,
+            "Protein": 20,
+            "Fat": 15,
+            "Vitamin C": 0,
+            "Cost": 2.0
+          },
+          "Beans": {
+            "Calories": 150,
+            "Protein": 8,
+            "Fat": 1,
+            "Vitamin C": 5,
+            "Cost": 1.0
+          },
+          "Milk": {
+            "Calories": 60,
+            "Protein": 3,
+            "Fat": 4,
+            "Vitamin C": 5,
+            "Cost": 1.5
+          },
+          "Vegetables": {
+            "Calories": 50,
+            "Protein": 2,
+            "Fat": 0,
+            "Vitamin C": 20,
+            "Cost": 1.0
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The consultant team of the Nutrition...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company purchased four energy packages...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The energy packages are ready to eat...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The company hopes to reduce the total weekly cost as much as possible...",
+        "Objective + at least one incentive-meal day (∑y_j ≥ 1)"
+      ],
+      [
+        "5",
+        "The consultant team needs to establish a linear programming model...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The company's goal is to minimize the total cost of the week under multiple constraints...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "For a certain obese customer group, the company provides this customer...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The optional foods and their calories, protein, fat and vitamin C content per 100 grams...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Nutritional requirements and restrictions: at least 2000 kcal of calories...",
+        "Daily nutrition bounds (cal≥2000, P≥50, VC≥100, F≤70)"
+      ],
+      [
+        "10",
+        "To ensure a balanced diet, vegetables are required to be no less than 100 grams...",
+        "Daily food-type bounds (veg≥100g, chicken≤300g, beans≤400g)"
+      ],
+      [
+        "11",
+        "At the same time, the total calories should not exceed 2500 kcal...",
+        "Daily calorie upper bound (cal≤2500)"
+      ],
+      [
+        "12",
+        "Buy fresh vegetables first, and you can weigh and cut them at will...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "If you want to meet the supply for a week, how many bags of energy packs...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "What packs should be allocated to customers for each day of the week?...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Incentive meals can only appear once in a week...",
+        "∑_{j=1..7} y_j ≤ 1"
+      ],
+      [
+        "16",
+        "The upper and lower limits of the calories on the incentive meal day...",
+        "Incentive-day calorie relaxation (cal_j bounds shift +500 when y_j=1)"
+      ],
+      [
+        "17",
+        "The rest of the days are based on the daily intake standards...",
+        "No constraints"
+      ],
+      [
+        "18",
+        "At the same time, due to health reasons, the energy packs consumed every day...",
+        "No constraints"
+      ],
+      [
+        "19",
+        "The limits are as follows: [table of min weekly purchase qty and daily delivery limits]...",
+        "Weekly and daily pack-usage constraints"
+      ],
+      [
+        "20",
+        "Based on the above scenario and description, please establish the corresponding linear programming model...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{A,j}, x_{B,j}, x_{C,j}, x_{D,j}",
+        "Meaning": "Number of packs A/B/C/D consumed on day j (j=1..7)",
+        "Type": "integer",
+        "Range ": "0 ≤ x_{A,j} ≤ 2; 0 ≤ x_{B,j} ≤ 5; 0 ≤ x_{C,j} ≤ 5; 0 ≤ x_{D,j} ≤ 1"
+      },
+      {
+        "symbol": "v_j",
+        "Meaning": "Grams of fresh vegetables consumed on day j",
+        "Type": "continuous",
+        "Range ": "v_j ≥ 100"
+      },
+      {
+        "symbol": "y_j",
+        "Meaning": "Binary indicator if day j is the incentive meal (1=yes, 0=no)",
+        "Type": "BINARY",
+        "Range ": "y_j ∈ {0,1}, ∑_{j=1..7} y_j = 1"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Calorie Lower Bound with Incentive Shift",
+        "∀j: 190 x_{A,j} + 170 x_{B,j} + 106 x_{C,j} + 30 x_{D,j} + 0.5 v_j ≥ 2000 + 500 y_j",
+        "sentence numbers:9,16"
+      ],
+      [
+        "Calorie Upper Bound with Incentive Shift",
+        "∀j: 190 x_{A,j} + 170 x_{B,j} + 106 x_{C,j} + 30 x_{D,j} + 0.5 v_j ≤ 2500 + 500 y_j",
+        "sentence numbers:11,16"
+      ],
+      [
+        "Protein Requirement",
+        "∀j: 11.5 x_{A,j} + 9.5 x_{B,j} + 6.2 x_{C,j} + 1.5 x_{D,j} + 0.02 v_j ≥ 50",
+        "sentence numbers:9"
+      ],
+      [
+        "Vitamin C Requirement",
+        "∀j: 1 x_{C,j} + 2.5 x_{D,j} + 0.2 v_j ≥ 100",
+        "sentence numbers:9"
+      ],
+      [
+        "Fat Limit",
+        "∀j: 7.75 x_{A,j} + 6.25 x_{B,j} + 3.3 x_{C,j} + 2 x_{D,j} ≤ 70",
+        "sentence numbers:9"
+      ],
+      [
+        "Vegetable Minimum",
+        "∀j: v_j ≥ 100",
+        "sentence numbers:10"
+      ],
+      [
+        "Chicken Maximum",
+        "∀j: 50 x_{A,j} + 40 x_{B,j} + 20 x_{C,j} ≤ 300",
+        "sentence numbers:10"
+      ],
+      [
+        "Beans Maximum",
+        "∀j: 20 x_{C,j} ≤ 400",
+        "sentence numbers:10"
+      ],
+      [
+        "Single Incentive Meal Day",
+        "∑_{j=1..7} y_j = 1",
+        "sentence numbers:4,15"
+      ],
+      [
+        "Daily Pack-Use Limits",
+        "∀j: x_{A,j} ≤ 2, x_{B,j} ≤ 5, x_{C,j} ≤ 5, x_{D,j} ≤ 1",
+        "sentence numbers:19"
+      ],
+      [
+        "Weekly Pack Minimum Purchase",
+        "∑_{j=1..7} x_{A,j} ≥ 3; ∑_{j=1..7} x_{B,j} ≥ 1; ∑_{j=1..7} x_{C,j} ≥ 1; ∑_{j=1..7} x_{D,j} ≥ 5",
+        "sentence numbers:19"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company hopes to reduce the total weekly cost as much as possible while ensuring that there is at least one day of \"motivational meal\" with calorie relaxation in a week...",
+      "Mathematical_expressions": "min ∑_{j=1..7} [1.125 x_{A,j} + 0.925 x_{B,j} + 0.650 x_{C,j} + 0.750 x_{D,j} + 0.01 v_j]"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "154.815"
+    ],
+    "time_seconds": 124.46498979999888,
+    "total_tokens": 18723
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "154.815"
+    ],
+    "ground_truth": 154.815
+  }
+}

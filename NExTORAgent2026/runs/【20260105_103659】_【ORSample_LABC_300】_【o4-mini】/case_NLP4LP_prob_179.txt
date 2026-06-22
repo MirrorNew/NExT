@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A grape grower transports his grapes using small crates or large crates. A small crate can hold 200 grapes, while a large crate can hold 500 grapes. Since customers prefer small crates, the number of small crates used must be at least 3 times the number of large crates used. The farmer has at most 100 small crates and 50 large crates available. In addition, on each loading, his truck can carry at most 60 crates, and he must use at least 10 large crates.\n\nNow, considering the seasonal fluctuations of the market over the year, in each month’s loading, the total number of crates the truck can carry exhibits a slight periodic fluctuation: let month $t$ denote time ($t$ is an integer from 1 to 12, corresponding to the 12 months of a year). The truck’s maximum allowable number of loaded crates in month $t$ is no longer the fixed value 60; instead, it varies slightly around 60 according to the following rule: in month $t$, the maximum number of crates allowed to be loaded is $60 \\times [1 + 0.1 \\times \\cos(\\pi \\times t / 6)]$, where 0.1 is the fluctuation amplitude coefficient, and $\\pi$ is taken as 3.14. That is, in some months the truck can load slightly more than 60 crates, while in other months it can load slightly fewer than 60 crates.\n\nFor a given month $t$, how many small crates and how many large crates should the farmer use in order to maximize the total number of grapes that can be transported in that month?",
+    "answer": 17800.0,
+    "index": "NLP4LP_prob_179",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 此外，他的卡车最多只能装 60 个箱子，而且他必须至少使用 10 个大箱。他应当使用多少个小箱和多少个大箱，才能使所能运输的葡萄总数最大化？, 修改后相关描述: 此外，他的卡车在每一次装载时最多只能装 60 个箱子，而且他必须至少使用 10 个大箱。现在考虑到市场在一年中的季节性波动，农民在每个月装载时，卡车能够承载的箱子总数会出现轻微的周期性波动：以月份 t 表示时间（t 为 1 到 12 的整数，对应一年中的 12 个月），卡车在第 t 个月的最大装载箱数不再是固定的 60 个，而是会在 60 附近上下小幅变化，其变化方式为：在第 t 个月允许装载的最大箱数为 60 × [1 + 0.1 × cos(π × t / 6)]，其中 0.1 为波动幅度系数，π 取 3.14。也就是说，有的月份卡车最多可装略多于 60 个箱子，有的月份则略少于 60 个箱子。农民在给定某一个月份 t 时，应当使用多少个小箱和多少个大箱，才能使在该月份所能运输的葡萄总数最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_179\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_098.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 20.89140020000923,
+    "total_tokens": 1821
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 17800.0
+  }
+}

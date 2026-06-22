@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An extremely large ski resort is considering purchasing two types of chairlifts: a high-density seating chairlift and a low-density seating chairlift. A high-density seating chairlift can transport 45 visitors up the slope per minute, while a low-density seating chairlift can transport 20 visitors per minute. A high-density seating chairlift consumes 30 units of electricity, while a low-density seating chairlift consumes 22 units of electricity. Since the low-density seating chairlift is slower and more beginner-friendly, there must be at least 5 low-density seating chairlifts. The ski resort must transport at least 1000 visitors per minute to be profitable, and it must satisfy the following power-structure constraint: the ratio of the total number of high-density seating chairlifts to the total number of low-density seating chairlifts cannot exceed 3; that is, the number of high-density seating chairlifts divided by the number of low-density seating chairlifts should be less than or equal to $3$. How many of each type of chairlift should be planned for installation in order to minimize the total number of chairlifts required?",
+    "answer": 27.0,
+    "index": "NLP4LP_prob_217",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 滑雪度假村每分钟至少需要运送 1000 名游客才能盈利，并且可用电力为 940 个单位。, 修改后相关描述: 滑雪度假村每分钟至少需要运送 1000 名游客才能盈利，并且需要满足这样一个用电结构约束：高密度座位缆车总数与低密度座位缆车总数的比率不能超过 3，也就是说高密度座位缆车的数量除以低密度座位缆车的数量应当小于或等于 3。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_217\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_072.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "27.0"
+    ],
+    "time_seconds": 13.429077299995697,
+    "total_tokens": 873
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "27.0"
+    ],
+    "ground_truth": 27.0
+  }
+}

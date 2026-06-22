@@ -1,0 +1,201 @@
+{
+  "entry": {
+    "index": 5,
+    "question": "In the field of financial investment, asset management companies such as Blue Ocean Capital often face the decision-making problem of how to allocate funds among multiple assets. Blue Ocean Capital is an institution focusing on quantitative investment. Its strategy team optimizes investment portfolios through mathematical models to balance returns and risks. Changes in the market environment, such as policy restrictions or adjustments in risk tolerance, often directly affect the capital allocation plan. For example, some assets may have short-selling restrictions, while other assets may show different return potential due to historical performance or market expectations. In this case, investors need to comprehensively consider returns, risk constraints and compliance requirements to formulate the optimal capital allocation strategy. \n\nThe solution to this kind of problem not only affects the performance of a single portfolio, but also has reference significance for the decision-making process of the entire asset management industry. An efficient asset allocation model can help institutions maximize returns within a compliance framework while controlling potential risks. With the complexity of financial markets, similar optimization problems are becoming more and more common in fields such as insurance, pension management and hedge funds, and have become an important research topic in modern financial engineering. \n\nAn investor of Blue Ocean Capital needs to allocate funds between two financial assets (asset A and asset B). The net rate of return of asset A is 0.5, and the average rate of return of asset B is twice that of asset A. In addition, according to the company's forecast results this year, the company is currently optimistic about asset B. When calculating the total investment amount, no matter how much the investment amount of asset B is, it can be calculated according to the 1.2 power of the investment amount of asset B. (It is not necessary to actually invest in the 1.2 power of the investment amount of asset B, just calculate the final return according to the 1.2 power of the investment amount of asset B) Currently, investors must invest at least 1.5 capital allocations in asset A, and the total investment risk tolerance limit is 9 risk units. The investment risk of each asset is measured by the square of each capital allocation amount. In addition, due to market policy restrictions, short selling of asset B is prohibited (that is, the investment amount cannot be negative). Under the premise of meeting risk constraints and trading rules, determine the capital allocation plan that can maximize investment returns and give the maximum return.",
+    "answer": 3.8947,
+    "Parameters_List": [
+      {
+        "Name": "assets",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "Name": "N_assets",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "r_A",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "r_B",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "exponent_B",
+        "Type": "float",
+        "Value": 1.2
+      },
+      {
+        "Name": "lower_bound_A",
+        "Type": "float",
+        "Value": 1.5
+      },
+      {
+        "Name": "lower_bound_B",
+        "Type": "float",
+        "Value": 0.0
+      },
+      {
+        "Name": "risk_limit",
+        "Type": "integer",
+        "Value": 9
+      },
+      {
+        "Name": "risk_power",
+        "Type": "integer",
+        "Value": 2
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the field of...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Blue Ocean Capital is...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Its strategy team optimizes...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Changes in the market...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "For example, some...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "In this case, investors...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The solution to this...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "An efficient asset allocation...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "With the complexity of...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "An investor of Blue...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The net rate of...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "In addition, according...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "When calculating the...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "(It is not necessary...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Currently, investors must...",
+        "x_A ≥ 1.5; total risk ≤ 9"
+      ],
+      [
+        "16",
+        "The investment risk of...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "In addition, due to...",
+        "x_B ≥ 0"
+      ],
+      [
+        "18",
+        "Under the premise of...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_A",
+        "Meaning": "Amount of capital allocated to asset A",
+        "Type": "continuous",
+        "Range ": "x_A ≥ 1.5"
+      },
+      {
+        "symbol": "x_B",
+        "Meaning": "Amount of capital allocated to asset B",
+        "Type": "continuous",
+        "Range ": "x_B ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "MinAllocationA",
+        "x_A ≥ 1.5",
+        "sentence numbers:15"
+      ],
+      [
+        "ProhibitShortSellB",
+        "x_B ≥ 0",
+        "sentence numbers:17"
+      ],
+      [
+        "RiskToleranceLimit",
+        "x_A^2 + x_B^2 ≤ 9",
+        "sentence numbers:15,16"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Under the premise of meeting risk constraints and trading rules, determine the capital allocation plan that can maximize investment returns and give the maximum return.",
+      "Mathematical_expressions": "Maximize f(x_A,x_B) = 0.5*x_A + x_B^1.2"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3.89472202787"
+    ],
+    "time_seconds": 70.97229480000533,
+    "total_tokens": 14877
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "3.89472202787"
+    ],
+    "ground_truth": 3.8947
+  }
+}

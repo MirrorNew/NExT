@@ -1,0 +1,265 @@
+{
+  "entry": {
+    "index": 28,
+    "question": "In the intelligent traffic management system of the Kazdale Transportation Commission, the problem of road resource allocation is of typical significance. Taking the North Fourth Ring Road (Road A) and the Beijing-Chengde Expressway (Road B) connecting the main east road CBD of Theresia City as examples, the two parallel main roads face exactly the same traffic allocation challenges during the morning rush hour on weekdays. Traffic engineering observation data show that when the traffic volume of the North Fourth Ring Road exceeds 900 vehicles/hour (i.e. 90% capacity), the ramp merging conflict will cause the actual travel time to increase slightly compared to the theoretical value, which is highly consistent with the additional waiting time setting in the question. The actual measured data of the Beijing Transportation Development Research Institute in 2023 show that this nonlinear delay characteristic is common in the expressway system, and the increase in travel time will increase several times for every 10% increase in traffic density. \n\nAmap uses a similar user equilibrium model in the navigation algorithm upgraded in 2024. The system dynamically adjusts the path recommendation strategy by monitoring the vehicle occupancy rate of the two alternative paths in real time. In specific implementation, the algorithm not only considers the congestion situation at the current moment, but also predicts the time point when the traffic reaches 90% capacity based on historical data. Practical application shows that this active balancing strategy shortens the average travel time during the morning rush hour in the East Third Ring Road area of ​​Beijing by 8.3%, while stabilizing the road capacity utilization rate in the optimal range of 85-89%. It is worth noting that when the system detects that a road is about to reach critical capacity, it will start to guide vehicle diversion in advance. This predictive control can reduce some additional delay time compared to passive response scheduling. \n\nSpecifically, there are now two parallel roads A and B for Theresia City in Kazdel that can lead from the same starting point to the end point. During peak hours, a total of 2,100 vehicles need to be distributed on the two roads. The idle driving time of Road A is about 10 minutes, and that of Road B is about 12 minutes; when congested, the travel time will increase with the square of the flow rate. Specifically, the travel time of Road A is $T_A=10+0.0001f_A^2$ (minutes), and that of Road B is $T_B=12+0.00008f_B^2$, where $f_A,f_B$ are the number of vehicles allocated to Roads A and B, respectively. If the number of vehicles on a road reaches 90%, there will be an additional 5% waiting time on the original basic travel time. Roads AB can accommodate up to about 1000 and 1200 vehicles respectively. Assuming that the travel time of all vehicles on any road is the same, it is necessary to determine the number of vehicles $f_A$ assigned to road A (the rest will take road B) to minimize the sum of the total travel time of all vehicles.",
+    "answer": 241138.90237,
+    "Parameters_List": [
+      {
+        "Name": "flow_threshold_A",
+        "Type": "integer",
+        "Value": 900
+      },
+      {
+        "Name": "capacity_threshold",
+        "Type": "float",
+        "Value": 0.9
+      },
+      {
+        "Name": "year_beijing_data",
+        "Type": "integer",
+        "Value": 2023
+      },
+      {
+        "Name": "density_increase_step",
+        "Type": "float",
+        "Value": 0.1
+      },
+      {
+        "Name": "year_amap_model_upgrade",
+        "Type": "integer",
+        "Value": 2024
+      },
+      {
+        "Name": "prediction_capacity_threshold",
+        "Type": "float",
+        "Value": 0.9
+      },
+      {
+        "Name": "time_reduction_rate",
+        "Type": "float",
+        "Value": 0.083
+      },
+      {
+        "Name": "utilization_optimal_range",
+        "Type": "list",
+        "Value": [
+          0.85,
+          0.89
+        ]
+      },
+      {
+        "Name": "total_vehicles",
+        "Type": "integer",
+        "Value": 2100
+      },
+      {
+        "Name": "idle_time",
+        "Type": "tuple",
+        "Value": {
+          "A": 10,
+          "B": 12
+        }
+      },
+      {
+        "Name": "travel_time_coefs",
+        "Type": "tuple",
+        "Value": {
+          "A": {
+            "base": 10,
+            "coef": 0.0001
+          },
+          "B": {
+            "base": 12,
+            "coef": 8e-05
+          }
+        }
+      },
+      {
+        "Name": "additional_wait_rate",
+        "Type": "float",
+        "Value": 0.05
+      },
+      {
+        "Name": "capacity",
+        "Type": "tuple",
+        "Value": {
+          "A": 1000,
+          "B": 1200
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the intelligent traffic management system...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the North Fourth Ring Road (Road A)...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Traffic engineering observation data show that when...",
+        "Threshold condition for Road A: if f_A ≥ 900 → additional waiting time"
+      ],
+      [
+        "4",
+        "The actual measured data of the Beijing Transportation...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Amap uses a similar user equilibrium model...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The system dynamically adjusts the path recommendation...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "In specific implementation, the algorithm not only considers...",
+        "No explicit decision constraint"
+      ],
+      [
+        "8",
+        "Practical application shows that this active balancing strategy...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "It is worth noting that when the system detects...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "This predictive control can reduce some additional delay time...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Specifically, there are now two parallel roads A and B...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "During peak hours, a total of 2,100 vehicles need to be...",
+        "Conservation of flow: f_A + f_B = 2100"
+      ],
+      [
+        "13",
+        "The idle driving time of Road A is about 10 minutes...",
+        "Travel-time is quadratic in flow (definition next)"
+      ],
+      [
+        "14",
+        "Specifically, the travel time of Road A is T_A = 10 + 0.0001 f_A²...",
+        "Definition of T_A and T_B"
+      ],
+      [
+        "15",
+        "If the number of vehicles on a road reaches 90%...",
+        "Piecewise threshold: if f_i ≥ 90% capacity then T_i multiplied by 1.05"
+      ],
+      [
+        "16",
+        "Roads AB can accommodate up to about 1000 and 1200...",
+        "Capacity bounds: f_A ≤ 1000, f_B ≤ 1200"
+      ],
+      [
+        "17",
+        "Assuming that the travel time of all vehicles on any road is the same...",
+        "Optimization objective: minimize total travel time"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "f_A",
+        "Meaning": "number of vehicles assigned to Road A",
+        "Type": "continuous",
+        "Range ": "0 ≤ f_A ≤ 1000"
+      },
+      {
+        "symbol": "f_B",
+        "Meaning": "number of vehicles assigned to Road B",
+        "Type": "continuous",
+        "Range ": "0 ≤ f_B ≤ 1200"
+      },
+      {
+        "symbol": "T_A",
+        "Meaning": "travel time per vehicle on Road A (minutes)",
+        "Type": "continuous",
+        "Range ": "≥ 10"
+      },
+      {
+        "symbol": "T_B",
+        "Meaning": "travel time per vehicle on Road B (minutes)",
+        "Type": "continuous",
+        "Range ": "≥ 12"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Flow conservation",
+        "f_A + f_B = 2100",
+        "sentence numbers:12"
+      ],
+      [
+        "Capacity Road A",
+        "0 ≤ f_A ≤ 1000",
+        "sentence numbers:16"
+      ],
+      [
+        "Capacity Road B",
+        "0 ≤ f_B ≤ 1200",
+        "sentence numbers:16"
+      ],
+      [
+        "Travel time Road A",
+        "T_A = 10 + 0.0001·f_A²",
+        "sentence numbers:14"
+      ],
+      [
+        "Travel time Road B",
+        "T_B = 12 + 0.00008·f_B²",
+        "sentence numbers:14"
+      ],
+      [
+        "Additional delay Road A",
+        "if f_A ≥ 0.9·1000 then T_A ← 1.05·(10 + 0.0001·f_A²)",
+        "sentence numbers:15"
+      ],
+      [
+        "Additional delay Road B",
+        "if f_B ≥ 0.9·1200 then T_B ← 1.05·(12 + 0.00008·f_B²)",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Assuming that the travel time of all vehicles on any road is the same, it is necessary to determine the number of vehicles f_A assigned to road A (the rest will take road B) to minimize the sum of the total travel time of all vehicles.",
+      "Mathematical_expressions": "Minimize Z = f_A·T_A + f_B·T_B"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "241137.1105949",
+      "993.2599949817528"
+    ],
+    "time_seconds": 28.327292499998293,
+    "total_tokens": 11399
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "241137.1105949",
+      "993.2599949817528"
+    ],
+    "ground_truth": 241138.90237
+  }
+}

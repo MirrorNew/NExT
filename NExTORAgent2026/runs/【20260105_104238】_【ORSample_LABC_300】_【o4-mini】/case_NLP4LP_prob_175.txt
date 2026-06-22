@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_175",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_175\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_175\\code.py",
+    "NLtype": "Linear",
+    "question": "A construction company in the tropics uses cows and elephants to carry bricks. A cow can carry 20 bricks on its back while an elephant can carry 50 bricks on its back. To avoid having elephants create too much traffic, the number of elephant cannot exceed the number of cows. In addition, there can be at most twice the number of cows as elephants. If the company needs to transport at least 1000 bricks, find the minimum number of animals, cows and elephants, that can be used..",
+    "answer": 29,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "29.0"
+    ],
+    "time_seconds": 5.491011300007813,
+    "total_tokens": 650
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "29.0"
+    ],
+    "ground_truth": 29
+  }
+}

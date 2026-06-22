@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Bright Future Toy Company plans to produce and sell robots, model cars, building-block sets, and dolls. Let the number of robots produced and sold be $R$, the number of model cars be $C$, the number of building-block sets be $B$, and the number of dolls be $D$.\n\nFor each robot sold, a profit of 15 dollars is earned; for each model car sold, a profit of 8 dollars is earned; for each building-block set sold, a profit of 12 dollars is earned; and for each doll sold, a profit of 5 dollars is earned. In addition, the company finds that when the three products—robots, model cars, and building-block sets—are sold simultaneously, an additional synergy profit is generated: for every combination of 1 robot, 1 model car, and 1 building-block set sold together, an extra 0.02 dollars of synergy profit is obtained. For simplicity, this synergy profit can be described as: the extra profit equals 0.02 times the product of the quantities of robots $R$, model cars $C$, and building-block sets $B$, i.e., extra profit $= 0.02 \\times R \\times C \\times B$. Therefore, total profit consists of the following two parts:\n1) Linear profit: $15 \\times R + 8 \\times C + 12 \\times B + 5 \\times D$;\n2) Nonlinear synergy profit: $0.02 \\times R \\times C \\times B$.\n\nHow many of each type of toy should Bright Future Toy Company produce, and in what quantities, in order to maximize total profit (linear profit plus nonlinear synergy profit)?\n\nThere are 1200 units of plastic available. Each robot requires 30 units of plastic, each model car requires 10 units of plastic, each building-block set requires 20 units of plastic, and each doll requires 15 units of plastic.\n\nThere are 800 units of electronic components available. Each robot requires 8 units of electronic components, each model car requires 5 units of electronic components, each building-block set requires 3 units of electronic components, and each doll requires 2 units of electronic components.\n\nIf Bright Future Toy Company produces robots, then it does not produce dolls.\n\nHowever, if they produce model cars, then they also produce building-block sets.\n\nThe number of dolls produced cannot exceed the number of model cars produced.",
+    "answer": 720.0,
+    "index": "IndustryOR_prob_019",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每售出一个机器人可获得 15 美元利润，每售出一个模型汽车可获得 8 美元利润，每售出一套积木可获得 12 美元利润，每售出一个玩偶可获得 5 美元利润。光明未来玩具公司应生产多少种类的玩具以使利润最大化？ 修改后相关描述: 每售出一个机器人可获得 15 美元利润，每售出一个模型汽车可获得 8 美元利润，每售出一套积木可获得 12 美元利润，每售出一个玩偶可获得 5 美元利润。除此之外，公司发现，当机器人、模型汽车和积木套装这三种产品同时销售时，会产生额外的协同利润：每当有 1 个机器人、1 个模型汽车和 1 套积木套装共同售出时，额外获得 0.02 美元的协同利润。为简化计算，可以将这一协同利润描述为：额外利润等于 0.02 乘以机器人数量 R、模型汽车数量 C 和积木套装数量 B 三者的乘积，即额外利润 = 0.02 × R × C × B。因此，总利润由线性利润 15 × R + 8 × C + 12 × B + 5 × D 和非线性协同利润 0.02 × R × C × B 两部分组成，光明未来玩具公司应生产多少种类及数量的玩具以使这一总利润最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_019\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_009.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "992.4"
+    ],
+    "time_seconds": 63.99260019999929,
+    "total_tokens": 4724
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "992.4"
+    ],
+    "ground_truth": 720.0
+  }
+}

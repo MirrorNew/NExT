@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A company has three plants located at different sites and needs to deliver goods to five stores located at different sites. The unit transportation costs from Plant 1 to the stores are 4, 9, 2, 6, and 5, respectively, with a corresponding capacity of 60. The unit transportation costs from Plant 2 to the stores are 2, 6, 1, 7, and 9, respectively, with a corresponding capacity of 30. The unit transportation costs from Plant 3 to the stores are 2, 4, 9, 8, and 3, respectively, with a corresponding capacity of 45. The demands of the five stores are 15, 35, 20, 5, and 40, respectively.\n\nNow consider that when the shipped quantity is large, additional dispatching complexity and congestion effects will arise. To reflect this nonlinear impact, it is specified that the transportation cost from Plant 1 to Store 1 is no longer computed linearly. Instead, when the shipment quantity on this route is denoted by $x$ (with the same unit as the demand), its total transportation cost is computed as “$x$ to the power of 1.2,” i.e., $(x)^{1.2}$. All other routes are still computed linearly using the original unit transportation costs. How should the shipments be arranged to minimize the total transportation cost?",
+    "answer": 395.71360948035255,
+    "index": "LogiOR_prob_005",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 第一家工厂到各商店的单位运送成本分别为 4、9、2、6 和 5，对应的储存容量为 60。修改后相关描述: 第一家工厂到各商店的单位运送成本分别为 4、9、2、6 和 5，对应的储存容量为 60。现在考虑到运量较大时会产生额外的调度复杂度和拥堵效应，为了反映这种非线性影响，规定从第一家工厂运往第一家商店的运输费用不再按线性计算，而是当该路线的运量记为 x（单位与需求量一致）时，其总运输费用按“x 的 1.2 次幂”，即 (4x)^1.2 来计算，其余路线仍按原来的单位运送成本线性计算。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_005\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_049.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "379.5515983136"
+    ],
+    "time_seconds": 36.86038379999809,
+    "total_tokens": 1851
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "379.5515983136"
+    ],
+    "ground_truth": 395.71360948035255
+  }
+}

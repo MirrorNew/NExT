@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A drinking water company sells water in glass bottles and plastic bottles. A glass bottle can hold 500 milliliters of water, while a plastic bottle can hold 750 milliliters of water. Since most customers prefer plastic bottles, the number of plastic bottles must be at least 3 times the number of glass bottles. However, the number of glass bottles must be at least 20. If the company has 250000 milliliters of water available, and as brand effects accumulate, the market acceptance of glass bottles gradually increases: specifically, when planning to produce $g$ glass bottles, the required lower bound on the number of plastic bottles is no longer simply $3g$, but at least $3 \\times 1.3^{(g/20)}$ times the number of glass bottles; that is, the number of plastic bottles must be at least $3 \\times 1.3^{(g/20)} \\times g$. To maximize the total number of bottles, how many glass bottles and plastic bottles should be produced?",
+    "answer": 350.0,
+    "index": "NLP4LP_prob_077",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 由于大多数顾客更偏爱塑料瓶，塑料瓶的数量必须至少是玻璃瓶数量的 3 倍。 修改后相关描述: 由于大多数顾客更偏爱塑料瓶，且随着品牌效应的累积，玻璃瓶在市场上的接受度会逐步提升：具体来说，当计划生产 g 个玻璃瓶时，实际需要满足的塑料瓶数量下限不再是简单的 3g，而是至少为 3 × 1.3^(g/20) 倍的玻璃瓶数量，即塑料瓶数量必须至少达到 3 × 1.3^(g/20) × g 个。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_077\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_061.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "350.0"
+    ],
+    "time_seconds": 29.225056700001005,
+    "total_tokens": 3803
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "350.0"
+    ],
+    "ground_truth": 350.0
+  }
+}

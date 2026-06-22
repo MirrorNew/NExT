@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A regional chain grocery store is launching a new energy drink product and needs to optimally allocate the initial inventory across its stores. There are 6 stores (S1–S6), each with different characteristics. The known data for each store include: customer traffic (daily store visits: S1-1200, S2-800, S3-1500, S4-900, S5-1100, S6-700), allocated shelf space (units: S1-50, S2-30, S3-60, S4-35, S5-45, S6-25), and a historical sales similarity score for comparable products (scale 0–1: S1-0.8, S2-0.6, S3-0.9, S4-0.7, S5-0.75, S6-0.5). The warehouse has 300 units of inventory available for the initial allocation.\n\nThere are two display options: a standard display (costing 5 dollars per store) and a promotional display (costing 15 dollars per store, but increasing effective shelf space by 20%). The total display budget is 120 dollars.\n\nWhen constructing the optimization model, to reflect more complex sales dynamics, assume that each store can also decide whether to add in-store small-scale advertising promotion (such as endcap ads, hanging banners, etc.), represented by a binary decision variable indicating whether each store activates small-scale advertising promotion: it takes value 1 if activated, and 0 otherwise. Let:\n1) the number of energy drink units allocated to each store be a decision variable;\n2) whether each store adopts the promotional display option be a binary decision variable;\n3) whether each store activates small-scale advertising promotion be a binary decision variable;\n4) introduce a fixed coefficient $k=0.5$ to characterize the nonlinear amplification effect after multiple promotional tactics are combined.\n\nThe objective is to maximize the expected product exposure, but now each store’s expected exposure is no longer the simple linear relationship “customer traffic × allocated units × sales similarity score”; instead, it is replaced by a nonlinear coupled relationship: for each store, its contribution to expected product exposure equals $k$ (where $k=0.5$) multiplied by the product of the following five quantities: that store’s customer traffic, that store’s allocated units, that store’s sales similarity score, the store’s binary decision variable for adopting the promotional display, and the store’s binary decision variable for activating small-scale advertising promotion. Then, sum this product term over all stores as the total expected product exposure. All other constraints regarding total inventory, shelf-space limits, and the total display budget remain unchanged.",
+    "answer": 126795.0,
+    "index": "LogiOR_prob_077",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “目标是最大化预期产品曝光量，其计算方式为：（顾客流量） × （分配的单位数） × （销售相似度评分）。” 修改后相关描述: “目标是最大化预期产品曝光量，但现在每家门店的预期曝光量不再是‘顾客流量 × 分配的单位数 × 销售相似度评分’这样简单的线性关系，而是改为一个非线性的耦合关系：对于每家门店，其贡献的预期产品曝光量等于 k（其中 k=0.5）乘以该门店的顾客流量、该门店分配的单位数、该门店的销售相似度评分、该门店是否采用促销陈列的二进制决策变量以及该门店是否启用小型广告推广的二进制决策变量这五个量的乘积，然后对所有门店的这一乘积项求和，作为总体预期产品曝光量。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_077\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_040.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "126795.0"
+    ],
+    "time_seconds": 32.81139769998845,
+    "total_tokens": 3329
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "126795.0"
+    ],
+    "ground_truth": 126795.0
+  }
+}

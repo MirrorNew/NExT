@@ -1,0 +1,337 @@
+{
+  "entry": {
+    "index": 7,
+    "question": "Morning Light Retail Supply Chain Co., Ltd. is a chain retail enterprise with a central warehouse, regional warehouses and multiple stores. Relying on the transportation network covering the southern region, the company implements the four-level inventory and distribution management of \"factory-central warehouse-regional warehouse-retail store\". In order to cope with market fluctuations and cost pressures, the company's logistics and operations team hopes to optimize ordering and transportation decisions through periodic review strategies, and minimize ordering costs, holding costs and transportation costs within a total of 15 cycles while ensuring that each store is constantly stocked, and reasonably utilize inventory resources.\n\nOn the supply side, in each cycle, regional warehouses can choose to place orders separately to request replenishment and replenishment quantities from the central warehouse. At the same time, regional warehouses can redistribute inventory to various retail stores. The ordering cost must be fixed and the replenishment quantity must be received immediately after a single order is placed. If an order is not placed with the central warehouse, the regional warehouse cannot obtain the new inventory. In addition, the central warehouse does not need to increase inventory. \n\nIn terms of demand, the four retail stores have certain sales needs in each cycle. If the inventory cannot meet the demand, there will be a risk of out-of-stock. It is necessary to ensure that the inventory level of each store in each period is non-negative, and It is necessary to ensure that each store maintains a safety stock of more than 30% of demand at the end of each period to cope with sudden increases in demand. \n\nIn terms of transportation, the transportation volume from the central warehouse to the regional warehouse and from the regional warehouse to the retail store is limited by the vehicle capacity. Each route has a maximum loading capacity limit in each period and the transportation cost is charged per unit of cargo. In terms of additional or priority constraints, in order to encourage centralized replenishment, the company requires that the number of orders from the central warehouse to warehouse 1 must not be less than 10 times during the entire planning period to maintain a stable supply, otherwise an additional service fee must be paid. Minimize costs and give the minimum total cost. \n\nInventory and demand table\n\n| Entity | Initial Stock (Units) | Demand per Period (Units) |\n| --------- | --------------- | --------------- |\n| Central Warehouse | 1200 | — |\n| Regional Warehouse 1 | 500 | — |\n| Regional Warehouse 2 | 400 | — |\n| Retail Store 1 | 350 | 50 |\n| Retail Store 2 | 450 | 60 |\n| Retail Store 3 | 500 | 70 |\n| Retail Store 4 | 600 | 80 |\n\nTransport Route Costs\n\n| Transport Route | Transport Costs (Euro/Unit) | Maximum Transport Capacity per Period (Units) |\n| -------------------- | -------------------- | ------------------- |\n| Central Warehouse → Regional Warehouse 1 | 0.55 | 1000 |\n| Central Warehouse → Regional Warehouse 2 | 0.22 | 1000 |\n| Regional warehouse 1 → Retail store 1 | 0.22 | 500 |\n| Regional warehouse 1 → Retail store 2 | 0.20 | 500 |\n| Regional warehouse 1 → Retail store 3 | 0.32 | 500 |\n| Regional warehouse 1 → Retail store 4 | 0.38 | 500 |\n| Regional warehouse 2 → Retail store 1 | 0.68 | 500 |\n| Regional warehouse 2 → Retail store 2 | 0.52 | 500 |\n| Regional warehouse 2 → Retail store 3 | 0.34 | 500 |\n| Regional warehouse 2 → Retail store 4 | 0.10 | 500 |\n\nCost\n\n| Cost type | Value |\n| -------------- | ---------------- |\n| Ordering cost | 30 EUR/time |\n| Warehouse holding cost | 0.2 EUR/period Unit |\n| Retail store holding costs | 0.6 EUR/period Unit |",
+    "answer": 9582.94,
+    "Parameters_List": [
+      {
+        "Name": "T",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "S",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 0.3
+      },
+      {
+        "Name": "min_orders_CW_RW1",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "Table_1_Inventory_Demand",
+        "Type": "list",
+        "Value": [
+          {
+            "Entity": "Central Warehouse",
+            "Initial Stock (Units)": 1200,
+            "Demand per Period (Units)": null
+          },
+          {
+            "Entity": "Regional Warehouse 1",
+            "Initial Stock (Units)": 500,
+            "Demand per Period (Units)": null
+          },
+          {
+            "Entity": "Regional Warehouse 2",
+            "Initial Stock (Units)": 400,
+            "Demand per Period (Units)": null
+          },
+          {
+            "Entity": "Retail Store 1",
+            "Initial Stock (Units)": 350,
+            "Demand per Period (Units)": 50
+          },
+          {
+            "Entity": "Retail Store 2",
+            "Initial Stock (Units)": 450,
+            "Demand per Period (Units)": 60
+          },
+          {
+            "Entity": "Retail Store 3",
+            "Initial Stock (Units)": 500,
+            "Demand per Period (Units)": 70
+          },
+          {
+            "Entity": "Retail Store 4",
+            "Initial Stock (Units)": 600,
+            "Demand per Period (Units)": 80
+          }
+        ]
+      },
+      {
+        "Name": "Table_2_Transport_Route_Costs",
+        "Type": "list",
+        "Value": [
+          {
+            "Transport Route": "Central Warehouse → Regional Warehouse 1",
+            "Transport Costs (Euro/Unit)": 0.55,
+            "Maximum Transport Capacity per Period (Units)": 1000
+          },
+          {
+            "Transport Route": "Central Warehouse → Regional Warehouse 2",
+            "Transport Costs (Euro/Unit)": 0.22,
+            "Maximum Transport Capacity per Period (Units)": 1000
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 1",
+            "Transport Costs (Euro/Unit)": 0.22,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 2",
+            "Transport Costs (Euro/Unit)": 0.2,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 3",
+            "Transport Costs (Euro/Unit)": 0.32,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 4",
+            "Transport Costs (Euro/Unit)": 0.38,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 1",
+            "Transport Costs (Euro/Unit)": 0.68,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 2",
+            "Transport Costs (Euro/Unit)": 0.52,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 3",
+            "Transport Costs (Euro/Unit)": 0.34,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 4",
+            "Transport Costs (Euro/Unit)": 0.1,
+            "Maximum Transport Capacity per Period (Units)": 500
+          }
+        ]
+      },
+      {
+        "Name": "Table_3_Costs",
+        "Type": "list",
+        "Value": [
+          {
+            "Cost type": "Ordering cost",
+            "Value": 30
+          },
+          {
+            "Cost type": "Warehouse holding cost",
+            "Value": 0.2
+          },
+          {
+            "Cost type": "Retail store holding costs",
+            "Value": 0.6
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Morning Light Retail Supply Chain Co., Ltd. is a chain retail enterprise...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Relying on the transportation network covering the southern region...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "In order to cope with market fluctuations and cost pressures...",
+        "Defines planning horizon T = {1,…,15} and objective minimize total cost"
+      ],
+      [
+        "4",
+        "On the supply side, in each cycle, regional warehouses can choose...",
+        "Introduces binary y_{i,t}, continuous z_{i,t}, and linking constraint z_{i,t}≤M·y_{i,t}"
+      ],
+      [
+        "5",
+        "At the same time, regional warehouses can redistribute inventory...",
+        "Introduces shipment variable w_{i,j,t}≥0"
+      ],
+      [
+        "6",
+        "The ordering cost must be fixed and the replenishment quantity...",
+        "Defines ordering cost c_order=30 EUR/time and zero lead time"
+      ],
+      [
+        "7",
+        "If an order is not placed with the central warehouse...",
+        "Reinforces z_{i,t}≤M·y_{i,t}"
+      ],
+      [
+        "8",
+        "In addition, the central warehouse does not need to increase inventory...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "In terms of demand, the four retail stores have certain sales needs...",
+        "Defines demand parameter d_j"
+      ],
+      [
+        "10",
+        "If the inventory cannot meet the demand...",
+        "Requires I^S_{j,t}≥0"
+      ],
+      [
+        "11",
+        "It is necessary to ensure that the inventory level of each store...",
+        "I^S_{j,t}≥0 and safety‐stock I^S_{j,t}≥0.3·d_j"
+      ],
+      [
+        "12",
+        "In terms of transportation, the transportation volume from the central warehouse...",
+        "Capacity constraints z_{i,t}≤Cap^{CR}_i and w_{i,j,t}≤Cap^{RS}_{i,j}"
+      ],
+      [
+        "13",
+        "Each route has a maximum loading capacity limit in each period...",
+        "Defines transport costs c^{CR}_i, c^{RS}_{i,j}; repeats capacity constraints"
+      ],
+      [
+        "14",
+        "In terms of additional or priority constraints, in order to encourage centralized replenishment...",
+        "∑_{t=1}^{15} y_{1,t} ≥ 10"
+      ],
+      [
+        "15",
+        "Minimize costs and give the minimum total cost...",
+        "Restates objective minimize total cost"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "y_{i,t}",
+        "Meaning": "order-placement decision at regional warehouse i in period t",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "z_{i,t}",
+        "Meaning": "replenishment quantity shipped from central warehouse to regional warehouse i in period t",
+        "Type": "continuous",
+        "Range ": "[0, Cap^{CR}_i]"
+      },
+      {
+        "symbol": "w_{i,j,t}",
+        "Meaning": "shipment quantity from regional warehouse i to retail store j in period t",
+        "Type": "continuous",
+        "Range ": "[0, Cap^{RS}_{i,j}]"
+      },
+      {
+        "symbol": "I^C_t",
+        "Meaning": "end-of-period inventory at central warehouse",
+        "Type": "continuous",
+        "Range ": ">=0"
+      },
+      {
+        "symbol": "I^R_{i,t}",
+        "Meaning": "end-of-period inventory at regional warehouse i",
+        "Type": "continuous",
+        "Range ": ">=0"
+      },
+      {
+        "symbol": "I^S_{j,t}",
+        "Meaning": "end-of-period inventory at retail store j",
+        "Type": "continuous",
+        "Range ": ">=0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Planning horizon",
+        "T = {1,…,15}",
+        "sentence numbers:3"
+      ],
+      [
+        "Order–quantity linking",
+        "z_{i,t} ≤ M·y_{i,t}",
+        "sentence numbers:4,7"
+      ],
+      [
+        "Binary order decision",
+        "y_{i,t} ∈ {0,1}",
+        "sentence numbers:4"
+      ],
+      [
+        "Demand satisfaction (no stockout)",
+        "I^S_{j,t} ≥ 0",
+        "sentence numbers:10"
+      ],
+      [
+        "Safety‐stock",
+        "I^S_{j,t} ≥ 0.3·d_j",
+        "sentence numbers:11"
+      ],
+      [
+        "Route capacity",
+        "z_{i,t} ≤ Cap^{CR}_i; w_{i,j,t} ≤ Cap^{RS}_{i,j}",
+        "sentence numbers:12,13"
+      ],
+      [
+        "Minimum orders to warehouse 1",
+        "∑_{t=1}^{15} y_{1,t} ≥ 10",
+        "sentence numbers:14"
+      ],
+      [
+        "Central inventory flow",
+        "I^C_t = I^C_{t-1} - ∑_{i=1}^{2} z_{i,t}",
+        "sentence numbers:derived"
+      ],
+      [
+        "Regional inventory flow",
+        "I^R_{i,t} = I^R_{i,t-1} + z_{i,t} - ∑_{j=1}^{4} w_{i,j,t}",
+        "sentence numbers:derived"
+      ],
+      [
+        "Store inventory flow",
+        "I^S_{j,t} = I^S_{j,t-1} + ∑_{i=1}^{2} w_{i,j,t} - d_j",
+        "sentence numbers:derived"
+      ],
+      [
+        "Initial inventories",
+        "I^C_0 = 1200; I^R_{1,0} = 500; I^R_{2,0} = 400; I^S_{1,0} = 350; I^S_{2,0} = 450; I^S_{3,0} = 500; I^S_{4,0} = 600",
+        "sentence numbers:inventory table"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize total cost and give the minimum total cost.",
+      "Mathematical_expressions": "Minimize ∑_{i=1}^{2} ∑_{t=1}^{15} (30·y_{i,t}) + 0.2·∑_{t=1}^{15} (I^C_t + ∑_{i=1}^{2} I^R_{i,t}) + 0.6·∑_{t=1}^{15} ∑_{j=1}^{4} I^S_{j,t} + ∑_{i=1}^{2} ∑_{t=1}^{15} c^{CR}_i·z_{i,t} + ∑_{i=1}^{2} ∑_{j=1}^{4} ∑_{t=1}^{15} c^{RS}_{i,j}·w_{i,j,t}"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "9582.94"
+    ],
+    "time_seconds": 123.6457498000018,
+    "total_tokens": 24236
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "9582.94"
+    ],
+    "ground_truth": 9582.94
+  }
+}

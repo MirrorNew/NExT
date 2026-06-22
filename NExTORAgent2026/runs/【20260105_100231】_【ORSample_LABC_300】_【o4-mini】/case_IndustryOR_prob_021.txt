@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A company plans to produce three products $A_1$, $A_2$, and $A_3$. There are 22 production days per month. The table below provides the maximum demand (unit = 100 kg), the selling price ($/100Kg$), the production cost (per 100Kg of product), and the production quota (when all production lines are fully devoted to that product, the maximum number of 100 kg units that can be produced per day).\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Maximum demand | 5300 | 4500 | 5400 |\n| Selling price | 124 | 109 | 115 |\n| Production cost | 73.30 | 52.90 | 65.40 |\n| Production quota | 500 | 450 | 550 |\n\nThe fixed start-up (activation) costs of the production lines are as follows:\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Start-up cost | 170000 | 150000 | 100000 |\n\nMinimum production batch sizes:\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Minimum batch size | 20 | 20 | 16 |\n\nBased on the above, add the following conditional requirement: if the total monthly production quantity of a product (measured in 100 kg units) exceeds 4000 (i.e., exceeds 400,000 kg), then that product’s production line must pay an additional one-time overtime activation cost of 30,000 USD for the month; if the total production quantity of that product does not exceed 4000, then this overtime activation cost does not need to be paid. Please reflect this conditional logic in the model.\n\nPlease formulate an Operations Research model that, considering the fixed start-up costs, the minimum batch size constraints, and the above nonlinear conditional constraint “exceeding 4000 units triggers an additional activation cost of 30,000 USD,” determines a production plan that maximizes total profit.",
+    "answer": 212240.0,
+    "index": "IndustryOR_prob_021",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: “请建立一个运筹学模型，在考虑固定启用成本和最小生产批量约束的前提下，确定一个使总收益最大化的生产计划。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_021\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_007.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "280950.0"
+    ],
+    "time_seconds": 36.37238200000138,
+    "total_tokens": 3812
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "280950.0"
+    ],
+    "ground_truth": 212240.0
+  }
+}

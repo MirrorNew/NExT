@@ -1,0 +1,219 @@
+{
+  "entry": {
+    "index": 37,
+    "question": "In the petroleum refining industry, the choice of raw materials directly affects the quality and production cost of finished oil. Take the third refinery of Kazdel Petrochemical as an example. The plant needs to mix raw materials with different octane numbers to produce gasoline that meets the National VI standard. Although high-octane raw materials (such as catalytic reforming oil) can improve the anti-knock performance of gasoline, the procurement cost is high; while low-octane raw materials (such as straight-run gasoline) are cheaper, but require additional processing to meet the standards. Market data shows that when the mixed octane number is lower than 80, the combustion efficiency of gasoline decreases, which may cause engine knock, increase exhaust emissions, and even affect vehicle performance. Therefore, refineries need to optimize the raw material ratio to reduce costs while meeting the minimum octane requirements. \n\nModern supply chain management systems monitor the octane number and price of different crude oil sources in real time and automatically calculate the optimal mixing ratio. In actual operation, if the proportion of low-octane raw materials is too high, the system will trigger an alarm and recommend increasing the purchase of high-octane raw materials. The 2023 industry report shows that refineries using optimization models can reduce raw material costs by **5%~10%** compared to traditional empirical decisions, while ensuring that finished oil products meet 100% environmental standards. In addition, with the growing demand for low-carbon fuels, some companies have begun to introduce **carbon intensity constraints** to further optimize procurement strategies to reduce carbon emissions in the refining process. \n\nIn the **refining industry**, raw material procurement and optimization are key steps to ensure efficient and cost-effective production. In particular, in the production process, octane number (Octane Number) is an important indicator for measuring raw material quality, which directly affects the combustion performance, stability and safety of the final product. Raw materials with high octane numbers usually have higher combustion efficiency and lower pollution emissions, so they are widely used in the refining process. If the unit price of a production raw material A is 30, the quality index (in units of octane content/flow) is 90; the unit price of raw material B is 20, and the quality index is 70. In actual operation, the octane number requirement is usually to ensure that the final product (such as gasoline, fuel, etc.) meets market standards and safety standards. In order to meet production needs and take safety into consideration,the quality index cannot be less than 80; the total flow rate of the two raw materials must be equal to 1000 units; If the purchased raw material A exceeds 450 units, the unit flow of material A rate needs to be calculated using 1.05 power of the unit flow rate of purchased raw material A. Try to reasonably purchase the flow rate of the two raw materials to minimize the total cost of the raw materials. Give me the flow rate of A as final answer.",
+    "answer": 30466.32,
+    "Parameters_List": [
+      {
+        "Name": "octane_threshold",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "cost_reduction_range",
+        "Type": "tuple",
+        "Value": [
+          0.05,
+          0.1
+        ]
+      },
+      {
+        "Name": "environmental_compliance_rate",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "unit_price_A",
+        "Type": "integer",
+        "Value": 30
+      },
+      {
+        "Name": "quality_index_A",
+        "Type": "integer",
+        "Value": 90
+      },
+      {
+        "Name": "unit_price_B",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "quality_index_B",
+        "Type": "integer",
+        "Value": 70
+      },
+      {
+        "Name": "quality_index_min",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "total_flow",
+        "Type": "integer",
+        "Value": 1000
+      },
+      {
+        "Name": "flow_threshold_A",
+        "Type": "integer",
+        "Value": 450
+      },
+      {
+        "Name": "penalty_exponent_A",
+        "Type": "float",
+        "Value": 1.05
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the petroleum refining...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Take the third refinery...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The plant needs to...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Although high-octane raw...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Market data shows...",
+        "mixture octane number ≥ 80"
+      ],
+      [
+        "6",
+        "Therefore, refineries need...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Modern supply chain...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "In actual operation...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The 2023 industry...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "In addition, with...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "In the refining industry...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "In particular, in...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Raw materials with...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "If the unit price...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "In actual operation...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "In order to meet...",
+        "quality index ≥ 80; x_A + x_B = 1000; piecewise f_A = x_A if x_A ≤ 450 else x_A^1.05"
+      ],
+      [
+        "17",
+        "Try to reasonably purchase...",
+        "No constraints"
+      ],
+      [
+        "18",
+        "Give me the flow...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_A",
+        "Meaning": "flow rate of raw material A (units)",
+        "Type": "continuous",
+        "Range ": "0 ≤ x_A ≤ 1000"
+      },
+      {
+        "symbol": "x_B",
+        "Meaning": "flow rate of raw material B (units)",
+        "Type": "continuous",
+        "Range ": "0 ≤ x_B ≤ 1000"
+      },
+      {
+        "symbol": "f_A",
+        "Meaning": "adjusted flow of A for cost calculation",
+        "Type": "continuous",
+        "Range ": "f_A ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Mixture Octane Constraint",
+        "(90·x_A + 70·x_B)/(x_A + x_B) ≥ 80",
+        "sentence numbers:5,16"
+      ],
+      [
+        "Total Flow Constraint",
+        "x_A + x_B = 1000",
+        "sentence numbers:16"
+      ],
+      [
+        "Flow Calculation for A",
+        "f_A = { x_A, if x_A ≤ 450; x_A^1.05, if x_A > 450 }",
+        "sentence numbers:16"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Try to reasonably purchase the flow rate of the two raw materials to minimize the total cost of the raw materials.",
+      "Mathematical_expressions": "Minimize total raw‐material cost = 30·f_A + 20·x_B"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "30466.31995483",
+      "500.0"
+    ],
+    "time_seconds": 132.7485658000005,
+    "total_tokens": 25152
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "30466.31995483",
+      "500.0"
+    ],
+    "ground_truth": 30466.32
+  }
+}

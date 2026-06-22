@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A regional chain grocery store is launching a new energy drink product and needs to optimally allocate the initial inventory across its stores. There are 6 stores (S1–S6), each with different characteristics. The known data for each store include: customer traffic (daily store visits: S1-1200, S2-800, S3-1500, S4-900, S5-1100, S6-700), allocated shelf space (units: S1-50, S2-30, S3-60, S4-35, S5-45, S6-25), and a historical sales similarity score for comparable products (on a 0–1 scale: S1-0.8, S2-0.6, S3-0.9, S4-0.7, S5-0.75, S6-0.5). The warehouse inventory available for the initial allocation is 300 units.\n\nTwo display modes are available: standard display (costs 5 USD per store) and promotional display (costs 15 USD per store, but increases effective shelf space by 20%). The total display budget is 120 USD. The objective is to maximize the expected product exposure, computed as:\n(customer traffic) × (allocated units) × (sales similarity score).\n\nIn addition, introduce the following nonlinear condition: if the number of units allocated to a store exceeds 80% of that store’s original shelf-space capacity, then an additional one-time replenishment organization cost of 40 USD must be paid for that store. For example, for a store with original shelf space of 50 units, if the allocated units are greater than 40 units (i.e., exceed 80% of 50), then an additional fixed cost of 40 USD must be added on top of the original display cost for that store; if the allocated units are less than or equal to 40 units, then this extra 40 USD cost does not need to be paid. The same applies to the other stores, with the corresponding trigger threshold computed as 80% of each store’s original shelf space.",
+    "answer": 211060.0,
+    "index": "LogiOR_prob_077",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 目标是最大化预期产品曝光量，其计算方式为：（顾客流量） × （分配的单位数） × （销售相似度评分）。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_077\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_040.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "194860.0"
+    ],
+    "time_seconds": 34.020403999995324,
+    "total_tokens": 3245
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "194860.0"
+    ],
+    "ground_truth": 211060.0
+  }
+}

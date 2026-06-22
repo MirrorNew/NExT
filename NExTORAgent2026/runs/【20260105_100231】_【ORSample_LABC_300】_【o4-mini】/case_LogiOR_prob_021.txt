@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A logistics company needs to arrange forklifts for a newly built warehouse to meet daily operating requirements. Over the next 7 weeks, the warehouse’s forklift demand is 6, 9, 12, 8, 5, 7, and 4 units, respectively. The company plans to rent forklifts from a leasing company that offers the following rental options:\n\n1. **Long-term forklift rental (premium forklifts):** The rental period is fixed at 7 weeks, and the rent is 240 yuan per week. Forklifts rented long-term can be used throughout the entire rental period.\n2. **Short-term forklift rental (standard forklifts):** The rental period is flexible and can be rented on a weekly basis, with a rent of 390 yuan per week. Forklifts rented short-term can only be used in the week they are rented.\n3. **Shared forklifts:** These forklifts are jointly rented with other warehouses, but are only available in weeks 2, 4, and 5, with a rent of 220 yuan per week.\n4. **Promotional forklifts:** In the last 4 weeks, these forklifts can be rented at a discounted price, with a rent of 190 yuan per week. At most 2 promotional forklifts can be rented per week.\n\nWhen designing the rental plan, based on practical considerations and negotiations, the following specific cost structure is introduced: let the number of long-term rented forklifts (premium forklifts) in week $i$ ($i$ from 1 to 7) be changed to a flexible rental decision, with weekly decision variables $L_i$ (at least one premium forklift in the long-term rental category must be rented), the number of short-term rented forklifts be the decision variable $S_i$, and the number of promotional forklifts be the decision variable $P_i$. The original total cost of long-term rental was linear, namely “240 yuan per week $\\times$ 7 weeks $\\times$ the number of long-term forklifts”; it is now replaced by a multivariable-coupled nonlinear form: the total cost of long-term rental equals 5 yuan times the product of the quantities of long-term rented forklifts over all 7 weeks, $L_1 \\times L_2 \\times L_3 \\times L_4 \\times L_5 \\times L_6 \\times L_7$. Here, 5 is a fixed coefficient (i.e., $k=5$), and $L_1$ through $L_7$ are all decision variables. The number of long-term rented forklifts in each week must be nonnegative and may be zero; however, once the long-term rental quantity in any week increases, this product term changes, thereby affecting the total long-term rental cost in a nonlinear manner. The short-term forklift rental and promotional forklift rental retain their original linear cost structures: in week $i$, the short-term rental cost is 390 yuan times $S_i$, and the promotional rental cost is 190 yuan times $P_i$, and $P_i$ does not exceed 2 units per week. Shared forklifts are still costed linearly at 220 yuan per week.\n\nUnder the above conditions, design a rental plan that fully satisfies the warehouse’s forklift demand over the next 7 weeks and minimizes the total rental cost.",
+    "answer": 14110.0,
+    "index": "LogiOR_prob_021",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “1. 长期叉车租赁：租期固定为 7 周，租金为每周 240 元。长期租赁的叉车在整个租期内均可使用。” 长期租赁在后续隐含为线性成本，即总成本等于每周 240 元乘以 7 周再乘以长期叉车数量。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_021\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_041.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6730.0"
+    ],
+    "time_seconds": 36.86600599999656,
+    "total_tokens": 4398
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "6730.0"
+    ],
+    "ground_truth": 14110.0
+  }
+}

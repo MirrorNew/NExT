@@ -1,0 +1,759 @@
+{
+  "entry": {
+    "index": 20,
+    "question": "The consultant team of the Nutrition and Health Management Center recently accepted a commission from a newly established healthy meal catering company to help it design a \"one-week fat-reducing energy package\" plan for obese people that can meet strict nutritional needs and control costs. The company purchased four energy packages with different ratios (A, B, C, D), and ate them with fresh vegetables. The energy packages are ready to eat after opening the bag and cannot be stored, while vegetables can be purchased and cut and eaten as needed. The company hopes to reduce the total weekly cost as much as possible while ensuring that there is at least one day of \"motivational meal\" with calorie relaxation in a week (to increase the motivation of customers to continue to stick to it). The consultant team needs to establish a linear programming model and provide a procurement and allocation plan based on the ingredients, costs and nutritional catering requirements of each energy package provided by the company. The company's goal is to minimize the total cost of the week under multiple constraints such as meeting the upper and lower limits of nutrition and calories, the purchase amount of the package and the daily intake limit, so as to provide a standardized formula for subsequent large-scale market launch.\n\nFor a certain obese customer group, the company provides this customer with Plan to consume a diet consisting of 5 types of food every day to meet nutritional needs and control calories and fat. The optional foods and their calories, protein, fat and vitamin C content per 100 grams are shown in the following table. Nutritional requirements and restrictions: at least 2000 kcal of calories, at least 50 grams of protein, at least 100 mg of vitamin C, and no more than 70 grams of fat. To ensure a balanced diet, vegetables are required to be no less than 100 grams, chicken is no more than 300 grams, and beans are no more than 400 grams. At the same time, the total calories should not exceed 2500 kcal. \n\nBuy fresh vegetables first, and you can weigh and cut them at will each time, but the energy pack must be eaten immediately after opening. If you want to meet the supply for a week, how many bags of energy packs should be purchased, and how many grams of vegetables should be purchased? What packs should be allocated to customers for each day of the week? How many bags are there respectively? \n\nIncentive meals can only appear once in a week. The upper and lower limits of the calories on the incentive meal day are 500 kcal higher than the above. The rest of the days are based on the daily intake standards. At the same time, due to health reasons, the energy packs consumed every day are limited in weekly and daily energy packs. The limits are as follows:\n\n| Limit type | Pack A | Pack B | Pack C | Pack D | Vegetables |\n| -------------- | ---- | ---- | ---- | ---- | -------- |\n| Minimum weekly purchase quantity | 3 | 1 | 1 | 5 | Unlimited |\n| Daily delivery limit | 2 | 5 | 5 | 1 | Spontaneous purchase |\n\nBased on the above scenario and description, please establish the corresponding linear programming model and give the calculated total weekly cost.\n\n| Food/pack | Rice (g) | Chicken (g) | Beans (g) | Milk (g) |\n| -------- | ------ | ------ | ------ | ------ |\n| **Pack A** | 25 | 50 | 0 | 0 |\n| **Pack B** | 25 | 40 | 0 | 0 |\n| **C pack** | 10 | 20 | 20 | 0 |\n| **D pack** | 0 | 0 | 0 | 50 |\n| **Vegetables** | – | – | – | – |\n\n| Ingredients | Calories (kcal) | Protein (g) | Fat (g) | Vitamin C (mg) | Cost (yuan/100g) |\n| ---- | ------------ | ------------ | ---------- | --------------- | --------------- |\n| Rice | 360 | 6 | 1 | 0 | 0.50 |\n| Chicken | 200 | 20 | 15 | 0 | 2.00 |\n| Beans | 150 | 8 | 1 | 5 | 1.00 |\n| Milk | 60 | 3 | 4 | 5 | 1.50 |\n| Vegetables | 50 | 2 | 0 | 20 | 1.00 |",
+    "answer": 154.815,
+    "Parameters_List": [
+      {
+        "Name": "Food_types",
+        "Type": "list",
+        "Value": [
+          "Rice",
+          "Chicken",
+          "Beans",
+          "Milk",
+          "Vegetables"
+        ]
+      },
+      {
+        "Name": "Pack_types",
+        "Type": "list",
+        "Value": [
+          "Pack A",
+          "Pack B",
+          "Pack C",
+          "Pack D",
+          "Vegetables"
+        ]
+      },
+      {
+        "Name": "Daily_min_calories_normal",
+        "Type": "integer",
+        "Value": 2000
+      },
+      {
+        "Name": "Daily_max_calories_normal",
+        "Type": "integer",
+        "Value": 2500
+      },
+      {
+        "Name": "Daily_min_calories_incentive",
+        "Type": "integer",
+        "Value": 2500
+      },
+      {
+        "Name": "Daily_max_calories_incentive",
+        "Type": "integer",
+        "Value": 3000
+      },
+      {
+        "Name": "Daily_min_protein",
+        "Type": "integer",
+        "Value": 50
+      },
+      {
+        "Name": "Daily_max_fat",
+        "Type": "integer",
+        "Value": 70
+      },
+      {
+        "Name": "Daily_min_vitaminC",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "Daily_min_vegetables_grams",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "Daily_max_chicken_grams",
+        "Type": "integer",
+        "Value": 300
+      },
+      {
+        "Name": "Daily_max_beans_grams",
+        "Type": "integer",
+        "Value": 400
+      },
+      {
+        "Name": "Num_days_per_week",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "Num_incentive_meals_per_week",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "Weekly_min_purchase_pack_A",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "Weekly_min_purchase_pack_B",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "Weekly_min_purchase_pack_C",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "Weekly_min_purchase_pack_D",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "Daily_delivery_limit_pack_A",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "Daily_delivery_limit_pack_B",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "Daily_delivery_limit_pack_C",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "Daily_delivery_limit_pack_D",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "Daily_delivery_limit_vegetables",
+        "Type": "list",
+        "Value": [
+          "Spontaneous purchase"
+        ]
+      },
+      {
+        "Name": "Vegetables_weekly_purchase_limit",
+        "Type": "list",
+        "Value": [
+          "Unlimited"
+        ]
+      },
+      {
+        "Name": "Table_1_pack_composition_grams",
+        "Type": "list",
+        "Value": [
+          {
+            "Food/pack": "Pack A",
+            "Rice (g)": 25,
+            "Chicken (g)": 50,
+            "Beans (g)": 0,
+            "Milk (g)": 0
+          },
+          {
+            "Food/pack": "Pack B",
+            "Rice (g)": 25,
+            "Chicken (g)": 40,
+            "Beans (g)": 0,
+            "Milk (g)": 0
+          },
+          {
+            "Food/pack": "Pack C",
+            "Rice (g)": 10,
+            "Chicken (g)": 20,
+            "Beans (g)": 20,
+            "Milk (g)": 0
+          },
+          {
+            "Food/pack": "Pack D",
+            "Rice (g)": 0,
+            "Chicken (g)": 0,
+            "Beans (g)": 0,
+            "Milk (g)": 50
+          },
+          {
+            "Food/pack": "Vegetables",
+            "Rice (g)": null,
+            "Chicken (g)": null,
+            "Beans (g)": null,
+            "Milk (g)": null
+          }
+        ]
+      },
+      {
+        "Name": "Table_2_ingredient_nutrition_cost_per_100g",
+        "Type": "list",
+        "Value": [
+          {
+            "Ingredients": "Rice",
+            "Calories (kcal)": 360,
+            "Protein (g)": 6,
+            "Fat (g)": 1,
+            "Vitamin C (mg)": 0,
+            "Cost (yuan/100g)": 0.5
+          },
+          {
+            "Ingredients": "Chicken",
+            "Calories (kcal)": 200,
+            "Protein (g)": 20,
+            "Fat (g)": 15,
+            "Vitamin C (mg)": 0,
+            "Cost (yuan/100g)": 2.0
+          },
+          {
+            "Ingredients": "Beans",
+            "Calories (kcal)": 150,
+            "Protein (g)": 8,
+            "Fat (g)": 1,
+            "Vitamin C (mg)": 5,
+            "Cost (yuan/100g)": 1.0
+          },
+          {
+            "Ingredients": "Milk",
+            "Calories (kcal)": 60,
+            "Protein (g)": 3,
+            "Fat (g)": 4,
+            "Vitamin C (mg)": 5,
+            "Cost (yuan/100g)": 1.5
+          },
+          {
+            "Ingredients": "Vegetables",
+            "Calories (kcal)": 50,
+            "Protein (g)": 2,
+            "Fat (g)": 0,
+            "Vitamin C (mg)": 20,
+            "Cost (yuan/100g)": 1.0
+          }
+        ]
+      },
+      {
+        "Name": "Calories_per_gram",
+        "Type": "list",
+        "Value": [
+          {
+            "Ingredient": "Rice",
+            "Calories_per_gram": 3.6
+          },
+          {
+            "Ingredient": "Chicken",
+            "Calories_per_gram": 2.0
+          },
+          {
+            "Ingredient": "Beans",
+            "Calories_per_gram": 1.5
+          },
+          {
+            "Ingredient": "Milk",
+            "Calories_per_gram": 0.6
+          },
+          {
+            "Ingredient": "Vegetables",
+            "Calories_per_gram": 0.5
+          }
+        ]
+      },
+      {
+        "Name": "Protein_per_gram",
+        "Type": "list",
+        "Value": [
+          {
+            "Ingredient": "Rice",
+            "Protein_per_gram": 0.06
+          },
+          {
+            "Ingredient": "Chicken",
+            "Protein_per_gram": 0.2
+          },
+          {
+            "Ingredient": "Beans",
+            "Protein_per_gram": 0.08
+          },
+          {
+            "Ingredient": "Milk",
+            "Protein_per_gram": 0.03
+          },
+          {
+            "Ingredient": "Vegetables",
+            "Protein_per_gram": 0.02
+          }
+        ]
+      },
+      {
+        "Name": "Fat_per_gram",
+        "Type": "list",
+        "Value": [
+          {
+            "Ingredient": "Rice",
+            "Fat_per_gram": 0.01
+          },
+          {
+            "Ingredient": "Chicken",
+            "Fat_per_gram": 0.15
+          },
+          {
+            "Ingredient": "Beans",
+            "Fat_per_gram": 0.01
+          },
+          {
+            "Ingredient": "Milk",
+            "Fat_per_gram": 0.04
+          },
+          {
+            "Ingredient": "Vegetables",
+            "Fat_per_gram": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "VitaminC_per_gram",
+        "Type": "list",
+        "Value": [
+          {
+            "Ingredient": "Rice",
+            "VitaminC_per_gram": 0.0
+          },
+          {
+            "Ingredient": "Chicken",
+            "VitaminC_per_gram": 0.0
+          },
+          {
+            "Ingredient": "Beans",
+            "VitaminC_per_gram": 0.05
+          },
+          {
+            "Ingredient": "Milk",
+            "VitaminC_per_gram": 0.05
+          },
+          {
+            "Ingredient": "Vegetables",
+            "VitaminC_per_gram": 0.2
+          }
+        ]
+      },
+      {
+        "Name": "Cost_per_gram",
+        "Type": "list",
+        "Value": [
+          {
+            "Ingredient": "Rice",
+            "Cost_per_gram": 0.005
+          },
+          {
+            "Ingredient": "Chicken",
+            "Cost_per_gram": 0.02
+          },
+          {
+            "Ingredient": "Beans",
+            "Cost_per_gram": 0.01
+          },
+          {
+            "Ingredient": "Milk",
+            "Cost_per_gram": 0.015
+          },
+          {
+            "Ingredient": "Vegetables",
+            "Cost_per_gram": 0.01
+          }
+        ]
+      },
+      {
+        "Name": "Pack_A_nutrition_per_pack",
+        "Type": "tuple",
+        "Value": {
+          "Calories_kcal": 190.0,
+          "Protein_g": 11.5,
+          "Fat_g": 7.75,
+          "VitaminC_mg": 0.0,
+          "Cost_yuan": 1.125
+        }
+      },
+      {
+        "Name": "Pack_B_nutrition_per_pack",
+        "Type": "tuple",
+        "Value": {
+          "Calories_kcal": 170.0,
+          "Protein_g": 9.5,
+          "Fat_g": 6.25,
+          "VitaminC_mg": 0.0,
+          "Cost_yuan": 0.925
+        }
+      },
+      {
+        "Name": "Pack_C_nutrition_per_pack",
+        "Type": "tuple",
+        "Value": {
+          "Calories_kcal": 106.0,
+          "Protein_g": 6.2,
+          "Fat_g": 3.3,
+          "VitaminC_mg": 1.0,
+          "Cost_yuan": 0.65
+        }
+      },
+      {
+        "Name": "Pack_D_nutrition_per_pack",
+        "Type": "tuple",
+        "Value": {
+          "Calories_kcal": 30.0,
+          "Protein_g": 1.5,
+          "Fat_g": 2.0,
+          "VitaminC_mg": 2.5,
+          "Cost_yuan": 0.75
+        }
+      },
+      {
+        "Name": "Vegetables_nutrition_per_gram",
+        "Type": "tuple",
+        "Value": {
+          "Calories_kcal": 0.5,
+          "Protein_g": 0.02,
+          "Fat_g": 0.0,
+          "VitaminC_mg": 0.2,
+          "Cost_yuan": 0.01
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The consultant team of the Nutrition and Health Management Center recently accepted...",
+        "Defines context: design a one-week fat-reducing energy package plan using four energy packages (A,B,C,D) plus vegetables; introduces that packs are ready-to-eat, cannot be stored, vegetables can be cut as needed; implies packs must be consumed in integer numbers per day and vegetables are continuous."
+      ],
+      [
+        "2",
+        "The company hopes to reduce the total weekly cost as much as possible while ensuring that there is at least one day...",
+        "Introduces objective: minimize total weekly cost; introduces constraint: at least one (exactly one later) motivational meal day with relaxed calorie bounds."
+      ],
+      [
+        "3",
+        "The consultant team needs to establish a linear programming model and provide a procurement and allocation plan...",
+        "Clarifies model type (linear programming) and that decisions include weekly purchase quantities and daily allocation of packs and vegetables; no explicit numerical constraints."
+      ],
+      [
+        "4",
+        "The company's goal is to minimize the total cost of the week under multiple constraints such as meeting the upper and lower limits of nutrition and calories...",
+        "Restates objective: minimize total weekly cost; restates existence of constraints on nutrition upper/lower limits, purchase amount of packages, and daily intake; summarized by detailed constraints later."
+      ],
+      [
+        "5",
+        "For a certain obese customer group, the company provides this customer with Plan to consume a diet consisting of 5 types of food every day...",
+        "Defines the 5 food types: Rice, Chicken, Beans, Milk, Vegetables, and that diet is daily; sets up base for nutrient constraints per day; no explicit numeric constraint yet."
+      ],
+      [
+        "6",
+        "The optional foods and their calories, protein, fat and vitamin C content per 100 grams are shown in the following table...",
+        "Provides parameter data (nutrient content and cost per 100g) for Rice, Chicken, Beans, Milk, Vegetables; used to define linear expressions for calories, protein, fat, vitamin C, and cost; no additional logical constraint."
+      ],
+      [
+        "7",
+        "Nutritional requirements and restrictions: at least 2000 kcal of calories, at least 50 grams of protein, at least 100 mg of vitamin C, and no more than 70 grams of fat.",
+        "Daily nutrient constraints on a normal day: Cal_d ≥ 2000; Prot_d ≥ 50; VitC_d ≥ 100; Fat_d ≤ 70."
+      ],
+      [
+        "8",
+        "To ensure a balanced diet, vegetables are required to be no less than 100 grams, chicken is no more than 300 grams, and beans are no more than 400 grams.",
+        "Daily food-balance constraints: V_d ≥ 100; Chicken grams per day ≤ 300; Beans grams per day ≤ 400."
+      ],
+      [
+        "9",
+        "At the same time, the total calories should not exceed 2500 kcal.",
+        "Daily calorie upper bound on normal days: Cal_d ≤ 2500."
+      ],
+      [
+        "10",
+        "Buy fresh vegetables first, and you can weigh and cut them at will each time, but the energy pack must be eaten immediately after opening.",
+        "Implies vegetables are continuous variables; energy packs must be consumed in whole bags (integer variables) and cannot be partially used or stored beyond the day."
+      ],
+      [
+        "11",
+        "If you want to meet the supply for a week, how many bags of energy packs should be purchased, and how many grams of vegetables should be purchased?",
+        "Implies decisions on weekly totals: sum_d A_d, sum_d B_d, sum_d C_d, sum_d D_d, and total vegetables; no new numeric constraints."
+      ],
+      [
+        "12",
+        "What packs should be allocated to customers for each day of the week? How many bags are there respectively?",
+        "Implies per-day allocation decisions: A_d, B_d, C_d, D_d for each day d; no extra numerical bounds."
+      ],
+      [
+        "13",
+        "Incentive meals can only appear once in a week.",
+        "Weekly logic constraint: exactly one day is incentive meal day; modeled as sum_d y_d = 1, y_d ∈ {0,1}."
+      ],
+      [
+        "14",
+        "The upper and lower limits of the calories on the incentive meal day are 500 kcal higher than the above.",
+        "Calorie constraints on incentive day: lower bound 2000+500=2500; upper bound 2500+500=3000; modeled via Cal_d ≥ 2000+500·y_d and Cal_d ≤ 2500+500·y_d."
+      ],
+      [
+        "15",
+        "The rest of the days are based on the daily intake standards.",
+        "Links normal days (y_d=0) to the original daily bounds (Cal between 2000 and 2500, other nutrients as given); no new constraints beyond tying to previous ones."
+      ],
+      [
+        "16",
+        "At the same time, due to health reasons, the energy packs consumed every day are limited in weekly and daily energy packs.",
+        "Introduces existence of weekly minimum purchase limits and daily delivery limits for each pack; detailed in table below."
+      ],
+      [
+        "17",
+        "The limits are as follows:",
+        "Refers to the limit table detailing weekly minimum purchase quantities and daily delivery limits; no constraint by itself."
+      ],
+      [
+        "18",
+        "| Limit type | Pack A | Pack B | Pack C | Pack D | Vegetables |...",
+        "From the table: weekly minimum purchase constraints ∑_d A_d ≥ 3; ∑_d B_d ≥ 1; ∑_d C_d ≥ 1; ∑_d D_d ≥ 5; vegetables have no weekly upper/lower bound. Daily delivery limits: A_d ≤ 2; B_d ≤ 5; C_d ≤ 5; D_d ≤ 1 for every day d."
+      ],
+      [
+        "19",
+        "Based on the above scenario and description, please establish the corresponding linear programming model and give the calculated total weekly cost.",
+        "Restates need to formulate LP and compute minimal weekly cost; no new numeric constraint."
+      ],
+      [
+        "20",
+        "| Food/pack | Rice (g) | Chicken (g) | Beans (g) | Milk (g) |...",
+        "Provides composition parameters of each pack (A,B,C,D) in grams of base foods; used to build linear nutrient and cost expressions; no additional logical constraints."
+      ],
+      [
+        "21",
+        "| Ingredients | Calories (kcal) | Protein (g) | Fat (g) | Vitamin C (mg) | Cost (yuan/100g) |...",
+        "Provides parameters for each ingredient’s nutrition and cost per 100g; used to define coefficients in constraints and objective; no new constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "d",
+        "Meaning": "Day index within the planning week",
+        "Type": "integer",
+        "Range ": "d = 1,2,...,7"
+      },
+      {
+        "symbol": "A_d",
+        "Meaning": "Number of Pack A consumed on day d",
+        "Type": "integer",
+        "Range ": "A_d ≥ 0, d = 1,...,7"
+      },
+      {
+        "symbol": "B_d",
+        "Meaning": "Number of Pack B consumed on day d",
+        "Type": "integer",
+        "Range ": "B_d ≥ 0, d = 1,...,7"
+      },
+      {
+        "symbol": "C_d",
+        "Meaning": "Number of Pack C consumed on day d",
+        "Type": "integer",
+        "Range ": "C_d ≥ 0, d = 1,...,7"
+      },
+      {
+        "symbol": "D_d",
+        "Meaning": "Number of Pack D consumed on day d",
+        "Type": "integer",
+        "Range ": "D_d ≥ 0, d = 1,...,7"
+      },
+      {
+        "symbol": "V_d",
+        "Meaning": "Grams of vegetables consumed on day d",
+        "Type": "continuous",
+        "Range ": "V_d ≥ 0, d = 1,...,7"
+      },
+      {
+        "symbol": "y_d",
+        "Meaning": "Binary indicator: 1 if day d is the incentive meal day, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y_d ∈ {0,1}, d = 1,...,7"
+      },
+      {
+        "symbol": "R_d",
+        "Meaning": "Grams of rice consumed on day d (derived from packs)",
+        "Type": "continuous",
+        "Range ": "R_d = 25 A_d + 25 B_d + 10 C_d, d = 1,...,7"
+      },
+      {
+        "symbol": "K_d",
+        "Meaning": "Grams of chicken consumed on day d (derived from packs)",
+        "Type": "continuous",
+        "Range ": "K_d = 50 A_d + 40 B_d + 20 C_d, d = 1,...,7"
+      },
+      {
+        "symbol": "Be_d",
+        "Meaning": "Grams of beans consumed on day d (derived from packs)",
+        "Type": "continuous",
+        "Range ": "Be_d = 20 C_d, d = 1,...,7"
+      },
+      {
+        "symbol": "M_d",
+        "Meaning": "Grams of milk consumed on day d (derived from packs)",
+        "Type": "continuous",
+        "Range ": "M_d = 50 D_d, d = 1,...,7"
+      },
+      {
+        "symbol": "Cal_d",
+        "Meaning": "Total calories consumed on day d (kcal), as linear function of packs and vegetables",
+        "Type": "continuous",
+        "Range ": "Cal_d defined by nutrient coefficients, d = 1,...,7"
+      },
+      {
+        "symbol": "Prot_d",
+        "Meaning": "Total protein consumed on day d (g), as linear function of packs and vegetables",
+        "Type": "continuous",
+        "Range ": "Prot_d defined by nutrient coefficients, d = 1,...,7"
+      },
+      {
+        "symbol": "Fat_d",
+        "Meaning": "Total fat consumed on day d (g), as linear function of packs and vegetables",
+        "Type": "continuous",
+        "Range ": "Fat_d defined by nutrient coefficients, d = 1,...,7"
+      },
+      {
+        "symbol": "VitC_d",
+        "Meaning": "Total vitamin C consumed on day d (mg), as linear function of packs and vegetables",
+        "Type": "continuous",
+        "Range ": "VitC_d defined by nutrient coefficients, d = 1,...,7"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Daily_calorie_lower_bound_with_incentive_logic",
+        "Cal_d ≥ 2000 + 500 y_d  for all d = 1,...,7",
+        "sentence numbers:7,13,14,15"
+      ],
+      [
+        "Daily_calorie_upper_bound_with_incentive_logic",
+        "Cal_d ≤ 2500 + 500 y_d  for all d = 1,...,7",
+        "sentence numbers:7,9,13,14,15"
+      ],
+      [
+        "Daily_protein_minimum",
+        "Prot_d ≥ 50  for all d = 1,...,7",
+        "sentence numbers:7"
+      ],
+      [
+        "Daily_fat_maximum",
+        "Fat_d ≤ 70  for all d = 1,...,7",
+        "sentence numbers:7"
+      ],
+      [
+        "Daily_vitaminC_minimum",
+        "VitC_d ≥ 100  for all d = 1,...,7",
+        "sentence numbers:7"
+      ],
+      [
+        "Daily_vegetable_minimum",
+        "V_d ≥ 100  for all d = 1,...,7",
+        "sentence numbers:8"
+      ],
+      [
+        "Daily_chicken_maximum",
+        "K_d = 50 A_d + 40 B_d + 20 C_d ≤ 300  for all d = 1,...,7",
+        "sentence numbers:8,20"
+      ],
+      [
+        "Daily_beans_maximum",
+        "Be_d = 20 C_d ≤ 400  for all d = 1,...,7",
+        "sentence numbers:8,20"
+      ],
+      [
+        "Daily_delivery_limit_PackA",
+        "A_d ≤ 2  for all d = 1,...,7",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Daily_delivery_limit_PackB",
+        "B_d ≤ 5  for all d = 1,...,7",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Daily_delivery_limit_PackC",
+        "C_d ≤ 5  for all d = 1,...,7",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Daily_delivery_limit_PackD",
+        "D_d ≤ 1  for all d = 1,...,7",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Weekly_minimum_PackA",
+        "∑_{d=1}^7 A_d ≥ 3",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Weekly_minimum_PackB",
+        "∑_{d=1}^7 B_d ≥ 1",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Weekly_minimum_PackC",
+        "∑_{d=1}^7 C_d ≥ 1",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Weekly_minimum_PackD",
+        "∑_{d=1}^7 D_d ≥ 5",
+        "sentence numbers:16,18"
+      ],
+      [
+        "Exactly_one_incentive_day",
+        "∑_{d=1}^7 y_d = 1",
+        "sentence numbers:13"
+      ],
+      [
+        "Binary_incentive_indicator",
+        "y_d ∈ {0,1}  for all d = 1,...,7",
+        "sentence numbers:13"
+      ],
+      [
+        "Integrality_packs",
+        "A_d, B_d, C_d, D_d are integers and ≥ 0  for all d = 1,...,7",
+        "sentence numbers:1,10,11,12"
+      ],
+      [
+        "Nonnegativity_vegetables",
+        "V_d ≥ 0  for all d = 1,...,7",
+        "sentence numbers:1,10,11"
+      ],
+      [
+        "Definition_calories",
+        "Cal_d = (25 A_d + 25 B_d + 10 C_d)/100 * 360 + (50 A_d + 40 B_d + 20 C_d)/100 * 200 + (20 C_d)/100 * 150 + (50 D_d)/100 * 60 + (V_d)/100 * 50",
+        "sentence numbers:6,20,21"
+      ],
+      [
+        "Definition_protein",
+        "Prot_d = (25 A_d + 25 B_d + 10 C_d)/100 * 6 + (50 A_d + 40 B_d + 20 C_d)/100 * 20 + (20 C_d)/100 * 8 + (50 D_d)/100 * 3 + (V_d)/100 * 2",
+        "sentence numbers:6,20,21"
+      ],
+      [
+        "Definition_fat",
+        "Fat_d = (25 A_d + 25 B_d + 10 C_d)/100 * 1 + (50 A_d + 40 B_d + 20 C_d)/100 * 15 + (20 C_d)/100 * 1 + (50 D_d)/100 * 4 + (V_d)/100 * 0",
+        "sentence numbers:6,20,21"
+      ],
+      [
+        "Definition_vitaminC",
+        "VitC_d = (20 C_d)/100 * 5 + (50 D_d)/100 * 5 + (V_d)/100 * 20",
+        "sentence numbers:6,20,21"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company hopes to reduce the total weekly cost as much as possible while satisfying all nutritional, caloric, purchase, and daily intake constraints.",
+      "Mathematical_expressions": "Minimize  Z = ∑_{d=1}^7 (1.125 A_d + 0.925 B_d + 0.650 C_d + 0.750 D_d + 0.01 V_d)"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "154.815"
+    ],
+    "time_seconds": 91.90364060000138,
+    "total_tokens": 66269
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "154.815"
+    ],
+    "ground_truth": 154.815
+  }
+}

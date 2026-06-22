@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A village is hosting a banquet and provides bicycles and cars as transportation for everyone. One bicycle can carry 3 people, and one car can carry 5 people. Since cars are more expensive, the number of cars can be at most 40% of the total number of vehicles. In addition, as the event scale expands, the village finds that for each additional car, the actual number of people that must be transported increases exponentially by a factor of $1.0005$ relative to the original baseline: that is, when the number of cars is 1, the required number of people to be transported becomes $1.0005$ times the original plan; when the number of cars is 2, it becomes $1.0005^2$ times the original plan; when the number of cars is 3, it becomes $1.0005^3$ times the original plan; and so on. If, in the absence of this growth effect, the original plan requires transporting at least 500 people, then after accounting for this exponential increase with growth factor $1.0005$, how many of each type of vehicle should be used so as to minimize the total number of bicycles required?",
+    "answer": "None",
+    "index": "NLP4LP_prob_167",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 如果该村庄需要运送至少 500 人，应使用多少辆每种交通工具，才能使所需自行车的总数量最小？, 修改后相关描述: 另外，随着活动规模扩大，村庄发现每增加一辆汽车，实际需要运送的人数会在原有基础上按  1.0005  的系数呈指数式增长：也就是说，当汽车数量为 1 辆时，需要运送的人数变为原计划的  1.0005  倍；当汽车数量为 2 辆时，需要运送的人数变为原计划的  1.0005  的平方倍；当汽车数量为 3 辆时，需要运送的人数变为原计划的  1.0005  的三次方倍，以此类推... 若在没有这种增长效应时原计划需要运送至少 500 人，那么在考虑这种按  1.0005   为增长系数的指数级增加后，应使用多少辆每种交通工具，才能使所需自行车的总数量最小？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_167\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_094.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "82.0"
+    ],
+    "time_seconds": 37.06041510000068,
+    "total_tokens": 2141
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "82.0"
+    ],
+    "ground_truth": "None"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "An appliance company sells and installs refrigerators and stoves. Each refrigerator requires 60 minutes of handling time and 20 minutes of installation time. Each stove requires 45 minutes of handling time and 25 minutes of installation time. The company initially has 20000 minutes of handling time and 13000 minutes of installation time available.\n\nAs the business expands, when the total number of refrigerators and stoves sold increases, the effective available handling time is affected by diminishing handling efficiency. Specifically, when the total number of units sold is $N$ (i.e., the sum of the number of refrigerators and stoves is $N$), the company’s effective handling-time requirement increases with $N$ according to an exponential factor of 1.0003: that is, it becomes $(1.0003)^N$ times the original requirement. Equivalently, for each increase of 1 unit in $N$, the total handling-time requirement is multiplied by 1.0003. Therefore, when considering the handling-time constraint, the original handling-time limit based on 20000 minutes should be interpreted as follows: when the total number of units sold is $N$, the corresponding handling-time requirement, after being scaled up by the factor $(1.0003)^N$, must still not exceed the available 20000 minutes of handling time.\n\nInstallation time remains linear and unchanged. If the profit per refrigerator is 400 dollars and the profit per stove is 260 dollars, how many refrigerators and how many stoves should they sell to maximize profit?",
+    "answer": 121600.0,
+    "index": "NLP4LP_prob_190",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 该公司共有 20000 分钟的搬运时间和 13000 分钟的安装时间可用。修改后相关描述: 该公司在最初阶段共有 20000 分钟的搬运时间和 13000 分钟的安装时间可用。随着业务规模的扩大，当公司销售的冰箱和炉灶总数量增加时，实际可用的搬运时间会受到搬运效率递减的影响：具体来说，当总销售数量为 N 台（即冰箱和炉灶数量之和为 N）时，公司的有效搬运时间会按 1.0003 的指数系数随 N 增长而增加到原始需求的 1.0003的 N 次方倍，即随着 N 每增加 1 台，总搬运时间需求会乘以 1.0003。因此，在考虑搬运时间约束时，需要将原先基于 20000 分钟的搬运时间限制理解为：当总销售数量为 N 台时，对应的搬运时间需求会按照系数 1.0003的 N 次方进行放大后，仍需不超过 20000 分钟的可用搬运时间。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_190\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_088.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 40.769710100008524,
+    "total_tokens": 3754
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 121600.0
+  }
+}

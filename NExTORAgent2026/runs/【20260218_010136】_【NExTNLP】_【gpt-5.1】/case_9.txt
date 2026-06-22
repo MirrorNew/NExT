@@ -1,0 +1,293 @@
+{
+  "entry": {
+    "index": 9,
+    "question": "Xiosta Chemical Industry Park is an important chemical production base in East China. There are 12 professional chemical companies gathered in the park, mainly producing fine chemical products such as pharmaceutical intermediates and special resins. These companies all adopt a three-shift production mode, and employees and their families have formed relatively concentrated residential areas. In recent years, with the expansion of cities and the improvement of safety production requirements, the original decentralized hazardous goods storage model no longer meets the provisions on safety distance in the current \"Regulations on the Safety Management of Hazardous Chemicals\". To this end, the Municipal Emergency Management Bureau took the lead in organizing expert demonstrations and planned to adopt the planning concept of modern logistics parks, optimize the hazardous goods management process by establishing a centralized storage center, and use GIS spatial analysis technology to ensure that the site selection not only meets the safety production distance requirements, but also takes into account the convenience of employee commuting. The implementation of this project will serve as a demonstration case for the safety standardization construction of chemical parks and provide a reference plan for the management of hazardous goods in similar industrial parks. \n\nXiosta City has a chemical production base. There are 12 chemical plants distributed in the city, and their raw materials and products are all dangerous. The geographical coordinates of the 12 plants are $(x_i,y_i), i=1,…,12$ respectively. It is stipulated that the warehouses for raw materials and finished products should be kept 0.8km away from the factory. The number of employees and their families of 12 chemical plants are $p_i,i=1,…,12$, all of whom live near the factory. City A plans to build a centralized warehouse for hazardous materials in an open area in the suburbs. Question: How should we choose a site so that it is convenient for employees of each chemical plant to store and retrieve raw materials and finished products(Consider the distance, and do not use the square of the distance), and the accommodation for employees' families can meet safety requirements (weighted by the number of family members)?\n\n| Factory number | x-coordinate (km) | y-coordinate (km) | Number of employees and their families (p_i) |\n| -------- | ---------- | ---------- | -------------------- |\n| 1 | 1.0 | 2.0 | 50 |\n| 2 | 3.0 | 1.5 | 80 |\n| 3 | 0.5 | 4.0 | 30 |\n| 4 | 5.0 | 3.0 | 100 |\n| 5 | 2.0 | 2.5 | 60 |\n| 6 | 4.0 | 5.0 | 70 |\n| 7 | 1.5 | 1.0 | 40 |\n| 8 | 3.5 | 4.5 | 90 |\n| 9 | 0.8 | 3.2 | 55 |\n| 10 | 2.5 | 0.5 | 75 |\n| 11 | 4.5 | 2.0 | 85 |\n| 12 | 1.2 | 5.5 | 65 |",
+    "answer": 1631.36,
+    "Parameters_List": [
+      {
+        "Name": "number_of_companies",
+        "Type": "integer",
+        "Value": 12
+      },
+      {
+        "Name": "shift_count",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "number_of_plants",
+        "Type": "integer",
+        "Value": 12
+      },
+      {
+        "Name": "I",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "Name": "x_i",
+        "Type": "list",
+        "Value": [
+          1.0,
+          3.0,
+          0.5,
+          5.0,
+          2.0,
+          4.0,
+          1.5,
+          3.5,
+          0.8,
+          2.5,
+          4.5,
+          1.2
+        ]
+      },
+      {
+        "Name": "y_i",
+        "Type": "list",
+        "Value": [
+          2.0,
+          1.5,
+          4.0,
+          3.0,
+          2.5,
+          5.0,
+          1.0,
+          4.5,
+          3.2,
+          0.5,
+          2.0,
+          5.5
+        ]
+      },
+      {
+        "Name": "p_i",
+        "Type": "list",
+        "Value": [
+          50,
+          80,
+          30,
+          100,
+          60,
+          70,
+          40,
+          90,
+          55,
+          75,
+          85,
+          65
+        ]
+      },
+      {
+        "Name": "safety_distance",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "distance_metric_power",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "Table_1_FactoryData",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            1.0,
+            2.0,
+            50
+          ],
+          [
+            2,
+            3.0,
+            1.5,
+            80
+          ],
+          [
+            3,
+            0.5,
+            4.0,
+            30
+          ],
+          [
+            4,
+            5.0,
+            3.0,
+            100
+          ],
+          [
+            5,
+            2.0,
+            2.5,
+            60
+          ],
+          [
+            6,
+            4.0,
+            5.0,
+            70
+          ],
+          [
+            7,
+            1.5,
+            1.0,
+            40
+          ],
+          [
+            8,
+            3.5,
+            4.5,
+            90
+          ],
+          [
+            9,
+            0.8,
+            3.2,
+            55
+          ],
+          [
+            10,
+            2.5,
+            0.5,
+            75
+          ],
+          [
+            11,
+            4.5,
+            2.0,
+            85
+          ],
+          [
+            12,
+            1.2,
+            5.5,
+            65
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Xiosta Chemical Industry Park...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "There are 12 professional chemical...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "These companies all adopt a three-shift...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In recent years, with the expansion...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "To this end, the Municipal Emergency Management...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The implementation of this project...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Xiosta City has a chemical...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "There are 12 chemical plants...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The geographical coordinates of...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "It is stipulated that the warehouses...",
+        "safety distance constraint: ∀ i=1,…,12 √((x–x_i)²+(y–y_i)²) ≥ 0.8"
+      ],
+      [
+        "11",
+        "The number of employees and their...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "City A plans to build a centralized...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Question: How should we choose a site...",
+        "Objective"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x",
+        "Meaning": "x-coordinate of the centralized warehouse",
+        "Type": "continuous",
+        "Range ": "ℝ"
+      },
+      {
+        "symbol": "y",
+        "Meaning": "y-coordinate of the centralized warehouse",
+        "Type": "continuous",
+        "Range ": "ℝ"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Safety distance constraint",
+        "∀ i=1,…,12: √((x–x_i)² + (y–y_i)²) ≥ 0.8",
+        "sentence numbers:10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "How should we choose a site so that it is convenient for employees of each chemical plant to store and retrieve raw materials and finished products (Consider the distance, and do not use the square of the distance), and the accommodation for employees' families can meet safety requirements (weighted by the number of family members)?",
+      "Mathematical_expressions": "minimize ∑_{i=1}^{12} p_i · √((x–x_i)² + (y–y_i)²)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1631.360836447"
+    ],
+    "time_seconds": 28.287047099998745,
+    "total_tokens": 9807
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1631.360836447"
+    ],
+    "ground_truth": 1631.36
+  }
+}

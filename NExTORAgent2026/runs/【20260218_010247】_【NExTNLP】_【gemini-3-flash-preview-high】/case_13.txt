@@ -1,0 +1,180 @@
+{
+  "entry": {
+    "index": 13,
+    "question": "In the field of financial investment, asset allocation optimization is the core link of institutional investors' daily decision-making. Take Rhode Island Capital Management as an example. When the company provides customized investment portfolio services to high-net-worth clients, it needs to balance expected returns and risk volatility. Its investment committee will evaluate the performance of multiple asset classes including stocks, bonds, commodities and alternative assets at its weekly meetings, and use modern portfolio theory to build an effective frontier. Such optimization problems not only affect the performance of a single investment portfolio, but also affect the asset pricing and capital flow of the capital market through the collective decision-making of institutional investors. Regulators have strict disclosure requirements for the use of such quantitative models because they may trigger herd effects or systemic risks. \n\nAs the executive director of the investment department, Amiya hopes to allocate funds among four assets to minimize the variance risk of the portfolio while meeting the expected return of no less than 11%. The expected annual return of the asset is $\\mu$, the covariance matrix $\\Sigma$ between assets is known, and the design variables are the investment weights of each asset $w_1, w_2, w_3, w_4$, which must satisfy $w_i\\ge0$ and $\\sum_{i=1}^4 w_i=1$. The objective function is the portfolio variance $w^T \\Sigma w$. Give the result of the optimal portfolio variance. \n\nReturn vector:\n$$\n\\boldsymbol{\\mu} = \\begin{bmatrix}\n0.12 \\\\ 0.10 \\\\ 0.15 \\\\ 0.09\n\\end{bmatrix}.\n$$\nCovariance matrix: \n$$\n\\Sigma = \\begin{bmatrix}\n0.10 & 0.02 & 0.01 & 0.005 \\\\\n0.02 & 0.05 & 0.03 & 0.01 \\\\\n0.01 & 0.03 & 0.08 & 0.02 \\\\\n0.005 & 0.01 & 0.02 & 0.03\n\\end{bmatrix}.\n$$",
+    "answer": 0.024232,
+    "Parameters_List": [
+      {
+        "Name": "R_min",
+        "Type": "float",
+        "Value": 0.11
+      },
+      {
+        "Name": "mu",
+        "Type": "list",
+        "Value": [
+          0.12,
+          0.1,
+          0.15,
+          0.09
+        ]
+      },
+      {
+        "Name": "Sigma",
+        "Type": "list",
+        "Value": [
+          [
+            0.1,
+            0.02,
+            0.01,
+            0.005
+          ],
+          [
+            0.02,
+            0.05,
+            0.03,
+            0.01
+          ],
+          [
+            0.01,
+            0.03,
+            0.08,
+            0.02
+          ],
+          [
+            0.005,
+            0.01,
+            0.02,
+            0.03
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the field of financial investment,...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Take Rhode Island Capital Management...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "When the company provides...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Its investment committee will evaluate...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Such optimization problems not only...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Regulators have strict disclosure requirements...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "As the executive director of the investment department,...",
+        "Expected return ≥ 11% (μᵀw ≥ 0.11)"
+      ],
+      [
+        "8",
+        "The expected annual return of the asset is μ,...",
+        "wᵢ ≥ 0; ∑₁⁴ wᵢ = 1"
+      ],
+      [
+        "9",
+        "The objective function is the portfolio variance...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Give the result of the optimal portfolio variance.",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Return vector: μ = [0.12;...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Covariance matrix: Σ = [[...]].",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "w1",
+        "Meaning": "investment weight in asset 1",
+        "Type": "continuous type",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "w2",
+        "Meaning": "investment weight in asset 2",
+        "Type": "continuous type",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "w3",
+        "Meaning": "investment weight in asset 3",
+        "Type": "continuous type",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "w4",
+        "Meaning": "investment weight in asset 4",
+        "Type": "continuous type",
+        "Range ": "[0,1]"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Expected return constraint",
+        "0.12 w1 + 0.10 w2 + 0.15 w3 + 0.09 w4 ≥ 0.11",
+        "sentence numbers:7"
+      ],
+      [
+        "Budget constraint",
+        "w1 + w2 + w3 + w4 = 1",
+        "sentence numbers:8"
+      ],
+      [
+        "Non-negativity constraints",
+        "wi ≥ 0 for i=1..4",
+        "sentence numbers:8"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the portfolio variance wᵀΣw.",
+      "Mathematical_expressions": "minimize wᵀ Σ w"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0242320086"
+    ],
+    "time_seconds": 142.80677750000177,
+    "total_tokens": 23919
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "0.0242320086"
+    ],
+    "ground_truth": 0.024232
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "entry": {
+    "index": 13,
+    "question": "Huifeng Airlines is an air transport company with an advanced fleet. It has established a transportation network covering five major hub cities in China to support cargo and passenger business. The management team at the company/factory level regularly evaluates fleet resource utilization and operating costs and optimizes flight execution through a centralized scheduling system, striving to maintain a leading edge in the fierce market competition and control cost/resource investment. At present, the company faces the dual goals of improving operational efficiency and reducing total operating costs. It is necessary to formulate reasonable scheduling plans for the operating costs and available resources of different aircraft types to support the stable operation of the transportation network and maximize profits. In terms of supply, Huifeng Airlines currently has 8 twin-engine narrow-body aircraft of type A and 9 twin-engine narrow-body aircraft of type B, and 10 small regional aircraft of type C, which are used to carry out daily routes. With limited transportation resources, it is necessary to ensure that the fleet scheduling is within the overall acceptable range.\n In terms of demand, the company needs to complete five flight tasks numbered 1 to 5. Each flight may involve multiple aircraft, but each aircraft can only perform one flight at most, and no more than three aircraft of the same model can be used in a flight. It is necessary to ensure that the dispatch service standards of each flight are consistent. \n\nIn terms of transportation, different types of aircraft will incur different costs when performing the same flight. The cost data is shown in the table. In order to meet the high-end passenger experience and ground operation consistency, flight 5 must be operated by a larger aircraft to ensure service quality, and for operational safety considerations, model B aircraft cannot perform flight 4. \n\nIf the number of passengers on each flight is different, and the AB model aircraft has 200 and 180 passengers, and the C model aircraft has 100 passengers, the average sanitation cost per person on the AB model aircraft is 0.1, and the average sanitation cost on the C model aircraft is 0.2. The airline hopes to complete all flight scheduling at the lowest total cost, and only needs to give an answer. \n\n| Flight/10,000 yuan | 1 | 2 | 3 | 4 | 5 |\n| --------- | ---- | ---- | ---- | ---- | ---- |\n| Model A Cost | 10 | 9 | 7 | 8 | 11 |\n| Model B Cost | 8 | 8 | 6 | 7 | 12 |\n| Model C Cost | 8 | 5 | 4 | 7 | 3 |\n\n| Flights | 1 | 2 | 3 | 4 | 5 |\n| ---- | ---- | ---- | ---- | ---- | ---- |\n| Demand | 500 | 1000 | 330 | 290 | 470 |",
+    "answer": 434.0,
+    "Parameters_List": [
+      {
+        "Name": "aircraft_supply",
+        "Type": "tuple",
+        "Value": {
+          "A": 8,
+          "B": 9,
+          "C": 10
+        }
+      },
+      {
+        "Name": "number_of_flights",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "max_same_model_per_flight",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "flights_require_large",
+        "Type": "list",
+        "Value": [
+          5
+        ]
+      },
+      {
+        "Name": "forbidden_B_flights",
+        "Type": "list",
+        "Value": [
+          4
+        ]
+      },
+      {
+        "Name": "capacity",
+        "Type": "tuple",
+        "Value": {
+          "A": 200,
+          "B": 180,
+          "C": 100
+        }
+      },
+      {
+        "Name": "sanitation_cost",
+        "Type": "tuple",
+        "Value": {
+          "A": 0.1,
+          "B": 0.1,
+          "C": 0.2
+        }
+      },
+      {
+        "Name": "Table_1_Model_Costs",
+        "Type": "tuple",
+        "Value": {
+          "A": [
+            10,
+            9,
+            7,
+            8,
+            11
+          ],
+          "B": [
+            8,
+            8,
+            6,
+            7,
+            12
+          ],
+          "C": [
+            8,
+            5,
+            4,
+            7,
+            3
+          ]
+        }
+      },
+      {
+        "Name": "Table_2_Flight_Demand",
+        "Type": "list",
+        "Value": [
+          500,
+          1000,
+          330,
+          290,
+          470
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Huifeng Airlines is an...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "It has established a...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The management team at...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "At present, the company...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "It is necessary to...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "In terms of supply,...",
+        "Supply‐availability constraints for models A, B, C"
+      ],
+      [
+        "7",
+        "With limited transportation...",
+        "No additional constraints beyond sentence 6"
+      ],
+      [
+        "8",
+        "In terms of demand,...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Each flight may involve...",
+        "Each aircraft ≤1 flight; per‐flight per‐model x_{i,k} ≤ 3"
+      ],
+      [
+        "10",
+        "It is necessary to ensure...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "In terms of transportation,...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "The cost data is...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "In order to meet...",
+        "x_{5,C} = 0; x_{4,B} = 0"
+      ],
+      [
+        "14",
+        "If the number of...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "The airline hopes to...",
+        "No constraints (objective)"
+      ],
+      [
+        "16",
+        "Flights 1–5 have...",
+        "Demand‐satisfaction constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{i,A}",
+        "Meaning": "number of type A aircraft assigned to flight i",
+        "Type": "integer",
+        "Range ": "0 ≤ x_{i,A} ≤ 3, i=1..5"
+      },
+      {
+        "symbol": "x_{i,B}",
+        "Meaning": "number of type B aircraft assigned to flight i",
+        "Type": "integer",
+        "Range ": "0 ≤ x_{i,B} ≤ 3, i=1..5"
+      },
+      {
+        "symbol": "x_{i,C}",
+        "Meaning": "number of type C aircraft assigned to flight i",
+        "Type": "integer",
+        "Range ": "0 ≤ x_{i,C} ≤ 3, i=1..5"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "C_sup_A",
+        "Σ_{i=1..5} x_{i,A} ≤ 8",
+        "sentence numbers:6"
+      ],
+      [
+        "C_sup_B",
+        "Σ_{i=1..5} x_{i,B} ≤ 9",
+        "sentence numbers:6"
+      ],
+      [
+        "C_sup_C",
+        "Σ_{i=1..5} x_{i,C} ≤ 10",
+        "sentence numbers:6"
+      ],
+      [
+        "C_max3",
+        "x_{i,k} ≤ 3 ∀i=1..5, k∈{A,B,C}",
+        "sentence numbers:9"
+      ],
+      [
+        "C_f5_noC",
+        "x_{5,C} = 0",
+        "sentence numbers:13"
+      ],
+      [
+        "C_f4_noB",
+        "x_{4,B} = 0",
+        "sentence numbers:13"
+      ],
+      [
+        "C_demand_i",
+        "200 x_{i,A} + 180 x_{i,B} + 100 x_{i,C} ≥ D_i (D=[500,1000,330,290,470]) ∀i",
+        "sentence numbers:16"
+      ],
+      [
+        "C_domain",
+        "x_{i,k} ∈ ℤ, x_{i,k} ≥ 0",
+        "sentence numbers:2-16"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The airline hopes to complete all flight scheduling at the lowest total cost, and only needs to give an answer.",
+      "Mathematical_expressions": "Minimize Σ_{i=1..5} [ (c_{i,A} + 0.1*200) x_{i,A} + (c_{i,B} + 0.1*180) x_{i,B} + (c_{i,C} + 0.2*100) x_{i,C} ]"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "434.0"
+    ],
+    "time_seconds": 19.6297093999965,
+    "total_tokens": 7666
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "434.0"
+    ],
+    "ground_truth": 434.0
+  }
+}

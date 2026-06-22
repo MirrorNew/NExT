@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "The well-known Operations Research problem—the Traveling Salesman Problem (TSP)—can be described as follows: A traveling salesperson departs from a certain city, goes to the other cities to sell products, and before returning to the original departure city, must ensure that each city is visited exactly once. The distances between the cities are given in the table below.\n\n| City | 1  | 2  | 3  | 4  |\n| ---- | -- | -- | -- | -- |\n| 1    | 0  | 10 | 20 | 12 |\n| 2    | 10 | 0  | 5  | 10 |\n| 3    | 20 | 5  | 0  | 8  |\n| 4    | 12 | 10 | 8  | 0  |\n\nIn the traditional linear model, the objective function is usually formed by multiplying the distance of each path from city $i$ to city $j$ by the corresponding decision variable indicating whether that path is selected, and then summing over all inter-city paths to obtain the total travel distance, which is then minimized. Now, in order to introduce nonlinearity, make the following modifications:\n\nWhen formulating the integer programming model, no longer use the linear form of “path distance multiplied by a single decision variable and then summed,” but instead represent the total travel distance as a product of multiple decision variables. The specific requirements are:\n\n- Let whether the arc from city $i$ to city $j$ is selected as an edge of the tour be represented by a binary (0–1) decision variable (for example, $x_{ij}$ indicates whether the path from city $i$ to city $j$ is chosen, and $x_{ij}$ can take only 0 or 1).\n- In practice, the final actual route length should be the $1.2$-th power of the predicted total route length.\n\nUnder the premise of keeping the original constraints of “each city is visited exactly once” and all other integer programming constraint structures unchanged, what route should the salesperson choose to minimize the actual travel distance?",
+    "answer": 71.2659,
+    "index": "IndustryOR_prob_069",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 推销员应选择怎样的路线才能使总行程距离最短？尝试为该问题建立一个整数规划模型。（隐含目标函数为各路径距离与对应 0-1 决策变量线性相乘并求和的形式，例如“总距离等于各城市间距离乘以是否选取该路径的变量，再对所有路径求和”）。, 修改后相关描述: 在传统线性模型中，目标函数通常是将每一条从城市 i 到城市 j 的路径的距离与对应的是否选取该路径的决策变量相乘，再对所有城市间路径求和，从而得到总行程距离，并使该总行程距离最小。现在改为：在目标函数中加入多变量乘积的非线性项，例如当同时选择从城市 1 到城市 2、从城市 2 到城市 3、以及从城市 3 到城市 4 三条路径时，用一个“2 乘以 x_12 再乘以 x_23 再乘以 x_34”的非线性乘积项来表示其组合行程距离贡献；保持其他约束不变，使总行程距离由若干这样的多变量乘积项（每个乘积项至少包含 3 个决策变量并乘以常数系数 2 等给定数值）累加而成，并在该非线性目标下最小化总行程距离。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_069\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_010.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 33.41098990000319,
+    "total_tokens": 2671
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 71.2659
+  }
+}

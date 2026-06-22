@@ -1,0 +1,326 @@
+{
+  "entry": {
+    "index": 32,
+    "question": "In the era of digital marketing, companies are faced with complex decisions on multi-channel advertising budget allocation. Taking the mineral disease product line of Rhode Island Media as an example, its annual advertising budget needs to be allocated between TV (channel A), social media (channel B) and radio (channel C). Market data analysis shows that although traditional TV advertising has the highest unit input-output ratio, it has a saturation threshold of 600,000 yuan; while social media advertising, although the initial benefits are low, can obtain stable marginal benefits through precise delivery. It is particularly noteworthy that when a channel becomes the \"lowest input channel\", the company will launch the \"effect amplifier\" strategy - expanding the budget of the channel by 3 times for concentrated delivery. This strategy stems from the A/B test that found that after the weak channel is strengthened, its marginal benefit curve will show a phased improvement. The 2023 marketing effect evaluation shows that the brand that adopts this dynamic adjustment strategy has a 18.7% lower customer acquisition cost than the fixed budget allocation model. \n\nThe Rhode Island Media platform handles this type of optimization problem through the marketing mix model (MMM). The system will track the input-output elasticity coefficient of each channel in real time. When a channel is identified as a \"long-tail channel\", the budget reallocation mechanism will be automatically triggered. In practice, this optimization needs to take into account the channel synergy effect - for example, the increase in brand awareness brought by TV advertising will greatly increase the conversion rate of social media advertising. The latest artificial intelligence system can also predict the cross-channel impact after the budget adjustment, and control the error of revenue forecast within a reasonable range. According to the benchmark report of MMA China, the average marketing ROI of enterprises using nonlinear budget optimization models is much higher than the industry level. Especially in the fast-moving consumer goods industry, companies such as Unilever have begun to incorporate external variables such as market saturation and the intensity of competitive product activities into the revenue function to build a more complex multi-objective optimization model. This evolution has enabled budget allocation to develop from a simple mathematical calculation to an intelligent decision-making system that integrates market dynamics. \n\nRhode Island Media plans to allocate a 100 units yuan advertising budget to three media channels (such as TV, Internet, and radio). The maximum investment amounts for channels A, B, and C are 60, 50, and 50 units yuan, respectively. According to market research, the advertising investment $x$ of each channel and the expected revenue (such as the number of potential customers) $y$ conform to the law of marginal benefits, which can be expressed as: $y_A=30.23\\sqrt{x_A}$, $y_B=24.36\\sqrt{x_B}$, $y_C=20.12\\sqrt{x_C}$. At the same time, the company will consider making an additional secondary investment in the channel with the least investment amount, with the investment amount being 3 times the original amount. The company hopes to determine the investment amount of each channel to maximize the revenue.All deposit amounts cannot exceed 100 units yuan(including all additional secondary investment). Give the maximum revenue after calculation.",
+    "answer": 437.27,
+    "Parameters_List": [
+      {
+        "Name": "saturation_threshold_TV",
+        "Type": "integer",
+        "Value": 600000
+      },
+      {
+        "Name": "expansion_factor_weak_channel",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "cost_reduction_percentage",
+        "Type": "float",
+        "Value": 18.7
+      },
+      {
+        "Name": "total_budget",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "max_investment",
+        "Type": "tuple",
+        "Value": {
+          "A": 60,
+          "B": 50,
+          "C": 50
+        }
+      },
+      {
+        "Name": "revenue_coefficients",
+        "Type": "tuple",
+        "Value": {
+          "A": 30.23,
+          "B": 24.36,
+          "C": 20.12
+        }
+      },
+      {
+        "Name": "extra_investment_factor",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "max_total_budget",
+        "Type": "integer",
+        "Value": 100
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the era of digital marketing...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the mineral disease product line...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Market data analysis shows that...",
+        "Constraint: TV budget ≤ 600000 yuan"
+      ],
+      [
+        "4",
+        "It is particularly noteworthy that when...",
+        "Constraint: identify min‐investment channel and secondary investment = 3×(that channel’s budget)"
+      ],
+      [
+        "5",
+        "This strategy stems from the A/B test...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The 2023 marketing effect evaluation shows...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The Rhode Island Media platform handles...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The system will track the input-output elasticity...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "When a channel is identified as a 'long-tail channel'...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "In practice, this optimization needs to take...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The latest artificial intelligence system can also predict...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "According to the benchmark report of MMA China...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Especially in the fast-moving consumer goods industry...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "This evolution has enabled budget allocation to develop...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Rhode Island Media plans to allocate a 100 units yuan...",
+        "Constraint: x_A + x_B + x_C ≤ 100"
+      ],
+      [
+        "16",
+        "The maximum investment amounts for channels A, B, and C are 60, 50, and 50 units yuan...",
+        "Constraint: x_A ≤ 60; x_B ≤ 50; x_C ≤ 50"
+      ],
+      [
+        "17",
+        "According to market research, the advertising...",
+        "Constraint: y_A=30.23√x_A; y_B=24.36√x_B; y_C=20.12√x_C"
+      ],
+      [
+        "18",
+        "At the same time, the company will consider making an additional secondary investment in the channel with the least investment amount...",
+        "Constraint: E_i = 3·x_i for the channel i with min x_i"
+      ],
+      [
+        "19",
+        "The company hopes to determine the investment amount of each channel to maximize the revenue...",
+        "Objective statement"
+      ],
+      [
+        "20",
+        "All deposit amounts cannot exceed 100 units yuan (including all additional secondary investment)...",
+        "Constraint: x_A + x_B + x_C + E_A + E_B + E_C ≤ 100"
+      ],
+      [
+        "21",
+        "Give the maximum revenue after calculation...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_A",
+        "Meaning": "primary advertising investment in TV (channel A)",
+        "Type": "continuous",
+        "Range ": "0 ≤ x_A ≤ 60"
+      },
+      {
+        "symbol": "x_B",
+        "Meaning": "primary advertising investment in social media (channel B)",
+        "Type": "continuous",
+        "Range ": "0 ≤ x_B ≤ 50"
+      },
+      {
+        "symbol": "x_C",
+        "Meaning": "primary advertising investment in radio (channel C)",
+        "Type": "continuous",
+        "Range ": "0 ≤ x_C ≤ 50"
+      },
+      {
+        "symbol": "δ_A",
+        "Meaning": "binary indicator, 1 if channel A has the lowest primary investment",
+        "Type": "BINARY",
+        "Range ": "0 or 1"
+      },
+      {
+        "symbol": "δ_B",
+        "Meaning": "binary indicator, 1 if channel B has the lowest primary investment",
+        "Type": "BINARY",
+        "Range ": "0 or 1"
+      },
+      {
+        "symbol": "δ_C",
+        "Meaning": "binary indicator, 1 if channel C has the lowest primary investment",
+        "Type": "BINARY",
+        "Range ": "0 or 1"
+      },
+      {
+        "symbol": "E_A",
+        "Meaning": "secondary (effect-amplifier) investment in channel A",
+        "Type": "continuous",
+        "Range ": "E_A ≥ 0"
+      },
+      {
+        "symbol": "E_B",
+        "Meaning": "secondary investment in channel B",
+        "Type": "continuous",
+        "Range ": "E_B ≥ 0"
+      },
+      {
+        "symbol": "E_C",
+        "Meaning": "secondary investment in channel C",
+        "Type": "continuous",
+        "Range ": "E_C ≥ 0"
+      },
+      {
+        "symbol": "y_A",
+        "Meaning": "expected revenue from channel A",
+        "Type": "continuous",
+        "Range ": "y_A ≥ 0"
+      },
+      {
+        "symbol": "y_B",
+        "Meaning": "expected revenue from channel B",
+        "Type": "continuous",
+        "Range ": "y_B ≥ 0"
+      },
+      {
+        "symbol": "y_C",
+        "Meaning": "expected revenue from channel C",
+        "Type": "continuous",
+        "Range ": "y_C ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "C1. TV saturation threshold",
+        "x_A ≤ 600000",
+        "sentence numbers:3"
+      ],
+      [
+        "C2. Initial budget limit",
+        "x_A + x_B + x_C ≤ 100",
+        "sentence numbers:15"
+      ],
+      [
+        "C3. Channel A max investment",
+        "x_A ≤ 60",
+        "sentence numbers:16"
+      ],
+      [
+        "C4. Channel B max investment",
+        "x_B ≤ 50",
+        "sentence numbers:16"
+      ],
+      [
+        "C5. Channel C max investment",
+        "x_C ≤ 50",
+        "sentence numbers:16"
+      ],
+      [
+        "C6. Binary‐sum for min detection",
+        "δ_A + δ_B + δ_C = 1",
+        "sentence numbers:4"
+      ],
+      [
+        "C7. Min‐channel identification, A",
+        "x_A ≤ x_B + M·(1–δ_A); x_A ≤ x_C + M·(1–δ_A)",
+        "sentence numbers:4"
+      ],
+      [
+        "C8. Min‐channel identification, B",
+        "x_B ≤ x_A + M·(1–δ_B); x_B ≤ x_C + M·(1–δ_B)",
+        "sentence numbers:4"
+      ],
+      [
+        "C9. Min‐channel identification, C",
+        "x_C ≤ x_A + M·(1–δ_C); x_C ≤ x_B + M·(1–δ_C)",
+        "sentence numbers:4"
+      ],
+      [
+        "C10. Secondary investment definition",
+        "E_A = 3·x_A·δ_A; E_B = 3·x_B·δ_B; E_C = 3·x_C·δ_C",
+        "sentence numbers:4,18"
+      ],
+      [
+        "C11. Final budget (incl. secondary)",
+        "x_A + x_B + x_C + E_A + E_B + E_C ≤ 100",
+        "sentence numbers:20"
+      ],
+      [
+        "C12. Revenue function definitions",
+        "y_A = 30.23·√(x_A + E_A); y_B = 24.36·√(x_B + E_B); y_C = 20.12·√(x_C + E_C)",
+        "sentence numbers:17"
+      ],
+      [
+        "C13. Nonnegativity",
+        "x_A, x_B, x_C, E_A, E_B, E_C ≥ 0; δ_A, δ_B, δ_C ∈ {0,1}",
+        "sentence numbers:2,4,18"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company hopes to determine the investment amount of each channel to maximize the revenue.",
+      "Mathematical_expressions": "max Z = y_A + y_B + y_C subject to y_A = 30.23·√(x_A + E_A), y_B = 24.36·√(x_B + E_B), y_C = 20.12·√(x_C + E_C)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "437.2730154018"
+    ],
+    "time_seconds": 166.13710749999882,
+    "total_tokens": 35860
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "437.2730154018"
+    ],
+    "ground_truth": 437.27
+  }
+}

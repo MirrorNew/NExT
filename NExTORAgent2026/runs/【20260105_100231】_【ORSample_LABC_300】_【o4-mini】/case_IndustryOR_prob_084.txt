@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A company produces two products (X and Y). The resources required to produce X and Y are divided into two parts: machine time for automated processing and artisan time for manual finishing. The following table gives the number of minutes required for each product:\n\n| Item | Machine time (minutes) | Artisan time (minutes) |\n| :---: | :---: | :---: |\n| X | 13 | 20 |\n| Y | 19 | 29 |\n\nThe company has 40 hours of machine time available in the next work week, but only 35 hours of artisan time. The cost of machine time is £10 per hour, and the cost of artisan time is £2 per hour. Idle time of machines and artisans incurs no cost. For each unit produced (all units produced can be sold), the revenue is £20 for product X and £30 for product Y. The company has a specific contract requiring that it must produce 10 units of product X per week for a particular customer.\n\nIn addition, introduce the following nonlinear cost condition: if the number of units of product Y produced this week exceeds 50, then an additional fixed cost of £500 will be incurred this week due to the need to arrange expedited inspection and special packaging; if the output of product Y does not exceed 50, then this additional fixed cost will not be incurred. Formulate a model for this problem.",
+    "answer": 1842.67,
+    "index": "IndustryOR_prob_084",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 公司有一项特定合同，要求每周必须为某客户生产 10 件产品 X。为该问题建立一个模型。修改后相关描述: 公司有一项特定合同，要求每周必须为某客户生产 10 件产品 X。此外，引入如下非线性成本条件：如果本周生产的产品 Y 数量超过 50 件，则由于需要额外安排加急检验和特殊包装，本周将产生一笔额外的固定成本 500 英镑；如果产品 Y 的产量不超过 50 件，则不会产生这笔额外固定成本。为该问题建立一个模型。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_084\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_018.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1851.25"
+    ],
+    "time_seconds": 37.09859569999389,
+    "total_tokens": 2295
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "1851.25"
+    ],
+    "ground_truth": 1842.67
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "entry": {
+    "index": 11,
+    "question": "In the field of industrial automation, the shock absorption system of precision mechanical equipment has strict requirements on spring performance. Bosch Rexroth, a well-known industrial transmission equipment manufacturer in Kazdel, recently developed a buffer device for its new generation of high-precision CNC machine tools, and needed to customize a batch of high-performance compression springs. This type of spring needs to balance the load capacity, fatigue resistance and dynamic stability in a limited installation space, while meeting the lightweight requirements to reduce the inertia of the equipment. Since the machine tool spindle will produce periodic vibrations when running at high speed, the natural frequency of the spring must avoid the working frequency band, otherwise the resonance may cause a decrease in positioning accuracy or even structural damage. In addition, the production line has extremely high requirements for spring consistency, and the parameter tolerance of each batch of products must be controlled within 5%, which requires that the material properties, process limitations and working condition boundary conditions must be comprehensively considered in the design stage. \n\nSpring design is essentially a multi-objective constrained optimization problem, involving the intersection of material mechanics, vibration theory and geometric topology. Taking the automobile suspension spring as an example, Tesla has adopted a similar approach in the lightweight design of Model 3. By adjusting the wire diameter, median diameter and effective number of turns, the weight of the suspension system was reduced while ensuring NVH (noise, vibration and harshness) performance. The constraints in this case reflect typical engineering trade-offs: the winding ratio restriction affects both the stress concentration factor (which needs to be calculated using the Wahl correction formula) and the feasibility of the coil spring process; while the outer diameter constraint is directly related to installation compatibility. The dynamic frequency requirement introduces the mass-stiffness coupling effect, and the system's natural frequency needs to be adjusted to move away from the excitation frequency. \n\nBosch Rexroth engineers plan to design a steel cylindrical helical spring for bearing compressive loads. It is known that the shear modulus of steel is $G = 11.5 \\times 10^6 $ and the material density is $\\rho = 0.284$. In addition, based on industrial requirements, the following practical conditions must also be met. In terms of safety, under the working load $ F_{\\text{work}} = 300 \\, \\text{lbf}$, the shear stress of the steel wire must be lower than the allowable value $ \\tau_{\\text{allowable}} = 80,\\!000 \\, \\text{psi} $, and the stress concentration effect caused by the spiral curvature must be taken into account; Second, considering the special dynamic performance of the spring, the natural frequency of the spring must be less than $F_{\\text{work}} = 4 \\, \\text{Hz}$ to avoid resonance; In addition, the compression of the spring must not be less than $\\delta_{\\text{allowable}} = 0.5 $ to ensure that the spring deformation is within the allowable range; Fourth, due to the strict limitation of the installation space of the spring and the need to ensure manufacturing processability, the winding ratio of the spring needs to satisfy $C = D/d$, which must be between 4 and 12, and the total outer diameter of the spring must be less than 1.5. The wire diameter needs to be between 0.1 and 0.5, and the spring center diameter needs to be between 0.5 and 6.0. Assuming that the weight is proportional to the volume of the spring and the proportional constant is 1, the effective number of coils and the support rings at both ends are included in the calculation of the total number of coils. The wire diameter, the middle diameter of the spring and the number of effective coils of the spring are reasonably designed to minimize the weight of the spring. \n\n**Appendix: Formula Symbol Table**\n\n| Symbol | Value | Meaning | Unit |\n| --------------------------- | ------ | -------------- | ---- |\n| $d$ | - | Wire diameter | inch |\n| $D$ | - | Spring center diameter | inch |\n| $N$ | - | Number of effective coils | - |\n| $F_{\\text{work}}$ | 300 | Working load | lbf |\n| $\\tau_{\\text{allowable}}$ | 8e4 | Allowable shear stress | psi |\n| $G$ | 11.5e6 | Shear modulus | psi |\n| $\\rho$ | 0.284 | Material density | in³ |\n| $f_{\\text{max}}$ | 4 | Maximum natural frequency | Hz |\n| $\\delta_{\\text{allowable}}$ | 0.5 | Minimum allowable compression | inch |\n\n**Appendix: Related formulas**\n\n1. Shear stress $\\tau$ calculation formula: \n$$\n\\tau = \\frac{8 F_{\\text{max}} D}{\\pi d^3} \\cdot K_w ,\n K_w = \\left( \\frac{4(D/d) - 1}{4(D/d) - 4} + \\frac{0.615}{D/d} \\right)\n$$\n2. Natural frequency $f$ calculation formula: \n$$\nf = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{m}},\nk = \\frac{G d^4}{8 D^3 N},\nm = \\frac{\\rho \\pi^2 d^2 D (N+2)}{4}\n$$\n\n\n3. Minimum allowable compression formula\n$$\n\\delta_{\\text{max}} = \\frac{8 F_{\\text{max}} D^3 N}{G d^4} \\geq \\delta_{\\text{allowable}}.\n$$",
+    "answer": 1.96564,
+    "Parameters_List": [
+      {
+        "Name": "tolerance",
+        "Type": "float",
+        "Value": 0.05
+      },
+      {
+        "Name": "G",
+        "Type": "float",
+        "Value": 11500000.0
+      },
+      {
+        "Name": "rho",
+        "Type": "float",
+        "Value": 0.284
+      },
+      {
+        "Name": "F_work",
+        "Type": "integer",
+        "Value": 300
+      },
+      {
+        "Name": "tau_allowable",
+        "Type": "integer",
+        "Value": 80000
+      },
+      {
+        "Name": "f_max",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "delta_allowable",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "C_range",
+        "Type": "list",
+        "Value": [
+          4,
+          12
+        ]
+      },
+      {
+        "Name": "outer_diameter_max",
+        "Type": "float",
+        "Value": 1.5
+      },
+      {
+        "Name": "d_range",
+        "Type": "list",
+        "Value": [
+          0.1,
+          0.5
+        ]
+      },
+      {
+        "Name": "D_range",
+        "Type": "list",
+        "Value": [
+          0.5,
+          6.0
+        ]
+      },
+      {
+        "Name": "weight_constant",
+        "Type": "integer",
+        "Value": 1
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the field of industrial...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "In addition, the production...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Spring design is essentially a...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Bosch Rexroth engineers plan...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "It is known that the shear...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "In terms of safety, under...",
+        "Constraint: τ ≤ τ_allowable (uses Wahl factor)"
+      ],
+      [
+        "7",
+        "Second, considering the special...",
+        "Constraint: f ≤ f_max"
+      ],
+      [
+        "8",
+        "In addition, the compression of...",
+        "Constraint: δ_max ≥ δ_allowable"
+      ],
+      [
+        "9",
+        "Fourth, due to the strict...",
+        "Constraints: 4 ≤ D/d ≤ 12; D + d ≤ 1.5; 0.1 ≤ d ≤ 0.5; 0.5 ≤ D ≤ 6.0"
+      ],
+      [
+        "10",
+        "Assuming that the weight is...",
+        "Objective: minimize weight (volume)"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "d",
+        "Meaning": "wire diameter",
+        "Type": "continuous",
+        "Range ": "0.1 ≤ d ≤ 0.5"
+      },
+      {
+        "symbol": "D",
+        "Meaning": "spring center diameter",
+        "Type": "continuous",
+        "Range ": "0.5 ≤ D ≤ 6.0"
+      },
+      {
+        "symbol": "N",
+        "Meaning": "total number of coils (effective + end supports)",
+        "Type": "integer",
+        "Range ": "N ≥ 1"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Shear stress constraint",
+        "τ = (8·F_work·D)/(π·d³)·K_w ≤ τ_allowable, with K_w = (4(D/d)–1)/(4(D/d)–4)+0.615/(D/d)",
+        "sentence numbers:6"
+      ],
+      [
+        "Natural frequency constraint",
+        "f = (1/(2π))·√(k/m) ≤ f_max, k = G·d⁴/(8·D³·N), m = ρ·π²·d²·D·(N+2)/4",
+        "sentence numbers:7"
+      ],
+      [
+        "Minimum compression constraint",
+        "δ_max = (8·F_work·D³·N)/(G·d⁴) ≥ δ_allowable",
+        "sentence numbers:8"
+      ],
+      [
+        "Winding ratio constraint",
+        "4 ≤ D/d ≤ 12",
+        "sentence numbers:9"
+      ],
+      [
+        "Outer diameter constraint",
+        "D + d ≤ 1.5",
+        "sentence numbers:9"
+      ],
+      [
+        "Wire diameter bounds",
+        "0.1 ≤ d ≤ 0.5",
+        "sentence numbers:9"
+      ],
+      [
+        "Spring center diameter bounds",
+        "0.5 ≤ D ≤ 6.0",
+        "sentence numbers:9"
+      ],
+      [
+        "Coil count domain",
+        "N ∈ ℤ, N ≥ 1",
+        "sentence numbers:10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the weight of the spring.",
+      "Mathematical_expressions": "W(d,D,N) = (π²/4)·d²·D·(N+2)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1.965640014377"
+    ],
+    "time_seconds": 216.45190709999588,
+    "total_tokens": 28339
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1.965640014377"
+    ],
+    "ground_truth": 1.96564
+  }
+}

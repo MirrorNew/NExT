@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An automobile manufacturer produces two types of motor oil: Oil Max and Oil Max Pro.  \nOne barrel of Oil Max contains 46 grams of substance A, 43 grams of substance B, and 56 grams of substance C.  \nOne barrel of Oil Max Pro contains 13 grams of substance A, 4 grams of substance B, and 45 grams of substance C.  \n\nThe manufacturer has 1345 grams of substance A, 346 grams of substance B, and 1643 grams of substance C available.  \nIn addition, the profit per barrel of Oil Max is 10 USD, whereas the profit for Oil Max Pro exhibits economies of scale: when producing $x$ barrels of Oil Max Pro, its total profit is no longer simply $15x$, but is computed as “15 times $x$ raised to the power $1.002$,” i.e., the total profit of Oil Max Pro is $15 \\times (x^{1.002})$ USD.  \n\nHow many barrels of each motor oil should the manufacturer produce in order to maximize profit?",
+    "answer": 543.8841025826698,
+    "index": "NLP4LP_prob_025",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 此外，每桶 Oil Max 的利润为 10 美元，每桶 Oil Max Pro 的利润为 15 美元。 修改后相关描述: 此外，每桶 Oil Max 的利润为 10 美元，而 Oil Max Pro 的利润存在规模效应：当生产 x 桶 Oil Max Pro 时，其总利润不再是简单的 15 乘以 x，而是按照“15 乘以 x 的 1.002 次幂”来计算，即 Oil Max Pro 的总利润为 15 × (x 的 1.002次幂) 美元。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_025\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_067.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "551.621466873"
+    ],
+    "time_seconds": 29.126773399999365,
+    "total_tokens": 3025
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "551.621466873"
+    ],
+    "ground_truth": 543.8841025826698
+  }
+}

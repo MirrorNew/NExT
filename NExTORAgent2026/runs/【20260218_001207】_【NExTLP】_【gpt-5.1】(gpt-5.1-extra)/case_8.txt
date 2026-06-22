@@ -1,0 +1,582 @@
+{
+  "entry": {
+    "index": 8,
+    "question": " ABC Insurance Company, as a comprehensive financial services group, has a dedicated policy printing factory and several regional distribution centers. The company relies on a nationwide transportation network to deliver tens of thousands of policy materials to local sales teams in a timely manner. The entire operation is inseparable from the fine control and scheduling of costs/resources. The group's senior management hopes to optimize policy allocation and production decisions through operations research models to meet customer needs and maintain market competitiveness under the premise of controlling total costs.\n\n On the supply side, the company needs to place production orders to three printing factories A, B, and C each period. Each printing factory is responsible for a fixed type of insurance policy, that is, there are three types of insurance policies, A, B, and C. The company wants to minimize the sum of deductibles and other costs. Please determine the expected number of customers for each plan to decide how many insurance policies should be printed.Different plans will incur fixed startup costs, and the startup costs of different plans are different. According to past experience, if a plan has a customer assigned, the startup costs of plans A, B, and C are US$50, US$55, and US$40 respectively. \n\nIn terms of demand, there are about 600 customers from ten cities in each city waiting to be assigned insurance plans. The specific values ​​are shown in the table below. Each period must meet this total amount and ensure that the average deductible does not exceed US$1,100 to maintain the attractiveness of the product. \n\nIn terms of transportation, the company uses the national transportation network to transport the insurance policies shipped by the printing factory to the regional distribution centers and sales outlets in batches. Since the company sends its own vehicle, the transportation cost can be ignored. \n\nAt the same time, in order to ensure service coverage and financial balance, the total premium income for the whole year must reach at least US$1 million to trigger the bonus distribution mechanism. \n\nIn terms of age segmentation, the company divides the total customers into age groups based on the differences in health risks of customers. It is divided into six categories: 0-6 years old, 6-12 years old, 12-18 years old, 18-35 years old, 35-65 years old, and 65-100 years old. The premiums for different age groups remain the same, but the deductible doctor's consultation fees and specialist doctor's fees will fluctuate slightly on the original basis to more accurately reflect the claims and usage costs of each age group. In order to ensure that all plans have sufficient penetration in the main young market, the proportion of customers in the 18-35 age group must not be less than 25% of all customers in Plan A, the proportion of customers in Plan B must not be less than 30%, and the proportion of customers in Plan C must not be less than 20%.And all the sub-quotas and ages in all cities must have at least 1/60 of the city's population, rounded down. Give the total costs. \n\n\n\n**City population data table (including age segments)** \n\n| City | A | B | C | D | E | F | G | H | I | J |\n| ---- | :--- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| Number of People | 600 | 650 | 620 | 600 | 560 | 540 | 590 | 580 | 610 | 500 |\n\n**Premium Data Table (with Age Groups)** \n\n| Plan | Age Group (Years) | Premium (USD) | Deductible (USD) | Doctor Visit Fees (USD) | Specialist Fees (USD) |\n| :--: | :---------: | :---------: | :-----------: | :-----------------: | :-----------------: |\n| A | 0–6 | 200 | 900 | 30 | 70 |\n| A | 6–12 | 200 | 950 | 28 | 68 |\n| A | 12–18 | 200 | 1000 | 28 | 70 |\n| 200 | 1000 | 35 | 70 |\n| A | 65–100 | 200 | 1100 | 35 | 75 |\n| B | 0–6 | 180 | 1150 | 38 | 80 |\n| B | 6–12 | 180 | 1180 | 39 | 75 |\n| B | 12–18 | 180 | 1200 | 40 | 75 |\n| B | 18–35 | 180 | 1200 | 40 | 80 |\n| B | 35–65 | 180 | 1200 | 40 | 85 |\n| | 220 | 750 | 25 | 65 |\n| C | 6–12 | 220 | 780 | 22 | 63 |\n| C | 12–18 | 220 | 800 | 20 | 60 |\n| 35–65 | 220 | 850 | 22 | 63 |\n| C | 65–100 | 220 | 875 | 25 | 65 |",
+    "answer": 5480184.0,
+    "Parameters_List": [
+      {
+        "Name": "num_factories",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "factories",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "Name": "num_plans",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "plans",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "Name": "startup_cost",
+        "Type": "dict",
+        "Value": {
+          "A": 50,
+          "B": 55,
+          "C": 40
+        }
+      },
+      {
+        "Name": "num_cities",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "approx_customers_per_city",
+        "Type": "integer",
+        "Value": 600
+      },
+      {
+        "Name": "avg_deductible_max",
+        "Type": "float",
+        "Value": 1100.0
+      },
+      {
+        "Name": "transportation_cost_per_unit",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "min_total_premium_income",
+        "Type": "integer",
+        "Value": 1000000
+      },
+      {
+        "Name": "age_groups",
+        "Type": "list",
+        "Value": [
+          "0-6",
+          "6-12",
+          "12-18",
+          "18-35",
+          "35-65",
+          "65-100"
+        ]
+      },
+      {
+        "Name": "min_share_18_35",
+        "Type": "dict",
+        "Value": {
+          "A": 0.25,
+          "B": 0.3,
+          "C": 0.2
+        }
+      },
+      {
+        "Name": "min_fraction_city_population_per_subquota",
+        "Type": "float",
+        "Value": 0.0166666667
+      },
+      {
+        "Name": "city_names",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ]
+      },
+      {
+        "Name": "city_population",
+        "Type": "dict",
+        "Value": {
+          "A": 600,
+          "B": 650,
+          "C": 620,
+          "D": 600,
+          "E": 560,
+          "F": 540,
+          "G": 590,
+          "H": 580,
+          "I": 610,
+          "J": 500
+        }
+      },
+      {
+        "Name": "Table_1_City_Population",
+        "Type": "dict",
+        "Value": {
+          "City": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J"
+          ],
+          "Number_of_People": [
+            600,
+            650,
+            620,
+            600,
+            560,
+            540,
+            590,
+            580,
+            610,
+            500
+          ]
+        }
+      },
+      {
+        "Name": "Table_2_Premium_Age_Data",
+        "Type": "list",
+        "Value": [
+          {
+            "Plan": "A",
+            "Age_Group_Years": "0-6",
+            "Premium_USD": 200,
+            "Deductible_USD": 900,
+            "Doctor_Visit_Fees_USD": 30,
+            "Specialist_Fees_USD": 70
+          },
+          {
+            "Plan": "A",
+            "Age_Group_Years": "6-12",
+            "Premium_USD": 200,
+            "Deductible_USD": 950,
+            "Doctor_Visit_Fees_USD": 28,
+            "Specialist_Fees_USD": 68
+          },
+          {
+            "Plan": "A",
+            "Age_Group_Years": "12-18",
+            "Premium_USD": 200,
+            "Deductible_USD": 1000,
+            "Doctor_Visit_Fees_USD": 28,
+            "Specialist_Fees_USD": 70
+          },
+          {
+            "Plan": null,
+            "Age_Group_Years": null,
+            "Premium_USD": 200,
+            "Deductible_USD": 1000,
+            "Doctor_Visit_Fees_USD": 35,
+            "Specialist_Fees_USD": 70
+          },
+          {
+            "Plan": "A",
+            "Age_Group_Years": "65-100",
+            "Premium_USD": 200,
+            "Deductible_USD": 1100,
+            "Doctor_Visit_Fees_USD": 35,
+            "Specialist_Fees_USD": 75
+          },
+          {
+            "Plan": "B",
+            "Age_Group_Years": "0-6",
+            "Premium_USD": 180,
+            "Deductible_USD": 1150,
+            "Doctor_Visit_Fees_USD": 38,
+            "Specialist_Fees_USD": 80
+          },
+          {
+            "Plan": "B",
+            "Age_Group_Years": "6-12",
+            "Premium_USD": 180,
+            "Deductible_USD": 1180,
+            "Doctor_Visit_Fees_USD": 39,
+            "Specialist_Fees_USD": 75
+          },
+          {
+            "Plan": "B",
+            "Age_Group_Years": "12-18",
+            "Premium_USD": 180,
+            "Deductible_USD": 1200,
+            "Doctor_Visit_Fees_USD": 40,
+            "Specialist_Fees_USD": 75
+          },
+          {
+            "Plan": "B",
+            "Age_Group_Years": "18-35",
+            "Premium_USD": 180,
+            "Deductible_USD": 1200,
+            "Doctor_Visit_Fees_USD": 40,
+            "Specialist_Fees_USD": 80
+          },
+          {
+            "Plan": "B",
+            "Age_Group_Years": "35-65",
+            "Premium_USD": 180,
+            "Deductible_USD": 1200,
+            "Doctor_Visit_Fees_USD": 40,
+            "Specialist_Fees_USD": 85
+          },
+          {
+            "Plan": null,
+            "Age_Group_Years": null,
+            "Premium_USD": 220,
+            "Deductible_USD": 750,
+            "Doctor_Visit_Fees_USD": 25,
+            "Specialist_Fees_USD": 65
+          },
+          {
+            "Plan": "C",
+            "Age_Group_Years": "6-12",
+            "Premium_USD": 220,
+            "Deductible_USD": 780,
+            "Doctor_Visit_Fees_USD": 22,
+            "Specialist_Fees_USD": 63
+          },
+          {
+            "Plan": "C",
+            "Age_Group_Years": "12-18",
+            "Premium_USD": 220,
+            "Deductible_USD": 800,
+            "Doctor_Visit_Fees_USD": 20,
+            "Specialist_Fees_USD": 60
+          },
+          {
+            "Plan": null,
+            "Age_Group_Years": "35-65",
+            "Premium_USD": 220,
+            "Deductible_USD": 850,
+            "Doctor_Visit_Fees_USD": 22,
+            "Specialist_Fees_USD": 63
+          },
+          {
+            "Plan": "C",
+            "Age_Group_Years": "65-100",
+            "Premium_USD": 220,
+            "Deductible_USD": 875,
+            "Doctor_Visit_Fees_USD": 25,
+            "Specialist_Fees_USD": 65
+          }
+        ]
+      },
+      {
+        "Name": "premium_values",
+        "Type": "list",
+        "Value": [
+          200,
+          180,
+          220
+        ]
+      },
+      {
+        "Name": "deductible_values",
+        "Type": "list",
+        "Value": [
+          900,
+          950,
+          1000,
+          1100,
+          1150,
+          1180,
+          1200,
+          750,
+          780,
+          800,
+          850,
+          875
+        ]
+      },
+      {
+        "Name": "doctor_visit_fee_values",
+        "Type": "list",
+        "Value": [
+          30,
+          28,
+          35,
+          38,
+          39,
+          40,
+          25,
+          22,
+          20
+        ]
+      },
+      {
+        "Name": "specialist_fee_values",
+        "Type": "list",
+        "Value": [
+          70,
+          68,
+          75,
+          80,
+          85,
+          65,
+          63,
+          60
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "ABC Insurance Company, as...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company relies on a nationwide...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The entire operation is inseparable...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The group's senior management hopes...",
+        "Imposes demand must be met (all customers assigned) and establishes that the objective is to control/minimize total costs."
+      ],
+      [
+        "5",
+        "On the supply side, the company...",
+        "Motivates production quantity per plan; production must cover the number of customers assigned to each plan."
+      ],
+      [
+        "6",
+        "Each printing factory is responsible...",
+        "Each factory corresponds to exactly one plan (A,B,C), so production and assignment are indexed by plan with no cross-production."
+      ],
+      [
+        "7",
+        "The company wants to minimize...",
+        "Defines the objective: minimize the sum of per-customer deductible-related costs plus other costs."
+      ],
+      [
+        "8",
+        "Please determine the expected number...",
+        "Introduces decision variables: number of customers per plan (later refined by city and age group) equal to printed policies."
+      ],
+      [
+        "9",
+        "Different plans will incur fixed startup...",
+        "Requires binary startup variables per plan and fixed startup costs in the objective."
+      ],
+      [
+        "10",
+        "According to past experience, if a plan...",
+        "Specifies fixed startup cost parameters (A:50, B:55, C:40) and ties them to the condition that a plan has at least one customer."
+      ],
+      [
+        "11",
+        "In terms of demand, there are about...",
+        "All customers in each city must be assigned to some plan/age group; city population acts as demand that must be fully allocated."
+      ],
+      [
+        "12",
+        "The specific values are shown...",
+        "Uses the city population table as parameters N_c in demand constraints."
+      ],
+      [
+        "13",
+        "Each period must meet this total...",
+        "Enforces that total demand is met and adds an average deductible constraint: average deductible over all customers ≤ 1100."
+      ],
+      [
+        "14",
+        "In terms of transportation, the company...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Since the company sends its own vehicle...",
+        "States transportation cost is zero, so there is no transportation term in the objective."
+      ],
+      [
+        "16",
+        "At the same time, in order to ensure...",
+        "Introduces a revenue constraint: total premium income must be at least 1,000,000."
+      ],
+      [
+        "17",
+        "In terms of age segmentation, the company...",
+        "No constraints"
+      ],
+      [
+        "18",
+        "It is divided into six categories...",
+        "Defines the age-group index set for decision variables and parameters."
+      ],
+      [
+        "19",
+        "The premiums for different age groups remain...",
+        "Defines that deductibles, doctor visit fees, and specialist fees vary by age group; these are cost parameters used in the objective."
+      ],
+      [
+        "20",
+        "In order to ensure that all plans have...",
+        "Adds proportion constraints: for each plan, customers aged 18–35 must be at least a given percentage of that plan’s total customers."
+      ],
+      [
+        "21",
+        "And all the sub-quotas and ages in all...",
+        "Adds minimum penetration constraints: every (city, plan, age) cell must have at least floor(N_c/60) customers."
+      ],
+      [
+        "22",
+        "Give the total costs.",
+        "Requires computing and reporting the minimized total cost; no new structural constraint."
+      ],
+      [
+        "23",
+        "City population data table...",
+        "Supplies parameter values: city populations, premiums, deductibles, doctor and specialist fees per plan and age group."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{c,a,p}",
+        "Meaning": "Number of customers from city c in age group a assigned to plan p (also the number of policies of type p used for (c,a)).",
+        "Type": "integer",
+        "Range ": "x_{c,a,p} ∈ Z_{≥0}, and for each city c: ∑_{a}∑_{p} x_{c,a,p} = N_c, with x_{c,a,p} ≥ L_c = ⌊N_c/60⌋."
+      },
+      {
+        "symbol": "X_p",
+        "Meaning": "Total number of customers assigned to plan p over all cities and age groups.",
+        "Type": "integer",
+        "Range ": "X_p ∈ Z_{≥0}, with X_p = ∑_{c}∑_{a} x_{c,a,p}."
+      },
+      {
+        "symbol": "y_p",
+        "Meaning": "Startup indicator for plan p; y_p = 1 if plan p is used (has at least one customer), otherwise 0.",
+        "Type": "BINARY",
+        "Range ": "y_p ∈ {0,1}, linked by X_p ≤ M_p · y_p with suitable big-M constants M_p."
+      },
+      {
+        "symbol": "N_tot",
+        "Meaning": "Total number of customers overall (can be treated as a parameter or auxiliary variable).",
+        "Type": "integer",
+        "Range ": "N_tot ∈ Z_{≥0}, with N_tot = ∑_{c} N_c = ∑_{c}∑_{a}∑_{p} x_{c,a,p}."
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Demand Satisfaction by City",
+        "∀ c:  ∑_{a} ∑_{p} x_{c,a,p} = N_c",
+        "sentence numbers:11,12,13,4"
+      ],
+      [
+        "Global Demand Total",
+        "N_tot = ∑_{c} ∑_{a} ∑_{p} x_{c,a,p} = ∑_{c} N_c",
+        "sentence numbers:13,11,12"
+      ],
+      [
+        "Minimum Sub-quota per (city,plan,age)",
+        "∀ c,∀ a,∀ p:  x_{c,a,p} ≥ L_c, where L_c = ⌊N_c/60⌋",
+        "sentence numbers:21"
+      ],
+      [
+        "Plan-wise Total Customers",
+        "∀ p:  X_p = ∑_{c} ∑_{a} x_{c,a,p}",
+        "sentence numbers:5,6,8"
+      ],
+      [
+        "Average Deductible Constraint",
+        "∑_{c}∑_{a}∑_{p} x_{c,a,p} · d_{p,a} ≤ 1100 · N_tot",
+        "sentence numbers:13"
+      ],
+      [
+        "Revenue (Premium) Constraint",
+        "∑_{c}∑_{a}∑_{p} x_{c,a,p} · π_{p,a} ≥ 1,000,000",
+        "sentence numbers:16"
+      ],
+      [
+        "Young Market Penetration - Plan A",
+        "∑_{c} x_{c,18–35,A} ≥ 0.25 · X_A",
+        "sentence numbers:20"
+      ],
+      [
+        "Young Market Penetration - Plan B",
+        "∑_{c} x_{c,18–35,B} ≥ 0.30 · X_B",
+        "sentence numbers:20"
+      ],
+      [
+        "Young Market Penetration - Plan C",
+        "∑_{c} x_{c,18–35,C} ≥ 0.20 · X_C",
+        "sentence numbers:20"
+      ],
+      [
+        "Startup Logic Big-M (Plan A)",
+        "X_A ≤ M_A · y_A",
+        "sentence numbers:9,10"
+      ],
+      [
+        "Startup Logic Big-M (Plan B)",
+        "X_B ≤ M_B · y_B",
+        "sentence numbers:9,10"
+      ],
+      [
+        "Startup Logic Big-M (Plan C)",
+        "X_C ≤ M_C · y_C",
+        "sentence numbers:9,10"
+      ],
+      [
+        "Nonnegativity of Assignment Variables",
+        "∀ c,a,p: x_{c,a,p} ≥ 0",
+        "sentence numbers:8,11"
+      ],
+      [
+        "Integrality of Assignment Variables",
+        "∀ c,a,p: x_{c,a,p} ∈ Z",
+        "sentence numbers:8,11,21"
+      ],
+      [
+        "Binary Nature of Startup Variables",
+        "∀ p: y_p ∈ {0,1}",
+        "sentence numbers:9,10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company wants to minimize the sum of deductibles and other costs.",
+      "Mathematical_expressions": "Minimize TotalCost = ∑_{c}∑_{a}∑_{p} x_{c,a,p} · (d_{p,a} + v_{p,a} + s_{p,a}) + 50·y_A + 55·y_B + 40·y_C."
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4379244.0"
+    ],
+    "time_seconds": 94.04310520000581,
+    "total_tokens": 65944
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "4379244.0"
+    ],
+    "ground_truth": 5480184.0
+  }
+}

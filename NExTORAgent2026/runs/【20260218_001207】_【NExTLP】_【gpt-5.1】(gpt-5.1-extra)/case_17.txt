@@ -1,0 +1,683 @@
+{
+  "entry": {
+    "index": 17,
+    "question": "China-Europe Cold Chain Logistics Co., Ltd. has built a \"one-stop processing center for pre-prepared meals\" in Chongqing Liangjiang New District. The core of the center is three parallel deep processing lines, called \"Line A\", \"Line B\" and \"Line C\". The beef, cod and shrimp raw material packages from the three southwestern provinces (respectively recorded as tasks A, B and C) must complete the three processes of initial cutting, deep freezing and packaging in sequence before they can be packed and shipped to supermarkets nationwide. The company's senior management requires that the total time required to complete the processing of all raw material packages should be shortened as much as possible while maintaining a smooth transportation network, reducing the cost of processing links and the waste of human resources, so as to catch up with the bulk trunk trains sent to East China every Wednesday night.\n**In terms of process**, the industry usually controls the \"ice coating rate\" of aquatic products at 6%-8% To reduce dehydration loss, each batch of raw material packages must first complete the initial cutting on assembly line A, then transfer to assembly line B for deep freezing, and finally transfer to assembly line C for packaging. The processing order must not be replaced, and each processing must be completed once before it can be completed, otherwise it will cause excessive bacteria and scrap. \n\nIn addition, in the process of initial cutting, deep freezing, and packaging, after a certain step is completed, you must wait for 0.5h (it takes 0.5h to move the product of a certain process to another assembly line, \n\nand it must be done during the working time of the assembly line, that is, between 6:00 and 20:00, but there is no need to wait after the packaging process is completed), and you must not enter the next process in advance without waiting time. \n\nThe three assembly lines can be started at the same time. \n\n At any time, assembly line A can only process one batch of raw material packages. If a batch has not completed the initial cutting, the remaining batches must wait. The order between them can be arbitrary, but more than two raw material packages cannot be processed at the same time. Assembly lines B and C also only process one batch of raw material packages at a time, and the order can be different from that of assembly line A, but a raw material package must be processed on assembly line A before it is placed on assembly line B, and the same applies to assembly line C. \n\nIn addition, the time period of the processing center is: the morning shift is from 6:00 to 20:00 every day, and there are only 14 hours of assembly line operation every day. \n **Completion time**, the three batches of raw material packages can only be packed and loaded after the assembly line C is finished. The company only cares about the last completion time of all batches, which is regarded as the construction period and is expected to be as small as possible. \nFaced with the tight delivery period, the dispatcher needs to give a start sequence plan for the three batches of raw material packages on the three assembly lines, that is, it must be specified which day, which time period, and which assembly line will process which raw material package. And give the minimum total construction period for all completions (starting from 0, in units of hours\t). If the construction period cannot be completed in one day, it can be postponed to the next day, and the longest construction period is three days. \n\nData table\n\n| Task | Assembly line A (initial cutting) processing time / h | Assembly line B (deep freezing) processing time / h | Assembly line C (packaging) processing time / h |\n| ----- | --------------------------- | --------------------------- | --------------------------- |\n| A beef | 3 | 2 | 1 |\n| B cod | 2 | 4 | 1 |\n| C Shrimp | 4 | 3 | 2 |",
+    "answer": 51.0,
+    "Parameters_List": [
+      {
+        "Name": "num_lines",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "lines",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "Name": "num_tasks",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "tasks",
+        "Type": "list",
+        "Value": [
+          "A_beef",
+          "B_cod",
+          "C_shrimp"
+        ]
+      },
+      {
+        "Name": "process_order",
+        "Type": "list",
+        "Value": [
+          "initial_cutting",
+          "deep_freezing",
+          "packaging"
+        ]
+      },
+      {
+        "Name": "transfer_time_between_processes",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "working_start_time",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "working_end_time",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "daily_working_hours",
+        "Type": "integer",
+        "Value": 14
+      },
+      {
+        "Name": "max_num_days",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "max_total_construction_period_hours",
+        "Type": "integer",
+        "Value": 42
+      },
+      {
+        "Name": "Table_1_processing_times",
+        "Type": "list",
+        "Value": [
+          {
+            "Task": "A_beef",
+            "Assembly_line_A_initial_cutting_h": 3,
+            "Assembly_line_B_deep_freezing_h": 2,
+            "Assembly_line_C_packaging_h": 1
+          },
+          {
+            "Task": "B_cod",
+            "Assembly_line_A_initial_cutting_h": 2,
+            "Assembly_line_B_deep_freezing_h": 4,
+            "Assembly_line_C_packaging_h": 1
+          },
+          {
+            "Task": "C_shrimp",
+            "Assembly_line_A_initial_cutting_h": 4,
+            "Assembly_line_B_deep_freezing_h": 3,
+            "Assembly_line_C_packaging_h": 2
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "China-Europe Cold Chain Logistics Co., Ltd. has built...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The core of the center is three parallel deep processing lines...",
+        "Defines three machines/assembly lines: Line A (initial cutting), Line B (deep freezing), Line C (packaging). Leads to machine index set and per-line capacity constraints."
+      ],
+      [
+        "3",
+        "The beef, cod and shrimp raw material packages from the three southwestern provinces...",
+        "Defines three jobs/tasks A, B, C, each must complete three processes (A-line, B-line, C-line) in sequence. Leads to job and operation index sets and routing (precedence) constraints."
+      ],
+      [
+        "4",
+        "The company's senior management requires that the total time required to complete...",
+        "Defines optimization goal: minimize the last completion time (makespan) while implicitly caring about smooth transport and cost; mathematically we minimize makespan."
+      ],
+      [
+        "5",
+        "In terms of process, the industry usually controls the \"ice coating rate\"...",
+        "No explicit mathematical constraint (quality level mentioned but no numeric bound beyond the process order already modeled)."
+      ],
+      [
+        "6",
+        "To reduce dehydration loss, each batch of raw material packages must first complete the initial cutting on assembly line A...",
+        "Precedence (routing) constraints: for each task i, processing order is A-line → B-line → C-line; no reordering allowed."
+      ],
+      [
+        "7",
+        "The processing order must not be replaced, and each processing must be completed once before it can be completed...",
+        "Reinforces precedence and non-preemption: each operation must finish before the next starts; no skipping or splitting. Captured by duration and precedence constraints."
+      ],
+      [
+        "8",
+        "In addition, in the process of initial cutting, deep freezing, and packaging, after a certain step is completed, you must wait for 0.5h...",
+        "Transfer/waiting-time constraints: after finishing an operation (on A or B), must wait 0.5h before next operation; this transfer must occur within working time; there is no waiting after packaging."
+      ],
+      [
+        "9",
+        "and it must be done during the working time of the assembly line, that is, between 6:00 and 20:00...",
+        "Working-time-window constraints per day: operations and the 0.5h transfer occur only between 6:00 and 20:00; no processing outside this window."
+      ],
+      [
+        "10",
+        "but there is no need to wait after the packaging process is completed...",
+        "Clarifies that no 0.5h waiting time is needed after C-line; precedence from C to anything else not required. No extra constraint beyond precedence end."
+      ],
+      [
+        "11",
+        "The three assembly lines can be started at the same time...",
+        "Initial time condition: all lines available at time 0; no staggered starts."
+      ],
+      [
+        "12",
+        "At any time, assembly line A can only process one batch of raw material packages...",
+        "Machine capacity constraints on line A: at most one job processed at a time; no overlap; order of jobs arbitrary; non-preemption of operations."
+      ],
+      [
+        "13",
+        "If a batch has not completed the initial cutting, the remaining batches must wait...",
+        "Reinforces non-overlap (no parallel processing on same machine) and non-preemption for line A; modeled via disjunctive sequencing constraints."
+      ],
+      [
+        "14",
+        "The order between them can be arbitrary, but more than two raw material packages cannot be processed at the same time...",
+        "Again machine capacity; ensures pairwise non-overlap. Already captured by machine capacity constraints."
+      ],
+      [
+        "15",
+        "Assembly lines B and C also only process one batch of raw material packages at a time...",
+        "Machine capacity constraints on lines B and C: at most one job at a time on each line; order can differ from line A; modeled analogously."
+      ],
+      [
+        "16",
+        "but a raw material package must be processed on assembly line A before it is placed on assembly line B, and the same applies to assembly line C...",
+        "Precedence constraints: for each job, B-line start after completion on A-line + waiting; C-line start after completion on B-line + waiting."
+      ],
+      [
+        "17",
+        "In addition, the time period of the processing center is: the morning shift is from 6:00 to 20:00 every day...",
+        "Defines daily working window 6:00–20:00, 14 hours per day per line; leads to time-window constraints and overall horizon limit."
+      ],
+      [
+        "18",
+        "and there are only 14 hours of assembly line operation every day...",
+        "Same working-window constraint; no processing outside 14-hour shift."
+      ],
+      [
+        "19",
+        "Completion time, the three batches of raw material packages can only be packed and loaded after the assembly line C is finished...",
+        "Defines that completion for each batch is when C-line operation ends; shipping only after all three finished. Used in makespan definition."
+      ],
+      [
+        "20",
+        "The company only cares about the last completion time of all batches, which is regarded as the construction period and is expected to be as small as possible...",
+        "Objective: minimize the time of last completion on line C (makespan)."
+      ],
+      [
+        "21",
+        "Faced with the tight delivery period, the dispatcher needs to give a start sequence plan for the three batches...",
+        "Defines what the decision variables represent: scheduling which day, which time interval, which line processes which batch (start times and order)."
+      ],
+      [
+        "22",
+        "that is, it must be specified which day, which time period, and which assembly line will process which raw material package...",
+        "Implies day-index variables or constraints linking absolute time to day and working window; operations assigned to days 1–3 within 6:00–20:00."
+      ],
+      [
+        "23",
+        "And give the minimum total construction period for all completions (starting from 0, in units of hours)...",
+        "Confirms objective as minimum makespan from time 0; units are hours."
+      ],
+      [
+        "24",
+        "If the construction period cannot be completed in one day, it can be postponed to the next day...",
+        "Scheduling horizon may extend across multiple days; same daily working-window constraints apply each day."
+      ],
+      [
+        "25",
+        "and the longest construction period is three days...",
+        "Horizon constraint: overall completion time ≤ 3 days; leads to upper bound on time (≤ 72h calendar, but processing allowed only 6–20 each day)."
+      ],
+      [
+        "26",
+        "Data table Task A beef 3 2 1, B cod 2 4 1, C Shrimp 4 3 2...",
+        "Provides deterministic processing times for each job-operation pair; used in duration constraints C = S + p."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "S_A_A",
+        "Meaning": "Start time of task A (beef) on assembly line A (initial cutting)",
+        "Type": "continuous",
+        "Range ": "S_A_A >= 0"
+      },
+      {
+        "symbol": "C_A_A",
+        "Meaning": "Completion time of task A on assembly line A",
+        "Type": "continuous",
+        "Range ": "C_A_A >= 0"
+      },
+      {
+        "symbol": "S_A_B",
+        "Meaning": "Start time of task A on assembly line B (deep freezing)",
+        "Type": "continuous",
+        "Range ": "S_A_B >= 0"
+      },
+      {
+        "symbol": "C_A_B",
+        "Meaning": "Completion time of task A on assembly line B",
+        "Type": "continuous",
+        "Range ": "C_A_B >= 0"
+      },
+      {
+        "symbol": "S_A_C",
+        "Meaning": "Start time of task A on assembly line C (packaging)",
+        "Type": "continuous",
+        "Range ": "S_A_C >= 0"
+      },
+      {
+        "symbol": "C_A_C",
+        "Meaning": "Completion time of task A on assembly line C",
+        "Type": "continuous",
+        "Range ": "C_A_C >= 0"
+      },
+      {
+        "symbol": "S_B_A",
+        "Meaning": "Start time of task B (cod) on assembly line A",
+        "Type": "continuous",
+        "Range ": "S_B_A >= 0"
+      },
+      {
+        "symbol": "C_B_A",
+        "Meaning": "Completion time of task B on assembly line A",
+        "Type": "continuous",
+        "Range ": "C_B_A >= 0"
+      },
+      {
+        "symbol": "S_B_B",
+        "Meaning": "Start time of task B on assembly line B",
+        "Type": "continuous",
+        "Range ": "S_B_B >= 0"
+      },
+      {
+        "symbol": "C_B_B",
+        "Meaning": "Completion time of task B on assembly line B",
+        "Type": "continuous",
+        "Range ": "C_B_B >= 0"
+      },
+      {
+        "symbol": "S_B_C",
+        "Meaning": "Start time of task B on assembly line C",
+        "Type": "continuous",
+        "Range ": "S_B_C >= 0"
+      },
+      {
+        "symbol": "C_B_C",
+        "Meaning": "Completion time of task B on assembly line C",
+        "Type": "continuous",
+        "Range ": "C_B_C >= 0"
+      },
+      {
+        "symbol": "S_C_A",
+        "Meaning": "Start time of task C (shrimp) on assembly line A",
+        "Type": "continuous",
+        "Range ": "S_C_A >= 0"
+      },
+      {
+        "symbol": "C_C_A",
+        "Meaning": "Completion time of task C on assembly line A",
+        "Type": "continuous",
+        "Range ": "C_C_A >= 0"
+      },
+      {
+        "symbol": "S_C_B",
+        "Meaning": "Start time of task C on assembly line B",
+        "Type": "continuous",
+        "Range ": "S_C_B >= 0"
+      },
+      {
+        "symbol": "C_C_B",
+        "Meaning": "Completion time of task C on assembly line B",
+        "Type": "continuous",
+        "Range ": "C_C_B >= 0"
+      },
+      {
+        "symbol": "S_C_C",
+        "Meaning": "Start time of task C on assembly line C",
+        "Type": "continuous",
+        "Range ": "S_C_C >= 0"
+      },
+      {
+        "symbol": "C_C_C",
+        "Meaning": "Completion time of task C on assembly line C",
+        "Type": "continuous",
+        "Range ": "C_C_C >= 0"
+      },
+      {
+        "symbol": "δ_AB_A",
+        "Meaning": "Binary variable: 1 if task A is processed before task B on assembly line A, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_AB_A ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_BA_A",
+        "Meaning": "Binary variable: 1 if task B is processed before task A on assembly line A, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_BA_A ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_AC_A",
+        "Meaning": "Binary variable: 1 if task A is processed before task C on assembly line A, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_AC_A ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_CA_A",
+        "Meaning": "Binary variable: 1 if task C is processed before task A on assembly line A, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_CA_A ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_BC_A",
+        "Meaning": "Binary variable: 1 if task B is processed before task C on assembly line A, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_BC_A ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_CB_A",
+        "Meaning": "Binary variable: 1 if task C is processed before task B on assembly line A, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_CB_A ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_AB_B",
+        "Meaning": "Binary variable: 1 if task A is processed before task B on assembly line B, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_AB_B ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_BA_B",
+        "Meaning": "Binary variable: 1 if task B is processed before task A on assembly line B, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_BA_B ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_AC_B",
+        "Meaning": "Binary variable: 1 if task A is processed before task C on assembly line B, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_AC_B ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_CA_B",
+        "Meaning": "Binary variable: 1 if task C is processed before task A on assembly line B, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_CA_B ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_BC_B",
+        "Meaning": "Binary variable: 1 if task B is processed before task C on assembly line B, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_BC_B ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_CB_B",
+        "Meaning": "Binary variable: 1 if task C is processed before task B on assembly line B, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_CB_B ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_AB_C",
+        "Meaning": "Binary variable: 1 if task A is processed before task B on assembly line C, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_AB_C ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_BA_C",
+        "Meaning": "Binary variable: 1 if task B is processed before task A on assembly line C, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_BA_C ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_AC_C",
+        "Meaning": "Binary variable: 1 if task A is processed before task C on assembly line C, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_AC_C ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_CA_C",
+        "Meaning": "Binary variable: 1 if task C is processed before task A on assembly line C, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_CA_C ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_BC_C",
+        "Meaning": "Binary variable: 1 if task B is processed before task C on assembly line C, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_BC_C ∈ {0,1}"
+      },
+      {
+        "symbol": "δ_CB_C",
+        "Meaning": "Binary variable: 1 if task C is processed before task B on assembly line C, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "δ_CB_C ∈ {0,1}"
+      },
+      {
+        "symbol": "d_A_A",
+        "Meaning": "Integer day index for task A on line A (which day it is processed)",
+        "Type": "integer",
+        "Range ": "d_A_A ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_A_B",
+        "Meaning": "Integer day index for task A on line B",
+        "Type": "integer",
+        "Range ": "d_A_B ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_A_C",
+        "Meaning": "Integer day index for task A on line C",
+        "Type": "integer",
+        "Range ": "d_A_C ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_B_A",
+        "Meaning": "Integer day index for task B on line A",
+        "Type": "integer",
+        "Range ": "d_B_A ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_B_B",
+        "Meaning": "Integer day index for task B on line B",
+        "Type": "integer",
+        "Range ": "d_B_B ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_B_C",
+        "Meaning": "Integer day index for task B on line C",
+        "Type": "integer",
+        "Range ": "d_B_C ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_C_A",
+        "Meaning": "Integer day index for task C on line A",
+        "Type": "integer",
+        "Range ": "d_C_A ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_C_B",
+        "Meaning": "Integer day index for task C on line B",
+        "Type": "integer",
+        "Range ": "d_C_B ∈ {1,2,3}"
+      },
+      {
+        "symbol": "d_C_C",
+        "Meaning": "Integer day index for task C on line C",
+        "Type": "integer",
+        "Range ": "d_C_C ∈ {1,2,3}"
+      },
+      {
+        "symbol": "T",
+        "Meaning": "Overall completion time (makespan), i.e., completion time of the last task on line C",
+        "Type": "continuous",
+        "Range ": "T >= 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Processing_duration_task_A",
+        "C_A_A = S_A_A + 3; C_A_B = S_A_B + 2; C_A_C = S_A_C + 1",
+        "sentence numbers:26"
+      ],
+      [
+        "Processing_duration_task_B",
+        "C_B_A = S_B_A + 2; C_B_B = S_B_B + 4; C_B_C = S_B_C + 1",
+        "sentence numbers:26"
+      ],
+      [
+        "Processing_duration_task_C",
+        "C_C_A = S_C_A + 4; C_C_B = S_C_B + 3; C_C_C = S_C_C + 2",
+        "sentence numbers:26"
+      ],
+      [
+        "Precedence_wait_task_A",
+        "S_A_B >= C_A_A + 0.5; S_A_C >= C_A_B + 0.5",
+        "sentence numbers:6,7,8,16"
+      ],
+      [
+        "Precedence_wait_task_B",
+        "S_B_B >= C_B_A + 0.5; S_B_C >= C_B_B + 0.5",
+        "sentence numbers:6,7,8,16"
+      ],
+      [
+        "Precedence_wait_task_C",
+        "S_C_B >= C_C_A + 0.5; S_C_C >= C_C_B + 0.5",
+        "sentence numbers:6,7,8,16"
+      ],
+      [
+        "Machine_capacity_line_A_AB",
+        "S_A_A >= C_B_A - M*(1 - δ_BA_A); S_B_A >= C_A_A - M*δ_BA_A",
+        "sentence numbers:12,13,14"
+      ],
+      [
+        "Machine_capacity_line_A_AC",
+        "S_A_A >= C_C_A - M*(1 - δ_CA_A); S_C_A >= C_A_A - M*δ_CA_A",
+        "sentence numbers:12,13,14"
+      ],
+      [
+        "Machine_capacity_line_A_BC",
+        "S_B_A >= C_C_A - M*(1 - δ_CB_A); S_C_A >= C_B_A - M*δ_CB_A",
+        "sentence numbers:12,13,14"
+      ],
+      [
+        "Machine_capacity_line_B_AB",
+        "S_A_B >= C_B_B - M*(1 - δ_BA_B); S_B_B >= C_A_B - M*δ_BA_B",
+        "sentence numbers:15"
+      ],
+      [
+        "Machine_capacity_line_B_AC",
+        "S_A_B >= C_C_B - M*(1 - δ_CA_B); S_C_B >= C_A_B - M*δ_CA_B",
+        "sentence numbers:15"
+      ],
+      [
+        "Machine_capacity_line_B_BC",
+        "S_B_B >= C_C_B - M*(1 - δ_CB_B); S_C_B >= C_B_B - M*δ_CB_B",
+        "sentence numbers:15"
+      ],
+      [
+        "Machine_capacity_line_C_AB",
+        "S_A_C >= C_B_C - M*(1 - δ_BA_C); S_B_C >= C_A_C - M*δ_BA_C",
+        "sentence numbers:15"
+      ],
+      [
+        "Machine_capacity_line_C_AC",
+        "S_A_C >= C_C_C - M*(1 - δ_CA_C); S_C_C >= C_A_C - M*δ_CA_C",
+        "sentence numbers:15"
+      ],
+      [
+        "Machine_capacity_line_C_BC",
+        "S_B_C >= C_C_C - M*(1 - δ_CB_C); S_C_C >= C_B_C - M*δ_CB_C",
+        "sentence numbers:15"
+      ],
+      [
+        "Binary_ordering_variables_A",
+        "δ_AB_A + δ_BA_A = 1; δ_AC_A + δ_CA_A = 1; δ_BC_A + δ_CB_A = 1; δ_.._A ∈ {0,1}",
+        "sentence numbers:12,14"
+      ],
+      [
+        "Binary_ordering_variables_B",
+        "δ_AB_B + δ_BA_B = 1; δ_AC_B + δ_CA_B = 1; δ_BC_B + δ_CB_B = 1; δ_.._B ∈ {0,1}",
+        "sentence numbers:15"
+      ],
+      [
+        "Binary_ordering_variables_C",
+        "δ_AB_C + δ_BA_C = 1; δ_AC_C + δ_CA_C = 1; δ_BC_C + δ_CB_C = 1; δ_.._C ∈ {0,1}",
+        "sentence numbers:15"
+      ],
+      [
+        "Working_window_task_A_line_A",
+        "6 + 24*(d_A_A - 1) <= S_A_A; C_A_A <= 20 + 24*(d_A_A - 1); d_A_A ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_A_line_B",
+        "6 + 24*(d_A_B - 1) <= S_A_B; C_A_B <= 20 + 24*(d_A_B - 1); d_A_B ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_A_line_C",
+        "6 + 24*(d_A_C - 1) <= S_A_C; C_A_C <= 20 + 24*(d_A_C - 1); d_A_C ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_B_line_A",
+        "6 + 24*(d_B_A - 1) <= S_B_A; C_B_A <= 20 + 24*(d_B_A - 1); d_B_A ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_B_line_B",
+        "6 + 24*(d_B_B - 1) <= S_B_B; C_B_B <= 20 + 24*(d_B_B - 1); d_B_B ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_B_line_C",
+        "6 + 24*(d_B_C - 1) <= S_B_C; C_B_C <= 20 + 24*(d_B_C - 1); d_B_C ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_C_line_A",
+        "6 + 24*(d_C_A - 1) <= S_C_A; C_C_A <= 20 + 24*(d_C_A - 1); d_C_A ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_C_line_B",
+        "6 + 24*(d_C_B - 1) <= S_C_B; C_C_B <= 20 + 24*(d_C_B - 1); d_C_B ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Working_window_task_C_line_C",
+        "6 + 24*(d_C_C - 1) <= S_C_C; C_C_C <= 20 + 24*(d_C_C - 1); d_C_C ∈ {1,2,3}",
+        "sentence numbers:9,17,18,22,24,25"
+      ],
+      [
+        "Initial_time_nonnegativity",
+        "S_i_k >= 0 for all tasks i ∈ {A,B,C}, lines k ∈ {A,B,C}",
+        "sentence numbers:11,23"
+      ],
+      [
+        "Horizon_limit",
+        "T <= 72; C_i_k <= 72 for all i,k (or equivalently T <= 3 days)",
+        "sentence numbers:24,25"
+      ],
+      [
+        "Makespan_definition",
+        "T >= C_A_C; T >= C_B_C; T >= C_C_C",
+        "sentence numbers:19,20,23"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company only cares about the last completion time of all batches, which is regarded as the construction period and is expected to be as small as possible...",
+      "Mathematical_expressions": "Minimize T"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "19.0"
+    ],
+    "time_seconds": 39.55312440000125,
+    "total_tokens": 20345
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "19.0"
+    ],
+    "ground_truth": 51.0
+  }
+}

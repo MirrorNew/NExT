@@ -1,0 +1,151 @@
+{
+  "Original_Sentences": [
+    {"sid": 1, "text": "Tiantian Food Company is a chain enterprise focusing on high-end baked goods."},
+    {"sid": 2, "text": "Its Tiantian Workshop factory is responsible for the supply of snacks in many cities across the country."},
+    {"sid": 3, "text": "Due to the increase in market demand for light luxury desserts this year, the company has launched two new products based on the original product line, named Product I and Product II."},
+    {"sid": 4, "text": "The pre-sale response of these two new products across the country has been enthusiastic, especially Product I, which is expected to have high sales due to its unique taste."},
+    {"sid": 5, "text": "In order to ensure smooth delivery, the factory cooperated with several large logistics companies to build a transportation network from the factory to major sales outlets."},
+    {"sid": 6, "text": "The transportation network design not only takes into account the transportation speed, but also introduces considerations of resource consumption and cost optimization."},
+    {"sid": 7, "text": "In addition, due to the long procurement cycle of raw materials, the factory's monthly supply of raw materials is currently limited."},
+    {"sid": 8, "text": "The company's senior management requires the production department to maximize this month's wholesale revenue while meeting supply constraints and sales expectations, while preparing for market expansion next month."},
+    {"sid": 9, "text": "Zhang made good production capacity and resource reserves."},
+    {"sid": 10, "text": "In terms of supply, the monthly supply of raw materials A and B in the first month is 6 tons and 8 tons respectively, and the procurement costs of the two are 9,900 yuan/ton and 6,600 yuan/ton respectively."},
+    {"sid": 11, "text": "Each product consumes different amounts of raw materials during the production process."},
+    {"sid": 12, "text": "In the first month, the product factory must make production decisions within the raw material limit."},
+    {"sid": 13, "text": "In terms of demand, according to the market department's estimate, the sales volume of product II in the first month cannot exceed 2,000 boxes, and the sales volume of product II must not exceed the sales volume of product I by more than 1,000 boxes."},
+    {"sid": 14, "text": "The goal is to make the plan to maximize wholesale revenue in the first month."},
+    {"sid": 15, "text": "In the second month, under the plan to maximize wholesale revenue in the first month, the overall market demand continues to grow by 25%, the raw material supply is sufficient, and the production arrangement can be adjusted according to demand, but the goal is to maximize the surplus (wholesale revenue minus raw material expenditure)."}
+  ],
+  "code_info_list": {
+    "Parameters_List": [
+      "supply_A            = 6\nsupply_B            = 8\nprocurement_cost_A  = 9900\nprocurement_cost_B  = 6600\nconsumption         = {'A': {'I': 1, 'II': 2},\n                       'B': {'I': 2, 'II': 1}}\nunit_price_material = {'A': 9.9, 'B': 6.6}\nwholesale_price     = {'I': 30, 'II': 20}\ndemand_upper_II     = 2000    # boxes\ndemand_diff_limit   = 1000    # boxes\ndemand_growth       = 0.25    # 25%\n\ndemand_upper_II_tb   = demand_upper_II / 1000.0\ndemand_diff_limit_tb = demand_diff_limit / 1000.0"
+    ],
+    "Variables_List": [
+      "# Month 1 decision variables\nx1 = model.addVar(lb=0, name=\"x1\")  # Product I\nx2 = model.addVar(lb=0, name=\"x2\")  # Product II",
+      "# Month 2 decision variables\ny1 = model.addVar(lb=0, name=\"y1\")  # Product I\ny2 = model.addVar(lb=0, name=\"y2\")  # Product II"
+    ],
+    "Constraint_List": [
+      "model.addConstr(consumption['A']['I'] * x1 + consumption['A']['II'] * x2 <= supply_A, name=\"RawA_limit_M1\")",
+      "model.addConstr(consumption['B']['I'] * x1 + consumption['B']['II'] * x2 <= supply_B, name=\"RawB_limit_M1\")",
+      "model.addConstr(x2 <= demand_upper_II_tb, name=\"DemandCapII_M1\")",
+      "model.addConstr(x2 - x1 <= demand_diff_limit_tb, name=\"IIvsI_ratio_M1\")",
+      "model.addConstr(y2 <= demand_upper_II_tb * (1 + demand_growth), name=\"DemandCapII_M2\")",
+      "model.addConstr(y2 - y1 <= demand_diff_limit_tb, name=\"IIvsI_ratio_M2\")"
+    ],
+    "Objective": "model.setObjective(wholesale_price['I'] * x1 + wholesale_price['II'] * x2, gp.GRB.MAXIMIZE)\nmodel.setObjective(rev2 - cost2, gp.GRB.MAXIMIZE)"
+  },
+  "Model_Items": [
+    {
+      "kind": "parameter",
+      "name": "Raw material supplies, costs, consumption, prices, demand caps, growth",
+      "math": "supply_A = 6, supply_B = 8; procurement_cost_A = 9900, procurement_cost_B = 6600; consumption_AI = 1, consumption_AII = 2, consumption_BI = 2, consumption_BII = 1; unit_price_A = 9.9, unit_price_B = 6.6; wholesale_price_I = 30, wholesale_price_II = 20; demand_upper_II = 2000→2; demand_diff_limit = 1000→1; demand_growth = 0.25",
+      "one_sentence_nl": "定义原料 A、B 的月供应量及采购成本，产品的单位消耗矩阵，材料单价、批发单价，以及产品 II 的需求上限、差值限和需求增长率。",
+      "matched_sids": [10,11,12,13,15],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "variable",
+      "name": "x1, x2",
+      "math": "x1 ≥ 0, x2 ≥ 0",
+      "one_sentence_nl": "令 x1、x2 为第1个月产品 I 和 II 的生产销售量（千箱），均非负。",
+      "matched_sids": [10,11,12,13,14],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "variable",
+      "name": "y1, y2",
+      "math": "y1 ≥ 0, y2 ≥ 0",
+      "one_sentence_nl": "令 y1、y2 为第2个月产品 I 和 II 的生产销售量（千箱），均非负。",
+      "matched_sids": [15],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "constraint",
+      "name": "RawA_limit_M1",
+      "math": "1·x1 + 2·x2 ≤ 6",
+      "one_sentence_nl": "第1个月产品对原料 A 的消耗 1*x1 + 2*x2 不超过 6 吨。",
+      "matched_sids": [10,12],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "constraint",
+      "name": "RawB_limit_M1",
+      "math": "2·x1 + 1·x2 ≤ 8",
+      "one_sentence_nl": "第1个月产品对原料 B 的消耗 2*x1 + 1*x2 不超过 8 吨。",
+      "matched_sids": [10,12],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "constraint",
+      "name": "DemandCapII_M1",
+      "math": "x2 ≤ 2",
+      "one_sentence_nl": "第1个月产品 II 的销售量 x2 不超过 2 千箱（2000 箱）。",
+      "matched_sids": [13],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "constraint",
+      "name": "IIvsI_ratio_M1",
+      "math": "x2 - x1 ≤ 1",
+      "one_sentence_nl": "第1个月产品 II 的销售不能比产品 I 多超过 1 千箱：x2 - x1 ≤ 1。",
+      "matched_sids": [13],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "constraint",
+      "name": "DemandCapII_M2",
+      "math": "y2 ≤ 2.5",
+      "one_sentence_nl": "第2个月产品 II 的销售上限增长 25%，即 y2 ≤ 2.5 千箱。",
+      "matched_sids": [15],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "constraint",
+      "name": "IIvsI_ratio_M2",
+      "math": "y2 - y1 ≤ 1",
+      "one_sentence_nl": "第2个月产品 II 的销售不能比产品 I 多超过 1 千箱：y2 - y1 ≤ 1。",
+      "matched_sids": [15],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "objective",
+      "name": "Month1 Objective",
+      "math": "max z1 = 30·x1 + 20·x2",
+      "one_sentence_nl": "第1个月最大化批发收入 z1 = 30*x1 + 20*x2。",
+      "matched_sids": [14],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    },
+    {
+      "kind": "objective",
+      "name": "Month2 Objective",
+      "math": "max z2 = 30·y1 + 20·y2 - [9.9*(1·y1 + 2·y2) + 6.6*(2·y1 + 1·y2)]",
+      "one_sentence_nl": "第2个月最大化批发收入减去原料费用的净剩余 z2 = 30*y1 + 20*y2 - (9.9(1*y1+2*y2) + 6.6(2*y1+1*y2))。",
+      "matched_sids": [15],
+      "status": "consistent",
+      "issues": [],
+      "suggested_fix_math": ""
+    }
+  ],
+  "Reconstructed_Paragraph": "定义原料 A、B 的月供应量及采购成本，产品的单位消耗矩阵，材料单价、批发单价，以及产品 II 的需求上限、差值限和需求增长率。令 x1、x2 为第1个月产品 I 和 II 的生产销售量（千箱），均非负。令 y1、y2 为第2个月产品 I 和 II 的生产销售量（千箱），均非负。第1个月产品对原料 A 的消耗 1*x1 + 2*x2 不超过 6 吨。第1个月产品对原料 B 的消耗 2*x1 + 1*x2 不超过 8 吨。第1个月产品 II 的销售量 x2 不超过 2 千箱（2000 箱）。第1个月产品 II 的销售不能比产品 I 多超过 1 千箱：x2 - x1 ≤ 1。第1个月最大化批发收入 z1 = 30*x1 + 20*x2。第2个月产品 II 的销售上限增长 25%，即 y2 ≤ 2.5 千箱。第2个月产品 II 的销售不能比产品 I 多超过 1 千箱：y2 - y1 ≤ 1。第2个月最大化批发收入减去原料费用的净剩余 z2 = 30*y1 + 20*y2 - (9.9(1*y1+2*y2) + 6.6(2*y1+1*y2))。",
+  "Global_Comments": "代码中所有定义、变量、约束和目标函数都与原题描述一致。第2个月由于原料供应充足，无需添加原料消耗约束，符合题意。无多余或遗漏信息。"
+}

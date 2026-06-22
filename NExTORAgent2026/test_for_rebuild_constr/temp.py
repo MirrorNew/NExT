@@ -1,0 +1,191 @@
+code_24 = '''import gurobipy as gp
+
+# Parameters from the provided list
+standard_panel_length = 100
+factory1_modes = [1, 2, 3]
+factory2_modes = [4, 5]
+demand_25 = 8
+demand_40 = 6
+demand_50 = 4
+
+Table_1_CuttingCombination = [
+    {'mode': 1, 'cutting_combination': [40, 25, 25], 'waste': 10},
+    {'mode': 2, 'cutting_combination': [40, 40], 'waste': 20},
+    {'mode': 3, 'cutting_combination': [50, 40], 'waste': 10},
+    {'mode': 4, 'cutting_combination': [50, 25, 25], 'waste': 0},
+    {'mode': 5, 'cutting_combination': [25, 25, 25, 25], 'waste': 0},
+    {'mode': 6, 'cutting_combination': [50, 50], 'waste': 0}
+]
+
+Table_3_SyntheticWoodFurniture = [
+    {'furniture': 'Bench', 'consumed_meters': 20, 'max_required_quantity': 12, 'profit': 3},
+    {'furniture': 'Chair', 'consumed_meters': 40, 'max_required_quantity': 7,  'profit': 8},
+    {'furniture': 'Table', 'consumed_meters': 50, 'max_required_quantity': 4,  'profit': 11}
+]
+
+# Derived data
+waste = {item['mode']: item['waste'] for item in Table_1_CuttingCombination}
+# Mode profits as given in the objective: 75,62,77,90,88,92 for modes 1..6
+profit_mode = {1: 75, 2: 62, 3: 77, 4: 90, 5: 88, 6: 92}
+
+# Create Gurobi model
+model = gp.Model("XXXXXXXX")
+
+# Decision variables
+# x_p: number of panels cut by mode p, integer 0..3
+x = model.addVars([1, 2, 3, 4, 5, 6],
+                  vtype=gp.GRB.INTEGER, lb=0, ub=3, name="x")
+# Synthetic‐wood furniture quantities
+y_bench = model.addVar(vtype=gp.GRB.INTEGER, lb=0, ub=12, name="y_bench")
+y_chair = model.addVar(vtype=gp.GRB.INTEGER, lb=0, ub=7,  name="y_chair")
+y_table = model.addVar(vtype=gp.GRB.INTEGER, lb=0, ub=4,  name="y_table")
+# Waste from factory 1
+W = model.addVar(vtype=gp.GRB.CONTINUOUS, lb=0, name="W")
+
+# Objective: maximize total profit
+model.setObjective(
+    gp.quicksum(profit_mode[p] * x[p] for p in x.keys())
+    + Table_3_SyntheticWoodFurniture[0]['profit'] * y_bench
+    + Table_3_SyntheticWoodFurniture[1]['profit'] * y_chair
+    + Table_3_SyntheticWoodFurniture[2]['profit'] * y_table,
+    gp.GRB.MAXIMIZE
+)
+
+# Constraints
+
+# 1) Factory 2 must process at least one board
+model.addConstr(x[4] + x[5] >= 1, name="Factory2Min")
+
+# 2) Mode 6 prerequisite: x6 ≤ (sum of others)/3  → 3*x6 ≤ sum(x1..x5)
+model.addConstr(3 * x[6] <= gp.quicksum(x[p] for p in [1, 2, 3, 4, 5]),
+                name="Mode6Prereq")
+
+# 3) Demand for 25-unit parts: 2x1 + 2x4 + 4x5 ≥ demand_25
+model.addConstr(2 * x[1] + 2 * x[4] + 4 * x[5] >= demand_25,
+                name="Demand25")
+
+# 4) Demand for 40-unit parts: x1 + 2x2 + x3 ≥ demand_40
+model.addConstr(x[1] + 2 * x[2] + x[3] >= demand_40,
+                name="Demand40")
+
+# 5) Demand for 50-unit parts: x3 + x4 + 2x6 ≥ demand_50
+model.addConstr(x[3] + x[4] + 2 * x[6] >= demand_50,
+                name="Demand50")
+
+# 6) Total panels used ≤ 20
+model.addConstr(gp.quicksum(x[p] for p in x.keys()) <= 20,
+                name="BoardSupply")
+
+# 7) Waste balance for Factory 1: W = 10x1 + 20x2 + 10x3
+model.addConstr(W == gp.quicksum(waste[p] * x[p] for p in x.keys()),
+                name="WasteBalance")
+
+# 8) Synthetic‐wood usage: W ≥ 20*y_bench + 40*y_chair + 50*y_table
+model.addConstr(W >= 20 * y_bench + 40 * y_chair + 50 * y_table,
+                name="SyntheticUsage")
+
+# Solve the model
+model.optimize()
+
+# Print solution
+if model.Status == gp.GRB.OPTIMAL:
+    for p in sorted(x.keys()):
+        print(f"x_{p} = {x[p].X}")
+    print(f"y_bench = {y_bench.X}")
+    print(f"y_chair = {y_chair.X}")
+    print(f"y_table = {y_table.X}")
+    print(f"W = {W.X}")
+    # Final answer: total profit
+    print(f"FinalAnswer=【{model.objVal}】")
+else:
+    print("No optimal solution found")
+'''
+
+
+code_25 = '''import gurobipy as gp
+
+# 1. Define parameters (from the provided list)
+supply_A            = 6
+supply_B            = 8
+procurement_cost_A  = 9900
+procurement_cost_B  = 6600
+consumption         = {'A': {'I': 1, 'II': 2},
+                       'B': {'I': 2, 'II': 1}}
+unit_price_material = {'A': 9.9, 'B': 6.6}
+wholesale_price     = {'I': 30, 'II': 20}
+demand_upper_II     = 2000    # boxes
+demand_diff_limit   = 1000    # boxes
+demand_growth       = 0.25    # 25%
+
+# Convert demand caps from boxes to thousand‐box units
+demand_upper_II_tb   = demand_upper_II / 1000.0
+demand_diff_limit_tb = demand_diff_limit / 1000.0
+
+# -----------------------------
+# Month 1: maximize wholesale revenue
+# -----------------------------
+model = gp.Model("Month1")
+
+# Decision variables (thousand boxes)
+x1 = model.addVar(lb=0, name="x1")  # Product I
+x2 = model.addVar(lb=0, name="x2")  # Product II
+
+# Objective: 30*x1 + 20*x2
+model.setObjective(wholesale_price['I'] * x1 + wholesale_price['II'] * x2,
+                   gp.GRB.MAXIMIZE)
+
+# Constraints
+model.addConstr(consumption['A']['I'] * x1 +
+                consumption['A']['II']*x2 <= supply_A,
+                name="RawA_limit_M1")
+model.addConstr(consumption['B']['I'] * x1 +
+                consumption['B']['II']*x2 <= supply_B,
+                name="RawB_limit_M1")
+model.addConstr(x2 <= demand_upper_II_tb,
+                name="DemandCapII_M1")
+model.addConstr(x2 - x1 <= demand_diff_limit_tb,
+                name="IIvsI_ratio_M1")
+
+# Solve Month 1
+model.optimize()
+z1     = model.ObjVal
+x1_opt = x1.X
+x2_opt = x2.X
+
+# -----------------------------
+# Month 2: maximize surplus = revenue - material cost
+# -----------------------------
+model = gp.Model("Month2")
+
+# Decision variables (thousand boxes)
+y1 = model.addVar(lb=0, name="y1")  # Product I
+y2 = model.addVar(lb=0, name="y2")  # Product II
+
+# Revenue and cost expressions
+rev2  = wholesale_price['I'] * y1 + wholesale_price['II'] * y2
+cost2 = (unit_price_material['A'] * (consumption['A']['I'] * y1 +
+                                     consumption['A']['II'] * y2)
+       + unit_price_material['B'] * (consumption['B']['I'] * y1 +
+                                     consumption['B']['II'] * y2))
+
+# Objective: maximize rev2 - cost2
+model.setObjective(rev2 - cost2, gp.GRB.MAXIMIZE)
+
+# Month 2 constraints
+model.addConstr(y2 <= demand_upper_II_tb * (1 + demand_growth),
+                name="DemandCapII_M2")
+model.addConstr(y2 - y1 <= demand_diff_limit_tb,
+                name="IIvsI_ratio_M2")
+
+# Solve Month 2
+model.optimize()
+z2     = model.ObjVal
+y1_opt = y1.X
+y2_opt = y2.X
+
+# Total profit for the two months
+total_profit = z1 + z2
+
+# Final answer output
+print(f"FinalAnswer=【{total_profit:.4f}】")
+'''

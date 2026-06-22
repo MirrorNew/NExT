@@ -1,0 +1,315 @@
+{
+  "entry": {
+    "index": 34,
+    "question": "In the design of industrial gearboxes, the balance between weight optimization and strength assurance is a typical multidisciplinary optimization problem. Taking the Siemens Flender reducer series as an example, its design team needs to consider the mutual influence of seven key dimensional parameters at the same time: although the increase in tooth width and module can improve the contact strength of the gear, it will significantly increase the weight; while the reduction in shaft diameter can reduce weight, it may cause the risk of bending failure. The latest revision of the German VDI standard in 2023 specifically emphasizes that for heavy-duty gear devices, the meshing strength coefficient must be controlled within the specified safety range. \nThe optimization module of ANSYS Workbench uses parametric modeling methods to deal with such complex problems. By coupling the tooth contact analysis (FEA) with the shaft dynamics simulation (MBS), the system can automatically evaluate millions of parameter combinations: the gear strength constraint is converted into a nonlinear function of the design variable through the ISO 6336 standard formula, the shaft strength calculation also considers the bending-torsion composite stress (based on the Tresca criterion), and the weight objective function corresponds to: gear mass (including tooth form coefficient), shaft segment weight reduction hole effect, shaft end flange contribution, Rolls-Royce has verified in the design of aviation gearboxes that this integrated optimization method can reduce weight and improve fatigue life compared to traditional trial and error design. \n\nNow, the mechanical design of the current reducer device requires the optimization of multiple dimensional parameters to reduce weight. This problem has 7 design variables: gear tooth width $x_1$, module $x_2$, number of teeth $x_3$, length of the two shaft segments $x_4,x_5$, and shaft diameter $x_6,x_7$ (units are uniformly in inches). The optimization goal is to minimize the overall weight of the reducer, and its approximate model is: $f=0.7854 x_1 x_2^2(3.3333 x_3^2 + 14.9334 x_3 - 43.0934) - 1.508 x_1(x_6^2+x_7^2) + 7.4777(x_6^3+x_7^3) + 0.7854(x_4 x_6^2 + x_5 x_7^2)$. In actual production, the meshing strength of the gears must be strong enough to prevent the gears from breaking or being damaged during operation. For the convenience of calculation, it is assumed that the meshing strength of the gears is inversely proportional to the tooth width, the square of the module and the number of teeth, and is proportional to the meshing force of the gears, and the coefficient is 27. The meshing strength of the gears needs to be controlled to be less than 1 to ensure that the designed gears and shafts can withstand the load under working conditions without failure. At the same time, considering the shaft strength of the bending and torsion resistance of the shaft, the shaft strength and the meshing strength of the gear are inversely proportional to the tooth width, the square of the module and the square of the number of teeth. The specific coefficient of the device is 397.5, and the shaft strength needs to be less than 1. In terms of size, considering that the pitch circle diameter does not exceed 40, and the gear tooth width needs to be greater than twice the module, other size parameter restrictions are as follows. \n\n| Parameter name | Minimum size | Maximum size |\n| ------------ | -------- | -------- |\n| Tooth width | **2.5** | 3.5 |\n| Module | 0.6 | 0.8 |\n| Number of teeth (integer) | 17 | 28 |\n| Shaft 1 length | 7 | 9 |\n| Shaft 2 length | 7.5 | 9 |\n| Shaft 1 diameter | 2.5 | 3.5 |\n| Shaft 2 diameter | 5 | 6 |",
+    "answer": 2532.81,
+    "Parameters_List": [
+      {
+        "Name": "num_design_variables",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "design_variables",
+        "Type": "list",
+        "Value": [
+          "x1",
+          "x2",
+          "x3",
+          "x4",
+          "x5",
+          "x6",
+          "x7"
+        ]
+      },
+      {
+        "Name": "units",
+        "Type": "string",
+        "Value": "inches"
+      },
+      {
+        "Name": "model_coefficients",
+        "Type": "list",
+        "Value": [
+          0.7854,
+          3.3333,
+          14.9334,
+          -43.0934,
+          -1.508,
+          7.4777,
+          0.7854
+        ]
+      },
+      {
+        "Name": "meshing_strength_coefficient",
+        "Type": "integer",
+        "Value": 27
+      },
+      {
+        "Name": "meshing_strength_threshold",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "shaft_strength_coefficient",
+        "Type": "float",
+        "Value": 397.5
+      },
+      {
+        "Name": "shaft_strength_threshold",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "pitch_circle_diameter_max",
+        "Type": "integer",
+        "Value": 40
+      },
+      {
+        "Name": "Table_1_sizeRestrictions",
+        "Type": "tuple",
+        "Value": {
+          "Tooth width": [
+            2.5,
+            3.5
+          ],
+          "Module": [
+            0.6,
+            0.8
+          ],
+          "Number of teeth (integer)": [
+            17,
+            28
+          ],
+          "Shaft 1 length": [
+            7,
+            9
+          ],
+          "Shaft 2 length": [
+            7.5,
+            9
+          ],
+          "Shaft 1 diameter": [
+            2.5,
+            3.5
+          ],
+          "Shaft 2 diameter": [
+            5,
+            6
+          ]
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the design of industrial...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the Siemens Flender...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The latest revision of the German...",
+        "No explicit numeric constraint"
+      ],
+      [
+        "4",
+        "The optimization module of ANSYS...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "By coupling the tooth contact...",
+        "No explicit numeric constraint"
+      ],
+      [
+        "6",
+        "Now, the mechanical design of...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "This problem has 7 design variables:...",
+        "Definition of decision variables x₁,x₂,x₃,x₄,x₅,x₆,x₇"
+      ],
+      [
+        "8",
+        "The optimization goal is to minimize...",
+        "Definition of objective function"
+      ],
+      [
+        "9",
+        "In actual production, the meshing strength...",
+        "No explicit numeric constraint"
+      ],
+      [
+        "10",
+        "For the convenience of calculation,...",
+        "Definition of gear-meshing strength function"
+      ],
+      [
+        "11",
+        "The meshing strength of the gears needs...",
+        "Gear-meshing strength constraint x₁·x₂²·x₃ ≥ 27"
+      ],
+      [
+        "12",
+        "At the same time, considering the shaft strength...",
+        "Definition of shaft-strength function"
+      ],
+      [
+        "13",
+        "The specific coefficient of the device is...",
+        "Shaft-strength constraint x₁·x₂²·x₃² ≥ 397.5"
+      ],
+      [
+        "14",
+        "In terms of size, considering that the pitch circle...",
+        "Pitch circle diameter constraint x₂·x₃ ≤ 40; Tooth width constraint x₁ ≥ 2·x₂"
+      ],
+      [
+        "15",
+        "| Parameter name | Minimum size | Maximum size |",
+        "Variable bounds and integrality"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x₁",
+        "Meaning": "gear tooth width",
+        "Type": "continuous",
+        "Range ": "[2.5, 3.5]"
+      },
+      {
+        "symbol": "x₂",
+        "Meaning": "module",
+        "Type": "continuous",
+        "Range ": "[0.6, 0.8]"
+      },
+      {
+        "symbol": "x₃",
+        "Meaning": "number of teeth",
+        "Type": "integer",
+        "Range ": "[17, 28]"
+      },
+      {
+        "symbol": "x₄",
+        "Meaning": "shaft 1 length",
+        "Type": "continuous",
+        "Range ": "[7, 9]"
+      },
+      {
+        "symbol": "x₅",
+        "Meaning": "shaft 2 length",
+        "Type": "continuous",
+        "Range ": "[7.5, 9]"
+      },
+      {
+        "symbol": "x₆",
+        "Meaning": "shaft 1 diameter",
+        "Type": "continuous",
+        "Range ": "[2.5, 3.5]"
+      },
+      {
+        "symbol": "x₇",
+        "Meaning": "shaft 2 diameter",
+        "Type": "continuous",
+        "Range ": "[5, 6]"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Gear-meshing strength function",
+        "g_strength = 27·F/(x₁·x₂²·x₃)",
+        "sentence numbers:10"
+      ],
+      [
+        "Gear-meshing strength limit",
+        "x₁·x₂²·x₃ ≥ 27",
+        "sentence numbers:11"
+      ],
+      [
+        "Shaft-strength function",
+        "S_strength = 397.5/(x₁·x₂²·x₃²)",
+        "sentence numbers:12"
+      ],
+      [
+        "Shaft-strength limit",
+        "x₁·x₂²·x₃² ≥ 397.5",
+        "sentence numbers:13"
+      ],
+      [
+        "Pitch circle diameter constraint",
+        "x₂·x₃ ≤ 40",
+        "sentence numbers:14"
+      ],
+      [
+        "Tooth width vs module constraint",
+        "x₁ ≥ 2·x₂",
+        "sentence numbers:14"
+      ],
+      [
+        "x₁ bounds",
+        "2.5 ≤ x₁ ≤ 3.5",
+        "sentence numbers:15"
+      ],
+      [
+        "x₂ bounds",
+        "0.6 ≤ x₂ ≤ 0.8",
+        "sentence numbers:15"
+      ],
+      [
+        "x₃ bounds",
+        "17 ≤ x₃ ≤ 28, integer",
+        "sentence numbers:15"
+      ],
+      [
+        "x₄ bounds",
+        "7 ≤ x₄ ≤ 9",
+        "sentence numbers:15"
+      ],
+      [
+        "x₅ bounds",
+        "7.5 ≤ x₅ ≤ 9",
+        "sentence numbers:15"
+      ],
+      [
+        "x₆ bounds",
+        "2.5 ≤ x₆ ≤ 3.5",
+        "sentence numbers:15"
+      ],
+      [
+        "x₇ bounds",
+        "5 ≤ x₇ ≤ 6",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The optimization goal is to minimize the overall weight of the reducer...",
+      "Mathematical_expressions": "f = 0.7854·x₁·x₂²·(3.3333·x₃² + 14.9334·x₃ - 43.0934) - 1.508·x₁·(x₆² + x₇²) + 7.4777·(x₆³ + x₇³) + 0.7854·(x₄·x₆² + x₅·x₇²)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "2532.807782446",
+      "2532.8078"
+    ],
+    "time_seconds": 97.22705520000454,
+    "total_tokens": 11803
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "2532.807782446",
+      "2532.8078"
+    ],
+    "ground_truth": 2532.81
+  }
+}

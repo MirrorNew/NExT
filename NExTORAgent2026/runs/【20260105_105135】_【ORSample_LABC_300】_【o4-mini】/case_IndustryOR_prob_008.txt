@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Haus Toys can manufacture and sell toy trucks, toy airplanes, toy boats, and toy trains. The profit per truck sold is \\$5, per airplane \\$10, per boat \\$8, and per train \\$7. How many of each type of toy should Haus Toys produce in order to maximize profit?\n\nA total of 890 units of wood are available. Each truck requires 12 units of wood, each airplane requires 20 units, each boat requires 15 units, and each train requires 10 units.\n\nA total of 500 units of steel are available. Each airplane requires 3 units of steel, each boat requires 5 units, each train requires 4 units, and each truck requires 6 units.\n\nIf Haus Toys produces trucks, then it does not produce trains.\n\nHowever, if it produces boats, then it also produces airplanes.\n\nThe ratio of the number of toy boats produced to the number of toy trains produced cannot exceed 1; that is, the value of $(\\text{number of toy boats produced})/(\\text{number of toy trains produced})$ must be less than or equal to 1.",
+    "answer": 623.0,
+    "index": "IndustryOR_prob_008",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 生产的玩具船数量不能超过生产的玩具火车数量。, 修改后相关描述: 生产的玩具船数量与生产的玩具火车数量之比不能超过 1，即生产的玩具船数量除以生产的玩具火车数量的比值必须小于或等于 1。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_008\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_017.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "623.0"
+    ],
+    "time_seconds": 34.29049369999848,
+    "total_tokens": 3650
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "623.0"
+    ],
+    "ground_truth": 623.0
+  }
+}

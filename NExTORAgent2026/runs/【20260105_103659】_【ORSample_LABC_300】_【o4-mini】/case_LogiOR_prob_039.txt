@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "HealthSupply manages a healthcare supply chain and must satisfy the demand for two products over the next two quarters: Vaccine X and Vaccine Y. The specific demands are: in Quarter 1, the demand for Vaccine X is 100 doses and the demand for Vaccine Y is 200 doses; in Quarter 2, the demand for Vaccine X is 300 doses and the demand for Vaccine Y is 100 doses.\n\nIn each quarter, the company can produce at most 1,500 doses of vaccine. Each dose of Vaccine X requires 4 liters of biochemical raw material, and each dose of Vaccine Y requires 3 liters of biochemical raw material. The cost of the biochemical raw material is \\$300 per liter in Quarter 1 and \\$450 per liter in Quarter 2. In each quarter, at most 2,500 liters of raw material can be purchased, and the raw material can only be used in the quarter in which it is purchased; it cannot be carried over for use across quarters.\n\nAt the beginning of Quarter 1, the company has initial inventory: 200 doses of Vaccine X and 300 doses of Vaccine Y. At the end of each quarter, an inventory holding cost of \\$100 per remaining dose is charged. Considering the complexity of inventory management and the nonlinear impact of long-term storage on facility utilization and quality-control pressure, the end-of-Quarter-2 inventory cost is no longer a simple linear function of the inventory level; instead, it is computed as “the total number of doses remaining at the end of Quarter 2 multiplied by \\$100, and then raised to the power of 1.2,” i.e., the end-of-Quarter-2 inventory cost equals $\\big(\\text{total remaining inventory doses at the end of Quarter 2} \\times \\$100\\big)^{1.2}$, where the exponent takes the specific value $1.2$. The end-of-Quarter-1 inventory cost remains linear, charged at \\$100 per dose.\n\nIn addition, the company must satisfy a regulatory requirement: the average effectiveness of the vaccines produced in each quarter must be at least 90%. Vaccine X has an effectiveness of 85%, and Vaccine Y has an effectiveness of 95%.\n\nUnder these conditions, determine how to meet the demand in each quarter and comply with the regulatory requirement at minimum cost (including raw material costs and the inventory costs computed as described above).",
+    "answer": 460000.0,
+    "index": "LogiOR_prob_039",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 在第 1 季度开始时，公司已有库存：疫苗 X 200 剂、疫苗 Y 300 剂。每个季度末对剩余库存按每剂 100 美元收取库存成本。 修改后相关描述: 在第 1 季度开始时，公司已有库存：疫苗 X 200 剂、疫苗 Y 300 剂。每个季度末对剩余库存按每剂 100 美元收取库存成本。考虑到库存管理的复杂性和长期储存对设施占用与品控压力的非线性影响，第 2 季度末的库存成本不再与库存量呈简单线性关系，而是按“第 2 季度末库存总剂量乘以 100 美元，再整体取 1.2 次幂”的方式计算，即第 2 季度末库存成本等于「(第 2 季度末剩余库存总剂量 × 100 美元) 的 1.2 次幂」，其中幂指数取具体数值 1.2。第 1 季度末的库存成本仍保持线性，按每剂 100 美元计收。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_039\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_047.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 32.3567311999941,
+    "total_tokens": 3281
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 460000.0
+  }
+}

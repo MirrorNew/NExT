@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A bottled water company sells water in glass bottles and plastic bottles. One glass bottle can hold 500 milliliters of water, while one plastic bottle can hold 750 milliliters of water. Since most customers prefer plastic bottles, the ratio of the number of plastic bottles to the number of glass bottles must be at least 3; that is, the number of plastic bottles must be no less than 3 times the number of glass bottles. However, the number of glass bottles must be at least 20. If the company has 250,000 milliliters of water available, in order to maximize the total number of bottles, how many glass bottles and plastic bottles should be produced?",
+    "answer": 363.0,
+    "index": "NLP4LP_prob_077",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 塑料瓶的数量必须至少是玻璃瓶数量的 3 倍。修改后相关描述: 要求塑料瓶数量与玻璃瓶数量的比值至少为 3，也就是说塑料瓶的数量必须不少于玻璃瓶数量的 3 倍。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_077\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_061.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "363.0"
+    ],
+    "time_seconds": 12.837549400006537,
+    "total_tokens": 884
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "363.0"
+    ],
+    "ground_truth": 363.0
+  }
+}

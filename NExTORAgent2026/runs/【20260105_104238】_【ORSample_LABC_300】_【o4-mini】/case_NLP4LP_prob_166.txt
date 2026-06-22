@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A corn farmer transports corn to the city using tractors or cars. Each tractor can carry 40 kg of corn, and each car can carry 20 kg of corn. Because tractors are very slow, the number of cars used must be at least twice the number of tractors used. If at least 500 kg of corn must be transported to the city, determine—subject to these conditions—the minimum total number of tractors and cars required. In addition, introduce the following conditional requirement to form a new constraint: if the number of tractors used for transportation exceeds 5, then due to congestion on rural roads, starting from the 6th tractor, for each additional tractor added, one additional car must also be added to divert the transportation flow.",
+    "answer": 25.0,
+    "index": "NLP4LP_prob_166",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述:『一位玉米农民通过拖拉机或汽车将玉米运往城市。每辆拖拉机可以运送 40 千克玉米，而每辆汽车可以运送 20 千克玉米。由于拖拉机非常缓慢，所使用的汽车数量必须至少是所使用拖拉机数量的两倍。如果至少需要将 500 千克玉米运往城市，求在满足条件的前提下，使所需拖拉机和汽车的总数量最小。』, 修改后相关描述:『一位玉米农民通过拖拉机或汽车将玉米运往城市。每辆拖拉机可以运送 40 千克玉米，而每辆汽车可以运送 20 千克玉米。由于拖拉机非常缓慢，所使用的汽车数量必须至少是所使用拖拉机数量的两倍。如果至少需要将 500 千克玉米运往城市，求在满足条件的前提下，使所需拖拉机和汽车的总数量最小。此外，引入如下条件判断形成新的约束：如果用于运输的拖拉机数量超过 5 辆，那么由于乡间道路拥堵，从第 6 辆拖拉机起，每增加 1 辆拖拉机，就必须额外增加 1 辆汽车来进行分流运输。』",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_166\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_071.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "19.0"
+    ],
+    "time_seconds": 14.633632500001113,
+    "total_tokens": 1758
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "19.0"
+    ],
+    "ground_truth": 25.0
+  }
+}

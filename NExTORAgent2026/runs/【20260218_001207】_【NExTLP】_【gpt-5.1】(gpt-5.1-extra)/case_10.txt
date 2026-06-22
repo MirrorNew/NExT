@@ -1,0 +1,393 @@
+{
+  "entry": {
+    "index": 10,
+    "question": "South China Electric Power Dispatching Co., Ltd. is a comprehensive energy company integrating power plant operation and grid dispatching. The company owns three generators with different technical characteristics. Through a complete power transmission network, the electric energy is transmitted to multiple substations in the region and finally delivered to users. The dispatching team needs to flexibly use the capacity and ramp-up/downhill capability of each unit to control operating costs and resource consumption while meeting load demand. The overall goal is to minimize the total power generation cost and reasonably allocate the limited power generation and transmission resources in the power grid through scientific start-stop and output decisions under the premise of ensuring the reliability of the power grid.\nIn terms of units, each generator set must bear the minimum stable output when it is started and must not exceed its rated maximum output. The start-stop status and output level are coupled with each other and need to be decided synchronously. In order to ensure that unit 3 has a maintenance opportunity, unit 3 is required to be shut down for maintenance at least once within the five-hour dispatch period. In terms of demand, the load demands of the four substations in the five time periods are different. It is necessary to ensure that the power demands of all substations in each time period are accurately met to avoid the risk of power outages. In terms of the dispatching network, the output change of each unit in adjacent time periods shall not exceed its climbing or descending limit, and each unit can supply power to at most two substations in the same time period. If the same substation is supplied for three consecutive time periods, it shall not be supplied to the substation in the next time period to improve the system fault tolerance. In order to maintain the spare capacity requirements, at least two units must be started at the same time in any time period to cope with sudden loads or unit failures. Minimize the total power generation cost and give the answer. Assume that all machines are initially turned off,You can choose whether to open it in the first period. Ramp-up/ramp-down here refers to the maximum rise/fall limit in the next period.  If the equipment set finally needs to add 500 as fixed equipment fee, how much will it cost in total?\n\n| Unit | Minimum output $P_i^{\\min}$ (MW) | Maximum output $P_i^{\\max}$ (MW) | Ramp-up/ramp-down limit $R_i$ (MW/hour) | Unit output cost $c_i$ ($/MWh) |\n| ----- | -------------------------- | -------------------------- | --------------------------- | -------------------------- |\n| Unit 1 | 20 | 50 | 40 | 50 |\n| Unit 2 | 30 | 80 | 30 | 60 |\n| Unit 3 | 0 | 70 | 70 | 100 |\n\n| Time period $t$ | Substation 1 demand $D_{1,t}$ (MW) | Substation 2 demand $D_{2,t}$ (MW) | Substation 3 demand $D_{3,t}$ (MW) | Substation 4 Demand $D_{4,t}$ (MW) |\n| -------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- |\n| 1 | 40 | 30 | 50 | 30 |\n| 2 | 30 | 30 | 40 | 20 |\n| 3 | 60 | 40 | 50 | 30 |\n| 4 | 35 | 25 | 40 | 30 |\n| 5 | 50 | 40 | 30 | 40 |",
+    "answer": 46600.0,
+    "Parameters_List": [
+      {
+        "Name": "num_units",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "units",
+        "Type": "list",
+        "Value": [
+          "Unit 1",
+          "Unit 2",
+          "Unit 3"
+        ]
+      },
+      {
+        "Name": "P_min",
+        "Type": "tuple",
+        "Value": {
+          "Unit 1": 20,
+          "Unit 2": 30,
+          "Unit 3": 0
+        }
+      },
+      {
+        "Name": "P_max",
+        "Type": "tuple",
+        "Value": {
+          "Unit 1": 50,
+          "Unit 2": 80,
+          "Unit 3": 70
+        }
+      },
+      {
+        "Name": "R",
+        "Type": "tuple",
+        "Value": {
+          "Unit 1": 40,
+          "Unit 2": 30,
+          "Unit 3": 70
+        }
+      },
+      {
+        "Name": "c",
+        "Type": "tuple",
+        "Value": {
+          "Unit 1": 50,
+          "Unit 2": 60,
+          "Unit 3": 100
+        }
+      },
+      {
+        "Name": "num_periods",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "periods",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name": "num_substations",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "substations",
+        "Type": "list",
+        "Value": [
+          "Substation 1",
+          "Substation 2",
+          "Substation 3",
+          "Substation 4"
+        ]
+      },
+      {
+        "Name": "D_matrix",
+        "Type": "list",
+        "Value": [
+          [
+            40,
+            30,
+            50,
+            30
+          ],
+          [
+            30,
+            30,
+            40,
+            20
+          ],
+          [
+            60,
+            40,
+            50,
+            30
+          ],
+          [
+            35,
+            25,
+            40,
+            30
+          ],
+          [
+            50,
+            40,
+            30,
+            40
+          ]
+        ]
+      },
+      {
+        "Name": "D",
+        "Type": "tuple",
+        "Value": {
+          "Substation 1": {
+            "1": 40,
+            "2": 30,
+            "3": 60,
+            "4": 35,
+            "5": 50
+          },
+          "Substation 2": {
+            "1": 30,
+            "2": 30,
+            "3": 40,
+            "4": 25,
+            "5": 40
+          },
+          "Substation 3": {
+            "1": 50,
+            "2": 40,
+            "3": 50,
+            "4": 40,
+            "5": 30
+          },
+          "Substation 4": {
+            "1": 30,
+            "2": 20,
+            "3": 30,
+            "4": 30,
+            "5": 40
+          }
+        }
+      },
+      {
+        "Name": "fixed_equipment_fee",
+        "Type": "integer",
+        "Value": 500
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "South China Electric Power...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company owns three...",
+        "Defines there are 3 generating units (i = 1,2,3); no numeric constraint."
+      ],
+      [
+        "3",
+        "Through a complete power...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The dispatching team needs...",
+        "Implies use of capacity limits, ramp-up/down limits, and satisfaction of load demand; cost minimization is part of the objective."
+      ],
+      [
+        "5",
+        "The overall goal is to minimize...",
+        "Defines objective: minimize total power generation cost; decisions are start-stop and output; reliability to be ensured via later constraints."
+      ],
+      [
+        "6",
+        "In terms of units, each...",
+        "If unit i is started (ON) in period t, output must satisfy P_i^{min} ≤ P_{i,t} ≤ P_i^{max}; if OFF, output is 0 via coupling."
+      ],
+      [
+        "7",
+        "The start-stop status and...",
+        "Couples binary on/off variable u_{i,t} with output P_{i,t}: P_i^{min} u_{i,t} ≤ P_{i,t} ≤ P_i^{max} u_{i,t}."
+      ],
+      [
+        "8",
+        "In order to ensure that unit 3...",
+        "Unit 3 must be OFF at least once: ∑_{t=1}^5 (1 - u_{3,t}) ≥ 1."
+      ],
+      [
+        "9",
+        "In terms of demand, the load...",
+        "No direct constraint; introduces that demands differ by time and substation, detailed in tables."
+      ],
+      [
+        "10",
+        "It is necessary to ensure that...",
+        "For each substation and period, supply equals demand: ∑_i x_{i,s,t} = D_{s,t}."
+      ],
+      [
+        "11",
+        "In terms of the dispatching network...",
+        "(1) Ramp constraint: |P_{i,t} - P_{i,t-1}| ≤ R_i between adjacent periods; (2) each unit can supply at most two substations per period: ∑_s z_{i,s,t} ≤ 2."
+      ],
+      [
+        "12",
+        "If the same substation is supplied...",
+        "Sequence constraint: if a unit supplies a substation for 3 consecutive periods, it cannot supply it in the next period; encoded via constraints on z_{i,s,t} over 4-period windows."
+      ],
+      [
+        "13",
+        "In order to maintain the spare...",
+        "Spare capacity constraint: at least two units ON each period: ∑_i u_{i,t} ≥ 2."
+      ],
+      [
+        "14",
+        "Minimize the total power...",
+        "Restates objective: minimize total power generation cost over all periods."
+      ],
+      [
+        "15",
+        "Assume that all machines are...",
+        "Initial condition: all units initially OFF; modeled as u_{i,0} = 0, P_{i,0} = 0; first-period ON decisions are free but must respect other constraints."
+      ],
+      [
+        "16",
+        "Ramp-up/ramp-down here refers...",
+        "Clarifies ramp constraints apply between consecutive periods t and t+1 (adjacent time periods)."
+      ],
+      [
+        "17",
+        "If the equipment set finally...",
+        "Objective adjustment: add a fixed constant fee 500 to the total cost at the end."
+      ],
+      [
+        "18",
+        "Unit | Minimum output...",
+        "Defines parameters P_i^{min}, P_i^{max}, R_i, c_i for units i=1,2,3; no constraints."
+      ],
+      [
+        "19",
+        "Time period t | Substation 1...",
+        "Defines parameters D_{s,t} for substations s=1..4 and periods t=1..5; no constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "u_{i,t}",
+        "Meaning": "ON/OFF (start-stop) status of unit i in period t (1 if running, 0 if shut down)",
+        "Type": "BINARY",
+        "Range ": "u_{i,t} ∈ {0,1} for i=1..3, t=1..5 (and u_{i,0}=0 as initial condition)"
+      },
+      {
+        "symbol": "P_{i,t}",
+        "Meaning": "Total power output of unit i in period t (sum of deliveries to all substations)",
+        "Type": "continuous type",
+        "Range ": "0 ≤ P_{i,t} ≤ P_i^{max}; more tightly P_i^{min} u_{i,t} ≤ P_{i,t} ≤ P_i^{max} u_{i,t}, for i=1..3, t=1..5, and P_{i,0}=0"
+      },
+      {
+        "symbol": "x_{i,s,t}",
+        "Meaning": "Power supplied from unit i to substation s in period t",
+        "Type": "continuous type",
+        "Range ": "x_{i,s,t} ≥ 0, for i=1..3, s=1..4, t=1..5; additionally x_{i,s,t} ≤ M z_{i,s,t} and x_{i,s,t} ≤ P_i^{max} u_{i,t}"
+      },
+      {
+        "symbol": "z_{i,s,t}",
+        "Meaning": "Supply indicator: 1 if unit i supplies substation s in period t, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "z_{i,s,t} ∈ {0,1}, for i=1..3, s=1..4, t=1..5"
+      },
+      {
+        "symbol": "Δ^+_{i,t}",
+        "Meaning": "Ramp-up amount: nonnegative variable representing positive change in output from period t−1 to t for unit i",
+        "Type": "continuous type",
+        "Range ": "Δ^+_{i,t} ≥ 0, for i=1..3, t=2..5"
+      },
+      {
+        "symbol": "Δ^-_{i,t}",
+        "Meaning": "Ramp-down amount: nonnegative variable representing magnitude of negative change in output from period t−1 to t for unit i",
+        "Type": "continuous type",
+        "Range ": "Δ^-_{i,t} ≥ 0, for i=1..3, t=2..5"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Min/Max output bounds & coupling",
+        "P_i^{min} u_{i,t} ≤ P_{i,t} ≤ P_i^{max} u_{i,t},  ∀i ∈ {1,2,3}, t ∈ {1,…,5}",
+        "sentence numbers: 6, 7"
+      ],
+      [
+        "Unit 3 maintenance shutdown at least once",
+        "∑_{t=1}^5 (1 - u_{3,t}) ≥ 1   (equivalently, ∑_{t=1}^5 u_{3,t} ≤ 4)",
+        "sentence numbers: 8"
+      ],
+      [
+        "Substation demand satisfaction",
+        "∑_{i=1}^3 x_{i,s,t} = D_{s,t},  ∀s ∈ {1,…,4}, t ∈ {1,…,5}",
+        "sentence numbers: 10, 18, 19"
+      ],
+      [
+        "Unit output equals total dispatched to substations",
+        "∑_{s=1}^4 x_{i,s,t} = P_{i,t},  ∀i ∈ {1,2,3}, t ∈ {1,…,5}",
+        "sentence numbers: 4, 10, 11"
+      ],
+      [
+        "Nonnegativity of power variables",
+        "x_{i,s,t} ≥ 0,  ∀i,s,t;   P_{i,t} ≥ 0,  ∀i,t",
+        "sentence numbers: 6, 10"
+      ],
+      [
+        "Ramp linearization balance",
+        "P_{i,t} - P_{i,t-1} = Δ^+_{i,t} - Δ^-_{i,t},  ∀i ∈ {1,2,3}, t=2,…,5",
+        "sentence numbers: 4, 11, 16"
+      ],
+      [
+        "Ramp-up/down limit",
+        "Δ^+_{i,t} ≥ 0,  Δ^-_{i,t} ≥ 0,  Δ^+_{i,t} + Δ^-_{i,t} ≤ R_i,  ∀i ∈ {1,2,3}, t=2,…,5",
+        "sentence numbers: 4, 11, 16"
+      ],
+      [
+        "Initial OFF status and zero initial output",
+        "u_{i,0} = 0,  P_{i,0} = 0,  ∀i ∈ {1,2,3}",
+        "sentence numbers: 15"
+      ],
+      [
+        "At least two units ON every period",
+        "∑_{i=1}^3 u_{i,t} ≥ 2,  ∀t ∈ {1,…,5}",
+        "sentence numbers: 13"
+      ],
+      [
+        "At most two substations per unit per period",
+        "∑_{s=1}^4 z_{i,s,t} ≤ 2,  ∀i ∈ {1,2,3}, t ∈ {1,…,5}",
+        "sentence numbers: 11"
+      ],
+      [
+        "Dispatch only if supply indicator is active (upper bound linking x and z)",
+        "x_{i,s,t} ≤ M z_{i,s,t},  ∀i ∈ {1,2,3}, s ∈ {1,…,4}, t ∈ {1,…,5}",
+        "sentence numbers: 11"
+      ],
+      [
+        "No supply if unit is OFF (linking x and u)",
+        "x_{i,s,t} ≤ P_i^{max} u_{i,t},  ∀i ∈ {1,2,3}, s ∈ {1,…,4}, t ∈ {1,…,5}",
+        "sentence numbers: 6, 7, 11"
+      ],
+      [
+        "Three-consecutive-period supply prohibition",
+        "For all i ∈ {1,2,3}, s ∈ {1,…,4}, and t=1,2:  z_{i,s,t} + z_{i,s,t+1} + z_{i,s,t+2} + z_{i,s,t+3} ≤ 3",
+        "sentence numbers: 12"
+      ],
+      [
+        "Binary domain constraints",
+        "u_{i,t} ∈ {0,1},  z_{i,s,t} ∈ {0,1},  ∀i ∈ {1,2,3}, s ∈ {1,…,4}, t ∈ {1,…,5}",
+        "sentence numbers: 7, 11, 12, 13, 15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The overall goal is to minimize the total power generation cost ... Minimize the total power generation cost and give the answer. If the equipment set finally needs to add 500 as fixed equipment fee, how much will it cost in total?",
+      "Mathematical_expressions": "min C_total = ∑_{t=1}^5 ∑_{i=1}^3 c_i P_{i,t} + 500"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "46600.0"
+    ],
+    "time_seconds": 81.39787499999511,
+    "total_tokens": 55948
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "46600.0"
+    ],
+    "ground_truth": 46600.0
+  }
+}

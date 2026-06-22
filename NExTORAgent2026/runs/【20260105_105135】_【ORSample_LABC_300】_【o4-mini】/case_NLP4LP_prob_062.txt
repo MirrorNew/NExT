@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A transportation company can purchase conventional trucks and hybrid trucks for deliveries. A conventional truck can deliver 500 parcels per day and generates 200 units of pollutants. A hybrid truck can deliver 300 parcels per day and generates 100 units of pollutants. Due to a new environmental law, they can generate at most 7000 units of pollutants per day. However, the company needs to be able to deliver at least 20000 parcels per day.\n\nIn actual operations, the company finds that if both conventional trucks and hybrid trucks are used on the same day, additional operational complexity arises due to dispatch coordination, route overlap, and loading/unloading interfaces, thereby reducing the effective deliverable volume. To model this effect, let the number of conventional trucks be $x$ and the number of hybrid trucks be $y$, and assume that when conventional and hybrid trucks coexist, a synergistic reduction effect occurs that is proportional to the product of $x$ and $y$. Specifically, the company’s “effective deliverable number of parcels” is no longer simply “$500\\times$ (number of conventional trucks) $+ 300\\times$ (number of hybrid trucks)”, but rather\n\nEffective deliverable parcels $= 500\\times$ (number of conventional trucks) $+ 300\\times$ (number of hybrid trucks) $- 0.02\\times$ (number of conventional trucks) $\\times$ (number of hybrid trucks) $\\times$ (number of conventional trucks $+$ number of hybrid trucks),\n\nwhere $0.02$ is a given reduction coefficient.\n\nThe company still requires this “effective deliverable number of parcels” to be at least 20000 parcels per day, while the total pollutants generated per day must still be at most 7000 units (i.e., total pollutants are still equal to $200\\times$ (number of conventional trucks) $+ 100\\times$ (number of hybrid trucks), and this constraint is unchanged). How many trucks of each type should they purchase in order to minimize the total number of required trucks (the sum of the number of conventional trucks and the number of hybrid trucks)?",
+    "answer": 61.0,
+    "index": "NLP4LP_prob_062",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “公司需要每天至少能够配送 20000 个包裹。” 这一要求隐含的数学表述为：500×普通货车数量 + 300×混合动力货车数量 ≥ 20000。修改后相关描述: “公司需要每天至少能够配送 20000 个包裹” 被细化为：考虑协同折减效应后，公司的有效可配送包裹数定义为 500×普通货车数量 + 300×混合动力货车数量 − 0.02×普通货车数量×混合动力货车数量×(普通货车数量 + 混合动力货车数量)，且要求这个有效可配送包裹数每天至少达到 20000 个包裹。其他描述（包括污染物约束和目标为最小化所需货车总数）保持不变。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_062\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_065.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 32.29543329999433,
+    "total_tokens": 3263
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 61.0
+  }
+}

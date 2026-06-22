@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A certain factory produces three products: I, II, and III. Each product must go through two processing operations, A and B. The factory has two machines that can perform operation A, denoted as A1 and A2; and three machines that can perform operation B, denoted as B1, B2, and B3. Product I can be processed on any machine in both operations A and B. Product II can be processed on any A-type machine in operation A, but in operation B it can only be processed on B1. Product III can only be processed on A2 and B2. Given the unit processing times of each product on different machines, raw material costs, product selling prices, the effective working hours of the machines, and the costs of operating the machines at full load (see Tables 1–4), the task is to determine an optimal production plan that maximizes the factory’s profit.\n\nOn this basis, introduce the following nonlinear constraints on production conditions: if the total output of product I exceeds 2000 units, then starting from the 2001st unit, for each additional unit of product I produced, an extra overtime labor cost of 0.10 yuan must be paid; if the total output of product III exceeds 1500 units, then the factory must activate an additional inspection operation for product III, and this inspection operation incurs a one-time fixed cost of 2000 yuan. Under these additional cost conditions, determine an optimal production plan that maximizes the factory’s net profit.\n\nTables 1–4  \n| Machine | Product I | Product II | Product III | Effective working hours | Full-load operating cost (yuan) |\n|--------|-----------|------------|-------------|--------------------------|----------------------------------|\n| A1     | 5         | 10         |             | 6000                     | 300                              |\n| A2     | 7         | 9          | 12          | 10000                    | 321                              |\n| B1     | 6         | 8          |             | 4000                     | 250                              |\n| B2     | 4         |            | 11          | 7000                     | 783                              |\n| B3     | 7         |            |             | 4000                     | 200                              |\n| Raw material cost (yuan/unit) | 0.25 | 0.35 | 0.50 | | |\n| Unit price (yuan/unit)        | 1.25 | 2.00 | 2.80 | | |",
+    "answer": 38000.0,
+    "index": "IndustryOR_prob_026",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 已知各产品在不同设备上的单位加工时间、原材料成本、产品销售单价、设备的有效工作小时数以及设备满负荷运转的成本（见表 1-4），要求安排最优生产计划，使工厂利润最大。 修改后相关描述: 已知各产品在不同设备上的单位加工时间、原材料成本、产品销售单价、设备的有效工作小时数以及设备满负荷运转的成本（见表 1-4），要求安排最优生产计划，使工厂利润最大。在此基础上，引入以下生产条件的非线性约束：如果产品 I 的总产量超过 2000 件，则从第 2001 件开始，每多生产 1 件产品 I，需额外支付 0.10 元的加班人工费用；如果产品 III 的总产量超过 1500 件，则工厂需要为产品 III 启动一条额外的检验工序，该检验工序产生一次性固定成本 2000 元。请在考虑上述附加成本条件的情况下，安排最优生产计划，使工厂的净利润最大。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_026\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_025.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1146.566502463"
+    ],
+    "time_seconds": 48.797335700000986,
+    "total_tokens": 4160
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "1146.566502463"
+    ],
+    "ground_truth": 38000.0
+  }
+}

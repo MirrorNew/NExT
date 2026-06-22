@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "LogiOR_prob_044",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_044\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_044\\code.py",
+    "NLtype": "Linear",
+    "question": "CargoLink Logistics operates two types of delivery vehicles: Type X and Type Y. New environmental regulations require that the average carbon emissions of all vehicles deployed over the next three years cannot exceed 40 grams per kilometer annually. Each Type X vehicle generates $25,000 in revenue, costs $18,000 to operate, and emits 70 grams of carbon per kilometer. Each Type Y vehicle generates $20,000 in revenue, costs $16,000 to operate, and emits 30 grams of carbon per kilometer. Due to fleet capacity constraints, CargoLink can deploy a maximum of 400 vehicles each year. The maximum number of each vehicle type that can be deployed annually is shown in the table below. For example, at most, 350 Type X vehicles can be deployed in year 3. How can CargoLink Logistics maximize its total profit over the next three years while complying with environmental regulations?\n\n| Year | Maximum Type X Vehicles | Maximum Type Y Vehicles |  \n|------|--------------------------|--------------------------|  \n| 1    | 300                      | 250                      |  \n| 2    | 320                      | 280                      |  \n| 3    | 350                      | 300                      |",
+    "answer": 5252000.0,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "5252000.0"
+    ],
+    "time_seconds": 36.63847530000203,
+    "total_tokens": 1945
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "5252000.0"
+    ],
+    "ground_truth": 5252000.0
+  }
+}

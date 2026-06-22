@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "LogiCorp operates a logistics network transporting two types of products: Basic and Advanced. The raw material required to produce these products can be purchased at a price of \\$5 per unit. Processing 1 unit of raw material requires 2 hours of warehouse labor. Each unit of processed raw material yields 2 units of Basic product and 3 units of Advanced product. The Basic product can be sold at \\$10 per unit, and the Advanced product can be sold at \\$12 per unit.\n\nLogiCorp may also choose to further process the Basic and Advanced products to produce Premium Basic and Premium Advanced, which sell for \\$20 per unit and \\$25 per unit, respectively. Further processing 1 unit of Basic product requires an additional 3 hours of warehouse labor and a processing cost of \\$5, and yields 1 unit of Premium Basic. Further processing 1 unit of Advanced product requires an additional 4 hours of warehouse labor and a processing cost of \\$6, and yields 1 unit of Premium Advanced.\n\nEach year, LogiCorp has 8,000 hours of warehouse labor available and can purchase at most 3,000 units of raw material.\n\nTo describe the synergy effect brought by further processing, assume that when LogiCorp simultaneously further processes some Basic products and some Advanced products into premium products, the total attainable synergy profit is:\n$ \\text{Synergy profit} = 0.0001 \\times (\\text{amount of raw material used to produce Basic products}) \\times (\\text{number of Basic products further processed into Premium Basic}) \\times (\\text{number of Advanced products further processed into Premium Advanced}), $\nwhere the coefficient 0.0001 is a given constant.\n\nLogiCorp’s total profit equals the revenue from selling all products minus the cost of purchasing raw materials and the further-processing costs, plus the synergy profit defined above. How should LogiCorp maximize its profit subject to the conditions that it can purchase at most 3,000 units of raw material per year, it has 8,000 hours of warehouse labor per year, and raw material can only be purchased in integer units? Assume warehouse labor cost is a fixed cost.",
+    "answer": 189268.2374,
+    "index": "LogiOR_prob_037",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: LogiCorp 应如何最大化其利润？假设仓储劳动力成本为固定成本，且原材料只能以整数单位购买。, 修改后相关描述: 为描述进一步加工带来的协同效应，假设当 LogiCorp 同时将部分基础型产品和部分高级型产品进一步加工为高端产品时，其总体可实现的协同利润为：协同利润 = 0.01 ×（用于生产基础型产品的原材料数量）×（进一步加工为高端基础型产品的基础型产品数量）×（进一步加工为高端高级型产品的高级型产品数量），其中系数 0.01 为给定常数。LogiCorp 的总利润等于销售所有产品的收入减去原材料购买成本和进一步加工成本，再加上上述协同利润。LogiCorp 应如何在每年最多购买 3,000 单位原材料、每年拥有 8,000 小时仓储劳动力且原材料只能以整数单位购买的条件下，最大化其利润？假设仓储劳动力成本为固定成本。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_037\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_035.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "168502.4722999"
+    ],
+    "time_seconds": 36.91562459999113,
+    "total_tokens": 3360
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "168502.4722999"
+    ],
+    "ground_truth": 189268.2374
+  }
+}

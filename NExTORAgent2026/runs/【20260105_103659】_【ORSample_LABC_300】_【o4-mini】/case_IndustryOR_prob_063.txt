@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A company must decide whether to hire some individuals from five candidates to join its R&D team. The salary requirements of candidates F, G, H, I, and J are \\$12,000, \\$15,000, \\$18,000, \\$5,000, and \\$10,000, respectively. The company aims to minimize the total amount paid to the candidates, subject to not exceeding the budget.\n\nThe company’s budget is \\$40,000, and they wish to hire at most 4 new employees.\n\nThe candidates’ skill levels are as follows:  \nCandidate F: level 2  \nCandidate G: level 3  \nCandidate H: level 4  \nCandidate I: level 1  \nCandidate J: level 2  \n\nThe company must ensure that the total skill level of the hired employees is at least 8. A nonlinear growth effect is introduced here: assume that each additional hired employee multiplies the team’s overall effective skill level by a growth factor of 1.3 on top of the original level. Specifically, if the final number of hired employees is $n$, then the team’s effective total skill level equals “the sum of the skill levels of all hired employees” multiplied by $1.3^n$, i.e., the effective skill level grows exponentially according to the $n$-th power of 1.3. The company requires that this effective total skill level, scaled by $1.3^n$, be at least 8.\n\nThe years of project management experience for each candidate are as follows:  \nCandidate F: 1 year  \nCandidate G: 2 years  \nCandidate H: 2 years  \nCandidate I: 5 years  \nCandidate J: 4 years  \n\nThey want the team’s total years of project management experience to be at least 8 years.\n\nBecause candidates G and J have similar technical backgrounds, the company may select at most one of them.",
+    "answer": 27000.0,
+    "index": "IndustryOR_prob_063",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 公司需要确保被雇用员工的总技能等级至少为 8。 修改后相关描述: 公司需要确保被雇用员工的总技能等级至少为 8。这里引入一个非线性增长效应：假设每增加一名被雇用员工，整体团队的有效技能等级会在原有基础上乘以一个 1.3 的增长系数。具体来说，如果最终被雇用的员工人数为 n 人，则团队的有效总技能等级等于“各被雇用员工技能等级之和”乘以 1.3 的 n 次方，即有效技能等级按 1.3 的 n 次方呈指数增长。公司要求这个按 1.3 的 n 次方放大后的有效总技能等级至少为 8。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_063\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_022.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "27000.0"
+    ],
+    "time_seconds": 29.70728859999508,
+    "total_tokens": 3804
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "27000.0"
+    ],
+    "ground_truth": 27000.0
+  }
+}

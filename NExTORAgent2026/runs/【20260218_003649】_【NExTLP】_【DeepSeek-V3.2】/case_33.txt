@@ -1,0 +1,187 @@
+{
+  "entry": {
+    "index": 33,
+    "question": "As a regional central city, Jinxiu City is facing severe challenges from an aging population. According to the White Paper on Social Services for the Silver Hair released by the Municipal Civil Affairs Bureau, the proportion of the city's population over 60 years old has exceeded the international standard for an aging society, and presents a distribution feature of \"dense urban areas and scattered suburban areas\". In response to this trend, the municipal government has launched the \"Sunset Red\" elderly care facility optimization project, planning to build a three-level elderly care service system. The project is currently in the first phase of planning, focusing on solving the problem of insufficient coverage of basic elderly care institutions. Due to the significant differences in geographical conditions among districts and counties - the central urban area has a highly concentrated population but tight land use, and the remote suburban counties have the pain point of too large a service radius, the project team needs to scientifically balance the efficiency of resource allocation and the principle of equalization of public services. This decision will directly affect the accessibility of elderly care services in the city, involving policy objectives such as the efficiency of the use of fiscal funds and regional coordinated development. The optimal site selection plan needs to maximize the coverage of the population under the constraints of a limited budget, and reserve expansion space for the subsequent second phase of the project. The implementation effect of the project will serve as a pilot case for provincial elderly care planning and provide a reference paradigm for similar cities. \n\nThe approximate locations and population numbers of the 20 districts and counties under Jinxiu City are shown in Figure C-13 and Table C34 respectively\n\nTable C-34 Number of residents in each district and county (unit: 10,000 people)\n\n| Code | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| -------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ |\n| Number of residents | 5.2 | 4.4 | 7.1 | 9.0 | 6.1 | 5.7 | 10.0 |\n| **Code** | **8** | **9** | **10** | **11** | **12** | **13** | **14** |\n| Number of residents | 12.2 | 7.6 | 20.3 | 30.4 | 30.9 | 12.0 | 9.3 |\n| **Code** | **15** | **16** | **17** | **18** | **19** | **20** | |\n| Number of residents | 15.5 | 25.6 | 11.0 | 5.3 | 7.9 | 9.9 | |\n\nAfter preliminary planning, it is planned to set up nursing homes in 10 points (①, ②, …, ⑩) in the figure, and each nursing home will serve the adjacent districts and counties. For example, the nursing home at point ② serves districts and counties 1, 2, 6, and 7, and the nursing home at point ④ serves districts and counties 7, 8, 10, 11, 12, and 13, and so on.\n\nQuestion: Due to limited funds, at most 4 can be set up in the first step. Where should they be built? Where should they be built to minimize the total population not covered? (10,000 people)\n\nFigure C-13 Regional distribution map (all areas point to possible nursing homes)\n\n```mermaid\nflowchart LR\n A1((\"Region 1\")) --> P2((\"Nursing home 2\"))\n A2((\"Region 2\")) --> P1((\"Nursing home 1\")) & P2\n A3((\"Region 3\")) --> P1 & P3((\"Nursing Home 3\"))\n A4((\"Area 4\")) --> P3\n A5((\"Area 5\")) --> P3\n A6((\"Area 6\")) --> P2\n A7((\"Area 7\")) --> P2 & P4((\"Nursing Home 4\"))\n A8((\"Area 8\")) --> P3 & P4\n A9((\"Area 9\")) --> P8((\"Nursing Home 8\"))\n A10((\"Area 10\")) --> P4 & P6((\"Nursing Home 6\"))\n A11((\"Area 11\")) --> P4 & P5((\"Nursing Home 5\"))\n A12((\"Area 12\")) --> P4 & P5 & P6\n A13((\"Area 13\")) --> P4 & P5 & P7((\"Nursing Home 7\"))\n A14((\"Region 14\")) --> P8 & P9((\"Nursing Home 9\"))\n A15((\"Region 15\")) --> P6 & P9\n A16((\"Region 16\")) --> P5 & P6\n A17((\"Region 17\")) --> P5 & P7 & P10((\"Nursing Home 10\"))\n A18((\"Region 18\")) --> P8 & P9\n A19((\"Region 19\")) --> P9 & P10\n A20((\"Region 20\")) --> P10\n A2 --- A1\n A1 --- A6\n A2 --- A7\n A2 --- A3\n A3 --- A4\n A3 --- A8\n A4 --- A5\n A5 --- A8\n A5 --- A13\n A6 --- A7\n A6 --- A9\n A7 --- A8\n A7 --- A9\n A7 --- A10\n A8 --- A13\n A9 --- A10\n A9 --- A14\n A9 --- A18\n A10 --- A12\n A10 --- A15\n A11 --- A12\n A11 --- A13\n A12 --- A16\n A13 --- A17\n A14 --- A15\n A14 --- A18\n A15 --- A16\n A15 --- A17\n A15 --- A19\n A16 --- A17\n A17 --- A19\n A17 --- A20\n A18 --- A19\n A19 --- A20\n\n\n```",
+    "answer": 32.8,
+    "Parameters_List": [
+      {
+        "Name": "max_nursing_homes",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "residents",
+        "Type": "list",
+        "Value": [
+          0.0,
+          5.2,
+          4.4,
+          7.1,
+          9.0,
+          6.1,
+          5.7,
+          10.0,
+          12.2,
+          7.6,
+          20.3,
+          30.4,
+          30.9,
+          12.0,
+          9.3,
+          15.5,
+          25.6,
+          11.0,
+          5.3,
+          7.9,
+          9.9
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "As a regional central city...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "According to the White Paper on...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "In response to this trend...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The project is currently in...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Due to the significant differences...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "This decision will directly affect...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The optimal site selection plan...",
+        "Extracted: Objective: maximize population coverage; Implied budget restriction"
+      ],
+      [
+        "8",
+        "The implementation effect of the project...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The approximate locations and population...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Table C-34 Number of residents...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "After preliminary planning, it is planned...",
+        "Extracted: Decision variables x_j; Coverage parameters a_{ij}"
+      ],
+      [
+        "12",
+        "For example, the nursing home at...",
+        "Extracted: entries of coverage matrix a_{2,1}=a_{2,2}=a_{2,6}=a_{2,7}=1; a_{4,7}=a_{4,8}=a_{4,10}=a_{4,11}=a_{4,12}=a_{4,13}=1"
+      ],
+      [
+        "13",
+        "Question: Due to limited funds...",
+        "Extracted constraint: ∑_{j=1}^{10} x_j ≤ 4"
+      ],
+      [
+        "14",
+        "Where should they be built?",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Where should they be built to minimize...",
+        "Extracted: Objective restated as minimize total uncovered population"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_j",
+        "Meaning": "1 if nursing home at candidate site j is built, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}, j=1…10"
+      },
+      {
+        "symbol": "y_i",
+        "Meaning": "1 if region i is covered by at least one built nursing home, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}, i=1…20"
+      },
+      {
+        "symbol": "p_i",
+        "Meaning": "population of region i (in 10,000 people)",
+        "Type": "continuous",
+        "Range ": "[5.2, 4.4, 7.1, 9.0, 6.1, 5.7, 10.0, 12.2, 7.6, 20.3, 30.4, 30.9, 12.0, 9.3, 15.5, 25.6, 11.0, 5.3, 7.9, 9.9]"
+      },
+      {
+        "symbol": "a_{ij}",
+        "Meaning": "1 if nursing-home site j can serve region i, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "defined by adjacency"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Budget constraint",
+        "∑_{j=1}^{10} x_j ≤ 4",
+        "sentence numbers:7,13"
+      ],
+      [
+        "Coverage definition",
+        "y_i ≤ ∑_{j=1}^{10} a_{ij} x_j ∀ i=1…20",
+        "sentence numbers:11,12"
+      ],
+      [
+        "Binary-domain x",
+        "x_j ∈ {0,1} ∀ j=1…10",
+        "modeling requirement"
+      ],
+      [
+        "Binary-domain y",
+        "y_i ∈ {0,1} ∀ i=1…20",
+        "modeling requirement"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Where should they be built to minimize the total population not covered? (10,000 people)",
+      "Mathematical_expressions": "Min Z = ∑_{i=1}^{20} p_i (1 − y_i)"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "32.8"
+    ],
+    "time_seconds": 51.234713300000294,
+    "total_tokens": 6095
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "32.8"
+    ],
+    "ground_truth": 32.8
+  }
+}

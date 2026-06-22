@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A flooring company produces laminated composite flooring planks and carpet. The marketing director reports that the expected weekly demand for laminated composite flooring planks is at least 15,000 square feet, and the expected weekly demand for carpet is at least 5,000 square feet. A transportation contract requires that the total weekly output of products be at least 50,000 square feet. However, due to a shortage of raw materials, the weekly production of laminated composite flooring planks may not exceed 40,000 square feet, and the weekly production of carpet may not exceed 20,000 square feet. If the profit per square foot of laminated composite flooring planks is \\$2.1, while the total profit for carpet is no longer linear as \\$3.3 times the carpet area, but instead uses a modified nonlinear profit form: the total weekly profit from carpet equals the term “\\$3.3 times the total square feet of carpet” raised to the power of 1.2, i.e., the total profit term is $(3.3\\times \\text{carpet square feet})^{1.2}$, how many square feet of these two products should the company produce each week to maximize profit?",
+    "answer": 166401.44246839205,
+    "index": "NLP4LP_prob_200",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每平方英尺地毯的利润为 3.3 美元。修改后相关描述: 地毯的总利润不再是线性的 3.3 乘以地毯面积，而是采用一个修正后的非线性利润形式：每周地毯的总利润等于 “3.3 乘以地毯的总平方英尺” 这一项的 1.2 次幂，即总利润项为 (3.3×地毯平方英尺)^1.2。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_200\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_100.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "94382.13359422"
+    ],
+    "time_seconds": 17.143001599994022,
+    "total_tokens": 1770
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "94382.13359422"
+    ],
+    "ground_truth": 166401.44246839205
+  }
+}

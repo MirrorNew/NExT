@@ -1,0 +1,419 @@
+{
+  "entry": {
+    "index": 19,
+    "question": "Haitong Manufacturing Co., Ltd. is a modern manufacturing enterprise with locations both at home and abroad. The company has five factories/teams, each with different professional skills and resources. Through the internal \"transportation network\" collaboration, it undertakes and completes customers' diverse orders. The company's operations management department recently received a batch of 12 orders, nine of which are standard orders that only need to be completed by a single factory independently, and three are joint orders. In order to avoid coordination confusion, the joint order only requires two factories. In order to effectively utilize the production capacity and logistics resources of each factory and control production and transportation costs, the company hopes to optimize the assignment plan to assign each order to the appropriate factory to minimize the overall cost, while considering the limitations of resources such as manpower, equipment, and transportation, as well as factors such as incentive mechanisms. In this scenario, the production scheduling team needs to model the order-factory matching plan and formulate the optimal plan to guide subsequent production arrangements and performance evaluation.\n On the supply side, each factory has different annual production capacity and specialized production line characteristics. Each factory must undertake at least one order to ensure equipment utilization and maintain annual assessment compliance, otherwise it will face idling penalties. Taking into account the specific situation of the factory, each factory can accept up to four order tasks, and all orders must be fully met, and no partial fulfillment can occur. If a factory undertakes a total of three or more orders, the company will return 10% of the lowest cost item in the order it undertakes as a performance bonus to encourage multi-point carrying capacity. \n\nThe following data table gives the estimated cost (in millions of yuan) for 5 factories (recorded as factories 1-5) to complete 12 orders (orders 1-9 are standard orders and 10-12 are joint orders). Those not listed indicate that the factory is not qualified for the order. Based on the above scenario and description, please give the calculated cost. \n\n| Factory \\ Order ( | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |\n| :-----------: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |\n| **Factory 1** | 9 | 2 | 7 | 8 | — | 6 | 5 | 4 | 3 | 11.2 | 9.2 | 10 |\n| **Factory 2** | 6 | 4 | 3 | — | — | 5 | 7 | 8 | 9 | 11.3 | 11.4 | 11.1 |\n| **Factory 3** | 5 | 8 | 1 | 8 | — | 4 | 6 | 7 | 2 | 12 | 10.4 | 12.4 |\n| **Factory 4** | 7 | 6 | 9 | 4 | 3 | 2 | 5 | 8 | 7 | 9.9 | 10.8 | 12.2 |\n| **Factory 5** | 8 | 5 | 6 | 4 | 9 | 7 | 3 | 2 | 1 | 11.4 | 10.6 | 13.1 |",
+    "answer": 84.2,
+    "Parameters_List": [
+      {
+        "Name": "factory_assignment",
+        "Type": "list",
+        "Value": {
+          "1": [
+            2,
+            7,
+            12
+          ],
+          "2": [
+            6,
+            10
+          ],
+          "3": [
+            3,
+            9,
+            11
+          ],
+          "4": [
+            4,
+            5
+          ],
+          "5": [
+            1,
+            8
+          ]
+        }
+      },
+      {
+        "Name": "order_assignment",
+        "Type": "list",
+        "Value": {
+          "1": 5,
+          "2": 1,
+          "3": 3,
+          "4": 4,
+          "5": 4,
+          "6": 2,
+          "7": 1,
+          "8": 5,
+          "9": 3,
+          "10": 2,
+          "11": 3,
+          "12": 1
+        }
+      },
+      {
+        "Name": "joint_orders",
+        "Type": "list",
+        "Value": [
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "Name": "standard_orders",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "Name": "factory_order_counts",
+        "Type": "list",
+        "Value": {
+          "1": 3,
+          "2": 2,
+          "3": 3,
+          "4": 2,
+          "5": 2
+        }
+      },
+      {
+        "Name": "raw_cost_per_factory",
+        "Type": "list",
+        "Value": {
+          "1": 17.0,
+          "2": 16.3,
+          "3": 13.4,
+          "4": 7.0,
+          "5": 10.0
+        }
+      },
+      {
+        "Name": "total_raw_cost",
+        "Type": "float",
+        "Value": 63.7
+      },
+      {
+        "Name": "rebate_per_factory",
+        "Type": "list",
+        "Value": {
+          "1": 0.2,
+          "2": 0.0,
+          "3": 0.1,
+          "4": 0.0,
+          "5": 0.0
+        }
+      },
+      {
+        "Name": "total_rebate",
+        "Type": "float",
+        "Value": 0.3
+      },
+      {
+        "Name": "final_total_cost",
+        "Type": "float",
+        "Value": 63.4
+      },
+      {
+        "Name": "min_orders_per_factory",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "max_orders_per_factory",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "rebate_threshold_orders",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "rebate_rate",
+        "Type": "float",
+        "Value": 0.1
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Haitong Manufacturing Co., Ltd. is a modern manufacturing enterprise...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company has five factories/teams, each with different professional skills...",
+        "Defines index set of factories i ∈ {1,2,3,4,5}; no explicit numerical constraint."
+      ],
+      [
+        "3",
+        "Through the internal \"transportation network\" collaboration, it undertakes and completes customers' diverse orders...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The company's operations management department recently received a batch of 12 orders...",
+        "Defines index set of orders j ∈ {1,…,12}."
+      ],
+      [
+        "5",
+        "nine of which are standard orders that only need to be completed by a single factory independently...",
+        "Standard orders S = {1,…,9}; each standard order j ∈ S must be assigned to exactly one factory: ∑_{i=1}^5 x_ij = 1."
+      ],
+      [
+        "6",
+        "and three are joint orders...",
+        "Joint orders J = {10,11,12}."
+      ],
+      [
+        "7",
+        "In order to avoid coordination confusion, the joint order only requires two factories...",
+        "Each joint order j ∈ J must be executed by exactly two factories: ∑_{i=1}^5 x_ij = 2."
+      ],
+      [
+        "8",
+        "In order to effectively utilize the production capacity and logistics resources of each factory and control production and transportation costs...",
+        "Motivation; no explicit mathematical constraint beyond capacity already modeled later."
+      ],
+      [
+        "9",
+        "the company hopes to optimize the assignment plan to assign each order to the appropriate factory to minimize the overall cost...",
+        "Defines optimization objective: minimize total cost of order–factory assignments (later adjusted by bonuses)."
+      ],
+      [
+        "10",
+        "while considering the limitations of resources such as manpower, equipment, and transportation, as well as factors such as incentive mechanisms...",
+        "Incentive mechanisms → bonus constraints; resource limits summarized later via capacity (min 1, max 4)."
+      ],
+      [
+        "11",
+        "In this scenario, the production scheduling team needs to model the order-factory matching plan...",
+        "No new constraints; modeling statement."
+      ],
+      [
+        "12",
+        "and formulate the optimal plan to guide subsequent production arrangements and performance evaluation...",
+        "No new constraints."
+      ],
+      [
+        "13",
+        "On the supply side, each factory has different annual production capacity and specialized production line characteristics...",
+        "Qualitative; no explicit numeric constraint beyond those that follow."
+      ],
+      [
+        "14",
+        "Each factory must undertake at least one order to ensure equipment utilization and maintain annual assessment compliance...",
+        "Per-factory minimum load: for each i, ∑_{j=1}^{12} x_ij ≥ 1."
+      ],
+      [
+        "15",
+        "otherwise it will face idling penalties...",
+        "Explains rationale for the lower bound; no extra variable/constraint."
+      ],
+      [
+        "16",
+        "Taking into account the specific situation of the factory, each factory can accept up to four order tasks...",
+        "Per-factory maximum load: for each i, ∑_{j=1}^{12} x_ij ≤ 4."
+      ],
+      [
+        "17",
+        "and all orders must be fully met, and no partial fulfillment can occur...",
+        "Each order j is fully assigned: standard orders already ∑_i x_ij = 1; joint orders ∑_i x_ij = 2; x_ij are binary (no partial assignment)."
+      ],
+      [
+        "18",
+        "If a factory undertakes a total of three or more orders, the company will return 10% of the lowest cost item in the order it undertakes as a performance bonus...",
+        "Bonus definition: if n_i = ∑_j x_ij ≥ 3, bonus b_i = 0.1 · min_{j: x_ij=1} c_ij; requires auxiliary integer n_i, binary z_i, and continuous b_i with linearization constraints to link them."
+      ],
+      [
+        "19",
+        "to encourage multi-point carrying capacity...",
+        "No additional constraint."
+      ],
+      [
+        "20",
+        "The following data table gives the estimated cost (in millions of yuan) for 5 factories (recorded as factories 1-5) to complete 12 orders...",
+        "Defines cost parameters c_ij for feasible (i,j)."
+      ],
+      [
+        "21",
+        "Those not listed indicate that the factory is not qualified for the order...",
+        "Feasibility: for any (i,j) with “—”, either x_ij = 0 or variable omitted."
+      ],
+      [
+        "22",
+        "Based on the above scenario and description, please give the calculated cost...",
+        "Restates objective: compute minimized total cost; no new constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "i",
+        "Meaning": "Index for factories (i = 1,…,5)",
+        "Type": "integer",
+        "Range ": "1,…,5 (index set)"
+      },
+      {
+        "symbol": "j",
+        "Meaning": "Index for orders (j = 1,…,12)",
+        "Type": "integer",
+        "Range ": "1,…,12 (index set)"
+      },
+      {
+        "symbol": "S",
+        "Meaning": "Set of standard orders S = {1,…,9}",
+        "Type": "N/A",
+        "Range ": "Subset of {1,…,12}"
+      },
+      {
+        "symbol": "J",
+        "Meaning": "Set of joint orders J = {10,11,12}",
+        "Type": "N/A",
+        "Range ": "Subset of {1,…,12}"
+      },
+      {
+        "symbol": "x_ij",
+        "Meaning": "1 if factory i undertakes order j; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "0 or 1 for all feasible (i,j)"
+      },
+      {
+        "symbol": "n_i",
+        "Meaning": "Total number of orders undertaken by factory i",
+        "Type": "integer",
+        "Range ": "1,…,4 (since 1 ≤ n_i = ∑_j x_ij ≤ 4)"
+      },
+      {
+        "symbol": "z_i",
+        "Meaning": "Indicator: 1 if factory i undertakes at least 3 orders (eligible for bonus), 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "0 or 1 for each i"
+      },
+      {
+        "symbol": "b_i",
+        "Meaning": "Performance bonus amount (million yuan) for factory i",
+        "Type": "continuous",
+        "Range ": "b_i ≥ 0"
+      },
+      {
+        "symbol": "m_ij",
+        "Meaning": "Auxiliary variable to enable linearization of minimum cost order for factory i (linked to c_ij when x_ij = 1)",
+        "Type": "continuous",
+        "Range ": "m_ij ≥ 0 for feasible (i,j)"
+      },
+      {
+        "symbol": "c_ij",
+        "Meaning": "Cost (million yuan) for factory i to undertake order j, if feasible",
+        "Type": "continuous parameter",
+        "Range ": "Given nonnegative values from data table; undefined or treated with big-M when infeasible"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Standard order assignment",
+        "For all j ∈ S = {1,…,9}:  ∑_{i=1}^{5} x_ij = 1",
+        "sentence numbers:5,17"
+      ],
+      [
+        "Joint order assignment",
+        "For all j ∈ J = {10,11,12}:  ∑_{i=1}^{5} x_ij = 2",
+        "sentence numbers:6,7,17"
+      ],
+      [
+        "Infeasible assignment prohibition",
+        "For all pairs (i,j) with “—” in the table: x_ij = 0 (or x_ij not defined)",
+        "sentence numbers:20,21"
+      ],
+      [
+        "Per-factory minimum load",
+        "For all i = 1,…,5:  ∑_{j=1}^{12} x_ij ≥ 1",
+        "sentence numbers:14"
+      ],
+      [
+        "Per-factory maximum load",
+        "For all i = 1,…,5:  ∑_{j=1}^{12} x_ij ≤ 4",
+        "sentence numbers:16"
+      ],
+      [
+        "Definition of order count n_i",
+        "For all i = 1,…,5:  n_i = ∑_{j=1}^{12} x_ij",
+        "sentence numbers:14,16,18"
+      ],
+      [
+        "Indicator z_i for at-least-3 orders (lower linking)",
+        "For all i:  n_i ≥ 3 · z_i",
+        "sentence numbers:18"
+      ],
+      [
+        "Indicator z_i for at-least-3 orders (upper linking)",
+        "For all i:  n_i ≤ 2 + (4−2) · z_i  (or generic big-M: n_i − 2 ≤ M · z_i)",
+        "sentence numbers:18"
+      ],
+      [
+        "Auxiliary m_ij linking to assignment and cost (upper bound style)",
+        "For all feasible (i,j):  m_ij ≥ c_ij − M · (1 − x_ij),  m_ij ≥ 0",
+        "sentence numbers:18,20"
+      ],
+      [
+        "Bonus b_i bounded by minimum cost (upper bound form)",
+        "For all i and feasible j:  b_i ≤ 0.1 · m_ij + M · (1 − x_ij)",
+        "sentence numbers:18"
+      ],
+      [
+        "Bonus b_i bounded by minimum cost (lower bound form)",
+        "For all i and feasible j:  b_i ≥ 0.1 · m_ij − M · (1 − x_ij)",
+        "sentence numbers:18"
+      ],
+      [
+        "Bonus activated only when z_i = 1",
+        "For all i:  b_i ≤ M · z_i,  b_i ≥ 0",
+        "sentence numbers:18"
+      ],
+      [
+        "Binary restrictions on assignment variables",
+        "For all feasible (i,j):  x_ij ∈ {0,1}",
+        "sentence numbers:5,7,17,21"
+      ],
+      [
+        "Binary restrictions on indicator variables",
+        "For all i:  z_i ∈ {0,1}",
+        "sentence numbers:18"
+      ],
+      [
+        "Integrality of order counts",
+        "For all i:  n_i ∈ ℤ, 1 ≤ n_i ≤ 4",
+        "sentence numbers:14,16,18"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "the company hopes to optimize the assignment plan to assign each order to the appropriate factory to minimize the overall cost...",
+      "Mathematical_expressions": "Minimize Z = ∑_{i=1}^{5} ∑_{j=1}^{12} c_ij · x_ij − ∑_{i=1}^{5} b_i"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "-413.1"
+    ],
+    "time_seconds": 31.89493070000026,
+    "total_tokens": 15591
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "-413.1"
+    ],
+    "ground_truth": 84.2
+  }
+}

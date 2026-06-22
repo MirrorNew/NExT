@@ -1,0 +1,455 @@
+{
+  "entry": {
+    "index": 29,
+    "question": "Zhenhua Manufacturing Enterprise was established in 1998. It initially set up a production base in **City** to meet the rapidly expanding market demand. With the development of the city, the cost of industrial land in the city has been rising year by year, and environmental protection policies have become increasingly stringent. At the same time, **Satellite Towns A and B** were included in the provincial industrial transfer plan, and the infrastructure was gradually improved, and tax incentives were provided. The company currently has five workshops, A, B, C, D, and E. Among them, Workshop A (precision processing) and Workshop D (electroplating) have old equipment and high relocation and transformation costs; while Workshop C (assembly) and Workshop E (warehousing) are highly dependent on transportation efficiency. \n\n**Goal:** Under the constraint that there are no more than 3 workshops in a single location, select the optimal relocation combination, quantify the annual cost savings and transportation cost increment, and minimize the overall cost. It is necessary to consider the collaborative relationship between workshops (such as workshop B provides semi-finished products for workshop A), the maturity of the satellite town industrial chain (Town A already has a third-party sewage treatment plant), and the one-time investment in equipment relocation. \n\n\n\nA factory plans to relocate part of its production workshops in the ** urban area to the ** satellite town** of the city. The advantage is that the land, rent and sewage treatment costs are cheaper, but this will increase the transportation costs between workshops. \nSuppose the factory originally has five workshops in the ** urban area, A, B, C, D, and E, and plans to relocate to two satellite towns, A and B. It is stipulated that no more than 3 workshops shall be left in the urban area or in the two satellite towns of A and B. \nThe **annual cost savings table** brought by moving from the urban area to the satellite town is shown in Table C-18\n\n| Workshop | Move to A | Move to B | Do not move |\n| ---- | ------ | ------ | ------ |\n| A | 100 | 100 | 0 |\n| B | 150 | 200 | 0 |\n| C | 100 | 150 | 0 |\n| D | 200 | 150 | 0 |\n| E | 50 | 150 | 0 |\n\nHowever, the increase in transportation costs after relocation is determined by the values ​​of $C_{ik}$ and $D_{jl}$. $C_{ik}$ is the annual transportation volume between workshops $i$ and $k$, and $D_{jl}$ is the unit transportation cost between urban areas and satellite towns. The specific data are shown in Table C-19 and Table C-20. \n\nTable C-19 $C_{ik}$ value, unit: tons/year (i to k area, at this time i<k, $C_{ik}=0$ means the annual transportation volume between workshops $i$ and $k$ is 0)\n\n| | B | C | D | E |\n| ---- | ---- | ---- | ---- | ---- |\n| A | 0 | 1000 | 1500 | 0 |\n| B | 0 | 1400 | 1200 | 0 |\n| C | 0 | 0 | 0 | 2000 |\n| D | 0 | 0 | 0 | 700 |\n\nTable C-20 $D_{jl}$ value, unit: yuan/ton (j to l, of course, different factories can be in the same city. When calculating, for convenience, the price from City B to City A and from City A to City B is equal.)\n\n| | A | B | Urban area |\n| ---- | ---- | ---- | ---- |\n| A | 500 | 1400 | 1300 |\n| B | 1400 | 500 | 900 |\n| Urban area | 1300 | 900 | 1000 |\n\nTry to determine the best workshop relocation plan for the factory and give the total cost minus the transportation cost. ",
+    "answer": 5809500.0,
+    "Parameters_List": [
+      {
+        "Name": "year_of_establishment",
+        "Type": "integer",
+        "Value": 1998
+      },
+      {
+        "Name": "max_workshops_per_location",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "workshops",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ]
+      },
+      {
+        "Name": "workshop_descriptions",
+        "Type": "tuple",
+        "Value": {
+          "A": "precision processing, old equipment, high relocation and transformation costs",
+          "B": "provides semi-finished products for workshop A",
+          "C": "assembly, highly dependent on transportation efficiency",
+          "D": "electroplating, old equipment, high relocation and transformation costs",
+          "E": "warehousing, highly dependent on transportation efficiency"
+        }
+      },
+      {
+        "Name": "locations",
+        "Type": "list",
+        "Value": [
+          "Urban area",
+          "Satellite Town A",
+          "Satellite Town B"
+        ]
+      },
+      {
+        "Name": "annual_cost_savings_from_relocation",
+        "Type": "tuple",
+        "Value": {
+          "A": {
+            "Satellite Town A": 100,
+            "Satellite Town B": 100,
+            "Urban area": 0
+          },
+          "B": {
+            "Satellite Town A": 150,
+            "Satellite Town B": 200,
+            "Urban area": 0
+          },
+          "C": {
+            "Satellite Town A": 100,
+            "Satellite Town B": 150,
+            "Urban area": 0
+          },
+          "D": {
+            "Satellite Town A": 200,
+            "Satellite Town B": 150,
+            "Urban area": 0
+          },
+          "E": {
+            "Satellite Town A": 50,
+            "Satellite Town B": 150,
+            "Urban area": 0
+          }
+        }
+      },
+      {
+        "Name": "Table_1_annual_cost_savings",
+        "Type": "list",
+        "Value": [
+          [
+            "Workshop",
+            "Move to A",
+            "Move to B",
+            "Do not move"
+          ],
+          [
+            "A",
+            100,
+            100,
+            0
+          ],
+          [
+            "B",
+            150,
+            200,
+            0
+          ],
+          [
+            "C",
+            100,
+            150,
+            0
+          ],
+          [
+            "D",
+            200,
+            150,
+            0
+          ],
+          [
+            "E",
+            50,
+            150,
+            0
+          ]
+        ]
+      },
+      {
+        "Name": "Cik_transport_volume_matrix",
+        "Type": "list",
+        "Value": [
+          [
+            0,
+            0,
+            1000,
+            1500,
+            0
+          ],
+          [
+            0,
+            0,
+            1400,
+            1200,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            2000
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            700
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "Name": "Table_2_Cik_values",
+        "Type": "list",
+        "Value": [
+          [
+            "",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          [
+            "A",
+            0,
+            1000,
+            1500,
+            0
+          ],
+          [
+            "B",
+            0,
+            1400,
+            1200,
+            0
+          ],
+          [
+            "C",
+            0,
+            0,
+            0,
+            2000
+          ],
+          [
+            "D",
+            0,
+            0,
+            0,
+            700
+          ]
+        ]
+      },
+      {
+        "Name": "Djl_unit_transport_cost_matrix",
+        "Type": "list",
+        "Value": [
+          [
+            500,
+            1400,
+            1300
+          ],
+          [
+            1400,
+            500,
+            900
+          ],
+          [
+            1300,
+            900,
+            1000
+          ]
+        ]
+      },
+      {
+        "Name": "Table_3_Djl_values",
+        "Type": "list",
+        "Value": [
+          [
+            "",
+            "A",
+            "B",
+            "Urban area"
+          ],
+          [
+            "A",
+            500,
+            1400,
+            1300
+          ],
+          [
+            "B",
+            1400,
+            500,
+            900
+          ],
+          [
+            "Urban area",
+            1300,
+            900,
+            1000
+          ]
+        ]
+      },
+      {
+        "Name": "Cik_definition",
+        "Type": "tuple",
+        "Value": {
+          "meaning": "annual transportation volume between workshops i and k",
+          "unit": "tons/year",
+          "condition": "i < k, Cik = 0 means annual transportation volume between workshops i and k is 0"
+        }
+      },
+      {
+        "Name": "Djl_definition",
+        "Type": "tuple",
+        "Value": {
+          "meaning": "unit transportation cost between locations j and l",
+          "unit": "yuan/ton",
+          "symmetry_assumption": "price from City B to City A equals price from City A to City B"
+        }
+      },
+      {
+        "Name": "objective_description",
+        "Type": "tuple",
+        "Value": {
+          "goal": "minimize overall cost",
+          "components": [
+            "annual cost savings (land, rent, sewage, etc.)",
+            "increment in transportation cost after relocation"
+          ]
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Zhenhua Manufacturing Enterprise was...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "It initially set up a...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "With the development of the...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "At the same time, Satellite...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The company currently has five...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Among them, Workshop A (precision...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Goal: Under the constraint that...",
+        "Each location (urban, A, B) can host at most 3 workshops; decision is to choose relocation plan minimizing overall cost (savings vs transport increment)."
+      ],
+      [
+        "8",
+        "It is necessary to consider...",
+        "No explicit algebraic constraints; indicates that flows and industrial chain maturity are already reflected in parameters."
+      ],
+      [
+        "9",
+        "A factory plans to relocate...",
+        "Implied that each workshop must be located in exactly one of the three locations (urban, Town A, Town B)."
+      ],
+      [
+        "10",
+        "The advantage is that the...",
+        "No constraints; explains trade-off between savings and increased transport cost."
+      ],
+      [
+        "11",
+        "Suppose the factory originally has...",
+        "Implied assignment decision for each workshop among urban, Town A, Town B."
+      ],
+      [
+        "12",
+        "It is stipulated that no...",
+        "No more than 3 workshops in urban area, and no more than 3 in each of towns A and B (capacity constraints)."
+      ],
+      [
+        "13",
+        "The annual cost savings table...",
+        "No constraints; introduces cost-saving parameters from relocation table."
+      ],
+      [
+        "14",
+        "Annual cost savings table brought...",
+        "No constraints; defines numerical values S_{iA}, S_{iB}, S_{iU}."
+      ],
+      [
+        "15",
+        "However, the increase in transportation...",
+        "No constraints; states transport cost increment is determined by parameters C_{ik} and D_{jl}."
+      ],
+      [
+        "16",
+        "C_{ik} is the annual...",
+        "No constraints; defines parameters C_{ik} and D_{jl}."
+      ],
+      [
+        "17",
+        "The specific data are shown...",
+        "No constraints; reference to parameter tables."
+      ],
+      [
+        "18",
+        "Table C-19 C_{ik} value,...",
+        "No constraints; gives numerical values of C_{ik}."
+      ],
+      [
+        "19",
+        "Table C-20 D_{jl} value,...",
+        "No constraints; gives numerical values of D_{jl}, with symmetry note."
+      ],
+      [
+        "20",
+        "Try to determine the best...",
+        "Objective: choose relocation plan that optimizes total cost minus transportation cost (equivalently maximize savings minus transportation cost)."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{iU}",
+        "Meaning": "1 if workshop i is located in the urban area after relocation; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "x_{iU} ∈ {0,1}, for i ∈ {A,B,C,D,E}"
+      },
+      {
+        "symbol": "x_{iA}",
+        "Meaning": "1 if workshop i is located in satellite town A after relocation; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "x_{iA} ∈ {0,1}, for i ∈ {A,B,C,D,E}"
+      },
+      {
+        "symbol": "x_{iB}",
+        "Meaning": "1 if workshop i is located in satellite town B after relocation; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "x_{iB} ∈ {0,1}, for i ∈ {A,B,C,D,E}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Assignment constraint (each workshop in exactly one location)",
+        "∀ i ∈ {A,B,C,D,E}: x_{iU} + x_{iA} + x_{iB} = 1",
+        "sentence numbers:7,9,11,20"
+      ],
+      [
+        "Capacity in urban area (≤3 workshops)",
+        "∑_{i ∈ {A,B,C,D,E}} x_{iU} ≤ 3",
+        "sentence numbers:7,12"
+      ],
+      [
+        "Capacity in satellite town A (≤3 workshops)",
+        "∑_{i ∈ {A,B,C,D,E}} x_{iA} ≤ 3",
+        "sentence numbers:7,12"
+      ],
+      [
+        "Capacity in satellite town B (≤3 workshops)",
+        "∑_{i ∈ {A,B,C,D,E}} x_{iB} ≤ 3",
+        "sentence numbers:7,12"
+      ],
+      [
+        "Binary nature of decision variables",
+        "x_{il} ∈ {0,1}, ∀ i ∈ {A,B,C,D,E}, l ∈ {U,A,B}",
+        "sentence numbers:7,9,11,20"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Quantify annual cost savings and transportation cost increment, and minimize overall cost / determine the best relocation plan and give total cost minus transportation cost.",
+      "Mathematical_expressions": "max Z = ∑_{i ∈ {A,B,C,D,E}} (S_{iA} x_{iA} + S_{iB} x_{iB} + S_{iU} x_{iU}) − ∑_{i<k} C_{ik} ∑_{l ∈ {U,A,B}} ∑_{m ∈ {U,A,B}} D_{lm} x_{il} x_{km}"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "-5809500.0"
+    ],
+    "time_seconds": 49.62418289999914,
+    "total_tokens": 19773
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "-5809500.0"
+    ],
+    "ground_truth": 5809500.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A person takes two supplements to meet his daily iron and calcium requirements. One tablet of supplement A contains 5 units of iron and 10 units of calcium. One tablet of supplement B contains 4 units of iron and 15 units of calcium. The man needs at least 40 units of iron and 50 units of calcium per day. Let $x$ be the number of tablets of supplement A he takes per day, and let $y$ be the number of tablets of supplement B he takes per day.\n\nNow consider that there is an interaction effect when the two supplements are taken simultaneously: when both supplements are taken, an additional compound cost is incurred, and this extra cost is coupled with the numbers of tablets taken of the two supplements. Specifically, assume there is a fixed interaction coefficient $k=0.01$. When he takes $x$ tablets of supplement A and $y$ tablets of supplement B, an additional compound cost of $0.01\\times x\\times y\\times (x+y)$ dollars is incurred. Ignoring other factors, the original price is 2 dollars per tablet for supplement A and 3 dollars per tablet for supplement B, so his total cost changes from “$2\\times x$ plus $3\\times y$” to “$2\\times x$ plus $3\\times y$ plus $0.01\\times x\\times y\\times (x+y)$.”\n\nHow many tablets of each supplement should he purchase, respectively, in order to minimize the total cost including this compound cost?",
+    "answer": 19.72,
+    "index": "NLP4LP_prob_201",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 如果补充剂A每片的价格为2美元，补充剂B每片的价格为3美元，他应分别购买多少片每种补充剂以使花费最小？ 修改后相关描述: 设他每天服用补充剂A的片数为x，补充剂B的片数为y。现在考虑到两种补充剂同时服用时存在相互影响：当两种补充剂同时服用时，会产生一个额外的复合成本，这一额外成本与两种补充剂的服用片数相互耦合。具体地，假设存在一个固定的影响系数k=0.1，当他服用x片补充剂A和y片补充剂B时，会额外产生0.1×x×y×(x+y)美元的复合成本。若不考虑其他因素，原本补充剂A每片的价格为2美元，补充剂B每片的价格为3美元，则他的总花费由原来的“2×x加上3×y”变为“2×x加上3×y再加上0.1×x×y×(x+y)”。他应分别购买多少片每种补充剂以使包含这一复合成本在内的总花费最小？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_201\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_060.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "16.0"
+    ],
+    "time_seconds": 56.2574353999953,
+    "total_tokens": 5658
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "16.0"
+    ],
+    "ground_truth": 19.72
+  }
+}

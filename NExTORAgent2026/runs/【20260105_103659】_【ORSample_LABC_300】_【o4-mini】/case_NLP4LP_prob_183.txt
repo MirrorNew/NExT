@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_183",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_183\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_183\\code.py",
+    "NLtype": "Linear",
+    "question": "A snow removal company removes snow from neighborhoods using small trucks and large trucks. A small truck requires 2 people to shovel the snow and can carry 30 units of snow. A large truck require 4 people to shovel the snow and car carry 50 units of snow. The company has available 30 people. In addition, because some neighbourhood don’t allow big trucks, at least 10 trucks must be small. There must be at least 3 large trucks as well and the number of small trucks must be twice as much as the number of large trucks. How many of each truck should be used to maximize the total amount of snow that can be transported?",
+    "answer": null,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 21.953715199997532,
+    "total_tokens": 2142
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": null
+  }
+}

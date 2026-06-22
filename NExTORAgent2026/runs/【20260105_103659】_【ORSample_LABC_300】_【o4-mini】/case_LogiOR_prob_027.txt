@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A nationwide e-commerce company operates three distribution centers in a metropolitan area. The quantities of standard products and premium products currently stored at each center are as follows:\n\n| Distribution Center | Standard Products | Premium Products |\n|--------------------|------------------|-----------------|\n| Center 1           | 150              | 30              |\n| Center 2           | 250              | 100             |\n| Center 3           | 300              | 70              |\n\nThe company plans to open three retail fulfillment hubs to provide same-day delivery service to customers. Company policy requires that the total inventory at each fulfillment hub must be exactly 300 units of product, and each hub must stock the same number of premium products, to ensure a consistent customer experience across all locations. The transportation distances (in kilometers) between distribution centers and fulfillment hubs are as follows:\n\n| Origin / Destination | Hub 1 | Hub 2 | Hub 3 |\n|---------------------|------:|------:|------:|\n| Center 1            | 0     | 12    | 18    |\n| Center 2            | 12    | 0     | 15    |\n| Center 3            | 18    | 15    | 0     |\n\nSubject to meeting the company’s inventory requirements, what is the minimum total transportation distance required? In addition, consider the following additional nonlinear transportation policy: if, on a given day, the total number of products shipped from a distribution center to all fulfillment hubs combined exceeds 250 units (including the sum of standard products and premium products), then all products shipped from that center on that day incur a one-time additional fixed transportation cost equivalent to an extra 80 km added to the total transportation distance; if the total shipped from a distribution center does not exceed 250 units, then this additional distance cost is not incurred. After taking this conditional rule into account, compute the minimum total “equivalent transportation distance” (i.e., the sum of the original transportation distance and the additional 80 km distance added when the above condition is triggered).",
+    "answer": 2020.0,
+    "index": "LogiOR_prob_027",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 在满足公司库存要求的前提下，所需的最小总运输距离是多少？, 修改后相关描述: 在满足公司库存要求的前提下，所需的最小总运输距离是多少？另外，考虑如下额外的非线性运输政策：如果某个配送中心在某一天向所有履约枢纽合计发运的产品总数量超过 250 件（包含标准产品和高端产品的总和），则从该中心发运的全部产品在该日会产生一次性额外固定运输成本，相当于额外增加 80 千米的总运输距离；若某个配送中心发运的总数量不超过 250 件，则不产生这项额外距离成本。请在考虑这一条件判断后，计算包含该额外距离成本在内的最小总“等效运输距离”（即原本的运输距离与满足上述条件而增加的额外 80 千米距离之和）。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_027\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_048.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "2020.0"
+    ],
+    "time_seconds": 29.828548700010288,
+    "total_tokens": 2681
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "2020.0"
+    ],
+    "ground_truth": 2020.0
+  }
+}

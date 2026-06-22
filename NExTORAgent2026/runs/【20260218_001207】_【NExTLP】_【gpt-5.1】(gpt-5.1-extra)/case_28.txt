@@ -1,0 +1,838 @@
+{
+  "entry": {
+    "index": 28,
+    "question": "A company has two production plants $A_i, i=1,2$, four transit warehouses $B_j, j=1,2,3,4$, and supplies six users $C_k, k=1,...,6$. Each user can purchase goods directly from the production plant or from the transit warehouse. The required transportation costs (yuan/t) are shown in Table C-16.\n\nTable C-16\n\n| From $\\downarrow$ / To $\\rightarrow$ | $B_1$ | $B_2$ | $B_3$ | $B_4$ | $C_1$ | $C_2$ | $C_3$ | $C_4$ | $C_5$ | $C_6$ |\n| -------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |\n| $A_1$ | 50 | 50 | 100 | 20 | 100 | — | 150 | 200 | — | 100 |\n| $A_2$ | — | 30 | 50 | 20 | 200 | — | — | — | — | — |\n| $B_1$ | — | — | — | — | — | 150 | 50 | 150 | — | 100 |\n| — | — | — | 100 | 50 | 50 | 100 | 50 | — |\n| $B_3$ | — | — | — | — | — | 150 | 200 | — | 50 | 150 |\n| |\n\nNote: \"—\" in the table means that transfer is not allowed. \n\nSome users want to get supply from a certain factory or warehouse first. They are: $C_1 \\rightarrow A_1$, $C_2 \\rightarrow B_1$, $C_5 \\rightarrow B_2$, $C_6 \\rightarrow B_3$ or $C_6 \\rightarrow B_4$. It is known that the maximum monthly supply of each production plant is: $A_1-150,000,t$, $A_2-200,000,t$; the maximum monthly turnover of each transit warehouse is: $B_1-70,000,t$, $B_2-50,000,t$, $B_3-100,000,t$, $B_4-40,000,t$. The user's minimum monthly demand is: $C_1-50,000,t$，$C_2-10,000,t$，$C_3-40,000,t$，$C_4-35,000,t$，$C_5-60,000,t$，$C_6-20,000,t$. \n\nSome people have proposed to open two new transit warehouses $B_5$ and $B_6$, and to expand the transit capacity of $B_2$. Assuming that a maximum of 4 warehouses are allowed, consider closing the original warehouse $B_1$ or $B_4$, or both. \n\nBuild a new warehouse and expand $B_2$. The costs and transfer capacity are as follows: $B_5$ requires an investment of 1,200,000 yuan, with a transfer capacity of 30,000 tons per month; $B_6$ requires an investment of 400,000 yuan, with a monthly transfer capacity of 25,000 tons; $B_2$ expansion requires an investment of 300,000 yuan, and the monthly transfer capacity is 20,000 tons more than the original. Closing the original warehouse can bring savings: closing $B_1$ saves 100,000 yuan per month; closing $B_4$ saves 50,000 yuan per month. The transportation costs of unit materials between the new warehouses $B_5$ and $B_6$ and the production plant and each user are shown in Table C-17\n\nTable C-17 (RMB/Ton)\n\n| From/To | B₅ | B₆ | C₁ | C₂ | C₃ | C₄ | C₅ | C₆ |\n| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| A₁ | 60 | 40 | — | — | — | — | — | — |\n| A₂ | 40 | 30 | — | — | — | — | — | — |\n| B₅ | — | — | 120 | 60 | 40 | — | 30 | 80 |\n| B₆ | — | — | — | 40 | — | 50 | 60 | 90 |\n\nIt is required to determine which of $B_5$ and $B_6$ should be newly built, whether $B_2$ needs to be expanded, whether $B_1$ and $B_4$ should be closed, and re-establish the supply relationship that minimizes the total transportation cost, and give the total cost. ",
+    "answer": 19550000.0,
+    "Parameters_List": [
+      {
+        "Name": "Plants",
+        "Type": "list",
+        "Value": [
+          "A1",
+          "A2"
+        ]
+      },
+      {
+        "Name": "Warehouses_existing",
+        "Type": "list",
+        "Value": [
+          "B1",
+          "B2",
+          "B3",
+          "B4"
+        ]
+      },
+      {
+        "Name": "Warehouses_new",
+        "Type": "list",
+        "Value": [
+          "B5",
+          "B6"
+        ]
+      },
+      {
+        "Name": "Customers",
+        "Type": "list",
+        "Value": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6"
+        ]
+      },
+      {
+        "Name": "Plant_Capacity",
+        "Type": "list",
+        "Value": [
+          150000.0,
+          200000.0
+        ]
+      },
+      {
+        "Name": "Warehouse_Capacity_Base",
+        "Type": "list",
+        "Value": [
+          70000.0,
+          50000.0,
+          100000.0,
+          40000.0
+        ]
+      },
+      {
+        "Name": "Warehouse_Capacity_Expansion_Increment",
+        "Type": "float",
+        "Value": 20000.0
+      },
+      {
+        "Name": "New_Warehouse_Capacity",
+        "Type": "list",
+        "Value": [
+          30000.0,
+          25000.0
+        ]
+      },
+      {
+        "Name": "Demand",
+        "Type": "list",
+        "Value": [
+          50000.0,
+          10000.0,
+          40000.0,
+          35000.0,
+          60000.0,
+          20000.0
+        ]
+      },
+      {
+        "Name": "Max_Open_Warehouses",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "Build_Cost_New_Warehouses",
+        "Type": "list",
+        "Value": [
+          1200000.0,
+          400000.0
+        ]
+      },
+      {
+        "Name": "Expansion_Cost_B2",
+        "Type": "float",
+        "Value": 300000.0
+      },
+      {
+        "Name": "Closure_Savings",
+        "Type": "list",
+        "Value": [
+          100000.0,
+          50000.0
+        ]
+      },
+      {
+        "Name": "Transport_Cost_Plant_to_Warehouse",
+        "Type": "list",
+        "Value": [
+          [
+            50.0,
+            50.0,
+            100.0,
+            20.0,
+            null,
+            null
+          ],
+          [
+            null,
+            30.0,
+            50.0,
+            20.0,
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "Name": "Transport_Cost_Plant_to_Customer",
+        "Type": "list",
+        "Value": [
+          [
+            100.0,
+            null,
+            150.0,
+            200.0,
+            null,
+            100.0
+          ],
+          [
+            200.0,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "Name": "Transport_Cost_Warehouse_to_Customer_Existing",
+        "Type": "list",
+        "Value": [
+          [
+            null,
+            150.0,
+            50.0,
+            150.0,
+            null,
+            100.0
+          ],
+          [
+            null,
+            null,
+            100.0,
+            50.0,
+            50.0,
+            100.0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            null,
+            150.0,
+            200.0,
+            null,
+            50.0
+          ]
+        ]
+      },
+      {
+        "Name": "Transport_Cost_New_Warehouse_Arcs",
+        "Type": "list",
+        "Value": [
+          {
+            "From": "A1",
+            "To": "B5",
+            "Cost": 60.0
+          },
+          {
+            "From": "A1",
+            "To": "B6",
+            "Cost": 40.0
+          },
+          {
+            "From": "A2",
+            "To": "B5",
+            "Cost": 40.0
+          },
+          {
+            "From": "A2",
+            "To": "B6",
+            "Cost": 30.0
+          },
+          {
+            "From": "B5",
+            "To": "C1",
+            "Cost": 120.0
+          },
+          {
+            "From": "B5",
+            "To": "C2",
+            "Cost": 60.0
+          },
+          {
+            "From": "B5",
+            "To": "C3",
+            "Cost": 40.0
+          },
+          {
+            "From": "B5",
+            "To": "C5",
+            "Cost": 30.0
+          },
+          {
+            "From": "B5",
+            "To": "C6",
+            "Cost": 80.0
+          },
+          {
+            "From": "B6",
+            "To": "C2",
+            "Cost": 40.0
+          },
+          {
+            "From": "B6",
+            "To": "C4",
+            "Cost": 50.0
+          },
+          {
+            "From": "B6",
+            "To": "C5",
+            "Cost": 60.0
+          },
+          {
+            "From": "B6",
+            "To": "C6",
+            "Cost": 90.0
+          }
+        ]
+      },
+      {
+        "Name": "Preference_C1_from_A1_Min",
+        "Type": "float",
+        "Value": 50000.0
+      },
+      {
+        "Name": "Preference_C2_from_B1_Min",
+        "Type": "float",
+        "Value": 10000.0
+      },
+      {
+        "Name": "Preference_C5_from_B2_Min",
+        "Type": "float",
+        "Value": 60000.0
+      },
+      {
+        "Name": "Preference_C6_from_B3_or_B4_Min",
+        "Type": "float",
+        "Value": 20000.0
+      },
+      {
+        "Name": "Big_M",
+        "Type": "float",
+        "Value": 215000.0
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "A company has two production plants A_i, i=1,2...",
+        "Defines node sets: plants A_i (i=1,2), warehouses B_j (j=1..4), customers C_k (k=1..6); implies flow variables between these nodes but no explicit numerical constraint."
+      ],
+      [
+        "2",
+        "Each user can purchase goods directly from the production plant or from the transit warehouse...",
+        "Defines feasible arcs (plant→warehouse, plant→customer, warehouse→customer) with per‑ton transportation costs; “—” cells are infeasible arcs (flow fixed to 0)."
+      ],
+      [
+        "3",
+        "Some users want to get supply from a certain factory or warehouse first...",
+        "Preference information (C1→A1, C2→B1, C5→B2, C6→B3 or B4); could be modeled as soft or hard preferences but no explicit requirement, so no hard constraints enforced."
+      ],
+      [
+        "4",
+        "It is known that the maximum monthly supply of each production plant is: A1-150,000,t, A2-200,000,t...",
+        "Plant capacity constraints: total outflow from A1 ≤150000, from A2 ≤200000."
+      ],
+      [
+        "5",
+        "the maximum monthly turnover of each transit warehouse is: B1-70,000,t, B2-50,000,t, B3-100,000,t, B4-40,000,t...",
+        "Warehouse throughput capacity constraints: total flow through B1 ≤70000, B2 ≤50000 (before expansion), B3 ≤100000, B4 ≤40000."
+      ],
+      [
+        "6",
+        "The user's minimum monthly demand is: C1-50,000,t, C2-10,000,t...",
+        "Customer demand constraints: for each k, total inflow to C_k ≥ specified minimum demand d_k."
+      ],
+      [
+        "7",
+        "Some people have proposed to open two new transit warehouses B5 and B6, and to expand the transit capacity of B2...",
+        "Introduces binary decisions: open B5, open B6, expand B2; and global constraint: at most 4 warehouses may be operating simultaneously."
+      ],
+      [
+        "8",
+        "Assuming that a maximum of 4 warehouses are allowed...",
+        "Explicit constraint: number of operating (open/built) warehouses among B1–B6 ≤4; interacts with closure/opening binaries."
+      ],
+      [
+        "9",
+        "consider closing the original warehouse B1 or B4, or both...",
+        "Introduces binary closure decisions for B1 and B4; closure implies zero throughput and contributes cost savings."
+      ],
+      [
+        "10",
+        "Build a new warehouse and expand B2. The costs and transfer capacity are as follows...",
+        "Defines fixed investment costs and capacities: B5 capacity 30000 if built, B6 capacity 25000 if built, B2 capacity increases by 20000 if expanded; these link binary build/expand variables to capacity constraints and fixed costs."
+      ],
+      [
+        "11",
+        "Closing the original warehouse can bring savings: closing B1 saves 100,000 yuan per month; closing B4 saves 50,000 yuan per month...",
+        "Defines monthly cost savings associated with closure binaries z1, z4; these enter the objective as negative costs; closure also implies zero throughput."
+      ],
+      [
+        "12",
+        "The transportation costs of unit materials between the new warehouses B5 and B6 and the production plant and each user are shown in Table C-17...",
+        "Adds feasible arcs and unit costs for plant→B5/B6 and B5/B6→customers; arcs with “—” are infeasible (flow fixed to 0)."
+      ],
+      [
+        "13",
+        "It is required to determine which of B5 and B6 should be newly built, whether B2 needs to be expanded...",
+        "Summarizes decision variables: build B5/B6, expand B2, close B1/B4, and all shipment quantities; no new numerical constraint."
+      ],
+      [
+        "14",
+        "and re-establish the supply relationship that minimizes the total transportation cost, and give the total cost...",
+        "Defines optimization objective: minimize total cost (transportation cost plus fixed investments minus savings from closures) subject to all constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{A_1,B_1}",
+        "Meaning": "Monthly shipment quantity from plant A1 to warehouse B1",
+        "Type": "continuous",
+        "Range ": "x_{A_1,B_1} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,B_2}",
+        "Meaning": "Monthly shipment quantity from plant A1 to warehouse B2",
+        "Type": "continuous",
+        "Range ": "x_{A_1,B_2} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,B_3}",
+        "Meaning": "Monthly shipment quantity from plant A1 to warehouse B3",
+        "Type": "continuous",
+        "Range ": "x_{A_1,B_3} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,B_4}",
+        "Meaning": "Monthly shipment quantity from plant A1 to warehouse B4",
+        "Type": "continuous",
+        "Range ": "x_{A_1,B_4} >= 0"
+      },
+      {
+        "symbol": "x_{A_2,B_2}",
+        "Meaning": "Monthly shipment quantity from plant A2 to warehouse B2",
+        "Type": "continuous",
+        "Range ": "x_{A_2,B_2} >= 0"
+      },
+      {
+        "symbol": "x_{A_2,B_3}",
+        "Meaning": "Monthly shipment quantity from plant A2 to warehouse B3",
+        "Type": "continuous",
+        "Range ": "x_{A_2,B_3} >= 0"
+      },
+      {
+        "symbol": "x_{A_2,B_4}",
+        "Meaning": "Monthly shipment quantity from plant A2 to warehouse B4",
+        "Type": "continuous",
+        "Range ": "x_{A_2,B_4} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,C_1}",
+        "Meaning": "Monthly shipment quantity from plant A1 directly to customer C1",
+        "Type": "continuous",
+        "Range ": "x_{A_1,C_1} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,C_3}",
+        "Meaning": "Monthly shipment quantity from plant A1 directly to customer C3",
+        "Type": "continuous",
+        "Range ": "x_{A_1,C_3} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,C_4}",
+        "Meaning": "Monthly shipment quantity from plant A1 directly to customer C4",
+        "Type": "continuous",
+        "Range ": "x_{A_1,C_4} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,C_6}",
+        "Meaning": "Monthly shipment quantity from plant A1 directly to customer C6",
+        "Type": "continuous",
+        "Range ": "x_{A_1,C_6} >= 0"
+      },
+      {
+        "symbol": "x_{A_2,C_1}",
+        "Meaning": "Monthly shipment quantity from plant A2 directly to customer C1 (if arc is allowed; omitted if '—')",
+        "Type": "continuous",
+        "Range ": "x_{A_2,C_1} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,B_5}",
+        "Meaning": "Monthly shipment quantity from plant A1 to new warehouse B5",
+        "Type": "continuous",
+        "Range ": "x_{A_1,B_5} >= 0"
+      },
+      {
+        "symbol": "x_{A_1,B_6}",
+        "Meaning": "Monthly shipment quantity from plant A1 to new warehouse B6",
+        "Type": "continuous",
+        "Range ": "x_{A_1,B_6} >= 0"
+      },
+      {
+        "symbol": "x_{A_2,B_5}",
+        "Meaning": "Monthly shipment quantity from plant A2 to new warehouse B5",
+        "Type": "continuous",
+        "Range ": "x_{A_2,B_5} >= 0"
+      },
+      {
+        "symbol": "x_{A_2,B_6}",
+        "Meaning": "Monthly shipment quantity from plant A2 to new warehouse B6",
+        "Type": "continuous",
+        "Range ": "x_{A_2,B_6} >= 0"
+      },
+      {
+        "symbol": "x_{B_1,C_2}",
+        "Meaning": "Monthly shipment quantity from warehouse B1 to customer C2",
+        "Type": "continuous",
+        "Range ": "x_{B_1,C_2} >= 0"
+      },
+      {
+        "symbol": "x_{B_1,C_3}",
+        "Meaning": "Monthly shipment quantity from warehouse B1 to customer C3",
+        "Type": "continuous",
+        "Range ": "x_{B_1,C_3} >= 0"
+      },
+      {
+        "symbol": "x_{B_1,C_4}",
+        "Meaning": "Monthly shipment quantity from warehouse B1 to customer C4",
+        "Type": "continuous",
+        "Range ": "x_{B_1,C_4} >= 0"
+      },
+      {
+        "symbol": "x_{B_1,C_6}",
+        "Meaning": "Monthly shipment quantity from warehouse B1 to customer C6",
+        "Type": "continuous",
+        "Range ": "x_{B_1,C_6} >= 0"
+      },
+      {
+        "symbol": "x_{B_2,C_3}",
+        "Meaning": "Monthly shipment quantity from warehouse B2 to customer C3",
+        "Type": "continuous",
+        "Range ": "x_{B_2,C_3} >= 0"
+      },
+      {
+        "symbol": "x_{B_2,C_4}",
+        "Meaning": "Monthly shipment quantity from warehouse B2 to customer C4",
+        "Type": "continuous",
+        "Range ": "x_{B_2,C_4} >= 0"
+      },
+      {
+        "symbol": "x_{B_2,C_5}",
+        "Meaning": "Monthly shipment quantity from warehouse B2 to customer C5",
+        "Type": "continuous",
+        "Range ": "x_{B_2,C_5} >= 0"
+      },
+      {
+        "symbol": "x_{B_2,C_6}",
+        "Meaning": "Monthly shipment quantity from warehouse B2 to customer C6",
+        "Type": "continuous",
+        "Range ": "x_{B_2,C_6} >= 0"
+      },
+      {
+        "symbol": "x_{B_3,C_2}",
+        "Meaning": "Monthly shipment quantity from warehouse B3 to customer C2",
+        "Type": "continuous",
+        "Range ": "x_{B_3,C_2} >= 0"
+      },
+      {
+        "symbol": "x_{B_3,C_3}",
+        "Meaning": "Monthly shipment quantity from warehouse B3 to customer C3",
+        "Type": "continuous",
+        "Range ": "x_{B_3,C_3} >= 0"
+      },
+      {
+        "symbol": "x_{B_3,C_5}",
+        "Meaning": "Monthly shipment quantity from warehouse B3 to customer C5",
+        "Type": "continuous",
+        "Range ": "x_{B_3,C_5} >= 0"
+      },
+      {
+        "symbol": "x_{B_3,C_6}",
+        "Meaning": "Monthly shipment quantity from warehouse B3 to customer C6",
+        "Type": "continuous",
+        "Range ": "x_{B_3,C_6} >= 0"
+      },
+      {
+        "symbol": "x_{B_4,C_1}",
+        "Meaning": "Monthly shipment quantity from warehouse B4 to customer C1",
+        "Type": "continuous",
+        "Range ": "x_{B_4,C_1} >= 0"
+      },
+      {
+        "symbol": "x_{B_4,C_2}",
+        "Meaning": "Monthly shipment quantity from warehouse B4 to customer C2",
+        "Type": "continuous",
+        "Range ": "x_{B_4,C_2} >= 0"
+      },
+      {
+        "symbol": "x_{B_4,C_3}",
+        "Meaning": "Monthly shipment quantity from warehouse B4 to customer C3",
+        "Type": "continuous",
+        "Range ": "x_{B_4,C_3} >= 0"
+      },
+      {
+        "symbol": "x_{B_4,C_4}",
+        "Meaning": "Monthly shipment quantity from warehouse B4 to customer C4",
+        "Type": "continuous",
+        "Range ": "x_{B_4,C_4} >= 0"
+      },
+      {
+        "symbol": "x_{B_5,C_1}",
+        "Meaning": "Monthly shipment quantity from new warehouse B5 to customer C1",
+        "Type": "continuous",
+        "Range ": "x_{B_5,C_1} >= 0"
+      },
+      {
+        "symbol": "x_{B_5,C_2}",
+        "Meaning": "Monthly shipment quantity from new warehouse B5 to customer C2",
+        "Type": "continuous",
+        "Range ": "x_{B_5,C_2} >= 0"
+      },
+      {
+        "symbol": "x_{B_5,C_3}",
+        "Meaning": "Monthly shipment quantity from new warehouse B5 to customer C3",
+        "Type": "continuous",
+        "Range ": "x_{B_5,C_3} >= 0"
+      },
+      {
+        "symbol": "x_{B_5,C_5}",
+        "Meaning": "Monthly shipment quantity from new warehouse B5 to customer C5",
+        "Type": "continuous",
+        "Range ": "x_{B_5,C_5} >= 0"
+      },
+      {
+        "symbol": "x_{B_5,C_6}",
+        "Meaning": "Monthly shipment quantity from new warehouse B5 to customer C6",
+        "Type": "continuous",
+        "Range ": "x_{B_5,C_6} >= 0"
+      },
+      {
+        "symbol": "x_{B_6,C_2}",
+        "Meaning": "Monthly shipment quantity from new warehouse B6 to customer C2",
+        "Type": "continuous",
+        "Range ": "x_{B_6,C_2} >= 0"
+      },
+      {
+        "symbol": "x_{B_6,C_4}",
+        "Meaning": "Monthly shipment quantity from new warehouse B6 to customer C4",
+        "Type": "continuous",
+        "Range ": "x_{B_6,C_4} >= 0"
+      },
+      {
+        "symbol": "x_{B_6,C_5}",
+        "Meaning": "Monthly shipment quantity from new warehouse B6 to customer C5",
+        "Type": "continuous",
+        "Range ": "x_{B_6,C_5} >= 0"
+      },
+      {
+        "symbol": "x_{B_6,C_6}",
+        "Meaning": "Monthly shipment quantity from new warehouse B6 to customer C6",
+        "Type": "continuous",
+        "Range ": "x_{B_6,C_6} >= 0"
+      },
+      {
+        "symbol": "y_5",
+        "Meaning": "Binary variable; 1 if new warehouse B5 is built, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y_5 ∈ {0,1}"
+      },
+      {
+        "symbol": "y_6",
+        "Meaning": "Binary variable; 1 if new warehouse B6 is built, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y_6 ∈ {0,1}"
+      },
+      {
+        "symbol": "y_{2}^{exp}",
+        "Meaning": "Binary variable; 1 if warehouse B2 is expanded, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y_{2}^{exp} ∈ {0,1}"
+      },
+      {
+        "symbol": "z_1",
+        "Meaning": "Binary variable; 1 if existing warehouse B1 is closed, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "z_1 ∈ {0,1}"
+      },
+      {
+        "symbol": "z_4",
+        "Meaning": "Binary variable; 1 if existing warehouse B4 is closed, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "z_4 ∈ {0,1}"
+      },
+      {
+        "symbol": "w_1",
+        "Meaning": "Logical open indicator for B1, defined as w1 = 1 - z1 (1 if B1 open)",
+        "Type": "BINARY",
+        "Range ": "w_1 ∈ {0,1}, w_1 = 1 - z_1"
+      },
+      {
+        "symbol": "w_2",
+        "Meaning": "Logical open indicator for B2 (base warehouse, always open; capacity affected by expansion y2^exp)",
+        "Type": "BINARY",
+        "Range ": "w_2 = 1"
+      },
+      {
+        "symbol": "w_3",
+        "Meaning": "Logical open indicator for B3 (always open; no closure option)",
+        "Type": "BINARY",
+        "Range ": "w_3 = 1"
+      },
+      {
+        "symbol": "w_4",
+        "Meaning": "Logical open indicator for B4, defined as w4 = 1 - z4 (1 if B4 open)",
+        "Type": "BINARY",
+        "Range ": "w_4 ∈ {0,1}, w_4 = 1 - z_4"
+      },
+      {
+        "symbol": "w_5",
+        "Meaning": "Logical open indicator for B5, equal to build variable y5",
+        "Type": "BINARY",
+        "Range ": "w_5 = y_5"
+      },
+      {
+        "symbol": "w_6",
+        "Meaning": "Logical open indicator for B6, equal to build variable y6",
+        "Type": "BINARY",
+        "Range ": "w_6 = y_6"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Plant_A1_capacity",
+        "sum_j x_{A_1,B_j} + sum_k x_{A_1,C_k} <= 150000",
+        "sentence numbers:4"
+      ],
+      [
+        "Plant_A2_capacity",
+        "sum_j x_{A_2,B_j} + sum_k x_{A_2,C_k} <= 200000",
+        "sentence numbers:4"
+      ],
+      [
+        "Customer_C1_demand",
+        "sum_{i=1}^2 x_{A_i,C_1} + sum_{j=1}^6 x_{B_j,C_1} >= 50000",
+        "sentence numbers:6"
+      ],
+      [
+        "Customer_C2_demand",
+        "sum_{i=1}^2 x_{A_i,C_2} + sum_{j=1}^6 x_{B_j,C_2} >= 10000",
+        "sentence numbers:6"
+      ],
+      [
+        "Customer_C3_demand",
+        "sum_{i=1}^2 x_{A_i,C_3} + sum_{j=1}^6 x_{B_j,C_3} >= 40000",
+        "sentence numbers:6"
+      ],
+      [
+        "Customer_C4_demand",
+        "sum_{i=1}^2 x_{A_i,C_4} + sum_{j=1}^6 x_{B_j,C_4} >= 35000",
+        "sentence numbers:6"
+      ],
+      [
+        "Customer_C5_demand",
+        "sum_{i=1}^2 x_{A_i,C_5} + sum_{j=1}^6 x_{B_j,C_5} >= 60000",
+        "sentence numbers:6"
+      ],
+      [
+        "Customer_C6_demand",
+        "sum_{i=1}^2 x_{A_i,C_6} + sum_{j=1}^6 x_{B_j,C_6} >= 20000",
+        "sentence numbers:6"
+      ],
+      [
+        "Warehouse_B1_capacity",
+        "sum_k x_{B_1,C_k} <= 70000 * (1 - z_1)",
+        "sentence numbers:5,9,11"
+      ],
+      [
+        "Warehouse_B2_capacity_with_expansion",
+        "sum_k x_{B_2,C_k} <= 50000 + 20000 * y_{2}^{exp}",
+        "sentence numbers:5,7,10"
+      ],
+      [
+        "Warehouse_B3_capacity",
+        "sum_k x_{B_3,C_k} <= 100000",
+        "sentence numbers:5"
+      ],
+      [
+        "Warehouse_B4_capacity",
+        "sum_k x_{B_4,C_k} <= 40000 * (1 - z_4)",
+        "sentence numbers:5,9,11"
+      ],
+      [
+        "Warehouse_B5_capacity",
+        "sum_k x_{B_5,C_k} <= 30000 * y_5",
+        "sentence numbers:7,10,12"
+      ],
+      [
+        "Warehouse_B6_capacity",
+        "sum_k x_{B_6,C_k} <= 25000 * y_6",
+        "sentence numbers:7,10,12"
+      ],
+      [
+        "Warehouse_B1_flow_balance",
+        "sum_i x_{A_i,B_1} = sum_k x_{B_1,C_k}",
+        "sentence numbers:1,2"
+      ],
+      [
+        "Warehouse_B2_flow_balance",
+        "sum_i x_{A_i,B_2} = sum_k x_{B_2,C_k}",
+        "sentence numbers:1,2,7,10"
+      ],
+      [
+        "Warehouse_B3_flow_balance",
+        "sum_i x_{A_i,B_3} = sum_k x_{B_3,C_k}",
+        "sentence numbers:1,2"
+      ],
+      [
+        "Warehouse_B4_flow_balance",
+        "sum_i x_{A_i,B_4} = sum_k x_{B_4,C_k}",
+        "sentence numbers:1,2,9"
+      ],
+      [
+        "Warehouse_B5_flow_balance",
+        "sum_i x_{A_i,B_5} = sum_k x_{B_5,C_k}",
+        "sentence numbers:7,10,12"
+      ],
+      [
+        "Warehouse_B6_flow_balance",
+        "sum_i x_{A_i,B_6} = sum_k x_{B_6,C_k}",
+        "sentence numbers:7,10,12"
+      ],
+      [
+        "Max_4_warehouses_operating",
+        "(1 - z_1) + 1 + 1 + (1 - z_4) + y_5 + y_6 <= 4",
+        "sentence numbers:7,8,9"
+      ],
+      [
+        "No_flow_through_closed_B1",
+        "x_{B_1,C_k} <= M * (1 - z_1) for all feasible k",
+        "sentence numbers:9,11"
+      ],
+      [
+        "No_flow_through_closed_B4",
+        "x_{B_4,C_k} <= M * (1 - z_4) for all feasible k",
+        "sentence numbers:9,11"
+      ],
+      [
+        "No_flow_through_unbuilt_B5",
+        "x_{B_5,C_k} <= M * y_5 for all feasible k",
+        "sentence numbers:7,10,12"
+      ],
+      [
+        "No_flow_through_unbuilt_B6",
+        "x_{B_6,C_k} <= M * y_6 for all feasible k",
+        "sentence numbers:7,10,12"
+      ],
+      [
+        "Nonnegativity_flows",
+        "x_{p,q} >= 0 for all feasible arcs (p,q)",
+        "sentence numbers:2,12"
+      ],
+      [
+        "Binary_facility_decisions",
+        "y_5, y_6, y_{2}^{exp}, z_1, z_4 ∈ {0,1}",
+        "sentence numbers:7,8,9,10,11"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "and re-establish the supply relationship that minimizes the total transportation cost, and give the total cost...",
+      "Mathematical_expressions": "min Z = sum_{(p,q) feasible} c_{p,q} * x_{p,q} + 1200000 * y_5 + 400000 * y_6 + 300000 * y_{2}^{exp} - 100000 * z_1 - 50000 * z_4"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "21700000.0"
+    ],
+    "time_seconds": 74.02341100000194,
+    "total_tokens": 58832
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "21700000.0"
+    ],
+    "ground_truth": 19550000.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A transportation company needs to deliver packages using either trucks or cars. Each truck can carry 50 packages per trip, while each car can carry 30 packages per trip. In addition, each truck trip consumes 20 liters of gasoline, and each car trip consumes 15 liters of gasoline. Moreover, depreciation (loss) must be considered: the total gasoline amount is computed according to the $1.2$-th power of the gasoline for cars; that is, the gasoline consumption for car trips is calculated in the nonlinear form “(total car gasoline consumption)$^{1.2}$”. The total number of truck trips is at most 5, and among all trips, at least 30% must be completed by cars. The company needs to deliver at least 500 packages. How many truck trips and how many car trips should be used, respectively, to minimize the total gasoline consumption computed in the above nonlinear manner?",
+    "answer": "None",
+    "index": "NLP4LP_prob_180",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 此外，每次卡车运输需要消耗20升汽油，而每次小汽车运输需要消耗15升汽油。修改后相关描述: 此外，每次卡车运输需要消耗20升汽油，而每次小汽车运输需要消耗15升汽油的1.2次方，也就是每次小汽车运输的汽油消耗量按 15 的 1.2 次方这一非线性形式来计算。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_180\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_095.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "460.0812621335"
+    ],
+    "time_seconds": 15.588845799997216,
+    "total_tokens": 1640
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "460.0812621335"
+    ],
+    "ground_truth": "None"
+  }
+}

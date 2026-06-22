@@ -1,0 +1,612 @@
+{
+  "entry": {
+    "index": 13,
+    "question": "Huifeng Airlines is an air transport company with an advanced fleet. It has established a transportation network covering five major hub cities in China to support cargo and passenger business. The management team at the company/factory level regularly evaluates fleet resource utilization and operating costs and optimizes flight execution through a centralized scheduling system, striving to maintain a leading edge in the fierce market competition and control cost/resource investment. At present, the company faces the dual goals of improving operational efficiency and reducing total operating costs. It is necessary to formulate reasonable scheduling plans for the operating costs and available resources of different aircraft types to support the stable operation of the transportation network and maximize profits. In terms of supply, Huifeng Airlines currently has 8 twin-engine narrow-body aircraft of type A and 9 twin-engine narrow-body aircraft of type B, and 10 small regional aircraft of type C, which are used to carry out daily routes. With limited transportation resources, it is necessary to ensure that the fleet scheduling is within the overall acceptable range.\n In terms of demand, the company needs to complete five flight tasks numbered 1 to 5. Each flight may involve multiple aircraft, but each aircraft can only perform one flight at most, and no more than three aircraft of the same model can be used in a flight. It is necessary to ensure that the dispatch service standards of each flight are consistent. \n\nIn terms of transportation, different types of aircraft will incur different costs when performing the same flight. The cost data is shown in the table. In order to meet the high-end passenger experience and ground operation consistency, flight 5 must be operated by a larger aircraft to ensure service quality, and for operational safety considerations, model B aircraft cannot perform flight 4. \n\nIf the number of passengers on each flight is different, and the AB model aircraft has 200 and 180 passengers, and the C model aircraft has 100 passengers, the average sanitation cost per person on the AB model aircraft is 0.1, and the average sanitation cost on the C model aircraft is 0.2. The airline hopes to complete all flight scheduling at the lowest total cost, and only needs to give an answer. \n\n| Flight/10,000 yuan | 1 | 2 | 3 | 4 | 5 |\n| --------- | ---- | ---- | ---- | ---- | ---- |\n| Model A Cost | 10 | 9 | 7 | 8 | 11 |\n| Model B Cost | 8 | 8 | 6 | 7 | 12 |\n| Model C Cost | 8 | 5 | 4 | 7 | 3 |\n\n| Flights | 1 | 2 | 3 | 4 | 5 |\n| ---- | ---- | ---- | ---- | ---- | ---- |\n| Demand | 500 | 1000 | 330 | 290 | 470 |",
+    "answer": 434.0,
+    "Parameters_List": [
+      {
+        "Name": "num_hub_cities",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "num_aircraft_type_A",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "num_aircraft_type_B",
+        "Type": "integer",
+        "Value": 9
+      },
+      {
+        "Name": "num_aircraft_type_C",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "flight_indices",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name": "max_flights_per_aircraft",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "max_same_model_per_flight",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "must_use_large_aircraft_flight",
+        "Type": "list",
+        "Value": [
+          5
+        ]
+      },
+      {
+        "Name": "large_aircraft_models",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "Name": "forbidden_flight_model_pairs",
+        "Type": "list",
+        "Value": [
+          {
+            "flight": 4,
+            "model": "B"
+          }
+        ]
+      },
+      {
+        "Name": "passenger_capacity_per_aircraft",
+        "Type": "list",
+        "Value": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "Name": "passenger_capacity_model",
+        "Type": "list",
+        "Value": [
+          {
+            "model": "A",
+            "capacity": 200
+          },
+          {
+            "model": "B",
+            "capacity": 180
+          },
+          {
+            "model": "C",
+            "capacity": 100
+          }
+        ]
+      },
+      {
+        "Name": "sanitation_cost_per_person_model",
+        "Type": "list",
+        "Value": [
+          {
+            "model": "A",
+            "cost": 0.1
+          },
+          {
+            "model": "B",
+            "cost": 0.1
+          },
+          {
+            "model": "C",
+            "cost": 0.2
+          }
+        ]
+      },
+      {
+        "Name": "Table_1_Costs",
+        "Type": "list",
+        "Value": {
+          "flights": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "Model_A_Cost": [
+            10,
+            9,
+            7,
+            8,
+            11
+          ],
+          "Model_B_Cost": [
+            8,
+            8,
+            6,
+            7,
+            12
+          ],
+          "Model_C_Cost": [
+            8,
+            5,
+            4,
+            7,
+            3
+          ],
+          "unit": "ten_thousand_yuan"
+        }
+      },
+      {
+        "Name": "Table_2_Demand",
+        "Type": "list",
+        "Value": {
+          "flights": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "demand": [
+            500,
+            1000,
+            330,
+            290,
+            470
+          ]
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Huifeng Airlines is an air transport company with an advanced fleet...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "It has established a transportation network covering five major hub cities in China to support cargo and passenger business...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The management team at the company/factory level regularly evaluates fleet resource utilization and operating costs and optimizes flight execution through a centralized scheduling system...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "At present, the company faces the dual goals of improving operational efficiency and reducing total operating costs...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "It is necessary to formulate reasonable scheduling plans for the operating costs and available resources of different aircraft types to support the stable operation of the transportation network and maximize profits...",
+        "Indicates presence of an optimization objective related to costs/profit, but no explicit mathematical constraint."
+      ],
+      [
+        "6",
+        "In terms of supply, Huifeng Airlines currently has 8 twin-engine narrow-body aircraft of type A and 9 twin-engine narrow-body aircraft of type B, and 10 small regional aircraft of type C, which are used to carry out daily routes...",
+        "Defines fleet availability constraints: sum over flights of type A aircraft ≤ 8; type B ≤ 9; type C ≤ 10."
+      ],
+      [
+        "7",
+        "With limited transportation resources, it is necessary to ensure that the fleet scheduling is within the overall acceptable range...",
+        "Reinforces fleet availability constraints; no additional distinct constraint."
+      ],
+      [
+        "8",
+        "In terms of demand, the company needs to complete five flight tasks numbered 1 to 5...",
+        "Defines set of flights i ∈ {1,2,3,4,5}; no numeric constraint beyond existence of 5 flights."
+      ],
+      [
+        "9",
+        "Each flight may involve multiple aircraft, but each aircraft can only perform one flight at most...",
+        "Multiple aircraft per flight allowed; fleet-wise constraints already capture limited number; 'one flight at most per aircraft' is modeled via total availability per type."
+      ],
+      [
+        "10",
+        "and no more than three aircraft of the same model can be used in a flight...",
+        "For each flight i and type j, x_j,i ≤ 3."
+      ],
+      [
+        "11",
+        "It is necessary to ensure that the dispatch service standards of each flight are consistent...",
+        "No explicit quantitative constraint."
+      ],
+      [
+        "12",
+        "In terms of transportation, different types of aircraft will incur different costs when performing the same flight...",
+        "Defines flight-type cost parameters c_Ai, c_Bi, c_Ci used in the objective; no constraint."
+      ],
+      [
+        "13",
+        "The cost data is shown in the table...",
+        "Specifies numerical values for c_Ai, c_Bi, c_Ci; used in objective."
+      ],
+      [
+        "14",
+        "In order to meet the high-end passenger experience and ground operation consistency, flight 5 must be operated by a larger aircraft to ensure service quality...",
+        "Imposes that flight 5 cannot use model C: x_C5 = 0."
+      ],
+      [
+        "15",
+        "and for operational safety considerations, model B aircraft cannot perform flight 4...",
+        "Imposes that flight 4 cannot use model B: x_B4 = 0."
+      ],
+      [
+        "16",
+        "If the number of passengers on each flight is different, and the AB model aircraft has 200 and 180 passengers, and the C model aircraft has 100 passengers...",
+        "Defines seat capacities: Cap_A = 200, Cap_B = 180, Cap_C = 100; used in capacity constraints."
+      ],
+      [
+        "17",
+        "the average sanitation cost per person on the AB model aircraft is 0.1, and the average sanitation cost on the C model aircraft is 0.2...",
+        "Defines sanitation cost parameters per passenger used in the objective; no constraints."
+      ],
+      [
+        "18",
+        "The airline hopes to complete all flight scheduling at the lowest total cost, and only needs to give an answer...",
+        "Defines objective: minimize total cost (operating + sanitation) while satisfying all constraints."
+      ],
+      [
+        "19",
+        "Flight/10,000 yuan cost table...",
+        "Provides numerical values for c_Ai, c_Bi, c_Ci; used in the objective."
+      ],
+      [
+        "20",
+        "Flights demand table with Demand: 500, 1000, 330, 290, 470...",
+        "Defines passenger demand per flight; yields capacity constraints: for each flight i, total seats assigned ≥ demand."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_A1",
+        "Meaning": "Number of type A aircraft assigned to flight 1",
+        "Type": "integer",
+        "Range ": "x_A1 ≥ 0, x_A1 ≤ 3"
+      },
+      {
+        "symbol": "x_A2",
+        "Meaning": "Number of type A aircraft assigned to flight 2",
+        "Type": "integer",
+        "Range ": "x_A2 ≥ 0, x_A2 ≤ 3"
+      },
+      {
+        "symbol": "x_A3",
+        "Meaning": "Number of type A aircraft assigned to flight 3",
+        "Type": "integer",
+        "Range ": "x_A3 ≥ 0, x_A3 ≤ 3"
+      },
+      {
+        "symbol": "x_A4",
+        "Meaning": "Number of type A aircraft assigned to flight 4",
+        "Type": "integer",
+        "Range ": "x_A4 ≥ 0, x_A4 ≤ 3"
+      },
+      {
+        "symbol": "x_A5",
+        "Meaning": "Number of type A aircraft assigned to flight 5",
+        "Type": "integer",
+        "Range ": "x_A5 ≥ 0, x_A5 ≤ 3"
+      },
+      {
+        "symbol": "x_B1",
+        "Meaning": "Number of type B aircraft assigned to flight 1",
+        "Type": "integer",
+        "Range ": "x_B1 ≥ 0, x_B1 ≤ 3"
+      },
+      {
+        "symbol": "x_B2",
+        "Meaning": "Number of type B aircraft assigned to flight 2",
+        "Type": "integer",
+        "Range ": "x_B2 ≥ 0, x_B2 ≤ 3"
+      },
+      {
+        "symbol": "x_B3",
+        "Meaning": "Number of type B aircraft assigned to flight 3",
+        "Type": "integer",
+        "Range ": "x_B3 ≥ 0, x_B3 ≤ 3"
+      },
+      {
+        "symbol": "x_B4",
+        "Meaning": "Number of type B aircraft assigned to flight 4",
+        "Type": "integer",
+        "Range ": "x_B4 = 0 (forbidden by safety constraint)"
+      },
+      {
+        "symbol": "x_B5",
+        "Meaning": "Number of type B aircraft assigned to flight 5",
+        "Type": "integer",
+        "Range ": "x_B5 ≥ 0, x_B5 ≤ 3"
+      },
+      {
+        "symbol": "x_C1",
+        "Meaning": "Number of type C aircraft assigned to flight 1",
+        "Type": "integer",
+        "Range ": "x_C1 ≥ 0, x_C1 ≤ 3"
+      },
+      {
+        "symbol": "x_C2",
+        "Meaning": "Number of type C aircraft assigned to flight 2",
+        "Type": "integer",
+        "Range ": "x_C2 ≥ 0, x_C2 ≤ 3"
+      },
+      {
+        "symbol": "x_C3",
+        "Meaning": "Number of type C aircraft assigned to flight 3",
+        "Type": "integer",
+        "Range ": "x_C3 ≥ 0, x_C3 ≤ 3"
+      },
+      {
+        "symbol": "x_C4",
+        "Meaning": "Number of type C aircraft assigned to flight 4",
+        "Type": "integer",
+        "Range ": "x_C4 ≥ 0, x_C4 ≤ 3"
+      },
+      {
+        "symbol": "x_C5",
+        "Meaning": "Number of type C aircraft assigned to flight 5",
+        "Type": "integer",
+        "Range ": "x_C5 = 0 (forbidden by large-aircraft requirement)"
+      },
+      {
+        "symbol": "Cap_A",
+        "Meaning": "Seat capacity of a type A aircraft",
+        "Type": "continuous",
+        "Range ": "Cap_A = 200"
+      },
+      {
+        "symbol": "Cap_B",
+        "Meaning": "Seat capacity of a type B aircraft",
+        "Type": "continuous",
+        "Range ": "Cap_B = 180"
+      },
+      {
+        "symbol": "Cap_C",
+        "Meaning": "Seat capacity of a type C aircraft",
+        "Type": "continuous",
+        "Range ": "Cap_C = 100"
+      },
+      {
+        "symbol": "D1",
+        "Meaning": "Passenger demand on flight 1",
+        "Type": "continuous",
+        "Range ": "D1 = 500"
+      },
+      {
+        "symbol": "D2",
+        "Meaning": "Passenger demand on flight 2",
+        "Type": "continuous",
+        "Range ": "D2 = 1000"
+      },
+      {
+        "symbol": "D3",
+        "Meaning": "Passenger demand on flight 3",
+        "Type": "continuous",
+        "Range ": "D3 = 330"
+      },
+      {
+        "symbol": "D4",
+        "Meaning": "Passenger demand on flight 4",
+        "Type": "continuous",
+        "Range ": "D4 = 290"
+      },
+      {
+        "symbol": "D5",
+        "Meaning": "Passenger demand on flight 5",
+        "Type": "continuous",
+        "Range ": "D5 = 470"
+      },
+      {
+        "symbol": "c_A1",
+        "Meaning": "Operating cost (10,000 yuan) of one type A aircraft on flight 1",
+        "Type": "continuous",
+        "Range ": "c_A1 = 10"
+      },
+      {
+        "symbol": "c_A2",
+        "Meaning": "Operating cost (10,000 yuan) of one type A aircraft on flight 2",
+        "Type": "continuous",
+        "Range ": "c_A2 = 9"
+      },
+      {
+        "symbol": "c_A3",
+        "Meaning": "Operating cost (10,000 yuan) of one type A aircraft on flight 3",
+        "Type": "continuous",
+        "Range ": "c_A3 = 7"
+      },
+      {
+        "symbol": "c_A4",
+        "Meaning": "Operating cost (10,000 yuan) of one type A aircraft on flight 4",
+        "Type": "continuous",
+        "Range ": "c_A4 = 8"
+      },
+      {
+        "symbol": "c_A5",
+        "Meaning": "Operating cost (10,000 yuan) of one type A aircraft on flight 5",
+        "Type": "continuous",
+        "Range ": "c_A5 = 11"
+      },
+      {
+        "symbol": "c_B1",
+        "Meaning": "Operating cost (10,000 yuan) of one type B aircraft on flight 1",
+        "Type": "continuous",
+        "Range ": "c_B1 = 8"
+      },
+      {
+        "symbol": "c_B2",
+        "Meaning": "Operating cost (10,000 yuan) of one type B aircraft on flight 2",
+        "Type": "continuous",
+        "Range ": "c_B2 = 8"
+      },
+      {
+        "symbol": "c_B3",
+        "Meaning": "Operating cost (10,000 yuan) of one type B aircraft on flight 3",
+        "Type": "continuous",
+        "Range ": "c_B3 = 6"
+      },
+      {
+        "symbol": "c_B4",
+        "Meaning": "Operating cost (10,000 yuan) of one type B aircraft on flight 4",
+        "Type": "continuous",
+        "Range ": "c_B4 = 7"
+      },
+      {
+        "symbol": "c_B5",
+        "Meaning": "Operating cost (10,000 yuan) of one type B aircraft on flight 5",
+        "Type": "continuous",
+        "Range ": "c_B5 = 12"
+      },
+      {
+        "symbol": "c_C1",
+        "Meaning": "Operating cost (10,000 yuan) of one type C aircraft on flight 1",
+        "Type": "continuous",
+        "Range ": "c_C1 = 8"
+      },
+      {
+        "symbol": "c_C2",
+        "Meaning": "Operating cost (10,000 yuan) of one type C aircraft on flight 2",
+        "Type": "continuous",
+        "Range ": "c_C2 = 5"
+      },
+      {
+        "symbol": "c_C3",
+        "Meaning": "Operating cost (10,000 yuan) of one type C aircraft on flight 3",
+        "Type": "continuous",
+        "Range ": "c_C3 = 4"
+      },
+      {
+        "symbol": "c_C4",
+        "Meaning": "Operating cost (10,000 yuan) of one type C aircraft on flight 4",
+        "Type": "continuous",
+        "Range ": "c_C4 = 7"
+      },
+      {
+        "symbol": "c_C5",
+        "Meaning": "Operating cost (10,000 yuan) of one type C aircraft on flight 5",
+        "Type": "continuous",
+        "Range ": "c_C5 = 3"
+      },
+      {
+        "symbol": "s_AB",
+        "Meaning": "Sanitation cost per passenger for aircraft of type A or B",
+        "Type": "continuous",
+        "Range ": "s_AB = 0.1"
+      },
+      {
+        "symbol": "s_C",
+        "Meaning": "Sanitation cost per passenger for aircraft of type C",
+        "Type": "continuous",
+        "Range ": "s_C = 0.2"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Type A fleet availability",
+        "x_A1 + x_A2 + x_A3 + x_A4 + x_A5 ≤ 8",
+        "sentence numbers:6,7,9"
+      ],
+      [
+        "Type B fleet availability",
+        "x_B1 + x_B2 + x_B3 + x_B4 + x_B5 ≤ 9",
+        "sentence numbers:6,7,9"
+      ],
+      [
+        "Type C fleet availability",
+        "x_C1 + x_C2 + x_C3 + x_C4 + x_C5 ≤ 10",
+        "sentence numbers:6,7,9"
+      ],
+      [
+        "Flight 1 demand satisfaction",
+        "200 x_A1 + 180 x_B1 + 100 x_C1 ≥ 500",
+        "sentence numbers:16,20"
+      ],
+      [
+        "Flight 2 demand satisfaction",
+        "200 x_A2 + 180 x_B2 + 100 x_C2 ≥ 1000",
+        "sentence numbers:16,20"
+      ],
+      [
+        "Flight 3 demand satisfaction",
+        "200 x_A3 + 180 x_B3 + 100 x_C3 ≥ 330",
+        "sentence numbers:16,20"
+      ],
+      [
+        "Flight 4 demand satisfaction",
+        "200 x_A4 + 180 x_B4 + 100 x_C4 ≥ 290",
+        "sentence numbers:16,20"
+      ],
+      [
+        "Flight 5 demand satisfaction",
+        "200 x_A5 + 180 x_B5 + 100 x_C5 ≥ 470",
+        "sentence numbers:16,20"
+      ],
+      [
+        "Per-flight type A upper limit",
+        "x_Ai ≤ 3 for i = 1,2,3,4,5",
+        "sentence numbers:10"
+      ],
+      [
+        "Per-flight type B upper limit",
+        "x_Bi ≤ 3 for i = 1,2,3,4,5",
+        "sentence numbers:10"
+      ],
+      [
+        "Per-flight type C upper limit",
+        "x_Ci ≤ 3 for i = 1,2,3,4,5",
+        "sentence numbers:10"
+      ],
+      [
+        "Flight 5 large-aircraft requirement",
+        "x_C5 = 0",
+        "sentence numbers:14"
+      ],
+      [
+        "Type B forbidden on flight 4",
+        "x_B4 = 0",
+        "sentence numbers:15"
+      ],
+      [
+        "Non-negativity and integrality",
+        "x_Ai, x_Bi, x_Ci ∈ {0,1,2,3} (integers, respecting other bounds)",
+        "sentence numbers:6,9,10,14,15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The airline hopes to complete all flight scheduling at the lowest total cost...",
+      "Mathematical_expressions": "Minimize Z = Σ_{i=1}^5 (c_Ai x_Ai + c_Bi x_Bi + c_Ci x_Ci) + Σ_{i=1}^5 [0.1 (200 x_Ai + 180 x_Bi) + 0.2 (100 x_Ci)]"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "434.0"
+    ],
+    "time_seconds": 68.89617749999888,
+    "total_tokens": 48557
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "434.0"
+    ],
+    "ground_truth": 434.0
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "Ayse produces a plant-growth compound by blending two fertilizers, C and Y. The compound must contain at least 5 units of nitrous oxide and 8 units of a vitamin mixture. The costs of fertilizers C and Y are \\$2 per kilogram and \\$3 per kilogram, respectively. Fertilizer C contains 1.5 units of nitrous oxide and 3 units of the vitamin mixture per kilogram. Fertilizer Y contains 5 units of nitrous oxide and 1 unit of the vitamin mixture per kilogram. However, note that Ayse has found that when fertilizer Y is used, the effective content of nitrous oxide increases exponentially with the amount used: specifically, when using $y$ kilograms of fertilizer Y, the total effective number of nitrous oxide units provided by fertilizer Y is $5 \\times 1.3^y$ (where 1.3 is a fixed growth factor). Determine the minimum cost of Ayse’s compound.",
+    "answer": 5.333333333333333,
+    "index": "NLP4LP_prob_023",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 肥料 Y 每千克含有 5 个单位的一氧化二氮和 1 个单位的维生素混合物。修改后相关描述: 肥料 Y 每千克含有 5 个单位的一氧化二氮和 1 个单位的维生素混合物。但需要注意的是，Ayse 发现当使用肥料 Y 时，一氧化二氮的有效含量会随使用量呈指数增长：具体地，当使用 y 千克肥料 Y 时，由肥料 Y 提供的一氧化二氮总有效单位数为 5 × 1.3 的 y 次方（其中 1.3 为固定增长系数）。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_023\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_058.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 19.465657000007923,
+    "total_tokens": 1708
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 5.333333333333333
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "entry": {
+    "index": 37,
+    "question": "Magic Square is an ancient mathematical game that can be traced back to the records of the Luoshu in China in 1900 BC. This arrangement of filling consecutive natural numbers into a square matrix so that the sum of each row, column and diagonal is equal not only has mathematical aesthetic value, but also has a profound impact in cryptography, statistics and art design. Modern research shows that there are 8 basic solutions to the 3×3 magic square, and many variants can be derived through rotation and mirroring. In computer science, magic square generation algorithms are often used as benchmark cases for testing combinatorial optimization methods, and their constraint satisfaction characteristics are isomorphic to practical applications such as scheduling problems and resource allocation. This problem is essentially a typical constraint satisfaction problem (CSP), and its modeling ideas can be extended to engineering fields such as production scheduling and traffic flow balancing. Solving magic squares through integer programming can not only verify the inherent laws of mathematical symmetry, but also provide a method reference for dealing with more complex discrete optimization problems. Magic square research is still a classic case in the teaching of combinatorial mathematics and discrete optimization, reflecting the close connection between mathematical theory and applied practice. \n\nFill the numbers 1, 2, ..., 9 into the 9 cells A, B, ..., H, I in Figure C-17, so that the sum of the numbers in each row, column and two main diagonals is 15. Try to establish an integer programming model and solve it. If the number in block A is 4, what is the number in block I? \n\nFigure C-17\n\n```\n+---+---+---+\n| A | B | C |\n+---+---+---+\n| D | E | F |\n+---+---+---+\n| G | H | I |\n+---+---+---+\n```",
+    "answer": 6.0,
+    "Parameters_List": [
+      {
+        "Name": "magic_square_size",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "magic_square_numbers",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "Name": "magic_constant",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "cell_labels",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I"
+        ]
+      },
+      {
+        "Name": "fixed_value_A",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "Table_1_layout",
+        "Type": "list",
+        "Value": [
+          [
+            "A",
+            "B",
+            "C"
+          ],
+          [
+            "D",
+            "E",
+            "F"
+          ],
+          [
+            "G",
+            "H",
+            "I"
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Magic Square is an...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "This arrangement of filling...",
+        "Background on magic squares; general idea of filling consecutive natural numbers in a square with equal row/column/diagonal sums; no additional specific constraints beyond later sentences"
+      ],
+      [
+        "3",
+        "Modern research shows that...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In computer science, magic...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "This problem is essentially...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Solving magic squares through...",
+        "Modeling hint: use integer programming; no specific numerical constraints"
+      ],
+      [
+        "7",
+        "Magic square research is still...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Fill the numbers 1, 2,...",
+        "Define decision variables for A–I; each takes a distinct value from {1,…,9}; sums of each row, column, and two main diagonals must equal 15"
+      ],
+      [
+        "9",
+        "Try to establish an...",
+        "Framework hint: formulate and solve as an integer program; no new numerical constraint"
+      ],
+      [
+        "10",
+        "If the number in block...",
+        "Adds fixed-value constraint A = 4"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "A",
+        "Meaning": "Number placed in the top-left cell labeled A",
+        "Type": "integer",
+        "Range ": "A ∈ {1,2,3,4,5,6,7,8,9} and A = 4; distinct from B,C,D,E,F,G,H,I"
+      },
+      {
+        "symbol": "B",
+        "Meaning": "Number placed in the top-middle cell labeled B",
+        "Type": "integer",
+        "Range ": "B ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,C,D,E,F,G,H,I"
+      },
+      {
+        "symbol": "C",
+        "Meaning": "Number placed in the top-right cell labeled C",
+        "Type": "integer",
+        "Range ": "C ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,B,D,E,F,G,H,I"
+      },
+      {
+        "symbol": "D",
+        "Meaning": "Number placed in the middle-left cell labeled D",
+        "Type": "integer",
+        "Range ": "D ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,B,C,E,F,G,H,I"
+      },
+      {
+        "symbol": "E",
+        "Meaning": "Number placed in the center cell labeled E",
+        "Type": "integer",
+        "Range ": "E ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,B,C,D,F,G,H,I"
+      },
+      {
+        "symbol": "F",
+        "Meaning": "Number placed in the middle-right cell labeled F",
+        "Type": "integer",
+        "Range ": "F ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,B,C,D,E,G,H,I"
+      },
+      {
+        "symbol": "G",
+        "Meaning": "Number placed in the bottom-left cell labeled G",
+        "Type": "integer",
+        "Range ": "G ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,B,C,D,E,F,H,I"
+      },
+      {
+        "symbol": "H",
+        "Meaning": "Number placed in the bottom-middle cell labeled H",
+        "Type": "integer",
+        "Range ": "H ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,B,C,D,E,F,G,I"
+      },
+      {
+        "symbol": "I",
+        "Meaning": "Number placed in the bottom-right cell labeled I",
+        "Type": "integer",
+        "Range ": "I ∈ {1,2,3,4,5,6,7,8,9}, all-different from A,B,C,D,E,F,G,H"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Integer domain constraints",
+        "A,B,C,D,E,F,G,H,I ∈ {1,2,3,4,5,6,7,8,9}",
+        "sentence numbers:8,9"
+      ],
+      [
+        "All-different (permutation) constraint",
+        "A,B,C,D,E,F,G,H,I are pairwise distinct; equivalently {A,B,C,D,E,F,G,H,I} = {1,2,3,4,5,6,7,8,9}",
+        "sentence numbers:8"
+      ],
+      [
+        "Row 1 sum",
+        "A + B + C = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Row 2 sum",
+        "D + E + F = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Row 3 sum",
+        "G + H + I = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Column 1 sum",
+        "A + D + G = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Column 2 sum",
+        "B + E + H = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Column 3 sum",
+        "C + F + I = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Main diagonal sum",
+        "A + E + I = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Other diagonal sum",
+        "C + E + G = 15",
+        "sentence numbers:8"
+      ],
+      [
+        "Fixed value of A",
+        "A = 4",
+        "sentence numbers:10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Try to establish an integer programming model and solve it.",
+      "Mathematical_expressions": "Minimize 0"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0",
+      "6.0"
+    ],
+    "time_seconds": 65.18939479999972,
+    "total_tokens": 33953
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "0.0",
+      "6.0"
+    ],
+    "ground_truth": 6.0
+  }
+}

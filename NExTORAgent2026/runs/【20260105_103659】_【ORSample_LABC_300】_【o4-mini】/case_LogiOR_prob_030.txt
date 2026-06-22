@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "LogiTrans operates two distribution centers to manage shipments of three types of goods to regional hubs. Each distribution center can staff at most seven logistics coordinators at the same time. A coordinator’s weekly wage is \\$500 at Distribution Center 1 and \\$900 at Distribution Center 2. Operating a distribution center for one week incurs a fixed cost: \\$1{,}000 for Distribution Center 1 and \\$2{,}000 for Distribution Center 2. Over one week at a distribution center, each coordinator can handle shipments of each type of goods as shown in the table:\n\n| Goods Type \\\\\\\\ Distribution Center | Center 1 | Center 2 |\n|-------------------------------|----------|----------|\n| Type 1                        | 20       | 25       |\n| Type 2                        | 18       | 22       |\n| Type 3                        | 15       | 20       |\n\nEach week, LogiTrans must ensure that it processes at least 120 units of Type 1 goods, at least 150 units of Type 2 goods, and at least 200 units of Type 3 goods. In addition, the following extra-cost rule applies: if in a given week the actual number of coordinators staffed at Distribution Center 2 exceeds 5 (i.e., is 6 or 7), then due to the need to schedule night shifts and expedited dispatching, an additional operating surcharge of \\$1{,}500 will be incurred at Distribution Center 2 for that week. How should LogiTrans minimize total cost while meeting the weekly shipment requirements, taking into account the above extra-cost rule?",
+    "answer": 11000.0,
+    "index": "LogiOR_prob_030",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 每周，LogiTrans 必须保证至少处理 120 件类型 1 货物、至少 150 件类型 2 货物以及至少 200 件类型 3 货物。如何在满足每周发运需求的前提下使总成本最小？, 修改后相关描述: 每周，LogiTrans 必须保证至少处理 120 件类型 1 货物、至少 150 件类型 2 货物以及至少 200 件类型 3 货物。另有如下额外成本规则：如果某一周在配送中心 2 实际配备的协调员人数超过 5 人（即达到 6 人或 7 人），则由于需要安排夜班和加急调度，本周在配送中心 2 将额外产生一笔 1,500 美元的运营附加成本。如何在满足每周发运需求的前提下，在考虑上述额外成本规则的情况下使总成本最小？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_030\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_032.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "11000.0"
+    ],
+    "time_seconds": 29.801024200001848,
+    "total_tokens": 3351
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "11000.0"
+    ],
+    "ground_truth": 11000.0
+  }
+}

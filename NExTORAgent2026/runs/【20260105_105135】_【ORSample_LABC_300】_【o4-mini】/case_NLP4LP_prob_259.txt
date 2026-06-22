@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A dieting woman needs to consume two types of pre-packaged meals: shakes and protein bars. Each serving of shake contains 2 units of protein and 300 calories. Each protein bar contains 7 units of protein and 250 calories. The woman can consume at most 2000 calories. Let the number of shakes consumed per day be $x$, and the number of protein bars be $y$. To make the problem more complex, instead of simply maximizing total protein $= 2x + 7y$, a nonlinear objective is introduced: assume the overall protein utilization efficiency is proportional to the product of the number of shakes, the number of protein bars, and the total-count-related composite term. Specifically, define a new decision variable $z$, representing the squared number of shakes plus the composite unit of protein bars per day, i.e., $z = x * x + y$. The objective to be maximized becomes: the protein utilization index equals $0.1 \\times x \\times y \\times z$, where the coefficient $0.1$ is a given constant. The woman must also satisfy an eating-habit constraint: the number of protein bars she consumes is twice the number of shakes, i.e., $y = 2x$. Under the conditions that calories do not exceed 2000 (given by $300x + 250y \\le 2000$), the number of protein bars is twice the number of shakes ($y = 2x$), and $x$, $y$, and $z$ are all nonnegative, how many servings of shakes and how many protein bars should she consume to maximize the above nonlinear protein utilization index $0.1 \\times x \\times y \\times z$?",
+    "answer": 6.4,
+    "index": "NLP4LP_prob_259",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “如果该女性最多只能摄入 2000 卡路里，她应当摄入多少份奶昔和多少根蛋白棒才能使蛋白质摄入量最大化？”，默认目标是最大化总蛋白质 2x + 7y。 修改后相关描述: 将目标改为最大化一个非线性的蛋白质利用指标：设奶昔数量为 x，蛋白棒数量为 y，z为 z = x * x  + y，目标为最大化 0.1 × x × y × z，其中 0.1 为给定常数，同时保留卡路里约束 300x + 250y ≤ 2000 和关系约束 y = 2x。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_259\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_070.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "2.5"
+    ],
+    "time_seconds": 28.26582950000011,
+    "total_tokens": 3158
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "2.5"
+    ],
+    "ground_truth": 6.4
+  }
+}

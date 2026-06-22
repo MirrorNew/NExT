@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_036",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_036\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_036\\code.py",
+    "NLtype": "Linear",
+    "question": "A bakery bakes bagels and croissants. A batch of bagels can be made using 2 hours of oven time and 0.25 hours of pastry chef time. A batch of croissants is more complicated, so while they take 1 hour of oven time, they take 2 hours of pastry chef time. In a day, the bakery has at most 70 hours available for the oven and 32 pastry chef hours available. Using all the available capacity, what is the maximum profit the bakery can generate assuming the profit per batch is $20 and $40 respectively for a batch of bagels and a batch of croissants.",
+    "answer": 1072,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1072.0"
+    ],
+    "time_seconds": 12.470448099993519,
+    "total_tokens": 1282
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1072.0"
+    ],
+    "ground_truth": 1072
+  }
+}

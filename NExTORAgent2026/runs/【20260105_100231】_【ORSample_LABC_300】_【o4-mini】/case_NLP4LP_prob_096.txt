@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A doctor advises her patient to eat more fish and chicken in order to increase protein and iron intake. Each serving of fish contains 10 units of protein and 12 units of iron. Each serving of chicken contains 15 units of protein and 8 units of iron. The patient needs to consume at least 130 units of protein and 120 units of iron. Since chicken meals are cheaper, the patient wants the ratio of the number of chicken servings to the number of fish servings to be at least 2; that is, the quotient of the number of chicken servings and the number of fish servings must be greater than or equal to 2. If each serving of fish contains 7 units of fat and each serving of chicken contains 10 units of fat, how many servings of fish and chicken should she eat to minimize her fat intake?",
+    "answer": 115.71428571428571,
+    "index": "NLP4LP_prob_096",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 由于鸡肉餐更便宜，病人希望食用的鸡肉餐数量至少是鱼餐数量的两倍。修改后相关描述: 由于鸡肉餐更便宜，病人希望食用的鸡肉餐数量与鱼餐数量的比率至少为 2，也就是说，鸡肉餐的份数与鱼餐的份数的比值要大于或等于 2。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_096\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_073.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "118.0"
+    ],
+    "time_seconds": 36.81184900000517,
+    "total_tokens": 2046
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "118.0"
+    ],
+    "ground_truth": 115.71428571428571
+  }
+}

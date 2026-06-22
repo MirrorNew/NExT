@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "The post office is purchasing stamping machines. They can buy dual-type stamping machines or single-type stamping machines. A dual-type stamping machine can stamp 50 letters per minute, while a single-type stamping machine can stamp 30 letters per minute. A dual-type stamping machine requires 20 units of glue per minute, while a single-type stamping machine requires 15 units of glue per minute. Because the single-type stamping machines are quieter, the number of single-type stamping machines must be greater than the number of dual-type stamping machines. In addition, the post office wants to ensure that they can stamp at least 300 letters per minute and use at most 135 units of glue per minute.\n\nThere is an additional rule: if the total number of stamping machines the post office ultimately purchases (dual-type plus single-type) exceeds 10, then due to additional maintenance arrangements, an extra 25 units of glue consumption per minute will be incurred, which is treated as adding a fixed glue usage of 25 units on top of the original glue usage; if the total number of stamping machines purchased does not exceed 10, then this additional glue consumption does not occur.\n\nUnder this nonlinear glue-usage rule, how many machines of each type should they purchase to minimize the total number of stamping machines?",
+    "answer": 8.0,
+    "index": "NLP4LP_prob_066",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述:『此外，邮局希望确保他们每分钟至少可以盖章 300 封信件，并且每分钟最多使用 135 个单位的胶水。他们应购买多少台每种型号的盖章机以使盖章机的总数量最小？』, 修改后相关描述:『此外，邮局希望确保他们每分钟至少可以盖章 300 封信件，并且每分钟最多使用 135 个单位的胶水。另有一项规定：如果邮局最终购买的盖章机总数量（双型号加单型号）超过 10 台，则由于额外的维护安排，每分钟会产生 25 个单位的额外胶水消耗，视同在原有胶水使用量的基础上增加 25 个单位的固定胶水占用；如果购买的盖章机总数量不超过 10 台，则不产生这项额外胶水消耗。在考虑这一非线性胶水使用规则的前提下，他们应购买多少台每种型号的盖章机以使盖章机的总数量最小？』",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_066\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_051.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "8.0"
+    ],
+    "time_seconds": 48.97806599999603,
+    "total_tokens": 4387
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "8.0"
+    ],
+    "ground_truth": 8.0
+  }
+}

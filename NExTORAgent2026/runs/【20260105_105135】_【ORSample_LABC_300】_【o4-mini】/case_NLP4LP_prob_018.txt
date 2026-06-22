@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A candy shop blends regular candy and sour candy to produce two products: the Regular Mix and the Sour Surprise Mix. Each kilogram of Regular Mix contains 0.8 kg of regular candy and 0.2 kg of sour candy. The profit from the Regular Mix is 3 dollars per kilogram. Each kilogram of Sour Surprise Mix contains 0.1 kg of regular candy and 0.9 kg of sour candy. The profit from the Sour Surprise Mix is 5 dollars per kilogram. The shop has 80 kg of regular candy and 60 kg of sour candy available.\n\nNote that the sour candy used to produce the Sour Surprise Mix generates an additional flavor-enhancement effect during processing: as the total amount of sour candy used for producing the Sour Surprise Mix increases, demand and the additional processing cause the amount of sour candy that can actually be consumed to grow exponentially. Specifically, for each additional 1 kg of Sour Surprise Mix produced, the total available sour candy can be regarded as the original 60 kg multiplied by $1.03$ raised to the corresponding power; that is, when the output of Sour Surprise Mix is $x$ kilograms, the effective available amount of sour candy is approximately $60\\times(1.03^{x})$ kilograms. How many kilograms of each type of candy mix should be produced to maximize profit?",
+    "answer": 300.0000116976695,
+    "index": "NLP4LP_prob_018",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 该糖果店拥有80千克普通糖果和60千克酸味糖果可供使用。应当制作多少千克每种类型的糖果混合装以使利润最大化？, 修改后相关描述: 该糖果店拥有80千克普通糖果和60千克酸味糖果可供使用。需要注意的是，用于生产酸味惊喜混合装的酸味糖果在加工过程中会产生额外的风味增强效果：当用于生产酸味惊喜混合装的酸味糖果总用量增加时，其需求和附加工艺会使实际可消耗的酸味糖果量按指数形式增长，具体为：当酸味惊喜混合装的产量每增加1千克时，可被视为可用的酸味糖果总量会在原有60千克基础上乘以1.3的幂，即当酸味惊喜混合装的产量为x千克时，相当于酸味糖果的有效可用量约为60×(1.3的x次方)千克。应当制作多少千克每种类型的糖果混合装以使利润最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_018\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_083.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4000.0"
+    ],
+    "time_seconds": 25.999499800003832,
+    "total_tokens": 2554
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "4000.0"
+    ],
+    "ground_truth": 300.0000116976695
+  }
+}

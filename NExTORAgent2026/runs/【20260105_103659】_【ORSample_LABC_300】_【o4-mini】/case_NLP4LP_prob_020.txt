@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An electronics store sells high-performance premium desktop computers as well as standard desktop computers for everyday use. The manufacturing cost of each premium desktop is 2000 USD, yielding a profit of 500 USD. The manufacturing cost of each standard desktop is 1000 USD, yielding a profit of 300 USD. The store can sell at most 200 desktops per month. To reflect additional loss and complexity in batch production management, the store applies a nonlinear modification to the manufacturing expenditure constraint: the original linear constraint “the total manufacturing expenditure for premium and standard desktops is at most 300000 USD” is replaced by “the $1.002$-th power of the total manufacturing expenditure term $(2000\\times\\text{(number of premium desktops)} + 1000\\times\\text{(number of standard desktops)})$ is at most 300000,” where the exponent takes the specific value $1.002$. How many desktops of each type should be manufactured and sold in order to maximize profit?",
+    "answer": 78400.0,
+    "index": "NLP4LP_prob_020",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 该商店每个月最多销售 200 台台式机，并且希望在制造台式机上的支出最多为 300000 美元。 修改后相关描述: 该商店每个月最多销售 200 台台式机。为了体现批量生产管理上的额外损耗和复杂度，商店对制造支出约束进行了非线性修正：将原本“高级台式机和普通台式机的总制造支出最多为 300000 美元”的线性约束，改为“高级台式机和普通台式机的总制造支出项 (2000×高级台式机数量 + 1000×普通台式机数量) 的 1.002次幂最多为 300000”，其中幂指数取具体数值 1.002。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_020\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_063.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "78400.0"
+    ],
+    "time_seconds": 23.705217800001265,
+    "total_tokens": 2593
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "78400.0"
+    ],
+    "ground_truth": 78400.0
+  }
+}

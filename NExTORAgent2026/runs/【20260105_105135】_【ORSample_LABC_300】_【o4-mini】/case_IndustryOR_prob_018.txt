@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A furniture store can order chairs from three different manufacturers, A, B, and C. The unit cost per chair is \\$50 when ordering from manufacturer A, \\$45 when ordering from manufacturer B, and \\$40 when ordering from manufacturer C. The store needs to minimize the total ordering cost.\n\nIn addition, each order placed with manufacturer A contains 15 chairs, and each order placed with manufacturers B and C contains 10 chairs. The numbers of batches ordered must be integers. The store must order at least 100 chairs.\n\nEach order placed with manufacturer A contains 15 chairs, and each order placed with manufacturers B and C contains 10 chairs. The store must order at most 500 chairs.\n\nIf the store decides to order chairs from manufacturer A, then it must also order at least 10 chairs from manufacturer B.\n\nMoreover, if the store decides to order chairs from manufacturer B, then it must also order chairs from manufacturer C.\n\nOn this basis, introduce the following additional cost condition: if the total number of chairs ordered from the three manufacturers combined exceeds 300 chairs, then an additional one-time warehousing management fee of \\$2000 must be paid; otherwise, this additional fee does not need to be paid. That is, when the total order quantity does not exceed 300 chairs, there is no additional cost of \\$2000, but once the total order quantity exceeds 300 chairs, a fixed fee of \\$2000 is added on top of the original ordering cost.",
+    "answer": 4000.0,
+    "index": "IndustryOR_prob_018",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 商店需要使总订购成本最小化。\\n\\n(后续未对成本结构做进一步说明，仅包含按每把椅子的线性订购成本)。, 修改后相关描述: 商店需要使总订购成本最小化。\\n\\n在原有按每把椅子支付的线性订购成本基础上，增加了一个条件：如果从三家制造商合计订购的椅子总数超过 300 把，则在总成本中额外增加一次性仓储管理费用 2000 美元；当总订购量不超过 300 把时，则不产生这 2000 美元的额外费用。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_018\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_013.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4000.0"
+    ],
+    "time_seconds": 45.998662400001194,
+    "total_tokens": 4337
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4000.0"
+    ],
+    "ground_truth": 4000.0
+  }
+}

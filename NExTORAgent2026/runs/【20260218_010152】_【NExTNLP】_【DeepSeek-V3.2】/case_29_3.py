@@ -1,0 +1,116 @@
+import gurobipy as gp
+
+# Define parameters
+threshold_speed_extra = 50
+number_of_sections = 3
+base_coef = 0.005
+extra_coef = 0.0001
+total_time_limit = 10
+min_speed_section_2 = 55
+
+section_data = [
+    {'Section': 1, 'Distance_km': 200, 'Fuel_price_yuan_per_ton': 3000, 'Max_speed_kmh': 70},
+    {'Section': 2, 'Distance_km': 100, 'Fuel_price_yuan_per_ton': 3500, 'Max_speed_kmh': 60},
+    {'Section': 3, 'Distance_km': 150, 'Fuel_price_yuan_per_ton': 4000, 'Max_speed_kmh': 80}
+]
+
+# Create model
+model = gp.Model("Malacca_Speed_Optimization")
+model.Params.NonConvex = 2
+
+# Decision variables - speeds for each section
+v = []
+for i in range(number_of_sections):
+    if i == 1:  # Section 2 has minimum speed constraint > 55
+        v_i = model.addVar(lb=min_speed_section_2 + 1e-6, ub=section_data[i]['Max_speed_kmh'], 
+                          name=f"v_{i+1}")
+    else:  # Sections 1 and 3 have lower bound 0
+        v_i = model.addVar(lb=0, ub=section_data[i]['Max_speed_kmh'], 
+                          name=f"v_{i+1}")
+    v.append(v_i)
+
+# Auxiliary variables for time denominators
+t = []
+for i in range(number_of_sections):
+    t_i = model.addVar(lb=0, ub=gp.GRB.INFINITY, name=f"t_{i+1}")
+    t.append(t_i)
+
+# Time constraints: v_i * t_i = distance_i
+model.addConstr(v[0] * t[0] == 200, "time_constraint_section1")
+model.addConstr(v[1] * t[1] == 100, "time_constraint_section2")
+model.addConstr(v[2] * t[2] == 150, "time_constraint_section3")
+
+# Total time constraint
+model.addConstr(t[0] + t[1] + t[2] <= total_time_limit, "total_time_limit")
+
+# Auxiliary variables for squares of speeds
+v_sq = []
+for i in range(number_of_sections):
+    v_sq_i = model.addVar(lb=0, ub=gp.GRB.INFINITY, name=f"v_sq_{i+1}")
+    v_sq.append(v_sq_i)
+    model.addGenConstrPow(v[i], v_sq_i, 2, f"pow_v_{i+1}")
+
+# Auxiliary variables for extra speed above 50 (max(0, v_i - 50))
+extra_speed = []
+extra_speed_sq = []
+for i in range(number_of_sections):
+    # Create variable for (v_i - 50)
+    v_minus_50 = model.addVar(lb=-gp.GRB.INFINITY, ub=gp.GRB.INFINITY, name=f"v_minus_50_{i+1}")
+    model.addConstr(v_minus_50 == v[i] - threshold_speed_extra, f"v_minus_50_def_{i+1}")
+    
+    # Create variable for max(0, v_i - 50) using indicator constraints
+    d_i = model.addVar(lb=0, ub=gp.GRB.INFINITY, name=f"d_{i+1}")
+    extra_speed.append(d_i)
+    
+    # Binary variable to indicate if v_i > 50
+    y_i = model.addVar(vtype=gp.GRB.BINARY, name=f"y_{i+1}")
+    
+    # Indicator constraints
+    epsilon = 1e-3
+    # If y_i = 1, then v_i >= 50 + epsilon and d_i = v_i - 50
+    model.addGenConstrIndicator(y_i, True, v[i] >= threshold_speed_extra + epsilon)
+    model.addGenConstrIndicator(y_i, True, d_i == v[i] - threshold_speed_extra)
+    
+    # If y_i = 0, then v_i <= 50 and d_i = 0
+    model.addGenConstrIndicator(y_i, False, v[i] <= threshold_speed_extra)
+    model.addGenConstrIndicator(y_i, False, d_i == 0)
+    
+    # Square of extra speed
+    d_sq_i = model.addVar(lb=0, ub=gp.GRB.INFINITY, name=f"d_sq_{i+1}")
+    extra_speed_sq.append(d_sq_i)
+    model.addGenConstrPow(d_i, d_sq_i, 2, f"pow_d_{i+1}")
+
+# Objective function
+obj = gp.QuadExpr()
+for i in range(number_of_sections):
+    distance = section_data[i]['Distance_km']
+    price = section_data[i]['Fuel_price_yuan_per_ton']
+    obj += price * distance * (base_coef * v_sq[i] + extra_coef * extra_speed_sq[i])
+
+model.setObjective(obj, gp.GRB.MINIMIZE)
+
+# Solve
+model.optimize()
+
+# Print results
+print("Optimal Solution:")
+print(f"v1 = {v[0].X:.4f} km/h")
+print(f"v2 = {v[1].X:.4f} km/h")
+print(f"v3 = {v[2].X:.4f} km/h")
+
+print(f"\nExtra speed above 50 km/h:")
+for i in range(number_of_sections):
+    print(f"Section {i+1}: {extra_speed[i].X:.4f} km/h")
+
+print(f"\nTotal fuel cost = {model.ObjVal:.2f} yuan")
+
+# Calculate total time
+total_time = t[0].X + t[1].X + t[2].X
+print(f"Total sailing time = {total_time:.4f} hours")
+
+# Check if any section exceeds 50 km/h
+for i in range(number_of_sections):
+    if v[i].X > threshold_speed_extra:
+        print(f"Section {i+1} exceeds 50 km/h by {v[i].X - threshold_speed_extra:.2f} km/h")
+
+print(f"\nFinalAnswer=【{model.ObjVal}】")

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A company plans to produce three products $A_1$, $A_2$, and $A_3$. There are 22 producible days per month. The table below gives the maximum demand (unit = 100 kg), selling price ($/100 kg), production cost (per 100 kg of product), and production quota (the maximum number of 100 kg units that can be produced per day when all production lines are fully dedicated to that product).\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Maximum demand | 5300 | 4500 | 5400 |\n| Selling price | 124 | 109 | 115 |\n| Production cost | 73.30 | 52.90 | 65.40 |\n| Production quota | 500 | 450 | 550 |\n\nThe fixed setup (startup) costs for the production lines are as follows:\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Setup cost | 170000 | 150000 | 100000 |\n\nMinimum production batch sizes:\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Minimum batch size | 20 | 20 | 16 |\n\nIn addition, over the entire planning horizon, the total production quantities of product $A_1$ and product $A_2$ must satisfy the following ratio constraint: the ratio of the total output of $A_1$ to the total output of $A_2$ must not exceed 1.2, i.e., (total output of $A_1$) divided by (total output of $A_2$) is at most $1.2$.\n\nFormulate an operations research model that, taking into account the fixed setup costs, the minimum batch-size constraints, and the above output-ratio constraint, determines a production plan that maximizes total profit.",
+    "answer": 167840.0,
+    "index": "IndustryOR_prob_021",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 请建立一个运筹学模型，在考虑固定启用成本和最小生产批量约束的前提下，确定一个使总收益最大化的生产计划。, 修改后相关描述: 另外，要求在整个计划期内，产品 A₁ 与产品 A₂ 的总产量之间满足如下比例约束：产品 A₁ 的总产量与产品 A₂ 的总产量之比不得超过 1.2，即 A₁ 总产量除以 A₂ 总产量不超过 1.2。请建立一个运筹学模型，在考虑固定启用成本、最小生产批量约束以及上述产量比例约束的前提下，确定一个使总收益最大化的生产计划。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_021\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_007.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "270290.0"
+    ],
+    "time_seconds": 32.86863799999992,
+    "total_tokens": 2952
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "270290.0"
+    ],
+    "ground_truth": 167840.0
+  }
+}

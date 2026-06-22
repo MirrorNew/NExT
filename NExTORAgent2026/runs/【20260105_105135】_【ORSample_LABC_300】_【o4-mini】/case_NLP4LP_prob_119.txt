@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A hospital patient can take two different analgesics: Analgesic 1 and Analgesic 2. Each dose of Analgesic 1 delivers 0.5 units of medication to the legs and 0.8 units of medication to the back. Each dose of Analgesic 2 delivers 0.7 units of medication to the legs and 0.4 units of medication to the back. In addition, Analgesic 1 delivers 0.3 units of a sleep aid, and Analgesic 2 delivers 0.6 units of a sleep aid. The amount of sleep aid delivered should be at most 8 units, and the amount of medication delivered to the legs should be at least 4 units. To better reflect practical efficacy evaluation, assume that the total effective amount of medication delivered to the back equals the $0.98$-th power of the total amount of medication delivered to the back; that is, if the original total amount of medication delivered to the back is $B$ units, then the effective amount of medication for the back is $B^{0.98}$. How many doses of these two analgesics should be taken, in order to maximize the effective amount of medication delivered to the back (computed according to the above $1.2$-th power)?",
+    "answer": 19.575013410763884,
+    "index": "NLP4LP_prob_119",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “应各服用多少剂这两种止痛药，才能使输送到背部的药物量最大化？”, 修改后相关描述: “为了更符合实际疗效评估，假设输送到背部的药物总有效量等于‘输送到背部的药物总量的1.2次幂’，即如果原本输送到背部的药物总量为B个单位，则背部的有效药物量为B的1.2次幂。应各服用多少剂这两种止痛药，才能使输送到背部的有效药物量（按上述1.2次幂计算）最大化？”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_119\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_059.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "20.06677331606"
+    ],
+    "time_seconds": 29.62872470000002,
+    "total_tokens": 2072
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "20.06677331606"
+    ],
+    "ground_truth": 19.575013410763884
+  }
+}

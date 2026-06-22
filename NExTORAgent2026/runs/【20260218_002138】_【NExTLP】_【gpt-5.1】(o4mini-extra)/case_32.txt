@@ -1,0 +1,350 @@
+{
+  "entry": {
+    "index": 32,
+    "question": "Founded in 2010, Dongfeng Express is a leading integrated logistics service provider in China, handling more than 2 million express parcels per day. Its large sorting center in East China uses an automated sorting system and is equipped with 11 high-speed cross-belt sorters, each with a theoretical processing capacity of 500 pieces per hour. According to the 2023 operating data, the sorting center handles an average of about 35,000 express parcels per day, of which e-commerce parcels account for 78%, showing obvious time period fluctuations: the main arrivals are trunk line goods in the morning, and the peak of intra-city parcels is in the afternoon.\n\nA parcel sorting department of Dongfeng Express handles the arriving outbound express parcels every day. According to statistics, the number of express parcels delivered in each time period every day is shown in Table C-33.\n\nTable C-33\n\n| Time period | Number of arriving express parcels | Time period | Number of arriving express parcels |\n| ------------ | ---------- | ------------ | ---------- |\n| Before 10:00 | 5000 | 14:00～15:00 | 3000 |\n| 10:00～11:00 | 4000 | 15:00～16:00 | 4000 |\n| 11:00～12:00 | 3000 | 16:00～17:00 | 4500 |\n| 12:00～13:00 | 4000 | 17:00～18:00 | 3500 |\n| 13:00～14:00 | 2500 | 18:00～19:00 | 2500 |\n\nExpress mail sorting is operated by machines (one employee per machine), with a total of $11$ sorting machines. Each sorting machine can sort $500$ per hour Express mail. Some of the employees are full-time, working in three shifts: 10:00-18:00, 11:00-19:00, 12:00-20:00, and each person is paid $150$ per day; the other part is part-time, working $5$ hours a day, 13:00-18:00, 14:00-19:00, 15:00-20:00, and each person is paid $80$ per day. \n\nThe express mail processing rule is: all express mails arriving before the hour can be processed from every hour. Due to the time requirements of express mail, all express mails arriving before $12:00$ must be processed before $14:00$; those arriving before $15:00$ must be processed before $17:00$; all express mails arriving on the same day must be processed before $20:00$ every day. Pre-processing is completed. \n\nBuild a model. How many full-time and part-time employees should be equipped in the express sorting department to complete the specified tasks and minimize the total expenditure? \n\nFigure C-12 can be used to represent the start and end time of each work. \n\nFigure C-12 (Employee Work Time Chart)\n\n| Employee | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 |\n| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| $x_1$ | █ | █ | █ | █ | █ | █ | █ | █ | | |\n| $x_2$ | | █ | █ | █ | █ | █ | █ | █ | █ | █ | |\n| $x_3$ | | | █ | █ | █ | █ | █ | █ |",
+    "answer": 1350.0,
+    "Parameters_List": [
+      {
+        "Name": "year_founded",
+        "Type": "integer",
+        "Value": 2010
+      },
+      {
+        "Name": "max_daily_parcels",
+        "Type": "integer",
+        "Value": 2000000
+      },
+      {
+        "Name": "num_sorters",
+        "Type": "integer",
+        "Value": 11
+      },
+      {
+        "Name": "sorter_capacity_per_hour",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "avg_daily_parcels",
+        "Type": "integer",
+        "Value": 35000
+      },
+      {
+        "Name": "ecommerce_ratio",
+        "Type": "float",
+        "Value": 0.78
+      },
+      {
+        "Name": "num_sorting_machines",
+        "Type": "integer",
+        "Value": 11
+      },
+      {
+        "Name": "full_time_shifts",
+        "Type": "list",
+        "Value": [
+          [
+            10,
+            18
+          ],
+          [
+            11,
+            19
+          ],
+          [
+            12,
+            20
+          ]
+        ]
+      },
+      {
+        "Name": "full_time_daily_pay",
+        "Type": "integer",
+        "Value": 150
+      },
+      {
+        "Name": "part_time_shifts",
+        "Type": "list",
+        "Value": [
+          [
+            13,
+            18
+          ],
+          [
+            14,
+            19
+          ],
+          [
+            15,
+            20
+          ]
+        ]
+      },
+      {
+        "Name": "part_time_hours_per_day",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "part_time_daily_pay",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "processing_deadlines",
+        "Type": "list",
+        "Value": [
+          [
+            12,
+            14
+          ],
+          [
+            15,
+            17
+          ],
+          [
+            24,
+            20
+          ]
+        ]
+      },
+      {
+        "Name": "Table_1_C33",
+        "Type": "tuple",
+        "Value": {
+          "Before 10:00": 5000,
+          "10:00-11:00": 4000,
+          "11:00-12:00": 3000,
+          "12:00-13:00": 4000,
+          "13:00-14:00": 2500,
+          "14:00-15:00": 3000,
+          "15:00-16:00": 4000,
+          "16:00-17:00": 4500,
+          "17:00-18:00": 3500,
+          "18:00-19:00": 2500
+        }
+      },
+      {
+        "Name": "Table_2_C12",
+        "Type": "tuple",
+        "Value": {
+          "times": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "x1": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "x2": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "x3": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Founded in 2010, Dongfeng Express...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Its large sorting center in East China...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "According to the 2023 operating data...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "A parcel sorting department of Dongfeng Express...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "According to statistics, the number of express parcels...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Table C-33 (arrival volumes by time period)...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Express mail sorting is operated by machines...",
+        "Constraint: number of employees working ≤ 11"
+      ],
+      [
+        "8",
+        "Each sorting machine can sort 500 per hour Express mail...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Some of the employees are full-time, working in three shifts...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The express mail processing rule is: all express mails arriving before the hour...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Due to the time requirements of express mail, all express mails arriving before 12:00...",
+        "Constraint: processing‐by‐deadline requirements"
+      ],
+      [
+        "12",
+        "Pre-processing is completed...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Build a model. How many full-time and part-time employees...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "Figure C-12 can be used to represent the start and end time...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Figure C-12 (Employee Work Time Chart)...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "number of full-time employees on shift 10:00–18:00",
+        "Type": "integer",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "number of full-time employees on shift 11:00–19:00",
+        "Type": "integer",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "x3",
+        "Meaning": "number of full-time employees on shift 12:00–20:00",
+        "Type": "integer",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "y1",
+        "Meaning": "number of part-time employees on shift 13:00–18:00",
+        "Type": "integer",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "y2",
+        "Meaning": "number of part-time employees on shift 14:00–19:00",
+        "Type": "integer",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "y3",
+        "Meaning": "number of part-time employees on shift 15:00–20:00",
+        "Type": "integer",
+        "Range ": ">= 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Machine_availability",
+        "for all p=1..10: x1*I1(p)+x2*I2(p)+x3*I3(p)+y1*J1(p)+y2*J2(p)+y3*J3(p) <= 11",
+        "sentence numbers:7"
+      ],
+      [
+        "Deadline_before_14:00",
+        "sum_{p=1..4}500*(x1*I1(p)+x2*I2(p)+x3*I3(p)+y1*J1(p)+y2*J2(p)+y3*J3(p)) >= 5000+4000+3000",
+        "sentence numbers:11"
+      ],
+      [
+        "Deadline_before_17:00",
+        "sum_{p=1..7}500*(x1*I1(p)+x2*I2(p)+x3*I3(p)+y1*J1(p)+y2*J2(p)+y3*J3(p)) >= 5000+4000+3000+4000+2500+3000",
+        "sentence numbers:11"
+      ],
+      [
+        "Deadline_before_20:00",
+        "sum_{p=1..10}500*(x1*I1(p)+x2*I2(p)+x3*I3(p)+y1*J1(p)+y2*J2(p)+y3*J3(p)) >= 36000",
+        "sentence numbers:11"
+      ],
+      [
+        "Domain",
+        "x1,x2,x3,y1,y2,y3 are non-negative integers",
+        "sentence numbers:9"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize total daily wage cost.",
+      "Mathematical_expressions": "150*(x1+x2+x3) + 80*(y1+y2+y3)"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1200.0"
+    ],
+    "time_seconds": 28.858440600000904,
+    "total_tokens": 9611
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "1200.0"
+    ],
+    "ground_truth": 1350.0
+  }
+}

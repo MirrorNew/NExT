@@ -1,0 +1,209 @@
+{
+  "entry": {
+    "index": 10,
+    "question": "In the energy and chemical industry, the design and manufacture of high-pressure gas storage containers is a key link to ensure industrial safety and efficiency. For example, Rhode Island Technology High Pressure Vessels, a well-known gas equipment manufacturer in Terra, recently undertook a project to provide high-pressure containers for new energy hydrogen energy storage systems. Such containers need to operate stably and for a long time under extreme pressure while meeting strict cost control requirements. Due to the high permeability and flammability of hydrogen, the structural strength and sealing of the container are particularly important, and the material thickness, welding process and volumetric efficiency must be considered comprehensively during design. The company's engineering team is optimizing the design based on industry standards to balance safety and economy, ensuring that while meeting volume requirements, the material and welding costs are minimized. The solution to this problem not only affects the economic benefits of a single project, but may also provide a standardized reference for the design of similar high-pressure vessels. \n\nSpecifically, Rhode Island engineers need to design a cylindrical pressure vessel (with hollow hemispherical heads at both ends) for storing high-pressure gas. The inner radius of the cylinder is known to be 10. The design variables include the thickness of the cylinder wall, the thickness of the head wall, and the length of the cylinder section. The container needs to meet the restrictions of the safety regulations for high-pressure gas storage. The wall thickness of the head must be more than five times the wall thickness of the cylindrical body, and the wall thickness of the cylindrical body must not be less than one thousandth of the length of the cylindrical section. In addition, the length of the cylindrical section must be less than 240, and the total volume of the container must not be less than 70,000 unit volumes. The manufacturing cost is composed of material cost and welding cost. The material cost is the cost of all material volumes. The unit volume cost of the given material is 1, and there is no need to consider the material cost of welding. The welding cost includes longitudinal welds and circumferential welds. The longitudinal weld is welded around the inner and outer edges of the cylindrical material, while the material of the welded part of the cylinder thickness is negligible due to its small length. The circumferential weld only considers the outermost edge of the welded cylinder, and require welding at both ends. The welding cost is equal to the respective welding length multiplied by the welding process coefficient. In order to simplify the calculation, we usually consider the welding cost to be twice the welding length. Design the container to minimize the manufacturing cost and give the minimum cost.",
+    "answer": 5339.58,
+    "Parameters_List": [
+      {
+        "Name": "inner_radius",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "min_head_to_cyl_ratio",
+        "Type": "float",
+        "Value": 5.0
+      },
+      {
+        "Name": "min_cyl_to_length_ratio",
+        "Type": "float",
+        "Value": 0.001
+      },
+      {
+        "Name": "max_cylindrical_length",
+        "Type": "integer",
+        "Value": 240
+      },
+      {
+        "Name": "min_total_volume",
+        "Type": "integer",
+        "Value": 70000
+      },
+      {
+        "Name": "cost_material_per_unit",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "welding_cost_coefficient",
+        "Type": "integer",
+        "Value": 2
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the energy and chemical...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "For example, Rhode Island...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Such containers need to...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Due to the high permeability...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The company's engineering team...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The solution to this problem...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Specifically, Rhode Island engineers...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The inner radius of the cylinder...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The design variables include...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The container needs to meet...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The wall thickness of the head must...",
+        "t_h ≥ 5 t_c; t_c ≥ L / 1000"
+      ],
+      [
+        "12",
+        "In addition, the length of the cylindrical...",
+        "L ≤ 240; π·r²·L + (4/3)·π·r³ ≥ 70000"
+      ],
+      [
+        "13",
+        "The manufacturing cost is composed...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "The material cost is the cost...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "The unit volume cost of the given...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "The welding cost includes longitudinal...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "The longitudinal weld is welded around...",
+        "No constraints"
+      ],
+      [
+        "18",
+        "The circumferential weld only considers...",
+        "No constraints"
+      ],
+      [
+        "19",
+        "The welding cost is equal to...",
+        "No constraints"
+      ],
+      [
+        "20",
+        "Design the container to minimize...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "t_c",
+        "Meaning": "cylinder-wall thickness",
+        "Type": "continuous",
+        "Range ": "t_c ≥ 0"
+      },
+      {
+        "symbol": "t_h",
+        "Meaning": "head-wall thickness",
+        "Type": "continuous",
+        "Range ": "t_h ≥ 0"
+      },
+      {
+        "symbol": "L",
+        "Meaning": "length of cylindrical section",
+        "Type": "continuous",
+        "Range ": "0 ≤ L ≤ 240"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Head-to-cylinder thickness ratio",
+        "t_h ≥ 5·t_c",
+        "sentence numbers:11"
+      ],
+      [
+        "Cylinder-thickness minimum bound",
+        "t_c ≥ L / 1000",
+        "sentence numbers:11"
+      ],
+      [
+        "Cylinder length upper bound",
+        "L ≤ 240",
+        "sentence numbers:12"
+      ],
+      [
+        "Storage-volume requirement",
+        "π·r²·L + (4/3)·π·r³ ≥ 70000",
+        "sentence numbers:12"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Design the container to minimize the manufacturing cost and give the minimum cost.",
+      "Mathematical_expressions": "Min C_total = π*((r+t_c)^2 - r^2)*L + (4/3)*π*((r+t_h)^3 - r^3) + 4*L + 8*π*(r+t_c)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "5339.581736314"
+    ],
+    "time_seconds": 20.939978399997926,
+    "total_tokens": 7692
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "5339.581736314"
+    ],
+    "ground_truth": 5339.58
+  }
+}

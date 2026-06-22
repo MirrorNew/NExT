@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A shop wants to clear 200 shirts and 100 pairs of trousers left over from last season. The shop decides to offer two promotional bundles: A and B. Bundle A contains one shirt and two pairs of trousers, priced at £30; bundle B contains three shirts and one pair of trousers, priced at £50. The shop does not want to sell fewer than 20 units of bundle A and 10 units of bundle B.\n\nWhen formulating the mathematical model, let the number of bundle A sold be $x$ and the number of bundle B sold be $y$. To reflect a more complex promotional interaction effect, assume that when bundles A and B are both sold in large quantities, an additional synergy revenue is generated. This synergy revenue is proportional to the product of three decision variables: the number of bundle A sold, the number of bundle B sold, and a decision variable $z$ representing the additional promotional intensity ($z$ denotes the intensity level of promotional resources投入, is a nonnegative integer, does not exceed 10, and cannot exceed either the number of bundle A sold or the number of bundle B sold). Specifically, let the synergy revenue be $0.001 \\times x \\times y \\times z$, where $0.1$ is a given constant coefficient. Hence, total revenue is described as: the revenue from bundles A and B alone ($30$ pounds times $x$, plus $50$ pounds times $y$), plus this synergy revenue.\n\nOn this basis, the goal is to maximize the total promotional revenue including the synergy revenue by appropriately choosing the three types of decision variables (bundle A sales quantity $x$, bundle B sales quantity $y$, and promotional intensity level $z$), subject to: not exceeding the inventory (shirt usage not exceeding 200, trouser usage not exceeding 100), and selling at least 20 units of bundle A and at least 10 units of bundle B.\n\nTry to formulate a model for this problem.",
+    "answer": 3612.0,
+    "index": "IndustryOR_prob_089",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “应当销售多少份每种组合，才能使此次促销的收入最大化？\\n\\n尝试为这一问题建立一个模型。” 这里隐含的目标函数收入仅由 30×A组合数量 与 50×B组合数量 的线性和构成。修改后相关描述: 将目标函数改为由三部分共同决定：第一部分仍为 30 英镑乘以 A 组合销售数量 x；第二部分为 50 英镑乘以 B 组合销售数量 y；第三部分新增一个非线性的联动收益项，设为 0.001 × x × y × z，其中 x 为A组合销售数量、y 为B组合销售数量、z 为新增的促销强度等级决策变量（z 表示投入的促销资源强度等级，取非负整数，不大于10，且不能大于任意销售A或B组合的数量），0.001 为给定常数系数。总收入由这三项之和构成，并在模型中以“30×x 加 50×y 再加 0.001 ×x×y×z”的自然语言方式表述，从而把原来的线性收入 y = 30x_A + 50x_B 改为包含三变量乘积的非线性收入。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_089\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_011.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3612.0"
+    ],
+    "time_seconds": 34.74475480000547,
+    "total_tokens": 4025
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "3612.0"
+    ],
+    "ground_truth": 3612.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A village is holding a banquet and provides bicycles and cars as means of transportation for everyone. One bicycle can carry 3 people, while one car can carry 5 people. Since cars are more expensive, it is required that the ratio of the number of cars used to the total number of vehicles (i.e., the sum of the numbers of bicycles and cars) does not exceed $2/5$. That is, the proportion of cars among all vehicles is at most 40%. If the village needs to transport at least 500 people, how many units of each type of vehicle should be used in order to minimize the total number of bicycles required?",
+    "answer": 80.0,
+    "index": "NLP4LP_prob_167",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 由于汽车更昂贵，汽车数量最多只能占全部车辆数量的 40%。修改后相关描述: 由于汽车更昂贵，要求所使用汽车的数量与全部车辆数量（即自行车与汽车数量之和）的比值不超过 2/5。也就是说，汽车数量占全部车辆数量的比例最多为 40%。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_167\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_094.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "80.0"
+    ],
+    "time_seconds": 10.356782100003329,
+    "total_tokens": 1369
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "80.0"
+    ],
+    "ground_truth": 80.0
+  }
+}

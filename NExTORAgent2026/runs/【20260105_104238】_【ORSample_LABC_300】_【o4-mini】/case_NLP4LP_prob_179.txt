@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_179",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_179\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_179\\code.py",
+    "NLtype": "Linear",
+    "question": "A grape farmer transports his grapes in either small crates or large crates. A small crate can take 200 grapes while a large crate can take 500.  Because his customers prefer smaller crates, at least 3 times as many small crates must be used than large crates. The farmer has available at most 100 small crates and at most 50 large crates. In addition, his truck can take at most 60 crates total and he must use at least 10 large crates. How many of each crate should he use to maximize the total number of grapes he can transport?",
+    "answer": 16500,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "16500.0"
+    ],
+    "time_seconds": 13.123197699998855,
+    "total_tokens": 685
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "16500.0"
+    ],
+    "ground_truth": 16500
+  }
+}

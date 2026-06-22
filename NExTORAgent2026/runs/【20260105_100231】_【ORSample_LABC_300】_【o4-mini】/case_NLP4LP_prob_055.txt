@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_055",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_055\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_055\\code.py",
+    "NLtype": "Linear",
+    "question": "A bakery makes almond and pistachio croissants. An almond croissant requires 5 units of butter and 8 units of flour. A pistachio croissant requires 3 units of butter and 6 units of flour. The bakery has available 600 units of butter and 800 units of flour. Since the almond croissant is more popular, at least 3 times as many almond croissants should be made as pistachio croissants. If making an almond croissant takes 12 minutes and making a pistachio croissant takes 10 minutes, how many of each should be made to minimize the total production time?",
+    "answer": 0,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0"
+    ],
+    "time_seconds": 37.66701769999054,
+    "total_tokens": 3169
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "0.0"
+    ],
+    "ground_truth": 0
+  }
+}

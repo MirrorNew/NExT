@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A taxi company plans to purchase vehicles to lease to its drivers. They are considering buying motorcycles or sedans. Each motorcycle can transport 30 passengers, generates 4 units of pollution, and yields the taxi company a profit of \\$100 per shift. Each sedan can transport 70 passengers, generates 15 units of pollution, and yields the company a profit of \\$225 per shift. Since not all customers are willing to ride motorcycles, the number of motorcycles can be at most 25% of the total number of vehicles. In addition, the company commits that its total pollution generated must be less than 200 units. The company needs to transport at least 1200 passengers per shift.\n\nNow, considering monthly demand fluctuations over a year, the company finds that the actual total number of passengers transported per shift will fluctuate slightly around the original plan according to a cosine function with a monthly periodic pattern. Specifically, let $x$ be the number of motorcycles and $y$ be the number of sedans, and let $t$ be the month index ($t=1$ denotes January, $t=2$ denotes February, and so on). The company requires that in each month $t$, the actual total number of passengers that can be transported per shift is at least $1200\\times[1 + 0.1\\times\\cos(\\pi\\times t/6)]$. That is, the original constraint “at least 1200 passengers per shift” becomes: for months 1 through 12, the total capacity provided $30x + 70y$ must satisfy, respectively,\n\\[\n30x + 70y \\ge 1200\\times[1 + 0.1\\times\\cos(\\pi\\times t/6)], \\quad t=1,2,\\ldots,12.\n\\]\n\nHow many vehicles of each type should be used to maximize the taxi company’s total profit per shift?",
+    "answer": "None",
+    "index": "NLP4LP_prob_250",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 公司每班至少需要运送 1200 名乘客。修改后相关描述: 公司每班至少需要运送的总乘客数不再是固定的 1200 名，而是随月份呈周期性波动：设 t 为月份序号（t=1 表示 1 月，t=2 表示 2 月，…，t=12 表示 12 月），要求每个月 t 的每班中，30x + 70y 至少达到 1200×[1 + 0.1×cos(π×t/6)]，即在原来 1200 名乘客的基础上，引入了一个幅度为 10%、周期为 12 个月的余弦函数来描述客流的周期性变化。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_250\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_092.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 15.497820999997202,
+    "total_tokens": 1499
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": "None"
+  }
+}

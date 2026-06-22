@@ -1,0 +1,494 @@
+{
+  "entry": {
+    "index": 18,
+    "question": " An agricultural company is located in northwest China and focuses on the planting and processing of agricultural products. The company owns 100 hectares of arable land and mainly grows crops such as wheat, corn, soybeans and cotton. As market demand changes, management hopes to reasonably allocate the planting area of ​​various crops under limited land and resource conditions to maximize economic benefits. The company faces many challenges, including how to maximize the planting profits of different crops while ensuring the supply of labor, irrigation water and fertilizer resources. In addition, in order to adapt to the needs of soil nutrients and market diversification, management has put forward some specific requirements for the planting ratio of each crop. The company needs to ensure the optimal use of resources and reasonable crop allocation plans. Ensuring agricultural production not only meets market demand, but also ensures sustained economic benefits. \n\n**On the supply side**, the company has 100 hectares of arable land available for planting, but the land area required for each crop is different, and all land must be planted with crops without waste. The output profit per hectare of wheat, corn, soybeans and cotton is also different. Therefore, it is necessary to reasonably allocate limited arable land resources in order to achieve maximum profit. **On the transportation side**, considering soil nutrients, management requires that the planting area of ​​all crops shall not be less than 10 hectares, and the planting area of ​​wheat shall not be less than 20 hectares. The planting area of ​​cotton is limited and shall not exceed 30 hectares. In order to cope with the diversification of market demand, corn and cotton The total planting area shall not exceed 80 hectares. \n\nThe company is located in a mild climate area with good water source conditions, but the weather has changed greatly recently, and the supply of water resources may be affected to a certain extent, especially if the water consumption exceeds 80% of the total supply, the insurance mechanism will be triggered. If water resources are still needed, additional labor will be needed to transport water resources to facilitate timely replenishment of the remaining 20% ​​of water resources to irrigate the land without interference, and every 1 unit of irrigation water requires 2 units of labor, and in order to protect water resources, the use of water resources must not exceed the maximum limit. At the same time, fertilizers may also encounter the problem of insufficient fertilizers, which involves fertilizer transportation, which also needs to be purchased from outside Purchase. If for every additional unit of fertilizer consumed, 2 additional workers are needed to ensure normal purchase, a maximum of 20 tons of fertilizer will be consumed. The capital expenditure of the purchase part has nothing to do with the unit profit and does not need to be considered. \n\nAssume that a worker can provide 2 hours of labor. Currently, the company has recruited a total of 500 workers. In this area, it is necessary to choose how many workers to send to plant a certain crop, and the total labor of the workers cannot be less than the required labor. \n\nIn order to optimize the use of resources, the company hopes to allocate land resources to different crops as efficiently as possible and provide a dispatch plan for workers to different crops, but at the same time, it also needs to ensure that the various constraints specified are not violated. Give the maximum profit value. \n\nData table\n\n| Crop | Unit profit (yuan/hectare) | Labor demand (man-hours/hectare) | Irrigation water demand (thousand cubic meters/hectare) | Fertilizer demand (tons/hectare) |\n| ---- | ------------------- | ----------------------- | ----------------------- | ------------------- |\n| Wheat | 300 | 10 | 5 | 2 |\n| Corn | 400 | 8 | 7 | 3 |\n| Soybean | 250 | 5 | 4 | 1 |\n| Cotton | 500 | 12 | 9 | 4 |\n\n| Resource type | Supply |\n| ------------------ | ------ |\n| Workers | 500 |\n| Maximum limit of irrigation water resources | 500 |\n| Available resources of fertilizer resources | 150 |\n| Cultivated land area | 100 |",
+    "answer": 30000.0,
+    "Parameters_List": [
+      {
+        "Name": "CROPS",
+        "Type": "list",
+        "Value": [
+          "Wheat",
+          "Corn",
+          "Soybean",
+          "Cotton"
+        ]
+      },
+      {
+        "Name": "Total_arable_land_hectares",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "Min_area_each_crop_hectares",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "Min_area_wheat_hectares",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "Max_area_cotton_hectares",
+        "Type": "integer",
+        "Value": 30
+      },
+      {
+        "Name": "Max_area_corn_plus_cotton_hectares",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "Water_trigger_fraction",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "Water_remaining_fraction",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "Labor_per_unit_additional_water",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "Max_irrigation_water",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "Labor_per_unit_additional_fertilizer",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "Max_additional_fertilizer_tons",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "Available_fertilizer_tons",
+        "Type": "integer",
+        "Value": 150
+      },
+      {
+        "Name": "Workers_count",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "Labor_hours_per_worker",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "Unit_profit_yuan_per_hectare",
+        "Type": "tuple",
+        "Value": {
+          "Wheat": 300,
+          "Corn": 400,
+          "Soybean": 250,
+          "Cotton": 500
+        }
+      },
+      {
+        "Name": "Labor_demand_man_hours_per_hectare",
+        "Type": "tuple",
+        "Value": {
+          "Wheat": 10,
+          "Corn": 8,
+          "Soybean": 5,
+          "Cotton": 12
+        }
+      },
+      {
+        "Name": "Irrigation_demand_thousand_cubic_meters_per_hectare",
+        "Type": "tuple",
+        "Value": {
+          "Wheat": 5,
+          "Corn": 7,
+          "Soybean": 4,
+          "Cotton": 9
+        }
+      },
+      {
+        "Name": "Fertilizer_demand_tons_per_hectare",
+        "Type": "tuple",
+        "Value": {
+          "Wheat": 2,
+          "Corn": 3,
+          "Soybean": 1,
+          "Cotton": 4
+        }
+      },
+      {
+        "Name": "Table_1_CropData",
+        "Type": "list",
+        "Value": [
+          {
+            "Crop": "Wheat",
+            "Unit_profit_yuan_per_hectare": 300,
+            "Labor_demand_man_hours_per_hectare": 10,
+            "Irrigation_demand_thousand_cubic_meters_per_hectare": 5,
+            "Fertilizer_demand_tons_per_hectare": 2
+          },
+          {
+            "Crop": "Corn",
+            "Unit_profit_yuan_per_hectare": 400,
+            "Labor_demand_man_hours_per_hectare": 8,
+            "Irrigation_demand_thousand_cubic_meters_per_hectare": 7,
+            "Fertilizer_demand_tons_per_hectare": 3
+          },
+          {
+            "Crop": "Soybean",
+            "Unit_profit_yuan_per_hectare": 250,
+            "Labor_demand_man_hours_per_hectare": 5,
+            "Irrigation_demand_thousand_cubic_meters_per_hectare": 4,
+            "Fertilizer_demand_tons_per_hectare": 1
+          },
+          {
+            "Crop": "Cotton",
+            "Unit_profit_yuan_per_hectare": 500,
+            "Labor_demand_man_hours_per_hectare": 12,
+            "Irrigation_demand_thousand_cubic_meters_per_hectare": 9,
+            "Fertilizer_demand_tons_per_hectare": 4
+          }
+        ]
+      },
+      {
+        "Name": "Table_2_ResourceSupply",
+        "Type": "list",
+        "Value": [
+          {
+            "Resource_type": "Workers",
+            "Supply": 500
+          },
+          {
+            "Resource_type": "Maximum_limit_of_irrigation_water_resources",
+            "Supply": 500
+          },
+          {
+            "Resource_type": "Available_fertilizer_resources",
+            "Supply": 150
+          },
+          {
+            "Resource_type": "Cultivated_land_area",
+            "Supply": 100
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "An agricultural company is...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company owns 100 hectares...",
+        "Defines total arable land = 100 ha and crop set {wheat, corn, soybeans, cotton} → land resource for allocation."
+      ],
+      [
+        "3",
+        "As market demand changes...",
+        "Indicates land and resource limits and that allocation must respect these limits; states objective: maximize economic benefits (profit)."
+      ],
+      [
+        "4",
+        "The company faces many challenges...",
+        "Indicates labor, irrigation water, and fertilizer are limited resources whose supplies must be ensured (cannot be exceeded); confirms profit-maximization goal."
+      ],
+      [
+        "5",
+        "In addition, in order to adapt...",
+        "Refers to specific planting ratio/area requirements which are specified quantitatively later; itself adds no explicit numeric constraint."
+      ],
+      [
+        "6",
+        "The company needs to ensure...",
+        "Qualitative statement about optimal use of resources; no new explicit constraint."
+      ],
+      [
+        "7",
+        "Ensuring agricultural production not only...",
+        "Qualitative statement about market demand and sustained benefits; no explicit constraint."
+      ],
+      [
+        "8",
+        "On the supply side, the company has 100 hectares...",
+        "All 100 ha must be planted, no waste → land balance constraint: total planted area = 100 ha, allocated among the four crops."
+      ],
+      [
+        "9",
+        "The output profit per hectare of wheat...",
+        "Provides different unit profits per hectare for crops (data for objective coefficients); no direct constraint."
+      ],
+      [
+        "10",
+        "Therefore, it is necessary to reasonably allocate...",
+        "Reiterates profit maximization objective; no additional constraint."
+      ],
+      [
+        "11",
+        "On the transportation side, considering soil nutrients...",
+        "Planting area of each crop ≥ 10 ha; wheat area specifically ≥ 20 ha → minimum area constraints per crop and tighter minimum for wheat."
+      ],
+      [
+        "12",
+        "The planting area of cotton is limited...",
+        "Cotton planting area ≤ 30 ha → upper bound on cotton area."
+      ],
+      [
+        "13",
+        "In order to cope with the diversification...",
+        "Total area of corn + cotton ≤ 80 ha → joint area cap for corn and cotton."
+      ],
+      [
+        "14",
+        "The company is located in a mild climate area...",
+        "Describes that if water use exceeds 80% of supply an insurance mechanism is triggered; suggests an operational threshold but no explicit optimization constraint beyond an overall max water limit stated later."
+      ],
+      [
+        "15",
+        "If water resources are still needed, additional labor...",
+        "For every 1 unit of irrigation water used, 2 units of labor are required (labor–water link); total water use must not exceed maximum water limit → water capacity constraint and labor-for-water relation."
+      ],
+      [
+        "16",
+        "At the same time, fertilizers may also encounter...",
+        "Introduces possible fertilizer shortage and external purchase; no explicit numerical constraint here."
+      ],
+      [
+        "17",
+        "If for every additional unit of fertilizer consumed...",
+        "For each unit of fertilizer used, 2 additional workers (labor units) are needed (labor–fertilizer link); total fertilizer consumption ≤ 20 tons → fertilizer capacity constraint and labor-for-fertilizer relation."
+      ],
+      [
+        "18",
+        "The capital expenditure of the purchase part...",
+        "States that purchase cost is not related to unit profit and is ignored in objective; no constraint."
+      ],
+      [
+        "19",
+        "Assume that a worker can provide 2 hours...",
+        "Defines conversion: 1 worker = 2 labor-hours → used to derive total labor-hours available."
+      ],
+      [
+        "20",
+        "Currently, the company has recruited...",
+        "Total workers = 500 → total labor-hours available = 500 × 2 = 1000; labor resource cap."
+      ],
+      [
+        "21",
+        "In this area, it is necessary to choose how many workers...",
+        "Labor assigned to each crop must be at least the required labor for that crop; total labor of workers cannot be less than total required labor → planting labor requirement constraints and total labor-hour consistency."
+      ],
+      [
+        "22",
+        "In order to optimize the use of resources...",
+        "Restates resource allocation and worker dispatch must satisfy all constraints; no new mathematical constraint."
+      ],
+      [
+        "23",
+        "Give the maximum profit value...",
+        "Explicitly states objective: maximize total profit value."
+      ],
+      [
+        "24",
+        "Data table (crop | unit profit | labor demand...)",
+        "Provides coefficients: unit profit, labor demand/ha, water demand/ha, fertilizer demand/ha for each crop → used to define profit function and resource-use equations."
+      ],
+      [
+        "25",
+        "Resource type | Supply (Workers 500, Max water 500...)",
+        "Provides numeric resource limits: workers 500 (→1000 labor-hours), irrigation water ≤ 500, fertilizer available 150 (overridden by tighter 20-ton cap), cultivated land area = 100 ha → resource capacity constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_w",
+        "Meaning": "Hectares of wheat planted",
+        "Type": "continuous",
+        "Range ": "x_w ≥ 0"
+      },
+      {
+        "symbol": "x_c",
+        "Meaning": "Hectares of corn planted",
+        "Type": "continuous",
+        "Range ": "x_c ≥ 0"
+      },
+      {
+        "symbol": "x_s",
+        "Meaning": "Hectares of soybean planted",
+        "Type": "continuous",
+        "Range ": "x_s ≥ 0"
+      },
+      {
+        "symbol": "x_t",
+        "Meaning": "Hectares of cotton planted",
+        "Type": "continuous",
+        "Range ": "x_t ≥ 0"
+      },
+      {
+        "symbol": "L_w",
+        "Meaning": "Labor-hours allocated to wheat planting",
+        "Type": "continuous",
+        "Range ": "L_w ≥ 0"
+      },
+      {
+        "symbol": "L_c",
+        "Meaning": "Labor-hours allocated to corn planting",
+        "Type": "continuous",
+        "Range ": "L_c ≥ 0"
+      },
+      {
+        "symbol": "L_s",
+        "Meaning": "Labor-hours allocated to soybean planting",
+        "Type": "continuous",
+        "Range ": "L_s ≥ 0"
+      },
+      {
+        "symbol": "L_t",
+        "Meaning": "Labor-hours allocated to cotton planting",
+        "Type": "continuous",
+        "Range ": "L_t ≥ 0"
+      },
+      {
+        "symbol": "L^{water}",
+        "Meaning": "Labor-hours used for transporting irrigation water",
+        "Type": "continuous",
+        "Range ": "L^{water} ≥ 0"
+      },
+      {
+        "symbol": "L^{fert}",
+        "Meaning": "Labor-hours used for fertilizer purchase/transport",
+        "Type": "continuous",
+        "Range ": "L^{fert} ≥ 0"
+      },
+      {
+        "symbol": "W",
+        "Meaning": "Total irrigation water used (thousand cubic meters)",
+        "Type": "continuous",
+        "Range ": "W ≥ 0"
+      },
+      {
+        "symbol": "F",
+        "Meaning": "Total fertilizer used (tons)",
+        "Type": "continuous",
+        "Range ": "F ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Land balance",
+        "x_w + x_c + x_s + x_t = 100",
+        "sentence numbers: 2, 8, 25"
+      ],
+      [
+        "Minimum area per crop",
+        "x_w ≥ 10, x_c ≥ 10, x_s ≥ 10, x_t ≥ 10",
+        "sentence numbers: 11"
+      ],
+      [
+        "Minimum wheat area",
+        "x_w ≥ 20",
+        "sentence numbers: 11"
+      ],
+      [
+        "Maximum cotton area",
+        "x_t ≤ 30",
+        "sentence numbers: 12"
+      ],
+      [
+        "Corn + cotton joint cap",
+        "x_c + x_t ≤ 80",
+        "sentence numbers: 13"
+      ],
+      [
+        "Water use definition (from crop areas)",
+        "W = 5 x_w + 7 x_c + 4 x_s + 9 x_t",
+        "sentence numbers: 24"
+      ],
+      [
+        "Water availability limit",
+        "W ≤ 500",
+        "sentence numbers: 15, 25"
+      ],
+      [
+        "Labor requirement for water transport",
+        "L^{water} = 2 W",
+        "sentence numbers: 15"
+      ],
+      [
+        "Fertilizer use definition (from crop areas)",
+        "F = 2 x_w + 3 x_c + 1 x_s + 4 x_t",
+        "sentence numbers: 24"
+      ],
+      [
+        "Fertilizer availability limit (tightest cap)",
+        "F ≤ 20",
+        "sentence numbers: 17, 25"
+      ],
+      [
+        "Labor requirement for fertilizer transport",
+        "L^{fert} = 2 F",
+        "sentence numbers: 17"
+      ],
+      [
+        "Planting labor requirement for wheat",
+        "L_w ≥ 10 x_w",
+        "sentence numbers: 24, 21"
+      ],
+      [
+        "Planting labor requirement for corn",
+        "L_c ≥ 8 x_c",
+        "sentence numbers: 24, 21"
+      ],
+      [
+        "Planting labor requirement for soybean",
+        "L_s ≥ 5 x_s",
+        "sentence numbers: 24, 21"
+      ],
+      [
+        "Planting labor requirement for cotton",
+        "L_t ≥ 12 x_t",
+        "sentence numbers: 24, 21"
+      ],
+      [
+        "Total labor-hours availability",
+        "L_w + L_c + L_s + L_t + L^{water} + L^{fert} ≤ 1000",
+        "sentence numbers: 19, 20, 21"
+      ],
+      [
+        "Nonnegativity constraints",
+        "x_w, x_c, x_s, x_t, L_w, L_c, L_s, L_t, L^{water}, L^{fert}, W, F ≥ 0",
+        "sentence numbers: implied"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Maximize economic benefits / planting profit and give the maximum profit value.",
+      "Mathematical_expressions": "max Z = 300 x_w + 400 x_c + 250 x_s + 500 x_t"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 30.32237819999864,
+    "total_tokens": 23557
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 30000.0
+  }
+}

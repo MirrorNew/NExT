@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An airport has two available gates (G1, G2) and needs to assign four flights to these two gates (F1: 10:00–11:00, F2: 10:30–11:30, F3: 11:15–12:30, F4: 10:45–11:45). For flights assigned to the same gate, their gate-occupancy time intervals must not overlap. It is also required that the ratio of the number of flights assigned to gate G1 to the number of flights assigned to gate G2 does not exceed 2; that is, the number of flights at G1 divided by the number of flights at G2 is at most 2. The objective is to minimize flight delays, where each minute of delay beyond the scheduled departure time incurs a cost of 1 unit. How should these flights be assigned to the gates to achieve this objective?",
+    "answer": 30.0,
+    "index": "LogiOR_prob_002",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 一个机场有两个可用登机口（G1、G2），需要将四个航班分配到这两个登机口上（F1：10:00-11:00，F2：10:30-11:30，F3：11:15-12:30，F4：10:45-11:45）。分配到同一登机口的航班，其使用时间区间不能重叠。目标是最小化航班延误，其中每超过计划起飞时间 1 分钟的延误产生 1 个单位的成本。应如何将这些航班分配到各登机口以实现这一目标？, 修改后相关描述: 一个机场有两个可用登机口（G1、G2），需要将四个航班分配到这两个登机口上（F1：10:00-11:00，F2：10:30-11:30，F3：11:15-12:30，F4：10:45-11:45）。分配到同一登机口的航班，其使用时间区间不能重叠。同时要求：分配到登机口 G1 的航班数量与分配到登机口 G2 的航班数量的比值不超过 2，也就是说，G1 上的航班数量除以 G2 上的航班数量最多为 2。目标是最小化航班延误，其中每超过计划起飞时间 1 分钟的延误产生 1 个单位的成本。应如何将这些航班分配到各登机口以实现这一目标？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_002\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_031.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "30.0"
+    ],
+    "time_seconds": 74.68836559999909,
+    "total_tokens": 7011
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "30.0"
+    ],
+    "ground_truth": 30.0
+  }
+}

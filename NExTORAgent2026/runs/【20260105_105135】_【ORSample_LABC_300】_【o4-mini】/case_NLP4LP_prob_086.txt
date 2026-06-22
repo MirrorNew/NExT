@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A company is purchasing printers for its headquarters, including high-end models and standard models. A high-end model can print 30 pages per minute, while a standard model can print 20 pages per minute. In addition, a high-end model requires 4 units of ink per minute, while a standard model requires 3 units of ink per minute. The company wants to ensure that it can print at least 200 pages per minute, and that it uses at most 35 units of ink per minute.\n\nNote that, due to maintenance constraints, the actual ink consumption of the high-end models increases exponentially with the number of high-end printers: when the number of high-end printers is $x$, the total ink consumption of the high-end models is no longer simply $4x$, but increases exponentially with growth factor $1.3$; that is, the total ink consumption of the high-end models is $4\\times(1.3^x)$ units. The ink consumption of the standard models remains linear; that is, the total ink consumption of the standard models per minute is $3$ times the number of standard printers. The company further requires that, when high-end and standard models are used together, the total ink consumption per minute (including the high-end ink consumption computed as $4\\times 1.3^x$ and the standard ink consumption computed as $3$ times the number of standard printers) is at most 40 units.\n\nBecause the high-end models are more convenient to use, the number of standard printers must be less than the number of high-end printers.\n\nHow many printers of these two types should be purchased to minimize the total number of printers in the office?",
+    "answer": 8.0,
+    "index": "NLP4LP_prob_086",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “此外，高端型号每分钟需要 4 个单位的墨水，而普通型号每分钟需要 3 个单位的墨水。公司希望确保每分钟至少可以打印 200 页，并且每分钟最多使用 40 个单位的墨水。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_086\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_099.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 35.319393099998706,
+    "total_tokens": 3506
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 8.0
+  }
+}

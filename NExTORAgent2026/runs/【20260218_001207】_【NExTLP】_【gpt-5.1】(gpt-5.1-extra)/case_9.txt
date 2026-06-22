@@ -1,0 +1,722 @@
+{
+  "entry": {
+    "index": 9,
+    "question": "In eastern Mexico, there is an energy company called \"Orissa Electric Holding Company\". The company owns 17 power plants distributed along the coast and inland. These plants include various types of machines such as bioenergy, combined cycle, wind energy, hydropower, solar energy and coal-fired. In order to ensure the stability of regional power supply, the company not only manages the power generation resources of each power plant, but also coordinates the fuel transportation network, transporting biomass fuel and natural gas to each plant through land pipelines and special fleets, and at the same time, transmitting electricity to substations in major cities through its own high-voltage transmission lines. The whole process involves maintaining a large amount of equipment, paying transportation costs and resource scheduling fees. The company's overall goal is to organize power generation and transmission at the lowest total cost while meeting the ever-changing power demand in four time periods. The eastern coastal area of ​​Mexico holds an annual The traditional hot air balloon festival is held, but it has no direct relationship with power dispatch. The agave planting industry in the coastal area is very developed, and some wind farms used to be large agave farms. The exterior walls of some local power plants are decorated with Mayan-style reliefs. \n\nOn the supply side, each power plant must meet the minimum and maximum output requirements of its units at any time, and can only generate electricity when the unit is in the on state. At the same time, each time the unit is turned on or off, fixed costs, startup costs and shutdown costs must be paid to maintain the life and safety of the equipment. If the power changes, change costs must also be paid for the changed power value. Change cost refers to the difference in the changed power value that needs to be calculated if the output power is changed when the unit switches to operate in different time periods (Assume that the difference in the first period is equal to the output power of that period minus 0, as all machines are initially turned off before first period). \n\nOn the demand side, the system needs to be based on the time period within four 6-hour periods. The demands of 1, 2, 3, and 4 need greater than 11832.52, 14467.92, 16661.10, and 15434.44 MWh, respectively. Otherwise, they will have to bear high fines or activate backup power due to power shortages. \n\nIn terms of transportation, all power generation is delivered from the factory to substations in various regions through the company's self-built transmission network. The loss during transmission is negligible and will not affect the balance of supply and demand. \n\nAt the same time, in order to reduce the frequent start and stop of units, if a Combined Cycle unit is running in any period, it must continue to run in the next period to avoid additional wear and tear. At the same time, the total number of units running in the system must not be less than eight to ensure network diversity and emergency backup capacity. Assume that all machines are initially turned off,You can choose whether to open it in the first period. Give the minimum cost. \n\n\n\n------\n\n**Data table**\n\n**Period demand (MWh)**\n\n| Period | Demand (MWh) |\n| ------------ | ---------- |\n| I (6-12) | 11832.52 |\n| II (12-18) | 14467.92 |\n| III (18-24) | 16661.10 |\n| IV (24-6) | 15434.44 |\n\n\n\n**Power plant parameters**\n\n| Power plant | Minimum power (MWh) | Maximum power (MWh) | Change costs (USD/MWh) | Fixed costs (USD) | Startup costs (USD) | Shutdown costs (USD) |\n| --------- | -------------- | -------------- | ------------------- | -------------- | --------------- |\n| Biomass 1 | 78.75 | 295.14 | 3.94 | 265.524 | 0 | 330 |\n| Biomass 2 | 100.00 | 300.00 | 4.10 | 270.000 | 0 | 340 |\n| Combined Cycle 1 | 742.50 | 2883.90 | 2.72 | 92.280 | 500 | 210 |\n| Combined Cycle 2 | 800.00 | 3000.00 | 2.85 | 95.000 | 500 | 215 |\n| Combined Cycle 3 | 700.00 | 2800.00 | 2.65 | 90.000 | 500 | 205 |\n| Combined Cycle 4 | 750.00 | 2900.00 | 2.80 | 93.000 | 500 | 208 |\n| Wind Energy 1 | 246.00 | 294.90 | 0.00 | 149.778 | 0 | 240 |\n| Wind Energy 2 | 200.00 | 350.00 | 0.00 | 160.000 | 0 | 250 |\n| Wind Energy 3 | 220.00 | 330.00 | 0.00 | 155.000 | 0 | 245 |\n| Wind Energy 4 | 250.00 | 340.00 | 0.00 | 162.000 | 0 | 255 |\n| Hydropower 1 | 50.00 | 500.00 | 1.50 | 60.000 | 0 | 100 |\n| Hydropower 2 | 60.00 | 600.00 | 1.80 | 65.000 | 0 | 120 |\n| Hydropower3 | 55.00 | 550.00 | 1.60 | 62.000 | 0 | 110 |\n| Solar1 | 20.00 | 400.00 | 0.00 | 120.000 | 0 | 150 |\n| Solar2 | 20.00 | 350.00 | 0.00 | 110.000 | 0 | 140 |\n| Coal1 | 500.00 | 2500.00 | 5.00 | 320.000 | 500 | 400 |\n| Coal2 | 550.00 | 2600.00 | 4.80 | 315.000 | 480 | 390 |",
+    "answer": 48770.92,
+    "Parameters_List": [
+      {
+        "Name": "company_name",
+        "Type": "string",
+        "Value": "Orissa Electric Holding Company"
+      },
+      {
+        "Name": "company_location",
+        "Type": "string",
+        "Value": "eastern Mexico"
+      },
+      {
+        "Name": "num_power_plants",
+        "Type": "integer",
+        "Value": 17
+      },
+      {
+        "Name": "plant_types",
+        "Type": "list",
+        "Value": [
+          "bioenergy",
+          "combined cycle",
+          "wind energy",
+          "hydropower",
+          "solar energy",
+          "coal-fired"
+        ]
+      },
+      {
+        "Name": "num_periods",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "initial_status_all_units",
+        "Type": "string",
+        "Value": "off"
+      },
+      {
+        "Name": "initial_output_power",
+        "Type": "float",
+        "Value": 0.0
+      },
+      {
+        "Name": "period_length_hours",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "demand_period_1",
+        "Type": "float",
+        "Value": 11832.52
+      },
+      {
+        "Name": "demand_period_2",
+        "Type": "float",
+        "Value": 14467.92
+      },
+      {
+        "Name": "demand_period_3",
+        "Type": "float",
+        "Value": 16661.1
+      },
+      {
+        "Name": "demand_period_4",
+        "Type": "float",
+        "Value": 15434.44
+      },
+      {
+        "Name": "transmission_loss_assumed_zero",
+        "Type": "bool",
+        "Value": true
+      },
+      {
+        "Name": "min_running_units",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "Table_1_Period_Demand",
+        "Type": "list",
+        "Value": [
+          {
+            "Period": "I (6-12)",
+            "Demand_MWh": 11832.52
+          },
+          {
+            "Period": "II (12-18)",
+            "Demand_MWh": 14467.92
+          },
+          {
+            "Period": "III (18-24)",
+            "Demand_MWh": 16661.1
+          },
+          {
+            "Period": "IV (24-6)",
+            "Demand_MWh": 15434.44
+          }
+        ]
+      },
+      {
+        "Name": "periods",
+        "Type": "list",
+        "Value": [
+          "I (6-12)",
+          "II (12-18)",
+          "III (18-24)",
+          "IV (24-6)"
+        ]
+      },
+      {
+        "Name": "demands_MWh",
+        "Type": "list",
+        "Value": [
+          11832.52,
+          14467.92,
+          16661.1,
+          15434.44
+        ]
+      },
+      {
+        "Name": "Table_2_Power_Plant_Parameters",
+        "Type": "list",
+        "Value": [
+          {
+            "Power_plant": "Biomass 1",
+            "Minimum_power_MWh": 78.75,
+            "Maximum_power_MWh": 295.14,
+            "Change_cost_USD_per_MWh": 3.94,
+            "Fixed_cost_USD": 265.524,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 330.0
+          },
+          {
+            "Power_plant": "Biomass 2",
+            "Minimum_power_MWh": 100.0,
+            "Maximum_power_MWh": 300.0,
+            "Change_cost_USD_per_MWh": 4.1,
+            "Fixed_cost_USD": 270.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 340.0
+          },
+          {
+            "Power_plant": "Combined Cycle 1",
+            "Minimum_power_MWh": 742.5,
+            "Maximum_power_MWh": 2883.9,
+            "Change_cost_USD_per_MWh": 2.72,
+            "Fixed_cost_USD": 92.28,
+            "Startup_cost_USD": 500.0,
+            "Shutdown_cost_USD": 210.0
+          },
+          {
+            "Power_plant": "Combined Cycle 2",
+            "Minimum_power_MWh": 800.0,
+            "Maximum_power_MWh": 3000.0,
+            "Change_cost_USD_per_MWh": 2.85,
+            "Fixed_cost_USD": 95.0,
+            "Startup_cost_USD": 500.0,
+            "Shutdown_cost_USD": 215.0
+          },
+          {
+            "Power_plant": "Combined Cycle 3",
+            "Minimum_power_MWh": 700.0,
+            "Maximum_power_MWh": 2800.0,
+            "Change_cost_USD_per_MWh": 2.65,
+            "Fixed_cost_USD": 90.0,
+            "Startup_cost_USD": 500.0,
+            "Shutdown_cost_USD": 205.0
+          },
+          {
+            "Power_plant": "Combined Cycle 4",
+            "Minimum_power_MWh": 750.0,
+            "Maximum_power_MWh": 2900.0,
+            "Change_cost_USD_per_MWh": 2.8,
+            "Fixed_cost_USD": 93.0,
+            "Startup_cost_USD": 500.0,
+            "Shutdown_cost_USD": 208.0
+          },
+          {
+            "Power_plant": "Wind Energy 1",
+            "Minimum_power_MWh": 246.0,
+            "Maximum_power_MWh": 294.9,
+            "Change_cost_USD_per_MWh": 0.0,
+            "Fixed_cost_USD": 149.778,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 240.0
+          },
+          {
+            "Power_plant": "Wind Energy 2",
+            "Minimum_power_MWh": 200.0,
+            "Maximum_power_MWh": 350.0,
+            "Change_cost_USD_per_MWh": 0.0,
+            "Fixed_cost_USD": 160.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 250.0
+          },
+          {
+            "Power_plant": "Wind Energy 3",
+            "Minimum_power_MWh": 220.0,
+            "Maximum_power_MWh": 330.0,
+            "Change_cost_USD_per_MWh": 0.0,
+            "Fixed_cost_USD": 155.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 245.0
+          },
+          {
+            "Power_plant": "Wind Energy 4",
+            "Minimum_power_MWh": 250.0,
+            "Maximum_power_MWh": 340.0,
+            "Change_cost_USD_per_MWh": 0.0,
+            "Fixed_cost_USD": 162.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 255.0
+          },
+          {
+            "Power_plant": "Hydropower 1",
+            "Minimum_power_MWh": 50.0,
+            "Maximum_power_MWh": 500.0,
+            "Change_cost_USD_per_MWh": 1.5,
+            "Fixed_cost_USD": 60.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 100.0
+          },
+          {
+            "Power_plant": "Hydropower 2",
+            "Minimum_power_MWh": 60.0,
+            "Maximum_power_MWh": 600.0,
+            "Change_cost_USD_per_MWh": 1.8,
+            "Fixed_cost_USD": 65.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 120.0
+          },
+          {
+            "Power_plant": "Hydropower3",
+            "Minimum_power_MWh": 55.0,
+            "Maximum_power_MWh": 550.0,
+            "Change_cost_USD_per_MWh": 1.6,
+            "Fixed_cost_USD": 62.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 110.0
+          },
+          {
+            "Power_plant": "Solar1",
+            "Minimum_power_MWh": 20.0,
+            "Maximum_power_MWh": 400.0,
+            "Change_cost_USD_per_MWh": 0.0,
+            "Fixed_cost_USD": 120.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 150.0
+          },
+          {
+            "Power_plant": "Solar2",
+            "Minimum_power_MWh": 20.0,
+            "Maximum_power_MWh": 350.0,
+            "Change_cost_USD_per_MWh": 0.0,
+            "Fixed_cost_USD": 110.0,
+            "Startup_cost_USD": 0.0,
+            "Shutdown_cost_USD": 140.0
+          },
+          {
+            "Power_plant": "Coal1",
+            "Minimum_power_MWh": 500.0,
+            "Maximum_power_MWh": 2500.0,
+            "Change_cost_USD_per_MWh": 5.0,
+            "Fixed_cost_USD": 320.0,
+            "Startup_cost_USD": 500.0,
+            "Shutdown_cost_USD": 400.0
+          },
+          {
+            "Power_plant": "Coal2",
+            "Minimum_power_MWh": 550.0,
+            "Maximum_power_MWh": 2600.0,
+            "Change_cost_USD_per_MWh": 4.8,
+            "Fixed_cost_USD": 315.0,
+            "Startup_cost_USD": 480.0,
+            "Shutdown_cost_USD": 390.0
+          }
+        ]
+      },
+      {
+        "Name": "plant_names",
+        "Type": "list",
+        "Value": [
+          "Biomass 1",
+          "Biomass 2",
+          "Combined Cycle 1",
+          "Combined Cycle 2",
+          "Combined Cycle 3",
+          "Combined Cycle 4",
+          "Wind Energy 1",
+          "Wind Energy 2",
+          "Wind Energy 3",
+          "Wind Energy 4",
+          "Hydropower 1",
+          "Hydropower 2",
+          "Hydropower3",
+          "Solar1",
+          "Solar2",
+          "Coal1",
+          "Coal2"
+        ]
+      },
+      {
+        "Name": "min_power_MWh",
+        "Type": "list",
+        "Value": [
+          78.75,
+          100.0,
+          742.5,
+          800.0,
+          700.0,
+          750.0,
+          246.0,
+          200.0,
+          220.0,
+          250.0,
+          50.0,
+          60.0,
+          55.0,
+          20.0,
+          20.0,
+          500.0,
+          550.0
+        ]
+      },
+      {
+        "Name": "max_power_MWh",
+        "Type": "list",
+        "Value": [
+          295.14,
+          300.0,
+          2883.9,
+          3000.0,
+          2800.0,
+          2900.0,
+          294.9,
+          350.0,
+          330.0,
+          340.0,
+          500.0,
+          600.0,
+          550.0,
+          400.0,
+          350.0,
+          2500.0,
+          2600.0
+        ]
+      },
+      {
+        "Name": "change_cost_USD_per_MWh",
+        "Type": "list",
+        "Value": [
+          3.94,
+          4.1,
+          2.72,
+          2.85,
+          2.65,
+          2.8,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5,
+          1.8,
+          1.6,
+          0.0,
+          0.0,
+          5.0,
+          4.8
+        ]
+      },
+      {
+        "Name": "fixed_cost_USD",
+        "Type": "list",
+        "Value": [
+          265.524,
+          270.0,
+          92.28,
+          95.0,
+          90.0,
+          93.0,
+          149.778,
+          160.0,
+          155.0,
+          162.0,
+          60.0,
+          65.0,
+          62.0,
+          120.0,
+          110.0,
+          320.0,
+          315.0
+        ]
+      },
+      {
+        "Name": "startup_cost_USD",
+        "Type": "list",
+        "Value": [
+          0.0,
+          0.0,
+          500.0,
+          500.0,
+          500.0,
+          500.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          500.0,
+          480.0
+        ]
+      },
+      {
+        "Name": "shutdown_cost_USD",
+        "Type": "list",
+        "Value": [
+          330.0,
+          340.0,
+          210.0,
+          215.0,
+          205.0,
+          208.0,
+          240.0,
+          250.0,
+          245.0,
+          255.0,
+          100.0,
+          120.0,
+          110.0,
+          150.0,
+          140.0,
+          400.0,
+          390.0
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In eastern Mexico, there...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company owns 17 power...",
+        "Defines index set of 17 power plants (used to index variables and constraints)."
+      ],
+      [
+        "3",
+        "These plants include various...",
+        "Defines technology types (e.g., Combined Cycle) used for type-specific constraints."
+      ],
+      [
+        "4",
+        "In order to ensure the stability...",
+        "Descriptive; references fuel transport and transmission but no explicit quantitative constraints."
+      ],
+      [
+        "5",
+        "The whole process involves maintaining...",
+        "Descriptive; indicates that various costs exist, aggregated in the total cost objective."
+      ],
+      [
+        "6",
+        "The company's overall goal is...",
+        "Defines objective: minimize total cost while satisfying demand in 4 time periods."
+      ],
+      [
+        "7",
+        "The eastern coastal area of...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The agave planting industry in...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The exterior walls of some local...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "On the supply side, each power...",
+        "For each plant and period: output must respect min/max bounds and can be positive only when the unit is on (capacity and on/off generation constraints)."
+      ],
+      [
+        "11",
+        "At the same time, each time the...",
+        "Introduces fixed, startup, and shutdown cost terms and implies binary on/off and start-up/shutdown indicator variables with corresponding logical constraints."
+      ],
+      [
+        "12",
+        "If the power changes, change costs...",
+        "Introduces power change (ramping) cost proportional to the amount of change; requires variables for power change magnitude."
+      ],
+      [
+        "13",
+        "Change cost refers to the difference...",
+        "Defines the 'change amount' as the (absolute) difference between power outputs in consecutive periods, with initial output 0 before period 1; requires absolute value linearization and initial conditions."
+      ],
+      [
+        "14",
+        "On the demand side, the system...",
+        "Establishes the planning horizon of four 6-hour periods (index set for time)."
+      ],
+      [
+        "15",
+        "The demands of 1, 2, 3, and...",
+        "Demand satisfaction constraints: total generation in each period must be at least the specified demand values."
+      ],
+      [
+        "16",
+        "Otherwise, they will have to bear...",
+        "Justifies that demand must be met (modeled as hard constraints; no explicit shortage variables introduced)."
+      ],
+      [
+        "17",
+        "In terms of transportation, all...",
+        "Descriptive; states all generated power is delivered via network but no capacity or loss constraints added."
+      ],
+      [
+        "18",
+        "The loss during transmission is...",
+        "States transmission losses are negligible, so supply-demand balance uses generation without loss factors (no loss terms in constraints)."
+      ],
+      [
+        "19",
+        "At the same time, in order to...",
+        "Combined Cycle minimum up-time logic: if a Combined Cycle unit is on in period t, it must stay on in period t+1 (u_{i,t} <= u_{i,t+1})."
+      ],
+      [
+        "20",
+        "At the same time, the total number...",
+        "System-wide reliability constraint: in each period, the total number of running units must be at least eight."
+      ],
+      [
+        "21",
+        "Assume that all machines are initially...",
+        "Initial condition: all units off (u_{i,0}=0, P_{i,0}=0); status in first period is a decision (u_{i,1} free binary)."
+      ],
+      [
+        "22",
+        "Give the minimum cost.",
+        "Restates objective: find schedule with minimum total cost."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "u_{i,t}",
+        "Meaning": "On/off status of plant i in period t (1 if on, 0 if off)",
+        "Type": "BINARY",
+        "Range ": "u_{i,t} ∈ {0,1} for all plants i and periods t"
+      },
+      {
+        "symbol": "P_{i,t}",
+        "Meaning": "Power output of plant i in period t (MWh over the 6-hour period)",
+        "Type": "continuous",
+        "Range ": "0 ≤ P_{i,t} ≤ P_i^{max} for all plants i and periods t; also P_{i,t} ≥ P_i^{min} u_{i,t}"
+      },
+      {
+        "symbol": "y_{i,t}",
+        "Meaning": "Startup indicator: 1 if plant i is started up at the beginning of period t (off at t−1, on at t)",
+        "Type": "BINARY",
+        "Range ": "y_{i,t} ∈ {0,1} for all plants i and periods t"
+      },
+      {
+        "symbol": "z_{i,t}",
+        "Meaning": "Shutdown indicator: 1 if plant i is shut down at the beginning of period t (on at t−1, off at t)",
+        "Type": "BINARY",
+        "Range ": "z_{i,t} ∈ {0,1} for all plants i and periods t"
+      },
+      {
+        "symbol": "ΔP_{i,t}^{+}",
+        "Meaning": "Positive part of power change of plant i from period t−1 to t (MWh), used to linearize |P_{i,t}−P_{i,t−1}|",
+        "Type": "continuous",
+        "Range ": "ΔP_{i,t}^{+} ≥ 0 for all plants i and periods t"
+      },
+      {
+        "symbol": "ΔP_{i,t}^{-}",
+        "Meaning": "Negative part (magnitude of decrease) of power change of plant i from period t−1 to t (MWh)",
+        "Type": "continuous",
+        "Range ": "ΔP_{i,t}^{-} ≥ 0 for all plants i and periods t"
+      },
+      {
+        "symbol": "C",
+        "Meaning": "Total system cost over all plants and periods (optional explicit objective variable)",
+        "Type": "continuous",
+        "Range ": "C ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Generation upper bound",
+        "P_{i,t} ≤ P_i^{max} · u_{i,t} \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 10, data table"
+      ],
+      [
+        "Generation lower bound when on",
+        "P_{i,t} ≥ P_i^{min} · u_{i,t} \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 10, data table"
+      ],
+      [
+        "Startup/shutdown logical relation",
+        "u_{i,t} − u_{i,t−1} = y_{i,t} − z_{i,t} \n∀ i ∈ I, t = 1,…,4 with u_{i,0} = 0",
+        "sentence numbers: 11, 21"
+      ],
+      [
+        "Initial off status",
+        "u_{i,0} = 0,  P_{i,0} = 0 \n∀ i ∈ I",
+        "sentence numbers: 13, 21"
+      ],
+      [
+        "Change amount decomposition",
+        "P_{i,t} − P_{i,t−1} = ΔP_{i,t}^{+} − ΔP_{i,t}^{−} \n∀ i ∈ I, ∀ t ∈ T with P_{i,0} = 0",
+        "sentence numbers: 12, 13"
+      ],
+      [
+        "Change variables nonnegativity",
+        "ΔP_{i,t}^{+} ≥ 0,  ΔP_{i,t}^{−} ≥ 0 \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 12, 13"
+      ],
+      [
+        "Absolute change representation (for cost)",
+        "|P_{i,t} − P_{i,t−1}| = ΔP_{i,t}^{+} + ΔP_{i,t}^{−} \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 12, 13"
+      ],
+      [
+        "Demand satisfaction period 1",
+        "∑_{i ∈ I} P_{i,1} ≥ 11832.52",
+        "sentence numbers: 15, 18"
+      ],
+      [
+        "Demand satisfaction period 2",
+        "∑_{i ∈ I} P_{i,2} ≥ 14467.92",
+        "sentence numbers: 15, 18"
+      ],
+      [
+        "Demand satisfaction period 3",
+        "∑_{i ∈ I} P_{i,3} ≥ 16661.10",
+        "sentence numbers: 15, 18"
+      ],
+      [
+        "Demand satisfaction period 4",
+        "∑_{i ∈ I} P_{i,4} ≥ 15434.44",
+        "sentence numbers: 15, 18"
+      ],
+      [
+        "No transmission loss (balance interpretation)",
+        "All generated power ∑_{i ∈ I} P_{i,t} is available to meet D_t without loss \n∀ t ∈ T",
+        "sentence numbers: 17, 18"
+      ],
+      [
+        "Combined Cycle must keep running if on",
+        "u_{i,t} ≤ u_{i,t+1} \n∀ i ∈ CC, t = 1,2,3",
+        "sentence numbers: 19"
+      ],
+      [
+        "Minimum number of running units",
+        "∑_{i ∈ I} u_{i,t} ≥ 8 \n∀ t ∈ T",
+        "sentence numbers: 20"
+      ],
+      [
+        "Unit status domain",
+        "u_{i,t} ∈ {0,1} \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 10, 21"
+      ],
+      [
+        "Startup indicator domain",
+        "y_{i,t} ∈ {0,1} \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 11"
+      ],
+      [
+        "Shutdown indicator domain",
+        "z_{i,t} ∈ {0,1} \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 11"
+      ],
+      [
+        "Power output nonnegativity",
+        "P_{i,t} ≥ 0 \n∀ i ∈ I, ∀ t ∈ T",
+        "sentence numbers: 10"
+      ],
+      [
+        "Total cost definition (if C used)",
+        "C = ∑_{t ∈ T} ∑_{i ∈ I} [ c_i^{fix} u_{i,t} + c_i^{su} y_{i,t} + c_i^{sd} z_{i,t} + c_i^{chg} (ΔP_{i,t}^{+} + ΔP_{i,t}^{−}) ]",
+        "sentence numbers: 11, 12, 13, data table"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company's overall goal is to organize power generation and transmission at the lowest total cost while meeting the ever-changing power demand in four time periods. Give the minimum cost.",
+      "Mathematical_expressions": "minimize  ∑_{t ∈ T} ∑_{i ∈ I} [ c_i^{fix} u_{i,t} + c_i^{su} y_{i,t} + c_i^{sd} z_{i,t} + c_i^{chg} (ΔP_{i,t}^{+} + ΔP_{i,t}^{−}) ]"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "48770.924"
+    ],
+    "time_seconds": 74.18436199999996,
+    "total_tokens": 57982
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "48770.924"
+    ],
+    "ground_truth": 48770.92
+  }
+}

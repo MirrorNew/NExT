@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "In a science club, there are two types of tables that can be used to make slime. On table 1, using 3 units of powder and 5 units of glue produces 4 units of slime. On table 2, using 8 units of powder and 6 units of glue produces 5 units of slime. However, table 1 generates 2 units of mess, and table 2 generates 4 units of mess. The science club currently has 100 units of powder and 90 units of glue. To more realistically reflect the difficulty of managing mess, the science club stipulates: when the total mess amount is $L$, its impact on the club is measured as “$L$ raised to the power $1.2$”; that is, if the two types of tables together generate a total mess of $L$ units, then the actual managerial “effective mess” is regarded as $L^{1.2}$. If this “effective mess” is required to be at most $30^{1.2}$ (i.e., at most producing a level that is managerially equivalent to 30 units of mess), how many of each type of table should be set up in order to maximize the amount of slime produced?",
+    "answer": "None",
+    "index": "NLP4LP_prob_121",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 如果最多只能产生30单位的杂乱，应分别设置多少张每种桌子，才能使所生产的黏液数量最大化？, 修改后相关描述: 为了更真实地反映管理杂乱的难度，科学俱乐部规定：当总杂乱量为L时，其对俱乐部的影响按「L 的 1.2 次幂」来计算，也就是说，如果两种桌子一共产生的杂乱量是L单位，则管理上的实际“有效杂乱”视为 L 的1.2次方。若要求这一“有效杂乱”最多只能达到30的1.2次方（即最多只能产生一个在管理效果上等价于30单位杂乱的水平），应分别设置多少张每种桌子，才能使所生产的黏液数量最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_121\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_091.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "60.0"
+    ],
+    "time_seconds": 24.5559276999993,
+    "total_tokens": 2002
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "60.0"
+    ],
+    "ground_truth": "None"
+  }
+}

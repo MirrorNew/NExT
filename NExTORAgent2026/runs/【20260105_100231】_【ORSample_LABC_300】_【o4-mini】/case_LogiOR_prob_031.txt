@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Global Freight Solutions (GFS) is a logistics company that needs to ship goods among three regions using the services of three carriers. Each carrier offers a different cost structure and service mix for large, medium, and small shipments, as shown in the table below:\n\n| Carrier | Cost per shipment (USD) | Large-item proportion (%) | Medium-item proportion (%) | Small-item proportion (%) |\n|--------|--------------------------|---------------------------|----------------------------|---------------------------|\n| 1      | 5.2                      | 45                        | 35                         | 20                        |\n| 2      | 4.7                      | 30                        | 45                         | 25                        |\n| 3      | 3.5                      | 15                        | 20                         | 65                        |\n\nGFS must satisfy, in each month, minimum demand of at least 500 large items, 300 medium items, and 300 small items, with the objective of minimizing total cost. In addition, due to capacity limitations, the ratio of the total number of shipments awarded to Carrier 1 and Carrier 2 to the number of shipments awarded to Carrier 3 must not exceed 4; that is, $\\dfrac{\\text{(shipments from Carrier 1 + shipments from Carrier 2)}}{\\text{shipments from Carrier 3}} \\le 4$. Find the minimum possible total cost.",
+    "answer": 6878.0,
+    "index": "LogiOR_prob_031",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 此外，由于运力限制，每个月从任意一家供应商处承接的运输次数不得超过 700 次。, 修改后相关描述: 此外，由于运力限制，要求从供应商 1 和供应商 2 承接的运输次数总和与从供应商 3 承接的运输次数之比不得超过 4，也就是说，供应商 1 与供应商 2 的合计运输次数除以供应商 3 的运输次数应不大于 4。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_031\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_045.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6230.769231"
+    ],
+    "time_seconds": 35.216606000001775,
+    "total_tokens": 2232
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "6230.769231"
+    ],
+    "ground_truth": 6878.0
+  }
+}

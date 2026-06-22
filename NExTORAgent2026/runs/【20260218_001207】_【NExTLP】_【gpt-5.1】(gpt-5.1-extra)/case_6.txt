@@ -1,0 +1,487 @@
+{
+  "entry": {
+    "index": 6,
+    "question": " Nanshan District Nonglian Agricultural Technology Co., Ltd. is a modern agricultural enterprise integrating breeding, planting and food processing. The company operates several intelligent greenhouse factories and cooperates deeply with the local transportation network to realize the closed-loop supply chain management of \"field-factory-market\". The company is careful in the input of resources such as land, irrigation, and labor, and predicts market demand and cost fluctuations through big data. In order to maximize profits and meet sustainable development goals, it is exploring a land allocation optimization solution based on linear programming. The overall goal is to scientifically allocate the planting area of ​​seven major crops on the premise of ensuring the rational use of resources and rigid market demand to maximize total profits. Nonglian tried to introduce drone sprinkler technology in 2019, which can increase water resource utilization to 150%, but it was eventually abandoned due to unstable rainy season.\n\n In terms of resources, the total available farmland area is 7 hectares, of which block A is 5 hectares and block B is 2 hectares, and green corn, cabbage and tomatoes can only be planted in block A. The irrigation water source is limited to 5,000 cubic meters, and the total labor force is 400 people, with an average of 10 hours of work per person. These three types of resources need to be reasonably allocated among the seven crops to avoid idle or overloaded resources. In terms of the market, the maximum sales demand for each crop is different. If this upper limit is exceeded, there will be a risk of unsalable products. Therefore, the planting area of ​​each crop should not exceed its maximum demand. In terms of operating costs, the cultivation costs and per hectare of different crops are different. Profits vary from hectare to hectare, and it is necessary to take into account cost consumption while pursuing high profits to prevent excessive cost investment. In terms of diversity, the company hopes to plant at least 6 or more crops (if planted, the crops must be planted on at least 0.8 hectares) to diversify market risks. At the same time, it is required that the planting area of ​​melons (pumpkins) and roots (sweet potatoes) be balanced to optimize product structure. In terms of additional or priority constraints, in order to support the supply of raw materials to deep processing factories, the total planting area of ​​green corn and pumpkin must be no less than 3 hectares to ensure the stable procurement needs of the factory throughout the year. Only the maximum total profit needs to be given. \n\n**Data table**\n\n| Crop | Profit/ha (USD) | Water/ha (m3) | Labor/ha (hours) | Maximum requirement (ha) |\n| ------ | ---------------- | ---------------- | ------------------ | -------------- |\n| Green corn | 10000 | 800 | 600 | 2 |\n| Cabbage | 12000 | 700 | 500 | 3 |\n| Tomato | 15000 | 900 | 700 | 1.5 |\n| Spinach | 8000 | 600 | 400 | 1 |\n| Mustard | 9000 | 650 | 450 | 1.5 |\n| Pumpkin | 11000 | 750 | 550 | 1 |\n| Sweet potato | 10000 | 700 | 500 | 1 |",
+    "answer": 72371.4286,
+    "Parameters_List": [
+      {
+        "Name": "crop_names",
+        "Type": "list",
+        "Value": [
+          "green_corn",
+          "cabbage",
+          "tomato",
+          "spinach",
+          "mustard",
+          "pumpkin",
+          "sweet_potato"
+        ]
+      },
+      {
+        "Name": "num_crops",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "land_total",
+        "Type": "float",
+        "Value": 7.0
+      },
+      {
+        "Name": "land_block_A",
+        "Type": "float",
+        "Value": 5.0
+      },
+      {
+        "Name": "land_block_B",
+        "Type": "float",
+        "Value": 2.0
+      },
+      {
+        "Name": "water_total",
+        "Type": "float",
+        "Value": 5000.0
+      },
+      {
+        "Name": "labor_people",
+        "Type": "integer",
+        "Value": 400
+      },
+      {
+        "Name": "labor_hours_per_person",
+        "Type": "float",
+        "Value": 10.0
+      },
+      {
+        "Name": "labor_total_hours",
+        "Type": "float",
+        "Value": 4000.0
+      },
+      {
+        "Name": "profit_per_ha",
+        "Type": "list",
+        "Value": [
+          10000.0,
+          12000.0,
+          15000.0,
+          8000.0,
+          9000.0,
+          11000.0,
+          10000.0
+        ]
+      },
+      {
+        "Name": "water_per_ha",
+        "Type": "list",
+        "Value": [
+          800.0,
+          700.0,
+          900.0,
+          600.0,
+          650.0,
+          750.0,
+          700.0
+        ]
+      },
+      {
+        "Name": "labor_per_ha",
+        "Type": "list",
+        "Value": [
+          600.0,
+          500.0,
+          700.0,
+          400.0,
+          450.0,
+          550.0,
+          500.0
+        ]
+      },
+      {
+        "Name": "max_demand_ha",
+        "Type": "list",
+        "Value": [
+          2.0,
+          3.0,
+          1.5,
+          1.0,
+          1.5,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "Name": "min_area_if_planted",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "min_num_crops_planted",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "block_A_crops_indices",
+        "Type": "list",
+        "Value": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "Name": "processing_requirement_min_area",
+        "Type": "float",
+        "Value": 3.0
+      },
+      {
+        "Name": "processing_crops_indices",
+        "Type": "list",
+        "Value": [
+          0,
+          5
+        ]
+      },
+      {
+        "Name": "balanced_crops_indices",
+        "Type": "list",
+        "Value": [
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "model_feasible",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "reason_infeasible",
+        "Type": "list",
+        "Value": [
+          "Full combination of constraints (factory area, balanced pumpkin-sweet_potato, min 0.8 ha per planted crop, at least 6 crops, and per-crop upper bounds) leads to no feasible planting plan in mixed-integer model."
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Total available farmland area...",
+        "Total planting area of all crops cannot exceed 7 ha."
+      ],
+      [
+        "2",
+        "Block A is 5 hectares...",
+        "Crops restricted to block A (green corn, cabbage, tomato) have total area ≤ 5 ha."
+      ],
+      [
+        "3",
+        "Green corn, cabbage and tomatoes...",
+        "Green corn, cabbage, tomato can only be planted in block A; modeled as x1 + x2 + x3 ≤ 5."
+      ],
+      [
+        "4",
+        "Irrigation water source is limited...",
+        "Total water use across all crops ≤ 5000 m³."
+      ],
+      [
+        "5",
+        "Total labor force is 400...",
+        "Total labor hours (all crops) ≤ 4000 hours."
+      ],
+      [
+        "6",
+        "Planting area of each crop...",
+        "Each crop area is bounded above by its maximum market demand."
+      ],
+      [
+        "7",
+        "Company wants to plant at least...",
+        "At least 6 different crops must be planted; modeled with binary selection variables."
+      ],
+      [
+        "8",
+        "If a crop is planted, its area...",
+        "If a crop is grown, its area ≥ 0.8 ha; otherwise area = 0."
+      ],
+      [
+        "9",
+        "Planting area of pumpkins and roots...",
+        "Pumpkin and sweet potato areas must be balanced; modeled as x6 = x7."
+      ],
+      [
+        "10",
+        "Total planting area of green corn and...",
+        "x1 + x6 (green corn + pumpkin) must be ≥ 3 ha."
+      ],
+      [
+        "11",
+        "Objective is to maximize total...",
+        "Objective is to maximize total profit over all crops."
+      ],
+      [
+        "12",
+        "Profit, water, labor, and maximum...",
+        "Provides parameter data for profit, water, labor, and maximum area per crop (used in constraints and objective)."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "Area of green corn planted (ha)",
+        "Type": "continuous",
+        "Range ": "x1 ≥ 0"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "Area of cabbage planted (ha)",
+        "Type": "continuous",
+        "Range ": "x2 ≥ 0"
+      },
+      {
+        "symbol": "x3",
+        "Meaning": "Area of tomato planted (ha)",
+        "Type": "continuous",
+        "Range ": "x3 ≥ 0"
+      },
+      {
+        "symbol": "x4",
+        "Meaning": "Area of spinach planted (ha)",
+        "Type": "continuous",
+        "Range ": "x4 ≥ 0"
+      },
+      {
+        "symbol": "x5",
+        "Meaning": "Area of mustard planted (ha)",
+        "Type": "continuous",
+        "Range ": "x5 ≥ 0"
+      },
+      {
+        "symbol": "x6",
+        "Meaning": "Area of pumpkin planted (ha)",
+        "Type": "continuous",
+        "Range ": "x6 ≥ 0"
+      },
+      {
+        "symbol": "x7",
+        "Meaning": "Area of sweet potato planted (ha)",
+        "Type": "continuous",
+        "Range ": "x7 ≥ 0"
+      },
+      {
+        "symbol": "y1",
+        "Meaning": "1 if green corn is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y1 ∈ {0,1}"
+      },
+      {
+        "symbol": "y2",
+        "Meaning": "1 if cabbage is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y2 ∈ {0,1}"
+      },
+      {
+        "symbol": "y3",
+        "Meaning": "1 if tomato is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y3 ∈ {0,1}"
+      },
+      {
+        "symbol": "y4",
+        "Meaning": "1 if spinach is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y4 ∈ {0,1}"
+      },
+      {
+        "symbol": "y5",
+        "Meaning": "1 if mustard is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y5 ∈ {0,1}"
+      },
+      {
+        "symbol": "y6",
+        "Meaning": "1 if pumpkin is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y6 ∈ {0,1}"
+      },
+      {
+        "symbol": "y7",
+        "Meaning": "1 if sweet potato is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y7 ∈ {0,1}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Total_land_area",
+        "x1 + x2 + x3 + x4 + x5 + x6 + x7 ≤ 7",
+        "sentence numbers:1"
+      ],
+      [
+        "Block_A_capacity_for_A-only_crops",
+        "x1 + x2 + x3 ≤ 5",
+        "sentence numbers:2,3"
+      ],
+      [
+        "Water_limit",
+        "800 x1 + 700 x2 + 900 x3 + 600 x4 + 650 x5 + 750 x6 + 700 x7 ≤ 5000",
+        "sentence numbers:4,12"
+      ],
+      [
+        "Labor_limit",
+        "600 x1 + 500 x2 + 700 x3 + 400 x4 + 450 x5 + 550 x6 + 500 x7 ≤ 4000",
+        "sentence numbers:5,12"
+      ],
+      [
+        "Max_demand_green_corn",
+        "x1 ≤ 2",
+        "sentence numbers:6,12"
+      ],
+      [
+        "Max_demand_cabbage",
+        "x2 ≤ 3",
+        "sentence numbers:6,12"
+      ],
+      [
+        "Max_demand_tomato",
+        "x3 ≤ 1.5",
+        "sentence numbers:6,12"
+      ],
+      [
+        "Max_demand_spinach",
+        "x4 ≤ 1",
+        "sentence numbers:6,12"
+      ],
+      [
+        "Max_demand_mustard",
+        "x5 ≤ 1.5",
+        "sentence numbers:6,12"
+      ],
+      [
+        "Max_demand_pumpkin",
+        "x6 ≤ 1",
+        "sentence numbers:6,12"
+      ],
+      [
+        "Max_demand_sweet_potato",
+        "x7 ≤ 1",
+        "sentence numbers:6,12"
+      ],
+      [
+        "At_least_6_crops_planted",
+        "y1 + y2 + y3 + y4 + y5 + y6 + y7 ≥ 6",
+        "sentence numbers:7"
+      ],
+      [
+        "Min_area_if_planted_green_corn",
+        "x1 ≥ 0.8 y1",
+        "sentence numbers:8"
+      ],
+      [
+        "Min_area_if_planted_cabbage",
+        "x2 ≥ 0.8 y2",
+        "sentence numbers:8"
+      ],
+      [
+        "Min_area_if_planted_tomato",
+        "x3 ≥ 0.8 y3",
+        "sentence numbers:8"
+      ],
+      [
+        "Min_area_if_planted_spinach",
+        "x4 ≥ 0.8 y4",
+        "sentence numbers:8"
+      ],
+      [
+        "Min_area_if_planted_mustard",
+        "x5 ≥ 0.8 y5",
+        "sentence numbers:8"
+      ],
+      [
+        "Min_area_if_planted_pumpkin",
+        "x6 ≥ 0.8 y6",
+        "sentence numbers:8"
+      ],
+      [
+        "Min_area_if_planted_sweet_potato",
+        "x7 ≥ 0.8 y7",
+        "sentence numbers:8"
+      ],
+      [
+        "Link_max_demand_green_corn",
+        "x1 ≤ 2 y1",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Link_max_demand_cabbage",
+        "x2 ≤ 3 y2",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Link_max_demand_tomato",
+        "x3 ≤ 1.5 y3",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Link_max_demand_spinach",
+        "x4 ≤ 1 y4",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Link_max_demand_mustard",
+        "x5 ≤ 1.5 y5",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Link_max_demand_pumpkin",
+        "x6 ≤ 1 y6",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Link_max_demand_sweet_potato",
+        "x7 ≤ 1 y7",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Balance_pumpkin_sweet_potato",
+        "x6 = x7",
+        "sentence numbers:9"
+      ],
+      [
+        "Green_corn_plus_pumpkin_minimum_area",
+        "x1 + x6 ≥ 3",
+        "sentence numbers:10"
+      ],
+      [
+        "Nonnegativity_x",
+        "x1, x2, x3, x4, x5, x6, x7 ≥ 0",
+        "sentence numbers:1,6"
+      ],
+      [
+        "Binary_y",
+        "y1, y2, y3, y4, y5, y6, y7 ∈ {0,1}",
+        "sentence numbers:7,8"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Objective is to maximize total profit.",
+      "Mathematical_expressions": "Maximize Z = 10000 x1 + 12000 x2 + 15000 x3 + 8000 x4 + 9000 x5 + 11000 x6 + 10000 x7"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "72371.42857143"
+    ],
+    "time_seconds": 20.845648900001834,
+    "total_tokens": 9617
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "72371.42857143"
+    ],
+    "ground_truth": 72371.4286
+  }
+}

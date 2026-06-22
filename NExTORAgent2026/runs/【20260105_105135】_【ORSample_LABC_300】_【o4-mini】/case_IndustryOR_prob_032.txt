@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A wealthy nobleman has died, leaving the following estate:\n\n- A painting by Caillebotte: $25000$  \n- A bust of Diocletian: $5000$  \n- A Chinese vase from the Yuan Dynasty: $20000$  \n- A Porsche 911: $40000$  \n- Three diamonds: $12000$ each  \n- A Louis XV period sofa: $3000$  \n- Two extremely valuable Jack Russell Terrier dogs: $3000$ each (the will stipulates that they cannot be separated)  \n- A sculpture from the year 200 AD: $10000$  \n- A sailboat: $15000$  \n- A Harley-Davidson motorcycle: $10000$  \n- A piece of furniture that once belonged to Cavour: $13000$  \n\nThese assets must be allocated between the two sons. How can the allocation be made so as to minimize the difference in value between the two shares?\n\nIn addition, the will contains a special clause: if the total value of the assets allocated to one son is strictly greater than $90000$, then an additional fixed administrative fee of $5000$ must be paid for that high-value share (this fee is computed and deducted only for that son’s share; the other son is unaffected). Taking this clause into account, how should the estate be allocated so as to minimize the difference between the two final share values after deducting any applicable administrative fee?",
+    "answer": 0.0,
+    "index": "IndustryOR_prob_032",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述:『这些遗产必须在两个儿子之间进行分配。如何使两部分的价值差最小？』, 修改后相关描述:『这些遗产必须在两个儿子之间进行分配。如何使两部分的价值差最小？另外，遗嘱中还有一条特殊条款：如果其中一个儿子分得的遗产总价值严格超过 $90000，则需要为这些高价值遗产额外支付一笔固定管理费用 $5000（这笔费用只对这一位儿子的那一部分计算和扣减，另一位儿子不受影响）。在考虑这条条款后，如何进行分配才能使两部分在扣除可能产生的管理费用之后的最终价值差最小？』",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_032\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_004.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 55.29356819999521,
+    "total_tokens": 5216
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 0.0
+  }
+}

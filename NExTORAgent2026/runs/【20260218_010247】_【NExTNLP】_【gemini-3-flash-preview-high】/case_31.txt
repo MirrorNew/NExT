@@ -1,0 +1,211 @@
+{
+  "entry": {
+    "index": 31,
+    "question": "In the precision irrigation system of Netafim, the agricultural technology branch of the Rhode Island Group, similar resource allocation problems are transformed into mathematical optimization models. Data from the experimental farm on the south bank of Theresa Bay show that there are significant differences in the response curves of tomato planting areas (field 1) and pepper planting areas (field 2) to fertilizer: tomato yield is less sensitive to fertilizer, and each additional kg of fertilizer only brings diminishing marginal yield benefits; while pepper crops have a significant initial yield increase effect, but when the fertilizer application exceeds the critical value (about 80 kg/hectare), the salinization caused by the increase in soil EC value will reduce the yield. \nThe National University of Colombia has developed a decision support tool similar to Netafim in the wheat-corn rotation system in the North China Plain. The system monitors the fertility of the field in real time through soil sensors. When it detects that the fertilizer application in a field is close to the threshold, it automatically allocates excess fertilizer to the field with a flatter response curve. Field trials in 2023 showed that this dynamic optimization allocation method can increase total yield while reducing fertilizer waste compared to uniform fertilization. It is worth noting that in practical applications, the differences in fertilizer requirements of different crop varieties must also be considered - for example, the fertilizer utilization efficiency of corn is usually 20-30% higher than that of wheat, which prompts modern precision agriculture systems to integrate crop growth models for multi-dimensional optimization. \n\nThe assessment report of the Food and Agriculture Organization of the United Nations (FAO) pointed out that after the promotion of this type of optimized fertilization model in rice-growing areas in Southeast Asia, it not only increased yields, but also reduced nitrogen fertilizer runoff pollution by 25%. The latest research is trying to incorporate soil health indicators such as organic matter content and microbial activity into the objective function so that the optimization results can not only guarantee the current yield, but also maintain the sustainable production capacity of the land. \n\nNow, Kazdale Farm has two fields, which have introduced the irrigation system of the Rhode Island Group Agricultural Technology Branch, which can allocate a total of 150 kilograms of fertilizer for crop fertilization. Fields 1 and 2 can apply a maximum of 100 and 90 kilograms of fertilizer respectively. Crop yield $y$ and fertilizer input $x$ show diminishing marginal returns. For example, the yield function of field 1 is $y_1=5\\sqrt{x_1}$, and field 2 is $y_2=6\\sqrt{x_2}$ (yield unit: tons). Assuming that the yield depends only on the amount of fertilizer input in the season, and because too much fertilizer input will lead to a reduction in the yield of Field 2, Experience shows that if Field 2 exceeds 90 tons, it is easy to lead to a reduction in land yield. The amount of reduction in yield is in a square relationship with the amount of fertilizer input to Field 2, with a coefficient of 0.00002, and the other conditions are the same. Farmers hope to maximize the total yield $y_1+y_2$ by reasonably allocating fertilizers $x_1,x_2$.",
+    "answer": 95.50028,
+    "Parameters_List": [
+      {
+        "Name": "threshold_salinity_field2",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "total_fertilizer_capacity",
+        "Type": "integer",
+        "Value": 150
+      },
+      {
+        "Name": "max_fertilizer_field1",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "max_fertilizer_field2",
+        "Type": "integer",
+        "Value": 90
+      },
+      {
+        "Name": "yield_coeff_field1",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "yield_coeff_field2",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "reduction_coef_field2",
+        "Type": "float",
+        "Value": 2e-05
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the precision irrigation system of Netafim,...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Data from the experimental farm on the south bank...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The National University of Colombia has developed...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The system monitors the fertility of the field...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "When it detects that the fertilizer application...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Field trials in 2023 showed that this dynamic...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "It is worth noting that in practical applications...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The assessment report of the Food and Agriculture Organization...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The latest research is trying to incorporate soil health indicators...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Now, Kazdale Farm has two fields,...",
+        "Constraint: x1 + x2 ≤ 150"
+      ],
+      [
+        "11",
+        "Fields 1 and 2 can apply a maximum of 100 and 90 kilograms...",
+        "Constraint: x1 ≤ 100; x2 ≤ 90"
+      ],
+      [
+        "12",
+        "Crop yield y and fertilizer input x show diminishing marginal returns.",
+        "No constraints"
+      ],
+      [
+        "13",
+        "For example, the yield function of field 1 is y1=5√x1...",
+        "Constraint: y1 = 5·√x1; y2 = 6·√x2"
+      ],
+      [
+        "14",
+        "Assuming that the yield depends only on the amount...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "The amount of reduction in yield is in a square relationship...",
+        "Constraint: Δ2 = 0.00002·x2²"
+      ],
+      [
+        "16",
+        "Farmers hope to maximize the total yield y1+y2...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "fertilizer input to Field 1 (kg)",
+        "Type": "continuous",
+        "Range ": "0 ≤ x1 ≤ 100"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "fertilizer input to Field 2 (kg)",
+        "Type": "continuous",
+        "Range ": "0 ≤ x2 ≤ 90"
+      },
+      {
+        "symbol": "y1",
+        "Meaning": "yield of Field 1 (tons)",
+        "Type": "continuous",
+        "Range ": "0 ≤ y1 ≤ 50"
+      },
+      {
+        "symbol": "y2",
+        "Meaning": "yield of Field 2 (tons)",
+        "Type": "continuous",
+        "Range ": "0 ≤ y2 ≤ 6·√90"
+      },
+      {
+        "symbol": "Δ2",
+        "Meaning": "reduction in Field 2 yield due to excessive fertilizer (tons)",
+        "Type": "continuous",
+        "Range ": "Δ2 ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Total Fertilizer Allocation",
+        "x1 + x2 ≤ 150",
+        "sentence numbers:10"
+      ],
+      [
+        "Max Fertilizer Field 1",
+        "x1 ≤ 100",
+        "sentence numbers:11"
+      ],
+      [
+        "Max Fertilizer Field 2",
+        "x2 ≤ 90",
+        "sentence numbers:11"
+      ],
+      [
+        "Yield Function Field 1",
+        "y1 = 5·√x1",
+        "sentence numbers:13"
+      ],
+      [
+        "Yield Function Field 2",
+        "y2 = 6·√x2",
+        "sentence numbers:13"
+      ],
+      [
+        "Yield Reduction Field 2",
+        "Δ2 = 0.00002·x2²",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Farmers hope to maximize the total yield y1 + y2 by reasonably allocating fertilizers x1, x2.",
+      "Mathematical_expressions": "maximize Z = y1 + y2"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "95.50031685004"
+    ],
+    "time_seconds": 156.94640440000512,
+    "total_tokens": 32056
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "95.50031685004"
+    ],
+    "ground_truth": 95.50028
+  }
+}

@@ -1,0 +1,697 @@
+{
+  "entry": {
+    "index": 31,
+    "question": "Rainbow Group is a cross-regional manufacturing company established in 1995. Its main business covers home appliances, new energy equipment and supporting services. It has large production bases and marketing centers in cities A and B. In recent years, with the transformation of intelligent manufacturing, the group has a surge in demand for compound talents, especially employees who understand automated production and have market insight. This recruitment is part of the group's \"14th Five-Year Plan\" talent reserve plan, involving three core positions: production, marketing, and finance. City A, as the headquarters of the group, has a mature training system; City B is in urgent need of technical backbones due to the newly built smart factory. The Human Resources Department screened 180 candidates through school-enterprise cooperation, social recruitment and other channels. Their professional backgrounds and career intentions show obvious differences. For example, although the 30 people in Category 3 are suitable for production or finance, they generally prefer production positions, which is inconsistent with the actual demand for financial positions in City B.\n\nRainbow Group is preparing to recruit 170 employees in three professions for its branches in cities A and B. See Table C-24 for details.\n\nTable C-24\n\n| City | Profession | Number of recruits | City | Major | Number of recruits |\n| ---- | ---- | -------- | ---- | ---- | -------- |\n| A | Production | 20 | B | Production | 25 |\n| A | Marketing | 30 | B | Marketing | 20 |\n| A | Finance | 40 | B | Finance | 35 |\n\nThe Group will divide the qualified applicants, totaling $180$, into $6$ categories according to the major they are suitable for, the major they wish to engage in, and the city they wish to work in. For details, see Table C-25. \n\nTable C-25\n\n| Category | Number of people | Suitable major | Major they wish to engage in | City they wish to work in |\n| ---- | ---- | -------------- | ------------------ | -------------- |\n| 1 | 30 | Production, Marketing | Production | A |\n| 2 | 30 | Marketing, Finance | Marketing | A |\n| 3 | 30 | Production, Finance | Production | B |\n| 4 | 30 | Production, Finance | Finance | B |\n| 5 | 30 | Marketing, Finance | Finance | A |\n| 6 | 30 | Finance | Finance | B |\n\nThe group determines the priority order of specific recruitment and allocation as follows:\n $p_1$: The group reasonably recruits employees who are suitable for the job and are suitable for the professional work;\n $p_2$: More than $80%$ of the recruited personnel are engaged in the profession they hope to engage in;\n $p_3$: More than $80%$ of the recruited personnel work in the city they hope to work in. \n\nLevel weight: $p_1\\gg p_2\\gg p_3$, this question can be taken as:\n\n- $p_1=10,000$\n\n $p_2=100$\n\n $p_3=1$\n\nIn order to use \"goal planning\" to handle hierarchical goals, use $x_{ijk}$ to represent the number of people who are recruited from the $i$ (6 categories) category of applicants and assigned to major $j$ (1=production, 2=marketing, 3=finance) and city $k$ (1=A, 2=B). At the same time, it is recommended to introduce deviation variables $d_l^+!,d_l^-\\;(l=1,\\dots,7)$ to measure the deficiency and excess of the $l$th goal, respectively, and establish a mathematical model of goal planning based on this. In the feasible solution, how many people in category 1 who want to engage in production majors and are assigned to city A? (This solution is unique)",
+    "answer": 10.0,
+    "Parameters_List": [
+      {
+        "Name": "company_name",
+        "Type": "string",
+        "Value": "Rainbow Group"
+      },
+      {
+        "Name": "establishment_year",
+        "Type": "integer",
+        "Value": 1995
+      },
+      {
+        "Name": "business_areas",
+        "Type": "list",
+        "Value": [
+          "home appliances",
+          "new energy equipment",
+          "supporting services"
+        ]
+      },
+      {
+        "Name": "cities",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "Name": "facility_types",
+        "Type": "list",
+        "Value": [
+          "production bases",
+          "marketing centers"
+        ]
+      },
+      {
+        "Name": "planning_horizon_name",
+        "Type": "string",
+        "Value": "14th Five-Year Plan"
+      },
+      {
+        "Name": "core_positions",
+        "Type": "list",
+        "Value": [
+          "production",
+          "marketing",
+          "finance"
+        ]
+      },
+      {
+        "Name": "number_of_core_positions",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "headquarters_city",
+        "Type": "string",
+        "Value": "A"
+      },
+      {
+        "Name": "new_smart_factory_city",
+        "Type": "string",
+        "Value": "B"
+      },
+      {
+        "Name": "total_candidates_screened",
+        "Type": "integer",
+        "Value": 180
+      },
+      {
+        "Name": "category_3_size",
+        "Type": "integer",
+        "Value": 30
+      },
+      {
+        "Name": "category_3_suitable_majors",
+        "Type": "list",
+        "Value": [
+          "production",
+          "finance"
+        ]
+      },
+      {
+        "Name": "category_3_preferred_major",
+        "Type": "string",
+        "Value": "production"
+      },
+      {
+        "Name": "city_B_actual_demand_major",
+        "Type": "string",
+        "Value": "finance"
+      },
+      {
+        "Name": "total_recruits_planned",
+        "Type": "integer",
+        "Value": 170
+      },
+      {
+        "Name": "number_of_professions",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "recruitment_cities",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "Name": "qualified_applicants_total",
+        "Type": "integer",
+        "Value": 180
+      },
+      {
+        "Name": "number_of_categories",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "categorization_criteria",
+        "Type": "list",
+        "Value": [
+          "suitable major",
+          "desired major",
+          "desired city"
+        ]
+      },
+      {
+        "Name": "p1_description",
+        "Type": "string",
+        "Value": "recruit employees who are suitable for the job and profession"
+      },
+      {
+        "Name": "p2_description",
+        "Type": "string",
+        "Value": "≥80% recruited in desired profession"
+      },
+      {
+        "Name": "p2_percentage_threshold",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "p3_description",
+        "Type": "string",
+        "Value": "≥80% recruited in desired city"
+      },
+      {
+        "Name": "p3_percentage_threshold",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "priority_relation",
+        "Type": "string",
+        "Value": "p1 >> p2 >> p3"
+      },
+      {
+        "Name": "p1_weight",
+        "Type": "integer",
+        "Value": 10000
+      },
+      {
+        "Name": "p2_weight",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "p3_weight",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "i_range",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "j_major_mapping",
+        "Type": "object",
+        "Value": {
+          "1": "production",
+          "2": "marketing",
+          "3": "finance"
+        }
+      },
+      {
+        "Name": "k_city_mapping",
+        "Type": "object",
+        "Value": {
+          "1": "A",
+          "2": "B"
+        }
+      },
+      {
+        "Name": "deviation_index_range_start",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "deviation_index_range_end",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "number_of_deviation_pairs",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "Table_1_C24_recruitment_plan",
+        "Type": "list",
+        "Value": [
+          {
+            "city": "A",
+            "profession": "Production",
+            "number_of_recruits": 20
+          },
+          {
+            "city": "A",
+            "profession": "Marketing",
+            "number_of_recruits": 30
+          },
+          {
+            "city": "A",
+            "profession": "Finance",
+            "number_of_recruits": 40
+          },
+          {
+            "city": "B",
+            "profession": "Production",
+            "number_of_recruits": 25
+          },
+          {
+            "city": "B",
+            "profession": "Marketing",
+            "number_of_recruits": 20
+          },
+          {
+            "city": "B",
+            "profession": "Finance",
+            "number_of_recruits": 35
+          }
+        ]
+      },
+      {
+        "Name": "recruitment_cities_C24",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "Name": "recruitment_professions_C24",
+        "Type": "list",
+        "Value": [
+          "Production",
+          "Marketing",
+          "Finance"
+        ]
+      },
+      {
+        "Name": "recruits_by_city_and_profession",
+        "Type": "object",
+        "Value": {
+          "A_Production": 20,
+          "A_Marketing": 30,
+          "A_Finance": 40,
+          "B_Production": 25,
+          "B_Marketing": 20,
+          "B_Finance": 35
+        }
+      },
+      {
+        "Name": "Table_2_C25_applicant_categories",
+        "Type": "list",
+        "Value": [
+          {
+            "category": 1,
+            "number_of_people": 30,
+            "suitable_majors": [
+              "Production",
+              "Marketing"
+            ],
+            "desired_major": "Production",
+            "desired_city": "A"
+          },
+          {
+            "category": 2,
+            "number_of_people": 30,
+            "suitable_majors": [
+              "Marketing",
+              "Finance"
+            ],
+            "desired_major": "Marketing",
+            "desired_city": "A"
+          },
+          {
+            "category": 3,
+            "number_of_people": 30,
+            "suitable_majors": [
+              "Production",
+              "Finance"
+            ],
+            "desired_major": "Production",
+            "desired_city": "B"
+          },
+          {
+            "category": 4,
+            "number_of_people": 30,
+            "suitable_majors": [
+              "Production",
+              "Finance"
+            ],
+            "desired_major": "Finance",
+            "desired_city": "B"
+          },
+          {
+            "category": 5,
+            "number_of_people": 30,
+            "suitable_majors": [
+              "Marketing",
+              "Finance"
+            ],
+            "desired_major": "Finance",
+            "desired_city": "A"
+          },
+          {
+            "category": 6,
+            "number_of_people": 30,
+            "suitable_majors": [
+              "Finance"
+            ],
+            "desired_major": "Finance",
+            "desired_city": "B"
+          }
+        ]
+      },
+      {
+        "Name": "categories_C25",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "category_sizes",
+        "Type": "list",
+        "Value": [
+          0,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      {
+        "Name": "category_suitable_majors",
+        "Type": "object",
+        "Value": {
+          "1": [
+            "Production",
+            "Marketing"
+          ],
+          "2": [
+            "Marketing",
+            "Finance"
+          ],
+          "3": [
+            "Production",
+            "Finance"
+          ],
+          "4": [
+            "Production",
+            "Finance"
+          ],
+          "5": [
+            "Marketing",
+            "Finance"
+          ],
+          "6": [
+            "Finance"
+          ]
+        }
+      },
+      {
+        "Name": "category_desired_major",
+        "Type": "object",
+        "Value": {
+          "1": "Production",
+          "2": "Marketing",
+          "3": "Production",
+          "4": "Finance",
+          "5": "Finance",
+          "6": "Finance"
+        }
+      },
+      {
+        "Name": "category_desired_city",
+        "Type": "object",
+        "Value": {
+          "1": "A",
+          "2": "A",
+          "3": "B",
+          "4": "B",
+          "5": "A",
+          "6": "B"
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Rainbow Group recruits 170...",
+        "Defines total recruitment of 170 employees across city–profession combinations; induces sum of all assignment variables equals 170."
+      ],
+      [
+        "2",
+        "There are 180 qualified...",
+        "Defines 6 categories with 30 people each; induces per‑category capacity constraints."
+      ],
+      [
+        "3",
+        "Decision variable: x_{ijk} is...",
+        "Defines decision variables x_{ijk} as number of recruits from category i to major j in city k."
+      ],
+      [
+        "4",
+        "Deviation variables d_l^+...",
+        "Defines deviation variables d_l^+, d_l^- for 7 goals; used in goal equations and objective."
+      ],
+      [
+        "5",
+        "Priority/weights of goals: p1...",
+        "Defines hierarchical goal weights (p1 >> p2 >> p3); drives structure of the objective function."
+      ],
+      [
+        "6",
+        "Goal p1: reasonably recruit...",
+        "States goal of assigning only to suitable majors; leads to either hard suitability constraints or a high‑priority goal on unsuitable assignments."
+      ],
+      [
+        "7",
+        "Goal p2: more than 80%...",
+        "Defines goal constraint: at least 80% of recruits work in desired major; modeled via linear goal equation with deviations."
+      ],
+      [
+        "8",
+        "Goal p3: more than 80%...",
+        "Defines goal constraint: at least 80% of recruits work in desired city; modeled via linear goal equation with deviations."
+      ],
+      [
+        "9",
+        "Each demanding city–profession...",
+        "Defines exact city–profession demand constraints for A and B by major."
+      ],
+      [
+        "10",
+        "Each category i has at most...",
+        "Defines per‑category capacity constraints: each category supplies at most 30 people."
+      ],
+      [
+        "11",
+        "Feasible solution exists and...",
+        "States uniqueness of solution; justifies that resulting x_{1,1,1} value is uniquely determined; no explicit mathematical constraint."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{ijk}",
+        "Meaning": "Number of recruits from category i assigned to major j and city k (i=1..6, j=1:Production,2:Marketing,3:Finance, k=1:A,2:B)",
+        "Type": "integer",
+        "Range ": "x_{ijk} >= 0"
+      },
+      {
+        "symbol": "d_1^+",
+        "Meaning": "Positive deviation from goal 1 (suitability goal, e.g., number of unsuitable assignments above target)",
+        "Type": "continuous",
+        "Range ": "d_1^+ >= 0"
+      },
+      {
+        "symbol": "d_1^-",
+        "Meaning": "Negative deviation from goal 1 (suitability goal, not usually penalized but included for completeness)",
+        "Type": "continuous",
+        "Range ": "d_1^- >= 0"
+      },
+      {
+        "symbol": "d_2^+",
+        "Meaning": "Positive deviation from goal 2 (more than 80% in desired major; measures surplus above target 80%)",
+        "Type": "continuous",
+        "Range ": "d_2^+ >= 0"
+      },
+      {
+        "symbol": "d_2^-",
+        "Meaning": "Negative deviation from goal 2 (shortfall from 80% in desired major)",
+        "Type": "continuous",
+        "Range ": "d_2^- >= 0"
+      },
+      {
+        "symbol": "d_3^+",
+        "Meaning": "Positive deviation from goal 3 (more than 80% in desired city; surplus above target)",
+        "Type": "continuous",
+        "Range ": "d_3^+ >= 0"
+      },
+      {
+        "symbol": "d_3^-",
+        "Meaning": "Negative deviation from goal 3 (shortfall from 80% in desired city)",
+        "Type": "continuous",
+        "Range ": "d_3^- >= 0"
+      },
+      {
+        "symbol": "d_4^+",
+        "Meaning": "Positive deviation for goal 4 (total recruitment exceeding 170 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_4^+ >= 0"
+      },
+      {
+        "symbol": "d_4^-",
+        "Meaning": "Negative deviation for goal 4 (total recruitment below 170 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_4^- >= 0"
+      },
+      {
+        "symbol": "d_5^+",
+        "Meaning": "Positive deviation for goal 5 (production recruits exceeding target 45 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_5^+ >= 0"
+      },
+      {
+        "symbol": "d_5^-",
+        "Meaning": "Negative deviation for goal 5 (production recruits below target 45 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_5^- >= 0"
+      },
+      {
+        "symbol": "d_6^+",
+        "Meaning": "Positive deviation for goal 6 (marketing recruits exceeding target 50 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_6^+ >= 0"
+      },
+      {
+        "symbol": "d_6^-",
+        "Meaning": "Negative deviation for goal 6 (marketing recruits below target 50 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_6^- >= 0"
+      },
+      {
+        "symbol": "d_7^+",
+        "Meaning": "Positive deviation for goal 7 (finance recruits exceeding target 75 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_7^+ >= 0"
+      },
+      {
+        "symbol": "d_7^-",
+        "Meaning": "Negative deviation for goal 7 (finance recruits below target 75 if modeled as goal)",
+        "Type": "continuous",
+        "Range ": "d_7^- >= 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "City A Production Demand",
+        "sum_{i=1}^6 x_{i,1,1} = 20",
+        "sentence numbers:1,9"
+      ],
+      [
+        "City A Marketing Demand",
+        "sum_{i=1}^6 x_{i,2,1} = 30",
+        "sentence numbers:1,9"
+      ],
+      [
+        "City A Finance Demand",
+        "sum_{i=1}^6 x_{i,3,1} = 40",
+        "sentence numbers:1,9"
+      ],
+      [
+        "City B Production Demand",
+        "sum_{i=1}^6 x_{i,1,2} = 25",
+        "sentence numbers:1,9"
+      ],
+      [
+        "City B Marketing Demand",
+        "sum_{i=1}^6 x_{i,2,2} = 20",
+        "sentence numbers:1,9"
+      ],
+      [
+        "City B Finance Demand",
+        "sum_{i=1}^6 x_{i,3,2} = 35",
+        "sentence numbers:1,9"
+      ],
+      [
+        "Category Capacity i=1..6",
+        "for each i=1..6: sum_{j=1}^3 sum_{k=1}^2 x_{ijk} <= 30",
+        "sentence numbers:2,10"
+      ],
+      [
+        "Suitability Category 1",
+        "x_{1,3,1} = 0, x_{1,3,2} = 0",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Suitability Category 2",
+        "x_{2,1,1} = 0, x_{2,1,2} = 0",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Suitability Category 3",
+        "x_{3,2,1} = 0, x_{3,2,2} = 0",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Suitability Category 4",
+        "x_{4,2,1} = 0, x_{4,2,2} = 0",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Suitability Category 5",
+        "x_{5,1,1} = 0, x_{5,1,2} = 0",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Suitability Category 6",
+        "x_{6,1,1} = 0, x_{6,1,2} = 0, x_{6,2,1} = 0, x_{6,2,2} = 0",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Goal 2: ≥80% Desired Major",
+        "M + d_2^- - d_2^+ = 136, where M = sum_{k=1}^2 x_{1,1,k} + sum_{k=1}^2 x_{2,2,k} + sum_{k=1}^2 x_{3,1,k} + sum_{k=1}^2 x_{4,3,k} + sum_{k=1}^2 x_{5,3,k} + sum_{k=1}^2 x_{6,3,k}",
+        "sentence numbers:3,4,7"
+      ],
+      [
+        "Goal 3: ≥80% Desired City",
+        "C + d_3^- - d_3^+ = 136, where C = sum_{j=1}^3 x_{1,j,1} + sum_{j=1}^3 x_{2,j,1} + sum_{j=1}^3 x_{5,j,1} + sum_{j=1}^3 x_{3,j,2} + sum_{j=1}^3 x_{4,j,2} + sum_{j=1}^3 x_{6,j,2}",
+        "sentence numbers:3,4,8"
+      ],
+      [
+        "Total Recruitment Goal (optional as goal)",
+        "sum_{i=1}^6 sum_{j=1}^3 sum_{k=1}^2 x_{ijk} + d_4^- - d_4^+ = 170",
+        "sentence numbers:1,4"
+      ],
+      [
+        "Total Production Goal (optional as goal)",
+        "sum_{i=1}^6 sum_{k=1}^2 x_{i,1,k} + d_5^- - d_5^+ = 45",
+        "sentence numbers:1,4"
+      ],
+      [
+        "Total Marketing Goal (optional as goal)",
+        "sum_{i=1}^6 sum_{k=1}^2 x_{i,2,k} + d_6^- - d_6^+ = 50",
+        "sentence numbers:1,4"
+      ],
+      [
+        "Total Finance Goal (optional as goal)",
+        "sum_{i=1}^6 sum_{k=1}^2 x_{i,3,k} + d_7^- - d_7^+ = 75",
+        "sentence numbers:1,4"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize weighted deviations from hierarchical goals: first minimize unsuitability (p1), then shortfall from 80% in desired major (p2), then shortfall from 80% in desired city and other lower-level goals (p3).",
+      "Mathematical_expressions": "Min Z = 10000*(d_1^+ + d_1^-) + 100*(d_2^- + d_2^+) + 1*(d_3^- + d_3^+) + 1*(d_4^- + d_4^+ + d_5^- + d_5^+ + d_6^- + d_6^+ + d_7^- + d_7^+)"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6.0",
+      "19.0"
+    ],
+    "time_seconds": 97.40343080000457,
+    "total_tokens": 59253
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "6.0",
+      "19.0"
+    ],
+    "ground_truth": 10.0
+  }
+}

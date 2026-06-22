@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "You are responsible for managing GreenTech Manufacturing, a company that produces environmentally friendly packaging materials using recycled paper. The company produces two packaging products: premium packaging and standard packaging. Premium packaging sells for 15 dollars per ton, and its average quality rating must be at least 9; standard packaging sells for 8 dollars per ton, and its average quality rating must be at least 7. The maximum monthly demand for premium packaging is 2,500 tons, and the maximum monthly demand for standard packaging is 800 tons.\n\nRecycled paper can be processed using one of three processing methods. The unit processing cost and output (yield) of each method are shown in the table below. For example, processing 1 ton of recycled paper by Method 1 costs 4.20 dollars and yields 0.3 tons of material with quality rating 6, 0.4 tons of material with quality rating 8, and 0.3 tons of material with quality rating 10. These costs already include the cost of acquiring the recycled paper. Before being converted into packaging material, materials with quality rating 6 and 8 can be upgraded via a refining process: by paying 1.20 dollars per ton, 1 ton of material with quality rating 6 can be upgraded to quality rating 8; by paying 1.80 dollars per ton, 1 ton of material with quality rating 8 can be upgraded to quality rating 10. To ensure a balanced production mix, the company requires that the ratio of total output used to produce premium packaging to the total output used to produce standard packaging must not exceed 3; that is, the ratio $\\frac{\\text{total output of premium packaging}}{\\text{total output of standard packaging}}$ must be no greater than 3. Subject to this ratio constraint and all quality and demand requirements, how should GreenTech Manufacturing schedule the use of each processing method and the refining process to maximize its monthly profit?\n\n| Processing Method | Unit Cost (USD/ton) | Output (Quality Rating 6) | Output (Quality Rating 8) | Output (Quality Rating 10) |\n|------------------|---------------------|---------------------------|---------------------------|----------------------------|\n| Method 1         | 4.20                | 0.3                       | 0.4                       | 0.3                        |\n| Method 2         | 3.80                | 0.5                       | 0.3                       | 0.2                        |\n| Method 3         | 4.50                | 0.2                       | 0.5                       | 0.3                        |",
+    "answer": 27856.0,
+    "index": "LogiOR_prob_045",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 绿科制造公司应如何在满足质量和需求要求的前提下，使其月利润最大化？, 修改后相关描述: 为了保证生产结构的均衡，公司要求：用于生产高端包装的总产出量与用于生产标准包装的总产出量之比不得大于 3，也就是说，高端包装的总产出量除以标准包装的总产出量的比值必须不超过 3。在满足这一比率约束以及所有质量和需求要求的前提下，绿科制造公司应如何安排各加工方法和精制工艺的使用，使其月利润最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_045\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_039.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "27856.0"
+    ],
+    "time_seconds": 38.0846409000078,
+    "total_tokens": 4077
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "27856.0"
+    ],
+    "ground_truth": 27856.0
+  }
+}

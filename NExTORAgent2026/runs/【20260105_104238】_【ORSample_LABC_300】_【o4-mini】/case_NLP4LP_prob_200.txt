@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_200",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_200\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_200\\code.py",
+    "NLtype": "Linear",
+    "question": "A flooring company produces engineered laminate planks and carpets. The chief marketer reports an expected demand of at least 15,000 square feet of laminate planks and 5,000 square feet of carpets each week. The shipping contract requires a total of at least 50,000 square feet of products each week. However, due to a shortage of raw materials, no more than 40,000 square feet of laminate planks and 20,000 square feet of carpets can be produced weekly. If a square foot of laminate planks produces a $2.1 profit and a square foot of carpets yields a $3.3 profit, how many of each type of product should be made weekly to maximize the company's profit?",
+    "answer": 150000,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "150000.0"
+    ],
+    "time_seconds": 15.721688699995866,
+    "total_tokens": 996
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "150000.0"
+    ],
+    "ground_truth": 150000
+  }
+}

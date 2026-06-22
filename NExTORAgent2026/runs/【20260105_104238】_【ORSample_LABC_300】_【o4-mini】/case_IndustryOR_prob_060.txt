@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A product can be processed on any one of four machines: A, B, C, or D. When each machine is put into operation, its setup (ready-to-run) cost, the unit production cost of the product, and the maximum processing capacity of the machine are given in Table 5-7. If it is required to produce 2000 units of this product, and it is required that, over all machines that are put into operation, the average value of the ratio of the actual number of units produced on that machine to the machine’s maximum processing capacity is not less than $0.7$, how can the total cost be minimized? Formulate a mathematical model.\n\nTable 5-7  \n| Machine | Setup cost (yuan) | Unit production cost (yuan/unit) | Maximum processing capacity (units) |\n|--------|--------------------|----------------------------------|-------------------------------------|\n| A      | 1000               | 20                               | 900                                 |\n| B      | 920                | 24                               | 1000                                |\n| C      | 800                | 16                               | 1200                                |\n| D      | 700                | 28                               | 1600                                |",
+    "answer": 37000.0,
+    "index": "IndustryOR_prob_060",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 若需要生产 2000 件该产品，如何使总成本最小？试建立数学模型。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_060\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_024.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 15.162990199998603,
+    "total_tokens": 1423
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 37000.0
+  }
+}

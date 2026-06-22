@@ -1,0 +1,455 @@
+{
+  "entry": {
+    "index": 11,
+    "question": "Huanya Manufacturing Group is a multinational electronic product manufacturer. Its Asia-Pacific operations center has two core factories (Shenzhen Factory 1 and Vietnam Factory), and plans to build regional distribution centers in three candidate cities in South China (City A, City B, and City C). Candidate warehouses A, B, and C each have fixed operating costs (500, 400, and 300 yuan respectively). Due to the surge in orders in the Southeast Asian market, the existing logistics network cannot meet the dual requirements of customer timeliness and cost. The group requires the supply chain department to reduce the total supply chain cost by at least 15% by optimizing warehouse location and transportation routes while ensuring full delivery of customer orders. The company needs to design the optimal supply chain network under the premise of comprehensively considering multi-dimensional costs. The overall goal is to minimize the total cost of the supply chain while meeting customer needs and only need to give an answer.\n\nThe order volume of the three core customers is fixed: The daily demand of customers (Singapore, Malaysia, and the Philippines) is shown in the following table. All orders must be delivered on the same day, and out-of-stock is not allowed Or delayed delivery. \n\nThe company's historical data shows that the Shenzhen factory has a high degree of automation and stable daily production capacity, but the electricity cost is high; the Vietnam factory relies on sea container scheduling, and the transportation flexibility is limited. Among the candidate warehouses, City A is close to the port but the land rent is expensive, City B has a government subsidy policy, and City C has low labor costs due to its remote geographical location. \n\nThe Shenzhen factory can ship to all three candidate warehouses through a third-party logistics company, but the Vietnam factory is only allowed to transport goods to warehouses in City B and City C due to customs agreement restrictions. In addition, due to waterway control, the warehouse in City A can only serve customers in Singapore and Malaysia, while other warehouses can cover all customers\n\nIf a warehouse is activated, its actual cargo throughput must strictly equal the sum of the cargo flow in and out of the warehouse, and the unactivated warehouse must not participate in any transportation activities. The Group's Finance Department requires that the warehouse in City B be given priority to obtain policy subsidies, and at least 2 warehouses must be opened. \n\n```mermaid\nflowchart LR\n A1((Shenzhen Factory)) --> B[A Warehouse]\n A1((Shenzhen Factory)) --> C[B Warehouse]\n A1((Shenzhen Factory)) --> D[C Warehouse]\n A2((Vietnam Factory)) --> C[B Warehouse]\n A2((Vietnam Factory)) --> D[C Warehouse]\n B --> B1((Customer A)) \n\tB --> B2((Customer B))\n C --> B2((Customer B))\n C --> B3((Customer C))\n D --> B1((Customer A))\n D --> B2((Customer B))\n D --> B3((Customer C))\n \n```\n\nFactory Capacity and Customer Demand\n\n| Item | Quantity (Pieces) |\n| ------------ | ---------- |\n| Shenzhen Factory Capacity | 1000 |\n| Vietnam Factory Capacity | 800 |\n| Customer 1 demand | 500 |\n| Customer 2 demand | 700 |\n| Customer 3 demand | 500 |\n\nUnit transportation cost from warehouse to customer (yuan/piece)\n\n| Path | Customer 1 | Customer 2 | Customer 3 |\n| ----------- | ----- | ----- | ----- |\n| **Warehouse in City A** | 3 | 4 | - |\n| **Warehouse in City B** | - | 3 | 3 |\n| **Warehouse in City C** | 3 | 5 | 2 |\n\nUnit transportation cost from factory to warehouse (yuan/piece)\n\n| Path | Factory in Shenzhen | Factory in Vietnam |\n| ----------- | -------- | -------- |\n| **Warehouse in City A** | 2 | - |\n| **Warehouse in City B** | 4 | 1 |\n| **Warehouse in City C** | 3 | 2 |",
+    "answer": 8900.0,
+    "Parameters_List": [
+      {
+        "Name": "Factories",
+        "Type": "list",
+        "Value": [
+          "Shenzhen",
+          "Vietnam"
+        ]
+      },
+      {
+        "Name": "CandidateWarehouses",
+        "Type": "list",
+        "Value": [
+          "CityA",
+          "CityB",
+          "CityC"
+        ]
+      },
+      {
+        "Name": "FixedOperatingCost",
+        "Type": "tuple",
+        "Value": {
+          "A": 500,
+          "B": 400,
+          "C": 300
+        }
+      },
+      {
+        "Name": "CostReductionTarget",
+        "Type": "float",
+        "Value": 0.15
+      },
+      {
+        "Name": "CustomerRegions",
+        "Type": "list",
+        "Value": [
+          "Singapore",
+          "Malaysia",
+          "Philippines"
+        ]
+      },
+      {
+        "Name": "AllowedRoutes_FactoryWarehouse",
+        "Type": "list",
+        "Value": [
+          [
+            "Shenzhen",
+            "CityA"
+          ],
+          [
+            "Shenzhen",
+            "CityB"
+          ],
+          [
+            "Shenzhen",
+            "CityC"
+          ],
+          [
+            "Vietnam",
+            "CityB"
+          ],
+          [
+            "Vietnam",
+            "CityC"
+          ]
+        ]
+      },
+      {
+        "Name": "AllowedRoutes_WarehouseCustomer",
+        "Type": "list",
+        "Value": [
+          [
+            "CityA",
+            "Singapore"
+          ],
+          [
+            "CityA",
+            "Malaysia"
+          ],
+          [
+            "CityB",
+            "Singapore"
+          ],
+          [
+            "CityB",
+            "Malaysia"
+          ],
+          [
+            "CityB",
+            "Philippines"
+          ],
+          [
+            "CityC",
+            "Singapore"
+          ],
+          [
+            "CityC",
+            "Malaysia"
+          ],
+          [
+            "CityC",
+            "Philippines"
+          ]
+        ]
+      },
+      {
+        "Name": "PriorityWarehouse",
+        "Type": "list",
+        "Value": [
+          "CityB"
+        ]
+      },
+      {
+        "Name": "MinWarehousesOpen",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "Table_1_Factory_Capacity_and_Customer_Demand",
+        "Type": "tuple",
+        "Value": {
+          "ShenzhenFactory": 1000,
+          "VietnamFactory": 800,
+          "Customer1": 500,
+          "Customer2": 700,
+          "Customer3": 500
+        }
+      },
+      {
+        "Name": "Table_2_Warehouse_to_Customer_Cost",
+        "Type": "tuple",
+        "Value": {
+          "CityA": {
+            "Customer1": 3,
+            "Customer2": 4,
+            "Customer3": null
+          },
+          "CityB": {
+            "Customer1": null,
+            "Customer2": 3,
+            "Customer3": 3
+          },
+          "CityC": {
+            "Customer1": 3,
+            "Customer2": 5,
+            "Customer3": 2
+          }
+        }
+      },
+      {
+        "Name": "Table_3_Factory_to_Warehouse_Cost",
+        "Type": "tuple",
+        "Value": {
+          "CityA": {
+            "Shenzhen": 2,
+            "Vietnam": null
+          },
+          "CityB": {
+            "Shenzhen": 4,
+            "Vietnam": 1
+          },
+          "CityC": {
+            "Shenzhen": 3,
+            "Vietnam": 2
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Huanya Manufacturing Group is...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Its Asia-Pacific operations center...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Candidate warehouses A, B, and C...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Due to the surge in orders...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The group requires the supply chain department to reduce...",
+        "Cost reduction: total cost ≤ 0.85·C₀; Full delivery: shipments cover 100% of demand"
+      ],
+      [
+        "6",
+        "The company needs to design the optimal supply chain network...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The overall goal is to minimize the total cost...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The order volume of the three core customers...",
+        "Demand satisfaction: ∑_{k∈{A,B,C}} x_{k,j} = d_j for j=1,2,3"
+      ],
+      [
+        "9",
+        "All orders must be delivered on the same day...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The company's historical data shows that the Shenzhen factory has...",
+        "Capacity constraints: ∑_{k∈{A,B,C}} x_{S,k} ≤ 1000; ∑_{k∈{A,B,C}} x_{V,k} ≤ 800"
+      ],
+      [
+        "11",
+        "Among the candidate warehouses, City A is close to the port...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "The Shenzhen factory can ship to all three candidate warehouses...",
+        "Routing constraint: x_{V,A} = 0"
+      ],
+      [
+        "13",
+        "In addition, due to waterway control, the warehouse in City A...",
+        "Routing constraint: x_{A,3} = 0"
+      ],
+      [
+        "14",
+        "If a warehouse is activated, its actual cargo throughput must...",
+        "Flow balance: ∑_{i∈{S,V}} x_{i,k} = ∑_{j∈{1,2,3}} x_{k,j} for k=A,B,C; Activation coupling: x_{i,k} ≤ M·y_k, x_{k,j} ≤ M·y_k"
+      ],
+      [
+        "15",
+        "The Group's Finance Department requires that the warehouse in City B...",
+        "y_B = 1; y_A + y_B + y_C ≥ 2"
+      ],
+      [
+        "16",
+        "Unit transportation cost from warehouse to customer...",
+        "Routing constraints: x_{A,3} = 0; x_{B,1} = 0"
+      ],
+      [
+        "17",
+        "Unit transportation cost from factory to warehouse...",
+        "Routing constraint: x_{V,A} = 0"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "y_A",
+        "Meaning": "1 if warehouse A is opened, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "y_B",
+        "Meaning": "1 if warehouse B is opened, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "y_C",
+        "Meaning": "1 if warehouse C is opened, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "x_S_A",
+        "Meaning": "daily flow from Shenzhen factory to warehouse A",
+        "Type": "continuous",
+        "Range ": "[0,1000]"
+      },
+      {
+        "symbol": "x_S_B",
+        "Meaning": "daily flow from Shenzhen factory to warehouse B",
+        "Type": "continuous",
+        "Range ": "[0,1000]"
+      },
+      {
+        "symbol": "x_S_C",
+        "Meaning": "daily flow from Shenzhen factory to warehouse C",
+        "Type": "continuous",
+        "Range ": "[0,1000]"
+      },
+      {
+        "symbol": "x_V_A",
+        "Meaning": "daily flow from Vietnam factory to warehouse A",
+        "Type": "continuous",
+        "Range ": "[0,800]"
+      },
+      {
+        "symbol": "x_V_B",
+        "Meaning": "daily flow from Vietnam factory to warehouse B",
+        "Type": "continuous",
+        "Range ": "[0,800]"
+      },
+      {
+        "symbol": "x_V_C",
+        "Meaning": "daily flow from Vietnam factory to warehouse C",
+        "Type": "continuous",
+        "Range ": "[0,800]"
+      },
+      {
+        "symbol": "x_A_1",
+        "Meaning": "flow from warehouse A to customer 1",
+        "Type": "continuous",
+        "Range ": "[0,500]"
+      },
+      {
+        "symbol": "x_A_2",
+        "Meaning": "flow from warehouse A to customer 2",
+        "Type": "continuous",
+        "Range ": "[0,700]"
+      },
+      {
+        "symbol": "x_A_3",
+        "Meaning": "flow from warehouse A to customer 3",
+        "Type": "continuous",
+        "Range ": "[0,500]"
+      },
+      {
+        "symbol": "x_B_1",
+        "Meaning": "flow from warehouse B to customer 1",
+        "Type": "continuous",
+        "Range ": "[0,500]"
+      },
+      {
+        "symbol": "x_B_2",
+        "Meaning": "flow from warehouse B to customer 2",
+        "Type": "continuous",
+        "Range ": "[0,700]"
+      },
+      {
+        "symbol": "x_B_3",
+        "Meaning": "flow from warehouse B to customer 3",
+        "Type": "continuous",
+        "Range ": "[0,500]"
+      },
+      {
+        "symbol": "x_C_1",
+        "Meaning": "flow from warehouse C to customer 1",
+        "Type": "continuous",
+        "Range ": "[0,500]"
+      },
+      {
+        "symbol": "x_C_2",
+        "Meaning": "flow from warehouse C to customer 2",
+        "Type": "continuous",
+        "Range ": "[0,700]"
+      },
+      {
+        "symbol": "x_C_3",
+        "Meaning": "flow from warehouse C to customer 3",
+        "Type": "continuous",
+        "Range ": "[0,500]"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Cost reduction",
+        "∑_{i∈{S,V},k∈{A,B,C}} c_{i,k}·x_{i,k} + ∑_{k∈{A,B,C},j∈{1,2,3}} c_{k,j}·x_{k,j} + ∑_{k∈{A,B,C}} f_k·y_k ≤ 0.85·C₀",
+        "sentence numbers:5"
+      ],
+      [
+        "Demand satisfaction",
+        "∑_{k∈{A,B,C}} x_{k,j} = d_j for j=1,2,3",
+        "sentence numbers:8"
+      ],
+      [
+        "Capacity (Shenzhen)",
+        "∑_{k∈{A,B,C}} x_{S,k} ≤ 1000",
+        "sentence numbers:10"
+      ],
+      [
+        "Capacity (Vietnam)",
+        "∑_{k∈{A,B,C}} x_{V,k} ≤ 800",
+        "sentence numbers:10"
+      ],
+      [
+        "Route V→A",
+        "x_{V,A} = 0",
+        "sentence numbers:12,17"
+      ],
+      [
+        "Route A→Customer3",
+        "x_{A,3} = 0",
+        "sentence numbers:13,16"
+      ],
+      [
+        "Route B→Customer1",
+        "x_{B,1} = 0",
+        "sentence numbers:16"
+      ],
+      [
+        "Flow balance",
+        "∑_{i∈{S,V}} x_{i,k} = ∑_{j∈{1,2,3}} x_{k,j} for k=A,B,C",
+        "sentence numbers:14"
+      ],
+      [
+        "Inbound coupling",
+        "x_{i,k} ≤ M·y_k for i∈{S,V}, k∈{A,B,C}",
+        "sentence numbers:14"
+      ],
+      [
+        "Outbound coupling",
+        "x_{k,j} ≤ M·y_k for k∈{A,B,C}, j∈{1,2,3}",
+        "sentence numbers:14"
+      ],
+      [
+        "Open B",
+        "y_B = 1",
+        "sentence numbers:15"
+      ],
+      [
+        "Minimum warehouses",
+        "y_A + y_B + y_C ≥ 2",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The overall goal is to minimize the total cost of the supply chain while meeting customer needs and only need to give an answer.",
+      "Mathematical_expressions": "Z = ∑_{i∈{S,V},k∈{A,B,C}} c_{i,k}·x_{i,k} + ∑_{k∈{A,B,C},j∈{1,2,3}} c_{k,j}·x_{k,j} + ∑_{k∈{A,B,C}} f_k·y_k"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "8900.0"
+    ],
+    "time_seconds": 133.1228437999962,
+    "total_tokens": 10181
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "8900.0"
+    ],
+    "ground_truth": 8900.0
+  }
+}

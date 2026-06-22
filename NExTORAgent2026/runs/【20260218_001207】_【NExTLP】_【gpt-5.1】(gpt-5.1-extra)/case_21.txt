@@ -1,0 +1,510 @@
+{
+  "entry": {
+    "index": 21,
+    "question": " Xun'an City Emergency Services Co., Ltd. recently received a higher-level commission: In order to improve the **robustness and resilience** of the city's emergency response, it is necessary not only to ensure that the area is covered, but also to consider **redundant protection** of key areas. Under the new policy requirements, Xun'an Company needs to flexibly plan the layout of fire stations under limited budget conditions to ensure that the most important areas still have sufficient backup response capabilities when encountering extreme events (such as road blockages and sudden disasters).\n\nThe infrastructure conditions of each alternative construction site are different, resulting in different costs for building fire stations. The city is divided into 12 key areas, each with different importance weights, and the coverage requirements must be met according to the weight level to ensure that high-risk areas have redundant protection capabilities.\n\nThe City Emergency Management Bureau clearly pointed out: **Regional importance weights Areas between 6 and 8 must be covered by at least two different fire stations; areas with a weight greater than or equal to 9 must be covered by at least three fire stations. **Other areas can still be covered at least once. Due to resource constraints, a maximum of 6 fire stations are allowed to be built this time. Since there are libraries in areas 5 and 6, they need to be covered by an additional fire station while meeting the previous requirements. \n\n**In terms of transportation**, after each station is built, it can support coverage of a specific area within 5 minutes. The coverage relationship has been determined and listed in the data table. Whether it is truly considered as coverage requires that the station is actually built and the response capability is within the time window. \n\nXuan Company has 8 alternative construction addresses. Each address requires a different fixed construction fee. The overall goal of the project is to minimize costs while meeting redundant coverage requirements. \n\n| Alternative Sites | Coverable Area Number | Construction Cost (RMB 10,000) |\n| :------: | :-----------: | :--------------: |\n| 1 | 1, 2, 5, 6,7,8,11 | 90 |\n| 2 | 2, 3, 6, 7, 5 | 70 |\n| 3 | 1,4,5,6, 7, 8 | 85 |\n| 4 | 3,4, 5, 6, 7 | 65 |\n| 5 | 6,7, 10, 11 | 60 |\n| 6 | 4,5,8, 11, 12 | 80 |\n| 7 | 2,9, 11, 12 | 60 |\n| 8 | 5, 10, 12 | 50 |\n\n\n\n| Region Number | Importance Weight |\n| :------: | :--------: |\n| 1 | 4 |\n| 2 | 8 |\n| 3 | 5 |\n| 4 | 10 |\n| 5 | 7 |\n| 6 | 9 |\n| 7 | 6 |\n| 8 | 6 |\n| 9 | 3 |\n| 10 | 5 |\n| 11 | 8 |\n| 12 | 4 |",
+    "answer": 420.0,
+    "Parameters_List": [
+      {
+        "Name": "NumRegions",
+        "Type": "integer",
+        "Value": 12
+      },
+      {
+        "Name": "NumSites",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "MaxStationsToBuild",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "CoverageTimeLimit",
+        "Type": "float",
+        "Value": 5.0
+      },
+      {
+        "Name": "WeightMinTwoCoverage",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "WeightMaxTwoCoverage",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "WeightMinThreeCoverage",
+        "Type": "integer",
+        "Value": 9
+      },
+      {
+        "Name": "ExtraCoverageRegions",
+        "Type": "list",
+        "Value": [
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "I",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "Name": "J",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "Name": "CoverableAreas",
+        "Type": "list",
+        "Value": [
+          [],
+          [
+            1,
+            2,
+            5,
+            6,
+            7,
+            8,
+            11
+          ],
+          [
+            2,
+            3,
+            6,
+            7,
+            5
+          ],
+          [
+            1,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            6,
+            7,
+            10,
+            11
+          ],
+          [
+            4,
+            5,
+            8,
+            11,
+            12
+          ],
+          [
+            2,
+            9,
+            11,
+            12
+          ],
+          [
+            5,
+            10,
+            12
+          ]
+        ]
+      },
+      {
+        "Name": "ConstructionCost",
+        "Type": "list",
+        "Value": [
+          0,
+          90,
+          70,
+          85,
+          65,
+          60,
+          80,
+          60,
+          50
+        ]
+      },
+      {
+        "Name": "ImportanceWeight",
+        "Type": "list",
+        "Value": [
+          0,
+          4,
+          8,
+          5,
+          10,
+          7,
+          9,
+          6,
+          6,
+          3,
+          5,
+          8,
+          4
+        ]
+      },
+      {
+        "Name": "Table_1_SiteCoverageAndCost",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            [
+              1,
+              2,
+              5,
+              6,
+              7,
+              8,
+              11
+            ],
+            90
+          ],
+          [
+            2,
+            [
+              2,
+              3,
+              6,
+              7,
+              5
+            ],
+            70
+          ],
+          [
+            3,
+            [
+              1,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            85
+          ],
+          [
+            4,
+            [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            65
+          ],
+          [
+            5,
+            [
+              6,
+              7,
+              10,
+              11
+            ],
+            60
+          ],
+          [
+            6,
+            [
+              4,
+              5,
+              8,
+              11,
+              12
+            ],
+            80
+          ],
+          [
+            7,
+            [
+              2,
+              9,
+              11,
+              12
+            ],
+            60
+          ],
+          [
+            8,
+            [
+              5,
+              10,
+              12
+            ],
+            50
+          ]
+        ]
+      },
+      {
+        "Name": "Table_2_RegionImportance",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            3
+          ],
+          [
+            10,
+            5
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            12,
+            4
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Xun'an City Emergency Services Co., Ltd. recently received...",
+        "Background description, robustness/resilience motivation – No explicit mathematical constraints."
+      ],
+      [
+        "2",
+        "Under the new policy requirements, Xun'an Company needs to flexibly plan...",
+        "Planning problem description: select which fire stations to build under limited budget; implicitly leads to decision variables for station construction and cost-minimizing objective."
+      ],
+      [
+        "3",
+        "The infrastructure conditions of each alternative construction site are different...",
+        "Defines that each candidate site i has its own construction cost c_i used in the objective function."
+      ],
+      [
+        "4",
+        "The city is divided into 12 key areas, each with different importance weights...",
+        "Defines parameter: importance weight w_j for each region j, later used to set coverage requirements."
+      ],
+      [
+        "5",
+        "The City Emergency Management Bureau clearly pointed out: Regional importance weights Areas between 6 and 8...",
+        "Coverage constraints by importance: if 6 ≤ w_j ≤ 8 then region j must be covered by at least 2 different stations; if w_j ≥ 9 then region j must be covered by at least 3 stations; otherwise (w_j ≤ 5) at least 1 station. Forms lower bounds R_j on ∑_{i∈C(j)} x_i."
+      ],
+      [
+        "6",
+        "Other areas can still be covered at least once...",
+        "Clarifies that for w_j ≤ 5, region j must be covered by at least 1 station: ∑_{i∈C(j)} x_i ≥ 1."
+      ],
+      [
+        "7",
+        "Due to resource constraints, a maximum of 6 fire stations are allowed to be built...",
+        "Build limit constraint: ∑_{i=1}^8 x_i ≤ 6."
+      ],
+      [
+        "8",
+        "Since there are libraries in areas 5 and 6, they need to be covered by an additional fire station...",
+        "Additional coverage constraints: region 5 and 6 require one extra coverage beyond their base requirements. So R_5 = base(importance) + 1, R_6 = base(importance) + 1."
+      ],
+      [
+        "9",
+        "In terms of transportation, after each station is built, it can support coverage of a specific area within 5 minutes...",
+        "Defines coverage feasibility: a station i can only cover a region j if listed in the coverage table and if x_i = 1. Leads to use of parameter a_{ji} ∈ {0,1} and constraints use only i ∈ C(j)."
+      ],
+      [
+        "10",
+        "The coverage relationship has been determined and listed in the data table...",
+        "Provides data for sets C(j): which stations i can cover each region j. No additional algebraic constraint beyond defining a_{ji}."
+      ],
+      [
+        "11",
+        "Whether it is truly considered as coverage requires that the station is actually built...",
+        "Logical link between coverage and build decision: only stations with x_i = 1 contribute to coverage; implicitly captured by using x_i in ∑_{i∈C(j)} x_i ≥ R_j."
+      ],
+      [
+        "12",
+        "Xuan Company has 8 alternative construction addresses...",
+        "Defines index set of candidate sites i = 1,…,8."
+      ],
+      [
+        "13",
+        "Each address requires a different fixed construction fee...",
+        "Re-states that each site has cost c_i; used in objective function."
+      ],
+      [
+        "14",
+        "The overall goal of the project is to minimize costs while meeting redundant coverage requirements...",
+        "Defines optimization objective: minimize total construction cost subject to all coverage and build-limit constraints."
+      ],
+      [
+        "15",
+        "Alternative Sites table: 1 | 1, 2, 5, 6,7,8,11 | 90 ...",
+        "Defines coverage sets C(j) and costs c_i numerically. Used to form explicit coverage constraints and the cost objective."
+      ],
+      [
+        "16",
+        "Region Number | Importance Weight table...",
+        "Provides numeric importance weights w_j for each region j, which determine the required cover counts R_j."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_i",
+        "Meaning": "Decision variable: x_i = 1 if a fire station is built at candidate site i (i = 1,...,8), and 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "x_i ∈ {0,1} for all i = 1,...,8"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Build_limit",
+        "x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 ≤ 6",
+        "sentence numbers:7"
+      ],
+      [
+        "Region_1_coverage",
+        "x_1 + x_3 ≥ 1",
+        "sentence numbers:4,5,6,9,10,15,16"
+      ],
+      [
+        "Region_2_coverage",
+        "x_1 + x_2 + x_7 ≥ 2",
+        "sentence numbers:4,5,9,10,15,16"
+      ],
+      [
+        "Region_3_coverage",
+        "x_2 + x_4 ≥ 1",
+        "sentence numbers:4,5,6,9,10,15,16"
+      ],
+      [
+        "Region_4_coverage",
+        "x_3 + x_4 + x_6 ≥ 3",
+        "sentence numbers:4,5,9,10,15,16"
+      ],
+      [
+        "Region_5_coverage",
+        "x_1 + x_2 + x_3 + x_4 + x_6 + x_8 ≥ 3",
+        "sentence numbers:4,5,8,9,10,15,16"
+      ],
+      [
+        "Region_6_coverage",
+        "x_1 + x_2 + x_3 + x_4 + x_5 ≥ 4",
+        "sentence numbers:4,5,8,9,10,15,16"
+      ],
+      [
+        "Region_7_coverage",
+        "x_1 + x_2 + x_3 + x_4 + x_5 ≥ 2",
+        "sentence numbers:4,5,9,10,15,16"
+      ],
+      [
+        "Region_8_coverage",
+        "x_1 + x_3 + x_6 ≥ 2",
+        "sentence numbers:4,5,9,10,15,16"
+      ],
+      [
+        "Region_9_coverage",
+        "x_7 ≥ 1",
+        "sentence numbers:4,5,6,9,10,15,16"
+      ],
+      [
+        "Region_10_coverage",
+        "x_5 + x_8 ≥ 1",
+        "sentence numbers:4,5,6,9,10,15,16"
+      ],
+      [
+        "Region_11_coverage",
+        "x_1 + x_5 + x_6 + x_7 ≥ 2",
+        "sentence numbers:4,5,9,10,15,16"
+      ],
+      [
+        "Region_12_coverage",
+        "x_6 + x_7 + x_8 ≥ 1",
+        "sentence numbers:4,5,6,9,10,15,16"
+      ],
+      [
+        "Binary_definition",
+        "x_i ∈ {0,1} for all i = 1,...,8",
+        "sentence numbers:2,9,11,12"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The overall goal of the project is to minimize costs while meeting redundant coverage requirements...",
+      "Mathematical_expressions": "min Z = 90 x_1 + 70 x_2 + 85 x_3 + 65 x_4 + 60 x_5 + 80 x_6 + 60 x_7 + 50 x_8"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "420.0"
+    ],
+    "time_seconds": 23.36834649999946,
+    "total_tokens": 12365
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "420.0"
+    ],
+    "ground_truth": 420.0
+  }
+}

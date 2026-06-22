@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "CargoLink Logistics operates two types of delivery vehicles: type X and type Y. New environmental regulations require that, for all vehicles deployed over the next three years, the average annual carbon emissions must not exceed 40 grams per kilometer. Each type X vehicle generates \\$25,000 in revenue, has an operating cost of \\$18,000, and emits 70 grams of carbon per kilometer. Each type Y vehicle generates \\$20,000 in revenue, has a base operating cost of \\$16,000, and emits 30 grams of carbon per kilometer. However, given that type Y vehicles exhibit a mildly increasing effect with scale in maintenance and energy consumption, the company decides to adopt a nonlinearly adjusted cost model: the total operating cost is computed as “\\$16,000 per vehicle multiplied by the number of type Y vehicles raised to the power of 1.002,” i.e., the total operating cost of type Y vehicles over the three years is $16{,}000 \\times (\\text{total number of type Y vehicles})^{1.002}$. Due to fleet capacity limitations, CargoLink can deploy at most 400 vehicles per year. The maximum number of vehicles of each type that can be deployed in each year is given in the table below. For example, in Year 3, at most 350 type X vehicles can be deployed. How should CargoLink, subject to compliance with the environmental regulations, maximize its total profit over the next three years?\n\n| Year | Maximum number of type X vehicles | Maximum number of type Y vehicles |\n|------|-----------------------------------|-----------------------------------|\n| 1    | 300                               | 250                               |\n| 2    | 320                               | 280                               |\n| 3    | 350                               | 300                               |",
+    "answer": 5072273.622418739,
+    "index": "LogiOR_prob_044",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每辆 Y 型车辆可产生 20,000 美元的收入，运营成本为 16,000 美元，每公里排放 30 克碳。, 修改后相关描述: 每辆 Y 型车辆可产生 20,000 美元的收入，基础运营成本为 16,000 美元，但考虑到 Y 型车辆在维护和能耗方面存在随规模略微加剧的效应，公司决定采用非线性修正后的成本模型：总运营成本按“每辆 16,000 美元乘以 Y 型车辆数量的 1.002  次幂”来计算，即三年内 Y 型车辆的总运营成本为 16,000 ×（Y 型车辆总数量的 1.002  次幂）。每公里排放 30 克碳。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_044\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_046.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 31.625423099991167,
+    "total_tokens": 3178
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 5072273.622418739
+  }
+}

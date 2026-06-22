@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Calcium and magnesium are present in two dietary supplements, Supplement A and Supplement B. One serving of Supplement A contains 30 grams of calcium and 50 grams of magnesium. One serving of Supplement B contains 60 grams of calcium and 10 grams of magnesium. The cost per serving of Supplement A is \\$14, and the cost per serving of Supplement B is \\$25. A patient must take these two supplements daily to ensure an intake of at least 400 grams of calcium and 50 grams of magnesium. Additionally, if the patient takes more than 5 servings of Supplement B per day (i.e., the 6th and subsequent servings of Supplement B), a one-time additional service fee of \\$40 must be paid; if the patient takes no more than 5 servings of Supplement B per day, this service fee is not required. Determine how many servings of each supplement the patient should take per day so as to minimize the total daily cost (including supplement costs and any additional service fee that may be incurred).",
+    "answer": 171.66666666666669,
+    "index": "NLP4LP_prob_197",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50克镁。确定该患者每天应服用多少份每种保健品，以使其每日成本最小。 修改后相关描述: 某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50克镁。额外地，如果该患者每天服用的保健品B超过5份（即第6份及以上的保健品B），则需要支付一次性额外服务费40美元；如果每天服用的保健品B不超过5份，则不需要支付这笔服务费。确定该患者每天应服用多少份每种保健品，以使其每日总成本（包括保健品成本和可能产生的额外服务费）最小。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_052.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "171.6666666667"
+    ],
+    "time_seconds": 40.75106040001265,
+    "total_tokens": 2810
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "171.6666666667"
+    ],
+    "ground_truth": 171.66666666666669
+  }
+}

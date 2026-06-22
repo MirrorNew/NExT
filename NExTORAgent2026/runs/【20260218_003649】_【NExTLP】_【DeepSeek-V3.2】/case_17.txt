@@ -1,0 +1,371 @@
+{
+  "entry": {
+    "index": 17,
+    "question": "China-Europe Cold Chain Logistics Co., Ltd. has built a \"one-stop processing center for pre-prepared meals\" in Chongqing Liangjiang New District. The core of the center is three parallel deep processing lines, called \"Line A\", \"Line B\" and \"Line C\". The beef, cod and shrimp raw material packages from the three southwestern provinces (respectively recorded as tasks A, B and C) must complete the three processes of initial cutting, deep freezing and packaging in sequence before they can be packed and shipped to supermarkets nationwide. The company's senior management requires that the total time required to complete the processing of all raw material packages should be shortened as much as possible while maintaining a smooth transportation network, reducing the cost of processing links and the waste of human resources, so as to catch up with the bulk trunk trains sent to East China every Wednesday night.\n**In terms of process**, the industry usually controls the \"ice coating rate\" of aquatic products at 6%-8% To reduce dehydration loss, each batch of raw material packages must first complete the initial cutting on assembly line A, then transfer to assembly line B for deep freezing, and finally transfer to assembly line C for packaging. The processing order must not be replaced, and each processing must be completed once before it can be completed, otherwise it will cause excessive bacteria and scrap. \n\nIn addition, in the process of initial cutting, deep freezing, and packaging, after a certain step is completed, you must wait for 0.5h (it takes 0.5h to move the product of a certain process to another assembly line, \n\nand it must be done during the working time of the assembly line, that is, between 6:00 and 20:00, but there is no need to wait after the packaging process is completed), and you must not enter the next process in advance without waiting time. \n\nThe three assembly lines can be started at the same time. \n\n At any time, assembly line A can only process one batch of raw material packages. If a batch has not completed the initial cutting, the remaining batches must wait. The order between them can be arbitrary, but more than two raw material packages cannot be processed at the same time. Assembly lines B and C also only process one batch of raw material packages at a time, and the order can be different from that of assembly line A, but a raw material package must be processed on assembly line A before it is placed on assembly line B, and the same applies to assembly line C. \n\nIn addition, the time period of the processing center is: the morning shift is from 6:00 to 20:00 every day, and there are only 14 hours of assembly line operation every day. \n **Completion time**, the three batches of raw material packages can only be packed and loaded after the assembly line C is finished. The company only cares about the last completion time of all batches, which is regarded as the construction period and is expected to be as small as possible. \nFaced with the tight delivery period, the dispatcher needs to give a start sequence plan for the three batches of raw material packages on the three assembly lines, that is, it must be specified which day, which time period, and which assembly line will process which raw material package. And give the minimum total construction period for all completions (starting from 0, in units of hours\t). If the construction period cannot be completed in one day, it can be postponed to the next day, and the longest construction period is three days. \n\nData table\n\n| Task | Assembly line A (initial cutting) processing time / h | Assembly line B (deep freezing) processing time / h | Assembly line C (packaging) processing time / h |\n| ----- | --------------------------- | --------------------------- | --------------------------- |\n| A beef | 3 | 2 | 1 |\n| B cod | 2 | 4 | 1 |\n| C Shrimp | 4 | 3 | 2 |",
+    "answer": 51.0,
+    "Parameters_List": [
+      {
+        "Name": "number_of_assembly_lines",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "assembly_line_names",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "Name": "tasks",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "Name": "task_product_map",
+        "Type": "tuple",
+        "Value": {
+          "A": "beef",
+          "B": "cod",
+          "C": "shrimp"
+        }
+      },
+      {
+        "Name": "process_sequence",
+        "Type": "list",
+        "Value": [
+          "initial cutting",
+          "deep freezing",
+          "packaging"
+        ]
+      },
+      {
+        "Name": "ice_coating_rate_range",
+        "Type": "tuple",
+        "Value": [
+          0.06,
+          0.08
+        ]
+      },
+      {
+        "Name": "process_line_map",
+        "Type": "tuple",
+        "Value": {
+          "initial cutting": "A",
+          "deep freezing": "B",
+          "packaging": "C"
+        }
+      },
+      {
+        "Name": "precedence_constraints",
+        "Type": "list",
+        "Value": [
+          [
+            "initial cutting",
+            "deep freezing"
+          ],
+          [
+            "deep freezing",
+            "packaging"
+          ]
+        ]
+      },
+      {
+        "Name": "transfer_time",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "transfer_must_be_within",
+        "Type": "tuple",
+        "Value": [
+          6,
+          20
+        ]
+      },
+      {
+        "Name": "no_transfer_after_packaging",
+        "Type": "boolean",
+        "Value": true
+      },
+      {
+        "Name": "parallel_start_allowed",
+        "Type": "boolean",
+        "Value": true
+      },
+      {
+        "Name": "capacity_line_A",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "max_concurrent_batches",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "capacity_line_B",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "capacity_line_C",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "shift_start",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "shift_end",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "daily_operation_hours",
+        "Type": "integer",
+        "Value": 14
+      },
+      {
+        "Name": "time_origin",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "time_unit",
+        "Type": "list",
+        "Value": [
+          "hours"
+        ]
+      },
+      {
+        "Name": "max_construction_days",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "Table_1_ProcessingTimes",
+        "Type": "list",
+        "Value": [
+          [
+            "A beef",
+            3,
+            2,
+            1
+          ],
+          [
+            "B cod",
+            2,
+            4,
+            1
+          ],
+          [
+            "C Shrimp",
+            4,
+            3,
+            2
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "China-Europe Cold Chain Logistics Co., Ltd....",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The core of the center is three parallel...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The beef, cod and shrimp raw material...",
+        "Precedence: each task must finish on machine1 before starting on machine2 and then on machine3"
+      ],
+      [
+        "4",
+        "The company's senior management requires that the total time...",
+        "Objective: minimize total completion time (makespan)"
+      ],
+      [
+        "5",
+        "In terms of process, the industry usually...",
+        "Restates precedence; no new constraints"
+      ],
+      [
+        "6",
+        "The processing order must not be replaced...",
+        "Non-preemptive processing; no additional constraints"
+      ],
+      [
+        "7",
+        "In addition, in the process of initial cutting...",
+        "Transfer-delay: s_{i,j+1} ≥ s_{i,j} + p_{i,j} + 0.5 for j=1,2"
+      ],
+      [
+        "8",
+        "The three assembly lines can be started at the same time...",
+        "Release time: s_{i,j} ≥ 0"
+      ],
+      [
+        "9",
+        "At any time, assembly line A can only process one batch...",
+        "Machine1 non-overlap"
+      ],
+      [
+        "10",
+        "If a batch has not completed the initial cutting...",
+        "Repeats non-overlap; no new constraints"
+      ],
+      [
+        "11",
+        "The order between them can be arbitrary...",
+        "Capacity; no new constraints"
+      ],
+      [
+        "12",
+        "Assembly lines B and C also only process one batch...",
+        "Machine2 and Machine3 non-overlap"
+      ],
+      [
+        "13",
+        "In addition, the time period of the processing center...",
+        "Daily-shift window: each task must lie within a 14-hour shift per day"
+      ],
+      [
+        "14",
+        "Completion time, the three batches of raw material...",
+        "Define C_max as max completion on machine3"
+      ],
+      [
+        "15",
+        "The company only cares about the last completion time...",
+        "Restates objective"
+      ],
+      [
+        "16",
+        "Faced with the tight delivery period, the dispatcher needs to give a start sequence plan...",
+        "Decision variables: start times, sequencing vars, day assignments"
+      ],
+      [
+        "17",
+        "And give the minimum total construction period for all completions...",
+        "Restates objective; no new constraints"
+      ],
+      [
+        "18",
+        "If the construction period cannot be completed in one day...",
+        "Time-horizon: finish within 3 days"
+      ],
+      [
+        "19",
+        "Data table | Task | Assembly line A...",
+        "Parameter definitions"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "s_{i,j}",
+        "Meaning": "start time of task i on machine j",
+        "Type": "continuous",
+        "Range ": "0 ≤ s_{i,j} ≤ 72"
+      },
+      {
+        "symbol": "C_max",
+        "Meaning": "makespan: last completion time on machine 3",
+        "Type": "continuous",
+        "Range ": "0 ≤ C_max ≤ 72"
+      },
+      {
+        "symbol": "x_{i,k,j}",
+        "Meaning": "1 if task i precedes task k on machine j",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "d_{i,j,d}",
+        "Meaning": "1 if task i on machine j is processed on day d",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Precedence",
+        "s_{i,2} ≥ s_{i,1} + p_{i,1}, s_{i,3} ≥ s_{i,2} + p_{i,2}",
+        "sentence numbers:3"
+      ],
+      [
+        "Transfer Delay",
+        "s_{i,2} ≥ s_{i,1} + p_{i,1} + 0.5, s_{i,3} ≥ s_{i,2} + p_{i,2} + 0.5",
+        "sentence numbers:7"
+      ],
+      [
+        "Machine 1 Non-overlap",
+        "∀ i<k: s_{i,1}+p_{i,1} ≤ s_{k,1} + M(1−x_{i,k,1}), s_{k,1}+p_{k,1} ≤ s_{i,1} + M x_{i,k,1}",
+        "sentence numbers:9"
+      ],
+      [
+        "Machine 2 Non-overlap",
+        "∀ i<k: s_{i,2}+p_{i,2} ≤ s_{k,2} + M(1−x_{i,k,2}), s_{k,2}+p_{k,2} ≤ s_{i,2} + M x_{i,k,2}",
+        "sentence numbers:12"
+      ],
+      [
+        "Machine 3 Non-overlap",
+        "∀ i<k: s_{i,3}+p_{i,3} ≤ s_{k,3} + M(1−x_{i,k,3}), s_{k,3}+p_{k,3} ≤ s_{i,3} + M x_{i,k,3}",
+        "sentence numbers:12"
+      ],
+      [
+        "Release Time",
+        "s_{i,j} ≥ 0",
+        "sentence numbers:8"
+      ],
+      [
+        "Daily-shift Window",
+        "∀ i,j,d: s_{i,j} ≥ 24·(d−1)·d_{i,j,d}, s_{i,j}+p_{i,j} ≤ (24·(d−1)+14)·d_{i,j,d}, ∑_{d=1}^3 d_{i,j,d}=1",
+        "sentence numbers:13,18"
+      ],
+      [
+        "Makespan Definition",
+        "C_max ≥ s_{i,3} + p_{i,3}",
+        "sentence numbers:14,15"
+      ],
+      [
+        "Time Horizon",
+        "C_max ≤ 72",
+        "sentence numbers:18"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company only cares about the last completion time of all batches, which is regarded as the construction period and is expected to be as small as possible.",
+      "Mathematical_expressions": "minimize C_max"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "19.0"
+    ],
+    "time_seconds": 99.29220150000037,
+    "total_tokens": 8058
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "19.0"
+    ],
+    "ground_truth": 51.0
+  }
+}

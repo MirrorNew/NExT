@@ -1,0 +1,452 @@
+{
+    "prob_001": {
+        "question": "Assume that a certain animal requires at least 700 g of protein, 30 g of minerals, and 100 mg of vitamins per day. There are 5 types of feed available. The nutrient contents of each feed and the price per kilogram are shown in Table 1-6:\n\nSubject to meeting the animal’s growth requirements, it is required that the ratio of the total protein content to the total mineral content of the selected feed does not exceed 20 (i.e., the total protein content divided by the total mineral content should be less than or equal to 20), and the cost of the selected feed is minimized.\n\nTable 1-6\n\n| Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) | Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) |\n|------|-------------|--------------|---------------|--------------|------|-------------|--------------|---------------|--------------|\n| 1    | 3           | 1            | 0.5           | 0.2          | 4    | 6           | 2            | 2             | 0.3          |\n| 2    | 2           | 0.5          | 1             | 0.7          | 5    | 18          | 0.5          | 0.8           | 0.8          |\n| 3    | 1           | 0.2          | 0.2           | 0.4          |      |             |              |               |              |",
+        "answer": 32.44,
+        "index": "IndustryOR_prob_029",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 试建立线性规划模型，在满足该动物生长需求的前提下，使所选饲料的成本最低。 修改后相关描述: 在满足该动物生长需求的前提下，要求所选饲料的总蛋白质含量与总矿物质含量的比值不超过 20（即总蛋白质含量除以总矿物质含量应小于或等于 20），并使所选饲料的成本最低。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_029\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_001.py"
+    },
+    "prob_002": {
+        "question": "Tom and Jerry have just bought a farm in Sunny Valley, and they are considering using it to cultivate corn, wheat, soybeans, and sorghum. The profit per acre for planting corn is \\$1500, the profit per acre for planting wheat is \\$1200, the profit per acre for planting soybeans is \\$1800, and the profit per acre for planting sorghum is \\$1600. In order to maximize their profit, how many acres of land should they allocate to each crop? Tom and Jerry’s farm has a total area of 100 acres.\n\nThe acreage used to plant corn must be at least twice the acreage used to plant wheat.\n\nThe ratio of the acreage used to plant soybeans to the acreage used to plant sorghum must be at least one-half; that is, the ratio (soybean acreage divided by sorghum acreage) must be greater than or equal to 0.5.\n\nThe acreage used to plant wheat must be three times the acreage used to plant sorghum.",
+        "answer": 180000.0,
+        "index": "IndustryOR_prob_012",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 用于种植大豆的土地面积必须至少是用于种植高粱的土地面积的一半。, 修改后相关描述: 用于种植大豆的土地面积与用于种植高粱的土地面积之比必须至少为二分之一，即大豆面积除以高粱面积的比值必须大于或等于 0.5。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_012\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_002.py"
+    },
+    "prob_007": {
+        "question": "A company plans to produce three products $A_1$, $A_2$, and $A_3$. There are 22 producible days per month. The table below gives the maximum demand (unit = 100 kg), selling price ($/100 kg), production cost (per 100 kg of product), and production quota (the maximum number of 100 kg units that can be produced per day when all production lines are fully dedicated to that product).\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Maximum demand | 5300 | 4500 | 5400 |\n| Selling price | 124 | 109 | 115 |\n| Production cost | 73.30 | 52.90 | 65.40 |\n| Production quota | 500 | 450 | 550 |\n\nThe fixed setup (startup) costs for the production lines are as follows:\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Setup cost | 170000 | 150000 | 100000 |\n\nMinimum production batch sizes:\n\n| Product | $A_1$ | $A_2$ | $A_3$ |\n| :---: | :---: | :---: | :---: |\n| Minimum batch size | 20 | 20 | 16 |\n\nIn addition, over the entire planning horizon, the total production quantities of product $A_1$ and product $A_2$ must satisfy the following ratio constraint: the ratio of the total output of $A_1$ to the total output of $A_2$ must not exceed 1.2, i.e., (total output of $A_1$) divided by (total output of $A_2$) is at most $1.2$.\n\nFormulate an operations research model that, taking into account the fixed setup costs, the minimum batch-size constraints, and the above output-ratio constraint, determines a production plan that maximizes total profit.",
+        "answer": 167840.0,
+        "index": "IndustryOR_prob_021",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 请建立一个运筹学模型，在考虑固定启用成本和最小生产批量约束的前提下，确定一个使总收益最大化的生产计划。, 修改后相关描述: 另外，要求在整个计划期内，产品 A₁ 与产品 A₂ 的总产量之间满足如下比例约束：产品 A₁ 的总产量与产品 A₂ 的总产量之比不得超过 1.2，即 A₁ 总产量除以 A₂ 总产量不超过 1.2。请建立一个运筹学模型，在考虑固定启用成本、最小生产批量约束以及上述产量比例约束的前提下，确定一个使总收益最大化的生产计划。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_021\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_007.py"
+    },
+    "prob_009": {
+        "question": "Bright Future Toy Company plans to manufacture and sell robots, model cars, building block sets, and dolls. The profit is \\$15 for each robot sold, \\$8 for each model car sold, \\$12 for each building block set sold, and \\$5 for each doll sold. How many units of each type of toy should Bright Future Toy Company produce in order to maximize profit?\n\nThere are 1200 units of plastic available. Each robot requires 30 units of plastic, each model car requires 10 units of plastic, each building block set requires 20 units of plastic, and each doll requires 15 units of plastic.\n\nThere are 800 units of electronic components available. Each robot requires 8 units of electronic components, each model car requires 5 units of electronic components, each building block set requires 3 units of electronic components, and each doll requires 2 units of electronic components.\n\nIf Bright Future Toy Company produces robots, then it does not produce dolls.\n\nHowever, if they produce model cars, then they also produce building block sets.\n\nThe ratio of the number of dolls produced to the number of model cars produced cannot exceed 1; that is, $\\frac{\\text{number of dolls produced}}{\\text{number of model cars produced}} \\le 1$.",
+        "answer": 956.0,
+        "index": "IndustryOR_prob_019",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 生产的玩偶数量不能超过生产的模型汽车数量。, 修改后相关描述: 生产的玩偶数量与生产的模型汽车数量之比不能超过 1，也就是说，生产的玩偶数量除以生产的模型汽车数量不能大于 1。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_019\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_009.py"
+    },
+    "prob_010": {
+        "question": "The well-known Operations Research problem—the Traveling Salesman Problem (TSP)—can be described as follows: A traveling salesperson departs from a certain city, visits the other cities to sell products, and, before returning to the original departure city, must ensure that each city is visited exactly once. The distances between the cities are given in the table below.\n\n| City | 1 | 2 | 3 | 4 |\n| ---- | --- | --- | --- | --- |\n| 1 | 0 | 10 | 20 | 12 |\n| 2 | 10 | 0 | 5 | 10 |\n| 3 | 20 | 5 | 0 | 8 |\n| 4 | 15 | 12 | 8 | 0 |\n\nWhat route should the salesperson choose to minimize the total travel distance? When formulating an integer programming model, in addition to requiring that each city is visited exactly once, one must also add a nonlinear constraint: after departing from city 1, the ratio of the sum of the distances of the two directly consecutive legs to the total length of the entire tour must not exceed $0.4$, i.e., the sum of these two directly consecutive legs accounts for at most $40\\%$ of the total travel distance. Attempt to formulate an integer programming model for this problem.",
+        "answer": 38.0,
+        "index": "IndustryOR_prob_069",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 推销员应选择怎样的路线才能使总行程距离最短？尝试为该问题建立一个整数规划模型。, 修改后相关描述: 推销员应选择怎样的路线才能使总行程距离最短？在建立整数规划模型时，除了考虑每个城市恰好被访问一次以外，还需增加一个非线性的约束：从城市1出发后，直接相连的两条路程的距离之和与整个旅行路线总距离的比值不得超过0.4，即这两段直接相连的路程之和占总行程距离的比例不超过40%。尝试为该问题建立一个整数规划模型。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_069\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_010.py"
+    },
+    "prob_017": {
+        "question": "Haus Toys can manufacture and sell toy trucks, toy airplanes, toy boats, and toy trains. The profit per truck sold is \\$5, per airplane \\$10, per boat \\$8, and per train \\$7. How many of each type of toy should Haus Toys produce in order to maximize profit?\n\nA total of 890 units of wood are available. Each truck requires 12 units of wood, each airplane requires 20 units, each boat requires 15 units, and each train requires 10 units.\n\nA total of 500 units of steel are available. Each airplane requires 3 units of steel, each boat requires 5 units, each train requires 4 units, and each truck requires 6 units.\n\nIf Haus Toys produces trucks, then it does not produce trains.\n\nHowever, if it produces boats, then it also produces airplanes.\n\nThe ratio of the number of toy boats produced to the number of toy trains produced cannot exceed 1; that is, the value of $(\\text{number of toy boats produced})/(\\text{number of toy trains produced})$ must be less than or equal to 1.",
+        "answer": 623.0,
+        "index": "IndustryOR_prob_008",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 生产的玩具船数量不能超过生产的玩具火车数量。, 修改后相关描述: 生产的玩具船数量与生产的玩具火车数量之比不能超过 1，即生产的玩具船数量除以生产的玩具火车数量的比值必须小于或等于 1。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_008\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_017.py"
+    },
+    "prob_022": {
+        "question": "A company needs to decide whether to hire some individuals from five candidates to join its R&D team. The candidates F, G, H, I, and J have salary requirements of $12{,}000$, $15{,}000$, $18{,}000$, $5{,}000$, and $10{,}000$, respectively. The company aims to minimize the total amount paid to the candidates without exceeding the budget.\n\nThe company’s budget is $40{,}000$, and they want to hire at most $4$ new employees.\n\nThe candidates’ skill levels are as follows:  \nCandidate F: level $2$  \nCandidate G: level $3$  \nCandidate H: level $4$  \nCandidate I: level $1$  \nCandidate J: level $2$\n\nThe company must ensure that the total skill level of the hired employees is at least $8$.\n\nThe years of project management experience for each candidate are as follows:  \nCandidate F: $1$ year  \nCandidate G: $2$ years  \nCandidate H: $2$ years  \nCandidate I: $5$ years  \nCandidate J: $4$ years\n\nThey require that the ratio of the total project management experience years of the hired employees to the number of hired employees (i.e., the average project management experience per person) be at least $2$ years. For example, if $3$ people are hired, then the sum of project management experience for these $3$ people must be at least $6$ years.\n\nBecause candidates G and J have similar technical backgrounds, the company can select at most one of them.",
+        "answer": 38000.0,
+        "index": "IndustryOR_prob_063",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 他们希望团队的项目管理经验总年限至少为 8 年。, 修改后相关描述: 他们希望团队中被雇用员工的项目管理经验总年限与被雇用员工人数的比率（即人均项目管理经验年限）至少达到 2 年，例如若雇用 3 人，则这 3 人的项目管理经验总和至少应为 6 年。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_063\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_022.py"
+    },
+    "prob_024": {
+        "question": "A product can be processed on any one of four machines: A, B, C, or D. When each machine is put into operation, its setup (ready-to-run) cost, the unit production cost of the product, and the maximum processing capacity of the machine are given in Table 5-7. If it is required to produce 2000 units of this product, and it is required that, over all machines that are put into operation, the average value of the ratio of the actual number of units produced on that machine to the machine’s maximum processing capacity is not less than $0.7$, how can the total cost be minimized? Formulate a mathematical model.\n\nTable 5-7  \n| Machine | Setup cost (yuan) | Unit production cost (yuan/unit) | Maximum processing capacity (units) |\n|--------|--------------------|----------------------------------|-------------------------------------|\n| A      | 1000               | 20                               | 900                                 |\n| B      | 920                | 24                               | 1000                                |\n| C      | 800                | 16                               | 1200                                |\n| D      | 700                | 28                               | 1600                                |",
+        "answer": 37000.0,
+        "index": "IndustryOR_prob_060",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 若需要生产 2000 件该产品，如何使总成本最小？试建立数学模型。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_060\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_024.py"
+    },
+    "prob_026": {
+        "question": "Healthy Pet Foods produces two dog food products: Meaties and Yummies. Each bag of Meaties contains 2 lb of grain and 3 lb of meat; each bag of Yummies contains 3 lb of grain and 1.5 lb of meat. The company believes that it can sell any quantity of dog food as long as it can be produced. The selling price is $2.80 per bag for Meaties and $2.00 per bag for Yummies. Production is subject to several constraints. First, at most 400,000 lb of grain can be purchased per month, at a cost of $0.20 per lb; at most 300,000 lb of meat can be purchased per month, at a cost of $0.50 per lb. In addition, producing Meaties requires a dedicated machine with a monthly capacity of 90,000 bags. The variable mixing and packaging costs are: $0.25 per bag for Meaties and $0.20 per bag for Yummies. Furthermore, management has introduced a new nutritional composition requirement: the ratio of the total actual monthly grain used to the total actual monthly meat used must not exceed 1.3; that is, the total pounds of grain used per month divided by the total pounds of meat used per month must be no greater than 1.3. Detailed information is given in Table B-1.\n\n**Table B-1 Healthy Pet Foods Data**\n\n|                    | Meaties            | Yummies      |\n|--------------------|--------------------|--------------|\n| Selling price per bag | $2.80           | $2.00        |\n| Raw materials      |                    |              |\n| - Grain            | 2.0 lb             | 3.0 lb       |\n| - Meat             | 3.0 lb             | 1.5 lb       |\n| Variable cost      | $0.25/bag          | $0.20/bag    |\n| Resources          |                    |              |\n| Meaties capacity   | 90,000 bags/month  |              |\n| Grain available per month | 400,000 lb   |              |\n| Meat available per month  | 300,000 lb   |              |\n\nAssume you are the manager of the dog food division at Healthy Pet Foods. Your compensation depends on the division’s profit, so you will strive to maximize profit. How should you operate the division in order to simultaneously maximize the division’s profit and your compensation?",
+        "answer": 76875.0,
+        "index": "IndustryOR_prob_085",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 公司生产受到若干约束条件的限制。首先，每月最多可购买 400,000 磅谷物，谷物的价格为每磅 0.20 美元；每月最多可购买 300,000 磅肉，肉的价格为每磅 0.50 美元。\\n\\n修改后相关描述: 公司生产受到若干约束条件的限制。首先，每月最多可购买 400,000 磅谷物，谷物的价格为每磅 0.20 美元；每月最多可购买 300,000 磅肉，肉的价格为每磅 0.50 美元。另外，公司管理层还提出一项新的营养结构要求：每月实际使用的谷物总重量与肉类总重量的比率必须不超过 1.3，也就是说，每月使用的谷物总磅数除以肉类总磅数不得大于 1.3。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_085\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_026.py"
+    },
+    "prob_027": {
+        "question": "A factory produces two models of microcomputers, Model A and Model B. Each model must go through the same two operations. The processing time of each model on each operation, the sales profit, and the factory’s maximum weekly processing capacity are shown in Table 3.1.\n\nTable 3.1\n\n| Operation | Model |  | Maximum weekly processing capacity |\n| :---: | :---: | :---: | :---: |\n|  | A | B |  |\n| I (hours/unit) | 4 | 6 | 150 |\n| II (hours/unit) | 3 | 2 | 70 |\n| Profit (yuan/unit) | 300 | 450 |  |\n\nGiven the factory’s operational goals:\n\np1: The total weekly profit must not be less than 10,000 yuan;\n\np2: Due to contractual requirements, at least 10 units of Model A and at least 15 units of Model B must be produced each week;\n\np3: The processing time of Operation I per week must be exactly 150 hours, and in that week’s production, the ratio of the total processing hours of Operation I used for Model A to the total processing hours of Operation I used for Model B must not exceed 2; that is, the ratio of “total hours on Operation I for Model A” divided by “total hours on Operation I for Model B” must be less than or equal to 2. The processing time of Operation II is preferably fully utilized, and appropriate overtime is allowed;\n\np4: If overtime production is scheduled in Operation II, then the unit profits of Models A and B decrease by 20 yuan and 25 yuan, respectively, and Operation II allows at most 30 hours of overtime per week. Formulate the mathematical model of this problem.",
+        "answer": 11250.0,
+        "index": "IndustryOR_prob_047",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述:p3：I 工序的加工时间每周必须恰好为 150 小时，II 工序的加工时间最好能被充分利用，并且可以适当加班；, 修改后相关描述:p3：I 工序的加工时间每周必须恰好为 150 小时，且在这一周的生产中，I 工序用于加工 A 型产品的总工时与用于加工 B 型产品的总工时的比率不得大于 2，也就是说，I 工序上加工 A 型产品的总工时除以加工 B 型产品的总工时的比值要小于或等于 2；II 工序的加工时间最好能被充分利用，并且可以适当加班；",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_047\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_027.py"
+    },
+    "prob_031": {
+        "question": "An airport has two available gates (G1, G2) and needs to assign four flights to these two gates (F1: 10:00–11:00, F2: 10:30–11:30, F3: 11:15–12:30, F4: 10:45–11:45). For flights assigned to the same gate, their gate-occupancy time intervals must not overlap. It is also required that the ratio of the number of flights assigned to gate G1 to the number of flights assigned to gate G2 does not exceed 2; that is, the number of flights at G1 divided by the number of flights at G2 is at most 2. The objective is to minimize flight delays, where each minute of delay beyond the scheduled departure time incurs a cost of 1 unit. How should these flights be assigned to the gates to achieve this objective?",
+        "answer": 30.0,
+        "index": "LogiOR_prob_002",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 一个机场有两个可用登机口（G1、G2），需要将四个航班分配到这两个登机口上（F1：10:00-11:00，F2：10:30-11:30，F3：11:15-12:30，F4：10:45-11:45）。分配到同一登机口的航班，其使用时间区间不能重叠。目标是最小化航班延误，其中每超过计划起飞时间 1 分钟的延误产生 1 个单位的成本。应如何将这些航班分配到各登机口以实现这一目标？, 修改后相关描述: 一个机场有两个可用登机口（G1、G2），需要将四个航班分配到这两个登机口上（F1：10:00-11:00，F2：10:30-11:30，F3：11:15-12:30，F4：10:45-11:45）。分配到同一登机口的航班，其使用时间区间不能重叠。同时要求：分配到登机口 G1 的航班数量与分配到登机口 G2 的航班数量的比值不超过 2，也就是说，G1 上的航班数量除以 G2 上的航班数量最多为 2。目标是最小化航班延误，其中每超过计划起飞时间 1 分钟的延误产生 1 个单位的成本。应如何将这些航班分配到各登机口以实现这一目标？",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_002\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_031.py"
+    },
+    "prob_032": {
+        "question": "LogiTrans operates two distribution centers to manage the shipment of three types of cargo to regional hubs. Each distribution center can staff at most seven logistics coordinators at the same time. The weekly wage of a coordinator is \\$500 at Distribution Center 1 and \\$900 at Distribution Center 2. Activating a distribution center for one week incurs a fixed cost: \\$1{,}000 for Distribution Center 1 and \\$2{,}000 for Distribution Center 2. Over one week at a distribution center, the number of shipments of each cargo type that can be handled by one coordinator is given in the table below:\n\n| Cargo Type \\\\ Distribution Center | Center 1 | Center 2 |\n|-------------------------------|----------|----------|\n| Type 1                        | 20       | 25       |\n| Type 2                        | 18       | 22       |\n| Type 3                        | 15       | 20       |\n\nEach week, LogiTrans must ensure that it processes at least 120 units of Type 1 cargo, at least 150 units of Type 2 cargo, and the ratio of the actual number of Type 3 cargo processed this week to the number of Type 2 cargo processed this week is no less than $2/3$, in order to ensure a reasonable composition of cargo types. How can the total cost be minimized while meeting the weekly shipment requirements?",
+        "answer": 7800.0,
+        "index": "LogiOR_prob_030",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 每周，LogiTrans 必须保证至少处理 120 件类型 1 货物、至少 150 件类型 2 货物以及至少 200 件类型 3 货物。 修改后相关描述: 每周，LogiTrans 必须保证至少处理 120 件类型 1 货物、至少 150 件类型 2 货物，并且要求本周实际处理的类型 3 货物数量与类型 2 货物数量的比值不低于 2/3（即类型 3 货物的处理量至少是类型 2 货物处理量的2分之三再乘以 2），从而保证类型结构的合理性。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_030\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_032.py"
+    },
+    "prob_033": {
+        "question": "LogiTech’s main distribution center consists of two key areas: a packing area located at coordinates $(0, 0)$ and a loading dock located at coordinates $(800, 600)$ (distance units in meters). The company must determine the locations of one sorting facility and one storage facility so as to minimize the daily cost of moving goods within the center. All movements within the distribution center are restricted to travel along the east–west or north–south directions.\n\nThe numbers of daily round trips between areas are as follows:\n\n| Origin/Destination | Packing Area | Loading Dock | Sorting Facility | Storage Facility |\n|-------------------|--------------|--------------|------------------|------------------|\n| Packing Area      | -            | 20           | 15               | 10               |\n| Loading Dock      | 20           | -            | 25               | 30               |\n| Sorting Facility  | 15           | 25           | -                | 40               |\n| Storage Facility  | 10           | 30           | 40               | -                |\n\nThe cost of moving goods is 0.50 yuan per meter per trip. The sorting facility and the storage facility must be located within the boundary of the distribution center, which spans from $(0, 0)$ to $(1000, 1000)$. In addition, it is required that the ratio of the sum of Manhattan distances to the sum of Euclidean distances among every pair of the four areas must not be less than $1.2$, where the “sum of Manhattan distances” refers to the sum, over all unordered pairs of areas, of the east–west distance plus the north–south distance, and the “sum of Euclidean distances” refers to the sum, over all unordered pairs of areas, of the straight-line distances; $1.2$ is the given specific ratio constant.\n\nHow should LogiTech position the sorting facility and the storage facility to minimize the daily transportation cost?",
+        "answer": 63000.0,
+        "index": "LogiOR_prob_049",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 并且四个区域中任意两个区域之间的距离至少为 100 个单位。 修改后相关描述: 并且要求：四个区域中任意两个区域间的曼哈顿距离总和与欧氏距离总和的比率不得小于 1.2，其中曼哈顿距离总和指所有区域两两之间沿东西向和南北向距离之和，欧氏距离总和指所有区域两两之间直线距离之和，1.2 为给定的具体比率常数。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_049\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_033.py"
+    },
+    "prob_034": {
+        "question": "LogiFlow Solutions is responsible for delivering two types of parcels: Standard and Express. Each parcel must be transported entirely either by air freight or entirely by ground transportation. There are 150 cubic meters of air-freight capacity and 210 cubic meters of ground-transportation capacity available. A Standard parcel requires either 17 cubic meters of air-freight capacity or 30 cubic meters of ground-transportation capacity; an Express parcel requires either 5 cubic meters of air-freight capacity or 13 cubic meters of ground-transportation capacity. To ensure a balanced transportation structure, the ratio of the total number of Standard parcels shipped by air to the total number of Express parcels shipped by ground may not exceed 2; that is, the ratio “number of air-shipped Standard parcels divided by number of ground-shipped Express parcels” must be less than or equal to 2. Each Standard parcel yields \\$40 in revenue, and each Express parcel yields \\$15 in revenue. How can LogiFlow Solutions maximize its total revenue from parcel delivery?",
+        "answer": 730.0,
+        "index": "LogiOR_prob_042",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 共有 150 立方米的空运容量和 210 立方米的地运容量可用。修改后相关描述: 共有 150 立方米的空运容量和 210 立方米的地运容量可用。为了保证运输结构的均衡，要求通过空运运输的标准件包裹总数量与通过地运运输的快件包裹总数量的比值不得超过 2，也就是说，空运标准件包裹数量除以地运快件包裹数量的比率必须小于或等于 2。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_042\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_034.py"
+    },
+    "prob_039": {
+        "question": "You are responsible for managing GreenTech Manufacturing, a company that produces environmentally friendly packaging materials using recycled paper. The company produces two packaging products: premium packaging and standard packaging. Premium packaging sells for 15 dollars per ton, and its average quality rating must be at least 9; standard packaging sells for 8 dollars per ton, and its average quality rating must be at least 7. The maximum monthly demand for premium packaging is 2,500 tons, and the maximum monthly demand for standard packaging is 800 tons.\n\nRecycled paper can be processed using one of three processing methods. The unit processing cost and output (yield) of each method are shown in the table below. For example, processing 1 ton of recycled paper by Method 1 costs 4.20 dollars and yields 0.3 tons of material with quality rating 6, 0.4 tons of material with quality rating 8, and 0.3 tons of material with quality rating 10. These costs already include the cost of acquiring the recycled paper. Before being converted into packaging material, materials with quality rating 6 and 8 can be upgraded via a refining process: by paying 1.20 dollars per ton, 1 ton of material with quality rating 6 can be upgraded to quality rating 8; by paying 1.80 dollars per ton, 1 ton of material with quality rating 8 can be upgraded to quality rating 10. To ensure a balanced production mix, the company requires that the ratio of total output used to produce premium packaging to the total output used to produce standard packaging must not exceed 3; that is, the ratio $\\frac{\\text{total output of premium packaging}}{\\text{total output of standard packaging}}$ must be no greater than 3. Subject to this ratio constraint and all quality and demand requirements, how should GreenTech Manufacturing schedule the use of each processing method and the refining process to maximize its monthly profit?\n\n| Processing Method | Unit Cost (USD/ton) | Output (Quality Rating 6) | Output (Quality Rating 8) | Output (Quality Rating 10) |\n|------------------|---------------------|---------------------------|---------------------------|----------------------------|\n| Method 1         | 4.20                | 0.3                       | 0.4                       | 0.3                        |\n| Method 2         | 3.80                | 0.5                       | 0.3                       | 0.2                        |\n| Method 3         | 4.50                | 0.2                       | 0.5                       | 0.3                        |",
+        "answer": 27856.0,
+        "index": "LogiOR_prob_045",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 绿科制造公司应如何在满足质量和需求要求的前提下，使其月利润最大化？, 修改后相关描述: 为了保证生产结构的均衡，公司要求：用于生产高端包装的总产出量与用于生产标准包装的总产出量之比不得大于 3，也就是说，高端包装的总产出量除以标准包装的总产出量的比值必须不超过 3。在满足这一比率约束以及所有质量和需求要求的前提下，绿科制造公司应如何安排各加工方法和精制工艺的使用，使其月利润最大化？",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_045\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_039.py"
+    },
+    "prob_040": {
+        "question": "A regional chain grocery store is launching a new energy drink product and needs to optimally allocate the initial inventory across its stores. There are 6 stores (S1–S6) with heterogeneous characteristics. Known data for each store include: customer traffic (daily store visits: S1-1200, S2-800, S3-1500, S4-900, S5-1100, S6-700), allocated shelf space (units: S1-50, S2-30, S3-60, S4-35, S5-45, S6-25), and a historical sales similarity score for comparable products (scale 0–1: S1-0.8, S2-0.6, S3-0.9, S4-0.7, S5-0.75, S6-0.5). The warehouse has 300 units of inventory available for the initial allocation.\n\nTwo display options are available: a standard display (costing 5 USD per store) and a promotional display (costing 15 USD per store, but increasing effective shelf space by 20%). The total display budget is 120 USD. To control the overall balance between promotional spending and inventory usage, the ratio between “the total cost incurred by the promotional display option across all stores” and “the total quantity of inventory actually allocated across all stores” must not exceed 0.4; that is, (total promotional display cost) divided by (the sum of allocated inventory quantities across stores) must be less than or equal to 0.4. The objective is to maximize the expected product exposure, computed as: (customer traffic) × (allocated units) × (sales similarity score).",
+        "answer": 253590.0,
+        "index": "LogiOR_prob_077",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 总陈列预算为 120 美元。 修改后相关描述: 总陈列预算为 120 美元。为了控制整体促销成本与库存使用之间的平衡，要求“所有门店促销陈列方式产生的总成本”与“所有门店实际分配的库存总量”之间的比率不得超过 0.4，也就是说，总促销陈列成本除以各门店分配库存数量之和必须小于或等于 0.4。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_077\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_040.py"
+    },
+    "prob_041": {
+        "question": "A logistics company needs to allocate forklifts for a newly built warehouse to meet daily operational requirements. Over the next 7 weeks, the warehouse’s forklift demands are 6, 9, 12, 8, 5, 7, and 4 units, respectively. The company plans to lease forklifts from a rental company that offers the following leasing options:\n\n1. **Long-term forklift lease**: The lease term is fixed at 7 weeks, with a rental rate of 240 CNY per week. Forklifts under the long-term lease are available throughout the entire lease term.\n\n2. **Short-term forklift lease**: The lease term is flexible and can be rented on a weekly basis, with a rental rate of 390 CNY per week. Short-term leased forklifts are available only during the week(s) in which they are rented.\n\n3. **Shared forklifts**: These forklifts are jointly leased with other warehouses, but are available only in weeks 2, 4, and 5, with a rental rate of 220 CNY per week.\n\n4. **Promotional forklifts**: During the last 4 weeks, these forklifts can be leased at a discounted price, with a rental rate of 190 CNY per week. At most 2 promotional forklifts can be leased per week. It is also required that, over these last 4 weeks, the ratio of the *average weekly number* of promotional forklifts used by the warehouse to the number of short-term forklifts does not exceed 0.8; that is, over these 4 weeks, the ratio of the total number of promotional forklifts to the total number of short-term forklifts must be less than or equal to 0.8.\n\nDesign a leasing plan that fully satisfies the warehouse’s forklift demand over the next 7 weeks and minimizes the total leasing cost.",
+        "answer": 14520.0,
+        "index": "LogiOR_prob_021",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 4. 促销叉车：在最后 4 周可以以优惠价格租用这些叉车，租金为每周 190 元。每周最多可租用 2 台促销叉车。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_021\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_041.py"
+    },
+    "prob_042": {
+        "question": "In an urban planning context, it is necessary to select locations for public transit stops to serve a set consisting of 15 passenger demand points, with 5 candidate stop locations available. The distances from each demand point to each candidate stop are known, and a demand point is considered “covered” by a stop if and only if the distance between the demand point and the stop does not exceed 300 meters. In addition, to control the relationship between the number of facilities and service capacity, the planning authority imposes an additional requirement: among all selected stops, the ratio of the number of selected stops that undertake actual coverage tasks (i.e., cover at least 1 demand point) to the total number of selected stops must be at least 0.8; that is, (number of stops with coverage tasks) divided by (total number of selected stops) must be no less than 0.8. Question: subject to the above conditions, what is the minimum number of stop locations that must be selected to ensure that all demand points are covered?\n\nThe distance matrix between each demand point and each candidate stop is as follows:\n\n| Demand node \\ Stop | 1    | 2    | 3    | 4    | 5    |\n|--------------------|------|------|------|------|------|\n| 1                  | 389  | 515  | 170  | 143  | 617  |\n| 2                  | 562  | 678  | 265  | 640  | 629  |\n| 3                  | 206  | 594  | 180  | 564  | 683  |\n| 4                  | 574  | 105  | 311  | 99   | 550  |\n| 5                  | 616  | 490  | 99   | 473  | 682  |\n| 6                  | 571  | 258  | 494  | 749  | 61   |\n| 7                  | 573  | 234  | 207  | 635  | 318  |\n| 8                  | 70   | 53   | 399  | 740  | 494  |\n| 9                  | 229  | 190  | 550  | 654  | 394  |\n| 10                 | 50   | 56   | 459  | 143  | 478  |\n| 11                 | 95   | 378  | 507  | 647  | 135  |\n| 12                 | 767  | 200  | 569  | 689  | 621  |\n| 13                 | 729  | 333  | 91   | 86   | 386  |\n| 14                 | 633  | 163  | 562  | 184  | 384  |\n| 15                 | 67   | 515  | 224  | 502  | 345  |",
+        "answer": 3.0,
+        "index": "LogiOR_prob_009",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 问：至少需要选择多少个站点位置，才能保证所有需求点都被覆盖？, 修改后相关描述: 另外，为了控制设施数量与服务能力之间的关系，规划部门提出一个附加要求：所有被选中的站点中，承担实际覆盖任务（即至少覆盖 1 个需求点）的站点数量与被选中的站点总数量之间的比值，必须至少达到 0.8，也就是说，有覆盖任务的站点数量除以被选中的站点总数量应不小于 0.8。问：在满足上述条件的前提下，至少需要选择多少个站点位置，才能保证所有需求点都被覆盖？",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_009\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_042.py"
+    },
+    "prob_044": {
+        "question": "Problem Description:\n\nA mining company operates three ore beneficiation plants (P1, P2, P3) with monthly processing capacities of 8000, 10000, and 12000 tons, respectively. The company sources ore from four different mines (M1, M2, M3, M4), with monthly supply availabilities of 6000, 9000, 7000, and 5000 tons, respectively.\n\nEach ore type has different characteristics:\n- Metal recovery rate: M1 = 85%, M2 = 92%, M3 = 78%, M4 = 88%\n- Processing cost per ton: M1 = $12, M2 = $18, M3 = $10, M4 = $15\n- Sulfur content (impurity): M1 = 1.2%, M2 = 0.8%, M3 = 2.1%, M4 = 1.5%\n- Maximum allowable overall average sulfur content across all plants: 1.5%\n\nThe unit transportation costs from mines to beneficiation plants are given in the following table:\n|       |  P1 |  P2 |  P3 |\n|-------|-----|-----|-----|\n|  M1   | $4  | $6  | $5  |\n|  M2   | $7  | $5  | $8  |\n|  M3   | $3  | $4  | $6  |\n|  M4   | $8  | $6  | $7  |\n\nThe company needs to determine the optimal ore allocation plan from each mine to each beneficiation plant. Subject to all operational constraints, the objective is to maximize the total metal recovery. In addition, the ratio of “total cost to total transported ore tonnage,” i.e., the average total unit cost, must not exceed $50 per ton.",
+        "answer": 23240.0,
+        "index": "LogiOR_prob_076",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 并使总成本不超过$500,000。, 修改后相关描述: 并且要求“总成本与总运输矿石吨数之比”也就是平均单位总成本不超过每吨$50。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_076\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_044.py"
+    },
+    "prob_045": {
+        "question": "Global Freight Solutions (GFS) is a logistics company that needs to ship goods among three regions using the services of three carriers. Each carrier offers a different cost structure and service mix for large, medium, and small shipments, as shown in the table below:\n\n| Carrier | Cost per shipment (USD) | Large-item proportion (%) | Medium-item proportion (%) | Small-item proportion (%) |\n|--------|--------------------------|---------------------------|----------------------------|---------------------------|\n| 1      | 5.2                      | 45                        | 35                         | 20                        |\n| 2      | 4.7                      | 30                        | 45                         | 25                        |\n| 3      | 3.5                      | 15                        | 20                         | 65                        |\n\nGFS must satisfy, in each month, minimum demand of at least 500 large items, 300 medium items, and 300 small items, with the objective of minimizing total cost. In addition, due to capacity limitations, the ratio of the total number of shipments awarded to Carrier 1 and Carrier 2 to the number of shipments awarded to Carrier 3 must not exceed 4; that is, $\\dfrac{\\text{(shipments from Carrier 1 + shipments from Carrier 2)}}{\\text{shipments from Carrier 3}} \\le 4$. Find the minimum possible total cost.",
+        "answer": 6878.0,
+        "index": "LogiOR_prob_031",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 此外，由于运力限制，每个月从任意一家供应商处承接的运输次数不得超过 700 次。, 修改后相关描述: 此外，由于运力限制，要求从供应商 1 和供应商 2 承接的运输次数总和与从供应商 3 承接的运输次数之比不得超过 4，也就是说，供应商 1 与供应商 2 的合计运输次数除以供应商 3 的运输次数应不大于 4。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_031\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_045.py"
+    },
+    "prob_047": {
+        "question": "HealthSupply manages a medical supply chain and must satisfy the demand for two products over the next two quarters: Vaccine X and Vaccine Y. The specific demands are: in Quarter 1, the demand for Vaccine X is 100 doses and the demand for Vaccine Y is 200 doses; in Quarter 2, the demand for Vaccine X is 300 doses and the demand for Vaccine Y is 100 doses.\n\nIn each quarter, the company can produce at most 1,500 doses of vaccines. Each dose of Vaccine X requires 4 liters of biochemical raw material, and each dose of Vaccine Y requires 3 liters of biochemical raw material. The cost of the biochemical raw material is \\$300 per liter in Quarter 1 and \\$450 per liter in Quarter 2. In each quarter, at most 2,500 liters of raw material can be purchased, and the raw material can only be used in the quarter in which it is purchased; it cannot be carried over across quarters.\n\nAt the beginning of Quarter 1, the company has initial inventory: 200 doses of Vaccine X and 300 doses of Vaccine Y. At the end of each quarter, an inventory holding cost of \\$100 per remaining dose is incurred.\n\nIn addition, the company must satisfy a regulatory requirement: in each quarter’s production, the ratio of Vaccine X output to Vaccine Y output must not exceed 2 to 3, i.e., in each quarter, the number of Vaccine X doses produced divided by the number of Vaccine Y doses produced must not be greater than $2/3$. It is known that the efficacy rate of Vaccine X is 85%, and the efficacy rate of Vaccine Y is 95%.\n\nUnder these conditions, determine how to satisfy the demand in each quarter at minimum total cost (including raw material cost and inventory holding cost) while complying with the regulatory requirement.",
+        "answer": 550000.0,
+        "index": "LogiOR_prob_039",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 此外，公司必须满足一项监管要求：每个季度生产出来的疫苗其平均有效率必须至少达到 90%。其中，疫苗 X 的有效率为 85%，疫苗 Y 的有效率为 95%。, 修改后相关描述: 此外，公司必须满足一项监管要求：每个季度生产出来的疫苗中，疫苗 X 的产量与疫苗 Y 的产量的比例必须不超过 2 比 3，即每个季度中疫苗 X 的生产数量除以疫苗 Y 的生产数量不得大于 2/3。已知疫苗 X 的有效率为 85%，疫苗 Y 的有效率为 95%。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_039\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_047.py"
+    },
+    "prob_051": {
+        "question": "The post office is purchasing stamping machines. They can buy either dual-type stamping machines or single-type stamping machines. A dual-type stamping machine can stamp 50 letters per minute, while a single-type stamping machine can stamp 30 letters per minute. A dual-type stamping machine requires 20 units of glue per minute, while a single-type stamping machine requires 15 units of glue per minute. Because the single-type stamping machines are quieter, the number of single-type stamping machines must be greater than the number of dual-type stamping machines. In addition, the post office wants to ensure that they can stamp at least 300 letters per minute, and that the ratio of the total glue used per minute by the single-type stamping machines to the total glue used per minute by the dual-type stamping machines does not exceed 9 to 8 (i.e., the total glue used per minute by the single-type stamping machines divided by the total glue used per minute by the dual-type stamping machines is no greater than $9/8$). How many stamping machines of each type should they purchase to minimize the total number of stamping machines?",
+        "answer": 9.0,
+        "index": "NLP4LP_prob_066",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 此外，邮局希望确保他们每分钟至少可以盖章 300 封信件，并且每分钟最多使用 135 个单位的胶水。 修改后相关描述: 此外，邮局希望确保他们每分钟至少可以盖章 300 封信件，并且单型号盖章机每分钟使用的胶水总量与双型号盖章机每分钟使用的胶水总量的比值不超过 9 比 8（即单型号盖章机每分钟使用的胶水总量除以双型号盖章机每分钟使用的胶水总量不大于 9/8）。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_066\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_051.py"
+    },
+    "prob_052": {
+        "question": "Calcium and magnesium are contained in two supplements, Supplement A and Supplement B. One serving of Supplement A contains 30 grams of calcium and 50 grams of magnesium. One serving of Supplement B contains 60 grams of calcium and 10 grams of magnesium. The cost per serving of Supplement A is 14 dollars, and the cost per serving of Supplement B is 25 dollars. A patient must take these two supplements every day to ensure an intake of at least 400 grams of calcium and 50 grams of magnesium. In addition, it is required that the ratio of the total number of servings of Supplement A taken per day to the total number of servings of Supplement B taken per day does not exceed 3; that is, the number of servings of Supplement A divided by the number of servings of Supplement B should be less than or equal to 3. Determine how many servings of each supplement the patient should take each day so as to minimize the daily cost.",
+        "answer": 167.11111,
+        "index": "NLP4LP_prob_197",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50克镁。确定该患者每天应服用多少份每种保健品，以使其每日成本最小。, 修改后相关描述: 某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50克镁。此外，还要求患者每天服用的保健品A总份数与保健品B总份数的比值不超过3，也就是说，保健品A的份数除以保健品B的份数应当小于或等于3。确定该患者每天应服用多少份每种保健品，以使其每日成本最小。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_052.py"
+    },
+    "prob_058": {
+        "question": "Ayse produces a plant growth compound by blending two fertilizers, C and Y. The compound must contain at least 5 units of nitrous oxide and 8 units of vitamin mixture. Meanwhile, in order to ensure a balanced nutrient structure, the ratio of the total units of nitrous oxide to the total units of vitamin mixture in the final blend must not exceed 2; that is, (total units of nitrous oxide)/(total units of vitamin mixture) must be less than or equal to 2. The costs of fertilizers C and Y are \\$2 per kilogram and \\$3 per kilogram, respectively. Fertilizer C contains 1.5 units of nitrous oxide and 3 units of vitamin mixture per kilogram. Fertilizer Y contains 5 units of nitrous oxide and 1 unit of vitamin mixture per kilogram. Determine the minimum cost of Ayse’s compound.",
+        "answer": 5.851851851851852,
+        "index": "NLP4LP_prob_023",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 该生长化合物必须至少含有 5 个单位的一氧化二氮和 8 个单位的维生素混合物。, 修改后相关描述: 该生长化合物必须至少含有 5 个单位的一氧化二氮和 8 个单位的维生素混合物。同时，为了保证营养结构的均衡，要求最终混合物中一氧化二氮总单位数与维生素混合物总单位数的比率不得超过 2，也就是说，一氧化二氮总单位数除以维生素混合物总单位数必须小于或等于 2。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_023\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_058.py"
+    },
+    "prob_059": {
+        "question": "A patient in a hospital can take two different painkillers: Painkiller 1 and Painkiller 2. Each dose of Painkiller 1 delivers 0.5 units of medication to the legs and 0.8 units of medication to the back. Each dose of Painkiller 2 delivers 0.7 units of medication to the legs and 0.4 units of medication to the back. In addition, Painkiller 1 also delivers 0.3 units of a sleep aid, and Painkiller 2 delivers 0.6 units of a sleep aid. The amount of sleep aid delivered should be at most 8 units, and the amount of medication delivered to the legs should be at least 4 units. Meanwhile, the ratio of the total medication delivered to the legs to the total medication delivered to the back should be no less than 0.6; that is, the total medication delivered to the legs divided by the total medication delivered to the back should be greater than or equal to 0.6. How many doses of each of these two painkillers should be taken in order to maximize the amount of medication delivered to the back?",
+        "answer": 22.0,
+        "index": "NLP4LP_prob_119",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 并且向腿部输送的药物至少应为4个单位。 修改后相关描述: 并且向腿部输送的药物至少应为4个单位。同时，向腿部输送的药物总量与向背部输送的药物总量的比值应不小于0.6，也就是说，向腿部输送的药物总量除以向背部输送的药物总量应当大于或等于0.6。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_119\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_059.py"
+    },
+    "prob_061": {
+        "question": "A bottled water company sells water in glass bottles and plastic bottles. One glass bottle can hold 500 milliliters of water, while one plastic bottle can hold 750 milliliters of water. Since most customers prefer plastic bottles, the ratio of the number of plastic bottles to the number of glass bottles must be at least 3; that is, the number of plastic bottles must be no less than 3 times the number of glass bottles. However, the number of glass bottles must be at least 20. If the company has 250,000 milliliters of water available, in order to maximize the total number of bottles, how many glass bottles and plastic bottles should be produced?",
+        "answer": 363.0,
+        "index": "NLP4LP_prob_077",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 塑料瓶的数量必须至少是玻璃瓶数量的 3 倍。修改后相关描述: 要求塑料瓶数量与玻璃瓶数量的比值至少为 3，也就是说塑料瓶的数量必须不少于玻璃瓶数量的 3 倍。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_077\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_061.py"
+    },
+    "prob_062": {
+        "question": "A handcrafted sports equipment manufacturing company produces basketballs and soccer balls. Producing one basketball requires 5 units of raw material and 1 hour of processing time, while producing one soccer ball requires 3 units of raw material and 2 hours of processing time. The company has a total of 1500 units of raw material available, and workers can work at most 750 hours when operating at full capacity. Because basketballs sell better, the ratio of the number of basketballs produced to the number of soccer balls produced must be at least 3; that is, the number of basketballs produced must be no less than 3 times the number of soccer balls produced, but the company also wishes to produce at least 50 soccer balls. How many basketballs and soccer balls should the company produce, respectively, in order to maximize the total number of sports items produced?",
+        "answer": 333.0,
+        "index": "NLP4LP_prob_256",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于篮球的销售情况更好，生产的篮球数量必须至少是足球数量的三倍, 修改后相关描述: 由于篮球的销售情况更好，生产的篮球数量与足球数量的比值必须至少为 3，也就是说，生产的篮球数量要不少于足球数量的 3 倍",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_256\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_062.py"
+    },
+    "prob_064": {
+        "question": "An oil and gas company has two types of pipelines: high-throughput pipelines and low-throughput pipelines. Each day, a high-throughput pipeline can transport 10,000 U.S. gallons, and it is recommended that 12 technicians closely monitor this pipeline to ensure proper operation. Each day, a low-throughput pipeline can transport 5,000 U.S. gallons, and for safety reasons it should be closely monitored by 5 technicians. Every day, the oil and gas company must satisfy a natural gas demand of at least 150,000 U.S. gallons, and they have 160 technicians on staff. Because high-throughput pipelines have a higher risk of environmental damage, the ratio of the number of high-throughput pipelines to the total number of pipelines can be at most 0.35; that is, $\\frac{\\text{number of high-throughput pipelines}}{\\text{total number of pipelines}} \\le 0.35$. In addition, the number of low-throughput pipelines is at least 8. How many pipelines of each type should be used in order to minimize the total number of pipelines required?",
+        "answer": 25.0,
+        "index": "NLP4LP_prob_222",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于高流量管道具有更高的环境损害风险，高流量管道最多只能占全部管道的 35%。, 修改后相关描述: 由于高流量管道具有更高的环境损害风险，高流量管道的数量与全部管道数量之间的比率最多只能为 0.35，即高流量管道数量除以全部管道数量不超过 0.35。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_222\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_064.py"
+    },
+    "prob_066": {
+        "question": "A food-delivery courier can choose to use a bicycle or a motorbike for work shifts. One shift using a bicycle can complete 10 orders, consumes 5 units of energy, and, due to higher speed, earns \\$50 in tips. One shift using a motorbike can complete 7 orders, consumes 6 units of energy, and earns \\$43 in tips. The ratio between the total number of shifts scheduled per month and the total number of orders completed must not exceed 0.12; that is, for every 100 orders completed, the average number of scheduled shifts cannot exceed 12 shifts. He has 230 units of energy available and must complete at least 320 orders. He must have at least 5 motorbike shifts, because bicycles are harder to obtain. How many shifts should the courier schedule using each mode of transportation in order to maximize the total tips earned?",
+        "answer": 2215.0,
+        "index": "NLP4LP_prob_225",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 该送餐员每月最多可工作 40 个班次, 修改后相关描述: 该送餐员每月总共安排的班次数量与完成的订单总数之间的比率必须不高于 0.12，也就是说，每完成 100 单订单，平均安排的班次不能超过 12 个班次。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_225\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_066.py"
+    },
+    "prob_069": {
+        "question": "A man is fishing in a 250-acre lake and can catch fish using either fishing nets or fishing lines. For each acre of water area, using nets catches 8 fish, requires 4 units of bait, but also causes 2 units of disutility (pain) to the fisherman. For each acre of water area, using lines catches 5 fish, requires 3 units of bait, but also causes 1 unit of disutility to the fisherman. The fisherman has a total of 800 units of bait available, and it is required that, over the entire fishing process, the ratio of total disutility from using nets to the total disutility from using lines does not exceed 3. That is, the total disutility generated by using nets divided by the total disutility generated by using lines must be less than or equal to $3$. On how many acres should he use each of the two fishing methods in order to maximize the number of fish he can catch?",
+        "answer": 1511.1111111111113,
+        "index": "NLP4LP_prob_074",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 渔夫共有 800 个单位的鱼饵可用，并且最多只能忍受 350 个单位的痛苦。修改后相关描述: 渔夫共有 800 个单位的鱼饵可用，并且要求他在整个捕鱼过程中，渔网方式带来的总痛苦与鱼线方式带来的总痛苦之比不超过 3。也就是说，使用渔网产生的总痛苦除以使用鱼线产生的总痛苦必须小于或等于 3。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_074\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_069.py"
+    },
+    "prob_071": {
+        "question": "A corn farmer transports corn to the city using tractors or cars. Each tractor can transport 40 kg of corn, and each car can transport 20 kg of corn. To improve overall transportation efficiency, the ratio of the number of cars used to the number of tractors must be at least 2; that is, the value of (number of cars) divided by (number of tractors) must not be less than 2. If at least 500 kg of corn must be transported to the city, determine—subject to these conditions—the minimum possible total number of tractors and cars required.",
+        "answer": 18.75,
+        "index": "NLP4LP_prob_166",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于拖拉机非常缓慢，所使用的汽车数量必须至少是所使用拖拉机数量的两倍。, 修改后相关描述: 为了提高整体运输效率，规定所使用汽车数量与拖拉机数量的比率必须至少为 2，也就是说，汽车数量除以拖拉机数量的值不得小于 2。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_166\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_071.py"
+    },
+    "prob_072": {
+        "question": "An extremely large ski resort is considering purchasing two types of chairlifts: a high-density seating chairlift and a low-density seating chairlift. A high-density seating chairlift can transport 45 visitors up the slope per minute, while a low-density seating chairlift can transport 20 visitors per minute. A high-density seating chairlift consumes 30 units of electricity, while a low-density seating chairlift consumes 22 units of electricity. Since the low-density seating chairlift is slower and more beginner-friendly, there must be at least 5 low-density seating chairlifts. The ski resort must transport at least 1000 visitors per minute to be profitable, and it must satisfy the following power-structure constraint: the ratio of the total number of high-density seating chairlifts to the total number of low-density seating chairlifts cannot exceed 3; that is, the number of high-density seating chairlifts divided by the number of low-density seating chairlifts should be less than or equal to $3$. How many of each type of chairlift should be planned for installation in order to minimize the total number of chairlifts required?",
+        "answer": 27.0,
+        "index": "NLP4LP_prob_217",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 滑雪度假村每分钟至少需要运送 1000 名游客才能盈利，并且可用电力为 940 个单位。, 修改后相关描述: 滑雪度假村每分钟至少需要运送 1000 名游客才能盈利，并且需要满足这样一个用电结构约束：高密度座位缆车总数与低密度座位缆车总数的比率不能超过 3，也就是说高密度座位缆车的数量除以低密度座位缆车的数量应当小于或等于 3。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_217\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_072.py"
+    },
+    "prob_073": {
+        "question": "A doctor advises her patient to eat more fish and chicken in order to increase protein and iron intake. Each serving of fish contains 10 units of protein and 12 units of iron. Each serving of chicken contains 15 units of protein and 8 units of iron. The patient needs to consume at least 130 units of protein and 120 units of iron. Since chicken meals are cheaper, the patient wants the ratio of the number of chicken servings to the number of fish servings to be at least 2; that is, the quotient of the number of chicken servings and the number of fish servings must be greater than or equal to 2. If each serving of fish contains 7 units of fat and each serving of chicken contains 10 units of fat, how many servings of fish and chicken should she eat to minimize her fat intake?",
+        "answer": 115.71428571428571,
+        "index": "NLP4LP_prob_096",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于鸡肉餐更便宜，病人希望食用的鸡肉餐数量至少是鱼餐数量的两倍。修改后相关描述: 由于鸡肉餐更便宜，病人希望食用的鸡肉餐数量与鱼餐数量的比率至少为 2，也就是说，鸡肉餐的份数与鱼餐的份数的比值要大于或等于 2。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_096\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_073.py"
+    },
+    "prob_074": {
+        "question": "A woodworking shop can purchase two types of power saws: miter saws and circular saws. Each miter saw can cut 50 boards per day and generates 60 units of sawdust. Each circular saw can cut 70 boards per day and generates 100 units of sawdust. The shop must cut at least 1500 boards per day. However, to avoid excessive pollution inside the shop, they require that the ratio of the total sawdust generated per day to the total number of boards cut that day be at most 1.5 (i.e., the total units of sawdust generated per day divided by the total number of boards cut per day is at most 1.5). How many units of each type of power saw should be purchased to minimize the total number of saws required?",
+        "answer": 22.0,
+        "index": "NLP4LP_prob_043",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 然而，为了避免木工坊内污染过多，他们每天至多只能产生 2000 单位的锯末。 修改后相关描述: 然而，为了避免木工坊内污染过多，他们要求每天产生的锯末总量与当天切割的木板总根数的比值至多为 1.5（即每天产生的锯末总单位数除以每天切割的木板总根数至多为 1.5）。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_043\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_074.py"
+    },
+    "prob_075": {
+        "question": "A pharmaceutical company produces batches of dermatological ointment, including regular batches and premium batches, for hospital procurement. Producing one regular batch requires 50 units of medicinal ingredient and 40 units of moisturizing ingredient. Producing one premium batch requires 40 units of medicinal ingredient and 60 units of moisturizing ingredient. The company currently has 3000 units of medicinal ingredient and 3500 units of moisturizing ingredient available. Since premium batches sell better, the company requires that the ratio of the number of regular batches to the number of premium batches must not exceed 0.8; that is, the ratio of the number of regular batches to the number of premium batches must be less than or equal to 0.8. In addition, the company must produce at least 10 regular batches. If one regular batch can treat 50 people and one premium batch can treat 30 people, then how many regular batches and premium batches should be produced, respectively, in order to maximize the number of people who can be treated?",
+        "answer": 2590.0,
+        "index": "NLP4LP_prob_097",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于高级批次销量更好，普通批次的数量必须少于高级批次的数量。此外，公司必须至少生产 10 批普通批次。 修改后相关描述: 由于高级批次销量更好，公司要求普通批次与高级批次的数量之比不得超过 0.8，也就是说，普通批次的数量与高级批次的数量之比必须小于或等于 0.8。此外，公司必须至少生产 10 批普通批次。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_097\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_075.py"
+    },
+    "prob_076": {
+        "question": "A scientist in the Arctic needs to obtain sufficient vitamin D and vitamin C in his diet by drinking orange juice and apple juice. Each carton of orange juice contains 10 units of vitamin D and 8 units of vitamin C. Each carton of apple juice contains 12 units of vitamin D and 6 units of vitamin C. Since the scientist prefers apple juice, the ratio of the number of cartons of apple juice to the number of cartons of orange juice must be at least 3; that is, the value of (number of apple-juice cartons) divided by (number of orange-juice cartons) must be greater than or equal to 3. However, he must also drink at least 3 cartons of orange juice. To avoid excessive vitamin C intake, the scientist can consume at most 300 units of vitamin C. How many cartons of each type of juice should he drink, respectively, in order to maximize his total vitamin D intake?",
+        "answer": 582.0,
+        "index": "NLP4LP_prob_093",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于这位科学家更喜欢苹果汁，他饮用的苹果汁盒数必须至少是橙汁盒数的3倍。, 修改后相关描述: 由于这位科学家更喜欢苹果汁，他饮用的苹果汁盒数与橙汁盒数的比率必须至少为3，也就是说，苹果汁盒数除以橙汁盒数的值必须大于或等于3。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_093\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_076.py"
+    },
+    "prob_077": {
+        "question": "A bakery produces almond croissants and pistachio croissants. Producing one almond croissant requires 5 units of butter and 8 units of flour. Producing one pistachio croissant requires 3 units of butter and 6 units of flour. The bakery has 600 units of butter and 800 units of flour. Because almond croissants are more popular, it is required that the ratio of the number of almond croissants to the number of pistachio croissants be at least 3; that is, the number of almond croissants divided by the number of pistachio croissants should be no less than 3. If producing one almond croissant takes 12 minutes, and producing one pistachio croissant takes 10 minutes, how many of these two types of croissants should be produced in order to minimize the total production time?",
+        "answer": 46.0,
+        "index": "NLP4LP_prob_055",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于杏仁牛角面包更受欢迎，杏仁牛角面包的产量至少应为开心果牛角面包的 3 倍。 修改后相关描述: 由于杏仁牛角面包更受欢迎，要求杏仁牛角面包的数量与开心果牛角面包数量的比值至少为 3，也就是说杏仁牛角面包的数量除以开心果牛角面包的数量应不少于 3。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_055\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_077.py"
+    },
+    "prob_079": {
+        "question": "A hot dog company can build two types of butcher shops: small butcher shops and large butcher shops. A small butcher shop can produce 30 hot dogs per day and requires 2 workers. A large butcher shop can produce 70 hot dogs per day and requires 4 workers. The company must produce at least 500 hot dogs per day, and the ratio of the total number of hot dogs produced per day to the total number of workers used must be at least 16 hot dogs per worker. However, they have only 30 workers available. How many butcher shops of each type should the company build in order to minimize the total number of butcher shops?",
+        "answer": 8.0,
+        "index": "NLP4LP_prob_071",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 公司每天必须至少生产500根热狗，但他们只有30名工人可用。 修改后相关描述: 公司每天必须至少生产500根热狗，并且要求每天总生产的热狗数量与所使用工人总数的比率至少为每名工人16根热狗。但他们只有30名工人可用。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_071\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_079.py"
+    },
+    "prob_080": {
+        "question": "A snow removal company uses small trucks and large trucks to clear snow from various communities. Each small truck requires 2 workers for shoveling and can carry 30 units of snow. Each large truck requires 4 workers for shoveling and can carry 50 units of snow. The company has a total of 30 workers available. In addition, because some communities do not allow large trucks to enter, at least 10 trucks must be small trucks. At the same time, at least 3 large trucks are required, and the ratio of the number of small trucks to the number of large trucks must be equal to 2. How many trucks of each type should be used to maximize the total amount of snow that can be transported?",
+        "answer": "None",
+        "index": "NLP4LP_prob_183",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 同时，至少需要 3 辆大型卡车，并且小型卡车的数量必须是大型卡车数量的两倍。, 修改后相关描述: 同时，至少需要 3 辆大型卡车，并且小型卡车数量与大型卡车数量的比值必须等于 2。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_183\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_080.py"
+    },
+    "prob_082": {
+        "question": "A water vendor transports water from a glacier using small barrels and large barrels. A small barrel can hold 40 liters of water, and a large barrel can hold 100 liters of water. The vendor has at most 30 small barrels and 10 large barrels available. Since small barrels are easier to carry, the number of small barrels used must be at least twice the number of large barrels. If the ratio between the total number of barrels used and the number of large barrels (i.e., total barrels divided by large barrels) is at most 5, and at least 5 barrels must be large barrels, how many small barrels and how many large barrels should he use in order to maximize the total amount of glacier water he can transport?",
+        "answer": 2200.0,
+        "index": "NLP4LP_prob_169",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 如果他总共最多可以运输 25 个桶, 修改后相关描述: 如果他总共使用的桶数与大桶数量之间的比率（即总桶数除以大桶数）最多为 5",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_169\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_082.py"
+    },
+    "prob_084": {
+        "question": "A snack exporter ships snacks to customers using small and large suitcases. A small suitcase can hold 50 portions of snacks, while a large suitcase can hold 80 portions. Most customers prefer small suitcases; therefore, the number of small suitcases used must be at least twice the number of large suitcases. The exporter has at most 70 small suitcases and 50 large suitcases available. If he must ship at least 15 large suitcases, and the ratio of the number of small suitcases to the number of large suitcases can be at most 3 (i.e., the number of small suitcases divided by the number of large suitcases does not exceed 3), then how many small and large suitcases should he ship, respectively, in order to maximize the total number of snack portions that can be transported?",
+        "answer": 6300.0,
+        "index": "NLP4LP_prob_159",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 并且总共最多只能发送 70 个行李箱, 修改后相关描述: 并且小号行李箱数量与大号行李箱数量的比值最多只能为 3（即小号行李箱数量除以大号行李箱数量不超过 3）",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_159\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_084.py"
+    },
+    "prob_085": {
+        "question": "There are two methods for extracting a certain metal from mined ore. The first method uses process J, and the second uses process P. Process J uses 8 units of water to extract 5 units of metal and produces 3 units of pollution. Process P uses 6 units of water to extract 9 units of metal and produces 5 units of pollution. The available water and the allowable pollution are subject to the following constraints: the ratio of total water usage to total pollution must not exceed 10; that is, the value of (total water usage) divided by (total pollution) must be less than or equal to 10. At most 1350 units of pollution can be produced. How many times should each of these two processes be used in order to maximize the amount of metal extracted?",
+        "answer": 2430.0,
+        "index": "NLP4LP_prob_247",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 最多可以使用 1500 个单位的水和产生 1350 个单位的污染。, 修改后相关描述: 可使用的水和可产生的污染之间有如下限制：总用水量与总污染量的比值不能超过 10，也就是说，总用水量除以总污染量的值必须小于或等于 10。最大可以产生 1350 个单位的污染。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_247\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_085.py"
+    },
+    "prob_086": {
+        "question": "A new fast-food restaurant produces burritos and platters. Each burrito requires 5 units of meat and 3 units of rice. Each platter requires 7 units of meat and 5 units of rice. Each burrito takes 10 minutes to prepare, and each platter takes 8 minutes to prepare. The restaurant must use at least 3000 units of meat and 2500 units of rice. Since burritos are more suitable for takeout, the ratio of the number of burritos produced to the number of platters produced must be at least 3; that is, the number of burritos divided by the number of platters must be no less than $3$. How many burritos and platters should the restaurant produce, respectively, to minimize the total production time?",
+        "answer": 6785.714286032282,
+        "index": "NLP4LP_prob_045",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于卷饼更适合外带食用，因此制作的卷饼数量必须至少是拼盘数量的 3 倍。 修改后相关描述: 由于卷饼更适合外带食用，因此制作的卷饼数量与拼盘数量的比值必须至少为 3，也就是说卷饼数量除以拼盘数量必须不小于 3。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_045\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_086.py"
+    },
+    "prob_088": {
+        "question": "An appliance company sells and installs refrigerators and stoves. Each refrigerator requires 60 minutes of moving time and 20 minutes of installation time. Each stove requires 45 minutes of moving time and 25 minutes of installation time. The company has a total of 20000 minutes of moving time and 13000 minutes of installation time available. In addition, the company stipulates that the average moving time per appliance (including both refrigerators and stoves) must not exceed 55 minutes; that is, the ratio of total moving time to the total number of appliances sold and installed (number of refrigerators plus number of stoves) must be less than or equal to 55. If the profit per refrigerator is 400 dollars and the profit per stove is 260 dollars, how many refrigerators and how many stoves should they sell to maximize profit?",
+        "answer": 212000.0,
+        "index": "NLP4LP_prob_190",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 该公司共有 20000 分钟的搬运时间和 13000 分钟的安装时间可用。 修改后相关描述: 该公司共有 20000 分钟的搬运时间和 13000 分钟的安装时间可用。此外，公司规定用于搬运每台电器（包括冰箱和炉灶在内）的平均时间不得超过 55 分钟，也就是说，总搬运时间与销售并安装的电器总数量（冰箱数量加上炉灶数量）之比必须小于或等于 55。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_190\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_088.py"
+    },
+    "prob_091": {
+        "question": "In a science club, there are two tables that can be used to make slime. On Table 1, 3 units of powder and 5 units of glue are used to produce 4 units of slime. On Table 2, 8 units of powder and 6 units of glue are used to produce 5 units of slime. However, Table 1 generates 2 units of mess, and Table 2 generates 4 units of mess. The science club currently has 100 units of powder and 90 units of glue. If it is required that the ratio of the total amount of slime produced to the total amount of mess generated be at least $2:1$, that is, total slime divided by total mess must be no less than $2$, then how many tables of each type should be set up in order to maximize the amount of slime produced under this condition?",
+        "answer": 60.0,
+        "index": "NLP4LP_prob_121",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 如果最多只能产生30单位的杂乱，应分别设置多少张每种桌子，才能使所生产的黏液数量最大化？, 修改后相关描述: 如果要求产生的黏液总量与产生的杂乱总量的比值至少要达到2比1，也就是说黏液总量除以杂乱总量必须不小于2，在此条件下应分别设置多少张每种桌子，才能使所生产的黏液数量最大化？",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_121\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_091.py"
+    },
+    "prob_093": {
+        "question": "An airport plans to purchase two types of vehicles for luggage handling: four-wheeled vehicles and three-wheeled vehicles.  \nA four-wheeled vehicle can handle 60 pieces of luggage per day and generates 30 units of pollutants per day.  \nA three-wheeled vehicle can handle 40 pieces of luggage per day and generates 15 units of pollutants per day.\n\nThe airport must be able to handle at least 1000 pieces of luggage per day.  \nTo avoid excessive pollution at the airport, it is stipulated that the ratio of the total pollutants generated per day to the total number of pieces of luggage that can actually be handled per day is at most 0.5; that is, the total units of pollutants generated per day divided by the total number of pieces of luggage that can be handled per day is at most 0.5.\n\nQuestion: How many four-wheeled vehicles and three-wheeled vehicles should the airport purchase, respectively, so that, under the above requirements, the total number of vehicles required is minimized?",
+        "answer": 17.0,
+        "index": "NLP4LP_prob_072",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 为避免对机场造成过度污染，每天产生的污染物最多为 430 个单位。 修改后相关描述: 为避免对机场造成过度污染，规定每天产生的总污染物与每天实际可搬运行李总件数的比率最多为 0.5，也就是说，每天产生的污染物总单位数除以每天可搬运行李的总件数最多为 0.5。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_072\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_093.py"
+    },
+    "prob_094": {
+        "question": "A village is holding a banquet and provides bicycles and cars as means of transportation for everyone. One bicycle can carry 3 people, while one car can carry 5 people. Since cars are more expensive, it is required that the ratio of the number of cars used to the total number of vehicles (i.e., the sum of the numbers of bicycles and cars) does not exceed $2/5$. That is, the proportion of cars among all vehicles is at most 40%. If the village needs to transport at least 500 people, how many units of each type of vehicle should be used in order to minimize the total number of bicycles required?",
+        "answer": 80.0,
+        "index": "NLP4LP_prob_167",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于汽车更昂贵，汽车数量最多只能占全部车辆数量的 40%。修改后相关描述: 由于汽车更昂贵，要求所使用汽车的数量与全部车辆数量（即自行车与汽车数量之和）的比值不超过 2/5。也就是说，汽车数量占全部车辆数量的比例最多为 40%。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_167\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_094.py"
+    },
+    "prob_096": {
+        "question": "An oil and gas company uses containers and trucks to transport oil to a port. One container can carry 30 units of oil, and one truck can carry 40 units of oil. Due to government restrictions, the ratio of the number of trucks used to the number of containers used must be at most $1/2$, i.e., the number of trucks divided by the number of containers cannot exceed 0.5. If at least 2000 units of oil must be transported to the port and at least 15 containers must be used, determine the minimum total number of containers and trucks required subject to the above conditions.",
+        "answer": 60.0,
+        "index": "NLP4LP_prob_146",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于政府限制，所使用的卡车数量必须至多为所使用集装箱数量的一半。, 修改后相关描述: 由于政府限制，所使用的卡车数量与所使用集装箱数量的比率必须至多为 1/2，也就是说卡车数量与集装箱数量的比值不能超过 0.5。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_146\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_096.py"
+    },
+    "prob_099": {
+        "question": "A company is purchasing printers for its headquarters, including high-end models and standard models. A high-end model can print 30 pages per minute, while a standard model can print 20 pages per minute. In addition, a high-end model requires 4 units of ink per minute, while a standard model requires 3 units of ink per minute. The company wants to ensure that it can print at least 200 pages per minute, and that it uses at most 35 units of ink per minute. Because the high-end model is more convenient to use, the company also requires that the ratio of the number of standard printers to the number of high-end printers does not exceed 0.8; that is, the ratio of the number of standard printers to the number of high-end printers must be no greater than 0.8. How many units of these two types of printers should be purchased in order to minimize the total number of printers in the office?",
+        "answer": 7.0,
+        "index": "NLP4LP_prob_086",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 由于高端型号更加方便使用，普通打印机的数量必须少于高端打印机的数量。 修改后相关描述: 由于高端型号更加方便使用，公司还要求普通打印机数量与高端打印机数量的比值不超过 0.8，也就是说普通打印机的数量与高端打印机的数量之比必须不大于 0.8。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_086\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_099.py"
+    },
+    "prob_100": {
+        "question": "A flooring company produces laminate composite flooring planks and carpet. The marketing director reports that the expected weekly demand for laminate composite flooring planks is at least 15,000 square feet, and the expected weekly demand for carpet is at least 5,000 square feet. A transportation contract requires that the total weekly quantity of products be at least 50,000 square feet. However, due to a shortage of raw materials, the ratio of weekly output of laminate composite flooring planks to weekly output of carpet may not exceed 2; that is, the weekly output of laminate composite flooring planks divided by the weekly output of carpet may not be greater than 2. If the profit per square foot of laminate composite flooring planks is 2.1 dollars and the profit per square foot of carpet is 3.3 dollars, how many square feet of each product should the company produce each week to maximize profit?",
+        "answer": "None",
+        "index": "NLP4LP_prob_200",
+        "NLtype": "B",
+        "NLChange": "原题目相关描述: 然而，由于原材料短缺，每周强化复合地板板材的产量不得超过 40,000 平方英尺，地毯的产量不得超过 20,000 平方英尺。 修改后相关描述: 然而，由于原材料短缺，每周强化复合地板板材的产量与地毯产量之比不得超过 2，也就是说，每周强化复合地板板材的产量除以地毯的产量不得大于 2。",
+        "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_200\\model.txt",
+        "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_100.py"
+    }
+}

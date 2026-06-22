@@ -1,0 +1,295 @@
+{
+  "entry": {
+    "index": 30,
+    "question": "Similar multi-level optimization problems are very common in the supply chain layout of the home appliance manufacturing industry. Taking the air conditioning business of Rhode Island Electric Group as an example, its production bases in Foshan (factory 1) and Wuhu (factory 2) serve the two major regional markets of East China (market 1) and South China (market 2) respectively. Production data show that due to the high degree of automation, the unit cost of the Foshan factory shows significant economies of scale as the output increases; while the Wuhu factory has higher fixed costs, but is more flexible in small batch production. The 2023 supply chain audit report shows that this nonlinear cost structure leads to a unique exponential characteristic of the total cost function, which is highly consistent with the mathematical model in the title. \n\nJD Logistics needs to accurately balance production scale benefits and transportation costs when designing regional distribution plans for home appliance customers. Its intelligent scheduling system uses a mixed integer programming model to dynamically optimize the factory-market distribution combination while meeting the needs of distribution centers in each region. In actual operation, the system will give priority to the low-cost transportation channel from Foshan to Guangzhou (similar to factory 1 to market 2), even if this means that the Foshan factory needs to break through the optimal economic output. Operational data from 2024 shows that this integrated optimization solution that takes economies of scale into account can reduce overall supply chain costs and increase order fulfillment rates compared to the traditional separate decision of production first and distribution later. \n\nModern supply chain management systems (such as SAP IBP) can handle more complex nonlinear cost functions. Alibaba's Rhino Intelligent Manufacturing Platform even incorporates learning curve effects into the model. This dynamic optimization capability enables companies to more accurately evaluate the marginal benefits of strategic decisions such as new factory site selection and capacity expansion. \n\nSpecifically, the two-level supply chain includes 2 factories and 2 sales markets. The demand for market 1 and 2 is 80 and 70 products, respectively. The unit production cost function of factories 1 and 2 has economies of scale and can be expressed as a function: \n$$\nc_1(y_1)=0.06y_1^{2.5}+11y_1\\\\\nc_2(y_2)=0.03y_2^{1.5}+12y_2\n$$\n, where $y_1,y_2$ are the outputs of the two factories. The unit transportation cost of the product from the factory to the market is known, 2.4 yuan/piece from factory 1 to market 1, 0.5 yuan/piece from 1 to market 2; 4 yuan/piece from factory 2 to market 1, 1.8 yuan/piece from 2 to market 2. The upper limit of the production capacity of each factory is 100 pieces. It is necessary to determine the quantity of shipments from each factory to each market to meet demand and minimize the total cost (total cost = production cost + transportation cost).",
+    "answer": 3206.66,
+    "Parameters_List": [
+      {
+        "Name": "factory_names",
+        "Type": "list",
+        "Value": [
+          "Foshan",
+          "Wuhu"
+        ]
+      },
+      {
+        "Name": "market_names",
+        "Type": "list",
+        "Value": [
+          "East China",
+          "South China"
+        ]
+      },
+      {
+        "Name": "audit_year",
+        "Type": "integer",
+        "Value": 2023
+      },
+      {
+        "Name": "operational_data_year",
+        "Type": "integer",
+        "Value": 2024
+      },
+      {
+        "Name": "num_factories",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "num_markets",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "demand",
+        "Type": "list",
+        "Value": [
+          80,
+          70
+        ]
+      },
+      {
+        "Name": "a1",
+        "Type": "float",
+        "Value": 0.06
+      },
+      {
+        "Name": "b1",
+        "Type": "float",
+        "Value": 11.0
+      },
+      {
+        "Name": "p1",
+        "Type": "float",
+        "Value": 2.5
+      },
+      {
+        "Name": "a2",
+        "Type": "float",
+        "Value": 0.03
+      },
+      {
+        "Name": "b2",
+        "Type": "float",
+        "Value": 12.0
+      },
+      {
+        "Name": "p2",
+        "Type": "float",
+        "Value": 1.5
+      },
+      {
+        "Name": "transportation_costs",
+        "Type": "list",
+        "Value": [
+          [
+            2.4,
+            0.5
+          ],
+          [
+            4.0,
+            1.8
+          ]
+        ]
+      },
+      {
+        "Name": "capacity",
+        "Type": "list",
+        "Value": [
+          100,
+          100
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Similar multi-level optimization problems...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the air conditioning business...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Production data show that due to...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The 2023 supply chain audit report shows...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "JD Logistics needs to accurately...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Its intelligent scheduling system uses...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "In actual operation, the system will...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Operational data from 2024 shows...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Modern supply chain management systems...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Alibaba's Rhino Intelligent Manufacturing Platform...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "This dynamic optimization capability enables...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Specifically, the two-level supply chain...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "The demand for market 1 and...",
+        "Demand satisfaction constraints for markets 1 and 2"
+      ],
+      [
+        "14",
+        "The unit production cost function...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "where y₁,y₂ are the outputs...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "The unit transportation cost of...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "The upper limit of the production...",
+        "Production capacity constraints"
+      ],
+      [
+        "18",
+        "It is necessary to determine the quantity...",
+        "Defines decision variables and objective"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x11",
+        "Meaning": "units shipped from factory 1 to market 1",
+        "Type": "continuous",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "x12",
+        "Meaning": "units shipped from factory 1 to market 2",
+        "Type": "continuous",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "x21",
+        "Meaning": "units shipped from factory 2 to market 1",
+        "Type": "continuous",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "x22",
+        "Meaning": "units shipped from factory 2 to market 2",
+        "Type": "continuous",
+        "Range ": ">= 0"
+      },
+      {
+        "symbol": "y1",
+        "Meaning": "total output of factory 1",
+        "Type": "continuous",
+        "Range ": "0 <= y1 <= 100"
+      },
+      {
+        "symbol": "y2",
+        "Meaning": "total output of factory 2",
+        "Type": "continuous",
+        "Range ": "0 <= y2 <= 100"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Demand_Market1",
+        "x11 + x21 = 80",
+        "sentence numbers:13"
+      ],
+      [
+        "Demand_Market2",
+        "x12 + x22 = 70",
+        "sentence numbers:13"
+      ],
+      [
+        "Flow_Conservation_Factory1",
+        "y1 - x11 - x12 = 0",
+        "sentence numbers:15,18"
+      ],
+      [
+        "Flow_Conservation_Factory2",
+        "y2 - x21 - x22 = 0",
+        "sentence numbers:15,18"
+      ],
+      [
+        "Capacity_Factory1",
+        "y1 <= 100",
+        "sentence numbers:17"
+      ],
+      [
+        "Capacity_Factory2",
+        "y2 <= 100",
+        "sentence numbers:17"
+      ],
+      [
+        "Nonnegativity",
+        "x11, x12, x21, x22, y1, y2 >= 0",
+        "sentence numbers:15,18"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "It is necessary to determine the quantity of shipments from each factory to each market to meet demand and minimize the total cost (total cost = production cost + transportation cost).",
+      "Mathematical_expressions": "Minimize Z = 0.06*y1^2.5 + 11*y1 + 0.03*y2^1.5 + 12*y2 + 2.4*x11 + 0.5*x12 + 4*x21 + 1.8*x22"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3206.660171788",
+      "3206.66"
+    ],
+    "time_seconds": 61.48531289999664,
+    "total_tokens": 8213
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "3206.660171788",
+      "3206.66"
+    ],
+    "ground_truth": 3206.66
+  }
+}

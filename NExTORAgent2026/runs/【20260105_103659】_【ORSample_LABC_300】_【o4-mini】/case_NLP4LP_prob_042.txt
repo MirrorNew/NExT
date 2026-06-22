@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "There are two process routes for gold-plating coins: Process A and Process B. Process A requires 3 units of gold and 2 metal wires, and can plate 5 coins. Process B requires 5 units of gold and 3 metal wires, and can plate 7 coins. There are 500 units of gold and 300 metal wires available.\n\nNow consider that during large-scale continuous operation, the gold utilization efficiency exhibits a nonlinear effect: when Process A is run repeatedly, its gold consumption no longer increases linearly in proportion to 3 units of gold, but instead grows according to the $1.2$-th power of $(3\\times \\text{number of runs of Process A})$, i.e., the Process A component of total gold consumption is $(3\\times \\text{number of runs of Process A})^{1.2}$. The gold consumption of Process B remains linear as $5\\times \\text{number of runs of Process B}$, and metal wire consumption also remains linear.\n\nHow many times should each process be run, respectively, in order to maximize the total number of coins plated, subject to the constraints that total gold consumption does not exceed 500 units and total metal wire consumption does not exceed 300 wires?",
+    "answer": 700.0,
+    "index": "NLP4LP_prob_042",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 工艺 A 需要 3 单位黄金、2 根金属丝，并且可以镀 5 枚硬币。现有 500 单位黄金和 300 根金属丝可用。应分别运行多少次每种工艺流程，才能使可镀硬币的总数量最大化？, 修改后相关描述: 工艺 A 需要 3 单位黄金、2 根金属丝，并且可以镀 5 枚硬币。现有 500 单位黄金和 300 根金属丝可用。现在考虑到大规模连续运转时黄金利用效率会出现非线性效应：工艺 A 在重复运行时，其黄金消耗不再简单按 3 单位黄金成线性增长，而是按“(3×工艺 A 运行次数) 的 1.2 次方”这种方式增长，即总黄金消耗量中工艺 A 部分为 (3×工艺 A 运行次数)^1.2。工艺 B 的黄金消耗仍保持线性为 5×工艺 B 运行次数，金属丝消耗也保持线性。应分别运行多少次每种工艺流程，才能使在黄金总消耗不超过 500 单位且金属丝总消耗不超过 300 根的前提下，可镀硬币的总数量最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_042\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_053.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 27.604344500010484,
+    "total_tokens": 3015
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 700.0
+  }
+}

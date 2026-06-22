@@ -1,0 +1,597 @@
+{
+  "entry": {
+    "index": 4,
+    "question": "Malaysia United Chemical Trading Co., Ltd. is a company focusing on the import and export of polymer materials. The company has a complete transportation network in Southeast Asia and maintains long-term cooperation with multiple ports, storage centers and logistics partners. The company currently operates four polyvinyl chloride polymer production plants P1-P4, which are located on different islands. In order to meet the needs of customers in many places in the region, it is necessary to transport products to four major demand locations, namely D1-D4, by land and sea. In order to ensure that the company maintains its cost advantage in the fierce market competition, the logistics department is seeking a set of methods that can minimize transportation costs while meeting the resources and contract constraints of all parties. The overall goal is to reasonably dispatch the shipments of each factory under the premise of the existing transportation network and resource capacity, to ensure that the needs of customers in various places are met on time, and to control the total transportation cost to the minimum. \n\nRecently, due to the limited amount of polyvinyl chloride polymers that can be provided by the four factories every day, the production capacity of each factory is closely related to the supply of raw materials. If the daily shipment volume of the factory exceeds its own production capacity, it will cause production plan conflicts. It is necessary to ensure that the total shipment volume of each factory does not exceed its supply capacity. On the demand side, each demand location is a local large-scale pipe manufacturer, and the downstream order volume is rigid. If the shipment volume is lower than the actual demand, it will lead to a breach of contract. Fines are incurred, so it must be ensured that the total volume of goods received by each demand location is not less than its actual demand. In terms of transportation, the transportation network consists of land trunk lines and ocean liners. The transportation costs and times of different routes vary significantly. In order to avoid the safety and insurance risks caused by excessive use of a single route, the transportation volume from each factory to the demand location should follow the maximum carrying capacity of the line and shall not exceed 2,000 tons. In addition, the company’s first factory P1 signed an agreement with its largest customer D1, requiring at least 300 units of goods, and the company’s fourth factory P4 signed an agreement with customer D1, requiring at least 200 units of goods to be shipped directly from the designated factory to the customer’s location. In order to maintain a long-term cooperative relationship. In addition, part of the shipment to D3 is a high-priority order jointly developed with a third-party brand. The company's internal agreement stipulates that at least 20% of D3's demand must be jointly undertaken by P2 and P3 factories to ensure the stability of supply to key customers. In order to support the development of the southern market, the volume of goods shipped by P4 factory to southern locations (D2 and D3) must account for more than 70% of its total shipments, while the volume of goods shipped by P2 factory to southern locations must be less than 50% of its total shipments to fulfill its cooperation commitment to the local government. Only the lowest total transportation cost needs to be given. \n\nThe data table is as follows:\n\n| Factory | Penang Factory P1 | Kuala Lumpur Factory P2 | Ipoh Factory P3 | Malacca Factory P4 |\n| ---- | ---------- | ------------ | ---------- | ------------ |\n| Supply | 1000 | 1500 | 1200 | 800 |\n\n| Demand Location | Butterworth Transit Terminal D1 | Kuantan Manufacturing Park D2 | Klang Chemical Park D3 | Muar Distribution Center D4 |\n| -------- | ------------ | ------------ | ------------ | -------------- |\n| Demand | 900 | 1100 | 1000 | 500 |\n\n| Transportation Cost | D1 | D2 | D3 | D4 |\n| -------- | ---- | ---- | ---- | ---- |\n| P1 | 10 | 15 | 12 | 20 |\n| P2 | 14 | 13 | 16 | 18 |\n| P3 | 12 | 17 | 11 | 15 |\n| P4 | 19 | 14 | 18 | 13 |",
+    "answer": 45420.0,
+    "Parameters_List": [
+      {
+        "Name": "num_factories",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "num_demand_locations",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "factories",
+        "Type": "list",
+        "Value": [
+          "P1",
+          "P2",
+          "P3",
+          "P4"
+        ]
+      },
+      {
+        "Name": "demand_locations",
+        "Type": "list",
+        "Value": [
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ]
+      },
+      {
+        "Name": "factory_full_names",
+        "Type": "list",
+        "Value": [
+          "Penang Factory P1",
+          "Kuala Lumpur Factory P2",
+          "Ipoh Factory P3",
+          "Malacca Factory P4"
+        ]
+      },
+      {
+        "Name": "demand_full_names",
+        "Type": "list",
+        "Value": [
+          "Butterworth Transit Terminal D1",
+          "Kuantan Manufacturing Park D2",
+          "Klang Chemical Park D3",
+          "Muar Distribution Center D4"
+        ]
+      },
+      {
+        "Name": "supply",
+        "Type": "list",
+        "Value": [
+          1000,
+          1500,
+          1200,
+          800
+        ]
+      },
+      {
+        "Name": "demand",
+        "Type": "list",
+        "Value": [
+          900,
+          1100,
+          1000,
+          500
+        ]
+      },
+      {
+        "Name": "route_capacity_max",
+        "Type": "integer",
+        "Value": 2000
+      },
+      {
+        "Name": "min_shipment_P1_D1",
+        "Type": "integer",
+        "Value": 300
+      },
+      {
+        "Name": "min_shipment_P4_D1",
+        "Type": "integer",
+        "Value": 200
+      },
+      {
+        "Name": "min_share_P2_P3_for_D3",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "south_share_min_P4",
+        "Type": "float",
+        "Value": 0.7
+      },
+      {
+        "Name": "south_share_max_P2",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "cost",
+        "Type": "list",
+        "Value": [
+          [
+            10,
+            15,
+            12,
+            20
+          ],
+          [
+            14,
+            13,
+            16,
+            18
+          ],
+          [
+            12,
+            17,
+            11,
+            15
+          ],
+          [
+            19,
+            14,
+            18,
+            13
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Malaysia United Chemical Trading Co., Ltd. is a company focusing...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company currently operates four polyvinyl chloride polymer production plants P1-P4...",
+        "Defines the set of plants {P1,P2,P3,P4} and demand locations {D1,D2,D3,D4} that will be linked by shipment variables x_ij."
+      ],
+      [
+        "3",
+        "In order to ensure that the company maintains its cost advantage in the fierce market competition...",
+        "Introduces the optimization goal: minimize total transportation cost while satisfying network/resource constraints."
+      ],
+      [
+        "4",
+        "The overall goal is to reasonably dispatch the shipments of each factory under the premise of the existing transportation network and resource capacity...",
+        "Reinforces objective to minimize total transportation cost subject to capacity and demand satisfaction; no new mathematical constraint beyond others."
+      ],
+      [
+        "5",
+        "Recently, due to the limited amount of polyvinyl chloride polymers that can be provided by the four factories every day...",
+        "Introduces plant supply capacity parameters and shipment volume per factory; basis for per-plant supply constraints."
+      ],
+      [
+        "6",
+        "If the daily shipment volume of the factory exceeds its own production capacity, it will cause production plan conflicts...",
+        "Plant supply constraints: for each plant i, sum_j x_ij must not exceed its supply capacity."
+      ],
+      [
+        "7",
+        "It is necessary to ensure that the total shipment volume of each factory does not exceed its supply capacity.",
+        "Explicit supply-capacity constraints: for each plant i, Σ_j x_ij ≤ Supply_i."
+      ],
+      [
+        "8",
+        "On the demand side, each demand location is a local large-scale pipe manufacturer, and the downstream order volume is rigid...",
+        "Introduces fixed demand parameters for each demand location and the need to meet or exceed them."
+      ],
+      [
+        "9",
+        "If the shipment volume is lower than the actual demand, it will lead to a breach of contract...",
+        "Demand satisfaction constraints: for each demand j, sum_i x_ij must be at least its demand."
+      ],
+      [
+        "10",
+        "Fines are incurred, so it must be ensured that the total volume of goods received by each demand location is not less than its actual demand.",
+        "Explicit demand constraints: for each demand j, Σ_i x_ij ≥ Demand_j."
+      ],
+      [
+        "11",
+        "In terms of transportation, the transportation network consists of land trunk lines and ocean liners...",
+        "Describes network structure and heterogeneous costs/times; no direct additional quantitative constraint."
+      ],
+      [
+        "12",
+        "The transportation costs and times of different routes vary significantly.",
+        "Justifies route-dependent unit transportation costs c_ij used in the objective; no new constraints."
+      ],
+      [
+        "13",
+        "In order to avoid the safety and insurance risks caused by excessive use of a single route, the transportation volume from each factory to the demand location should follow the maximum carrying capacity of the line and shall not exceed 2,000 tons.",
+        "Per-route capacity constraint: for all plants i and demands j, x_ij ≤ 2000."
+      ],
+      [
+        "14",
+        "In addition, the company’s first factory P1 signed an agreement with its largest customer D1, requiring at least 300 units of goods...",
+        "Minimum shipment constraint: x_11 (P1→D1) ≥ 300."
+      ],
+      [
+        "15",
+        "and the company’s fourth factory P4 signed an agreement with customer D1, requiring at least 200 units of goods to be shipped directly from the designated factory to the customer’s location.",
+        "Minimum shipment constraint: x_41 (P4→D1) ≥ 200."
+      ],
+      [
+        "16",
+        "In order to maintain a long-term cooperative relationship.",
+        "No constraints"
+      ],
+      [
+        "17",
+        "In addition, part of the shipment to D3 is a high-priority order jointly developed with a third-party brand.",
+        "Motivation for a composition constraint on shipments to D3; no explicit formula yet."
+      ],
+      [
+        "18",
+        "The company's internal agreement stipulates that at least 20% of D3's demand must be jointly undertaken by P2 and P3 factories...",
+        "Priority-share constraint for D3: x_23 + x_33 ≥ 0.2 * Demand_D3."
+      ],
+      [
+        "19",
+        "In order to support the development of the southern market, the volume of goods shipped by P4 factory to southern locations (D2 and D3) must account for more than 70% of its total shipments...",
+        "Southern-share constraint for P4: x_42 + x_43 > 0.7 * (x_41 + x_42 + x_43 + x_44); in linear form modeled as x_42 + x_43 ≥ 0.7 * (x_41 + x_42 + x_43 + x_44)."
+      ],
+      [
+        "20",
+        "while the volume of goods shipped by P2 factory to southern locations must be less than 50% of its total shipments to fulfill its cooperation commitment to the local government.",
+        "Southern-share constraint for P2: x_22 + x_23 < 0.5 * (x_21 + x_22 + x_23 + x_24); in linear form modeled as x_22 + x_23 ≤ 0.5 * (x_21 + x_22 + x_23 + x_24)."
+      ],
+      [
+        "21",
+        "Only the lowest total transportation cost needs to be given.",
+        "Objective: minimize total transportation cost Σ_i Σ_j c_ij * x_ij."
+      ],
+      [
+        "22",
+        "The data table is as follows:",
+        "Introduces numerical parameters for supplies, demands, and transportation costs; no new structural constraint."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x11",
+        "Meaning": "Quantity shipped from plant P1 to demand location D1",
+        "Type": "continuous",
+        "Range ": "x11 ≥ 0, x11 ≤ 2000"
+      },
+      {
+        "symbol": "x12",
+        "Meaning": "Quantity shipped from plant P1 to demand location D2",
+        "Type": "continuous",
+        "Range ": "x12 ≥ 0, x12 ≤ 2000"
+      },
+      {
+        "symbol": "x13",
+        "Meaning": "Quantity shipped from plant P1 to demand location D3",
+        "Type": "continuous",
+        "Range ": "x13 ≥ 0, x13 ≤ 2000"
+      },
+      {
+        "symbol": "x14",
+        "Meaning": "Quantity shipped from plant P1 to demand location D4",
+        "Type": "continuous",
+        "Range ": "x14 ≥ 0, x14 ≤ 2000"
+      },
+      {
+        "symbol": "x21",
+        "Meaning": "Quantity shipped from plant P2 to demand location D1",
+        "Type": "continuous",
+        "Range ": "x21 ≥ 0, x21 ≤ 2000"
+      },
+      {
+        "symbol": "x22",
+        "Meaning": "Quantity shipped from plant P2 to demand location D2",
+        "Type": "continuous",
+        "Range ": "x22 ≥ 0, x22 ≤ 2000"
+      },
+      {
+        "symbol": "x23",
+        "Meaning": "Quantity shipped from plant P2 to demand location D3",
+        "Type": "continuous",
+        "Range ": "x23 ≥ 0, x23 ≤ 2000"
+      },
+      {
+        "symbol": "x24",
+        "Meaning": "Quantity shipped from plant P2 to demand location D4",
+        "Type": "continuous",
+        "Range ": "x24 ≥ 0, x24 ≤ 2000"
+      },
+      {
+        "symbol": "x31",
+        "Meaning": "Quantity shipped from plant P3 to demand location D1",
+        "Type": "continuous",
+        "Range ": "x31 ≥ 0, x31 ≤ 2000"
+      },
+      {
+        "symbol": "x32",
+        "Meaning": "Quantity shipped from plant P3 to demand location D2",
+        "Type": "continuous",
+        "Range ": "x32 ≥ 0, x32 ≤ 2000"
+      },
+      {
+        "symbol": "x33",
+        "Meaning": "Quantity shipped from plant P3 to demand location D3",
+        "Type": "continuous",
+        "Range ": "x33 ≥ 0, x33 ≤ 2000"
+      },
+      {
+        "symbol": "x34",
+        "Meaning": "Quantity shipped from plant P3 to demand location D4",
+        "Type": "continuous",
+        "Range ": "x34 ≥ 0, x34 ≤ 2000"
+      },
+      {
+        "symbol": "x41",
+        "Meaning": "Quantity shipped from plant P4 to demand location D1",
+        "Type": "continuous",
+        "Range ": "x41 ≥ 0, x41 ≤ 2000"
+      },
+      {
+        "symbol": "x42",
+        "Meaning": "Quantity shipped from plant P4 to demand location D2",
+        "Type": "continuous",
+        "Range ": "x42 ≥ 0, x42 ≤ 2000"
+      },
+      {
+        "symbol": "x43",
+        "Meaning": "Quantity shipped from plant P4 to demand location D3",
+        "Type": "continuous",
+        "Range ": "x43 ≥ 0, x43 ≤ 2000"
+      },
+      {
+        "symbol": "x44",
+        "Meaning": "Quantity shipped from plant P4 to demand location D4",
+        "Type": "continuous",
+        "Range ": "x44 ≥ 0, x44 ≤ 2000"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "P1_supply_capacity",
+        "x11 + x12 + x13 + x14 ≤ 1000",
+        "sentence numbers:5,6,7,22"
+      ],
+      [
+        "P2_supply_capacity",
+        "x21 + x22 + x23 + x24 ≤ 1500",
+        "sentence numbers:5,6,7,22"
+      ],
+      [
+        "P3_supply_capacity",
+        "x31 + x32 + x33 + x34 ≤ 1200",
+        "sentence numbers:5,6,7,22"
+      ],
+      [
+        "P4_supply_capacity",
+        "x41 + x42 + x43 + x44 ≤ 800",
+        "sentence numbers:5,6,7,22"
+      ],
+      [
+        "D1_demand_satisfaction",
+        "x11 + x21 + x31 + x41 ≥ 900",
+        "sentence numbers:8,9,10,22"
+      ],
+      [
+        "D2_demand_satisfaction",
+        "x12 + x22 + x32 + x42 ≥ 1100",
+        "sentence numbers:8,9,10,22"
+      ],
+      [
+        "D3_demand_satisfaction",
+        "x13 + x23 + x33 + x43 ≥ 1000",
+        "sentence numbers:8,9,10,22"
+      ],
+      [
+        "D4_demand_satisfaction",
+        "x14 + x24 + x34 + x44 ≥ 500",
+        "sentence numbers:8,9,10,22"
+      ],
+      [
+        "Route_capacity_P1D1",
+        "x11 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P1D2",
+        "x12 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P1D3",
+        "x13 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P1D4",
+        "x14 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P2D1",
+        "x21 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P2D2",
+        "x22 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P2D3",
+        "x23 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P2D4",
+        "x24 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P3D1",
+        "x31 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P3D2",
+        "x32 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P3D3",
+        "x33 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P3D4",
+        "x34 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P4D1",
+        "x41 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P4D2",
+        "x42 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P4D3",
+        "x43 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Route_capacity_P4D4",
+        "x44 ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "P1_D1_minimum_shipment",
+        "x11 ≥ 300",
+        "sentence numbers:14"
+      ],
+      [
+        "P4_D1_minimum_shipment",
+        "x41 ≥ 200",
+        "sentence numbers:15"
+      ],
+      [
+        "D3_priority_share_P2P3",
+        "x23 + x33 ≥ 0.2 * 1000",
+        "sentence numbers:17,18,22"
+      ],
+      [
+        "P4_southern_share",
+        "x42 + x43 ≥ 0.7 * (x41 + x42 + x43 + x44)",
+        "sentence numbers:19"
+      ],
+      [
+        "P2_southern_share",
+        "x22 + x23 ≤ 0.5 * (x21 + x22 + x23 + x24)",
+        "sentence numbers:20"
+      ],
+      [
+        "Nonnegativity_x11",
+        "x11 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x12",
+        "x12 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x13",
+        "x13 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x14",
+        "x14 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x21",
+        "x21 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x22",
+        "x22 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x23",
+        "x23 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x24",
+        "x24 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x31",
+        "x31 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x32",
+        "x32 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x33",
+        "x33 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x34",
+        "x34 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x41",
+        "x41 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x42",
+        "x42 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x43",
+        "x43 ≥ 0",
+        "sentence numbers:implied"
+      ],
+      [
+        "Nonnegativity_x44",
+        "x44 ≥ 0",
+        "sentence numbers:implied"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Only the lowest total transportation cost needs to be given.",
+      "Mathematical_expressions": "Minimize Z = 10*x11 + 15*x12 + 12*x13 + 20*x14 + 14*x21 + 13*x22 + 16*x23 + 18*x24 + 12*x31 + 17*x32 + 11*x33 + 15*x34 + 19*x41 + 14*x42 + 18*x43 + 13*x44"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "45420.0"
+    ],
+    "time_seconds": 28.710672900000645,
+    "total_tokens": 21315
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "45420.0"
+    ],
+    "ground_truth": 45420.0
+  }
+}

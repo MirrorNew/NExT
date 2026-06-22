@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A meal delivery company uses electric bicycles or electric scooters to deliver meals to customers. An electric bicycle can carry 8 meals and requires 3 units of electricity; an electric scooter can carry 5 meals and requires 2 units of electricity. Because the city is more favorable to electric scooters, at most 30% of the electric vehicles can be electric bicycles, and at least 20 electric scooters must be used. If the company has only 200 units of electricity available, how many vehicles of each type should be used in order to maximize the number of meals that can be delivered?\n\nIn addition, introduce the following extra rule: if the total number of meals planned to be delivered exceeds 250 meals (including 250), then the company must additionally activate a peak-period dispatch support system, which consumes an extra 10 units of electricity; if the total number of meals planned to be delivered does not exceed 250 meals, then this system does not need to be activated, and therefore this additional 10-unit electricity consumption is not incurred.",
+    "answer": 487.0,
+    "index": "NLP4LP_prob_154",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 如果公司只有 200 单位电量可用，应当分别使用多少辆这两种车辆，才能使可配送的餐食数量最大化？, 修改后相关描述: 如果公司只有 200 单位电量可用，应当分别使用多少辆这两种车辆，才能使可配送的餐食数量最大化？另外，引入如下额外规定：如果为了满足需求而计划配送的餐食总数超过 250 份（包括 250 份在内），则公司需要额外启用一套高峰期调度支持系统，该系统会额外消耗 10 单位电量；如果计划配送的餐食总数不超过 250 份，则不需要启用该系统，也就不产生这额外的 10 单位电量消耗。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_154\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_054.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "487.0"
+    ],
+    "time_seconds": 35.282295500001055,
+    "total_tokens": 2078
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "487.0"
+    ],
+    "ground_truth": 487.0
+  }
+}

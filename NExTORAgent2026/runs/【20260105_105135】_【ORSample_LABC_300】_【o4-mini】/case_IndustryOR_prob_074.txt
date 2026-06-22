@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "There are two products, A and B, and both must undergo two consecutive chemical reaction operations. Each unit of product A requires 2 hours in the first operation and 3 hours in the second operation; each unit of product B requires 3 hours in the first operation and 4 hours in the second operation. The available time for the first operation is 16 hours, and the available time for the second operation is 24 hours.\n\nFor every 1 unit of product B produced, 2 units of by-product C are simultaneously generated at no additional cost. At most 5 units of by-product C can be sold; any excess must be disposed of at a cost of 2 yuan per unit.\n\nThe profit from selling 1 unit of product A is 4 yuan, the profit from selling 1 unit of product B is 10 yuan, and the profit from selling 1 unit of by-product C is 3 yuan. Now a new process is introduced that creates product synergy effects: when product A, product B, and by-product C are produced simultaneously, additional synergy profit is generated. Specifically, suppose that within a certain time period, the quantities produced are $x$ units of product A, $y$ units of product B, and $z$ units of by-product C that can be sold; then, on top of the original profits above, the additional synergy profit equals $0.5\\times x\\times y\\times z$ yuan, where the coefficient 0.5 is a given constant.\n\nTo maximize the total profit (including the base profits of product A, product B, and by-product C, as well as the above synergy profit), formulate the optimization model for this problem.",
+    "answer": 83.66666,
+    "index": "IndustryOR_prob_074",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每销售 1 件产品 A 的利润为 4 元，每销售 1 件产品 B 的利润为 10 元，每销售 1 件副产品 C 的利润为 3 元。为使总利润最大，建立该问题的线性规划模型。 修改后相关描述: 每销售 1 件产品 A 的利润为 4 元，每销售 1 件产品 B 的利润为 10 元，每销售 1 件副产品 C 的利润为 3 元。现在引入一个新的工艺协同效应：当同时生产产品 A、产品 B 和副产品 C 时，会产生额外的协同利润。具体地，假设在一定时间段内生产的产品 A 数量为 x 件、产品 B 数量为 y 件、可销售的副产品 C 数量为 z 件，则在上述原有利润的基础上，额外增加的协同利润等于 0.5×x×y×z 元，其中系数 0.5 为给定常数。为使总利润最大（包括产品 A、产品 B、副产品 C 的基本利润以及上述协同利润），建立该问题的规划模型。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_074\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_003.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "83.66666666667"
+    ],
+    "time_seconds": 33.88666660001036,
+    "total_tokens": 3508
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "83.66666666667"
+    ],
+    "ground_truth": 83.66666
+  }
+}

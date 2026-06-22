@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A bakery produces almond croissants and pistachio croissants. Producing one almond croissant requires 5 units of butter and 8 units of flour. Producing one pistachio croissant requires 3 units of butter and 6 units of flour. The bakery has 600 units of butter and 800 units of flour. Since almond croissants are more popular, the output of almond croissants should be at least three times the output of pistachio croissants.\n\nConsidering that market demand fluctuates slightly within a month, the bakery plans multiple production batches within a month. Let $t$ denote the $t$-th batch of the month ($t$ is an integer from 1 to 12). The minimum required output of almond croissants varies periodically within a small range across batches. Specifically, based on the original requirement “the output of almond croissants should be at least three times the output of pistachio croissants,” in each batch $t$ the minimum required output is adjusted by a periodic coefficient based on a cosine function: this minimum-output requirement is equivalent to “the output of almond croissants should be at least the output of pistachio croissants multiplied by 3 and then multiplied by $[1 + 0.1 \\times \\cos(\\pi \\times \\text{(pistachio croissant output)} \\times t / 50)]$.” Here, 0.1 is the adjustment amplitude constant, and 50 is the period-control constant. That is, in each production batch, the output ratio between almond croissants and pistachio croissants fluctuates periodically within a small range with respect to the batch index $t$ and the pistachio croissant output, while remaining close to the original “3 times” requirement.\n\nIf producing one almond croissant takes 12 minutes and producing one pistachio croissant takes 10 minutes, then for a given batch $t=5$, how many of each type of croissant should be produced so that, subject to all the above conditions, the total production time in that batch is minimized?",
+    "answer": 0.0,
+    "index": "NLP4LP_prob_055",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 由于杏仁牛角面包更受欢迎，杏仁牛角面包的产量至少应为开心果牛角面包的 3 倍。 修改后相关描述: 由于杏仁牛角面包更受欢迎，杏仁牛角面包的产量至少应为开心果牛角面包的 3 倍。考虑到市场需求会在每月内略有波动，面包店计划在一个月内安排多次生产批次，用 t 表示当月第 t 批生产（t 取 1 到 12 的整数），杏仁牛角面包的最低产量要求会随着批次在小范围内周期性变化。具体地，在原本“杏仁牛角面包的产量至少应为开心果牛角面包的 3 倍”的基础上，每一批次 t 中，杏仁牛角面包的最低产量要求按一个以余弦函数为基础的周期性系数进行调整：该最低产量要求等价于“杏仁牛角面包的产量至少应为 开心果牛角面包产量 乘以 3 再乘以 [1 + 0.1 × cos(π × 开心果牛角面包产量 × t / 50)]”。这里 0.1 为调整幅度常数，50 为周期控制常数。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_055\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_077.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0"
+    ],
+    "time_seconds": 24.730091100005666,
+    "total_tokens": 3000
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "0.0"
+    ],
+    "ground_truth": 0.0
+  }
+}

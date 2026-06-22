@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A water vendor transports water from a glacier using small barrels and large barrels. A small barrel can hold 40 liters of water, and a large barrel can hold 100 liters of water. The vendor has at most 30 small barrels and 10 large barrels available. Since small barrels are easier to carry, the number of small barrels used must be at least twice the number of large barrels. If the ratio between the total number of barrels used and the number of large barrels (i.e., total barrels divided by large barrels) is at most 5, and at least 5 barrels must be large barrels, how many small barrels and how many large barrels should he use in order to maximize the total amount of glacier water he can transport?",
+    "answer": 2200.0,
+    "index": "NLP4LP_prob_169",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 如果他总共最多可以运输 25 个桶, 修改后相关描述: 如果他总共使用的桶数与大桶数量之间的比率（即总桶数除以大桶数）最多为 5",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_169\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_082.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "2200.0"
+    ],
+    "time_seconds": 34.28910160000669,
+    "total_tokens": 1818
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "2200.0"
+    ],
+    "ground_truth": 2200.0
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "entry": {
+    "index": 26,
+    "question": "In the renewable energy layout of the Northwest Branch of Kazdel National Energy Group, similar problems of optimizing the allocation of power generation resources are faced. The wind energy resources in the suburban areas are abundant, but limited by the power grid's absorption capacity, the marginal power generation benefits of wind farms will decrease significantly with the increase of installed capacity; in contrast, although the local photovoltaic power generation has a stable output per unit investment, it needs to build a supporting energy storage system to balance the difference in output during the day and night. \nThis investment optimization model reflects the typical characteristics of new energy development: wind power has a first-mover advantage but is limited by resource endowment, while photovoltaic power faces nonlinear growth in system costs. The practice of the Rhode Island Group in Kazdel shows this. Based on this, modern energy planning software usually introduces such nonlinear constraints into the traditional production function to more accurately simulate the efficiency loss in the actual system. \n\nCurrently, a certain area in Kazdel plans to allocate up to 10 billion yuan of investment to wind power ($W$ billion) and photovoltaic ($P$ billion) construction to maximize annual power generation. The annual power generation of wind farms decreases marginally with the increase of investment, which can be approximated as $F(W) = 5W - 0.01W^2$ (billion kWh); photovoltaic power generation is approximately proportional to investment $S(P) = 10P$ (billion kWh), but an additional fixed 5 units of power generation is required as startup energy. In addition, if the investment exceeds 2 billion yuan or more in photovoltaic power generation, a large amount of power generation will be consumed as the electricity for infrastructure construction. The power generation of this part and the amount of the excess part are in a standard quadratic relationship, that is, the coefficient is 1. The design variables are the investment amounts of wind power and photovoltaic power $W, P$ (billion yuan). The total power generation is wind power and photovoltaic power generation $F(W)+S(P)$ minus the consumed startup energy and electricity consumed for infrastructure construction. The total power generation is expected to be the largest. ",
+    "answer": 60.95,
+    "Parameters_List": [
+      {
+        "Name": "investment_limit",
+        "Type": "float",
+        "Value": 10
+      },
+      {
+        "Name": "F_linear_coeff",
+        "Type": "float",
+        "Value": 5
+      },
+      {
+        "Name": "F_quad_coeff",
+        "Type": "float",
+        "Value": -0.01
+      },
+      {
+        "Name": "S_linear_coeff",
+        "Type": "float",
+        "Value": 10
+      },
+      {
+        "Name": "startup_consumption",
+        "Type": "float",
+        "Value": 5
+      },
+      {
+        "Name": "P_threshold",
+        "Type": "float",
+        "Value": 2
+      },
+      {
+        "Name": "consumption_quad_coeff",
+        "Type": "float",
+        "Value": 1
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the renewable energy layout...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The wind energy resources...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "in contrast, although the local...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "This investment optimization model...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The practice of the Rhode Island Group...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Based on this, modern energy planning...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Currently, a certain area...",
+        "Constraint: total investment limit and non-negativity"
+      ],
+      [
+        "8",
+        "The annual power generation of...",
+        "Definition of wind generation function"
+      ],
+      [
+        "9",
+        "photovoltaic power generation is...",
+        "Definition of PV generation; startup energy = 5 (constant)"
+      ],
+      [
+        "10",
+        "In addition, if the investment...",
+        "Introduction of piecewise consumption for P>2"
+      ],
+      [
+        "11",
+        "The power generation of this part...",
+        "Completes the piecewise-quadratic consumption rule"
+      ],
+      [
+        "12",
+        "The design variables are the...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "The total power generation is wind...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "The total power generation is expected...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "W",
+        "Meaning": "Investment in wind power (billion yuan)",
+        "Type": "continuous",
+        "Range ": "0 <= W <= 10"
+      },
+      {
+        "symbol": "P",
+        "Meaning": "Investment in photovoltaic power (billion yuan)",
+        "Type": "continuous",
+        "Range ": "0 <= P <= 10"
+      },
+      {
+        "symbol": "F",
+        "Meaning": "Annual wind power generation (billion kWh)",
+        "Type": "continuous",
+        "Range ": "F = 5W - 0.01W^2"
+      },
+      {
+        "symbol": "S",
+        "Meaning": "Annual PV power generation before deductions (billion kWh)",
+        "Type": "continuous",
+        "Range ": "S = 10P"
+      },
+      {
+        "symbol": "C",
+        "Meaning": "Power consumed for PV infrastructure if P>2 (billion kWh)",
+        "Type": "continuous",
+        "Range ": "C = (max{P-2,0})^2"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Total investment limit",
+        "W + P <= 10",
+        "sentence numbers:7"
+      ],
+      [
+        "Non-negativity of investments",
+        "W >= 0, P >= 0",
+        "sentence numbers:7"
+      ],
+      [
+        "Wind power generation function",
+        "F = 5W - 0.01W^2",
+        "sentence numbers:8"
+      ],
+      [
+        "PV power generation function",
+        "S = 10P",
+        "sentence numbers:9"
+      ],
+      [
+        "Startup energy consumption",
+        "-5 (billion kWh, subtracted in objective)",
+        "sentence numbers:9"
+      ],
+      [
+        "PV infrastructure consumption",
+        "C = (max{P-2,0})^2",
+        "sentence numbers:10-11"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The total power generation is expected to be the largest.",
+      "Mathematical_expressions": "Z = F + S - 5 - C"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "60.9504950495"
+    ],
+    "time_seconds": 99.22319119999884,
+    "total_tokens": 17641
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "60.9504950495"
+    ],
+    "ground_truth": 60.95
+  }
+}

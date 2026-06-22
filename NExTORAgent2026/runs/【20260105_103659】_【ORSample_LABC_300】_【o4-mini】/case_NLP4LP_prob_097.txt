@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A pharmaceutical company produces skin ointment in batches, including regular batches and premium batches, for hospital procurement. Producing one regular batch requires 50 units of medicinal ingredient and 40 units of moisturizing ingredient. Producing one premium batch requires 40 units of medicinal ingredient and 60 units of moisturizing ingredient. The company currently has 3000 units of medicinal ingredient and 3500 units of moisturizing ingredient available.\n\nBecause premium batches sell better, the number of regular batches must be less than the number of premium batches. In addition, the company must produce at least 10 regular batches.\n\nIf one regular batch can treat 50 people, while one premium batch provides a nonlinear improvement to the overall treatment effect—so that its number of treatable people is no longer computed linearly as 30 people per batch, but instead computed in the form $(30\\times \\text{(number of premium batches)})^{1.02}$ (where the exponent 1.02 is a given correction coefficient)—then how many regular batches and premium batches, respectively, should be produced in order to maximize the number of people that can be treated?",
+    "answer": 2806.7382673987827,
+    "index": "NLP4LP_prob_097",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 若一批普通批次可治疗 50 人，而一批高级批次可治疗 30 人，那么应分别生产多少批普通批次和高级批次，才能使可治疗的人数最大化？, 修改后相关描述: 若一批普通批次可治疗 50 人，而一批高级批次对整体治疗效果有非线性提升作用，其可治疗人数不再按 30 人线性计算，而是按“(30×高级批次数量)^1.02”的形式计算（其中指数 1.02 为给定的修正系数），那么应分别生产多少批普通批次和高级批次，才能使可治疗的人数最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_097\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_075.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "2806.738267399"
+    ],
+    "time_seconds": 32.54013069999928,
+    "total_tokens": 2863
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "2806.738267399"
+    ],
+    "ground_truth": 2806.7382673987827
+  }
+}

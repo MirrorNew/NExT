@@ -1,0 +1,209 @@
+{
+  "entry": {
+    "index": 4,
+    "question": "As a medium-sized manufacturing enterprise, Xie's Company has recently faced the decision-making difficulties of product portfolio optimization and equipment resource allocation. The three types of equipment rented by the company for producing lathes have different technical characteristics and working time restrictions, which directly restricts the capacity configuration of the two main products. Market research shows that there are significant differences in the price elasticity of the two products, and industry practice requires that product II be kept in a specific proportion range in the total output. The production and operation department needs to balance equipment utilization and market demand response, avoiding both the waste of rental costs caused by idle equipment and the accelerated equipment loss caused by overload operation. \n\nIn the current industrial environment, this kind of production planning problem under multiple constraints is common in industries such as electronic product assembly and automobile parts manufacturing. Reasonable production decisions can not only improve the efficiency of equipment use, but also maximize profits through price strategy optimization. H Company is considering introducing a hybrid algorithm combining linear programming and integer programming, which has shown good application results in production optimization of similar companies. The finance department pays special attention to the impact of the model on cash flow, because equipment rental costs constitute an important part of the company's fixed costs, and product sales prices directly affect revenue levels. \n\nXie's Company rents three types of equipment A, B, and C to produce two products, Lathe I and II. The equipment hours required to produce each product and the available hours of the three types of equipment are shown in Table 6-1. \n\n| Product | Equipment A | Equipment B | Equipment C |\n| -------- | ----- | ----- | ----- |\n| Lathe I | 3 | 2 | 15 |\n| Lathe II | 4 | 1 | 2 |\n| Available hours | 1600 | 600 | 750 |\n\nThe production volume of Lathe II shall not be less than 30% of the total output of the two products and shall not exceed 60%. The quantities of two products $x_1$, $x_2$ (both integers) demanded are functions of their prices $P_1$, $P_2$:\n\n$x_1 = 5000 - 7P_1$\n\n$x_2 = 1000 - 10P_2$\n\nHow should the company balance demand and price to maximize the expected total sales price?",
+    "answer": 35464.8571,
+    "Parameters_List": [
+      {
+        "Name": "x2_proportion_range",
+        "Type": "list",
+        "Value": [
+          0.3,
+          0.6
+        ]
+      },
+      {
+        "Name": "demand_parameters",
+        "Type": "tuple",
+        "Value": {
+          "x1": {
+            "intercept": 5000,
+            "price_coef": 7
+          },
+          "x2": {
+            "intercept": 1000,
+            "price_coef": 10
+          }
+        }
+      },
+      {
+        "Name": "equipment_hours",
+        "Type": "tuple",
+        "Value": {
+          "Lathe I": {
+            "Equipment A": 3,
+            "Equipment B": 2,
+            "Equipment C": 15
+          },
+          "Lathe II": {
+            "Equipment A": 4,
+            "Equipment B": 1,
+            "Equipment C": 2
+          }
+        }
+      },
+      {
+        "Name": "available_hours",
+        "Type": "tuple",
+        "Value": {
+          "Equipment A": 1600,
+          "Equipment B": 600,
+          "Equipment C": 750
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "As a medium-sized manufacturing enterprise,...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The three types of equipment rented...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Market research shows that there are...",
+        "Proportion constraint on product II share: x₂/(x₁+x₂) ∈ [0.3, 0.6]"
+      ],
+      [
+        "4",
+        "The production and operation department needs...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "In the current industrial environment,...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Reasonable production decisions can not only...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "H Company is considering introducing...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The finance department pays special...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Xie's Company rents three types...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The equipment hours required to produce...",
+        "Equipment-capacity constraints for A, B, C"
+      ],
+      [
+        "11",
+        "The production volume of Lathe II shall not be less...",
+        "Proportion constraints: x₂ ≥ 0.3(x₁+x₂), x₂ ≤ 0.6(x₁+x₂)"
+      ],
+      [
+        "12",
+        "The quantities of two products x₁, x₂ (both integers)...",
+        "Demand-function constraints: x₁ + 7P₁ = 5000; x₂ + 10P₂ = 1000; integrality of x₁, x₂"
+      ],
+      [
+        "13",
+        "How should the company balance demand and price...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x₁",
+        "Meaning": "Production (demand) quantity of Lathe I",
+        "Type": "integer",
+        "Range ": "0 ≤ x₁ ≤ 5000"
+      },
+      {
+        "symbol": "x₂",
+        "Meaning": "Production (demand) quantity of Lathe II",
+        "Type": "integer",
+        "Range ": "0 ≤ x₂ ≤ 1000"
+      },
+      {
+        "symbol": "P₁",
+        "Meaning": "Selling price of Lathe I",
+        "Type": "continuous",
+        "Range ": "P₁ ≥ 0"
+      },
+      {
+        "symbol": "P₂",
+        "Meaning": "Selling price of Lathe II",
+        "Type": "continuous",
+        "Range ": "P₂ ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Equipment_A_capacity",
+        "3·x₁ + 4·x₂ ≤ 1600",
+        "sentence numbers: 10"
+      ],
+      [
+        "Equipment_B_capacity",
+        "2·x₁ + 1·x₂ ≤ 600",
+        "sentence numbers: 10"
+      ],
+      [
+        "Equipment_C_capacity",
+        "15·x₁ + 2·x₂ ≤ 750",
+        "sentence numbers: 10"
+      ],
+      [
+        "Product_II_share_lower",
+        "x₂ ≥ 0.3·(x₁ + x₂)",
+        "sentence numbers: 3, 11"
+      ],
+      [
+        "Product_II_share_upper",
+        "x₂ ≤ 0.6·(x₁ + x₂)",
+        "sentence numbers: 3, 11"
+      ],
+      [
+        "Demand_function_I",
+        "x₁ + 7·P₁ = 5000",
+        "sentence numbers: 12"
+      ],
+      [
+        "Demand_function_II",
+        "x₂ + 10·P₂ = 1000",
+        "sentence numbers: 12"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "How should the company balance demand and price to maximize the expected total sales price?",
+      "Mathematical_expressions": "Z = P₁·x₁ + P₂·x₂"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "35464.85714286",
+      "35464.86"
+    ],
+    "time_seconds": 71.84326790000341,
+    "total_tokens": 7857
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "35464.85714286",
+      "35464.86"
+    ],
+    "ground_truth": 35464.8571
+  }
+}

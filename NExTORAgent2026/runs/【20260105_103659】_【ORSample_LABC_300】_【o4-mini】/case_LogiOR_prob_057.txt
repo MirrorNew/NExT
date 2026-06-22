@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A logistics company needs to optimize its warehouse storage by selecting a subset of products to store so as to maximize profit, subject to warehouse space limitations and product compatibility constraints (due to safety or regulatory reasons, certain products cannot be stored together). The total warehouse capacity is 500 cubic meters. There are 8 candidate products, each with a specified volume, profit, and incompatibility restrictions. In practical analysis, to more accurately capture the nonlinear effect on space utilization efficiency as the total occupied volume approaches the warehouse limit, the company introduces a corrected power function on the total occupied volume: that is, the linear constraint “the sum of volumes of all selected products does not exceed 500 cubic meters” is replaced by “first sum the volumes of all selected products, then take the overall $1.2$-th power, and require it to not exceed the $1.2$-th power of 500,” where the exponent is fixed at $1.2$. The products and their attributes are as follows:\n\n| Product ID | Volume (m³) | Profit ($) | Incompatible Products |\n|------------|-------------|------------|------------------------|\n| 1          | 80          | 1200       | 3, 5                   |\n| 2          | 60          | 900        | 4                      |\n| 3          | 40          | 700        | 1, 6                   |\n| 4          | 70          | 1100       | 2, 7                   |\n| 5          | 50          | 800        | 1                      |\n| 6          | 30          | 500        | 3                      |\n| 7          | 90          | 1300       | 4                      |\n| 8          | 20          | 300        | None                   |",
+    "answer": 4200.0,
+    "index": "LogiOR_prob_057",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 仓库总容量为 500 立方米。, 修改后相关描述: 仓库总容量为 500 立方米，但为了刻画接近容量上限时空间利用的非线性效应，对所有选定产品体积之和整体取 1.2 次幂后进行比较，即要求“所有选定产品体积之和的 1.2 次幂不超过 500 的 1.2 次幂”，其中幂指数为 1.2。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_057\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_038.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4200.0"
+    ],
+    "time_seconds": 21.833817000006093,
+    "total_tokens": 2535
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4200.0"
+    ],
+    "ground_truth": 4200.0
+  }
+}

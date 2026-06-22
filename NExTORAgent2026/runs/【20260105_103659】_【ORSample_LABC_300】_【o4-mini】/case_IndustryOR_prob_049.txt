@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A store has formulated a purchasing and sales plan for a certain product from July to December. It is known that the nominal upper limit of the warehouse capacity is 500 units, and the inventory at the end of June is 200 units. Thereafter, purchasing is conducted at the beginning of each month. Assume that the purchase price and selling price of this product in each month are as shown in Table 1-21. How many units should be purchased and sold each month in order to maximize the total profit?\n\nOn the original basis, considering that the actual available warehouse capacity in different months may exhibit small periodic fluctuations around the nominal capacity due to periodic factors such as temperature, staff scheduling, and management efficiency, the setting is as follows: from July to December, let time be indexed by month number $t$ (July corresponds to $t=1$, August to $t=2$, …, December to $t=6$). Let the inventory level in that month be denoted by $x$ (unit: pieces). Then the upper limit of the actually available warehouse capacity in that month equals the nominal capacity of 500 units multiplied by an adjustment factor that varies slightly with time and inventory level. This adjustment factor varies according to a sinusoidal function, of the form $1 + 0.1 \\times \\cos(\\pi \\times x \\times t / 50)$, where $0.1$ indicates a maximum fluctuation amplitude of 10%, $\\pi$ takes the value 3.1416, and the denominator constant 50 is a given fixed value. Therefore, in any month $t$, the inventory level $x$ must not exceed $500 \\times [1 + 0.1 \\times \\cos(3.1416 \\times x \\times t / 50)]$ units.\n\nTable 1-21  \n| Month | 7 | 8 | 9 | 10 | 11 | 12 |\n|------|---|---|---|----|----|----|\n| Purchase price | 28 | 24 | 25 | 27 | 23 | 23 |\n| Selling price | 29 | 24 | 26 | 28 | 22 | 25 |",
+    "answer": 9437.0,
+    "index": "IndustryOR_prob_049",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “已知仓库容量不得超过 500 件，且 6 月底库存为 200 件。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_049\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_015.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 28.45258329999342,
+    "total_tokens": 3539
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 9437.0
+  }
+}

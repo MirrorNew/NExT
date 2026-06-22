@@ -1,0 +1,422 @@
+{
+  "entry": {
+    "index": 26,
+    "question": "Manager Zhang, who is in charge of production at Hailong Auto Parts Factory, is considering how to train and reasonably arrange workers to reduce production costs. The factory produces three different types of auto parts, A, B, and C, and has six workers of different levels. Each worker works 40 hours per week. Due to the different complexity of parts, workers with different skills are required to complete them. For example, the production line of type A parts is the most complex, requiring workers of levels 1 to 3 to operate, the production line of type B parts is second, and the production line of type C parts has the lowest requirement for worker level. The current number of workers of different levels, hourly wages, and weekly time spent on each production line are shown in Table C-7.\n\nTable C-7\n\n| Worker level | Number of people | Wage (yuan/h) | A (h) | B (h) | C (h) |\n| :------: | :--: | :----------: | :---: | :---: | :---: |\n| 1 | 4 | 15.0 | 160 | — | — |\n| 2 | 9 | 14.5 | 360 | — | — |\n| 3 | 20 | 13.0 | 600 | 200 | — |\n| 4 | 54 | 12.0 | — | 160 | 2000 |\n| 5 | 102 | 10.5 | — | 80 | 4000 |\n| 6 | 40 | 9.75 | — | — | 1600 |\n\nConsidering the changes in production tasks, Manager Zhang is training workers so that workers of different levels can work on the production lines of three types of accessories, A and B. \n\nWhether to train different workers to other production lines, training people requires different costs (the underlined part in Table 7 requires a one-time fee, and the more difficult and the lower the worker level, the higher the average training cost per person). The training cost table is as follows, and the part that does not need to be trained is replaced by 0. \n\n| Worker level | Training cost of line A (yuan/person) | Training cost of line B (yuan/person) | Training cost of line C (yuan/person) |\n| :------: | :------------------: | :------------------: | :------------------: |\n| 1 | 0 | 10 | 5 |\n| 2 | 0 | 20 | 5 |\n| 3 | 0 | 0 | 10 |\n| 4 | 15 | 0 | 0 |\n| 5 | 20 | 0 | 0 |\n| 6 | 25 | 20 | 0 |\n\n\n\nOf course, due to the differences in spare parts of A, B, and C, and the expertise of workers at different levels, the work efficiency of workers at different levels on different production lines is different. Table C-8 shows the work efficiency of workers at different levels on production lines A, B, and C. \n\nTable C-8\n\n| Worker level | A (pieces/h) | B (pieces/h) | C (items/h) |\n| :------: | :------: | :------: | :------: |\n| 1 | 2.00 | 1.20 | 2.00 |\n| 2 | 1.80 | 1.08 | 1.80 |\n| 3 | 1.62 | 2.50 | 1.62 |\n| 4 | 1.80 | 2.16 | 1.45 |\n| 5 | 1.62 | 1.93 | 1.31 |\n| 6 | 1.30 | 1.74 | 1.20 |\n\nIt is known that the demand for spare parts A, B, and C in each week of the next quarter is 1940, 1000, and 10060 pieces respectively. Manager Zhang preliminarily estimates that according to the current work schedule given in Table C-7 and the work efficiency given in Table C-8, the factory can be competent for the tasks of the next quarter, but the result of such an arrangement is that there is no flexible free time, and the salary expenditure is not economical. Therefore, a better weekly work schedule for workers is needed (specifically, at which level the workers of each level work), so as to minimize the salary expenditure for the tasks of the next quarter, and give the calculated total salary expenditure. ",
+    "answer": 100227.23,
+    "Parameters_List": [
+      {
+        "Name": "levels",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "lines",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "Name": "num_workers",
+        "Type": "list",
+        "Value": [
+          4,
+          9,
+          20,
+          54,
+          102,
+          40
+        ]
+      },
+      {
+        "Name": "wage",
+        "Type": "list",
+        "Value": [
+          15.0,
+          14.5,
+          13.0,
+          12.0,
+          10.5,
+          9.75
+        ]
+      },
+      {
+        "Name": "hours_per_worker",
+        "Type": "float",
+        "Value": 40.0
+      },
+      {
+        "Name": "total_hours_per_level",
+        "Type": "list",
+        "Value": [
+          160.0,
+          360.0,
+          800.0,
+          2160.0,
+          4080.0,
+          1600.0
+        ]
+      },
+      {
+        "Name": "initial_hours_assignment",
+        "Type": "list",
+        "Value": [
+          [
+            160.0,
+            0.0,
+            0.0
+          ],
+          [
+            360.0,
+            0.0,
+            0.0
+          ],
+          [
+            600.0,
+            200.0,
+            0.0
+          ],
+          [
+            0.0,
+            160.0,
+            2000.0
+          ],
+          [
+            0.0,
+            80.0,
+            4000.0
+          ],
+          [
+            0.0,
+            0.0,
+            1600.0
+          ]
+        ]
+      },
+      {
+        "Name": "training_cost_per_worker",
+        "Type": "list",
+        "Value": [
+          [
+            0.0,
+            10.0,
+            5.0
+          ],
+          [
+            0.0,
+            20.0,
+            5.0
+          ],
+          [
+            0.0,
+            0.0,
+            10.0
+          ],
+          [
+            15.0,
+            0.0,
+            0.0
+          ],
+          [
+            20.0,
+            0.0,
+            0.0
+          ],
+          [
+            25.0,
+            20.0,
+            0.0
+          ]
+        ]
+      },
+      {
+        "Name": "productivity",
+        "Type": "list",
+        "Value": [
+          [
+            2.0,
+            1.2,
+            2.0
+          ],
+          [
+            1.8,
+            1.08,
+            1.8
+          ],
+          [
+            1.62,
+            2.5,
+            1.62
+          ],
+          [
+            1.8,
+            2.16,
+            1.45
+          ],
+          [
+            1.62,
+            1.93,
+            1.31
+          ],
+          [
+            1.3,
+            1.74,
+            1.2
+          ]
+        ]
+      },
+      {
+        "Name": "weekly_demand",
+        "Type": "list",
+        "Value": [
+          1940.0,
+          1000.0,
+          10060.0
+        ]
+      },
+      {
+        "Name": "weeks_in_quarter",
+        "Type": "integer",
+        "Value": 13
+      },
+      {
+        "Name": "objective_total_quarter_cost_description",
+        "Type": "string",
+        "Value": "Minimize Z = 13 * sum_i sum_j w_i * h_i,j + sum_i sum_j n_i * T_i,j * y_i,j"
+      },
+      {
+        "Name": "time_availability_constraints_description",
+        "Type": "string",
+        "Value": "For each level i: sum_j h_i,j <= total_hours_per_level[i]"
+      },
+      {
+        "Name": "demand_constraints_description",
+        "Type": "string",
+        "Value": "For each line j: sum_i productivity[i][j] * h_i,j >= weekly_demand[j]"
+      },
+      {
+        "Name": "training_link_constraints_description",
+        "Type": "string",
+        "Value": "For each i,j: h_i,j <= 40 * num_workers[i] * y_i,j"
+      },
+      {
+        "Name": "optimal_total_quarter_salary_expenditure",
+        "Type": "float",
+        "Value": 5140000.0
+      },
+      {
+        "Name": "optimal_weekly_salary_expenditure",
+        "Type": "float",
+        "Value": 395000.0
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Manager Zhang, who is in charge...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The factory produces three different types...",
+        "Defines part-type index j ∈ {A,B,C}."
+      ],
+      [
+        "3",
+        "and has six workers of different levels...",
+        "Defines worker-level index i ∈ {1,…,6} and parameter n_i (number of workers of each level)."
+      ],
+      [
+        "4",
+        "Each worker works 40 hours per week...",
+        "Defines parameter H = 40 (hours per worker per week)."
+      ],
+      [
+        "5",
+        "Due to the different complexity of parts...",
+        "Defines feasibility/qualification structure by level and line but no explicit numeric constraint beyond defining which (i,j) pairs are allowed."
+      ],
+      [
+        "6",
+        "For example, the production line of type A...",
+        "Refines feasibility: A requires levels 1–3, B is intermediate, C is lowest requirement; can be modeled by allowing all level i to work on lines j with training as needed."
+      ],
+      [
+        "7",
+        "The current number of workers of different levels...",
+        "From Table C-7: defines parameters n_i, w_i, and original allocations but no hard constraint to keep same allocation in new plan."
+      ],
+      [
+        "8",
+        "Considering the changes in production tasks...",
+        "Introduces decision to train workers for different lines; leads to training decision variables y_{ij}."
+      ],
+      [
+        "9",
+        "Whether to train different workers to other production lines...",
+        "Defines training cost parameters c^{train}_{ij} (0 for combinations not needing training); implies training–assignment link constraints between x_{ij} and y_{ij}."
+      ],
+      [
+        "10",
+        "Of course, due to the differences in spare parts...",
+        "Introduces productivity parameters p_{ij} (pieces/hour) by level and line from Table C-8."
+      ],
+      [
+        "11",
+        "It is known that the demand for spare parts A, B, and C...",
+        "Defines demand parameters D_A = 1940, D_B = 1000, D_C = 10060; implies demand satisfaction constraints."
+      ],
+      [
+        "12",
+        "Manager Zhang preliminarily estimates that according...",
+        "States current schedule meets demand but with no slack; no additional constraints for new optimization."
+      ],
+      [
+        "13",
+        "Therefore, a better weekly work schedule for workers is needed...",
+        "Defines objective: minimize total salary expenditure (and implicitly training cost) subject to meeting demands; motivates worker-availability and demand constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "i",
+        "Meaning": "Index of worker level (1 to 6)",
+        "Type": "integer",
+        "Range ": "i ∈ {1,2,3,4,5,6}"
+      },
+      {
+        "symbol": "j",
+        "Meaning": "Index of production line / part type (A,B,C)",
+        "Type": "integer",
+        "Range ": "j ∈ {A,B,C}"
+      },
+      {
+        "symbol": "n_i",
+        "Meaning": "Number of workers of level i",
+        "Type": "integer",
+        "Range ": "n_1=4, n_2=9, n_3=20, n_4=54, n_5=102, n_6=40"
+      },
+      {
+        "symbol": "w_i",
+        "Meaning": "Hourly wage of a level-i worker (yuan/h)",
+        "Type": "continuous",
+        "Range ": "w_1=15.0, w_2=14.5, w_3=13.0, w_4=12.0, w_5=10.5, w_6=9.75"
+      },
+      {
+        "symbol": "H",
+        "Meaning": "Weekly working hours per worker",
+        "Type": "continuous",
+        "Range ": "H = 40"
+      },
+      {
+        "symbol": "p_{ij}",
+        "Meaning": "Productivity of a level-i worker on line j (pieces/hour)",
+        "Type": "continuous",
+        "Range ": "Given by Table C-8 for all i=1..6, j∈{A,B,C}"
+      },
+      {
+        "symbol": "c^{train}_{ij}",
+        "Meaning": "Training cost per level-i worker to be qualified for line j (yuan/person)",
+        "Type": "continuous",
+        "Range ": "Given by training cost table; c^{train}_{ij} ≥ 0"
+      },
+      {
+        "symbol": "D_A",
+        "Meaning": "Weekly demand for part A (pieces/week)",
+        "Type": "continuous",
+        "Range ": "D_A = 1940"
+      },
+      {
+        "symbol": "D_B",
+        "Meaning": "Weekly demand for part B (pieces/week)",
+        "Type": "continuous",
+        "Range ": "D_B = 1000"
+      },
+      {
+        "symbol": "D_C",
+        "Meaning": "Weekly demand for part C (pieces/week)",
+        "Type": "continuous",
+        "Range ": "D_C = 10060"
+      },
+      {
+        "symbol": "x_{ij}",
+        "Meaning": "Number of level-i workers assigned to production line j (worker-count per week)",
+        "Type": "integer",
+        "Range ": "x_{ij} ≥ 0 and x_{ij} ≤ n_i for all i=1..6, j∈{A,B,C}"
+      },
+      {
+        "symbol": "y_{ij}",
+        "Meaning": "Training/qualification decision: 1 if level-i workers are (or become) qualified for line j via training; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y_{ij} ∈ {0,1} for all i=1..6, j∈{A,B,C}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Worker availability by level",
+        "x_{iA} + x_{iB} + x_{iC} ≤ n_i,  ∀ i = 1,…,6",
+        "sentence numbers:3,4,13"
+      ],
+      [
+        "Demand satisfaction for part A",
+        "H * Σ_{i=1}^6 (p_{iA} * x_{iA}) ≥ D_A",
+        "sentence numbers:10,11,13"
+      ],
+      [
+        "Demand satisfaction for part B",
+        "H * Σ_{i=1}^6 (p_{iB} * x_{iB}) ≥ D_B",
+        "sentence numbers:10,11,13"
+      ],
+      [
+        "Demand satisfaction for part C",
+        "H * Σ_{i=1}^6 (p_{iC} * x_{iC}) ≥ D_C",
+        "sentence numbers:10,11,13"
+      ],
+      [
+        "Training–assignment link",
+        "x_{ij} ≤ n_i * y_{ij},  ∀ i=1,…,6, j∈{A,B,C}",
+        "sentence numbers:5,8,9"
+      ],
+      [
+        "Binary domain of training variables",
+        "y_{ij} ∈ {0,1},  ∀ i=1,…,6, j∈{A,B,C}",
+        "sentence numbers:8,9"
+      ],
+      [
+        "Nonnegativity and integrality of assignment variables",
+        "x_{ij} ≥ 0, integer,  ∀ i=1,…,6, j∈{A,B,C}",
+        "sentence numbers:2,3,4,13"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Therefore, a better weekly work schedule for workers is needed ... so as to minimize the salary expenditure for the tasks of the next quarter, and give the calculated total salary expenditure.",
+      "Mathematical_expressions": "Minimize Z = Σ_{i=1}^6 Σ_{j∈{A,B,C}} (x_{ij} * H * w_i) + Σ_{i=1}^6 Σ_{j∈{A,B,C}} (n_i * c^{train}_{ij} * y_{ij})"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "5140000.0"
+    ],
+    "time_seconds": 20.71072099999583,
+    "total_tokens": 13917
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "5140000.0"
+    ],
+    "ground_truth": 100227.23
+  }
+}

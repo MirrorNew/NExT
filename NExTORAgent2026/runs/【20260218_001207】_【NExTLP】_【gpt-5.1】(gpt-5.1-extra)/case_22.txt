@@ -1,0 +1,280 @@
+{
+  "entry": {
+    "index": 22,
+    "question": "Xinyuan Hydropower Co., Ltd. is promoting the \"smart watershed\" construction project. As one of the demonstration projects, Chenxi Reservoir has introduced a zoned water transfer scheduling system for the first time. Different downstream areas will directly receive the water released from the reservoir. At the same time, in the new round of green energy transformation, the power generation efficiency of Chenxi Reservoir has been raised to the main assessment indicator, and water supply demand has become a basic premise that must be guaranteed.\n\nThe company has set up a new power generation reward mechanism: due to the high initial head and good power generation efficiency, the power generation in the first two periods is calculated as twice the water release; and the head decreases in the later period, the third and fourth periods are calculated as twice the water release. The power generation in a period is equal to the water release itself. In order to cope with the diversified regional water supply needs, Chenxi Reservoir needs to reasonably allocate the total water release according to the maximum demand limits of different regions, and avoid the system burden caused by excessive water supply in various regions. \n\nThe company hopes to formulate a scientific and reasonable four-period scheduling plan this time to **maximize the total power generation** and ensure that the water supply demand in the downstream area is not affected. \n\n**In terms of supply**, the current water volume of Chenxi Reservoir is 1 million cubic meters, with a fixed natural inflow in each period, and all the inflow enters the reservoir capacity. There is no natural loss during the dispatch period, and it can be dispatched freely, but it cannot be discarded or artificially increased. **In terms of demand**, downstream demand is divided into two areas, area A and area B, and each period has a corresponding maximum water supply demand limit. The sum of the actual water supply in each area should be equal to the current water release, and each shall not exceed the corresponding maximum demand limit. \n\n**In terms of transportation**, the total water release of the reservoir in each period shall not exceed 1 million cubic meters, and the water release must be greater than or equal to 0. The final inventory of the reservoir in each period is maintained between 0 and 2 million cubic meters. At the end of each period, The change in water volume must satisfy the water balance: that is, the reservoir storage is equal to the previous period's storage plus the current period's inflow minus the current total water release. \n\n**In terms of power generation**, the power generation of Chenxi Reservoir is directly related to the water release. In the first and second periods, the power generation is twice the water release, and in the third and fourth periods, the power generation is 1 times the water release. In addition, in order to maintain overall operational safety, the company requires that after the end of the 4 periods, the Chenxi Reservoir's storage volume must not be less than 200,000 cubic meters in preparation for the next period of scheduling. Based on the above scenario and description, please give the calculated total power generation. (The units for the numbers in the following table are: 10,000 cubic meters)\n\n| Period $t$ | Inflow $I_t$ | Maximum water supply in region A | Maximum water supply in region B | Minimum water supply in region A | Minimum water supply in region B | Power generation rate |\n| :------: | :----------: | :---------------: | :---------------: | ----------------- | ----------------- | -------- |\n| 1 | 80 | 20 | 10 | 10 | 8 | 0.31 |\n| 2 | 50 | 40 | 30 | 20 | 20 | 1.55 |\n| 3 | 20 | 55 | 40 | 30 | 30 | 2.05 |\n| 4 | 0 | 50 | 40 | 20 | 34 | 0.65 |",
+    "answer": 333.08,
+    "Parameters_List": [
+      {
+        "Name": "initial_storage_10k_m3",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "num_periods",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "storage_lower_bound_10k_m3",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "storage_upper_bound_10k_m3",
+        "Type": "integer",
+        "Value": 200
+      },
+      {
+        "Name": "final_storage_min_10k_m3",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "release_lower_bound_10k_m3",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "release_upper_bound_10k_m3",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "units",
+        "Type": "string",
+        "Value": "10000 m3"
+      },
+      {
+        "Name": "Table_1_periods",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "Name": "Table_1_inflow_10k_m3",
+        "Type": "list",
+        "Value": [
+          80,
+          50,
+          20,
+          0
+        ]
+      },
+      {
+        "Name": "Table_1_max_supply_region_A_10k_m3",
+        "Type": "list",
+        "Value": [
+          20,
+          40,
+          55,
+          50
+        ]
+      },
+      {
+        "Name": "Table_1_max_supply_region_B_10k_m3",
+        "Type": "list",
+        "Value": [
+          10,
+          30,
+          40,
+          40
+        ]
+      },
+      {
+        "Name": "Table_1_min_supply_region_A_10k_m3",
+        "Type": "list",
+        "Value": [
+          10,
+          20,
+          30,
+          20
+        ]
+      },
+      {
+        "Name": "Table_1_min_supply_region_B_10k_m3",
+        "Type": "list",
+        "Value": [
+          8,
+          20,
+          30,
+          34
+        ]
+      },
+      {
+        "Name": "Table_1_power_generation_rate",
+        "Type": "list",
+        "Value": [
+          0.31,
+          1.55,
+          2.05,
+          0.65
+        ]
+      },
+      {
+        "Name": "power_weight_periods_1_to_4",
+        "Type": "list",
+        "Value": [
+          2,
+          2,
+          1,
+          1
+        ]
+      },
+      {
+        "Name": "total_initial_plus_inflow_10k_m3",
+        "Type": "integer",
+        "Value": 250
+      },
+      {
+        "Name": "max_total_release_given_final_storage_min_10k_m3",
+        "Type": "integer",
+        "Value": 230
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Current initial water storage...",
+        "Initial storage S0 = 100 (10,000 m³)."
+      ],
+      [
+        "2",
+        "There are 4 periods...",
+        "Define periods t = 1,2,3,4 with fixed inflow It each period."
+      ],
+      [
+        "3",
+        "No natural loss...",
+        "Mass conservation: all inflow enters storage; no extra source or sink besides releases."
+      ],
+      [
+        "4",
+        "Total release per period...",
+        "Release bounds: 0 ≤ Rt ≤ 100 for t = 1..4."
+      ],
+      [
+        "5",
+        "Storage St after each period...",
+        "Storage bounds: 0 ≤ St ≤ 200 for t = 1..4."
+      ],
+      [
+        "6",
+        "Water balance: St = St-1...",
+        "Water balance constraint: St = St-1 + It − Rt for t = 1..4 with S0 = 100."
+      ],
+      [
+        "7",
+        "Downstream has two regions...",
+        "Linkage: At + Bt = Rt for t = 1..4."
+      ],
+      [
+        "8",
+        "For each period and region...",
+        "Regional bounds: At^min ≤ At ≤ At^max; Bt^min ≤ Bt ≤ Bt^max for t = 1..4."
+      ],
+      [
+        "9",
+        "Generation in period 1 and 2...",
+        "Power generation in period t: PGt = rate_t × Rt with given rate_t."
+      ],
+      [
+        "10",
+        "Total power generation is...",
+        "Objective: maximize Σ_t PGt = Σ_t rate_t × Rt."
+      ],
+      [
+        "11",
+        "Final storage after period 4...",
+        "Terminal storage: S4 ≥ 20 (in addition to 0 ≤ S4 ≤ 200)."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "R_t",
+        "Meaning": "Total water release of the reservoir in period t (10,000 m³).",
+        "Type": "continuous",
+        "Range ": "0 ≤ R_t ≤ 100 for t = 1,2,3,4"
+      },
+      {
+        "symbol": "A_t",
+        "Meaning": "Water supply to region A in period t (10,000 m³).",
+        "Type": "continuous",
+        "Range ": "A_t^min ≤ A_t ≤ A_t^max for t = 1,2,3,4"
+      },
+      {
+        "symbol": "B_t",
+        "Meaning": "Water supply to region B in period t (10,000 m³).",
+        "Type": "continuous",
+        "Range ": "B_t^min ≤ B_t ≤ B_t^max for t = 1,2,3,4"
+      },
+      {
+        "symbol": "S_t",
+        "Meaning": "Reservoir storage at the end of period t (10,000 m³).",
+        "Type": "continuous",
+        "Range ": "0 ≤ S_t ≤ 200 for t = 1,2,3,4 and S_4 ≥ 20"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Water_balance",
+        "S_1 = 100 + 80 - R_1; S_2 = S_1 + 50 - R_2; S_3 = S_2 + 20 - R_3; S_4 = S_3 - R_4",
+        "sentence numbers:6"
+      ],
+      [
+        "Storage_bounds",
+        "0 ≤ S_t ≤ 200 for t = 1,2,3,4",
+        "sentence numbers:5"
+      ],
+      [
+        "Terminal_storage",
+        "S_4 ≥ 20",
+        "sentence numbers:11"
+      ],
+      [
+        "Release_bounds",
+        "0 ≤ R_t ≤ 100 for t = 1,2,3,4",
+        "sentence numbers:4"
+      ],
+      [
+        "Supply_release_linkage",
+        "A_t + B_t = R_t for t = 1,2,3,4",
+        "sentence numbers:7"
+      ],
+      [
+        "Region_A_supply_limits",
+        "10 ≤ A_1 ≤ 20; 20 ≤ A_2 ≤ 40; 30 ≤ A_3 ≤ 55; 20 ≤ A_4 ≤ 50",
+        "sentence numbers:8"
+      ],
+      [
+        "Region_B_supply_limits",
+        "8 ≤ B_1 ≤ 10; 20 ≤ B_2 ≤ 30; 30 ≤ B_3 ≤ 40; 34 ≤ B_4 ≤ 40",
+        "sentence numbers:8"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Maximize the total power generation over the four periods.",
+      "Mathematical_expressions": "Max Z = 0.31 R_1 + 1.55 R_2 + 2.05 R_3 + 0.65 R_4"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "333.08"
+    ],
+    "time_seconds": 57.035691099998076,
+    "total_tokens": 44775
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "333.08"
+    ],
+    "ground_truth": 333.08
+  }
+}

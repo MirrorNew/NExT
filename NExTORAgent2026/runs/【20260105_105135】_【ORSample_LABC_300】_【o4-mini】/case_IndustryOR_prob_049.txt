@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A store has formulated a procurement and sales plan for a certain product from July to December. It is known that the warehouse capacity must not exceed 500 units, and the inventory at the end of June is 200 units. Thereafter, procurement is carried out at the beginning of each month. Assume that the monthly procurement prices and selling prices of this product are as shown in Table 1-21. How many units should be procured and sold in each month to maximize total profit?\n\nIn addition, introduce the following condition: if the total procurement quantity over the six months from July to December exceeds 2000 units, then starting from the month in which the excess occurs and continuing through the end of December, the store must pay an additional fixed warehousing management fee of 3000 yuan each month; if the total procurement quantity from July to December does not exceed 2000 units, then this additional fee does not occur.\n\nTable 1-21  \n| Month | 7  | 8  | 9  | 10 | 11 | 12 |\n|------|----|----|----|----|----|----|\n| Procurement price | 28 | 24 | 25 | 27 | 23 | 23 |\n| Selling price     | 29 | 24 | 26 | 28 | 22 | 25 |",
+    "answer": 9100.0,
+    "index": "IndustryOR_prob_049",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 已知仓库容量不得超过 500 件，且 6 月底库存为 200 件。此后，每个月初进行进货。假设该商品在各月的进货价和销售价如表 1-21 所示。应在每个月进货和销售多少件，才能使总收益最大？ 修改后相关描述: 已知仓库容量不得超过 500 件，且 6 月底库存为 200 件。此后，每个月初进行进货。假设该商品在各月的进货价和销售价如表 1-21 所示。应在每个月进货和销售多少件，才能使总收益最大？另外，引入以下条件：从 7 月到 12 月这 6 个月中，所有月份的进货量合计如果超过 2000 件，则从超过的当月开始直到 12 月底，商店每个月都需要额外支付 3000 元的仓储管理固定费用；如果 7 月到 12 月的进货总量不超过 2000 件，则不发生这项额外费用。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_049\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_015.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "13800.0"
+    ],
+    "time_seconds": 44.764190400004736,
+    "total_tokens": 4661
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "13800.0"
+    ],
+    "ground_truth": 9100.0
+  }
+}

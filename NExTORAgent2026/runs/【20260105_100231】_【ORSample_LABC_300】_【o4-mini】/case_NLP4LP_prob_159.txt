@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A snack exporter ships snacks to customers using small and large suitcases. One small suitcase can hold 50 servings of snacks, and one large suitcase, under the traditional linear estimate, can hold 80 servings. However, in actual transportation, due to changes in stacking methods and space utilization, the effective loading capacity of large suitcases exhibits a slight nonlinear increase as the number of large suitcases increases. To account for this effect, assume that when shipping $x$ large suitcases, the total number of snack servings that the large suitcases can carry is no longer simply computed as $80x$, but is estimated as the “$1.02$-th power of $(80x)$,” i.e., the total effective loading capacity of the large suitcases is $(80x)^{1.02}$.\n\nMost customers prefer small suitcases, so the number of small suitcases used must be at least twice the number of large suitcases. The exporter has at most 70 small suitcases and 50 large suitcases available. If he must ship at least 15 large suitcases, and in total can ship at most 70 suitcases, then—given that the total loading capacity of small suitcases is still computed linearly as 50 servings per small suitcase (i.e., the total number of snack servings in small suitcases is $50$ times the number of small suitcases), while the total loading capacity of large suitcases is computed as $(80x)^{1.02}$—how many small and large suitcases, respectively, should he ship in order to maximize the total number of snack servings that can be transported?",
+    "answer": 4488.524250616573,
+    "index": "NLP4LP_prob_159",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 一个小号行李箱可以装 50 份零食，而一个大号行李箱可以装 80 份零食。, 修改后相关描述: 一个小号行李箱可以装 50 份零食，而一个大号行李箱在传统线性估算下可以装 80 份零食，但当发送 x 个大号行李箱时，大号行李箱所能运送的零食总数按 (80x)^1.2 来估算。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_159\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_084.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 35.234098100001574,
+    "total_tokens": 2108
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 4488.524250616573
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "entry": {
+    "index": 8,
+    "question": "In the consumer goods manufacturing industry, companies usually need to develop differentiated pricing strategies for different customer groups to maximize overall profits. A daily necessities manufacturer faces two types of customers, Customer A and Customer B, and adopts different demand-price functions. Customer A is usually more sensitive to price, and demand decreases as price increases; while Customer B may represent the high-end market or bulk purchasing customers, and its price elasticity is higher. This market segmentation strategy is more common in the fast-moving consumer goods industry. For example, when Procter & Gamble sells similar products in different regions or channels, it adjusts the pricing structure according to local consumption capacity. \n\nThe company faces the dual constraints of fixed costs (such as machine wear and tear) and variable costs (single-piece production costs) during the production process. Optimizing production decisions requires not only considering marginal benefits, but also balancing the demand elasticity of different customer groups. By establishing a profit maximization model, companies can scientifically formulate production plans to avoid profit losses due to over-reliance on a single customer group. This type of problem is typical in operations management and microeconomics, and its solution can be extended to production optimization scenarios with multiple product lines and multiple markets. \n\nCurrently, the demand of customer A is $x_1$, and the price of each piece is $70-4x_1$ (unit: 10,000 yuan), and the demand of customer B is $x_2$, and the price of each piece is $150-15x_2$ (unit: 10,000 yuan). The cost of producing one product for the enterprise is 150,000 yuan, and after all products are produced, an additional 1 million yuan of machine loss fee must be considered. Requirement: How should the enterprise produce and supply the two types of customers with the product number $x_1$ and $x_2$ to maximize profit? Modeling and giving the maximum profit",
+    "answer": 389.0,
+    "Parameters_List": [
+      {
+        "Name": "price_A",
+        "Type": "list",
+        "Value": [
+          70.0,
+          -4.0
+        ]
+      },
+      {
+        "Name": "price_B",
+        "Type": "list",
+        "Value": [
+          150.0,
+          -15.0
+        ]
+      },
+      {
+        "Name": "unit_production_cost",
+        "Type": "integer",
+        "Value": 150000
+      },
+      {
+        "Name": "machine_loss_fee",
+        "Type": "integer",
+        "Value": 1000000
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the consumer goods manufacturing industry, companies...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "A daily necessities manufacturer faces two...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Customer A is usually more sensitive to price,...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "This market segmentation strategy is more common...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "For example, when Procter & Gamble sells similar...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The company faces the dual constraints of fixed costs...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Optimizing production decisions requires not only...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "By establishing a profit maximization model, companies...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "This type of problem is typical in operations management...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Currently, the demand of customer A is x₁, and the price of each piece is 70-4x₁...",
+        "Extracted variables x₁, x₂, p₁, p₂; constraints: p₁ = 70 - 4 x₁, p₂ = 150 - 15 x₂; x₁ ≥ 0, x₂ ≥ 0"
+      ],
+      [
+        "11",
+        "The cost of producing one product for the enterprise is 150,000 yuan, and after all products are produced, an additional 1 million yuan...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Requirement: How should the enterprise produce and supply the two types of customers with the product number x₁ and x₂ to maximize profit?...",
+        "Defines optimization objective (maximize profit)"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x₁",
+        "Meaning": "Demand quantity sold to Customer A (units)",
+        "Type": "continuous",
+        "Range ": "x₁ ≥ 0"
+      },
+      {
+        "symbol": "x₂",
+        "Meaning": "Demand quantity sold to Customer B (units)",
+        "Type": "continuous",
+        "Range ": "x₂ ≥ 0"
+      },
+      {
+        "symbol": "p₁",
+        "Meaning": "Unit selling price to Customer A (10,000 yuan)",
+        "Type": "continuous",
+        "Range ": "p₁ = 70 - 4 x₁"
+      },
+      {
+        "symbol": "p₂",
+        "Meaning": "Unit selling price to Customer B (10,000 yuan)",
+        "Type": "continuous",
+        "Range ": "p₂ = 150 - 15 x₂"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Price function for A",
+        "p₁ = 70 - 4 x₁",
+        "sentence numbers:10"
+      ],
+      [
+        "Price function for B",
+        "p₂ = 150 - 15 x₂",
+        "sentence numbers:10"
+      ],
+      [
+        "Non-negativity of x₁",
+        "x₁ ≥ 0",
+        "sentence numbers:10"
+      ],
+      [
+        "Non-negativity of x₂",
+        "x₂ ≥ 0",
+        "sentence numbers:10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Requirement: How should the enterprise produce and supply the two types of customers with the product number x₁ and x₂ to maximize profit?...",
+      "Mathematical_expressions": "π = x₁(70 - 4x₁) + x₂(150 - 15x₂) - 15(x₁ + x₂) - 100"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "392.8125"
+    ],
+    "time_seconds": 194.5388582000014,
+    "total_tokens": 19964
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "392.8125"
+    ],
+    "ground_truth": 389.0
+  }
+}

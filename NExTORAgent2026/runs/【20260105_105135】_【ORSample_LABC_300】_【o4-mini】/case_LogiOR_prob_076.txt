@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "Problem Description:  \nA mining company operates three ore beneficiation plants (P1, P2, P3), with monthly processing capacities of 8000, 10000, and 12000 tons, respectively. The company sources ore from four different mines (M1, M2, M3, M4), with monthly supply limits of 6000, 9000, 7000, and 5000 tons, respectively.\n\nEach ore type has different characteristics:  \n- Metal recovery rate: M1 = 85%, M2 = 92%, M3 = 78%, M4 = 88%  \n- Processing cost per ton: M1 = $12, M2 = $18, M3 = $10, M4 = $15  \n- Sulfur content (impurity): M1 = 1.2%, M2 = 0.8%, M3 = 2.1%, M4 = 1.5%  \n- Maximum allowable overall average sulfur content across all beneficiation plants: 1.5%\n\nThe unit transportation costs from mines to beneficiation plants are given in the table below:  \n|       |  P1 |  P2 |  P3 |  \n|-------|-----|-----|-----|  \n|  M1   | $4  | $6  | $5  |  \n|  M2   | $7  | $5  | $8  |  \n|  M3   | $3  | $4  | $6  |  \n|  M4   | $8  | $6  | $7  |\n\nThe company needs to determine the optimal ore allocation plan from each mine to each beneficiation plant, such that, under all operational constraints, the total metal recovery is maximized and the total cost does not exceed $500,000.\n\nWhen constructing the objective function for maximizing total metal recovery, introduce the following nonlinear relationship:  \nFor the ore shipped from each mine to each beneficiation plant, its contribution to total metal recovery is no longer computed linearly as “metal recovery rate times shipped quantity”, but instead is computed as the product of “0.00001, the shipped quantity on that route, one-thousandth of the corresponding beneficiation plant’s total throughput, and the company-wide total ore throughput.” Specifically:\n\n- $0.00001$ is a given constant coefficient;  \n- The shipped quantity on a given route is the decision variable for shipments from that mine to that beneficiation plant (in tons);  \n- The corresponding beneficiation plant’s total throughput is the sum of shipments from all mines into that beneficiation plant (a linear combination of decision variables);  \n- The company-wide total ore throughput is the sum of shipments from all mines to all beneficiation plants (also a linear combination of decision variables).  \n\nUnder this nonlinear specification, while keeping the other conditions and constraints above unchanged, find the shipment allocation that maximizes total metal recovery and ensures that the total cost does not exceed $500,000.",
+    "answer": 69347.25770095363,
+    "index": "LogiOR_prob_076",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 公司需要确定从各矿山到各选矿厂的最佳矿石分配方案，在满足所有运营约束的前提下，使总金属回收量最大化，并使总成本不超过$500,000。目标函数中总金属回收量通常按“金属回收率乘以运输量”这种线性方式计算。 , 修改后相关描述: 公司需要确定从各矿山到各选矿厂的最佳矿石分配方案，在满足所有运营约束的前提下，使总金属回收量最大化，并使总成本不超过$500,000。在构建总金属回收量最大化的目标函数时，引入非线性：每一条矿山到选矿厂的运输流向对总金属回收量的贡献按“0.000001 乘以该流向的运输量、该选矿厂的总处理量以及全公司总处理量三者的乘积”来计算，其中 0.000001 为给定常数系数，这样原本类似于 y=kx 的线性关系被改为 y=0.000001·x·z·t 形式的多变量相乘的非线性关系。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_076\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_044.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 47.05565090000164,
+    "total_tokens": 3811
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 69347.25770095363
+  }
+}

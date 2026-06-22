@@ -1,0 +1,200 @@
+{
+  "entry": {
+    "index": 35,
+    "question": "In the design of industrial reducers, the precise matching of the number of gear teeth directly determines the performance and efficiency of the transmission system. Taking the Siemens Flender reducer as an example, its planetary gear system needs to achieve a specific reduction ratio through the precise matching of multi-stage gears. Engineering practice shows that when the actual transmission ratio deviates from the theoretical value by more than 0.5%, it will shorten the bearing life and generate audible noise pollution. The measured data of a wind power gearbox shows that the transmission error can be controlled within 0.1% by using the optimized tooth number combination, while greatly improving the system efficiency. Modern gear design software (such as RomaxDESIGNER) uses genetic algorithms to solve such discrete optimization problems. By establishing a solution space containing hundreds of groups of candidate tooth numbers, the system can automatically select the combination that minimizes the transmission ratio error while meeting constraints such as strength and noise. \n\nA gear transmission system consists of four meshing gears, and the goal is to achieve a specific total transmission ratio. In this mechanical system, the reducer is used to convert the high speed of the input shaft into a lower output speed through the gear transmission system. The desired transmission ratio determines the degree of deceleration. The expected transmission ratio is $R_{exp}=1/6.931$, that is, the input speed is reduced to the original **1/6.931**. The actual transmission ratio can be expressed as $R$, which is the ratio of the product of the number of teeth of the 2nd and 3rd gears to the product of the number of teeth of the 1st and 4th gears. In order to achieve the target transmission ratio, the objective function is defined as the square of the deviation $f=(R_{exp} - R)^2$. All tooth number range limits are shown in the following table. It is hoped to adjust the number of teeth of the four meshing gears to minimize the transmission ratio deviation. Gives result for x1\n\n| Gear number | Tooth range |\n| ---------- | ------------ |\n| Gear 1 (x1) | 12 ≤ x1 ≤ 50 |\n| Gear 2 (x2) | 20 ≤ x2≤ 40 |\n| Gear 3 (x3) | 10 ≤ x3≤ 50 |\n| Gear 4 (x4) | 30 ≤ x4≤ 60 |",
+    "answer": 0.0,
+    "Parameters_List": [
+      {
+        "Name": "deviation_threshold",
+        "Type": "float",
+        "Value": 0.005
+      },
+      {
+        "Name": "error_tolerance",
+        "Type": "float",
+        "Value": 0.001
+      },
+      {
+        "Name": "R_exp",
+        "Type": "float",
+        "Value": 0.144279
+      },
+      {
+        "Name": "Table_1_Tooth_Range",
+        "Type": "tuple",
+        "Value": {
+          "x1": [
+            12,
+            50
+          ],
+          "x2": [
+            20,
+            40
+          ],
+          "x3": [
+            10,
+            50
+          ],
+          "x4": [
+            30,
+            60
+          ]
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the design of industrial...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the Siemens Flender...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Engineering practice shows...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The measured data of a wind...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Modern gear design software...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "By establishing a solution...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "A gear transmission system...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "In this mechanical system...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The desired transmission ratio...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The expected transmission ratio is...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The actual transmission ratio can...",
+        "Extract constraint: R = (x2*x3)/(x1*x4)"
+      ],
+      [
+        "12",
+        "In order to achieve the target...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "All tooth number range limits are...",
+        "Extract constraints: 12 ≤ x1 ≤ 50; 20 ≤ x2 ≤ 40; 10 ≤ x3 ≤ 50; 30 ≤ x4 ≤ 60"
+      ],
+      [
+        "14",
+        "It is hoped to adjust the number...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "Number of teeth of Gear 1",
+        "Type": "integer",
+        "Range ": "[12, 50]"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "Number of teeth of Gear 2",
+        "Type": "integer",
+        "Range ": "[20, 40]"
+      },
+      {
+        "symbol": "x3",
+        "Meaning": "Number of teeth of Gear 3",
+        "Type": "integer",
+        "Range ": "[10, 50]"
+      },
+      {
+        "symbol": "x4",
+        "Meaning": "Number of teeth of Gear 4",
+        "Type": "integer",
+        "Range ": "[30, 60]"
+      },
+      {
+        "symbol": "R",
+        "Meaning": "Actual transmission ratio",
+        "Type": "continuous",
+        "Range ": "(0, ∞)"
+      },
+      {
+        "symbol": "f",
+        "Meaning": "Squared transmission‐ratio deviation",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Ratio_Definition",
+        "R - (x2*x3)/(x1*x4) = 0",
+        "sentence numbers:11"
+      ],
+      [
+        "Gear1_Tooth_Range",
+        "12 ≤ x1 ≤ 50",
+        "sentence numbers:13"
+      ],
+      [
+        "Gear2_Tooth_Range",
+        "20 ≤ x2 ≤ 40",
+        "sentence numbers:13"
+      ],
+      [
+        "Gear3_Tooth_Range",
+        "10 ≤ x3 ≤ 50",
+        "sentence numbers:13"
+      ],
+      [
+        "Gear4_Tooth_Range",
+        "30 ≤ x4 ≤ 60",
+        "sentence numbers:13"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "In order to achieve the target transmission ratio, the objective function is defined as the square of the deviation f=(R_exp - R)^2.",
+      "Mathematical_expressions": "f = (R_exp - R)^2"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 1063.6212809999997,
+    "total_tokens": 297051
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 0.0
+  }
+}

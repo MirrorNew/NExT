@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "The Li family has 5 children: Alice, Bob, Charlie, Diana, and Ella. The cost of taking Alice is 1000 dollars, Bob is 900 dollars, Charlie is 600 dollars, Diana is 500 dollars, and Ella is 700 dollars. Which children should the couple take so as to minimize the final cost of taking children?\n\nThey can take at most 3 children on this trip.\n\nBob is the youngest, so the Li family must take him.\n\nIf the couple takes Alice, then they will not take Diana, because Alice does not get along with her.\n\nIf the couple takes Bob, then they will not take Charlie, because Bob does not get along with him.\n\nIf they take Charlie, then they must also take Diana.\n\nIf they take Diana, then they must also take Ella.\n\nAlthough the cost is not low, the Li family still decides to take at least two children.\n\nIn addition, the Li family has an extra family discount rule: if Alice, Diana, and Ella are all taken on this trip, then an additional “family bundle service fee” is added on top of the total cost. This service fee equals 200 dollars multiplied by the product of the three decision variables indicating whether to take Alice, whether to take Diana, and whether to take Ella. Specifically, if all three are taken, an additional 200 dollars is added; otherwise, this additional cost is 0. Moreover, considering various contingencies, the final cost is the $1.02$-th power of the total cost after calculation.",
+    "answer": 1854.4,
+    "index": "IndustryOR_prob_072",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 尾段为“尽管费用不低，李家还是决定至少带两个孩子。”之后没有任何关于额外费用或优惠的描述。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_072\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_028.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 28.44873180000286,
+    "total_tokens": 3631
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 1854.4
+  }
+}

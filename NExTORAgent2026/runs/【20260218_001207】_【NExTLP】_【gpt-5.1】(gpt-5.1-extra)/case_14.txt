@@ -1,0 +1,480 @@
+{
+  "entry": {
+    "index": 14,
+    "question": "The community security department under Huadun Security Group is like a precision-run company/factory. It ensures the safe operation of the community by building a complete patrol \"transportation network\". Various positions are linked together like assembly line operations. The management needs to comprehensively consider the human \"cost/resource\" investment and service level, formulate a scientific scheduling plan to balance safety quality and operating expenses, and ensure that the community security network can be covered around the clock and efficiently under limited human resources. The current task is to formulate a plan for the community's monthly scheduling throughout the year, minimize the total number of shifts in all shifts in a single month, so as to ensure service continuity and balance employee qualifications.\n\nIn terms of supply, the community has a total of 8 full-time security guards (one team leader) available for scheduling. Each security guard can work at most one shift per day to ensure adequate rest, and the number of working days per week does not exceed 6 days (the team leader needs to work seven days). In terms of sitting shifts, each security guard cannot work more than 3 times a week to prevent excessive fatigue.\n In terms of demand, one month is calculated as four weeks, with each week including Monday to Sunday, and two shifts (day shift and night shift). Each shift requires at least 3 security guards and a maximum of 4 security guards on duty. At the same time, each shift must have one security guard patrolling, one security guard on duty, and at least one security guard handling official business in the community. \nIt is necessary to ensure that the roles of patrolling, on duty, and handling official business meet the minimum number of personnel and the upper limit. \nIn addition, on Fridays and weekends (day shift), 2 security guards are required to handle official business to cope with the peak of weekend business. Each security guard must have at least one day in a month. Full weekends off to meet physical and mental health needs. In order to prevent excessive repetition of a single role, the total number of patrols and shifts of the same security guard per week cannot exceed 4 times. \n\nIf on duty from Monday to Thursday, all security teams will receive 30 yuan for the day shift and 37 yuan for the night shift. On Fridays and weekends, the day shift will receive 40 yuan, the night shift will receive 47 yuan, and each patrol can receive an additional 7 yuan. The team leader will receive an additional 97 yuan per week. Consider how much salary is paid in a month after calculating the shift schedule. Only the total salary that needs to be paid needs to be given. \n\nShift requirements and roles\n\n| Shift Type | Minimum Number of Personnel | Maximum Number of Personnel | Patrol | On-duty | Business Processing (Non-Friday/Workday) | Business Processing (Friday and Weekend Day Shift) |\n| -------- | -------- | -------- | ---- | ---- | ------------------------- | -------------------------- |\n| Day Shift | 3 | 4 | 1 | 1 | ≥1 | 2 |\n| Night Shift | 3 | 4 | 1 | 1 | ≥1 | ≥1 |\n\nBasic Security Parameters\n\n| Security Number | Maximum Number of Shifts per Day | Maximum Number of Days per Week |\n| --------- | ---------------- | ---------------- |\n| A (Team Leader) | 1 | 7 |\n| B-H (Team Members) | 1 | 6 |",
+    "answer": "None",
+    "Parameters_List": [
+      {
+        "Name": "num_guards_total",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "num_team_leaders",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "num_team_members",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "weeks_per_month",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "days_per_week",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "shifts_per_day",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "min_guards_per_shift",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "max_guards_per_shift",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "leader_max_days_per_week",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "member_max_days_per_week",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "max_shifts_per_day_per_guard",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "max_sitting_shifts_per_week_per_guard",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "min_patrol_per_shift",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "min_onduty_per_shift",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "min_business_per_shift_weekday_non_fri",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "min_business_per_shift_fri_weekend_day",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "min_business_per_night_shift",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "max_patrol_plus_onduty_per_guard_per_week",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "min_full_weekends_off_per_guard_per_month",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "day_shift_pay_mon_thu",
+        "Type": "integer",
+        "Value": 30
+      },
+      {
+        "Name": "night_shift_pay_mon_thu",
+        "Type": "integer",
+        "Value": 37
+      },
+      {
+        "Name": "day_shift_pay_fri_weekend",
+        "Type": "integer",
+        "Value": 40
+      },
+      {
+        "Name": "night_shift_pay_fri_weekend",
+        "Type": "integer",
+        "Value": 47
+      },
+      {
+        "Name": "patrol_bonus_per_shift",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "leader_bonus_per_week",
+        "Type": "integer",
+        "Value": 97
+      },
+      {
+        "Name": "required_shifts_per_week",
+        "Type": "integer",
+        "Value": 14
+      },
+      {
+        "Name": "required_guard_shifts_per_week_min",
+        "Type": "integer",
+        "Value": 42
+      },
+      {
+        "Name": "max_guard_shifts_per_week_from_day_limits",
+        "Type": "integer",
+        "Value": 49
+      },
+      {
+        "Name": "max_guard_shifts_per_week_from_sitting_limits",
+        "Type": "integer",
+        "Value": 24
+      },
+      {
+        "Name": "feasible_schedule_exists",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "total_salary_per_month_defined",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "shift_type_min_max_staff_and_roles",
+        "Type": "list",
+        "Value": [
+          {
+            "shift_type": "day",
+            "min_total_staff": 3,
+            "max_total_staff": 4,
+            "min_patrol": 1,
+            "min_onduty": 1,
+            "min_business_non_fri_weekday": 1,
+            "min_business_fri_weekend_day": 2
+          },
+          {
+            "shift_type": "night",
+            "min_total_staff": 3,
+            "max_total_staff": 4,
+            "min_patrol": 1,
+            "min_onduty": 1,
+            "min_business_any_night": 1
+          }
+        ]
+      },
+      {
+        "Name": "weekly_capacity_vs_demand_summary",
+        "Type": "list",
+        "Value": [
+          {
+            "description": "required_guard_shifts_per_week_min",
+            "value": 42
+          },
+          {
+            "description": "max_guard_shifts_from_day_limits",
+            "value": 49
+          },
+          {
+            "description": "max_guard_shifts_from_sitting_limits",
+            "value": 24
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The community security department...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "It ensures the safe operation...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Various positions are linked...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The management needs to comprehensively...",
+        "High-level goal; no explicit mathematical constraint, indicates coverage and cost trade-off"
+      ],
+      [
+        "5",
+        "The current task is to formulate...",
+        "Defines objective: minimize total number of assigned shifts in a month"
+      ],
+      [
+        "6",
+        "In terms of supply, the community...",
+        "Defines staff set I={A,…,H}, A is team leader"
+      ],
+      [
+        "7",
+        "Each security guard can work at most...",
+        "At most one shift per person per day; team members work ≤6 days/week; team leader works 7 days/week"
+      ],
+      [
+        "8",
+        "In terms of sitting shifts, each security...",
+        "Each guard has at most 3 on-duty (sitting) shifts per week"
+      ],
+      [
+        "9",
+        "In terms of demand, one month is...",
+        "Defines planning horizon: 4 weeks, 7 days/week, 2 shifts/day"
+      ],
+      [
+        "10",
+        "Each shift requires at least 3...",
+        "Each shift must have 3–4 guards assigned"
+      ],
+      [
+        "11",
+        "At the same time, each shift must...",
+        "Each shift: exactly 1 patrol, exactly 1 on-duty, at least 1 business-processing guard"
+      ],
+      [
+        "12",
+        "It is necessary to ensure that the roles...",
+        "Reinforces minimum/maximum role requirements; consistent with previous constraints"
+      ],
+      [
+        "13",
+        "In addition, on Fridays and weekends...",
+        "Friday & weekend day shifts require exactly 2 business-processing guards"
+      ],
+      [
+        "14",
+        "Each security guard must have at least...",
+        "Each guard must have at least one full weekend (Sat+Sun) off in the month"
+      ],
+      [
+        "15",
+        "In order to prevent excessive repetition...",
+        "Each guard has at most 4 patrol-role assignments per week (anti-repetition)"
+      ],
+      [
+        "16",
+        "If on duty from Monday to Thursday...",
+        "Defines wage parameters (Mon–Thu): day=30, night=37; used for salary computation"
+      ],
+      [
+        "17",
+        "On Fridays and weekends, the day shift...",
+        "Defines wage parameters (Fri–Sun): day=40, night=47; patrol bonus=7; used for salary"
+      ],
+      [
+        "18",
+        "The team leader will receive an additional...",
+        "Defines leader bonus: 97 per week; used for salary"
+      ],
+      [
+        "19",
+        "Consider how much salary is paid...",
+        "Output metric: compute total monthly salary given schedule"
+      ],
+      [
+        "20",
+        "Only the total salary that needs...",
+        "Output requirement; no constraint"
+      ],
+      [
+        "21",
+        "Shift requirements and roles...",
+        "Table heading; no constraints"
+      ],
+      [
+        "22",
+        "Shift Type | Minimum Number...",
+        "Defines meaning of role and personnel columns; detailed in subsequent rows"
+      ],
+      [
+        "23",
+        "Day Shift | 3 | 4 | 1...",
+        "Day shift: 3–4 staff; patrol=1; on-duty=1; business (non-Fri weekdays) ≥1; business (Fri & weekend day) =2"
+      ],
+      [
+        "24",
+        "Night Shift | 3 | 4 | 1...",
+        "Night shift: 3–4 staff; patrol=1; on-duty=1; business ≥1 on all nights"
+      ],
+      [
+        "25",
+        "Basic Security Parameters...",
+        "Table heading; no constraints"
+      ],
+      [
+        "26",
+        "Security Number | Maximum Number...",
+        "Defines columns for per-guard limits"
+      ],
+      [
+        "27",
+        "A (Team Leader) | 1 | 7...",
+        "Leader A: ≤1 shift/day, ≤7 days/week; interpreted as 7 days/week together with sentence 7"
+      ],
+      [
+        "28",
+        "B-H (Team Members) | 1 | 6...",
+        "Members B–H: ≤1 shift/day, ≤6 days/week"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{i,w,d,s}",
+        "Meaning": "1 if guard i works shift s on day d of week w; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y_{i,w,d,s,r}",
+        "Meaning": "1 if guard i is assigned role r (Patrol, Duty, Business) in shift (w,d,s); 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "z_{i,w}",
+        "Meaning": "1 if guard i has a full weekend (Sat and Sun) off in week w; 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Single shift per day",
+        "∑_{s∈S} x_{i,w,d,s} ≤ 1,  ∀ i∈I, ∀ w∈W, ∀ d∈D",
+        "sentence numbers:7,27,28"
+      ],
+      [
+        "Weekly days for team members",
+        "∑_{d∈D} ∑_{s∈S} x_{i,w,d,s} ≤ 6,  ∀ i∈{B,…,H}, ∀ w∈W",
+        "sentence numbers:7,28"
+      ],
+      [
+        "Weekly days for team leader",
+        "∑_{d∈D} ∑_{s∈S} x_{A,w,d,s} = 7,  ∀ w∈W",
+        "sentence numbers:7,27"
+      ],
+      [
+        "Sitting shifts limit per week",
+        "∑_{d∈D} ∑_{s∈S} y_{i,w,d,s,Duty} ≤ 3,  ∀ i∈I, ∀ w∈W",
+        "sentence numbers:8"
+      ],
+      [
+        "Min personnel per shift",
+        "∑_{i∈I} x_{i,w,d,s} ≥ 3,  ∀ w∈W, ∀ d∈D, ∀ s∈S",
+        "sentence numbers:10,23,24"
+      ],
+      [
+        "Max personnel per shift",
+        "∑_{i∈I} x_{i,w,d,s} ≤ 4,  ∀ w∈W, ∀ d∈D, ∀ s∈S",
+        "sentence numbers:10,23,24"
+      ],
+      [
+        "Role assignment consistency",
+        "∑_{r∈R} y_{i,w,d,s,r} ≤ x_{i,w,d,s},  ∀ i∈I, ∀ w∈W, ∀ d∈D, ∀ s∈S",
+        "sentence numbers:11,12"
+      ],
+      [
+        "Exactly 1 patrol per shift",
+        "∑_{i∈I} y_{i,w,d,s,Patrol} = 1,  ∀ w∈W, ∀ d∈D, ∀ s∈S",
+        "sentence numbers:11,23,24"
+      ],
+      [
+        "Exactly 1 on-duty per shift",
+        "∑_{i∈I} y_{i,w,d,s,Duty} = 1,  ∀ w∈W, ∀ d∈D, ∀ s∈S",
+        "sentence numbers:11,23,24"
+      ],
+      [
+        "Business ≥1 on Mon–Thu",
+        "∑_{i∈I} y_{i,w,d,s,Business} ≥ 1,  ∀ w∈W, ∀ d∈{Mon,Tue,Wed,Thu}, ∀ s∈S",
+        "sentence numbers:11,23,24"
+      ],
+      [
+        "Business=2 on Friday day",
+        "∑_{i∈I} y_{i,w,Fri,Day,Business} = 2,  ∀ w∈W",
+        "sentence numbers:13,23"
+      ],
+      [
+        "Business=2 on weekend days",
+        "∑_{i∈I} y_{i,w,d,Day,Business} = 2,  ∀ w∈W, ∀ d∈{Sat,Sun}",
+        "sentence numbers:13,23"
+      ],
+      [
+        "Business ≥1 on all nights",
+        "∑_{i∈I} y_{i,w,d,Night,Business} ≥ 1,  ∀ w∈W, ∀ d∈D",
+        "sentence numbers:11,24"
+      ],
+      [
+        "Full weekend off definition",
+        "x_{i,w,Sat,Day} + x_{i,w,Sat,Night} + x_{i,w,Sun,Day} + x_{i,w,Sun,Night} ≤ 4·(1 - z_{i,w}),  ∀ i∈I, ∀ w∈W",
+        "sentence numbers:14"
+      ],
+      [
+        "At least one full weekend off",
+        "∑_{w∈W} z_{i,w} ≥ 1,  ∀ i∈I",
+        "sentence numbers:14"
+      ],
+      [
+        "Patrol count limit per week",
+        "∑_{d∈D} ∑_{s∈S} y_{i,w,d,s,Patrol} ≤ 4,  ∀ i∈I, ∀ w∈W",
+        "sentence numbers:15"
+      ],
+      [
+        "Index structure",
+        "w∈{1,2,3,4}, d∈{Mon,Tue,Wed,Thu,Fri,Sat,Sun}, s∈{Day,Night}",
+        "sentence numbers:9"
+      ],
+      [
+        "Guard set",
+        "I = {A,B,C,D,E,F,G,H}, A is leader, B–H are members",
+        "sentence numbers:6,27,28"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The current task is to formulate a plan for the community's monthly scheduling throughout the year, minimize the total number of shifts in all shifts in a single month...",
+      "Mathematical_expressions": "min  ∑_{i∈I} ∑_{w∈W} ∑_{d∈D} ∑_{s∈S} x_{i,w,d,s}"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0"
+    ],
+    "time_seconds": 90.27586670000164,
+    "total_tokens": 59752
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "0.0"
+    ],
+    "ground_truth": "None"
+  }
+}

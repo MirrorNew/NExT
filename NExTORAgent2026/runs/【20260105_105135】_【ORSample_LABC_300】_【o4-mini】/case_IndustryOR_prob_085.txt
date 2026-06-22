@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Healthy Pet Foods produces two dog food products: Meaties and Yummies. Each bag of Meaties contains 2 lb of grain and 3 lb of meat; each bag of Yummies contains 3 lb of grain and 1.5 lb of meat. The company believes that it can sell any quantity of dog food it is able to produce. The selling price is \\$2.80 per bag for Meaties and \\$2.00 per bag for Yummies. Production is subject to several constraints. First, at most 400,000 lb of grain can be purchased per month, at a grain cost of \\$0.20 per pound; at most 300,000 lb of meat can be purchased per month, at a meat cost of \\$0.50 per pound. In addition, producing Meaties requires a dedicated machine with a baseline monthly capacity of 90,000 bags. However, due to equipment aging and maintenance costs, as the planned production quantity of Meaties increases, the available capacity decreases exponentially. Specifically, let the planned production of Meaties be $x$ bags; then the effective available capacity is $90{,}000 \\times (0.9^x)$ bags, where 0.9 is the capacity decay factor. Therefore, the exponential constraint “the actual production quantity of Meaties does not exceed $90{,}000 \\times (0.9^x)$” must be satisfied. The variable mixing and packaging costs are \\$0.25 per bag for Meaties and \\$0.20 per bag for Yummies. Detailed information is shown in Table B-1.\n\n**Table B-1 Healthy Pet Foods Data**\n\n|                    | Meaties            | Yummies      |\n|--------------------|--------------------|--------------|\n| Selling price per bag | \\$2.80          | \\$2.00        |\n| Raw materials         |                |              |\n| - Grain               | 2.0 lb         | 3.0 lb       |\n| - Meat                | 3.0 lb         | 1.5 lb       |\n| Variable cost         | \\$0.25/bag     | \\$0.20/bag   |\n| Resources             |                |              |\n| Meaties capacity      | Baseline capacity is 90,000 bags/month, but effective capacity decreases exponentially with planned Meaties output $x$; effective capacity $= 90{,}000 \\times (0.9^x)$ bags/month |\n| Monthly available grain | 400,000 lb    |              |\n| Monthly available meat  | 300,000 lb    |              |\n\nSuppose you are the manager of the dog food division at Healthy Pet Foods. Your compensation depends on the division’s profit, so you will strive to maximize profit. How should you operate this division in order to maximize both the division’s profit and your compensation?",
+    "answer": 60023.9,
+    "index": "IndustryOR_prob_085",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “另外，生产 Meaties 需要一台专用机器，其月产能为 90,000 包。”以及表格中“Meaties 产能 90,000 包/月”。, 修改后相关描述: “另外，生产 Meaties 需要一台专用机器，其基础月产能为 90,000 包。但由于设备老化和维护成本的影响，当实际计划生产的 Meaties 数量增加时，可用产能会呈指数形式下降。具体来说，假设 Meaties 的计划产量为 x 包，则有效可用产能为 90,000 × (0.9 的 x 次方) 包，其中 0.9 为设备产能递减系数。因此，必须满足‘实际生产的 Meaties 数量不超过 90,000 × (0.9 的 x 次方)’这一指数约束条件。”并在表 B-1 中将“Meaties 产能 90,000 包/月”修改为“Meaties 产能 基础产能为 90,000 包/月，但实际有效产能随 Meaties 计划产量 x 呈指数下降，有效产能 = 90,000 × (0.9 的 x 次方) 包/月”。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_085\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_026.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "60000.0"
+    ],
+    "time_seconds": 43.850787599993055,
+    "total_tokens": 5585
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "60000.0"
+    ],
+    "ground_truth": 60023.9
+  }
+}

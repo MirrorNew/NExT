@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A nationwide e-commerce company operates three distribution centers in a metropolitan area. The quantities of standard products and premium products currently stored at each center are as follows:\n\n| Distribution Center | Standard Products | Premium Products |\n|--------------------|------------------|-----------------|\n| Center 1           | 150              | 30              |\n| Center 2           | 250              | 100             |\n| Center 3           | 300              | 70              |\n\nThe company plans to open three retail fulfillment hubs to provide same-day delivery service to customers. Company policy requires that the total inventory at each fulfillment hub must be exactly 300 units of products, and that each hub must stock the same number of premium products, to ensure a consistent customer experience across all locations. The transportation distances (in kilometers) between the distribution centers and the fulfillment hubs are as follows:\n\n| Origin / Destination | Hub 1 | Hub 2 | Hub 3 |\n|---------------------|------:|------:|------:|\n| Center 1            | 0     | 12    | 18    |\n| Center 2            | 12    | 0     | 15    |\n| Center 3            | 18    | 15    | 0     |\n\nSubject to satisfying the company’s inventory requirements, assume that the total transportation “distance cost” is no longer the simple linear sum of (transportation distance) times (shipment quantity) from each distribution center to each hub. Instead, for each transportation route, first compute the $1.2$-th power of “distance multiplied by quantity,” and then sum over all routes; that is, the effective distance cost for a single route is the $1.2$-th power of “distance multiplied by the total number of products shipped on that route.” For example, the effective distance cost from Center 2 to Hub 3 is $(15 \\times \\text{(total number of products shipped on that route)})^{1.2}$. Under this nonlinear distance-cost definition, what is the minimum total transportation distance cost required?",
+    "answer": 6063.601741247527,
+    "index": "LogiOR_prob_027",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 在满足公司库存要求的前提下，所需的最小总运输距离是多少？, 修改后相关描述: 在满足公司库存要求的前提下，假设总运输“距离成本”不再是各配送中心到各枢纽运输距离与运输数量的简单线性乘积之和，而是对每一条运输路径上的“距离乘以数量”先计算其 1.2 次幂，再对所有路径求和，即单条路径的有效距离成本为“距离乘以该路径上运输产品总数量”的 1.2 次方。例如，从中心 2 到枢纽 3 的有效距离成本为 (15 × 该路径运输产品总数量) 的 1.2 次方。问在这种非线性距离成本定义下，所需的最小总运输距离成本是多少？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_027\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_048.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "7415.164772295"
+    ],
+    "time_seconds": 34.445361099991715,
+    "total_tokens": 4748
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "7415.164772295"
+    ],
+    "ground_truth": 6063.601741247527
+  }
+}

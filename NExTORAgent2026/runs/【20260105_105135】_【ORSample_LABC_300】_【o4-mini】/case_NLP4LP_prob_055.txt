@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A bakery produces almond croissants and pistachio croissants. Producing one almond croissant requires 5 units of butter and 8 units of flour. Producing one pistachio croissant requires 3 units of butter and 6 units of flour. The bakery has 600 units of butter and 800 units of flour. Because almond croissants are more popular, it is required that the ratio of the number of almond croissants to the number of pistachio croissants be at least 3; that is, the number of almond croissants divided by the number of pistachio croissants should be no less than 3. If producing one almond croissant takes 12 minutes, and producing one pistachio croissant takes 10 minutes, how many of these two types of croissants should be produced in order to minimize the total production time?",
+    "answer": 46.0,
+    "index": "NLP4LP_prob_055",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 由于杏仁牛角面包更受欢迎，杏仁牛角面包的产量至少应为开心果牛角面包的 3 倍。 修改后相关描述: 由于杏仁牛角面包更受欢迎，要求杏仁牛角面包的数量与开心果牛角面包数量的比值至少为 3，也就是说杏仁牛角面包的数量除以开心果牛角面包的数量应不少于 3。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_055\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_077.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0"
+    ],
+    "time_seconds": 36.77255229999719,
+    "total_tokens": 3285
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "0.0"
+    ],
+    "ground_truth": 46.0
+  }
+}

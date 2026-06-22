@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_146",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_146\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_146\\code.py",
+    "NLtype": "Linear",
+    "question": "An oil and gas company is sending their oil to the port using containers and trucks. A container can hold 30 units of oil while a truck can hold 40 units of oil. Due to government restrictions, the number of trucks used has to at most half the number of containers used. If at least 2000 units of oil need to be sent to the port and at least 15 containers need to be used, minimize the total number of containers and trucks needed.",
+    "answer": 60,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "60.0"
+    ],
+    "time_seconds": 13.683720899993205,
+    "total_tokens": 834
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "60.0"
+    ],
+    "ground_truth": 60
+  }
+}

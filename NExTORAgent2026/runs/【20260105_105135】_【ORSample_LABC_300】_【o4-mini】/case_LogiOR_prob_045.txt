@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "You are responsible for managing GreenTech Manufacturing, a company that produces eco-friendly packaging materials using recycled paper. The company produces two packaging products: premium packaging and standard packaging. The selling price of premium packaging is \\$15 per ton, and its average quality rating must be at least 9; the selling price of standard packaging is \\$8 per ton, and its average quality rating must be at least 7. The maximum monthly demand for premium packaging is 2,500 tons, and the maximum monthly demand for standard packaging is 800 tons.\n\nRecycled paper can be processed using one of three processing methods. The unit processing cost and outputs (yields) of each method are shown in the table below. For example, processing 1 ton of recycled paper using Method 1 costs \\$4.20 and yields 0.3 tons of material with quality rating 6, 0.4 tons of material with quality rating 8, and 0.3 tons of material with quality rating 10. These costs already include the cost of acquiring the recycled paper. Before being converted into packaging materials, materials with quality ratings 6 and 8 can be upgraded through a refining process: by paying \\$1.20 per ton, 1 ton of quality-6 material can be upgraded to quality 8; by paying \\$1.80 per ton, 1 ton of quality-8 material can be upgraded to quality 10.\n\nWhen formulating the optimization model, let:\n- $x_1$, $x_2$, $x_3$ denote the tons of recycled paper processed using Method 1, Method 2, and Method 3, respectively;\n- $y_H$ denote the tons of premium packaging produced;\n- $y_S$ denote the tons of standard packaging produced;\n- $t$ denote the flexible adjustment coefficient used in the current month to coordinate the mix of outputs from different processing methods, where $t$ is a continuous decision variable between 0 and 2.\n\nTo reflect more realistically the impact of process interactions on profit, the company’s monthly profit is no longer computed simply as a linear expression of “total output times unit profit.” Instead, a multivariate-coupled nonlinear profit term is introduced: management specifies that the core profit contribution from the premium packaging business will be included in the objective function in the form “premium packaging output $\\times$ Method 1 input $\\times$ flexible adjustment coefficient.” Specifically,\n\nCore profit contribution of premium packaging $= 0.00001 \\times y_H \\times x_1 \\times t$, where 0.00001 is a given coefficient.\n\nTherefore, total profit equals the above core profit contribution of premium packaging plus other linear revenues minus various linear costs (including basic product sales revenue, the processing costs of each method, and the upgrading costs of the refining process, etc.), and is to be maximized. All other quality constraints, demand constraints, and output proportion relationships remain unchanged in their original linear structure. How should GreenTech Manufacturing maximize its monthly profit while satisfying the quality and demand requirements?\n\n| Processing Method | Unit Cost (USD/ton) | Output (Quality 6) | Output (Quality 8) | Output (Quality 10) |\n|------------------|---------------------|--------------------|--------------------|---------------------|\n| Method 1         | 4.20                | 0.3                | 0.4                | 0.3                 |\n| Method 2         | 3.80                | 0.5                | 0.3                | 0.2                 |\n| Method 3         | 4.50                | 0.2                | 0.5                | 0.3                 |",
+    "answer": 29029.0,
+    "index": "LogiOR_prob_045",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 原题目中利润目标仅按各类包装产品的产量乘以对应的单位售价减去加工成本和精制成本来线性计算，并未引入多决策变量相乘的非线性项，也未显式给出 x1、x2、x3、z、t 等决策变量及高端包装利润与其他决策变量的耦合关系。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_045\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_039.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "29029.0"
+    ],
+    "time_seconds": 100.6160830000008,
+    "total_tokens": 5212
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "29029.0"
+    ],
+    "ground_truth": 29029.0
+  }
+}

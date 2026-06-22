@@ -1,0 +1,247 @@
+{
+  "entry": {
+    "index": 1,
+    "question": "Located under the shade of sycamore trees in the old city, Changning District People's Hospital has been a trusted medical center for surrounding residents for decades. With the aging of the population and the opening of the two-child policy, the number of outpatient visits and hospitalization needs have increased year by year, especially in the pediatric and emergency departments, which are often overcrowded. Head nurse Lin Mei has worked in this hospital for 15 years. She arrives at work at five in the morning every day to check the shift schedule and coordinate emergencies - for example, Xiao Li, who worked the night shift yesterday, suddenly had a fever, and twins were born in the obstetrics department in the early morning. She knows that scheduling is not just a table, but also about patient safety and the morale of the nursing team: newcomers need to be mentored by old staff, pregnant women cannot work night shifts, and nurses who work around the clock are prone to mistakes... But the hospital budget is limited, and human resource costs must be carefully calculated. Under the premise of meeting the demand for nurses in each time period, design an efficient and humane scheduling plan to avoid overwork or waste of manpower, and reserve flexible space for emergencies. \n\nPeople's Hospital is a district-level hospital in Changning District. The number of nurses on duty required in each time period of the hospital every day is shown in Table C-2. \n\nTable C-2\n\n| Time period | 6:00-10:00 | 10:00-14:00 | 14:00-18:00 | 18:00-22:00 | 22:00-6:00 (next day) |\n| -------- | ---------- | ----------- | ----------- | ----------- | ---------------- |\n| Number of nurses required | 18 | 20 | 19 | 17 | 12 |\n\nThe nurses in this hospital work in five shifts, each 8 hours. The specific working hours are 2:00-10:00 for the first shift, 6:00-14:00 for the second shift, 10:00-18:00 for the third shift, 14:00-22:00 for the fourth shift, and 18:00-2:00 (next day). Each nurse works 5 shifts per week and is assigned to different days. There is a chief nurse who is responsible for the nurses' duty arrangements and duty plans, which should be relatively economical in terms of personnel or economy, and as reasonable as possible. It is the duty plan:\n\n**Plan**: Each nurse works for 5 consecutive days, rests for 2 days, and is arranged from the first shift to the fifth shift from the first day of work. For example, if a nurse starts working on Monday, she will work the first shift on Monday, the second shift on Tuesday... the fifth shift on Friday; if another nurse starts working on Wednesday, she will work the first shift on Wednesday, the second shift on Thursday... the fifth shift on Sunday, and so on.\n\nEstablish a linear programming model to minimize the number of nurses on duty. You only need to give the minimum number of nurses. ",
+    "answer": 70.0,
+    "Parameters_List": [
+      {
+        "Name": "head_nurse_tenure_years",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "head_nurse_arrival_time",
+        "Type": "list",
+        "Value": [
+          "5:00"
+        ]
+      },
+      {
+        "Name": "time_period_labels",
+        "Type": "list",
+        "Value": [
+          "6:00-10:00",
+          "10:00-14:00",
+          "14:00-18:00",
+          "18:00-22:00",
+          "22:00-6:00 (next day)"
+        ]
+      },
+      {
+        "Name": "time_period_ranges",
+        "Type": "list",
+        "Value": [
+          "6:00-10:00",
+          "10:00-14:00",
+          "14:00-18:00",
+          "18:00-22:00",
+          "22:00-6:00 (next day)"
+        ]
+      },
+      {
+        "Name": "demand_per_period",
+        "Type": "list",
+        "Value": [
+          18,
+          20,
+          19,
+          17,
+          12
+        ]
+      },
+      {
+        "Name": "num_shifts",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "shift_length_hours",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "shift_time_ranges",
+        "Type": "list",
+        "Value": [
+          "2:00-10:00",
+          "6:00-14:00",
+          "10:00-18:00",
+          "14:00-22:00",
+          "18:00-2:00 (next day)"
+        ]
+      },
+      {
+        "Name": "shifts_per_week_per_nurse",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "work_days_per_cycle",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "rest_days_per_cycle",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "total_cycle_days",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "objective_type",
+        "Type": "list",
+        "Value": [
+          "minimize_nurses"
+        ]
+      },
+      {
+        "Name": "Table_1_C_2_time_period_labels",
+        "Type": "list",
+        "Value": [
+          "6:00-10:00",
+          "10:00-14:00",
+          "14:00-18:00",
+          "18:00-22:00",
+          "22:00-6:00 (next day)"
+        ]
+      },
+      {
+        "Name": "Table_1_C_2_nurses_required",
+        "Type": "list",
+        "Value": [
+          18,
+          20,
+          19,
+          17,
+          12
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The hospital operates with...",
+        "Defines 5 shifts and their time ranges; used to map which shifts cover each time period."
+      ],
+      [
+        "2",
+        "Daily demand for nurses...",
+        "Gives required nurse numbers R1–R5 for each of 5 time periods; these are right-hand sides of coverage constraints."
+      ],
+      [
+        "3",
+        "Each nurse works exactly...",
+        "Defines work pattern: 5 consecutive days on specific shifts, then 2 days off; implies weekly cyclic schedule."
+      ],
+      [
+        "4",
+        "Nurses starting on different...",
+        "Explains that starting day shifts pattern in time; motivates decision variables by start day."
+      ],
+      [
+        "5",
+        "The goal is to assign...",
+        "States coverage requirement and that demand must be met or exceeded; basis of coverage constraints and objective."
+      ],
+      [
+        "6",
+        "We assume a weekly cycle...",
+        "Assumes identical demand each day over 7-day cycle; justifies using 7 start-day variables with periodic constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_d",
+        "Meaning": "Number of nurses whose 5-day work block starts on day d of the weekly cycle (d = 1,...,7).",
+        "Type": "integer",
+        "Range ": "x_d ≥ 0"
+      },
+      {
+        "symbol": "R_1",
+        "Meaning": "Required number of nurses in time period 1 (6:00–10:00) each day.",
+        "Type": "continuous",
+        "Range ": "R_1 = 18"
+      },
+      {
+        "symbol": "R_2",
+        "Meaning": "Required number of nurses in time period 2 (10:00–14:00) each day.",
+        "Type": "continuous",
+        "Range ": "R_2 = 20"
+      },
+      {
+        "symbol": "R_3",
+        "Meaning": "Required number of nurses in time period 3 (14:00–18:00) each day.",
+        "Type": "continuous",
+        "Range ": "R_3 = 19"
+      },
+      {
+        "symbol": "R_4",
+        "Meaning": "Required number of nurses in time period 4 (18:00–22:00) each day.",
+        "Type": "continuous",
+        "Range ": "R_4 = 17"
+      },
+      {
+        "symbol": "R_5",
+        "Meaning": "Required number of nurses in time period 5 (22:00–6:00 next day) each night.",
+        "Type": "continuous",
+        "Range ": "R_5 = 12"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Coverage_P1_t",
+        "x_t + x_{t-1} \\ge R_1, \\quad t = 1,\\dots,7 \\text{ (indices modulo 7)}",
+        "sentence numbers:1,2,3,4,5,6"
+      ],
+      [
+        "Coverage_P2_t",
+        "x_{t-1} + x_{t-2} \\ge R_2, \\quad t = 1,\\dots,7 \\text{ (indices modulo 7)}",
+        "sentence numbers:1,2,3,4,5,6"
+      ],
+      [
+        "Coverage_P3_t",
+        "x_{t-2} + x_{t-3} \\ge R_3, \\quad t = 1,\\dots,7 \\text{ (indices modulo 7)}",
+        "sentence numbers:1,2,3,4,5,6"
+      ],
+      [
+        "Coverage_P4_t",
+        "x_{t-3} + x_{t-4} \\ge R_4, \\quad t = 1,\\dots,7 \\text{ (indices modulo 7)}",
+        "sentence numbers:1,2,3,4,5,6"
+      ],
+      [
+        "Coverage_P5_t",
+        "x_{t-4} + x_{t+1} \\ge R_5, \\quad t = 1,\\dots,7 \\text{ (indices modulo 7)}",
+        "sentence numbers:1,2,3,4,5,6"
+      ],
+      [
+        "Nonnegativity_Integrality",
+        "x_d \\in \\mathbb{Z}_{\\ge 0}, \\quad d = 1,\\dots,7",
+        "sentence numbers:3,4,5"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the total number of nurses employed in the weekly steady state.",
+      "Mathematical_expressions": " \\min Z = x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 "
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "70.0"
+    ],
+    "time_seconds": 58.615660900002695,
+    "total_tokens": 37898
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "70.0"
+    ],
+    "ground_truth": 70.0
+  }
+}

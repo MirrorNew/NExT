@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "In a certain hospital, the required number of nurses in each time period over a 24-hour day is as follows: 10 nurses are needed from 2:00–6:00, 15 from 6:00–10:00, 25 from 10:00–14:00, 20 from 14:00–18:00, 18 from 18:00–22:00, and 12 from 22:00–2:00. There are 6 shift start times for nurse scheduling, at 2:00, 6:00, 10:00, 14:00, 18:00, and 22:00, respectively, and each nurse works continuously for 8 hours. The hospital may hire contract nurses with the same working hours as regular nurses; the wage of a regular nurse is 10 yuan/hour, and the wage of a contract nurse is 15 yuan/hour. Introduce the following additional rule: if the total number of contract nurses scheduled on a given day exceeds 20, then the hospital must pay an additional fixed management cost of 2000 yuan for contract nurses; if the total number of contract nurses does not exceed 20, then this fixed management cost is not paid. Determine: after taking the above fixed management cost into account, should the hospital hire contract nurses? If it should, how many should be hired?",
+    "answer": 4240.0,
+    "index": "IndustryOR_prob_050",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: '请确定：如果医院可以聘用与正式护士工作时间相同的合同护士，且正式护士的报酬为 10 元/小时，合同护士的报酬为 15 元/小时，医院是否应当聘用合同护士？如果应当聘用，应聘用多少人？', 修改后相关描述: '医院可以聘用与正式护士工作时间相同的合同护士，正式护士的报酬为 10 元/小时，合同护士的报酬为 15 元/小时。引入如下额外规定：如果在某一天安排的合同护士总人数超过 20 人，则医院需要为合同护士额外支付一笔 2000 元的固定管理费用；如果合同护士总人数不超过 20 人，则不支付这笔固定管理费用。请确定：在考虑上述固定管理费用的情况下，医院是否应当聘用合同护士？如果应当聘用，应聘用多少人？'",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_050\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_029.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4240.0"
+    ],
+    "time_seconds": 31.27193350000016,
+    "total_tokens": 3315
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4240.0"
+    ],
+    "ground_truth": 4240.0
+  }
+}

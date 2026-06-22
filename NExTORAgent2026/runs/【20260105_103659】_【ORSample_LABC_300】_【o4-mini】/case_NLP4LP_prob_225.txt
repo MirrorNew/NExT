@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A food delivery courier can choose to use either a bicycle or a motorcycle for work shifts. One bicycle shift can complete 10 orders, consumes 5 units of energy, and, due to higher speed, earns \\$50 in tips. One motorcycle shift can complete 7 orders, and the motorcycle’s total energy consumption is no longer a simple linear sum; instead, there is an intensity amplification effect: if $x$ motorcycle shifts are scheduled, then the motorcycle’s total energy consumption is computed as $(6x)^{1.2}$ (where 1.2 is the given exponent), and it earns \\$43 in tips. The courier can work at most 40 shifts per month, has 230 units of energy, and must complete at least 320 orders. He must have at least 5 motorcycle shifts because bicycles are harder to obtain. How many shifts should the courier schedule for each mode of transportation to maximize the total tips earned?",
+    "answer": 1915.0,
+    "index": "NLP4LP_prob_225",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 使用机车的一个班次可以完成 7 单订单，消耗 6 单位能量，可获得 43 美元小费。修改后相关描述: 使用机车的一个班次可以完成 7 单订单，机车产生的总能量消耗不再是简单的线性累加，而是存在一定强度放大的效应：如果安排了 x 个机车班次，则机车的总能量消耗按 (6x)^1.2 来计算（这里 1.2 为给定的幂指数），可获得 43 美元小费。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_225\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_066.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 27.32287049999286,
+    "total_tokens": 3190
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 1915.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A master’s student majoring in Operations Research at a university is required to choose electives from the following seven courses: Advanced Mathematics, Operations Research, Data Structures, Management Statistics, Computer Simulation, Computer Programming, and Forecasting. The goals are: select two Mathematics courses, two Operations Research courses, and two Computer Science courses.\n\nSome courses belong to only one category: Advanced Mathematics belongs to the Mathematics category, and Computer Programming belongs to the Computer Science category.  \nHowever, some courses belong to multiple categories: Operations Research belongs to both the Operations Research and Mathematics categories; Data Structures belongs to both the Computer Science and Mathematics categories; Management Statistics belongs to both the Mathematics and Operations Research categories; Computer Simulation belongs to both the Computer Science and Operations Research categories; Forecasting belongs to both the Operations Research and Mathematics categories.  \nA course that belongs to multiple categories may simultaneously satisfy the corresponding category requirements.\n\nIn addition, some courses have prerequisite requirements:  \nBefore taking Computer Simulation or Data Structures, the student must first take Computer Programming;  \nBefore taking Management Statistics, the student must first take Advanced Mathematics;  \nBefore taking Forecasting, the student must first take Management Statistics.\n\nOn this basis, a new school regulation is introduced: if the total number of courses ultimately taken by the master’s student exceeds 5 (i.e., taking 6 or 7 courses), then the student must additionally take one more special seminar course, “Academic Writing,” which does not count toward any category; moreover, “Academic Writing” cannot be used to satisfy any of the course-count requirements for Mathematics, Operations Research, or Computer Science, and is merely an additional mandatory course. If the total number of courses ultimately taken does not exceed 5 (i.e., 5 or fewer courses), then “Academic Writing” is not required.\n\nThe question is: in order to satisfy the above requirements (including the original category and prerequisite requirements as well as the new school regulation), what is the minimum number of courses the master’s student must take? Which specific courses should be selected?",
+    "answer": 4.0,
+    "index": "IndustryOR_prob_054",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 此前题目仅包含课程类别要求与先修课要求，并未提到根据总选课门数触发的额外课程要求。, 修改后相关描述: 在原有描述之后增加了一条新的学院规定：如果该硕士研究生最终选修的课程门数超过5门（即选修6门或7门），则必须额外再选修一门不计入任何类别的专题研讨课“学术写作”，且“学术写作”不能用于满足数学类、运筹学类或计算机科学类的选课数量要求；如果最终选修的课程门数不超过5门，则不需要选修“学术写作”。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_054\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_021.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4.0"
+    ],
+    "time_seconds": 21.051279000006616,
+    "total_tokens": 1949
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4.0"
+    ],
+    "ground_truth": 4.0
+  }
+}

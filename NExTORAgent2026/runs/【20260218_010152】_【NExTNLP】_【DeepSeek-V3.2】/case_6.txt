@@ -1,0 +1,124 @@
+{
+  "entry": {
+    "index": 6,
+    "question": "The urban planning department is promoting the plan to improve the quality of urban public spaces, among which the circular square renovation project involves the cross-application of multiple disciplines such as landscape design and fluid mechanics. As the core landscape element of the square, the size design of the fountain pool needs to comprehensively consider engineering parameters such as the visual effect of the waterscape, the efficiency of the water circulation system, and the retention rate of tourist activity space. When the area of ​​the rectangular water body reaches the theoretical maximum value, an optimal geometric form with four sides tangent to the circular square will be formed. This design can produce the best optical interaction effect between the water curtain projection area and the square lighting system. \n\nIn municipal engineering practice, this type of maximizing the inscribed rectangle problem has universal application value. Shenzhen Water Group used a similar principle to design a hydrophilic platform in the water system renovation of Futian Central District. By establishing a constrained optimization model to determine the platform boundary, it not only ensured the safety of citizens' hydrophilic activities, but also achieved a functional balance between landscape water bodies and hard pavement. This case shows that geometric optimization technology can effectively improve the spatial utilization efficiency of urban public facilities and provide basic parameters for the subsequent layout of water supply and drainage networks and night scene lighting planning. \n\nCurrently, the city planning department plans to build a rectangular fountain pool in the center of a circular square (the radius of the square is 10 meters). In order to maximize the ornamental and practical value of the fountain pool, the pool area is required to be as large as possible and must be completely contained in the circular square (that is, the vertices of the rectangle do not exceed the circular boundary). As an engineer, please establish a nonlinear programming model to determine the optimal size (length and width) of the rectangular pool and give the maximum area.",
+    "answer": 200.0,
+    "Parameters_List": [
+      {
+        "Name": "R",
+        "Type": "integer",
+        "Value": 10
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The urban planning department is promoting...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "As the core landscape element of the square...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "When the area of the rectangular water body reaches...",
+        "Implied containment constraint: rectangle inscribed in circle (vertices on boundary)"
+      ],
+      [
+        "4",
+        "This design can produce the best optical interaction...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "In municipal engineering practice, this type of maximizing...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Shenzhen Water Group used a similar principle to design...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "By establishing a constrained optimization model to determine...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "This case shows that geometric optimization technology can effectively...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Currently, the city planning department plans to build...",
+        "Defines parameter R = 10 m"
+      ],
+      [
+        "10",
+        "In order to maximize the ornamental and practical value...",
+        "Decision variables L, W; Objective: maximize A=L×W; Constraints: (L/2)^2 + (W/2)^2 ≤ R^2; L ≥ 0; W ≥ 0"
+      ],
+      [
+        "11",
+        "As an engineer, please establish a nonlinear programming model...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "L",
+        "Meaning": "length of rectangular pool",
+        "Type": "continuous",
+        "Range ": "L ≥ 0"
+      },
+      {
+        "symbol": "W",
+        "Meaning": "width of rectangular pool",
+        "Type": "continuous",
+        "Range ": "W ≥ 0"
+      },
+      {
+        "symbol": "R",
+        "Meaning": "radius of circular square",
+        "Type": "continuous",
+        "Range ": "R = 10"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Containment constraint",
+        "(L/2)^2 + (W/2)^2 ≤ R^2",
+        "sentence numbers:3,10"
+      ],
+      [
+        "Non-negativity",
+        "L ≥ 0; W ≥ 0",
+        "sentence numbers:10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "In order to maximize the ornamental and practical value of the fountain pool, the pool area is required to be as large as possible and must be completely contained in the circular square...",
+      "Mathematical_expressions": "maximize A = L × W"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "199.9999999983"
+    ],
+    "time_seconds": 124.33079800000269,
+    "total_tokens": 16681
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "199.9999999983"
+    ],
+    "ground_truth": 200.0
+  }
+}

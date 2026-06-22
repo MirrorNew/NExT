@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A logistics company needs to allocate forklifts for a newly built warehouse to meet daily operational requirements. Over the next 7 weeks, the warehouse’s forklift demands are 6, 9, 12, 8, 5, 7, and 4 units, respectively. The company plans to lease forklifts from a rental company that offers the following leasing options:\n\n1. **Long-term forklift lease**: The lease term is fixed at 7 weeks, with a rental rate of 240 CNY per week. Forklifts under the long-term lease are available throughout the entire lease term.\n\n2. **Short-term forklift lease**: The lease term is flexible and can be rented on a weekly basis, with a rental rate of 390 CNY per week. Short-term leased forklifts are available only during the week(s) in which they are rented.\n\n3. **Shared forklifts**: These forklifts are jointly leased with other warehouses, but are available only in weeks 2, 4, and 5, with a rental rate of 220 CNY per week.\n\n4. **Promotional forklifts**: During the last 4 weeks, these forklifts can be leased at a discounted price, with a rental rate of 190 CNY per week. At most 2 promotional forklifts can be leased per week. It is also required that, over these last 4 weeks, the ratio of the *average weekly number* of promotional forklifts used by the warehouse to the number of short-term forklifts does not exceed 0.8; that is, over these 4 weeks, the ratio of the total number of promotional forklifts to the total number of short-term forklifts must be less than or equal to 0.8.\n\nDesign a leasing plan that fully satisfies the warehouse’s forklift demand over the next 7 weeks and minimizes the total leasing cost.",
+    "answer": 14520.0,
+    "index": "LogiOR_prob_021",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 4. 促销叉车：在最后 4 周可以以优惠价格租用这些叉车，租金为每周 190 元。每周最多可租用 2 台促销叉车。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_021\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_041.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "13790.0"
+    ],
+    "time_seconds": 28.97976619999099,
+    "total_tokens": 3067
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "13790.0"
+    ],
+    "ground_truth": 14520.0
+  }
+}

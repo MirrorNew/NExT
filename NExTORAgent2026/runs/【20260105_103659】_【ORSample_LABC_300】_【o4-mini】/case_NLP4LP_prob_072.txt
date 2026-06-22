@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An airport plans to purchase two types of vehicles for baggage handling: four-wheeled vehicles and three-wheeled vehicles.  \nA four-wheeled vehicle can handle 60 pieces of baggage per day and generates 30 units of pollutants per day.  \nA three-wheeled vehicle can handle 40 pieces of baggage per day and generates 15 units of pollutants per day.\n\nThe airport must be able to handle at least 1000 pieces of baggage per day.  \nTo avoid excessive pollution at the airport, considering that emissions may exhibit slight nonlinear amplification under high load, it is specified that the daily equivalent pollutants must be at most 430 units. The equivalent pollutants are computed as follows: the pollution generated per day by four-wheeled vehicles is calculated as the 1.2-th power of $30\\times$ (number of four-wheeled vehicles), and then added to the total pollution generated per day by three-wheeled vehicles, i.e., $15\\times$ (number of three-wheeled vehicles). That is, the constraint is that $(30\\times\\text{number of four-wheeled vehicles})^{1.2} + 15\\times\\text{number of three-wheeled vehicles}$ does not exceed 430 units.\n\nQuestion: How many four-wheeled vehicles and three-wheeled vehicles should the airport purchase, respectively, so that the total number of vehicles required is minimized while satisfying the above requirements?",
+    "answer": 25.0,
+    "index": "NLP4LP_prob_072",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 为避免对机场造成过度污染，每天产生的污染物最多为 430 个单位。 修改后相关描述: 为避免对机场造成过度污染，考虑到排放在高负荷下会略有非线性放大，规定每天产生的等效污染物最多为 430 个单位，其中等效污染物的计算方式为：四轮车每天产生的污染量按「30×四轮车数量」的 1.2 次幂来计算，再加上三轮车每天产生的 15×三轮车数量的污染物之和，即以「(30×四轮车数量)^1.2 + 15×三轮车数量」不超过 430 个单位为限制。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_072\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_093.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "17.0"
+    ],
+    "time_seconds": 28.864151899993885,
+    "total_tokens": 3590
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "17.0"
+    ],
+    "ground_truth": 25.0
+  }
+}

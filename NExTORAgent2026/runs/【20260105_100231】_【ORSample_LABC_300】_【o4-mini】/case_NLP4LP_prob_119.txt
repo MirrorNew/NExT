@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A patient in a hospital can take two different painkillers: Painkiller 1 and Painkiller 2. Each dose of Painkiller 1 delivers 0.5 units of medication to the legs and 0.8 units of medication to the back. Each dose of Painkiller 2 delivers 0.7 units of medication to the legs and 0.4 units of medication to the back. In addition, Painkiller 1 also delivers 0.3 units of a sleep aid, and Painkiller 2 delivers 0.6 units of a sleep aid. The amount of sleep aid delivered should be at most 8 units, and the amount of medication delivered to the legs should be at least 4 units. Meanwhile, the ratio of the total medication delivered to the legs to the total medication delivered to the back should be no less than 0.6; that is, the total medication delivered to the legs divided by the total medication delivered to the back should be greater than or equal to 0.6. How many doses of each of these two painkillers should be taken in order to maximize the amount of medication delivered to the back?",
+    "answer": 22.0,
+    "index": "NLP4LP_prob_119",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 并且向腿部输送的药物至少应为4个单位。 修改后相关描述: 并且向腿部输送的药物至少应为4个单位。同时，向腿部输送的药物总量与向背部输送的药物总量的比值应不小于0.6，也就是说，向腿部输送的药物总量除以向背部输送的药物总量应当大于或等于0.6。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_119\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_059.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "21.33333333"
+    ],
+    "time_seconds": 34.44438960000116,
+    "total_tokens": 1863
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "21.33333333"
+    ],
+    "ground_truth": 22.0
+  }
+}

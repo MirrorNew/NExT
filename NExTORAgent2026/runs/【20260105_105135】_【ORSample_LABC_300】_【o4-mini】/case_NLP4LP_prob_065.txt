@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A grilled cheese sandwich shop sells light grilled cheese sandwiches and heavy grilled cheese sandwiches.  \n\nOne light grilled cheese sandwich requires 2 slices of bread and 3 slices of cheese.  \nOne heavy grilled cheese sandwich requires 3 slices of bread and 5 slices of cheese.  \n\nSince most customers visiting the shop strongly prefer grilled cheese sandwiches, the shop must produce at least three times as many heavy grilled cheese sandwiches as light grilled cheese sandwiches.  \n\nThe shop currently has 300 slices of bread and 500 slices of cheese.  \n\nIf producing one light grilled cheese sandwich takes 10 minutes, while the production time for heavy grilled cheese sandwiches increases slightly in a nonlinear manner with the batch size: when producing $y$ heavy grilled cheese sandwiches, the total production time is computed as $(15y)^{1.2}$ minutes. That is, the total production time equals $10x$ minutes for the light grilled cheese sandwiches plus $(15y)^{1.2}$ minutes for the heavy grilled cheese sandwiches. How many of each type of sandwich should they produce to minimize the total production time?",
+    "answer": 0.0,
+    "index": "NLP4LP_prob_065",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 如果制作一份轻量烤芝士三明治需要 10 分钟，制作一份重量烤芝士三明治需要 15 分钟，问他们各应制作多少份这两种三明治才能使总生产时间最小？, 修改后相关描述: 如果制作一份轻量烤芝士三明治需要 10 分钟，而制作重量烤芝士三明治的时间会随批量增加略有非线性增长：当制作 y 份重量烤芝士三明治时，其总生产时间按“(15y)^1.2 分钟”计算，即总生产时间等于轻量烤芝士三明治的 10x 分钟加上重量烤芝士三明治的 (15y)^1.2 分钟。问他们各应制作多少份这两种三明治才能使总生产时间最小？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_065\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_089.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0"
+    ],
+    "time_seconds": 27.764676400009193,
+    "total_tokens": 2304
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "0.0"
+    ],
+    "ground_truth": 0.0
+  }
+}

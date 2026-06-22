@@ -1,0 +1,2433 @@
+{
+    "0": {
+        "question": "This is a multi-commodity transportation problem. Given a set of origins `Origins`, a set of destinations `Destinations`, and a set of products `Products`. Each origin `i` has a certain supply of each product `p` `Supply_{i,p}` and each destination `j` has a certain demand for each product `p` `Demand_{j,p}`. The cost of shipping one unit of product `p` from origin `i` to destination `j` is `ShippingCost_{i, j, p}`. The problem aims to minimize the total cost of shipping all products from the origins to the destinations. It is constrained that the total amount of each product `p` shipped from each origin `i` equals its supply, the total amount of each product `p` shipped to each destination `j` equals its demand, and the total amount of all products shipped from each origin `i` to each destination `j` does not exceed a certain limit `Limit_{i,j}`. How to decide the number of units of each product `p` to be shipped from each origin `i` to each destination `j`?\n\nThe following parameters are included in this problem:\nsupply: a 2D list, supply[i][p] indicates the amount of product p available at origin i\ndemand: a 2D list, demand[p][j] indicates the amount of product p required at destination j\nlimit: a 2D list, limit[i][j] indicates the maximum total amount of all products that can be shipped from origin i to destination j\ncost: a 3D list, cost[i][j][p] indicates the shipment cost per unit of product p from origin i to destination j\n\n\nThe following data is included in this problem:\n{'supply': [[20, 30], [40, 10]], 'demand': [[30, 30], [30, 10]], 'limit': [[35, 25], [30, 30]], 'cost': [[[2, 3], [4, 1]], [[3, 2], [2, 4]]]}",
+        "answer": 55.66667,
+        "ori": "15_complexor",
+        "index": 1,
+        "Sentence_Scanning": [
+            [
+                "1",
+                "Consider a problem where...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "For each element j in P...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "We also have a global...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "We have a variable X[j]...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "The goal is to maximize...",
+                "Objective specification"
+            ],
+            [
+                "6",
+                "The constraints are that...",
+                "Resource-capacity constraint"
+            ],
+            [
+                "7",
+                "and X[j] should be between...",
+                "Variable-bound constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "X[j]",
+                "Meaning": "Allocation decision for element j ∈ P",
+                "Type": "continuous",
+                "Range ": "0 ≤ X[j] ≤ u[j]"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Resource Capacity",
+                "∑_{j∈P} (1/a[j]) X[j] ≤ b",
+                "sentence numbers:6"
+            ],
+            [
+                "Upper-Bound on X",
+                "X[j] ≤ u[j], ∀ j ∈ P",
+                "sentence numbers:7"
+            ],
+            [
+                "Nonnegativity of X",
+                "X[j] ≥ 0, ∀ j ∈ P",
+                "sentence numbers:7"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The goal is to maximize the total profit, which is the sum of c[j] * X[j] for all j in P.",
+            "Mathematical_expressions": "Maximize ∑_{j∈P} c[j]·X[j]"
+        },
+        "Problem_Type": "MILP"
+    },
+    "1": {
+        "question": "The main media selection problem is a problem of allocating advertising budgets between possible advertising outlets. Given a set of media options, it aims to determine which media should be selected so that all audiences are reached with minimum campaign cost. It does not matter if an audience is covered more than once, as long as it is covered at least once. Moreover, the company does not wish to spend more money on the campaign than necessary.\n\nThe following parameters are included in this problem:\ntarget_audiences: List of target audiences (typically a list of integers)\nadvertising_media: List of advertising media (typically a list of integers)\nincidence_matrix: 2D list where incidence_matrix[t][m] indicates if audience t is covered by media m\nmedia_costs: List of costs associated with each advertising media\n\n\nThe following data is included in this problem:\n{'target_audiences': [0, 1, 2], 'advertising_media': [0, 1, 2], 'incidence_matrix': [[1, 0, 1], [1, 1, 0], [0, 1, 1]], 'media_costs': [10, 15, 20]}",
+        "answer": 25,
+        "ori": "15_complexor",
+        "index": 2,
+        "Parameters_List": [
+            {
+                "Name": "target_audiences",
+                "Type": "list",
+                "Value": [
+                    0,
+                    1,
+                    2
+                ]
+            },
+            {
+                "Name": "advertising_media",
+                "Type": "list",
+                "Value": [
+                    0,
+                    1,
+                    2
+                ]
+            },
+            {
+                "Name": "incidence_matrix",
+                "Type": "list",
+                "Value": [
+                    [
+                        1,
+                        0,
+                        1
+                    ],
+                    [
+                        1,
+                        1,
+                        0
+                    ],
+                    [
+                        0,
+                        1,
+                        1
+                    ]
+                ]
+            },
+            {
+                "Name": "media_costs",
+                "Type": "list",
+                "Value": [
+                    10,
+                    15,
+                    20
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "The main media selection problem...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set of media options...",
+                "Coverage constraint: for each audience t, the selected media must cover t at least once."
+            ],
+            [
+                "3",
+                "It does not matter if an audience...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "Moreover, the company does not wish...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "The following parameters are included...",
+                "No constraints"
+            ],
+            [
+                "6",
+                "target_audiences: List of target audiences...",
+                "No constraints"
+            ],
+            [
+                "7",
+                "advertising_media: List of advertising media...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "incidence_matrix: 2D list where incidence_matrix[t][m]...",
+                "No constraints"
+            ],
+            [
+                "9",
+                "media_costs: List of costs associated...",
+                "No constraints"
+            ],
+            [
+                "10",
+                "The following data is included...",
+                "No constraints"
+            ],
+            [
+                "11",
+                "{'target_audiences': [0, 1, 2],...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_m",
+                "Meaning": "indicator variable; 1 if media m is selected, 0 otherwise",
+                "Type": "BINARY",
+                "Range ": "x_m ∈ {0,1}, ∀ m ∈ advertising_media"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Coverage constraint",
+                "∀ t ∈ T: ∑_m incidence_matrix[t][m] · x_m ≥ 1",
+                "sentence numbers:2"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "Moreover, the company does not wish to spend more money on the campaign than necessary.",
+            "Mathematical_expressions": "minimize ∑_m media_costs[m] · x_m"
+        },
+        "Problem_Type": "MILP"
+    },
+    "2": {
+        "question": "The Car Selection Problem is a mixed integer programming model that aims to assign participants to cars in a way that maximizes the total number of assignments. The problem involves a set of participants and a set of cars, where each participant is interested in a subset of cars. The objective is to find the optimal assignment of participants to cars that satisfies certain constraints.\n\nThe following parameters are included in this problem:\nparticipants: list, the set of all participants.\ncars: list, the set of all cars.\npossible_assignments: 2D list, PossibleAssignments[i][j] indicates whether participant i is interested in car j.\n\n\nThe following data is included in this problem:\n{'participants': ['P1', 'P2', 'P3'], 'cars': ['C1', 'C2', 'C3'], 'possible_assignments': [[1, 0, 1], [0, 1, 0], [1, 1, 1]]}",
+        "answer": 3,
+        "ori": "15_complexor",
+        "index": 3,
+        "Parameters_List": [
+            {
+                "Name": "participants",
+                "Type": "list",
+                "Value": [
+                    "P1",
+                    "P2",
+                    "P3"
+                ]
+            },
+            {
+                "Name": "cars",
+                "Type": "list",
+                "Value": [
+                    "C1",
+                    "C2",
+                    "C3"
+                ]
+            },
+            {
+                "Name": "possible_assignments",
+                "Type": "list",
+                "Value": [
+                    [
+                        1,
+                        0,
+                        1
+                    ],
+                    [
+                        0,
+                        1,
+                        0
+                    ],
+                    [
+                        1,
+                        1,
+                        1
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "The Car Selection Problem ...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "The problem involves a set ...",
+                "Constraint: assignment only allowed if the participant is interested in that car, i.e. xᵢⱼ ≤ possible_assignmentsᵢⱼ ∀ i ∈ participants, j ∈ cars"
+            ],
+            [
+                "3",
+                "The objective is to find ...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The following parameters are included ...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "The following data is included ...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "xᵢⱼ",
+                "Meaning": "1 if participant i is assigned to car j, 0 otherwise",
+                "Type": "BINARY",
+                "Range ": "{0,1}"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "InterestConstraint",
+                "xᵢⱼ ≤ possible_assignmentsᵢⱼ ∀ i∈participants, j∈cars",
+                "sentence numbers:2"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The Car Selection Problem is a mixed integer programming model that aims to assign participants to cars in a way that maximizes the total number of assignments.",
+            "Mathematical_expressions": "max ∑_{i ∈ participants} ∑_{j ∈ cars} xᵢⱼ"
+        },
+        "Problem_Type": "MILP"
+    },
+    "3": {
+        "question": "A telecom company needs to build a set of cell towers to provide signal coverage for the inhabitants of a given city. A number of potential locations where the towers could be built have been identified. The towers have a fixed range, and due to budget constraints only a limited number of them can be built. Given these restrictions, the company wishes to provide coverage to the largest percentage of the population possible. To simplify the problem, the company has split the area it wishes to cover into a set of regions, each of which has a known population. The goal is then to choose which of the potential locations the company should build cell towers on in order to provide coverage to as many people as possible.\n\nThe following parameters are included in this problem:\ndelta: A matrix (list of lists) where delta[i][j] is 1 if site `i` covers region `j`, otherwise 0\ncost: A list where cost[i] is the cost of building the tower at site `i`\npopulation: A list where population[j] is the population of region `j`\nbudget: An integer, the total budget allowed for building the towers\n\n\nThe following data is included in this problem:\n{'delta': [[1, 0, 1], [0, 1, 0]], 'cost': [3, 4], 'population': [100, 200, 150], 'budget': 4}",
+        "answer": 250,
+        "ori": "15_complexor",
+        "index": 4,
+        "Parameters_List": [
+            {
+                "Name": "delta",
+                "Type": "list",
+                "Value": [
+                    [
+                        1,
+                        0,
+                        1
+                    ],
+                    [
+                        0,
+                        1,
+                        0
+                    ]
+                ]
+            },
+            {
+                "Name": "cost",
+                "Type": "list",
+                "Value": [
+                    3,
+                    4
+                ]
+            },
+            {
+                "Name": "population",
+                "Type": "list",
+                "Value": [
+                    100,
+                    200,
+                    150
+                ]
+            },
+            {
+                "Name": "budget",
+                "Type": "integer",
+                "Value": 4
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "A telecom company needs...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "A number of potential locations...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "The towers have a fixed range...",
+                "Budget constraint: ∑_i cost[i]·x[i] ≤ budget; Domain constraint: x[i]∈{0,1}"
+            ],
+            [
+                "4",
+                "Given these restrictions, the...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "To simplify the problem, the...",
+                "No constraints"
+            ],
+            [
+                "6",
+                "The goal is then to choose...",
+                "Coverage linking: y[j] ≤ ∑_i δ[i][j]·x[i], ∀ j; Domain constraint: y[j]∈{0,1}"
+            ],
+            [
+                "7",
+                "The following parameters are included...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "delta: A matrix...",
+                "No constraints"
+            ],
+            [
+                "9",
+                "cost: A list...",
+                "No constraints"
+            ],
+            [
+                "10",
+                "population: A list...",
+                "No constraints"
+            ],
+            [
+                "11",
+                "budget: An integer...",
+                "No constraints"
+            ],
+            [
+                "12",
+                "The following data is included...",
+                "No constraints"
+            ],
+            [
+                "13",
+                "{'delta': [[1, 0, 1], [0, 1, 0]],...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_i",
+                "Meaning": "1 if a tower is built at site i; 0 otherwise",
+                "Type": "BINARY",
+                "Range ": "{0,1}"
+            },
+            {
+                "symbol": "y_j",
+                "Meaning": "1 if region j is covered by at least one built tower; 0 otherwise",
+                "Type": "BINARY",
+                "Range ": "{0,1}"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Budget",
+                "∑_i cost[i]·x[i] ≤ budget",
+                "sentence numbers:3"
+            ],
+            [
+                "Coverage linking",
+                "y[j] ≤ ∑_i δ[i][j]·x[i], ∀ j",
+                "sentence numbers:6"
+            ],
+            [
+                "Binary domain for x",
+                "x[i] ∈ {0,1}, ∀ i",
+                "sentence numbers:3"
+            ],
+            [
+                "Binary domain for y",
+                "y[j] ∈ {0,1}, ∀ j",
+                "sentence numbers:6"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "Given these restrictions, the company wishes to provide coverage to the largest percentage of the population possible.",
+            "Mathematical_expressions": "maximize ∑_j population[j]·y[j]"
+        },
+        "Problem_Type": "MILP"
+    },
+    "4": {
+        "question": "Consider a transportation problem. Given a set of origins `Origins` and a set of destinations `Destinations`. Each origin `i` has a certain supply of goods `Supply_{i}` and each destination `j` has a certain demand for goods `Demand_{j}`. The cost of shipping one unit of goods from origin `i` to destination `j` is `Rate_{i, j}`. However, the number of units shipped can't exceed the limit `Limit_{i, j}`. The problem aims to minimize the total cost of shipping goods from the origins to the destinations. How to decide the number of units to be shipped from each origin `i` to each destination `j`?\n\nThe following parameters are included in this problem:\nsupply: a list of integers, each indicates the amount of goods available at an origin\ndemand: a list of integers, each indicates the amount of goods required at a destination\nrate: a 2D list of integers, the shipment costs per unit from each origin to each destination\nlimit: a 2D list of integers, the limit on units shipped from each origin to each destination\n\n\nThe following data is included in this problem:\n{'supply': [20, 30], 'demand': [30, 20], 'rate': [[8, 6], [5, 10]], 'limit': [[15, 25], [25, 20]]}",
+        "answer": 305,
+        "ori": "15_complexor",
+        "index": 5,
+        "Parameters_List": [
+            {
+                "Name": "supply",
+                "Type": "list",
+                "Value": [
+                    20,
+                    30
+                ]
+            },
+            {
+                "Name": "demand",
+                "Type": "list",
+                "Value": [
+                    30,
+                    20
+                ]
+            },
+            {
+                "Name": "rate",
+                "Type": "list",
+                "Value": [
+                    [
+                        8,
+                        6
+                    ],
+                    [
+                        5,
+                        10
+                    ]
+                ]
+            },
+            {
+                "Name": "limit",
+                "Type": "list",
+                "Value": [
+                    [
+                        15,
+                        25
+                    ],
+                    [
+                        25,
+                        20
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "Consider a transportation problem...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set of origins Origins and a set of destinations Destinations...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each origin i has a certain supply of goods Supply_{i} and each destination j has a certain demand for goods Demand_{j}...",
+                "Supply and demand constraints"
+            ],
+            [
+                "4",
+                "The cost of shipping one unit of goods from origin i to destination j is Rate_{i, j}...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "However, the number of units shipped can't exceed the limit Limit_{i, j}...",
+                "Limit constraint"
+            ],
+            [
+                "6",
+                "The problem aims to minimize the total cost of shipping goods from the origins to the destinations...",
+                "Objective definition"
+            ],
+            [
+                "7",
+                "How to decide the number of units to be shipped from each origin i to each destination j?...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_{i,j}",
+                "Meaning": "number of units shipped from origin i to destination j",
+                "Type": "continuous",
+                "Range ": "0 ≤ x_{i,j} ≤ Limit_{i,j}, ∀ i∈Origins, j∈Destinations"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Supply constraint",
+                "∑_{j∈Destinations} x_{i,j} ≤ Supply_{i}, ∀ i∈Origins",
+                "sentence numbers:3"
+            ],
+            [
+                "Demand constraint",
+                "∑_{i∈Origins} x_{i,j} ≥ Demand_{j}, ∀ j∈Destinations",
+                "sentence numbers:3"
+            ],
+            [
+                "Limit constraint",
+                "x_{i,j} ≤ Limit_{i,j}, ∀ i∈Origins, j∈Destinations",
+                "sentence numbers:5"
+            ],
+            [
+                "Non-negativity constraint",
+                "x_{i,j} ≥ 0, ∀ i∈Origins, j∈Destinations",
+                "sentence numbers:implicit"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total cost of shipping goods from the origins to the destinations.",
+            "Mathematical_expressions": "min ∑_{i∈Origins} ∑_{j∈Destinations} Rate_{i,j} · x_{i,j}"
+        },
+        "Problem_Type": "MILP"
+    },
+    "5": {
+        "question": "The Knapsack Problem is a classic optimization problem in operations research and computer science. The problem is to determine the most valuable combination of items to include in a knapsack, given a set of items with different values and weights, and a maximum weight capacity of the knapsack. The goal is to maximize the total value of the items in the knapsack without exceeding its weight capacity.\n\nThe following parameters are included in this problem:\nitem_values: a list of integers, indicating the value of each item\nitem_weights: a list of integers, indicating the weight of each item\nmax_weight_knapsack: an integer, denotes the maximum weight capacity of the knapsack\n\n\nThe following data is included in this problem:\n{'item_values': [60, 100, 120], 'item_weights': [10, 20, 30], 'max_weight_knapsack': 50}",
+        "answer": 220,
+        "ori": "15_complexor",
+        "index": 6,
+        "Sentence_Scanning": [
+            [
+                "1",
+                "The Knapsack Problem is a classic...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "The problem is to determine the most valuable...",
+                "Decision variable definition and capacity constraint"
+            ],
+            [
+                "3",
+                "The goal is to maximize the total value...",
+                "Objective function specification and capacity constraint"
+            ],
+            [
+                "4",
+                "The following parameters are included...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "item_values: a list of integers,...",
+                "No constraints"
+            ],
+            [
+                "6",
+                "item_weights: a list of integers,...",
+                "No constraints"
+            ],
+            [
+                "7",
+                "max_weight_knapsack: an integer,...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "The following data is included...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_i",
+                "Meaning": "1 if item i is included in the knapsack, 0 otherwise",
+                "Type": "BINARY",
+                "Range ": "{0,1}, i=1..n"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Weight capacity",
+                "∑_{i=1}^n item_weights[i] · x_i ≤ max_weight_knapsack",
+                "sentence numbers:2,3"
+            ],
+            [
+                "Binary domain",
+                "x_i ∈ {0,1} ∀ i=1..n",
+                "sentence numbers:2"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The goal is to maximize the total value of the items in the knapsack without exceeding its weight capacity.",
+            "Mathematical_expressions": "Z = ∑_{i=1}^n item_values[i] · x_i"
+        },
+        "Problem_Type": "MILP"
+    },
+    "6": {
+        "question": "This is a multi-commodity transportation problem. Given a set of origins `Origins`, a set of destinations `Destinations`, and a set of products `Products`. Each origin `i` has a certain supply of each product `p` `Supply_{i,p}` and each destination `j` has a certain demand for each product `p` `Demand_{j,p}`. The cost of shipping one unit of product `p` from origin `i` to destination `j` is `ShippingCost_{i, j, p}`. The problem aims to minimize the total cost of shipping all products from the origins to the destinations. It is constrained that the total amount of each product `p` shipped from each origin `i` equals its supply, the total amount of each product `p` shipped to each destination `j` equals its demand, and the total amount of all products shipped from each origin `i` to each destination `j` does not exceed a certain limit `Limit_{i,j}`. How to decide the number of units of each product `p` to be shipped from each origin `i` to each destination `j`?\n\nThe following parameters are included in this problem:\nsupply: a 2D list, supply[i][p] indicates the amount of product p available at origin i\ndemand: a 2D list, demand[p][j] indicates the amount of product p required at destination j\nlimit: a 2D list, limit[i][j] indicates the maximum total amount of all products that can be shipped from origin i to destination j\ncost: a 3D list, cost[i][j][p] indicates the shipment cost per unit of product p from origin i to destination j\n\n\nThe following data is included in this problem:\n{'supply': [[20, 30], [40, 10]], 'demand': [[30, 30], [30, 10]], 'limit': [[35, 25], [20, 30]], 'cost': [[[2, 3], [4, 1]], [[3, 2], [2, 4]]]}",
+        "answer": 235,
+        "ori": "15_complexor",
+        "index": 7,
+        "Parameters_List": [
+            {
+                "Name": "supply",
+                "Type": "list",
+                "Value": [
+                    [
+                        20,
+                        30
+                    ],
+                    [
+                        40,
+                        10
+                    ]
+                ]
+            },
+            {
+                "Name": "demand",
+                "Type": "list",
+                "Value": [
+                    [
+                        30,
+                        30
+                    ],
+                    [
+                        30,
+                        10
+                    ]
+                ]
+            },
+            {
+                "Name": "limit",
+                "Type": "list",
+                "Value": [
+                    [
+                        35,
+                        25
+                    ],
+                    [
+                        20,
+                        30
+                    ]
+                ]
+            },
+            {
+                "Name": "cost",
+                "Type": "list",
+                "Value": [
+                    [
+                        [
+                            2,
+                            3
+                        ],
+                        [
+                            4,
+                            1
+                        ]
+                    ],
+                    [
+                        [
+                            3,
+                            2
+                        ],
+                        [
+                            2,
+                            4
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "This is a...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each origin i has...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The cost of shipping...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "The problem aims...",
+                "Objective extracted"
+            ],
+            [
+                "6",
+                "It is constrained that...",
+                "Supply, demand and link-limit constraints extracted"
+            ],
+            [
+                "7",
+                "How to decide the...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "The following parameters...",
+                "No constraints"
+            ],
+            [
+                "9",
+                "supply: a 2D list...",
+                "No constraints"
+            ],
+            [
+                "10",
+                "demand: a 2D list...",
+                "No constraints"
+            ],
+            [
+                "11",
+                "limit: a 2D list...",
+                "No constraints"
+            ],
+            [
+                "12",
+                "cost: a 3D list...",
+                "No constraints"
+            ],
+            [
+                "13",
+                "The following data is...",
+                "No constraints"
+            ],
+            [
+                "14",
+                "Output the lists...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_{i,j,p}",
+                "Meaning": "number of units of product p shipped from origin i to destination j",
+                "Type": "continuous",
+                "Range ": "x_{i,j,p} ≥ 0, ∀i∈Origins, j∈Destinations, p∈Products"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Supply constraint",
+                "∑_{j∈Destinations} x_{i,j,p} = supply[i][p], ∀i∈Origins, p∈Products",
+                "sentence numbers:6"
+            ],
+            [
+                "Demand constraint",
+                "∑_{i∈Origins} x_{i,j,p} = demand[p][j], ∀j∈Destinations, p∈Products",
+                "sentence numbers:6"
+            ],
+            [
+                "Link-limit constraint",
+                "∑_{p∈Products} x_{i,j,p} ≤ limit[i][j], ∀i∈Origins, j∈Destinations",
+                "sentence numbers:6"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total cost of shipping all products from the origins to the destinations.",
+            "Mathematical_expressions": "Z = ∑_{i∈Origins} ∑_{j∈Destinations} ∑_{p∈Products} cost[i][j][p] · x_{i,j,p}"
+        },
+        "Problem_Type": "MILP"
+    },
+    "7": {
+        "question": "This is a cutting stock problem. Given a roll of width `RollWidth` and a set of widths `Width` to be cut. Each width `i` has a certain number of Orders `Orders_{i}`. There are `NumPatterns` patterns and each pattern `j` has a certain number of rolls of each width `i` `NumRollsWidth_{i, j}`. The problem aims to minimize the total number of raw rolls cut. It is constrained that for each width `i`, the total number of rolls cut meets the total Orders. How to decide the number of rolls cut using each pattern `j`?\n\nThe following parameters are included in this problem:\nroll_width: An integer, the width of the raw rolls.\nwidths: A list of integers, the set of widths to be cut.\norders: A list of integers, the number of orders for each width.\nnum_patterns: An integer, the number of different patterns.\nnum_rolls_width: A list of lists, where each inner list contains the number of rolls of a particular width in a given pattern.\n\n\nThe following data is included in this problem:\n{'roll_width': 10, 'widths': [2, 3, 5], 'orders': [4, 2, 2], 'num_patterns': 2, 'num_rolls_width': [[1, 2, 0], [0, 0, 1]]}",
+        "answer": 6,
+        "ori": "15_complexor",
+        "index": 8,
+        "Parameters_List": [
+            {
+                "Name": "roll_width",
+                "Type": "integer",
+                "Value": 10
+            },
+            {
+                "Name": "widths",
+                "Type": "list",
+                "Value": [
+                    2,
+                    3,
+                    5
+                ]
+            },
+            {
+                "Name": "orders",
+                "Type": "list",
+                "Value": [
+                    4,
+                    2,
+                    2
+                ]
+            },
+            {
+                "Name": "num_patterns",
+                "Type": "integer",
+                "Value": 2
+            },
+            {
+                "Name": "num_rolls_width",
+                "Type": "list",
+                "Value": [
+                    [
+                        1,
+                        2,
+                        0
+                    ],
+                    [
+                        0,
+                        0,
+                        1
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "This is a...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a roll...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each width i...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "There are NumPatterns...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "The problem aims...",
+                "Objective statement"
+            ],
+            [
+                "6",
+                "It is constrained...",
+                "Demand‐fulfillment constraint"
+            ],
+            [
+                "7",
+                "How to decide...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "The following parameters...",
+                "No constraints"
+            ],
+            [
+                "9",
+                "roll_width: An...",
+                "No constraints"
+            ],
+            [
+                "10",
+                "widths: A list...",
+                "No constraints"
+            ],
+            [
+                "11",
+                "orders: A list...",
+                "No constraints"
+            ],
+            [
+                "12",
+                "num_patterns: An...",
+                "No constraints"
+            ],
+            [
+                "13",
+                "num_rolls_width: A list...",
+                "No constraints"
+            ],
+            [
+                "14",
+                "The following data...",
+                "No constraints"
+            ],
+            [
+                "15",
+                "{'roll_width': 10...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_j",
+                "Meaning": "Number of raw rolls cut following pattern j",
+                "Type": "integer",
+                "Range": "x_j ≥ 0, j = 1..NumPatterns"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Demand‐fulfillment constraint",
+                "∀ i: ∑_{j=1..NumPatterns} NumRollsWidth_{i,j} · x_j ≥ Orders_i",
+                "sentence numbers:6"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total number of raw rolls cut.",
+            "Mathematical_expressions": "Minimize ∑_{j=1..NumPatterns} x_j"
+        },
+        "Problem_Type": "MILP"
+    },
+    "8": {
+        "question": "Consider a diet problem. Given a set of nutrients `Nutrients` and a set of foods `Foods`. Each food `j` has a cost `Cost_{j}` and a range of amount that can be bought `[MinAmount_{j}, MaxAmount_{j}]`. Each nutrient `i` has a range of amount that should be included in the diet `[MinNutrient_{i}, MaxNutrient_{i}]`. The amount of nutrient `i` in food `j` is `NutrientAmount_{i, j}`. The problem aims to minimize the total cost of buying foods. It is constrained that the total amount of each nutrient `i` in the bought foods should be within its range. How to decide the amount of each food `j` to buy?\n\nThe following parameters are included in this problem:\nfood_set: List of strings, each representing a type of food.\nnutrient_set: List of strings, each representing a type of nutrient.\nfood_cost: List of floats, cost of each type of food, indexed by food_set.\nmin_food_amount: List of floats, minimum amount we can buy for each type of food, indexed by food_set.\nmax_food_amount: List of floats, maximum amount we can buy for each type of food, indexed by food_set.\nmin_nutrient_amount: List of floats, minimum required amount for each type of nutrient, indexed by nutrient_set.\nmax_nutrient_amount: List of floats, maximum allowed amount for each type of nutrient, indexed by nutrient_set.\nnutrient_amount: 2D list of floats, nutrient content in each type of food, indexed by [food_set][nutrient_set].\n\n\nThe following data is included in this problem:\n{'food_set': ['Apple', 'Banana'], 'nutrient_set': ['VitaminC', 'Fiber'], 'food_cost': [2.0, 1.5], 'min_food_amount': [0, 0], 'max_food_amount': [10, 10], 'min_nutrient_amount': [50, 30], 'max_nutrient_amount': [100, 60], 'nutrient_amount': [[10, 5], [5, 10]]}",
+        "answer": 10.33,
+        "ori": "15_complexor",
+        "index": 9,
+        "Parameters_List": [
+            {
+                "Name": "food_set",
+                "Type": "list",
+                "Value": [
+                    "Apple",
+                    "Banana"
+                ]
+            },
+            {
+                "Name": "nutrient_set",
+                "Type": "list",
+                "Value": [
+                    "VitaminC",
+                    "Fiber"
+                ]
+            },
+            {
+                "Name": "food_cost",
+                "Type": "list",
+                "Value": [
+                    2.0,
+                    1.5
+                ]
+            },
+            {
+                "Name": "min_food_amount",
+                "Type": "list",
+                "Value": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "Name": "max_food_amount",
+                "Type": "list",
+                "Value": [
+                    10,
+                    10
+                ]
+            },
+            {
+                "Name": "min_nutrient_amount",
+                "Type": "list",
+                "Value": [
+                    50,
+                    30
+                ]
+            },
+            {
+                "Name": "max_nutrient_amount",
+                "Type": "list",
+                "Value": [
+                    100,
+                    60
+                ]
+            },
+            {
+                "Name": "nutrient_amount",
+                "Type": "list",
+                "Value": [
+                    [
+                        10,
+                        5
+                    ],
+                    [
+                        5,
+                        10
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "Consider a diet problem...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set of nutrients...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each food `j` has a cost...",
+                "introduces x_j and bounds: x_j ≥ MinAmount_j; x_j ≤ MaxAmount_j"
+            ],
+            [
+                "4",
+                "Each nutrient `i` has a range...",
+                "introduces nutrient‐intake constraints: ∑_{j∈Foods} NutrientAmount_{i,j}·x_j ≥ MinNutrient_i; ∑_{j∈Foods} NutrientAmount_{i,j}·x_j ≤ MaxNutrient_i"
+            ],
+            [
+                "5",
+                "The amount of nutrient...",
+                "No constraints"
+            ],
+            [
+                "6",
+                "The problem aims to minimize...",
+                "Objective"
+            ],
+            [
+                "7",
+                "It is constrained that the total...",
+                "No new constraints"
+            ],
+            [
+                "8",
+                "How to decide the amount...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_j",
+                "Meaning": "amount of food j to buy",
+                "Type": "continuous",
+                "Range ": "MinAmount_j ≤ x_j ≤ MaxAmount_j, ∀ j∈Foods"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Food-amount bounds",
+                "MinAmount_j ≤ x_j ≤ MaxAmount_j, ∀ j∈Foods",
+                "sentence numbers:3"
+            ],
+            [
+                "Nutrient-intake bounds",
+                "MinNutrient_i ≤ ∑_{j∈Foods} NutrientAmount_{i,j}·x_j ≤ MaxNutrient_i, ∀ i∈Nutrients",
+                "sentence numbers:4"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total cost of buying foods.",
+            "Mathematical_expressions": "minimize Z = ∑_{j∈Foods} Cost_j·x_j"
+        },
+        "Problem_Type": "MILP"
+    },
+    "9": {
+        "question": "Consider a production problem. Given a set of products `Products` and a set of stages `Stages`. Each product `p` has a certain production rate `Rate_{p, s}` in each stage `s` and a certain profit `Profit_{p}` per ton. Each stage `s` has a certain number of hours `Available_{s}` available per week. There are also lower and upper limits on the tons of each product sold in a week, `Commit_{p}` and `Market_{p}` respectively. The problem aims to maximize the total profit from all products. It is constrained that the total number of hours used by all products in each stage `s` may not exceed the hours available. How to decide the number of tons to be produced for each product `p`?\n\nThe following parameters are included in this problem:\nproducts: list of products\nstages: list of stages\nrate: 2D list indicating the production rate of each product at each stage\nprofit: list indicating profit per ton for each product\ncommit: list indicating minimum production (lower limit) for each product\nmarket: list indicating maximum production (upper limit) for each product\navail: list indicating hours available per week at each stage\n\n\nThe following data is included in this problem:\n{'products': ['P1', 'P2'], 'stages': ['S1', 'S2'], 'rate': [[2, 3], [3, 2]], 'profit': [10, 20], 'commit': [1, 2], 'market': [5, 4], 'avail': [10, 8]}",
+        "answer": 110,
+        "ori": "15_complexor",
+        "index": 10,
+        "Parameters_List": [
+            {
+                "Name": "products",
+                "Type": "list",
+                "Value": [
+                    "P1",
+                    "P2"
+                ]
+            },
+            {
+                "Name": "stages",
+                "Type": "list",
+                "Value": [
+                    "S1",
+                    "S2"
+                ]
+            },
+            {
+                "Name": "rate",
+                "Type": "list",
+                "Value": [
+                    [
+                        2,
+                        3
+                    ],
+                    [
+                        3,
+                        2
+                    ]
+                ]
+            },
+            {
+                "Name": "profit",
+                "Type": "list",
+                "Value": [
+                    10,
+                    20
+                ]
+            },
+            {
+                "Name": "commit",
+                "Type": "list",
+                "Value": [
+                    1,
+                    2
+                ]
+            },
+            {
+                "Name": "market",
+                "Type": "list",
+                "Value": [
+                    5,
+                    4
+                ]
+            },
+            {
+                "Name": "avail",
+                "Type": "list",
+                "Value": [
+                    10,
+                    8
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "Consider a production...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set of products...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each product p has...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "Each stage s has...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "There are also lower...",
+                "Bound constraints: Commit_p ≤ x_p ≤ Market_p"
+            ],
+            [
+                "6",
+                "The problem aims to maximize...",
+                "Objective definition"
+            ],
+            [
+                "7",
+                "It is constrained that...",
+                "Capacity constraints: ∑_p (x_p / Rate_{p,s}) ≤ Available_s"
+            ],
+            [
+                "8",
+                "How to decide the...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x[p]",
+                "Meaning": "tons of product p produced per week",
+                "Type": "continuous",
+                "Range ": "Commit_p ≤ x_p ≤ Market_p"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Bounds",
+                "Commit_p ≤ x_p ≤ Market_p",
+                "sentence numbers:5"
+            ],
+            [
+                "Capacity",
+                "∑_p (x_p / Rate_{p,s}) ≤ Available_s",
+                "sentence numbers:7"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to maximize the total profit from all products.",
+            "Mathematical_expressions": "Max Z = ∑_p Profit_p · x_p"
+        },
+        "Problem_Type": "MILP"
+    },
+    "10": {
+        "question": "A set of jobs `Jobs` need to be processed on a set of machines `Machines` in series. All jobs have the same processing order through all the machines from machine 1 to machine M. Each machine can work in parallel. The workflow is the following: the first job of the sequence goes to the first machine to be processed; meanwhile, other jobs wait; when the first machine has processed the first job, the first job goes to the second machine and the second job of the sequence starts to be processed by the first machine; and so on. The time required to process job `j` on machine `m` is `ProcesTime_{j, m}`. The problem aims to minimize the total makespan. The goal is to find a sequence of jobs that minimize the makespan: the time when all jobs have been processed.\n\nThe following parameters are included in this problem:\njobs: list of ints, represents a set of all Jobs\nschedules: list of ints, represents a set of all schedules, range [1, S]\nmachines: list of ints, represents a set of all machines, range [1, M]\nproces_time: 2D list of ints, time required to process job `j` on machine `m`, domain size [Jobs x Machines]\n\n\nThe following data is included in this problem:\n{'jobs': [1, 2, 3], 'schedules': [1, 2, 3], 'machines': [1, 2], 'proces_time': [[1, 3], [2, 2], [3, 1]]}",
+        "answer": 7,
+        "ori": "15_complexor",
+        "index": 11,
+        "Parameters_List": [
+            {
+                "Name": "jobs",
+                "Type": "list",
+                "Value": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "Name": "schedules",
+                "Type": "list",
+                "Value": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "Name": "machines",
+                "Type": "list",
+                "Value": [
+                    1,
+                    2
+                ]
+            },
+            {
+                "Name": "proces_time",
+                "Type": "list",
+                "Value": [
+                    [
+                        1,
+                        3
+                    ],
+                    [
+                        2,
+                        2
+                    ],
+                    [
+                        3,
+                        1
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "A set of jobs Jobs need to...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "All jobs have the same...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each machine can work...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The workflow is the following...",
+                "Extracts the flow-shop precedence constraints on the same machine (no overlap) and across machines (series precedence)."
+            ],
+            [
+                "5",
+                "The time required to process...",
+                "No constraints"
+            ],
+            [
+                "6",
+                "The problem aims to minimize...",
+                "Objective identified"
+            ],
+            [
+                "7",
+                "The goal is to find a sequence...",
+                "Extracts the sequence-validity constraints (each job in exactly one position, each position filled by exactly one job)."
+            ],
+            [
+                "8",
+                "The following parameters are included...",
+                "No constraints"
+            ],
+            [
+                "9",
+                "The following data is included...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_{j,k}",
+                "Meaning": "=1 if job j∈Jobs is placed in sequence position k∈Schedules; =0 otherwise",
+                "Type": "BINARY",
+                "Range ": "{0,1}"
+            },
+            {
+                "symbol": "C_{k,m}",
+                "Meaning": "completion time of the job in position k on machine m",
+                "Type": "continuous",
+                "Range ": ">=0"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Position assignment",
+                "∑_{j∈Jobs} x_{j,k} = 1 ∀ k∈Schedules",
+                "sentence numbers:7"
+            ],
+            [
+                "Job assignment",
+                "∑_{k∈Schedules} x_{j,k} = 1 ∀ j∈Jobs",
+                "sentence numbers:7"
+            ],
+            [
+                "Same-machine precedence",
+                "C_{k,m} ≥ C_{k-1,m} + ∑_{j∈Jobs} p_{j,m}·x_{j,k} ∀ k=2…|Jobs|, ∀ m=1…M",
+                "sentence numbers:4"
+            ],
+            [
+                "Cross-machine precedence",
+                "C_{k,m} ≥ C_{k,m-1} + ∑_{j∈Jobs} p_{j,m}·x_{j,k} ∀ k=1…|Jobs|, ∀ m=2…M",
+                "sentence numbers:4"
+            ],
+            [
+                "Initialization (first comp time)",
+                "C_{1,1} ≥ ∑_{j∈Jobs} p_{j,1}·x_{j,1}",
+                "sentence numbers:4"
+            ],
+            [
+                "Initialization (machine chain)",
+                "C_{1,m} ≥ C_{1,m-1} + ∑_{j∈Jobs} p_{j,m}·x_{j,1} ∀ m=2…M",
+                "sentence numbers:4"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total makespan.",
+            "Mathematical_expressions": "minimize C_{|Jobs|,M}"
+        },
+        "Problem_Type": "MILP"
+    },
+    "11": {
+        "question": "We have a set of flight legs (one-way non-stop flight) with a limited passenger capacity. According to market research, we defined a set of flight itineraries to sell as a package with a given price. For each package, we have an estimated demand. How many units of each package should we sell to maximize the revenue? We reserve the passenger seats according to the number of packages we want to sell.\n\nThe following parameters are included in this problem:\navailable_seats: List of integers, available seats for each flight leg\ndemand: List of integers, estimated demand for each package\nrevenue: List of integers, revenue gained for selling a unit of each package\ndelta: 2D list of integers, 1 if package uses a specific flight leg, otherwise 0\n\n\nThe following data is included in this problem:\n{'available_seats': [50, 60, 70], 'demand': [30, 40], 'revenue': [100, 150], 'delta': [[1, 1, 0], [0, 1, 1]]}",
+        "answer": 8000,
+        "ori": "15_complexor",
+        "index": 12,
+        "Parameters_List": [
+            {
+                "Name": "available_seats",
+                "Type": "list",
+                "Value": [
+                    50,
+                    60,
+                    70
+                ]
+            },
+            {
+                "Name": "demand",
+                "Type": "list",
+                "Value": [
+                    30,
+                    40
+                ]
+            },
+            {
+                "Name": "revenue",
+                "Type": "list",
+                "Value": [
+                    100,
+                    150
+                ]
+            },
+            {
+                "Name": "delta",
+                "Type": "list",
+                "Value": [
+                    [
+                        1,
+                        1,
+                        0
+                    ],
+                    [
+                        0,
+                        1,
+                        1
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "We have a set...",
+                "seat-capacity constraint: ∑_j δ_{i,j}·x_j ≤ available_seats_i"
+            ],
+            [
+                "2",
+                "According to market...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "For each package...",
+                "demand limit constraint: x_j ≤ demand_j"
+            ],
+            [
+                "4",
+                "How many units...",
+                "Defines objective: maximize ∑_j revenue_j·x_j"
+            ],
+            [
+                "5",
+                "We reserve the passenger...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_j",
+                "Meaning": "number of units of package j to sell",
+                "Type": "integer",
+                "Range ": "0 ≤ x_j ≤ demand_j"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "SeatCapacity",
+                "∑_{j∈J} δ_{i,j}·x_j ≤ available_seats_i",
+                "sentence numbers:1,5"
+            ],
+            [
+                "DemandLimit",
+                "x_j ≤ demand_j",
+                "sentence numbers:3"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "How many units of each package should we sell to maximize the revenue?",
+            "Mathematical_expressions": "maximize Z = ∑_{j∈J} revenue_j · x_j"
+        },
+        "Problem_Type": "MILP"
+    },
+    "12": {
+        "question": "Consider a transportation problem with multiple products. Given a set of cities `Cities` and a set of links `Links` between the cities. Each city `i` has a certain supply of each product `p` `Supply_{i,p}` and a certain demand for each product `p` `Demand_{i,p}`. The cost of shipping one package of product `p` from city `i` to city `j` is `ShipmentCost_{i, j, p}`. Each link `(i, j)` has a certain capacity for each product `p` `Capacity_{i,j,p}` and a joint capacity `JointCapacity_{i, j}` for all products. The problem aims to minimize the total cost of shipping products from the cities to the cities. The total number of packages to be shipped on each link `(i, j)` should not exceed its joint capacity. How to decide the number of packages of each product `p` to be shipped from each city `i` to each city `j`?\n\nThe following parameters are included in this problem:\nCities: list, a list of cities\nLinks: list, a list of links between the cities\nProducts: list, a list of products\nSupply: list of lists, the supply of each product at each city\nDemand: list of lists, the demand of each product at each city\nShipmentCost: list of lists of lists, the cost of shipping each product from each city to each city\nCapacity: list of lists of lists, the capacity of shipping each product from each city to each city\nJointCapacity: list of lists, the joint capacity of each link\n\n\nThe following data is included in this problem:\n{'Cities': ['A', 'B'], 'Links': [['A', 'B']], 'Products': ['Product1'], 'Supply': [[10], [0]], 'Demand': [[0], [10]], 'ShipmentCost': [[[1]]], 'Capacity': [[[10]]], 'JointCapacity': [[10]]}",
+        "answer": 10,
+        "ori": "15_complexor",
+        "index": 13,
+        "Parameters_List": [
+            {
+                "Name": "Cities",
+                "Type": "list",
+                "Value": [
+                    "A",
+                    "B"
+                ]
+            },
+            {
+                "Name": "Links",
+                "Type": "list",
+                "Value": [
+                    [
+                        "A",
+                        "B"
+                    ]
+                ]
+            },
+            {
+                "Name": "Products",
+                "Type": "list",
+                "Value": [
+                    "Product1"
+                ]
+            },
+            {
+                "Name": "Supply",
+                "Type": "list",
+                "Value": [
+                    [
+                        10
+                    ],
+                    [
+                        0
+                    ]
+                ]
+            },
+            {
+                "Name": "Demand",
+                "Type": "list",
+                "Value": [
+                    [
+                        0
+                    ],
+                    [
+                        10
+                    ]
+                ]
+            },
+            {
+                "Name": "ShipmentCost",
+                "Type": "list",
+                "Value": [
+                    [
+                        [
+                            1
+                        ]
+                    ]
+                ]
+            },
+            {
+                "Name": "Capacity",
+                "Type": "list",
+                "Value": [
+                    [
+                        [
+                            10
+                        ]
+                    ]
+                ]
+            },
+            {
+                "Name": "JointCapacity",
+                "Type": "list",
+                "Value": [
+                    [
+                        10
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "Consider a transportation problem...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set of cities...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each city `i` has a certain supply...",
+                "Supply constraint: ∑_{j∈Cities} x_{i,j,p} ≤ Supply_{i,p}; Demand constraint: ∑_{i∈Cities} x_{i,j,p} ≥ Demand_{j,p}"
+            ],
+            [
+                "4",
+                "The cost of shipping one...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "Each link `(i, j)` has a certain...",
+                "Per-product capacity: x_{i,j,p} ≤ Capacity_{i,j,p}; Joint capacity: ∑_{p∈Products} x_{i,j,p} ≤ JointCapacity_{i,j}"
+            ],
+            [
+                "6",
+                "The problem aims to minimize...",
+                "No constraints"
+            ],
+            [
+                "7",
+                "The total number of packages...",
+                "Redundant joint-capacity constraint"
+            ],
+            [
+                "8",
+                "How to decide the number...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_{i,j,p}",
+                "Meaning": "number of packages of product p shipped from city i to city j",
+                "Type": "integer",
+                "Range ": "0 ≤ x_{i,j,p} ≤ Capacity_{i,j,p}"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "SupplyConstraint",
+                "∀i∈Cities, ∀p∈Products: ∑_{j∈Cities} x_{i,j,p} ≤ Supply_{i,p}",
+                "sentence numbers:3"
+            ],
+            [
+                "DemandConstraint",
+                "∀j∈Cities, ∀p∈Products: ∑_{i∈Cities} x_{i,j,p} ≥ Demand_{j,p}",
+                "sentence numbers:3"
+            ],
+            [
+                "ProductCapacity",
+                "∀(i,j)∈Links, ∀p∈Products: x_{i,j,p} ≤ Capacity_{i,j,p}",
+                "sentence numbers:5"
+            ],
+            [
+                "JointCapacity",
+                "∀(i,j)∈Links: ∑_{p∈Products} x_{i,j,p} ≤ JointCapacity_{i,j}",
+                "sentence numbers:5,7"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total cost of shipping products from the cities to the cities.",
+            "Mathematical_expressions": "min ∑_{i∈Cities} ∑_{j∈Cities} ∑_{p∈Products} ShipmentCost_{i,j,p} * x_{i,j,p}"
+        },
+        "Problem_Type": "MILP"
+    },
+    "13": {
+        "question": "Consider a diet problem. Given a set of foods `Foods` and a set of nutrients `Nutrients` which is the union of nutrients with minimum requirements `MinRequirements` and nutrients with maximum requirements `MaxRequirements`. Each food `j` has a cost `Cost_{j}` and the amount of each nutrient `i` it contains is `NutrientAmount_{i, j}`. The problem aims to minimize the total cost of buying foods. It is constrained that the total amount of each nutrient `i` with minimum requirements in the foods bought is at least `MinRequirement_{i}` and the total amount of each nutrient `i` with maximum requirements in the foods bought is at most `MaxRequirement_{i}`. How to decide the amount of each food `j` to buy?\n\nThe following parameters are included in this problem:\ncost: list of costs for each food item, length is the number of foods\nf_min: list of minimum amounts to buy for each food item, length is the number of foods\nf_max: list of maximum amounts to buy for each food item, length is the number of foods\nn_min: list of minimum nutrient requirements, length is the number of nutrients\nn_max: list of maximum nutrient requirements, length is the number of nutrients\namt: 2D list where amt[i][j] is the amount of nutrient i in food j, dimensions are nutrients x foods\n\n\nThe following data is included in this problem:\n{'cost': [2, 3, 1.5], 'f_min': [0, 0, 0], 'f_max': [100, 100, 100], 'n_min': [50, 60], 'n_max': [200, 250], 'amt': [[2, 1, 3], [3, 4, 2]]}",
+        "answer": 45,
+        "ori": "15_complexor",
+        "index": 14,
+        "Parameters_List": [
+            {
+                "Name": "cost",
+                "Type": "list",
+                "Value": [
+                    2,
+                    3,
+                    1.5
+                ]
+            },
+            {
+                "Name": "f_min",
+                "Type": "list",
+                "Value": [
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "Name": "f_max",
+                "Type": "list",
+                "Value": [
+                    100,
+                    100,
+                    100
+                ]
+            },
+            {
+                "Name": "n_min",
+                "Type": "list",
+                "Value": [
+                    50,
+                    60
+                ]
+            },
+            {
+                "Name": "n_max",
+                "Type": "list",
+                "Value": [
+                    200,
+                    250
+                ]
+            },
+            {
+                "Name": "amt",
+                "Type": "list",
+                "Value": [
+                    [
+                        2,
+                        1,
+                        3
+                    ],
+                    [
+                        3,
+                        4,
+                        2
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "Consider a diet problem...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set of foods Foods and a set of nutrients Nutrients...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each food j has a cost Cost_j and the amount of each nutrient i...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The problem aims to minimize the total cost of buying foods...",
+                "Objective"
+            ],
+            [
+                "5",
+                "It is constrained that the total amount of each nutrient i with minimum requirements...",
+                "Nutrient lower- and upper-bound constraints"
+            ],
+            [
+                "6",
+                "How to decide the amount of each food j to buy?...",
+                "No constraints"
+            ],
+            [
+                "7",
+                "cost: list of costs for each food item...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "f_min: list of minimum amounts to buy for each food item...",
+                "Food lower-bound constraints"
+            ],
+            [
+                "9",
+                "f_max: list of maximum amounts to buy for each food item...",
+                "Food upper-bound constraints"
+            ],
+            [
+                "10",
+                "n_min: list of minimum nutrient requirements...",
+                "No constraints"
+            ],
+            [
+                "11",
+                "n_max: list of maximum nutrient requirements...",
+                "No constraints"
+            ],
+            [
+                "12",
+                "amt: 2D list where amt[i][j] is the amount of nutrient i in food j...",
+                "No constraints"
+            ],
+            [
+                "13",
+                "The following data is included in this problem: ...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_j",
+                "Meaning": "amount of food j to buy",
+                "Type": "continuous",
+                "Range ": "f_min[j] ≤ x_j ≤ f_max[j], j=1,…,|Foods|"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Min Nutrient Requirement",
+                "∀ i: Σ_{j∈Foods} amt[i][j]·x_j ≥ n_min[i]",
+                "sentence numbers:5"
+            ],
+            [
+                "Max Nutrient Requirement",
+                "∀ i: Σ_{j∈Foods} amt[i][j]·x_j ≤ n_max[i]",
+                "sentence numbers:5"
+            ],
+            [
+                "Food Lower-Bound",
+                "∀ j: x_j ≥ f_min[j]",
+                "sentence numbers:8"
+            ],
+            [
+                "Food Upper-Bound",
+                "∀ j: x_j ≤ f_max[j]",
+                "sentence numbers:9"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total cost of buying foods.",
+            "Mathematical_expressions": "Min Z = ∑_{j∈Foods} cost[j]·x_j"
+        },
+        "Problem_Type": "MILP"
+    },
+    "14": {
+        "question": "The Aircraft Landing Problem (ALP) is the problem of deciding a landing time on an appropriate runway for each aircraft in a given set of aircraft such that each aircraft lands within a predetermined time window; and separation criteria between the landing of an aircraft, and the landing of all successive aircraft, are respected. We are given the earliest landing time, latest landing time, target landing time, and penalties for landing before or after the target landing time for each aircraft. There is also a separation time that represents the minimum time required between the landing of two aircraft. The objective of the problem is to minimize the total penalties of landing before or after the target time for each aircraft. The problem includes several constraints. The order constraint ensures that the aircrafts land in a specific order. The separation constraint ensures that there is enough separation time between the landing of aircraft. The lower and upper time window constraints ensure that each aircraft lands within its respective earliest and latest time windows.\n\nThe following parameters are included in this problem:\nEarliestLanding: list of integers, earliest landing times for each aircraft.\nLatestLanding: list of integers, latest landing times for each aircraft.\nTargetLanding: list of integers, target landing times for each aircraft.\nPenaltyAfterTarget: list of integers, penalties for landing after target times for each aircraft.\nPenaltyBeforeTarget: list of integers, penalties for landing before target times for each aircraft.\nSeparationTime: 2D list of integers, separation times between each pair of aircraft.\n\n\nThe following data is included in this problem:\n{'EarliestLanding': [1, 3, 5], 'LatestLanding': [10, 12, 15], 'TargetLanding': [4, 8, 14], 'PenaltyAfterTarget': [10, 20, 30], 'PenaltyBeforeTarget': [5, 10, 15], 'SeparationTime': [[0, 2, 3], [2, 0, 4], [3, 4, 0]]}",
+        "answer": 0,
+        "ori": "15_complexor",
+        "index": 15,
+        "Parameters_List": [
+            {
+                "Name": "EarliestLanding",
+                "Type": "list",
+                "Value": [
+                    1,
+                    3,
+                    5
+                ]
+            },
+            {
+                "Name": "LatestLanding",
+                "Type": "list",
+                "Value": [
+                    10,
+                    12,
+                    15
+                ]
+            },
+            {
+                "Name": "TargetLanding",
+                "Type": "list",
+                "Value": [
+                    4,
+                    8,
+                    14
+                ]
+            },
+            {
+                "Name": "PenaltyAfterTarget",
+                "Type": "list",
+                "Value": [
+                    10,
+                    20,
+                    30
+                ]
+            },
+            {
+                "Name": "PenaltyBeforeTarget",
+                "Type": "list",
+                "Value": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            {
+                "Name": "SeparationTime",
+                "Type": "list",
+                "Value": [
+                    [
+                        0,
+                        2,
+                        3
+                    ],
+                    [
+                        2,
+                        0,
+                        4
+                    ],
+                    [
+                        3,
+                        4,
+                        0
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "The Aircraft Landing Problem (ALP)...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "We are given the earliest landing time...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "There is also a separation time...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The objective of the problem is to minimize...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "The problem includes several constraints.",
+                "No constraints"
+            ],
+            [
+                "6",
+                "The order constraint ensures that the aircrafts...",
+                "Order constraint"
+            ],
+            [
+                "7",
+                "The separation constraint ensures that there is enough separation time...",
+                "Separation constraint"
+            ],
+            [
+                "8",
+                "The lower and upper time window constraints ensure that each aircraft lands...",
+                "Lower and upper time-window constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "t_i",
+                "Meaning": "landing time of aircraft i",
+                "Type": "integer",
+                "Range ": "EarliestLanding_i ≤ t_i ≤ LatestLanding_i"
+            },
+            {
+                "symbol": "Δ⁻_i",
+                "Meaning": "earliness amount for aircraft i (TargetLanding_i − t_i if positive)",
+                "Type": "integer",
+                "Range ": "Δ⁻_i ≥ 0"
+            },
+            {
+                "symbol": "Δ⁺_i",
+                "Meaning": "lateness amount for aircraft i (t_i − TargetLanding_i if positive)",
+                "Type": "integer",
+                "Range ": "Δ⁺_i ≥ 0"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Lower Time Window",
+                "forall i: t_i ≥ EarliestLanding_i",
+                "sentence numbers:8"
+            ],
+            [
+                "Upper Time Window",
+                "forall i: t_i ≤ LatestLanding_i",
+                "sentence numbers:8"
+            ],
+            [
+                "Order Constraint",
+                "forall i=1…N−1: t_i ≤ t_{i+1}",
+                "sentence numbers:6"
+            ],
+            [
+                "Separation Constraint",
+                "forall i<j: t_j − t_i ≥ SeparationTime_{i,j}",
+                "sentence numbers:7"
+            ],
+            [
+                "Earliness/Lateness Balance",
+                "forall i: t_i + Δ⁻_i − Δ⁺_i = TargetLanding_i",
+                "sentence numbers:2,4"
+            ],
+            [
+                "Nonnegativity of Δ Variables",
+                "forall i: Δ⁻_i ≥ 0 and Δ⁺_i ≥ 0",
+                "sentence numbers:2,4"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The objective of the problem is to minimize the total penalties of landing before or after the target time for each aircraft.",
+            "Mathematical_expressions": "minimize ∑_{i=1}^N (PenaltyBeforeTarget_i * Δ⁻_i + PenaltyAfterTarget_i * Δ⁺_i)"
+        },
+        "Problem_Type": "MILP"
+    },
+    "15": {
+        "question": "Consider a project assignment problem. Given a set of people `People` and a set of projects `Projects`. Each person `i` has a certain number of available hours `Supply_{i}` and each project `j` requires a certain number of hours `Demand_{j}`. The cost per hour of work for person `i` on project `j` is `Cost_{i, j}`. Each person `i` can contribute to project `j` up to a maximum limit `Limit_{i, j}`. The problem aims to minimize the total cost of assigning people to projects. It is constrained that the total number of hours assigned from each person `i` equals its supply and the total number of hours assigned to each project `j` equals its demand. How to decide the number of hours to be assigned from each person `i` to each project `j`?\n\nThe following parameters are included in this problem:\nsupply: list, hours each person is available, length is number of people\ndemand: list, hours each project requires, length is number of projects\ncost: 2D list, cost per hour of work for each person on each project, dimensions are number of people x number of projects\nlimit: 2D list, maximum contributions to projects for each person on each project, dimensions are number of people x number of projects\n\n\nThe following data is included in this problem:\n{'supply': [8, 7], 'demand': [5, 10], 'cost': [[10, 20], [15, 25]], 'limit': [[5, 6], [4, 7]]}",
+        "answer": 285,
+        "ori": "15_complexor",
+        "index": 16,
+        "Parameters_List": [
+            {
+                "Name": "supply",
+                "Type": "list",
+                "Value": [
+                    8,
+                    7
+                ]
+            },
+            {
+                "Name": "demand",
+                "Type": "list",
+                "Value": [
+                    5,
+                    10
+                ]
+            },
+            {
+                "Name": "cost",
+                "Type": "list",
+                "Value": [
+                    [
+                        10,
+                        20
+                    ],
+                    [
+                        15,
+                        25
+                    ]
+                ]
+            },
+            {
+                "Name": "limit",
+                "Type": "list",
+                "Value": [
+                    [
+                        5,
+                        6
+                    ],
+                    [
+                        4,
+                        7
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "Consider a project assignment...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "Given a set of people `People`...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Each person `i` has a certain...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The cost per hour of work...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "Each person `i` can contribute...",
+                "Assignment-limit constraint"
+            ],
+            [
+                "6",
+                "The problem aims to minimize...",
+                "Objective"
+            ],
+            [
+                "7",
+                "It is constrained that the total...",
+                "Supply-equality and demand-equality constraints"
+            ],
+            [
+                "8",
+                "How to decide the number of hours...",
+                "No constraints"
+            ],
+            [
+                "9",
+                "The following parameters are included...",
+                "No constraints"
+            ],
+            [
+                "10",
+                "supply: list, hours each person...",
+                "No constraints"
+            ],
+            [
+                "11",
+                "demand: list, hours each project...",
+                "No constraints"
+            ],
+            [
+                "12",
+                "cost: 2D list, cost per hour...",
+                "No constraints"
+            ],
+            [
+                "13",
+                "limit: 2D list, maximum contributions...",
+                "No constraints"
+            ],
+            [
+                "14",
+                "The following data is included...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_{i,j}",
+                "Meaning": "number of hours assigned from person i to project j",
+                "Type": "continuous",
+                "Range ": "0 ≤ x_{i,j} ≤ Limit_{i,j}"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Assignment-limit constraint",
+                "x_{i,j} ≤ Limit_{i,j}, ∀i ∈ People, j ∈ Projects",
+                "sentence numbers:5"
+            ],
+            [
+                "Supply-equality constraint",
+                "∑_{j ∈ Projects} x_{i,j} = Supply_i, ∀i ∈ People",
+                "sentence numbers:7"
+            ],
+            [
+                "Demand-equality constraint",
+                "∑_{i ∈ People} x_{i,j} = Demand_j, ∀j ∈ Projects",
+                "sentence numbers:7"
+            ],
+            [
+                "Non-negativity constraint",
+                "x_{i,j} ≥ 0, ∀i ∈ People, j ∈ Projects",
+                "sentence numbers:implicit"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The problem aims to minimize the total cost of assigning people to projects.",
+            "Mathematical_expressions": "Minimize Z = ∑_{i∈People} ∑_{j∈Projects} Cost_{i,j} · x_{i,j}"
+        },
+        "Problem_Type": "MILP"
+    },
+    "16": {
+        "question": "The problem aims to determine the optimal amounts of alloys to purchase in order to achieve a desired blend of required elements at the minimum cost. We are given a set of alloys available on the market and a set of required elements for the blend, the percentage composition data of each required element in each alloy, the desired blend percentage of each required element, the price of each alloy. The decision is the amount of each alloy to be purchased, which is continuous. The objective is to minimize the total cost of the alloy purchased. There are two constraints. The first set of constraints ensures that the desired blend percentage of each required element is met. The second constraint ensures that the total amount of alloys purchased is equal to 1.\n\nThe following parameters are included in this problem:\nalloys_on_market: list of integers, IDs of available alloys on the market\nrequired_elements: list of strings, IDs of required elements\ncomposition_data: 2D list of floats, percentage of each required element in each alloy\ndesired_blend_percentage: list of floats, desired blend percentage for each element\nalloy_price: list of floats, price of each alloy\n\n\nThe following data is included in this problem:\n{'alloys_on_market': [0, 1], 'required_elements': ['A', 'B'], 'composition_data': [[0.5, 0.1], [0.5, 0.9]], 'desired_blend_percentage': [0.5, 0.5], 'alloy_price': [10.0, 20.0]}",
+        "answer": 10,
+        "ori": "15_complexor",
+        "index": 17,
+        "Parameters_List": [
+            {
+                "Name": "alloys_on_market",
+                "Type": "list",
+                "Value": [
+                    0,
+                    1
+                ]
+            },
+            {
+                "Name": "required_elements",
+                "Type": "list",
+                "Value": [
+                    "A",
+                    "B"
+                ]
+            },
+            {
+                "Name": "composition_data",
+                "Type": "list",
+                "Value": [
+                    [
+                        0.5,
+                        0.1
+                    ],
+                    [
+                        0.5,
+                        0.9
+                    ]
+                ]
+            },
+            {
+                "Name": "desired_blend_percentage",
+                "Type": "list",
+                "Value": [
+                    0.5,
+                    0.5
+                ]
+            },
+            {
+                "Name": "alloy_price",
+                "Type": "list",
+                "Value": [
+                    10.0,
+                    20.0
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "The problem aims...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "We are given a set...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "The decision is the...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The objective is to...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "There are two constraints...",
+                "Blend‐percentage constraints: for each element j, the weighted sum of compositions equals the desired percentage."
+            ],
+            [
+                "6",
+                "The second constraint ensures...",
+                "Total‐amount constraint: the sum of all alloy amounts equals 1."
+            ],
+            [
+                "7",
+                "The following parameters are...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "The following data is...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_i",
+                "Meaning": "Amount of alloy i to purchase",
+                "Type": "continuous",
+                "Range ": "0 ≤ x_i ≤ 1"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Blend_Percentage_Constraint_j",
+                "∑_{i ∈ alloys_on_market} composition_data[i][j] * x_i = desired_blend_percentage[j], ∀ j ∈ required_elements",
+                "sentence numbers:5"
+            ],
+            [
+                "Total_Amount_Constraint",
+                "∑_{i ∈ alloys_on_market} x_i = 1",
+                "sentence numbers:6"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The objective is to minimize the total cost of the alloy purchased.",
+            "Mathematical_expressions": "minimize Z = ∑_{i ∈ alloys_on_market} alloy_price[i] * x_i"
+        },
+        "Problem_Type": "MILP"
+    },
+    "17": {
+        "question": "The Aircraft Assignment Problem aims to assign aircraft to routes in order to minimize the total cost while satisfying demand constraints with available aircraft. The problem involves a set of aircraft and a set of routes. Given the costs of assigning an aircraft to a route. The objective is to minimize the total cost of the assignment. There are limited available aircraft. It is constrained that the number of each aircraft allocated does not exceed its available number. Given the demand of each route and the capabilities (the largest number of people can be carried) of an aircraft for a route. The demand constraint ensures that the total allocation for each route satisfies the demand. The problem seeks to find the most cost-effective assignment of aircraft to routes.\n\nThe following parameters are included in this problem:\navailability: list, availability of each aircraft\ndemand: list, demand for each route\ncapabilities: 2D list, capabilities of each aircraft for each route\ncosts: 2D list, costs of assigning each aircraft to each route\n\n\nThe following data is included in this problem:\n{'availability': [2, 3, 1], 'demand': [100, 150], 'capabilities': [[50, 70], [60, 80], [70, 90]], 'costs': [[100, 200], [150, 250], [200, 300]]}",
+        "answer": 700,
+        "ori": "15_complexor",
+        "index": 18,
+        "Parameters_List": [
+            {
+                "Name": "availability",
+                "Type": "list",
+                "Value": [
+                    2,
+                    3,
+                    1
+                ]
+            },
+            {
+                "Name": "demand",
+                "Type": "list",
+                "Value": [
+                    100,
+                    150
+                ]
+            },
+            {
+                "Name": "capabilities",
+                "Type": "list",
+                "Value": [
+                    [
+                        50,
+                        70
+                    ],
+                    [
+                        60,
+                        80
+                    ],
+                    [
+                        70,
+                        90
+                    ]
+                ]
+            },
+            {
+                "Name": "costs",
+                "Type": "list",
+                "Value": [
+                    [
+                        100,
+                        200
+                    ],
+                    [
+                        150,
+                        250
+                    ],
+                    [
+                        200,
+                        300
+                    ]
+                ]
+            }
+        ],
+        "Sentence_Scanning": [
+            [
+                "1",
+                "The Aircraft Assignment Problem aims...",
+                "No constraints"
+            ],
+            [
+                "2",
+                "The problem involves a set...",
+                "No constraints"
+            ],
+            [
+                "3",
+                "Given the costs of assigning...",
+                "No constraints"
+            ],
+            [
+                "4",
+                "The objective is to minimize...",
+                "No constraints"
+            ],
+            [
+                "5",
+                "There are limited available...",
+                "No constraints"
+            ],
+            [
+                "6",
+                "It is constrained that the number...",
+                "Availability constraint extracted"
+            ],
+            [
+                "7",
+                "Given the demand of each route...",
+                "No constraints"
+            ],
+            [
+                "8",
+                "The demand constraint ensures...",
+                "Demand-satisfaction constraint extracted"
+            ],
+            [
+                "9",
+                "The problem seeks to find...",
+                "No constraints"
+            ]
+        ],
+        "Variables_List": [
+            {
+                "symbol": "x_{i,j}",
+                "Meaning": "number of aircraft of type i assigned to route j",
+                "Type": "integer",
+                "Range ": "0 ≤ x_{i,j} ≤ availability_i, i ∈ {1,2,3}, j ∈ {1,2}"
+            }
+        ],
+        "Constraint_Table": [
+            [
+                "Availability constraint",
+                "∑_{j∈J} x_{i,j} ≤ availability_i ∀ i ∈ I",
+                "sentence numbers:6"
+            ],
+            [
+                "Demand-satisfaction constraint",
+                "∑_{i∈I} capabilities_{i,j}·x_{i,j} ≥ demand_j ∀ j ∈ J",
+                "sentence numbers:8"
+            ]
+        ],
+        "Objective": {
+            "Objective_sentence": "The objective is to minimize the total cost of the assignment.",
+            "Mathematical_expressions": "minimize Z = ∑_{i∈I} ∑_{j∈J} costs_{i,j} · x_{i,j}"
+        },
+        "Problem_Type": "MILP"
+    }
+}

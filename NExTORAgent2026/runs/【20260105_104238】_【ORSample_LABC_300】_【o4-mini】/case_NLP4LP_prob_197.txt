@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_197",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\code.py",
+    "NLtype": "Linear",
+    "question": "Calcium and Magnesium are found in two health supplements, health supplement A and health supplement B. One serving of health supplement A contains 30 grams of Calcium and 50 grams of Magnesium. One serving of health supplement B contains 60 grams of Calcium and 10 grams of Magnesium. The cost per health supplement for health supplement A is $14 and the cost per health supplement for health supplement B is $25. A patient must consume these two health supplements every day to get at least 400 grams of Calcium and 50 grams of Magnesium. Determine how much servings of each supplement the patient needs to minimize her daily cost.",
+    "answer": 166.66666666666669,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "166.6666667"
+    ],
+    "time_seconds": 11.836505800005398,
+    "total_tokens": 727
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "166.6666667"
+    ],
+    "ground_truth": 166.66666666666669
+  }
+}

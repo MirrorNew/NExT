@@ -1,0 +1,179 @@
+{
+  "entry": {
+    "index": 2,
+    "question": "In large-scale bridge projects, the cross-sectional design of steel beams directly affects the load-bearing efficiency and material utilization of the structure. A design institute in Hainan found in a cross-river bridge project that the traditional rectangular cross-sectional beams have the problem of uneven stress distribution, and the cross-sectional parameters need to be optimized according to the principles of material mechanics. Structural engineers pointed out that under the constraints of a given circular steel billet, a reasonable selection of the aspect ratio can maximize the cross-sectional inertia moment, thereby improving the bending resistance. This optimization problem involves the coupled calculation of material strength theory and geometric constraints, and its methodology is also applicable to the design of load-bearing components such as high-rise building steel structures and heavy mechanical arms. \n\nBased on the technical specifications of the metallurgical industry, the optimized cross-sectional design must ensure that the edge fiber stress does not exceed the yield limit of the steel. The project supervisor pays special attention to the applicable boundary of the model, because the cross-sectional shape will also affect the fatigue life of the component under dynamic loads. The material laboratory is simultaneously conducting scaled model tests to verify the consistency between the theoretical calculation results and the actual force performance. \n\nAs the project progresses, the current engineers are paying attention to the following issues. There is a round stick with a radius of r, and we take r=300 meters. Now we want to cut a rectangular cross-section beam from the round stick (the cross-section size remains unchanged along the length of the beam). The cross-section size should maximize the bending moment that the beam can withstand. Try to write the mathematical model of this problem and try to find its optimal solution and give the value of $x_1$. Note: Assume that the width of the beam is $2x_1$ and the height is $2x_2$. The following is the relationship formula between the various parameters. Under the action of a given bending moment M, what is the maximum bending stress on the beam section? \n$$\n\\sigma_{\\max}=\\frac{M}{I}x_2=\\frac{Mx_2}{\\frac{1}{12}(2x_1)(2x_2)^3}=\\frac{3}{4}\\cdot\\frac{M}{x_1x_2^2}\n$$",
+    "answer": 10392304.84,
+    "Parameters_List": [
+      {
+        "Name": "r",
+        "Type": "integer",
+        "Value": 300
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In large-scale bridge projects...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "A design institute in Hainan...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Structural engineers pointed out...",
+        "Constraint: x1^2 + x2^2 ≤ r^2"
+      ],
+      [
+        "4",
+        "This optimization problem involves...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Based on the technical specifications...",
+        "Constraint: σ_max ≤ σ_y"
+      ],
+      [
+        "6",
+        "The project supervisor pays...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The material laboratory is...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "As the project progresses...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "There is a round stick...",
+        "Constraint: r = 300"
+      ],
+      [
+        "10",
+        "Now we want to cut...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The cross-section size should...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Try to write the mathematical...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Note: Assume that the...",
+        "Constraint: x1 ≥ 0; x2 ≥ 0"
+      ],
+      [
+        "14",
+        "The following is the...",
+        "Constraint: σ_max = (3/4)*M/(x1*x2^2)"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "half-width of the rectangular cross-section",
+        "Type": "continuous",
+        "Range ": "0 ≤ x1 ≤ r"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "half-height of the rectangular cross-section",
+        "Type": "continuous",
+        "Range ": "0 ≤ x2 ≤ r"
+      },
+      {
+        "symbol": "r",
+        "Meaning": "radius of the circular steel billet",
+        "Type": "continuous",
+        "Range ": "r = 300"
+      },
+      {
+        "symbol": "σ_max",
+        "Meaning": "maximum bending stress on the beam section",
+        "Type": "continuous",
+        "Range ": "σ_max ≥ 0"
+      },
+      {
+        "symbol": "σ_y",
+        "Meaning": "yield limit of the steel",
+        "Type": "continuous",
+        "Range ": "σ_y > 0"
+      },
+      {
+        "symbol": "M",
+        "Meaning": "applied bending moment",
+        "Type": "continuous",
+        "Range ": "M > 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Circular-billet boundary",
+        "x1^2 + x2^2 ≤ r^2",
+        "sentence numbers:3"
+      ],
+      [
+        "Yield-stress limit",
+        "σ_max ≤ σ_y",
+        "sentence numbers:5"
+      ],
+      [
+        "Maximum-stress definition",
+        "σ_max = (3/4)*M/(x1*x2^2)",
+        "sentence numbers:14"
+      ],
+      [
+        "Non-negativity of x1",
+        "x1 ≥ 0",
+        "sentence numbers:13"
+      ],
+      [
+        "Non-negativity of x2",
+        "x2 ≥ 0",
+        "sentence numbers:13"
+      ],
+      [
+        "Radius assignment",
+        "r = 300",
+        "sentence numbers:9"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The cross-section size should maximize the bending moment that the beam can withstand.",
+      "Mathematical_expressions": "Maximize M_max = (4/3)*σ_y*x1*x2^2"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "13856406.46055",
+      "173.20508075688772"
+    ],
+    "time_seconds": 154.42896219999966,
+    "total_tokens": 31586
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "13856406.46055",
+      "173.20508075688772"
+    ],
+    "ground_truth": 10392304.84
+  }
+}

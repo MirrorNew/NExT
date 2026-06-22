@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "There are two methods for extracting a certain metal from mined ore. The first method uses process J, and the second uses process P. Process J uses 8 units of water to extract 5 units of metal and produces 3 units of pollution. Process P uses 6 units of water to extract 9 units of metal and produces 5 units of pollution. The available water and the allowable pollution are subject to the following constraints: the ratio of total water usage to total pollution must not exceed 10; that is, the value of (total water usage) divided by (total pollution) must be less than or equal to 10. At most 1350 units of pollution can be produced. How many times should each of these two processes be used in order to maximize the amount of metal extracted?",
+    "answer": 2430.0,
+    "index": "NLP4LP_prob_247",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 最多可以使用 1500 个单位的水和产生 1350 个单位的污染。, 修改后相关描述: 可使用的水和可产生的污染之间有如下限制：总用水量与总污染量的比值不能超过 10，也就是说，总用水量除以总污染量的值必须小于或等于 10。最大可以产生 1350 个单位的污染。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_247\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_085.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "2430.0"
+    ],
+    "time_seconds": 29.49136039998848,
+    "total_tokens": 1921
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "2430.0"
+    ],
+    "ground_truth": 2430.0
+  }
+}

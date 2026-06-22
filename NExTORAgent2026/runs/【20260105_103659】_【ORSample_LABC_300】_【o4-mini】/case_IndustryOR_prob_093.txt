@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A company blends two crude oils (A and B) to produce two types of gasoline (Type I and Type II). In Gasoline Type I and Type II, the minimum blending proportions of crude oil A are 50% and 60%, respectively. The selling prices of the two gasolines are 4800 yuan/ton and 5600 yuan/ton, respectively. The company currently has inventory of 500 tons of crude oil A and 1000 tons of crude oil B, and it can additionally purchase at most 1500 tons of crude oil A from the market. The market price of crude oil A is: 10000 yuan/ton for the portion purchased within 500 tons; 8000 yuan/ton for the portion exceeding 500 tons but not exceeding 1000 tons; 6000 yuan/ton for the portion exceeding 1000 tons. Note that, in order to reflect the nonlinear discount effect brought by large-volume procurement, the final total cost should adopt a modified form with exponent 1.00002, i.e., the final total cost is computed as “raise the original total cost as a whole to the power of $1.00002$”. How should the company arrange the procurement and processing of crude oil?",
+    "answer": 5001542.73,
+    "index": "IndustryOR_prob_093",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 总成本。 修改后相关描述: 需要注意的是，为了反映大批量采购带来的非线性折扣效应，最终总成本应该采用一个幂次为1.00002 的修正形式，即最终总成本按“原总成本整体取 1.00002 次幂”的方式计算。问公司应如何安排原油的采购与加工？。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_093\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_030.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 32.0017538999964,
+    "total_tokens": 3418
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 5001542.73
+  }
+}

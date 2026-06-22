@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A physician recommends that her patient eat more fish and chicken in order to increase the intake of protein and iron. Each serving of fish contains 10 units of protein and 12 units of iron. Each serving of chicken contains 15 units of protein and 8 units of iron. The patient must consume at least 130 units of protein and 120 units of iron. Since chicken meals are cheaper, the patient wishes the number of chicken servings to be at least twice the number of fish servings. In addition, the physician points out that as the number of fish servings increases, the actual absorption of iron from fish exhibits a cumulative effect: when the number of fish servings is $x$, the total amount of iron absorbable from fish is no longer a simple linear increase, but instead grows exponentially according to the rule “for each additional fish serving, the iron absorption contributed by that serving is scaled by a factor of 1.3 relative to the previous serving.” Specifically, assume that eating the first fish serving results in an actual absorption of 12 units of iron; then the second fish serving is amplified by a factor of 1.3 based on the first, the third is amplified by a factor of 1.3 based on the second, and so on. Therefore, when eating $x$ fish servings, the total iron absorption from fish exhibits an exponential growth trend (growth factor 1.3). If each fish serving contains 7 units of fat, and each chicken serving contains 10 units of fat, how many servings of fish and chicken should she eat to minimize her fat intake?",
+    "answer": 108.0,
+    "index": "NLP4LP_prob_096",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “每份鱼餐含有 10 个单位的蛋白质和 12 个单位的铁。” 后续默认铁摄入量随鱼餐份数线性增加。 修改后相关描述: “每份鱼餐含有 10 个单位的蛋白质和 12 个单位的铁。” 保持不变，但新增说明：随着鱼餐份数 x 的增加，鱼餐中铁的实际吸收不再线性增加，而是按照‘每多吃一份鱼餐，其所贡献的铁吸收量在前一份的基础上放大 1.3 倍’的规律呈指数级增长；第一份鱼餐吸收 12 个单位铁，第二份在此基础上乘以 1.3，第三份再乘以 1.3，以此类推，使得来自鱼餐的铁吸收总量对鱼餐份数表现为指数级变化（增长系数为 1.3）。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_096\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_073.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "108.0"
+    ],
+    "time_seconds": 35.55334120000771,
+    "total_tokens": 3428
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "108.0"
+    ],
+    "ground_truth": 108.0
+  }
+}

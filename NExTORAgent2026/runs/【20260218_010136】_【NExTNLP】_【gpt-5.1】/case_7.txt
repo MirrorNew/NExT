@@ -1,0 +1,201 @@
+{
+  "entry": {
+    "index": 7,
+    "question": "In modern logistics and supply chain management, warehouse location is a key decision-making issue that directly affects the company's transportation costs and service efficiency. Lemiaoan Manufacturing Company plans to build a new distribution center to optimize its cargo distribution process to four major customers. Traditional warehouse location models are usually based on minimizing the total transportation distance or turnover, but in actual operations, transportation costs are often not simply linearly related to distance. For example, longer-distance transportation may involve higher fuel consumption, more complex route planning, or additional transit costs, so it is necessary to introduce an empirical correction factor to make the model closer to actual operations. \n\nThe company referred to domestic and foreign logistics optimization cases, such as JD Logistics' warehousing network planning in North China, which also used nonlinear cost functions to optimize distribution efficiency. By establishing a mathematical model that takes into account the empirical correction coefficient, the company hopes to find the warehouse location that minimizes the total empirical turnover, thereby reducing logistics costs and improving customer response speed in long-term operations. This optimization process involves not only mathematical modeling, but also requires the combination of geographic information systems (GIS) and actual road network data to ensure that the site selection plan is operational. \n\nA factory wants to build a warehouse. The coordinates of its four customer locations are shown in Table 6-2. Try to determine the warehouse location. We usually use the total turnover as the calculation, but in practice, this project needs to use the empirical correction coefficient for calculation, that is, it is necessary to minimize the total empirical turnover (empirical turnover = 1.2 power of transportation distance x transportation volume). Try to establish a mathematical model\n\nTable 6-2\n\n| Customer | Coordinate $x$ | Coordinate $y$ | Monthly shipment |\n| ---- | ------- | ------- | ---------- |\n| 1 | 5 | 10 | 200 |\n| 2 | 10 | 5 | 150 |\n| 3 | 0 | 12 | 200 |\n| 4 | 12 | 0 | 300 |",
+    "answer": 8148.7408,
+    "Parameters_List": [
+      {
+        "Name": "empirical_exponent",
+        "Type": "float",
+        "Value": 1.2
+      },
+      {
+        "Name": "Table_1_CustomerData",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            5,
+            10,
+            200
+          ],
+          [
+            2,
+            10,
+            5,
+            150
+          ],
+          [
+            3,
+            0,
+            12,
+            200
+          ],
+          [
+            4,
+            12,
+            0,
+            300
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In modern logistics and...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Lemiaoan Manufacturing Company plans...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Traditional warehouse location models are...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "For example, longer-distance transportation may...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The company referred to domestic and foreign...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "By establishing a mathematical model that...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "This optimization process involves not only...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "A factory wants to build a warehouse...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The coordinates of its four customer locations...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Try to determine the warehouse location...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "We usually use the total turnover as...",
+        "Extracts the empirical-turnover definition"
+      ],
+      [
+        "12",
+        "Try to establish a mathematical model...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_w",
+        "Meaning": "x-coordinate of the warehouse location",
+        "Type": "continuous",
+        "Range ": "(-∞, +∞)"
+      },
+      {
+        "symbol": "y_w",
+        "Meaning": "y-coordinate of the warehouse location",
+        "Type": "continuous",
+        "Range ": "(-∞, +∞)"
+      },
+      {
+        "symbol": "d1",
+        "Meaning": "distance between warehouse and customer 1",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      },
+      {
+        "symbol": "d2",
+        "Meaning": "distance between warehouse and customer 2",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      },
+      {
+        "symbol": "d3",
+        "Meaning": "distance between warehouse and customer 3",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      },
+      {
+        "symbol": "d4",
+        "Meaning": "distance between warehouse and customer 4",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      },
+      {
+        "symbol": "c1",
+        "Meaning": "empirical turnover for customer 1",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      },
+      {
+        "symbol": "c2",
+        "Meaning": "empirical turnover for customer 2",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      },
+      {
+        "symbol": "c3",
+        "Meaning": "empirical turnover for customer 3",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      },
+      {
+        "symbol": "c4",
+        "Meaning": "empirical turnover for customer 4",
+        "Type": "continuous",
+        "Range ": "[0, +∞)"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Distance definition (all i)",
+        "d_i = sqrt((x_w - x_i)^2 + (y_w - y_i)^2), ∀ i=1..4",
+        "sentence numbers:11"
+      ],
+      [
+        "Empirical-turnover definition (all i)",
+        "c_i = v_i * d_i^1.2, ∀ i=1..4",
+        "sentence numbers:11"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "By establishing a mathematical model that takes into account the empirical correction coefficient, the company hopes to find the warehouse location that minimizes the total empirical turnover, thereby reducing logistics costs and improving customer response speed in long-term operations.",
+      "Mathematical_expressions": "Minimize Z = 200*d1^1.2 + 150*d2^1.2 + 200*d3^1.2 + 300*d4^1.2"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "8148.74076497"
+    ],
+    "time_seconds": 23.57723149999947,
+    "total_tokens": 8859
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "8148.74076497"
+    ],
+    "ground_truth": 8148.7408
+  }
+}

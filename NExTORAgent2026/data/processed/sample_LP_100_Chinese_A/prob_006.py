@@ -1,0 +1,151 @@
+import gurobipy as gp
+from gurobipy import GRB
+
+
+def solve_production_planning_with_overtime():
+    """
+    Solves the production planning problem to maximize net profit,
+    considering resource constraints and *nonlinear* overtime pay:
+    Overtime cost = 100 * (H ** 1.2), where H is total overtime hours.
+    """
+    try:
+        # --- Parameters ---
+        products = ['A', 'B']
+
+        # Profit per unit (excluding worker overtime pay) (yuan/unit)
+        gross_profit = {'A': 5000, 'B': 11000}
+
+        # Resource requirements per unit
+        steel_req = {'A': 6, 'B': 12}  # kg/unit
+        aluminum_req = {'A': 8, 'B': 20}  # kg/unit
+        labor_req = {'A': 11, 'B': 24}  # hours/unit
+
+        # Resource availability
+        avail_steel = 200  # kg
+        avail_aluminum = 300  # kg
+        avail_labor_regular = 300  # hours
+
+        # Base overtime pay coefficient (yuan)
+        overtime_pay_coeff = 100
+
+        # --- Create Gurobi Model ---
+        model = gp.Model("ProductionPlanningOvertimeNonlinear")
+
+        # --- Decision Variables ---
+        # X[p]: Number of units of product p to produce
+        X = model.addVars(products, name="Produce", vtype=GRB.INTEGER, lb=0)
+
+        # OT: Total overtime hours used
+        OT = model.addVar(name="OvertimeHours", lb=0.0, vtype=GRB.CONTINUOUS)
+
+        # OC: Overtime cost = 100 * OT^1.2 (to be linked via nonlinear constraint)
+        OC = model.addVar(name="OvertimeCost", lb=0.0, vtype=GRB.CONTINUOUS)
+
+        # --- Objective Function: Maximize Net Profit ---
+        # Net Profit = Gross Profit from Products - Cost of Overtime
+        total_gross_profit = gp.quicksum(gross_profit[p] * X[p]
+                                         for p in products)
+
+        # ❤ Non-linearity is introduced. ❤
+        # total_overtime_cost = overtime_pay_per_hour * OT
+        # Introduce nonlinear overtime cost:  OC = 100 * OT^1.2  and use OC in the objective
+        total_overtime_cost = OC
+
+        model.setObjective(total_gross_profit - total_overtime_cost,
+                           GRB.MAXIMIZE)
+
+        # --- Nonlinear Overtime Cost Constraint ---
+        # OC = 100 * OT^1.2
+        # This uses Gurobi's general function API; the exponent 1.2 is nonlinear.
+        # ❤ Non-linearity is introduced. ❤
+
+
+        # Correct nonlinear construction using a power general constraint
+        temp = model.addVar(name="OvertimePower", lb=0.0, vtype=GRB.CONTINUOUS)
+        # temp = OT^1.2
+        # ❤ Non-linearity is introduced. ❤
+        model.addGenConstrPow(OT, temp, 1.2, name="OvertimePowerConstr")
+        # OC = 100 * temp
+        model.addConstr(OC == overtime_pay_coeff * temp, name="OvertimeCostDef")
+
+        # --- Constraints ---
+        # 1. Steel Constraint
+        model.addConstr(gp.quicksum(steel_req[p] * X[p] for p in products)
+                        <= avail_steel,
+                        name="SteelLimit")
+
+        # 2. Aluminum Constraint
+        model.addConstr(gp.quicksum(aluminum_req[p] * X[p] for p in products)
+                        <= avail_aluminum,
+                        name="AluminumLimit")
+
+        # 3. Labor Constraint
+        # Total labor hours required can be met by regular hours + overtime hours
+        total_labor_needed = gp.quicksum(labor_req[p] * X[p] for p in products)
+        model.addConstr(total_labor_needed <= avail_labor_regular + OT,
+                        name="LaborAvailability")
+
+        # The objective already penalizes overtime via the nonlinear cost term.
+        # To "使工人加班时间最少" (make overtime as small as possible) given the
+        # profit-maximizing objective, the convexly increasing cost 100 * H^1.2
+        # already pushes the solution towards smaller H (OT).
+
+        # Suppress Gurobi output to console if desired
+        # model.setParam('OutputFlag', 0)
+
+        # Optimize the model
+        model.optimize()
+
+        # --- Results ---
+        if model.status == GRB.OPTIMAL:
+            print("Optimal production plan found.")
+            print(f"Maximum Net Profit: {model.ObjVal:.2f} Yuan")
+
+            print("\nOptimal Production Quantities (units):")
+            for p in products:
+                print(f"  Product {p}: {X[p].X:.0f} units")
+
+            print(f"\nOvertime Hours Used: {OT.X:.4f} hours")
+            print(f"Overtime Cost (100 * H^1.2): {OC.X:.2f} Yuan")
+
+            print("\nResource Utilization:")
+            steel_used = sum(steel_req[p] * X[p].X for p in products)
+            aluminum_used = sum(aluminum_req[p] * X[p].X for p in products)
+            labor_needed_val = sum(labor_req[p] * X[p].X for p in products)
+
+            print(
+                f"  Steel Used: {steel_used:.2f} / {avail_steel} kg "
+                f"({(steel_used/avail_steel*100) if avail_steel > 0 else 0:.1f}%)"
+            )
+            print(
+                f"  Aluminum Used: {aluminum_used:.2f} / {avail_aluminum} kg "
+                f"({(aluminum_used/avail_aluminum*100) if avail_aluminum > 0 else 0:.1f}%)"
+            )
+            print(f"  Total Labor Needed: {labor_needed_val:.2f} hours")
+            print(
+                f"    Met by Regular Hours: {min(labor_needed_val, avail_labor_regular):.2f} / {avail_labor_regular} hours"
+            )
+            if OT.X > 1e-6:
+                print(f"    Met by Overtime Hours: {OT.X:.4f} hours")
+
+        elif model.status == GRB.INFEASIBLE:
+            print(
+                "Model is infeasible. Check constraints and resource availability."
+            )
+            # Uncomment below for IIS diagnostics if needed
+            # model.computeIIS()
+            # model.write("production_overtime_nonlinear_iis.ilp")
+            # print("IIS written to production_overtime_nonlinear_iis.ilp for debugging.")
+        else:
+            print(f"Optimization stopped with status: {model.status}")
+            if model.SolCount == 0:
+                print("No feasible solution found.")
+
+    except gp.GurobiError as e:
+        print(f"Gurobi error code {e.errno}: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+
+if __name__ == '__main__':
+    solve_production_planning_with_overtime()

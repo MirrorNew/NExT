@@ -1,0 +1,267 @@
+{
+  "entry": {
+    "index": 4,
+    "question": "Malaysia United Chemical Trading Co., Ltd. is a company focusing on the import and export of polymer materials. The company has a complete transportation network in Southeast Asia and maintains long-term cooperation with multiple ports, storage centers and logistics partners. The company currently operates four polyvinyl chloride polymer production plants P1-P4, which are located on different islands. In order to meet the needs of customers in many places in the region, it is necessary to transport products to four major demand locations, namely D1-D4, by land and sea. In order to ensure that the company maintains its cost advantage in the fierce market competition, the logistics department is seeking a set of methods that can minimize transportation costs while meeting the resources and contract constraints of all parties. The overall goal is to reasonably dispatch the shipments of each factory under the premise of the existing transportation network and resource capacity, to ensure that the needs of customers in various places are met on time, and to control the total transportation cost to the minimum. \n\nRecently, due to the limited amount of polyvinyl chloride polymers that can be provided by the four factories every day, the production capacity of each factory is closely related to the supply of raw materials. If the daily shipment volume of the factory exceeds its own production capacity, it will cause production plan conflicts. It is necessary to ensure that the total shipment volume of each factory does not exceed its supply capacity. On the demand side, each demand location is a local large-scale pipe manufacturer, and the downstream order volume is rigid. If the shipment volume is lower than the actual demand, it will lead to a breach of contract. Fines are incurred, so it must be ensured that the total volume of goods received by each demand location is not less than its actual demand. In terms of transportation, the transportation network consists of land trunk lines and ocean liners. The transportation costs and times of different routes vary significantly. In order to avoid the safety and insurance risks caused by excessive use of a single route, the transportation volume from each factory to the demand location should follow the maximum carrying capacity of the line and shall not exceed 2,000 tons. In addition, the company’s first factory P1 signed an agreement with its largest customer D1, requiring at least 300 units of goods, and the company’s fourth factory P4 signed an agreement with customer D1, requiring at least 200 units of goods to be shipped directly from the designated factory to the customer’s location. In order to maintain a long-term cooperative relationship. In addition, part of the shipment to D3 is a high-priority order jointly developed with a third-party brand. The company's internal agreement stipulates that at least 20% of D3's demand must be jointly undertaken by P2 and P3 factories to ensure the stability of supply to key customers. In order to support the development of the southern market, the volume of goods shipped by P4 factory to southern locations (D2 and D3) must account for more than 70% of its total shipments, while the volume of goods shipped by P2 factory to southern locations must be less than 50% of its total shipments to fulfill its cooperation commitment to the local government. Only the lowest total transportation cost needs to be given. \n\nThe data table is as follows:\n\n| Factory | Penang Factory P1 | Kuala Lumpur Factory P2 | Ipoh Factory P3 | Malacca Factory P4 |\n| ---- | ---------- | ------------ | ---------- | ------------ |\n| Supply | 1000 | 1500 | 1200 | 800 |\n\n| Demand Location | Butterworth Transit Terminal D1 | Kuantan Manufacturing Park D2 | Klang Chemical Park D3 | Muar Distribution Center D4 |\n| -------- | ------------ | ------------ | ------------ | -------------- |\n| Demand | 900 | 1100 | 1000 | 500 |\n\n| Transportation Cost | D1 | D2 | D3 | D4 |\n| -------- | ---- | ---- | ---- | ---- |\n| P1 | 10 | 15 | 12 | 20 |\n| P2 | 14 | 13 | 16 | 18 |\n| P3 | 12 | 17 | 11 | 15 |\n| P4 | 19 | 14 | 18 | 13 |",
+    "answer": 45420.0,
+    "Parameters_List": [
+      {
+        "Name": "SupplyCapacity",
+        "Type": "tuple",
+        "Value": {
+          "P1": 1000,
+          "P2": 1500,
+          "P3": 1200,
+          "P4": 800
+        }
+      },
+      {
+        "Name": "Demand",
+        "Type": "tuple",
+        "Value": {
+          "D1": 900,
+          "D2": 1100,
+          "D3": 1000,
+          "D4": 500
+        }
+      },
+      {
+        "Name": "TransportCost",
+        "Type": "tuple",
+        "Value": {
+          "P1": {
+            "D1": 10,
+            "D2": 15,
+            "D3": 12,
+            "D4": 20
+          },
+          "P2": {
+            "D1": 14,
+            "D2": 13,
+            "D3": 16,
+            "D4": 18
+          },
+          "P3": {
+            "D1": 12,
+            "D2": 17,
+            "D3": 11,
+            "D4": 15
+          },
+          "P4": {
+            "D1": 19,
+            "D2": 14,
+            "D3": 18,
+            "D4": 13
+          }
+        }
+      },
+      {
+        "Name": "MaxRouteCapacity",
+        "Type": "integer",
+        "Value": 2000
+      },
+      {
+        "Name": "MinShip_P1_D1",
+        "Type": "integer",
+        "Value": 300
+      },
+      {
+        "Name": "MinShip_P4_D1",
+        "Type": "integer",
+        "Value": 200
+      },
+      {
+        "Name": "MinJointPct_D3",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "SouthMinPct_P4",
+        "Type": "float",
+        "Value": 0.7
+      },
+      {
+        "Name": "SouthMaxPct_P2",
+        "Type": "float",
+        "Value": 0.5
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Malaysia United Chemical ...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company has a ...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The company currently ...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In order to meet ...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "In order to ensure ...",
+        "Objective: minimize total transportation cost"
+      ],
+      [
+        "6",
+        "The overall goal is ...",
+        "No new constraints"
+      ],
+      [
+        "7",
+        "Recently, due to the limited ...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "If the daily shipment ...",
+        "Supply capacity constraints: ∑_j x_i_j ≤ S_i for each factory i"
+      ],
+      [
+        "9",
+        "It is necessary to ensure ...",
+        "Supply capacity constraints: ∑_j x_i_j ≤ S_i for each factory i"
+      ],
+      [
+        "10",
+        "On the demand side ...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "If the shipment volume ...",
+        "Demand satisfaction constraints: ∑_i x_i_j ≥ D_j for each demand j"
+      ],
+      [
+        "12",
+        "Fines are incurred ...",
+        "Demand satisfaction constraints: ∑_i x_i_j ≥ D_j for each demand j"
+      ],
+      [
+        "13",
+        "In terms of transportation ...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "The transportation costs ...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "In order to avoid ...",
+        "Route capacity constraints: x_i_j ≤ 2000 for all i,j"
+      ],
+      [
+        "16",
+        "In addition, the company’s first ...",
+        "Factory-customer agreements: x_1_1 ≥ 300; x_4_1 ≥ 200"
+      ],
+      [
+        "17",
+        "In order to maintain a ...",
+        "No constraints"
+      ],
+      [
+        "18",
+        "In addition, part of the shipment ...",
+        "No constraints"
+      ],
+      [
+        "19",
+        "The company's internal agreement ...",
+        "Joint priority: x_2_3 + x_3_3 ≥ 0.2·D_3"
+      ],
+      [
+        "20",
+        "In order to support ...",
+        "Southern market constraints: x_4_2 + x_4_3 ≥ 0.7·∑_j x_4_j; x_2_2 + x_2_3 ≤ 0.5·∑_j x_2_j"
+      ],
+      [
+        "21",
+        "Only the lowest total ...",
+        "Objective (repeat): minimize total transportation cost"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_i_j",
+        "Meaning": "Shipment quantity from factory i to demand location j",
+        "Type": "continuous",
+        "Range ": "0 <= x_i_j <= 2000"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Supply Capacity",
+        "∑_j x_i_j ≤ S_i for each factory i",
+        "sentence numbers:8,9"
+      ],
+      [
+        "Demand Satisfaction",
+        "∑_i x_i_j ≥ D_j for each demand j",
+        "sentence numbers:11,12"
+      ],
+      [
+        "Route Capacity",
+        "x_i_j ≤ 2000 for all i,j",
+        "sentence numbers:15"
+      ],
+      [
+        "Minimum P1→D1",
+        "x_1_1 ≥ 300",
+        "sentence numbers:16"
+      ],
+      [
+        "Minimum P4→D1",
+        "x_4_1 ≥ 200",
+        "sentence numbers:16"
+      ],
+      [
+        "Joint Priority on D3",
+        "x_2_3 + x_3_3 ≥ 0.2·D_3",
+        "sentence numbers:19"
+      ],
+      [
+        "Southern Share for P4",
+        "x_4_2 + x_4_3 ≥ 0.7·(x_4_1 + x_4_2 + x_4_3 + x_4_4)",
+        "sentence numbers:20"
+      ],
+      [
+        "Southern Limit for P2",
+        "x_2_2 + x_2_3 ≤ 0.5·(x_2_1 + x_2_2 + x_2_3 + x_2_4)",
+        "sentence numbers:20"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "minimize total transportation cost",
+      "Mathematical_expressions": "Minimize Z = ∑_{i=1}^4 ∑_{j=1}^4 c_{i,j} * x_i_j"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "45420.0"
+    ],
+    "time_seconds": 56.87006329999713,
+    "total_tokens": 10957
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "45420.0"
+    ],
+    "ground_truth": 45420.0
+  }
+}

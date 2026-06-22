@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_159",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_159\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_159\\code.py",
+    "NLtype": "Linear",
+    "question": "A snack exporter sends snacks to his customer in small and large suitcases. A small suitcase can hold 50 snacks while a large suitcase can hold 80 snacks. Most customer prefer small suitcases, and so at least twice as many small suitcases must be used as large suitcases. The exporter has available at most 70 small suitcases and 50 large suitcases. If he must send at least 15 large suitcases and can send  at most 70 suitcases in total, how many of each should he send to maximize the total number of snacks that can be delivered?",
+    "answer": 4190,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4190.0"
+    ],
+    "time_seconds": 23.859003899997333,
+    "total_tokens": 845
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4190.0"
+    ],
+    "ground_truth": 4190
+  }
+}

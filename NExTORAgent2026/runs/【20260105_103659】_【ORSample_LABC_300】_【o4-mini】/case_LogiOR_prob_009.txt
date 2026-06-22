@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "In an urban planning context, it is necessary to select locations for public transit stops to serve a set consisting of 15 passenger demand points, with 5 candidate stop locations available. The distances from each demand point to each candidate stop are known, and a demand point is considered “covered” by a stop if and only if the distance between the demand point and the stop does not exceed 300 meters. In addition, to control the relationship between the number of facilities and service capacity, the planning authority imposes an additional requirement: among all selected stops, the ratio of the number of selected stops that undertake actual coverage tasks (i.e., cover at least 1 demand point) to the total number of selected stops must be at least 0.8; that is, (number of stops with coverage tasks) divided by (total number of selected stops) must be no less than 0.8. Question: subject to the above conditions, what is the minimum number of stop locations that must be selected to ensure that all demand points are covered?\n\nThe distance matrix between each demand point and each candidate stop is as follows:\n\n| Demand node \\ Stop | 1    | 2    | 3    | 4    | 5    |\n|--------------------|------|------|------|------|------|\n| 1                  | 389  | 515  | 170  | 143  | 617  |\n| 2                  | 562  | 678  | 265  | 640  | 629  |\n| 3                  | 206  | 594  | 180  | 564  | 683  |\n| 4                  | 574  | 105  | 311  | 99   | 550  |\n| 5                  | 616  | 490  | 99   | 473  | 682  |\n| 6                  | 571  | 258  | 494  | 749  | 61   |\n| 7                  | 573  | 234  | 207  | 635  | 318  |\n| 8                  | 70   | 53   | 399  | 740  | 494  |\n| 9                  | 229  | 190  | 550  | 654  | 394  |\n| 10                 | 50   | 56   | 459  | 143  | 478  |\n| 11                 | 95   | 378  | 507  | 647  | 135  |\n| 12                 | 767  | 200  | 569  | 689  | 621  |\n| 13                 | 729  | 333  | 91   | 86   | 386  |\n| 14                 | 633  | 163  | 562  | 184  | 384  |\n| 15                 | 67   | 515  | 224  | 502  | 345  |",
+    "answer": 3.0,
+    "index": "LogiOR_prob_009",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 问：至少需要选择多少个站点位置，才能保证所有需求点都被覆盖？, 修改后相关描述: 另外，为了控制设施数量与服务能力之间的关系，规划部门提出一个附加要求：所有被选中的站点中，承担实际覆盖任务（即至少覆盖 1 个需求点）的站点数量与被选中的站点总数量之间的比值，必须至少达到 0.8，也就是说，有覆盖任务的站点数量除以被选中的站点总数量应不小于 0.8。问：在满足上述条件的前提下，至少需要选择多少个站点位置，才能保证所有需求点都被覆盖？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_009\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_042.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3.0"
+    ],
+    "time_seconds": 29.687063600009424,
+    "total_tokens": 4557
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "3.0"
+    ],
+    "ground_truth": 3.0
+  }
+}

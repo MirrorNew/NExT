@@ -1,0 +1,259 @@
+{
+  "entry": {
+    "index": 27,
+    "question": "At the provincial dispatching center of the State Grid, the economic load dispatch (ELD) problem needs to be solved in real time every day. Taking the Kazdale Energy Grid as an example, although its coal-fired units (similar to power source 1) have a low basic power generation cost, the coal consumption characteristic curve shows an obvious quadratic growth feature; while the gas turbine (similar to power source 2) has a fast startup speed, but the fuel cost rises faster with the increase in output. During the peak summer period in 2023, the dispatchers found that when the transmission distance exceeds 200 kilometers, the line loss will significantly affect the economy of the entire network, and it becomes a nonlinear loss, which is highly consistent with the simulation results of the IEEE 14-node standard test system. \n\nModern power system optimization has developed from the traditional linear DC optimal power flow (DCOPF) to the AC optimal power flow (ACOPF) considering network losses. The intelligent dispatching system adopted by the Kazdale Power Grid updates the network loss coefficient in real time through online state estimation, and controls the economic dispatch error within a very small number. Compared with traditional methods, this refined dispatching method can save about 120 million yuan in fuel costs each year and reduce carbon emissions by 0.3%. The latest research is trying to integrate deep learning prediction into loss calculation to cope with the uncertainty brought by the access of renewable energy. \n\nFor this situation, there is now a simple power network with two power sources and one load node. Power sources 1 and 2 supply power to load 3 through separate lines, and the load demand is 100MW. Lines 1-3 and 2-3 have nonlinear losses when transmitting power, and their loss power is about $0.0005P_1^2$ and $0.0010P_2^2$ (in MW). The power generation costs ($/h$) of power sources 1 and 2 are $C_1=5P_1+0.02P_1^2$ and $C_2=4P_2+0.025P_2^2$ respectively. It is hoped that the outputs $P_1,P_2$ of the two units will be determined to minimize the total cost and balance the load.",
+    "answer": 590.06,
+    "Parameters_List": [
+      {
+        "Name": "peak_period_year",
+        "Type": "integer",
+        "Value": 2023
+      },
+      {
+        "Name": "transmission_distance_threshold_km",
+        "Type": "integer",
+        "Value": 200
+      },
+      {
+        "Name": "ieee_test_nodes",
+        "Type": "integer",
+        "Value": 14
+      },
+      {
+        "Name": "annual_fuel_cost_saving_yuan",
+        "Type": "float",
+        "Value": 120000000.0
+      },
+      {
+        "Name": "emission_reduction_rate_percent",
+        "Type": "float",
+        "Value": 0.3
+      },
+      {
+        "Name": "n_power_sources",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "n_load_nodes",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "load_demand_MW",
+        "Type": "float",
+        "Value": 100.0
+      },
+      {
+        "Name": "loss_coefficient_P1",
+        "Type": "float",
+        "Value": 0.0005
+      },
+      {
+        "Name": "loss_coefficient_P2",
+        "Type": "float",
+        "Value": 0.001
+      },
+      {
+        "Name": "cost_coeff_P1_linear",
+        "Type": "float",
+        "Value": 5.0
+      },
+      {
+        "Name": "cost_coeff_P1_quadratic",
+        "Type": "float",
+        "Value": 0.02
+      },
+      {
+        "Name": "cost_coeff_P2_linear",
+        "Type": "float",
+        "Value": 4.0
+      },
+      {
+        "Name": "cost_coeff_P2_quadratic",
+        "Type": "float",
+        "Value": 0.025
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "At the provincial dispatching...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the Kazdale Energy Grid...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "During the peak summer period...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Modern power system optimization...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The intelligent dispatching system adopted...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Compared with traditional methods...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The latest research is trying to integrate...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "For this situation, there is now...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Power sources 1 and 2 supply...",
+        "Power‐balance constraint: total generation minus total loss must equal 100 MW"
+      ],
+      [
+        "10",
+        "Lines 1-3 and 2-3 have nonlinear losses...",
+        "Definition of line losses L₁ and L₂"
+      ],
+      [
+        "11",
+        "The power generation costs ($/h) of power sources 1 and 2 are...",
+        "Definition of generation costs C₁ and C₂"
+      ],
+      [
+        "12",
+        "It is hoped that the outputs P₁, P₂ of the two units will be determined...",
+        "Objective: minimize total cost"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "P₁",
+        "Meaning": "Output power of unit 1 (MW)",
+        "Type": "continuous",
+        "Range ": "P₁ ≥ 0"
+      },
+      {
+        "symbol": "P₂",
+        "Meaning": "Output power of unit 2 (MW)",
+        "Type": "continuous",
+        "Range ": "P₂ ≥ 0"
+      },
+      {
+        "symbol": "L₁",
+        "Meaning": "Line loss on line 1-3 (MW)",
+        "Type": "continuous",
+        "Range ": "L₁ ≥ 0"
+      },
+      {
+        "symbol": "L₂",
+        "Meaning": "Line loss on line 2-3 (MW)",
+        "Type": "continuous",
+        "Range ": "L₂ ≥ 0"
+      },
+      {
+        "symbol": "C₁",
+        "Meaning": "Generation cost of unit 1 ($/h)",
+        "Type": "continuous",
+        "Range ": "C₁ ≥ 0"
+      },
+      {
+        "symbol": "C₂",
+        "Meaning": "Generation cost of unit 2 ($/h)",
+        "Type": "continuous",
+        "Range ": "C₂ ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Power_balance",
+        "P₁ + P₂ - L₁ - L₂ = 100",
+        "sentence numbers:9"
+      ],
+      [
+        "Loss1_definition",
+        "L₁ = 0.0005·P₁²",
+        "sentence numbers:10"
+      ],
+      [
+        "Loss2_definition",
+        "L₂ = 0.0010·P₂²",
+        "sentence numbers:10"
+      ],
+      [
+        "Cost1_definition",
+        "C₁ = 5·P₁ + 0.02·P₁²",
+        "sentence numbers:11"
+      ],
+      [
+        "Cost2_definition",
+        "C₂ = 4·P₂ + 0.025·P₂²",
+        "sentence numbers:11"
+      ],
+      [
+        "P₁_nonnegativity",
+        "P₁ ≥ 0",
+        "derived"
+      ],
+      [
+        "P₂_nonnegativity",
+        "P₂ ≥ 0",
+        "derived"
+      ],
+      [
+        "L₁_nonnegativity",
+        "L₁ ≥ 0",
+        "derived"
+      ],
+      [
+        "L₂_nonnegativity",
+        "L₂ ≥ 0",
+        "derived"
+      ],
+      [
+        "C₁_nonnegativity",
+        "C₁ ≥ 0",
+        "derived"
+      ],
+      [
+        "C₂_nonnegativity",
+        "C₂ ≥ 0",
+        "derived"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "It is hoped that the outputs P₁, P₂ of the two units will be determined to minimize the total cost and balance the load.",
+      "Mathematical_expressions": "minimize Z = C₁ + C₂ = (5P₁ + 0.02P₁²) + (4P₂ + 0.025P₂²)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "590.0568511156",
+      "590.06"
+    ],
+    "time_seconds": 47.93281370000477,
+    "total_tokens": 6974
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "590.0568511156",
+      "590.06"
+    ],
+    "ground_truth": 590.06
+  }
+}

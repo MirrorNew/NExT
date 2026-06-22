@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A factory produces three products: I, II, and III. Each product must undergo two processing operations, A and B. The factory has two machines that can perform operation A, denoted by A1 and A2; and three machines that can perform operation B, denoted by B1, B2, and B3. Product I can be processed on any machine for both operations A and B; product II can be processed on any A-type machine for operation A, but for operation B it can only be processed on B1; product III can only be processed on A2 and B2. The unit processing times of each product on different machines, raw-material costs, selling prices, the effective available working hours of the machines, and the cost of operating the machines at full load are given in Tables 1–4. In addition, considering that when the output of product I is large, its comprehensive processing cost on machine A1 will increase nonlinearly due to machine wear, assume that this portion of the cost can be approximated by “the $1.2$-th power of the total processing hours of product I on A1”: that is, modify the original cost term that is linearly related to the processing hours of product I on A1 to instead grow according to “the $1.2$-th power of the total processing hours of product I on A1.” On this basis, determine the optimal production plan so as to maximize the factory’s profit.\n\nTables 1–4  \n| Machine | Product I | Product II | Product III | Effective working hours | Full-load operating cost (yuan) |\n|---|---:|---:|---:|---:|---:|\n| A1 | 5 | 10 |  | 6000 | 300 |\n| A2 | 7 | 9 | 12 | 10000 | 321 |\n| B1 | 6 | 8 |  | 4000 | 250 |\n| B2 | 4 |  | 11 | 7000 | 783 |\n| B3 | 7 |  |  | 4000 | 200 |\n| Raw-material cost (yuan/unit) | 0.25 | 0.35 | 0.50 |  |  |\n| Unit price (yuan/unit) | 1.25 | 2.00 | 2.80 |  |  |",
+    "answer": 910.214286,
+    "index": "IndustryOR_prob_026",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “已知各产品在不同设备上的单位加工时间、原材料成本、产品销售单价、设备的有效工作小时数以及设备满负荷运转的成本（见表 1-4），要求安排最优生产计划，使工厂利润最大。” 修改后相关描述: “已知各产品在不同设备上的单位加工时间、原材料成本、产品销售单价、设备的有效工作小时数以及设备满负荷运转的成本（见表 1-4），并考虑到当产品 I 的产量较大时，其在设备 A1 上的综合加工成本会因设备磨损非线性增加，假定这一部分成本可用‘产品 I 在 A1 上的加工工时总量的 1.2 次幂’来近似描述：即将原本与产品 I 在 A1 上加工工时成线性关系的成本项修正为按‘产品 I 在 A1 上的加工工时总量的 1.2 次幂’增长。要求在此基础上安排最优生产计划，使工厂利润最大。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_026\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_025.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "911.0234412096"
+    ],
+    "time_seconds": 45.20288470000378,
+    "total_tokens": 4421
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "911.0234412096"
+    ],
+    "ground_truth": 910.214286
+  }
+}

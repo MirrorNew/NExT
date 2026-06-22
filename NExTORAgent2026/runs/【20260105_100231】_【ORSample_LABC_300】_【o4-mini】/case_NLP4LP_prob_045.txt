@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A new fast-food restaurant produces burritos and platters. Each burrito requires 5 units of meat and 3 units of rice. Each platter requires 7 units of meat and 5 units of rice. Each burrito takes 10 minutes to prepare, and each platter takes 8 minutes to prepare. The restaurant must use at least 3000 units of meat and 2500 units of rice. Since burritos are more suitable for takeout, the number of burritos produced must be at least 3 times the number of platters. To reflect the exponential growth in customers’ preference for burritos, the actual requirement is: counting from the first platter, when the number of platters is $n$, the minimum required number of burritos is no longer simply 3 times, but grows according to $3$ multiplied by $1.3$ to the power of $n$; that is, when there are $n$ platters, the number of burritos must be at least $3\\times(1.3^n)$. How many burritos and platters should the restaurant produce, respectively, to minimize the total production time?",
+    "answer": 8158.0,
+    "index": "NLP4LP_prob_045",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 由于卷饼更适合外带食用，因此制作的卷饼数量必须至少是拼盘数量的 3 倍。 修改后相关描述: 由于卷饼更适合外带食用，因此制作的卷饼数量必须至少是拼盘数量的 3 倍。为了体现顾客对卷饼偏好的指数级增长，实际要求是：从第一个拼盘开始计算，当拼盘数量为 n 时，卷饼的最低需求数量不再是简单的 3 倍，而是按 3 乘以 1.3 的 n 次方来增长，即当有 n 个拼盘时，卷饼数量至少要达到 3×(1.3 的 n 次方) 个。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_045\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_086.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "8158.0"
+    ],
+    "time_seconds": 37.00763750000624,
+    "total_tokens": 3345
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "8158.0"
+    ],
+    "ground_truth": 8158.0
+  }
+}

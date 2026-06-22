@@ -1,0 +1,996 @@
+{
+  "entry": {
+    "index": 0,
+    "question": "Refinery Process Production Flow\n\n```mermaid\nflowchart LR\n A1((Crude oil 1)) --> B[Distillation]\n A2((Crude oil 2)) --> B\n\n B --> C((Naphtha))\n B --> D((Light oil))\n B --> F((Heavy oil))\n B --> G((Residue oil))\n\n C --> H[Reforming]\n H --> I((Reforming gasoline))\n\n D --> J[Cracking]\n F --> J\n J --> K((Cracking gasoline))\n J --> T((Cracking oil))\n\n I --> L[Engine oil blend]\n C --> L\n K --> L\n L --> M((Premium engine oil))\n L --> N((Ordinary engine oil))\n \n\n P --> O((Fuel oil))\n D --> P[Kerosene/Fuel Oil Mixture]\n F --> P\n T --> P\n G --> P\n P --> Q((Kerosene))\n\n G --> R[Residue Treatment]\n R --> S((Lubricating Oil))\n\n```\n\nThe refinery inputs two types of crude oil (Crude Oil 1 and Crude Oil 2). The crude oil first enters the distillation unit. The products and proportions of each barrel of crude oil after distillation are shown in Table C-1. The octane numbers of light, medium and heavy naphtha are 90, 80 and 70 respectively. \n\n| | Light naphtha | Medium naphtha | Heavy naphtha | Light oil | Heavy oil | Residue |\n| ----- | -------- | -------- | -------- | ---- | ---- | ---- |\n| Crude oil 1 | 0.1 | 0.2 | 0.2 | 0.12 | 0.2 | 0.13 |\n| Crude oil 2 | 0.15 | 0.25 | 0.18 | 0.08 | 0.19 | 0.12 |\n\nPart of the naphtha is directly used for engine oil mixing, and part is input into the reforming unit to obtain reformed gasoline with an octane number of 115. One barrel of light, medium and heavy naphtha can obtain 0.6, 0.52 and 0.45 barrels of reformed gasoline respectively. \n\nPart of the light oil and heavy oil obtained by distillation is directly used for mixing with kerosene and fuel oil, and part is passed through the cracking unit to obtain cracking gasoline and cracking oil. The octane number of pyrolysis gasoline is 105. After pyrolysis of 1 barrel of light oil, 0.68 barrels of pyrolysis oil and 0.28 barrels of pyrolysis gasoline are obtained; after pyrolysis of 1 barrel of heavy oil, 0.75 barrels of pyrolysis oil and 0.2 barrels of pyrolysis gasoline are obtained. Pyrolysis gasoline is used for engine oil mixing, and pyrolysis oil is used for kerosene and fuel oil mixing. \n\nResidual oil can be directly used for kerosene and fuel oil mixing, or for the production of lubricating oil. After treatment, 1 barrel of residual oil can produce 0.5 barrels of lubricating oil. \nThe octane number of the high-grade engine oil mixed should not be less than 94, and the octane number of the ordinary one should not be less than 84. The octane number of the mixture is calculated by linear weighting according to the octane number and proportion of each oil before mixing. \n\nIt is stipulated that the gas pressure of kerosene shall not exceed 1$kg/cm^2$, while the gas pressures of light oil, heavy oil, pyrolysis oil and residual oil are 1.0, 0.6, 1.5 and 0.05$kg/cm^2$ respectively. The calculation of gas pressure is based on the linear weighted calculation of the gas pressure and proportion of each mixed component.\n\nIn fuel oil, the ratio of light oil, heavy oil, cracking oil and residual oil should be 10:3:4:1. \n\nIt is known that 20,000 barrels of crude oil 1 and 30,000 barrels of crude oil 2 are available every day. The maximum capacity of the distillation unit is 45,000 barrels per day, the reforming unit can reform up to 10,000 barrels of naphtha per day, and the maximum capacity of the cracking unit is 8,000 barrels per day. The daily output of lubricating oil should be between 500 and 1,000 barrels, and the output of high-end engine oil should not be less than 40% of ordinary engine oil. \n\nIt is also known that the profits of the final products (yuan/barrel) are: high-end engine oil 700, ordinary engine oil 600, kerosene 400, fuel oil 350, lubricating oil 150. Try to formulate a plan for the refinery to maximize the total profit\n\nOnly the maximum value of the total profit needs to be given.",
+    "answer": 21136513.48,
+    "Parameters_List": [
+      {
+        "Name": "CRUDE_TYPES",
+        "Type": "list",
+        "Value": [
+          "Crude oil 1",
+          "Crude oil 2"
+        ]
+      },
+      {
+        "Name": "NAPHTHA_TYPES",
+        "Type": "list",
+        "Value": [
+          "Light naphtha",
+          "Medium naphtha",
+          "Heavy naphtha"
+        ]
+      },
+      {
+        "Name": "Octane_Naphtha",
+        "Type": "tuple",
+        "Value": {
+          "Light naphtha": 90,
+          "Medium naphtha": 80,
+          "Heavy naphtha": 70
+        }
+      },
+      {
+        "Name": "Octane_ReformedGasoline",
+        "Type": "integer",
+        "Value": 115
+      },
+      {
+        "Name": "Reforming_Yield",
+        "Type": "tuple",
+        "Value": {
+          "Light naphtha": 0.6,
+          "Medium naphtha": 0.52,
+          "Heavy naphtha": 0.45
+        }
+      },
+      {
+        "Name": "Octane_CrackingGasoline",
+        "Type": "integer",
+        "Value": 105
+      },
+      {
+        "Name": "Cracking_Yield_LightOil",
+        "Type": "tuple",
+        "Value": {
+          "Cracking oil": 0.68,
+          "Cracking gasoline": 0.28
+        }
+      },
+      {
+        "Name": "Cracking_Yield_HeavyOil",
+        "Type": "tuple",
+        "Value": {
+          "Cracking oil": 0.75,
+          "Cracking gasoline": 0.2
+        }
+      },
+      {
+        "Name": "Residue_to_LubeOil_Yield",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "MinOctane_PremiumEngineOil",
+        "Type": "integer",
+        "Value": 94
+      },
+      {
+        "Name": "MinOctane_OrdinaryEngineOil",
+        "Type": "integer",
+        "Value": 84
+      },
+      {
+        "Name": "MaxVaporPressure_KeroseneBlend",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "VaporPressure_Components",
+        "Type": "tuple",
+        "Value": {
+          "Light oil": 1.0,
+          "Heavy oil": 0.6,
+          "Cracking oil": 1.5,
+          "Residue": 0.05
+        }
+      },
+      {
+        "Name": "FuelOil_Ratio",
+        "Type": "tuple",
+        "Value": {
+          "Light oil": 10,
+          "Heavy oil": 3,
+          "Cracking oil": 4,
+          "Residue": 1
+        }
+      },
+      {
+        "Name": "Available_CrudeOil1",
+        "Type": "integer",
+        "Value": 20000
+      },
+      {
+        "Name": "Available_CrudeOil2",
+        "Type": "integer",
+        "Value": 30000
+      },
+      {
+        "Name": "MaxCapacity_Distillation",
+        "Type": "integer",
+        "Value": 45000
+      },
+      {
+        "Name": "MaxCapacity_Reforming",
+        "Type": "integer",
+        "Value": 10000
+      },
+      {
+        "Name": "MaxCapacity_Cracking",
+        "Type": "integer",
+        "Value": 8000
+      },
+      {
+        "Name": "MinOutput_LubeOil",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "MaxOutput_LubeOil",
+        "Type": "integer",
+        "Value": 1000
+      },
+      {
+        "Name": "MinRatio_Premium_to_Ordinary_EngineOil",
+        "Type": "float",
+        "Value": 0.4
+      },
+      {
+        "Name": "Profit",
+        "Type": "tuple",
+        "Value": {
+          "Premium engine oil": 700,
+          "Ordinary engine oil": 600,
+          "Kerosene": 400,
+          "Fuel oil": 350,
+          "Lubricating oil": 150
+        }
+      },
+      {
+        "Name": "Table_1_DistillationYields",
+        "Type": "tuple",
+        "Value": {
+          "Crude oil 1": {
+            "Light naphtha": 0.1,
+            "Medium naphtha": 0.2,
+            "Heavy naphtha": 0.2,
+            "Light oil": 0.12,
+            "Heavy oil": 0.2,
+            "Residue": 0.13
+          },
+          "Crude oil 2": {
+            "Light naphtha": 0.15,
+            "Medium naphtha": 0.25,
+            "Heavy naphtha": 0.18,
+            "Light oil": 0.08,
+            "Heavy oil": 0.19,
+            "Residue": 0.12
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The refinery inputs two types...",
+        "Introduces crude feed variables C1, C2 and that they are inputs to the process; availability and processing decisions will be constrained later."
+      ],
+      [
+        "2",
+        "The crude oil first enters the distillation unit...",
+        "Defines that all crude sent (C1, C2) must go to distillation; together with Table C-1 output fractions it induces linear material-balance constraints from each crude to light/medium/heavy naphtha, light oil, heavy oil, residue."
+      ],
+      [
+        "3",
+        "The octane numbers of light, medium and heavy naphtha...",
+        "Provides octane parameters (90, 80, 70) for use in linear octane constraints for engine oil blends."
+      ],
+      [
+        "4",
+        "Part of the naphtha is directly used...",
+        "Introduces split variables for light/medium/heavy naphtha between direct engine oil blending and reforming (e.g., LN1_dir, LN1_ref, etc.) and associated balance constraints: direct + reforming = total from distillation."
+      ],
+      [
+        "5",
+        "One barrel of light, medium and heavy naphtha can obtain...",
+        "Defines linear yield constraints for reforming: RG_L = 0.6*(light naphtha to reforming), RG_M = 0.52*(medium naphtha to reforming), RG_H = 0.45*(heavy naphtha to reforming). Also RG has octane 115 used later in blending constraints."
+      ],
+      [
+        "6",
+        "Part of the light oil and heavy oil obtained by distillation...",
+        "Introduces split variables for light/heavy oil between direct blending to kerosene/fuel oil and cracking (LO*_dir, LO*_cr, HO*_dir, HO*_cr) with balance constraints: direct + cracking = total from distillation."
+      ],
+      [
+        "7",
+        "After pyrolysis of 1 barrel of light oil...",
+        "Defines cracking yield constraints: from light oil, CG_LO = 0.28*(LO1_cr+LO2_cr), CO_LO = 0.68*(LO1_cr+LO2_cr); from heavy oil, CG_HO = 0.2*(HO1_cr+HO2_cr), CO_HO = 0.75*(HO1_cr+HO2_cr). Also sets octane of cracking gasoline = 105 for blending constraints."
+      ],
+      [
+        "8",
+        "Pyrolysis gasoline is used for engine oil mixing...",
+        "Defines that cracking gasoline (CG) only goes to engine oil blending; cracking oil (CO) only to kerosene/fuel oil blending. This induces availability and allocation constraints for CG and CO in blending."
+      ],
+      [
+        "9",
+        "Residual oil can be directly used...",
+        "Introduces split variables for residue between kerosene/fuel blending and lube production (RES*_fuel, RES*_lube), with balance constraints; defines lube yield LUBE = 0.5*(residue sent to lube)."
+      ],
+      [
+        "10",
+        "The octane number of the high-grade engine oil mixed...",
+        "Introduces octane-quality constraints for premium and ordinary engine oils: linear weighted-average octane of component streams in each blend must be ≥94 (premium) and ≥84 (ordinary); yields two linear inequalities after cross multiplication."
+      ],
+      [
+        "11",
+        "It is stipulated that the gas pressure of kerosene...",
+        "Introduces a linear weighted-average vapor pressure constraint for kerosene blend: 1.0*LO_K + 0.6*HO_K + 1.5*CO_K + 0.05*RES_K ≤ 1*K; also defines vapor pressure parameters for components."
+      ],
+      [
+        "12",
+        "In fuel oil, the ratio of light oil...",
+        "Defines fixed proportion constraints for fuel oil blend: light : heavy : cracking : residue = 10:3:4:1; modeled via LO_F=10*t_F, HO_F=3*t_F, CO_F=4*t_F, RES_F=1*t_F and F=18*t_F."
+      ],
+      [
+        "13",
+        "It is known that 20,000 barrels of crude oil 1...",
+        "Gives availability bounds: C1 ≤ 20000, C2 ≤ 30000."
+      ],
+      [
+        "14",
+        "The maximum capacity of the distillation unit...",
+        "Gives total distillation capacity constraint: C1 + C2 ≤ 45000."
+      ],
+      [
+        "15",
+        "the reforming unit can reform up to 10,000 barrels...",
+        "Gives reforming capacity: total naphtha sent to reforming (all types, both crudes) ≤ 10000."
+      ],
+      [
+        "16",
+        "and the maximum capacity of the cracking unit is 8,000...",
+        "Gives cracking capacity: total light+heavy oil sent to cracking ≤ 8000."
+      ],
+      [
+        "17",
+        "The daily output of lubricating oil should be between...",
+        "Gives bounds 500 ≤ LUBE ≤ 1000."
+      ],
+      [
+        "18",
+        "and the output of high-end engine oil should not be less...",
+        "Gives relational constraint between engine oil products: E_H ≥ 0.4 * E_O."
+      ],
+      [
+        "19",
+        "It is also known that the profits of the final products...",
+        "Defines profit coefficients for objective: 700 (E_H), 600 (E_O), 400 (K), 350 (F), 150 (LUBE)."
+      ],
+      [
+        "20",
+        "Try to formulate a plan for the refinery to maximize...",
+        "Defines optimization objective: maximize total daily profit from final products; all previous relationships are constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "C1",
+        "Meaning": "Barrels/day of crude oil 1 sent to distillation",
+        "Type": "continuous",
+        "Range ": "C1 ≥ 0, C1 ≤ 20000"
+      },
+      {
+        "symbol": "C2",
+        "Meaning": "Barrels/day of crude oil 2 sent to distillation",
+        "Type": "continuous",
+        "Range ": "C2 ≥ 0, C2 ≤ 30000"
+      },
+      {
+        "symbol": "LN1_dir",
+        "Meaning": "Light naphtha from crude 1 sent directly to engine oil blending",
+        "Type": "continuous",
+        "Range ": "LN1_dir ≥ 0"
+      },
+      {
+        "symbol": "LN1_ref",
+        "Meaning": "Light naphtha from crude 1 sent to reforming",
+        "Type": "continuous",
+        "Range ": "LN1_ref ≥ 0"
+      },
+      {
+        "symbol": "MN1_dir",
+        "Meaning": "Medium naphtha from crude 1 sent directly to engine oil blending",
+        "Type": "continuous",
+        "Range ": "MN1_dir ≥ 0"
+      },
+      {
+        "symbol": "MN1_ref",
+        "Meaning": "Medium naphtha from crude 1 sent to reforming",
+        "Type": "continuous",
+        "Range ": "MN1_ref ≥ 0"
+      },
+      {
+        "symbol": "HN1_dir",
+        "Meaning": "Heavy naphtha from crude 1 sent directly to engine oil blending",
+        "Type": "continuous",
+        "Range ": "HN1_dir ≥ 0"
+      },
+      {
+        "symbol": "HN1_ref",
+        "Meaning": "Heavy naphtha from crude 1 sent to reforming",
+        "Type": "continuous",
+        "Range ": "HN1_ref ≥ 0"
+      },
+      {
+        "symbol": "LN2_dir",
+        "Meaning": "Light naphtha from crude 2 sent directly to engine oil blending",
+        "Type": "continuous",
+        "Range ": "LN2_dir ≥ 0"
+      },
+      {
+        "symbol": "LN2_ref",
+        "Meaning": "Light naphtha from crude 2 sent to reforming",
+        "Type": "continuous",
+        "Range ": "LN2_ref ≥ 0"
+      },
+      {
+        "symbol": "MN2_dir",
+        "Meaning": "Medium naphtha from crude 2 sent directly to engine oil blending",
+        "Type": "continuous",
+        "Range ": "MN2_dir ≥ 0"
+      },
+      {
+        "symbol": "MN2_ref",
+        "Meaning": "Medium naphtha from crude 2 sent to reforming",
+        "Type": "continuous",
+        "Range ": "MN2_ref ≥ 0"
+      },
+      {
+        "symbol": "HN2_dir",
+        "Meaning": "Heavy naphtha from crude 2 sent directly to engine oil blending",
+        "Type": "continuous",
+        "Range ": "HN2_dir ≥ 0"
+      },
+      {
+        "symbol": "HN2_ref",
+        "Meaning": "Heavy naphtha from crude 2 sent to reforming",
+        "Type": "continuous",
+        "Range ": "HN2_ref ≥ 0"
+      },
+      {
+        "symbol": "RG_L",
+        "Meaning": "Reformed gasoline produced from light naphtha",
+        "Type": "continuous",
+        "Range ": "RG_L ≥ 0"
+      },
+      {
+        "symbol": "RG_M",
+        "Meaning": "Reformed gasoline produced from medium naphtha",
+        "Type": "continuous",
+        "Range ": "RG_M ≥ 0"
+      },
+      {
+        "symbol": "RG_H",
+        "Meaning": "Reformed gasoline produced from heavy naphtha",
+        "Type": "continuous",
+        "Range ": "RG_H ≥ 0"
+      },
+      {
+        "symbol": "LO1_dir",
+        "Meaning": "Light oil from crude 1 sent directly to kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "LO1_dir ≥ 0"
+      },
+      {
+        "symbol": "LO1_cr",
+        "Meaning": "Light oil from crude 1 sent to cracking",
+        "Type": "continuous",
+        "Range ": "LO1_cr ≥ 0"
+      },
+      {
+        "symbol": "LO2_dir",
+        "Meaning": "Light oil from crude 2 sent directly to kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "LO2_dir ≥ 0"
+      },
+      {
+        "symbol": "LO2_cr",
+        "Meaning": "Light oil from crude 2 sent to cracking",
+        "Type": "continuous",
+        "Range ": "LO2_cr ≥ 0"
+      },
+      {
+        "symbol": "HO1_dir",
+        "Meaning": "Heavy oil from crude 1 sent directly to kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "HO1_dir ≥ 0"
+      },
+      {
+        "symbol": "HO1_cr",
+        "Meaning": "Heavy oil from crude 1 sent to cracking",
+        "Type": "continuous",
+        "Range ": "HO1_cr ≥ 0"
+      },
+      {
+        "symbol": "HO2_dir",
+        "Meaning": "Heavy oil from crude 2 sent directly to kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "HO2_dir ≥ 0"
+      },
+      {
+        "symbol": "HO2_cr",
+        "Meaning": "Heavy oil from crude 2 sent to cracking",
+        "Type": "continuous",
+        "Range ": "HO2_cr ≥ 0"
+      },
+      {
+        "symbol": "CG_LO",
+        "Meaning": "Cracking gasoline produced from light oil",
+        "Type": "continuous",
+        "Range ": "CG_LO ≥ 0"
+      },
+      {
+        "symbol": "CO_LO",
+        "Meaning": "Cracking oil produced from light oil",
+        "Type": "continuous",
+        "Range ": "CO_LO ≥ 0"
+      },
+      {
+        "symbol": "CG_HO",
+        "Meaning": "Cracking gasoline produced from heavy oil",
+        "Type": "continuous",
+        "Range ": "CG_HO ≥ 0"
+      },
+      {
+        "symbol": "CO_HO",
+        "Meaning": "Cracking oil produced from heavy oil",
+        "Type": "continuous",
+        "Range ": "CO_HO ≥ 0"
+      },
+      {
+        "symbol": "CG",
+        "Meaning": "Total cracking gasoline available for engine oil blending",
+        "Type": "continuous",
+        "Range ": "CG ≥ 0"
+      },
+      {
+        "symbol": "CO",
+        "Meaning": "Total cracking oil available for kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "CO ≥ 0"
+      },
+      {
+        "symbol": "RES1_fuel",
+        "Meaning": "Residue from crude 1 sent to kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "RES1_fuel ≥ 0"
+      },
+      {
+        "symbol": "RES1_lube",
+        "Meaning": "Residue from crude 1 sent to lubricating oil production",
+        "Type": "continuous",
+        "Range ": "RES1_lube ≥ 0"
+      },
+      {
+        "symbol": "RES2_fuel",
+        "Meaning": "Residue from crude 2 sent to kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "RES2_fuel ≥ 0"
+      },
+      {
+        "symbol": "RES2_lube",
+        "Meaning": "Residue from crude 2 sent to lubricating oil production",
+        "Type": "continuous",
+        "Range ": "RES2_lube ≥ 0"
+      },
+      {
+        "symbol": "LUBE",
+        "Meaning": "Daily lubricating oil production (barrels/day)",
+        "Type": "continuous",
+        "Range ": "500 ≤ LUBE ≤ 1000"
+      },
+      {
+        "symbol": "LN_dir",
+        "Meaning": "Total light naphtha available for engine oil blending (from both crudes)",
+        "Type": "continuous",
+        "Range ": "LN_dir ≥ 0"
+      },
+      {
+        "symbol": "MN_dir",
+        "Meaning": "Total medium naphtha available for engine oil blending (from both crudes)",
+        "Type": "continuous",
+        "Range ": "MN_dir ≥ 0"
+      },
+      {
+        "symbol": "HN_dir",
+        "Meaning": "Total heavy naphtha available for engine oil blending (from both crudes)",
+        "Type": "continuous",
+        "Range ": "HN_dir ≥ 0"
+      },
+      {
+        "symbol": "RG",
+        "Meaning": "Total reformed gasoline available for engine oil blending",
+        "Type": "continuous",
+        "Range ": "RG ≥ 0"
+      },
+      {
+        "symbol": "x_LN_PH",
+        "Meaning": "Light naphtha sent to premium (high-end) engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_LN_PH ≥ 0"
+      },
+      {
+        "symbol": "x_MN_PH",
+        "Meaning": "Medium naphtha sent to premium engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_MN_PH ≥ 0"
+      },
+      {
+        "symbol": "x_HN_PH",
+        "Meaning": "Heavy naphtha sent to premium engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_HN_PH ≥ 0"
+      },
+      {
+        "symbol": "x_RG_PH",
+        "Meaning": "Reformed gasoline sent to premium engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_RG_PH ≥ 0"
+      },
+      {
+        "symbol": "x_CG_PH",
+        "Meaning": "Cracking gasoline sent to premium engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_CG_PH ≥ 0"
+      },
+      {
+        "symbol": "x_LN_PO",
+        "Meaning": "Light naphtha sent to ordinary engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_LN_PO ≥ 0"
+      },
+      {
+        "symbol": "x_MN_PO",
+        "Meaning": "Medium naphtha sent to ordinary engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_MN_PO ≥ 0"
+      },
+      {
+        "symbol": "x_HN_PO",
+        "Meaning": "Heavy naphtha sent to ordinary engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_HN_PO ≥ 0"
+      },
+      {
+        "symbol": "x_RG_PO",
+        "Meaning": "Reformed gasoline sent to ordinary engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_RG_PO ≥ 0"
+      },
+      {
+        "symbol": "x_CG_PO",
+        "Meaning": "Cracking gasoline sent to ordinary engine oil blend",
+        "Type": "continuous",
+        "Range ": "x_CG_PO ≥ 0"
+      },
+      {
+        "symbol": "E_H",
+        "Meaning": "Premium (high-end) engine oil production (barrels/day)",
+        "Type": "continuous",
+        "Range ": "E_H ≥ 0"
+      },
+      {
+        "symbol": "E_O",
+        "Meaning": "Ordinary engine oil production (barrels/day)",
+        "Type": "continuous",
+        "Range ": "E_O ≥ 0"
+      },
+      {
+        "symbol": "LO_dir",
+        "Meaning": "Total light oil available for kerosene/fuel oil blending (after cracking split)",
+        "Type": "continuous",
+        "Range ": "LO_dir ≥ 0"
+      },
+      {
+        "symbol": "HO_dir",
+        "Meaning": "Total heavy oil available for kerosene/fuel oil blending (after cracking split)",
+        "Type": "continuous",
+        "Range ": "HO_dir ≥ 0"
+      },
+      {
+        "symbol": "RES_fuel",
+        "Meaning": "Total residue sent to kerosene/fuel oil blending",
+        "Type": "continuous",
+        "Range ": "RES_fuel ≥ 0"
+      },
+      {
+        "symbol": "LO_K",
+        "Meaning": "Light oil sent to kerosene blending",
+        "Type": "continuous",
+        "Range ": "LO_K ≥ 0"
+      },
+      {
+        "symbol": "LO_F",
+        "Meaning": "Light oil sent to fuel oil blending",
+        "Type": "continuous",
+        "Range ": "LO_F ≥ 0"
+      },
+      {
+        "symbol": "HO_K",
+        "Meaning": "Heavy oil sent to kerosene blending",
+        "Type": "continuous",
+        "Range ": "HO_K ≥ 0"
+      },
+      {
+        "symbol": "HO_F",
+        "Meaning": "Heavy oil sent to fuel oil blending",
+        "Type": "continuous",
+        "Range ": "HO_F ≥ 0"
+      },
+      {
+        "symbol": "CO_K",
+        "Meaning": "Cracking oil sent to kerosene blending",
+        "Type": "continuous",
+        "Range ": "CO_K ≥ 0"
+      },
+      {
+        "symbol": "CO_F",
+        "Meaning": "Cracking oil sent to fuel oil blending",
+        "Type": "continuous",
+        "Range ": "CO_F ≥ 0"
+      },
+      {
+        "symbol": "RES_K",
+        "Meaning": "Residue sent to kerosene blending",
+        "Type": "continuous",
+        "Range ": "RES_K ≥ 0"
+      },
+      {
+        "symbol": "RES_F",
+        "Meaning": "Residue sent to fuel oil blending",
+        "Type": "continuous",
+        "Range ": "RES_F ≥ 0"
+      },
+      {
+        "symbol": "K",
+        "Meaning": "Kerosene product output (barrels/day)",
+        "Type": "continuous",
+        "Range ": "K ≥ 0"
+      },
+      {
+        "symbol": "F",
+        "Meaning": "Fuel oil product output (barrels/day)",
+        "Type": "continuous",
+        "Range ": "F ≥ 0"
+      },
+      {
+        "symbol": "t_F",
+        "Meaning": "Scaling variable defining overall fuel oil blending level for 10:3:4:1 ratio",
+        "Type": "continuous",
+        "Range ": "t_F ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Crude1 availability",
+        "C1 ≤ 20000",
+        "sentence numbers:13"
+      ],
+      [
+        "Crude2 availability",
+        "C2 ≤ 30000",
+        "sentence numbers:13"
+      ],
+      [
+        "Distillation capacity",
+        "C1 + C2 ≤ 45000",
+        "sentence numbers:14"
+      ],
+      [
+        "Light naphtha balance crude1",
+        "LN1_dir + LN1_ref = 0.10 * C1",
+        "sentence numbers:2,4"
+      ],
+      [
+        "Medium naphtha balance crude1",
+        "MN1_dir + MN1_ref = 0.20 * C1",
+        "sentence numbers:2,4"
+      ],
+      [
+        "Heavy naphtha balance crude1",
+        "HN1_dir + HN1_ref = 0.20 * C1",
+        "sentence numbers:2,4"
+      ],
+      [
+        "Light naphtha balance crude2",
+        "LN2_dir + LN2_ref = 0.15 * C2",
+        "sentence numbers:2,4"
+      ],
+      [
+        "Medium naphtha balance crude2",
+        "MN2_dir + MN2_ref = 0.25 * C2",
+        "sentence numbers:2,4"
+      ],
+      [
+        "Heavy naphtha balance crude2",
+        "HN2_dir + HN2_ref = 0.18 * C2",
+        "sentence numbers:2,4"
+      ],
+      [
+        "Reforming yield from light naphtha",
+        "RG_L = 0.6 * (LN1_ref + LN2_ref)",
+        "sentence numbers:5"
+      ],
+      [
+        "Reforming yield from medium naphtha",
+        "RG_M = 0.52 * (MN1_ref + MN2_ref)",
+        "sentence numbers:5"
+      ],
+      [
+        "Reforming yield from heavy naphtha",
+        "RG_H = 0.45 * (HN1_ref + HN2_ref)",
+        "sentence numbers:5"
+      ],
+      [
+        "Reforming unit capacity",
+        "LN1_ref + LN2_ref + MN1_ref + MN2_ref + HN1_ref + HN2_ref ≤ 10000",
+        "sentence numbers:15"
+      ],
+      [
+        "Light oil balance crude1",
+        "LO1_dir + LO1_cr = 0.12 * C1",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Light oil balance crude2",
+        "LO2_dir + LO2_cr = 0.08 * C2",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Heavy oil balance crude1",
+        "HO1_dir + HO1_cr = 0.20 * C1",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Heavy oil balance crude2",
+        "HO2_dir + HO2_cr = 0.19 * C2",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Cracking capacity",
+        "LO1_cr + LO2_cr + HO1_cr + HO2_cr ≤ 8000",
+        "sentence numbers:16"
+      ],
+      [
+        "Cracking yields from light oil gasoline",
+        "CG_LO = 0.28 * (LO1_cr + LO2_cr)",
+        "sentence numbers:7"
+      ],
+      [
+        "Cracking yields from light oil cracking oil",
+        "CO_LO = 0.68 * (LO1_cr + LO2_cr)",
+        "sentence numbers:7"
+      ],
+      [
+        "Cracking yields from heavy oil gasoline",
+        "CG_HO = 0.20 * (HO1_cr + HO2_cr)",
+        "sentence numbers:7"
+      ],
+      [
+        "Cracking yields from heavy oil cracking oil",
+        "CO_HO = 0.75 * (HO1_cr + HO2_cr)",
+        "sentence numbers:7"
+      ],
+      [
+        "Total cracking gasoline",
+        "CG = CG_LO + CG_HO",
+        "sentence numbers:7,8"
+      ],
+      [
+        "Total cracking oil",
+        "CO = CO_LO + CO_HO",
+        "sentence numbers:7,8"
+      ],
+      [
+        "Residue balance crude1",
+        "RES1_fuel + RES1_lube = 0.13 * C1",
+        "sentence numbers:2,9"
+      ],
+      [
+        "Residue balance crude2",
+        "RES2_fuel + RES2_lube = 0.12 * C2",
+        "sentence numbers:2,9"
+      ],
+      [
+        "Lube yield from residue",
+        "LUBE = 0.5 * (RES1_lube + RES2_lube)",
+        "sentence numbers:9"
+      ],
+      [
+        "Lube production lower bound",
+        "LUBE ≥ 500",
+        "sentence numbers:17"
+      ],
+      [
+        "Lube production upper bound",
+        "LUBE ≤ 1000",
+        "sentence numbers:17"
+      ],
+      [
+        "Total light naphtha availability for blending",
+        "LN_dir = LN1_dir + LN2_dir",
+        "sentence numbers:4"
+      ],
+      [
+        "Total medium naphtha availability for blending",
+        "MN_dir = MN1_dir + MN2_dir",
+        "sentence numbers:4"
+      ],
+      [
+        "Total heavy naphtha availability for blending",
+        "HN_dir = HN1_dir + HN2_dir",
+        "sentence numbers:4"
+      ],
+      [
+        "Total reformate availability for blending",
+        "RG = RG_L + RG_M + RG_H",
+        "sentence numbers:5"
+      ],
+      [
+        "Light naphtha allocation to engine oils",
+        "x_LN_PH + x_LN_PO = LN_dir",
+        "sentence numbers:4,8"
+      ],
+      [
+        "Medium naphtha allocation to engine oils",
+        "x_MN_PH + x_MN_PO = MN_dir",
+        "sentence numbers:4,8"
+      ],
+      [
+        "Heavy naphtha allocation to engine oils",
+        "x_HN_PH + x_HN_PO = HN_dir",
+        "sentence numbers:4,8"
+      ],
+      [
+        "Reformate allocation to engine oils",
+        "x_RG_PH + x_RG_PO = RG",
+        "sentence numbers:5,8"
+      ],
+      [
+        "Cracking gasoline allocation to engine oils",
+        "x_CG_PH + x_CG_PO = CG",
+        "sentence numbers:7,8"
+      ],
+      [
+        "Premium engine oil definition",
+        "E_H = x_LN_PH + x_MN_PH + x_HN_PH + x_RG_PH + x_CG_PH",
+        "sentence numbers:4,5,7,10"
+      ],
+      [
+        "Ordinary engine oil definition",
+        "E_O = x_LN_PO + x_MN_PO + x_HN_PO + x_RG_PO + x_CG_PO",
+        "sentence numbers:4,5,7,10"
+      ],
+      [
+        "Premium vs ordinary engine oil relation",
+        "E_H ≥ 0.40 * E_O",
+        "sentence numbers:18"
+      ],
+      [
+        "Premium engine oil octane constraint",
+        "90*x_LN_PH + 80*x_MN_PH + 70*x_HN_PH + 115*x_RG_PH + 105*x_CG_PH ≥ 94 * E_H",
+        "sentence numbers:3,5,7,10"
+      ],
+      [
+        "Ordinary engine oil octane constraint",
+        "90*x_LN_PO + 80*x_MN_PO + 70*x_HN_PO + 115*x_RG_PO + 105*x_CG_PO ≥ 84 * E_O",
+        "sentence numbers:3,5,7,10"
+      ],
+      [
+        "Total light oil to blending definition",
+        "LO_dir = LO1_dir + LO2_dir",
+        "sentence numbers:6"
+      ],
+      [
+        "Total heavy oil to blending definition",
+        "HO_dir = HO1_dir + HO2_dir",
+        "sentence numbers:6"
+      ],
+      [
+        "Total residue to blending definition",
+        "RES_fuel = RES1_fuel + RES2_fuel",
+        "sentence numbers:9"
+      ],
+      [
+        "Light oil split between kerosene and fuel oil",
+        "LO_K + LO_F = LO_dir",
+        "sentence numbers:6,11,12"
+      ],
+      [
+        "Heavy oil split between kerosene and fuel oil",
+        "HO_K + HO_F = HO_dir",
+        "sentence numbers:6,11,12"
+      ],
+      [
+        "Cracking oil split between kerosene and fuel oil",
+        "CO_K + CO_F = CO",
+        "sentence numbers:7,8,11,12"
+      ],
+      [
+        "Residue split between kerosene and fuel oil",
+        "RES_K + RES_F = RES_fuel",
+        "sentence numbers:9,11,12"
+      ],
+      [
+        "Kerosene product definition",
+        "K = LO_K + HO_K + CO_K + RES_K",
+        "sentence numbers:6,7,8,9,11"
+      ],
+      [
+        "Fuel oil product definition",
+        "F = LO_F + HO_F + CO_F + RES_F",
+        "sentence numbers:6,7,8,9,12"
+      ],
+      [
+        "Kerosene vapor pressure constraint",
+        "1.0*LO_K + 0.6*HO_K + 1.5*CO_K + 0.05*RES_K ≤ 1 * K",
+        "sentence numbers:11"
+      ],
+      [
+        "Fuel oil ratio light oil",
+        "LO_F = 10 * t_F",
+        "sentence numbers:12"
+      ],
+      [
+        "Fuel oil ratio heavy oil",
+        "HO_F = 3 * t_F",
+        "sentence numbers:12"
+      ],
+      [
+        "Fuel oil ratio cracking oil",
+        "CO_F = 4 * t_F",
+        "sentence numbers:12"
+      ],
+      [
+        "Fuel oil ratio residue",
+        "RES_F = 1 * t_F",
+        "sentence numbers:12"
+      ],
+      [
+        "Fuel oil production from ratio scaling",
+        "F = LO_F + HO_F + CO_F + RES_F = 18 * t_F",
+        "sentence numbers:12"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Try to formulate a plan for the refinery to maximize the total profit",
+      "Mathematical_expressions": "Maximize Z = 700 * E_H + 600 * E_O + 400 * K + 350 * F + 150 * LUBE"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "21136513.48"
+    ],
+    "time_seconds": 45.98019840000052,
+    "total_tokens": 23809
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "21136513.48"
+    ],
+    "ground_truth": 21136513.48
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A woodworking shop can purchase two types of power saws: miter saws and circular saws. A miter saw can cut 50 boards per day and produces 60 units of sawdust. A circular saw can cut 70 boards per day and produces 100 units of sawdust. The shop must cut at least 1500 boards per day. However, to avoid excessive pollution inside the shop, it can produce at most 2000 units of sawdust per day.\n\nNote that, because sawdust exhibits an accumulation effect in an enclosed space, the actual environmental pollution impact does not increase linearly. According to measurements, assume that the effective pollution amount grows exponentially with respect to the total number of saws: when the shop purchases a total of $x$ miter saws and $y$ circular saws, the effective pollution amount it generates equals “$(60\\times x + 100\\times y) + (1.3^x)$”, where $1.2$ is the pollution accumulation growth coefficient. To meet environmental requirements, this effective pollution amount can be at most 2201 units per day.\n\nHow many units of each type of power saw should be purchased to minimize the total number of saws required?",
+    "answer": 22.0,
+    "index": "NLP4LP_prob_043",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “然而，为了避免木工坊内污染过多，他们每天至多只能产生 2000 单位的锯末。” 修改后相关描述: “然而，为了避免木工坊内污染过多，他们每天至多只能产生 2000 单位的锯末。需要注意的是，由于锯末在封闭空间中会产生累积效应，实际对环境的污染影响并不是线性增加的。经测算，假设有效污染量会按电锯总台数呈指数级增长：当木工坊共购买 x 台斜切锯和 y 台圆锯时，其产生的有效污染量等于“(60×x + 100×y) ) 加( 1.3 的 x 次方) ”，其中 1.3 为污染累积增长系数。为了满足环境要求，这一有效污染量每天至多只能为 2201单位。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_043\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_074.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "26.0"
+    ],
+    "time_seconds": 36.21102000000246,
+    "total_tokens": 2777
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "26.0"
+    ],
+    "ground_truth": 22.0
+  }
+}

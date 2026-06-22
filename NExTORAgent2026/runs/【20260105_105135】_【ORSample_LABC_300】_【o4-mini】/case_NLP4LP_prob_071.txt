@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A hot dog company can build two types of butcher shops: small butcher shops and large butcher shops. A small butcher shop can produce 30 hot dogs per day and requires 2 workers. A large butcher shop can theoretically produce 70 hot dogs per day and requires 4 workers. However, because the company plans to adopt a gradually upgraded large-scale production process, if $x$ large butcher shops are built, then after being put into operation, the actual daily output of the $i$-th large butcher shop (indexed from 1 to $x$) grows exponentially based on 70 hot dogs, i.e., the daily output of the $i$-th large butcher shop is $70 \\times 1.03^{(i-1)}$ hot dogs, where 1.03 is a fixed growth factor. The company must produce at least 500 hot dogs per day, but they have only 30 workers available. How many butcher shops of each type should the company build in order to minimize the total number of butcher shops?",
+    "answer": 6.0,
+    "index": "NLP4LP_prob_071",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 大型肉铺每天可以生产70根热狗，需要4名工人。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_071\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_079.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "7.0"
+    ],
+    "time_seconds": 24.383456200012006,
+    "total_tokens": 2077
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "7.0"
+    ],
+    "ground_truth": 6.0
+  }
+}

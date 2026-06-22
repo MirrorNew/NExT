@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Bright Future Toy Company plans to manufacture and sell robots, model cars, building block sets, and dolls. The profit is \\$15 for each robot sold, \\$8 for each model car sold, \\$12 for each building block set sold, and \\$5 for each doll sold. How many units of each type of toy should Bright Future Toy Company produce in order to maximize profit?\n\nThere are 1200 units of plastic available. Each robot requires 30 units of plastic, each model car requires 10 units of plastic, each building block set requires 20 units of plastic, and each doll requires 15 units of plastic.\n\nThere are 800 units of electronic components available. Each robot requires 8 units of electronic components, each model car requires 5 units of electronic components, each building block set requires 3 units of electronic components, and each doll requires 2 units of electronic components.\n\nIf Bright Future Toy Company produces robots, then it does not produce dolls.\n\nHowever, if they produce model cars, then they also produce building block sets.\n\nThe ratio of the number of dolls produced to the number of model cars produced cannot exceed 1; that is, $\\frac{\\text{number of dolls produced}}{\\text{number of model cars produced}} \\le 1$.",
+    "answer": 956.0,
+    "index": "IndustryOR_prob_019",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 生产的玩偶数量不能超过生产的模型汽车数量。, 修改后相关描述: 生产的玩偶数量与生产的模型汽车数量之比不能超过 1，也就是说，生产的玩偶数量除以生产的模型汽车数量不能大于 1。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_019\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_009.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "956.0"
+    ],
+    "time_seconds": 46.96462330000941,
+    "total_tokens": 4198
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "956.0"
+    ],
+    "ground_truth": 956.0
+  }
+}

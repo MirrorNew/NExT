@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A food delivery company uses electric bicycles or electric scooters to deliver meals to customers. One electric bicycle can carry 8 meals and requires 3 units of electric energy; one electric scooter can carry 5 meals and requires 2 units of electric energy. To more accurately reflect the impact of energy usage on total delivery capacity, the company found that under higher utilization intensity the energy consumption of electric bicycles exhibits a slight nonlinear increase. Therefore, it modifies the original linear total energy consumption constraint “3 times the number of electric bicycles plus 2 times the number of electric scooters does not exceed 200 units of energy” as follows: the energy consumption of electric bicycles is computed as “$(3\\times \\text{number of electric bicycles})^{1.002}$”, i.e., the bicycle energy consumption is $(3\\times \\text{number of electric bicycles})^{1.002}$, plus the linear scooter energy consumption of $2\\times \\text{number of electric scooters}$; the sum of the two does not exceed 200 units of energy. Because the city is more friendly to electric scooters, at most 30% of the electric vehicles may be electric bicycles, and at least 20 electric scooters must be used. If the company has only 200 units of energy available, how many of each of these two types of vehicles should be used to maximize the number of meals that can be delivered?",
+    "answer": 510.0,
+    "index": "NLP4LP_prob_154",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 如果公司只有 200 单位电量可用，应当分别使用多少辆这两种车辆，才能使可配送的餐食数量最大化？（隐含的电量约束为：3×电动自行车数量 + 2×电动踏板车数量 ≤ 200）; 修改后相关描述: 为了更准确地反映电量使用对总配送能力的影响，公司发现电动自行车在较高使用强度下电量消耗会呈现轻微的非线性增长，因此将电动自行车的电量消耗改为按“3 倍电动自行车数量的 1.2 次方”来计算，即电动自行车的电量消耗记为 (3×电动自行车数量)^1.2，再加上电动踏板车的线性电量消耗 2 倍踏板车数量，两者之和不超过 200 单位电量，其余条件保持不变。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_154\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_054.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "510.0"
+    ],
+    "time_seconds": 24.664720700006,
+    "total_tokens": 3062
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "510.0"
+    ],
+    "ground_truth": 510.0
+  }
+}

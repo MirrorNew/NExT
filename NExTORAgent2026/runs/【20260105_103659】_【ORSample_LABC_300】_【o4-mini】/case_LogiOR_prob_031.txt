@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "LogiOR_prob_031",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_031\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_031\\code.py",
+    "NLtype": "Linear",
+    "question": "Global Freight Solutions (GFS), a logistics company, needs to transport goods across three regions using services from three shipping providers. Each provider offers different cost structures and service mixes for large, medium, and small shipments, as detailed in Table as follows:\n\n| Supplier | Cost Per Shipment ($) | Percent Large | Percent Medium | Percent Small |\n|----------|-----------------------|---------------|----------------|---------------|\n| 1        | 5.2                   | 45            | 35             | 20            |\n| 2        | 4.7                   | 30            | 45             | 25            |\n| 3        | 3.5                   | 15            | 20             | 65            |\n\nGFS must fulfill a minimum monthly demand of at least 500 large shipments, 300 medium shipments, and 300 small shipments while minimizing total costs. Additionally, due to capacity constraints, no more than 700 shipments can be contracted from any single provider each month. Determine what the lowest possible cost is.",
+    "answer": 6553.7,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6551.111111"
+    ],
+    "time_seconds": 19.740614499998628,
+    "total_tokens": 1433
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "6551.111111"
+    ],
+    "ground_truth": 6553.7
+  }
+}

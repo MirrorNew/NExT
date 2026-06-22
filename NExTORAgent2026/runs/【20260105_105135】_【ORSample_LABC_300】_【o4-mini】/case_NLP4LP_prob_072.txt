@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An airport plans to purchase two types of vehicles for luggage handling: four-wheeled vehicles and three-wheeled vehicles.  \nA four-wheeled vehicle can handle 60 pieces of luggage per day and generates 30 units of pollutants per day.  \nA three-wheeled vehicle can handle 40 pieces of luggage per day and generates 15 units of pollutants per day.\n\nThe airport must be able to handle at least 1000 pieces of luggage per day.  \nTo avoid excessive pollution at the airport, it is stipulated that the ratio of the total pollutants generated per day to the total number of pieces of luggage that can actually be handled per day is at most 0.5; that is, the total units of pollutants generated per day divided by the total number of pieces of luggage that can be handled per day is at most 0.5.\n\nQuestion: How many four-wheeled vehicles and three-wheeled vehicles should the airport purchase, respectively, so that, under the above requirements, the total number of vehicles required is minimized?",
+    "answer": 17.0,
+    "index": "NLP4LP_prob_072",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 为避免对机场造成过度污染，每天产生的污染物最多为 430 个单位。 修改后相关描述: 为避免对机场造成过度污染，规定每天产生的总污染物与每天实际可搬运行李总件数的比率最多为 0.5，也就是说，每天产生的污染物总单位数除以每天可搬运行李的总件数最多为 0.5。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_072\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_093.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "17.0"
+    ],
+    "time_seconds": 32.16646870000113,
+    "total_tokens": 1840
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "17.0"
+    ],
+    "ground_truth": 17.0
+  }
+}

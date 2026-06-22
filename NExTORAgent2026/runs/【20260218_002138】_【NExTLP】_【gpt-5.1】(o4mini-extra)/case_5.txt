@@ -1,0 +1,396 @@
+{
+  "entry": {
+    "index": 5,
+    "question": "XYZ Asset Management Co., Ltd. is a fund management company focusing on diversified investment. The company relies on an asset network covering major markets around the world to provide clients with a stable return and risk-balanced investment portfolio. The company currently manages a portfolio worth $1 million, aiming to maximize annualized returns by adjusting the weights of various asset types such as stocks, real estate, bonds and time deposits under the premise of limited resource allocation. The overall goal is to optimize the allocation of various assets and maximize the total return of the portfolio under the premise of meeting liquidity and risk management requirements. Last year, the company negotiated with an insurance institution for alternative risk hedging products, but it was not implemented due to the mismatch between yield and cost. Only the maximum annualized return needs to be given.\n\nIn terms of total investment, all funds need to be invested in four assets to make full use of resources. At the same time, the fund stipulates that the total investment amount shall not exceed $1 million to meet regulatory requirements, and the sum of the any two investment amounts cannot exceed USD 700,000. In terms of liquidity, in order to ensure short-term funding needs, the total investment in time deposits and bonds shall not be less than 200,000 US dollars, and the maximum investment amount of time deposits shall not exceed 300,000 US dollars to reserve market liquidity space. \n\nIn terms of income and risk management, the proportion of real estate investment shall not be less than 30% of the total investment to lock in a higher rate of return. Due to market volatility, the risk of stock investment is controlled below 400,000 US dollars, and the bond investment shall not be less than 100,000 US dollars to ensure the stability of the portfolio. \n\nThe proportion of stocks to other assets cannot exceed half of the sum of real estate and bond investments. \n\nIn terms of additional or priority constraints, in order to encourage investment diversity, in terms of diversification, in order to encourage asset diversification, at least one or more asset categories must be held in the investment portfolio to exceed 500,000 US dollars to be considered compliant. \n\nIn terms of sustainable development, considering the ESG scoring requirements, the ESG scores of each asset are shown in the table below, and the weighted average ESG score of the portfolio must be no less than 0.7. \n\nIn addition, the company's internal risk management regulations stipulate that the weighted average risk factor of the portfolio (the risk factor of each asset is shown in the table below) shall not be higher than 0.2. If it is higher, an additional risk reserve of 200,000 US dollars is required. \n\n| Asset type | Expected Annual Return | Minimum Investment (USD) | Maximum Investment (USD) | ESG Score | Risk Factor |\n| ---------- | ------------ | ---------------- | ---------------- | ------- | -------- |\n| Stock S | 6% | 100000 | 400000 | 0.5 | 0.30 |\n| Real Estate R | 7% | 300000 | 1000000 | 0.7 | 0.25 |\n| Bond B | 5% | 100000 | 1000000 | 0.8 | 0.10 |\n| Certificate of Deposit C | 4% | 100000 | 300000 | 0.9 | 0.05 |\n| Hedging Product D | 10% | 500000 | 1000000 | 0.3 | 0.8 |",
+    "answer": 60500.0,
+    "Parameters_List": [
+      {
+        "Name": "portfolio_worth",
+        "Type": "integer",
+        "Value": 1000000
+      },
+      {
+        "Name": "number_of_asset_types",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "total_investment_max",
+        "Type": "integer",
+        "Value": 1000000
+      },
+      {
+        "Name": "sum_of_any_two_investments_max",
+        "Type": "integer",
+        "Value": 700000
+      },
+      {
+        "Name": "time_deposits_plus_bonds_min",
+        "Type": "integer",
+        "Value": 200000
+      },
+      {
+        "Name": "time_deposits_max",
+        "Type": "integer",
+        "Value": 300000
+      },
+      {
+        "Name": "real_estate_proportion_min",
+        "Type": "float",
+        "Value": 0.3
+      },
+      {
+        "Name": "stock_investment_max",
+        "Type": "integer",
+        "Value": 400000
+      },
+      {
+        "Name": "bond_investment_min",
+        "Type": "integer",
+        "Value": 100000
+      },
+      {
+        "Name": "stock_to_others_ratio_max",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "at_least_one_asset_investment_min",
+        "Type": "integer",
+        "Value": 500000
+      },
+      {
+        "Name": "weighted_ESG_score_min",
+        "Type": "float",
+        "Value": 0.7
+      },
+      {
+        "Name": "weighted_risk_factor_max",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "additional_risk_reserve",
+        "Type": "integer",
+        "Value": 200000
+      },
+      {
+        "Name": "Table_1_asset_data",
+        "Type": "list",
+        "Value": [
+          [
+            "Stock S",
+            0.06,
+            100000,
+            400000,
+            0.5,
+            0.3
+          ],
+          [
+            "Real Estate R",
+            0.07,
+            300000,
+            1000000,
+            0.7,
+            0.25
+          ],
+          [
+            "Bond B",
+            0.05,
+            100000,
+            1000000,
+            0.8,
+            0.1
+          ],
+          [
+            "Certificate of Deposit C",
+            0.04,
+            100000,
+            300000,
+            0.9,
+            0.05
+          ],
+          [
+            "Hedging Product D",
+            0.1,
+            500000,
+            1000000,
+            0.3,
+            0.8
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "XYZ Asset Management Co., Ltd. is a fund...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company relies on an asset network...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The company currently manages a portfolio...",
+        "Introduces decision variables x_S, x_R, x_B, x_C; ∑x_i ≤ 1000000; objective maximize annualized return"
+      ],
+      [
+        "4",
+        "The overall goal is to optimize the allocation...",
+        "Restates objective, no new constraints"
+      ],
+      [
+        "5",
+        "Last year, the company negotiated with an insurance...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Only the maximum annualized return needs...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "In terms of total investment, all funds need to be...",
+        "∑x_i = 1000000"
+      ],
+      [
+        "8",
+        "At the same time, the fund stipulates that the total investment amount...",
+        "∑x_i ≤ 1000000; ∀i<j: x_i + x_j ≤ 700000"
+      ],
+      [
+        "9",
+        "In terms of liquidity, in order to ensure short-term...",
+        "x_C + x_B ≥ 200000"
+      ],
+      [
+        "10",
+        "and the maximum investment amount of time deposits...",
+        "x_C ≤ 300000"
+      ],
+      [
+        "11",
+        "In terms of income and risk management, the proportion of real estate...",
+        "x_R ≥ 0.3*(x_S + x_R + x_B + x_C)"
+      ],
+      [
+        "12",
+        "Due to market volatility, the risk of stock investment...",
+        "x_S ≤ 400000; x_B ≥ 100000"
+      ],
+      [
+        "13",
+        "The proportion of stocks to other assets cannot exceed...",
+        "x_S ≤ 0.5*(x_R + x_B)"
+      ],
+      [
+        "14",
+        "…at least one or more asset categories must be held...",
+        "Disjunctive OR: at least one x_i ≥ 500000"
+      ],
+      [
+        "15",
+        "…, the weighted average ESG score of the portfolio...",
+        "(0.5 x_S+0.7 x_R+0.8 x_B+0.9 x_C)/(x_S+x_R+x_B+x_C) ≥ 0.7"
+      ],
+      [
+        "16",
+        "…, the weighted average risk factor of the portfolio...",
+        "(0.3 x_S+0.25 x_R+0.1 x_B+0.05 x_C)/(x_S+x_R+x_B+x_C) ≤ 0.2"
+      ],
+      [
+        "17",
+        "If it is higher, an additional risk reserve of 200,000...",
+        "Logical implication requiring binary z to model 200000 reserve"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_S",
+        "Meaning": "Investment in Stocks (USD)",
+        "Type": "continuous",
+        "Range ": "[100000,400000]"
+      },
+      {
+        "symbol": "x_R",
+        "Meaning": "Investment in Real Estate (USD)",
+        "Type": "continuous",
+        "Range ": "[300000,1000000]"
+      },
+      {
+        "symbol": "x_B",
+        "Meaning": "Investment in Bonds (USD)",
+        "Type": "continuous",
+        "Range ": "[100000,1000000]"
+      },
+      {
+        "symbol": "x_C",
+        "Meaning": "Investment in Time Deposits (USD)",
+        "Type": "continuous",
+        "Range ": "[100000,300000]"
+      },
+      {
+        "symbol": "y_S",
+        "Meaning": "Indicator if x_S ≥ 500000",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "y_R",
+        "Meaning": "Indicator if x_R ≥ 500000",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "y_B",
+        "Meaning": "Indicator if x_B ≥ 500000",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "y_C",
+        "Meaning": "Indicator if x_C ≥ 500000",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "z",
+        "Meaning": "Indicator if weighted average risk > 0.2",
+        "Type": "BINARY",
+        "Range ": "[0,1]"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Budget upper bound",
+        "x_S + x_R + x_B + x_C ≤ 1000000",
+        "sentence numbers:3,8"
+      ],
+      [
+        "Full investment",
+        "x_S + x_R + x_B + x_C = 1000000",
+        "sentence numbers:7"
+      ],
+      [
+        "Pairwise investment limit",
+        "∀ i<j ∈{S,R,B,C}: x_i + x_j ≤ 700000",
+        "sentence numbers:8"
+      ],
+      [
+        "Liquidity lower bound",
+        "x_B + x_C ≥ 200000",
+        "sentence numbers:9"
+      ],
+      [
+        "Time deposit upper bound",
+        "x_C ≤ 300000",
+        "sentence numbers:10"
+      ],
+      [
+        "Real estate minimum proportion",
+        "x_R ≥ 0.3*(x_S + x_R + x_B + x_C)",
+        "sentence numbers:11"
+      ],
+      [
+        "Stock upper bound",
+        "x_S ≤ 400000",
+        "sentence numbers:12"
+      ],
+      [
+        "Bond minimum",
+        "x_B ≥ 100000",
+        "sentence numbers:12"
+      ],
+      [
+        "Stock-to-(RE+Bond) ratio",
+        "x_S ≤ 0.5*(x_R + x_B)",
+        "sentence numbers:13"
+      ],
+      [
+        "Diversification OR",
+        "∀ i∈{S,R,B,C}: x_i ≥ 500000*y_i; y_S+y_R+y_B+y_C ≥ 1",
+        "sentence numbers:14"
+      ],
+      [
+        "ESG weighted average",
+        "0.5*x_S + 0.7*x_R + 0.8*x_B + 0.9*x_C ≥ 0.7*(x_S + x_R + x_B + x_C)",
+        "sentence numbers:15"
+      ],
+      [
+        "Risk weighted average",
+        "0.3*x_S + 0.25*x_R + 0.1*x_B + 0.05*x_C ≤ 0.2*(x_S + x_R + x_B + x_C)",
+        "sentence numbers:16"
+      ],
+      [
+        "Risk-reserve disjunction",
+        "(0.3*x_S+0.25*x_R+0.1*x_B+0.05*x_C) ≤ 0.2*(x_S+x_R+x_B+x_C) + M*z; x_S+x_R+x_B+x_C ≤ 1000000 - 200000*z; z∈{0,1}",
+        "sentence numbers:17"
+      ],
+      [
+        "Asset minimum – Stock",
+        "x_S ≥ 100000",
+        "sentence numbers:table"
+      ],
+      [
+        "Asset maximum – Stock",
+        "x_S ≤ 400000",
+        "sentence numbers:table"
+      ],
+      [
+        "Asset minimum – Real Estate",
+        "x_R ≥ 300000",
+        "sentence numbers:table"
+      ],
+      [
+        "Asset maximum – Real Estate",
+        "x_R ≤ 1000000",
+        "sentence numbers:table"
+      ],
+      [
+        "Asset minimum – Bond",
+        "x_B ≥ 100000",
+        "sentence numbers:table"
+      ],
+      [
+        "Asset maximum – Bond",
+        "x_B ≤ 1000000",
+        "sentence numbers:table"
+      ],
+      [
+        "Asset minimum – CD",
+        "x_C ≥ 100000",
+        "sentence numbers:table"
+      ],
+      [
+        "Asset maximum – CD",
+        "x_C ≤ 300000",
+        "sentence numbers:table"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company currently manages a portfolio worth $1 million, aiming to maximize annualized returns...",
+      "Mathematical_expressions": "Max Z = 0.06 x_S + 0.07 x_R + 0.05 x_B + 0.04 x_C"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "60500.0"
+    ],
+    "time_seconds": 22.961746700006188,
+    "total_tokens": 9529
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "60500.0"
+    ],
+    "ground_truth": 60500.0
+  }
+}

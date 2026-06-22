@@ -1,0 +1,401 @@
+{
+  "entry": {
+    "index": 15,
+    "question": "Shengrui Supply Chain Technology Company plans to launch a 12-phase strategic project investment plan in the new year, with the goal of gradually advancing its six key projects, covering logistics platform construction, intelligent warehousing transformation, new algorithm research and development and other fields. There is a strong dependence and phased incentive mechanism between projects. The company hopes to maximize the cumulative profit for the whole year through reasonable phased investment. Due to the tight funds and human resources, the company headquarters has formulated a unified constraint framework: the budget for each period is up to 40 million yuan, the upper limit of human resources is 18 people, and the resource allocation of all projects must comply with the corresponding logical restrictions. At the same time, in order to encourage early investment, the company has set up a phased \"investment incentive\" policy. If a specific number of projects are completed within a certain period, additional incentives will be obtained in subsequent periods, such as cost discounts or additional project unlocking rights. The company's executive level plans to build a set of full-year investment plans to determine which projects should be selected in each period to meet the requirement that all projects are implemented at least once throughout the year, and at the same time make full use of incentive policies to pursue the maximization of annual profits within budget and human resources constraints.\n\nIn terms of supply, The maximum investment per phase is 40 million yuan, and the total human resources is no more than 18 people. Exceeding this limit will be a violation. There are 12 phases in a year, but resources can be reset in each phase. \n\nIn terms of demand, the investment income of each project is one-time (that is, if you invest in a certain phase, you will get the profit of that phase). Each implementation requires reinvesting the cost and human resources of the project, and the previous remaining resources cannot be accumulated. \n\nIn terms of investment logic, if Project 3 and Project 6 are selected at the same time at a certain stage, the R&D cost of Project 3 in the next phase will be halved due to the synergy of development timeliness, but will be restored to its original price afterwards. This cost change has no effect on profits, only on cost investment. \n\nIn terms of project unlocking incentives, If Project 1 is selected 3 times, Project 2 is selected 2 times, and Project 3 is selected once throughout the year, after all three conditions are met, in each subsequent period, the company can select an additional implementation project (i.e., any one of Projects 4, 5, and 6), and its cost is 0.7 times the original cost, and the company can send additional people to help, without satisfying human resource constraints. However, it still cannot violate the constraint that Project 4 and Project 5 cannot be implemented at the same time in the same period. \n\nIn terms of project dependency and exclusivity, in any period, if Project 2 is selected, Project 1 must be selected at the same time, otherwise the implementation of Project 2 will fail; and Project 4 and Project 5 cannot be implemented at the same time in the same period; throughout the year, Project 3 and Project 6 must be selected at least once to ensure the achievement of the strategic expansion task. \n\nIn terms of selection restrictions, A maximum of 4 projects can be selected in each period (if the project incentive is unlocked, a maximum of 4+1 projects can be selected). Each period contains at least 1 R&D project and at most 2 R&D projects (projects 1, 2, and 3 belong to the R&D category) to prevent R&D investment from getting out of control. \n\nIn terms of annual goals, each project is required to be selected at least once in the 12 periods of the year (that is, the cumulative number of selections for each project throughout the year ≥ 1). Only the calculated profit needs to be given. \n\n| Project No. | Project Category | Cost (million yuan) | Profit (million yuan) | Manpower Requirements (people) |\n| -------- | -------- | -------------- | -------------- | -------------- |\n| Project 1 | R&D | 10 | 8 | 4 |\n| Project 2 | R&D | 15 | 12 | 6 |\n| Project 3 | R&D | 8 | 7 | 3 |\n| Project 4 | Implementation | 20 | 15 | 8 |\n| Project 5 | Implementation | 11 | 9 | 5 |\n| Project 6 | Implementation | 9 | 8 | 4 |",
+    "answer": 432.0,
+    "Parameters_List": [
+      {
+        "Name": "number_of_phases",
+        "Type": "integer",
+        "Value": 12
+      },
+      {
+        "Name": "number_of_projects",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "budget_limit_per_period",
+        "Type": "integer",
+        "Value": 40
+      },
+      {
+        "Name": "hr_limit_per_period",
+        "Type": "integer",
+        "Value": 18
+      },
+      {
+        "Name": "resources_reset_each_phase",
+        "Type": "boolean",
+        "Value": true
+      },
+      {
+        "Name": "synergy_pair",
+        "Type": "list",
+        "Value": [
+          3,
+          6
+        ]
+      },
+      {
+        "Name": "synergy_discount_factor",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "synergy_duration_phases",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "unlocking_requirements",
+        "Type": "tuple",
+        "Value": {
+          "1": 3,
+          "2": 2,
+          "3": 1
+        }
+      },
+      {
+        "Name": "unlocking_extra_projects",
+        "Type": "list",
+        "Value": [
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "unlocking_discount_factor",
+        "Type": "float",
+        "Value": 0.7
+      },
+      {
+        "Name": "unlocking_ignore_hr_constraint",
+        "Type": "boolean",
+        "Value": true
+      },
+      {
+        "Name": "exclusivity_pairs",
+        "Type": "list",
+        "Value": [
+          [
+            4,
+            5
+          ]
+        ]
+      },
+      {
+        "Name": "dependency",
+        "Type": "tuple",
+        "Value": {
+          "2": [
+            "1"
+          ]
+        }
+      },
+      {
+        "Name": "minimal_selection_each_project",
+        "Type": "tuple",
+        "Value": {
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1
+        }
+      },
+      {
+        "Name": "max_projects_per_period",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "max_projects_with_incentive",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "rd_projects",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "Name": "rd_projects_min_per_period",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "rd_projects_max_per_period",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "strategic_mandatory_projects",
+        "Type": "list",
+        "Value": [
+          3,
+          6
+        ]
+      },
+      {
+        "Name": "Table_1_ProjectInfo",
+        "Type": "list",
+        "Value": [
+          [
+            "Project 1",
+            "R&D",
+            10,
+            8,
+            4
+          ],
+          [
+            "Project 2",
+            "R&D",
+            15,
+            12,
+            6
+          ],
+          [
+            "Project 3",
+            "R&D",
+            8,
+            7,
+            3
+          ],
+          [
+            "Project 4",
+            "Implementation",
+            20,
+            15,
+            8
+          ],
+          [
+            "Project 5",
+            "Implementation",
+            11,
+            9,
+            5
+          ],
+          [
+            "Project 6",
+            "Implementation",
+            9,
+            8,
+            4
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Shengrui Supply Chain...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "There is a strong...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The company hopes...",
+        "Defines the objective (maximize cumulative profit)"
+      ],
+      [
+        "4",
+        "Due to the tight funds...",
+        "Budget ≤ 40 per period; Manpower ≤ 18 per period"
+      ],
+      [
+        "5",
+        "At the same time...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "If a specific number...",
+        "General trigger mention; details in sentence 11"
+      ],
+      [
+        "7",
+        "The company's executive...",
+        "Each project selected ≥1 over year; objective restated"
+      ],
+      [
+        "8",
+        "In terms of supply...",
+        "Reiterates budget and manpower constraints; resources reset each period"
+      ],
+      [
+        "9",
+        "In terms of demand...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "In terms of investment...",
+        "Synergy: if 3 & 6 co-occur, next period cost of 3 halved"
+      ],
+      [
+        "11",
+        "In terms of project unlocking...",
+        "Unlock triggers: x1≥3, x2≥2, x3≥1; extra project allowed at 0.7 cost; still 4&5 exclusivity"
+      ],
+      [
+        "12",
+        "In terms of project dependency...",
+        "x2⇒x1; x4+x5≤1; Project 3 & 6 each ≥1 over year"
+      ],
+      [
+        "13",
+        "In terms of selection...",
+        "Per period: ≤4 + unlock flag projects; 1≤R&D≤2"
+      ],
+      [
+        "14",
+        "In terms of annual goals...",
+        "Each project ≥1 over year (repeats)"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_pj",
+        "Meaning": "=1 if project j selected in period p under normal rules",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=1..12, j=1..6"
+      },
+      {
+        "symbol": "y_pj",
+        "Meaning": "=1 if project j selected as extra incentive project in period p",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=1..12, j=4..6"
+      },
+      {
+        "symbol": "w_p",
+        "Meaning": "=1 if incentives unlocked before period p",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=1..12"
+      },
+      {
+        "symbol": "z1_p",
+        "Meaning": "=1 if cumulative selections of project1 up to p ≥3",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=1..12"
+      },
+      {
+        "symbol": "z2_p",
+        "Meaning": "=1 if cumulative selections of project2 up to p ≥2",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=1..12"
+      },
+      {
+        "symbol": "z3_p",
+        "Meaning": "=1 if cumulative selections of project3 up to p ≥1",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=1..12"
+      },
+      {
+        "symbol": "α_p",
+        "Meaning": "=1 if in period p both project3 and project6 selected",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=1..12"
+      },
+      {
+        "symbol": "s_p",
+        "Meaning": "=1 if cost of project3 halved in period p",
+        "Type": "BINARY",
+        "Range ": "0 or 1, p=2..12"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Budget per period",
+        "∀p: ∑_{j=1..6} c_j x_pj + ∑_{j=4..6} 0.7 c_j y_pj - 4 s_p ≤ 40",
+        "sentence numbers:4,8,10,11"
+      ],
+      [
+        "Manpower per period",
+        "∀p: ∑_{j=1..6} m_j x_pj ≤ 18",
+        "sentence numbers:4,8"
+      ],
+      [
+        "Dependency",
+        "∀p: x_p2 ≤ x_p1",
+        "sentence numbers:12"
+      ],
+      [
+        "Exclusivity 4 vs. 5",
+        "∀p: x_p4 + x_p5 + y_p4 + y_p5 ≤ 1",
+        "sentence numbers:11,12"
+      ],
+      [
+        "Period selection limit",
+        "∀p: ∑_{j=1..6} x_pj + ∑_{j=4..6} y_pj ≤ 4 + w_p",
+        "sentence numbers:13"
+      ],
+      [
+        "R&D count per period",
+        "∀p: 1 ≤ ∑_{j=1..3} x_pj ≤ 2",
+        "sentence numbers:13"
+      ],
+      [
+        "Annual each ≥1",
+        "∀j: ∑_{p=1..12}(x_pj + y_pj) ≥ 1",
+        "sentence numbers:7,14"
+      ],
+      [
+        "Synergy-trigger linearization",
+        "∀p: α_p ≤ x_p3; α_p ≤ x_p6; α_p ≥ x_p3 + x_p6 - 1",
+        "sentence numbers:10"
+      ],
+      [
+        "Cost-halve linearization",
+        "∀p=2..12: s_p ≤ α_{p-1}; s_p ≤ x_p3; s_p ≥ α_{p-1} + x_p3 - 1",
+        "sentence numbers:10"
+      ],
+      [
+        "Unlock-counts requirements",
+        "∑_{p=1..12} x_p1 ≥ 3; ∑_{p=1..12} x_p2 ≥ 2; ∑_{p=1..12} x_p3 ≥ 1",
+        "sentence numbers:11"
+      ],
+      [
+        "Unlock-availability definition",
+        "∀p=2..12: w_p ≤ z1_{p-1}; w_p ≤ z2_{p-1}; w_p ≤ z3_{p-1}; w_p ≥ z1_{p-1} + z2_{p-1} + z3_{p-1} - 2",
+        "sentence numbers:11"
+      ],
+      [
+        "z-variable linearizations",
+        "∀p: ∑_{t=1..p} x_{t,1} ≥ 3 z1_p; ∑_{t=1..p} x_{t,1} ≤ 2 + M z1_p; (similarly for z2_p, z3_p)",
+        "sentence numbers:11"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company hopes to maximize the cumulative profit for the whole year through reasonable phased investment",
+      "Mathematical_expressions": "Max ∑_{p=1..12}(∑_{j=1..6} π_j x_pj + ∑_{j=4..6} π_j y_pj)"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "432.0"
+    ],
+    "time_seconds": 39.63567509999848,
+    "total_tokens": 14323
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "432.0"
+    ],
+    "ground_truth": 432.0
+  }
+}

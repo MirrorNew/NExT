@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Global Freight Solutions (GFS) is a logistics company that needs to transport shipments among three regions using the services of three carriers. Each carrier offers a different cost structure and service mix for large, medium, and small shipments, as shown in the table below:\n\n| Supplier | Cost per shipment (USD) | Large-item proportion (%) | Medium-item proportion (%) | Small-item proportion (%) |\n|---------|--------------------------|----------------------------|-----------------------------|----------------------------|\n| 1       | 5.2                      | 45                         | 35                          | 20                         |\n| 2       | 4.7                      | 30                         | 45                          | 25                         |\n| 3       | 3.5                      | 15                         | 20                          | 65                         |\n\nEach month, GFS must satisfy minimum demand of at least 500 large items, 300 medium items, and 300 small items, with the objective of minimizing total cost. In addition, due to capacity limits, the number of shipments contracted from any supplier in a month may not exceed 700.\n\nOn this basis, introduce the following nonlinear condition: if, in a given month, the number of shipments assigned to a supplier exceeds 400, then starting from the $401$st shipment, that supplier incurs an additional one-time fixed administrative cost of $2000$ USD (whether the threshold of 400 shipments is exceeded is evaluated separately for each supplier). This additional fixed cost of $2000$ is incurred only if the supplier’s monthly shipment count is strictly greater than 400; if the supplier’s monthly shipment count is not greater than 400, then this additional fixed cost is not paid. Determine the minimum possible total cost subject to all demand and capacity constraints and the above nonlinear cost condition.",
+    "answer": 10554.4,
+    "index": "LogiOR_prob_031",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 'GFS 必须在每个月中至少满足 500 件大件货物、300 件中件货物和 300 件小件货物的最低需求，并以总成本最小化为目标。此外，由于运力限制，每个月从任意一家供应商处承接的运输次数不得超过 700 次。求最低可能的总成本。'",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_031\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_045.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "10551.11111111"
+    ],
+    "time_seconds": 27.880245299995295,
+    "total_tokens": 3044
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "10551.11111111"
+    ],
+    "ground_truth": 10554.4
+  }
+}

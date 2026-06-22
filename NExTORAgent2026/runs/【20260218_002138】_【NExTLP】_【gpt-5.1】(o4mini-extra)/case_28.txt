@@ -1,0 +1,485 @@
+{
+  "entry": {
+    "index": 28,
+    "question": "A company has two production plants $A_i, i=1,2$, four transit warehouses $B_j, j=1,2,3,4$, and supplies six users $C_k, k=1,...,6$. Each user can purchase goods directly from the production plant or from the transit warehouse. The required transportation costs (yuan/t) are shown in Table C-16.\n\nTable C-16\n\n| From $\\downarrow$ / To $\\rightarrow$ | $B_1$ | $B_2$ | $B_3$ | $B_4$ | $C_1$ | $C_2$ | $C_3$ | $C_4$ | $C_5$ | $C_6$ |\n| -------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |\n| $A_1$ | 50 | 50 | 100 | 20 | 100 | — | 150 | 200 | — | 100 |\n| $A_2$ | — | 30 | 50 | 20 | 200 | — | — | — | — | — |\n| $B_1$ | — | — | — | — | — | 150 | 50 | 150 | — | 100 |\n| — | — | — | 100 | 50 | 50 | 100 | 50 | — |\n| $B_3$ | — | — | — | — | — | 150 | 200 | — | 50 | 150 |\n| |\n\nNote: \"—\" in the table means that transfer is not allowed. \n\nSome users want to get supply from a certain factory or warehouse first. They are: $C_1 \\rightarrow A_1$, $C_2 \\rightarrow B_1$, $C_5 \\rightarrow B_2$, $C_6 \\rightarrow B_3$ or $C_6 \\rightarrow B_4$. It is known that the maximum monthly supply of each production plant is: $A_1-150,000,t$, $A_2-200,000,t$; the maximum monthly turnover of each transit warehouse is: $B_1-70,000,t$, $B_2-50,000,t$, $B_3-100,000,t$, $B_4-40,000,t$. The user's minimum monthly demand is: $C_1-50,000,t$，$C_2-10,000,t$，$C_3-40,000,t$，$C_4-35,000,t$，$C_5-60,000,t$，$C_6-20,000,t$. \n\nSome people have proposed to open two new transit warehouses $B_5$ and $B_6$, and to expand the transit capacity of $B_2$. Assuming that a maximum of 4 warehouses are allowed, consider closing the original warehouse $B_1$ or $B_4$, or both. \n\nBuild a new warehouse and expand $B_2$. The costs and transfer capacity are as follows: $B_5$ requires an investment of 1,200,000 yuan, with a transfer capacity of 30,000 tons per month; $B_6$ requires an investment of 400,000 yuan, with a monthly transfer capacity of 25,000 tons; $B_2$ expansion requires an investment of 300,000 yuan, and the monthly transfer capacity is 20,000 tons more than the original. Closing the original warehouse can bring savings: closing $B_1$ saves 100,000 yuan per month; closing $B_4$ saves 50,000 yuan per month. The transportation costs of unit materials between the new warehouses $B_5$ and $B_6$ and the production plant and each user are shown in Table C-17\n\nTable C-17 (RMB/Ton)\n\n| From/To | B₅ | B₆ | C₁ | C₂ | C₃ | C₄ | C₅ | C₆ |\n| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| A₁ | 60 | 40 | — | — | — | — | — | — |\n| A₂ | 40 | 30 | — | — | — | — | — | — |\n| B₅ | — | — | 120 | 60 | 40 | — | 30 | 80 |\n| B₆ | — | — | — | 40 | — | 50 | 60 | 90 |\n\nIt is required to determine which of $B_5$ and $B_6$ should be newly built, whether $B_2$ needs to be expanded, whether $B_1$ and $B_4$ should be closed, and re-establish the supply relationship that minimizes the total transportation cost, and give the total cost. ",
+    "answer": 19550000.0,
+    "Parameters_List": [
+      {
+        "Name": "I",
+        "Type": "list",
+        "Value": [
+          1,
+          2
+        ]
+      },
+      {
+        "Name": "J_orig",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "Name": "K",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "PreAssignment",
+        "Type": "list",
+        "Value": [
+          [],
+          [
+            [
+              "A",
+              1
+            ]
+          ],
+          [
+            [
+              "B",
+              1
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              "B",
+              2
+            ]
+          ],
+          [
+            [
+              "B",
+              3
+            ],
+            [
+              "B",
+              4
+            ]
+          ]
+        ]
+      },
+      {
+        "Name": "MaxSupply",
+        "Type": "list",
+        "Value": [
+          null,
+          150000,
+          200000
+        ]
+      },
+      {
+        "Name": "MaxTurnover",
+        "Type": "list",
+        "Value": [
+          null,
+          70000,
+          50000,
+          100000,
+          40000
+        ]
+      },
+      {
+        "Name": "MinDemand",
+        "Type": "list",
+        "Value": [
+          null,
+          50000,
+          10000,
+          40000,
+          35000,
+          60000,
+          20000
+        ]
+      },
+      {
+        "Name": "NewWarehousesCandidates",
+        "Type": "list",
+        "Value": [
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "ExpandCandidate",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "MaxOpenWarehouses",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "ClosingCandidates",
+        "Type": "list",
+        "Value": [
+          1,
+          4
+        ]
+      },
+      {
+        "Name": "Inv_B5",
+        "Type": "integer",
+        "Value": 1200000
+      },
+      {
+        "Name": "Cap_B5",
+        "Type": "integer",
+        "Value": 30000
+      },
+      {
+        "Name": "Inv_B6",
+        "Type": "integer",
+        "Value": 400000
+      },
+      {
+        "Name": "Cap_B6",
+        "Type": "integer",
+        "Value": 25000
+      },
+      {
+        "Name": "Inv_ExpB2",
+        "Type": "integer",
+        "Value": 300000
+      },
+      {
+        "Name": "Cap_ExpB2",
+        "Type": "integer",
+        "Value": 20000
+      },
+      {
+        "Name": "Save_B1",
+        "Type": "integer",
+        "Value": 100000
+      },
+      {
+        "Name": "Save_B4",
+        "Type": "integer",
+        "Value": 50000
+      },
+      {
+        "Name": "Table_1_C16",
+        "Type": "list",
+        "Value": [
+          [
+            "A1",
+            [
+              50,
+              50,
+              100,
+              20,
+              100,
+              null,
+              150,
+              200,
+              null,
+              100
+            ]
+          ],
+          [
+            "A2",
+            [
+              null,
+              30,
+              50,
+              20,
+              200,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          ],
+          [
+            "B1",
+            [
+              null,
+              null,
+              null,
+              null,
+              null,
+              150,
+              50,
+              150,
+              null,
+              100
+            ]
+          ],
+          [
+            null,
+            [
+              null,
+              null,
+              100,
+              50,
+              50,
+              100,
+              50,
+              null,
+              null
+            ]
+          ],
+          [
+            "B3",
+            [
+              null,
+              null,
+              null,
+              null,
+              null,
+              150,
+              200,
+              null,
+              50,
+              150
+            ]
+          ]
+        ]
+      },
+      {
+        "Name": "Table_2_C17",
+        "Type": "list",
+        "Value": [
+          [
+            "A1",
+            [
+              60,
+              40,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          ],
+          [
+            "A2",
+            [
+              40,
+              30,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          ],
+          [
+            "B5",
+            [
+              null,
+              null,
+              120,
+              60,
+              40,
+              null,
+              30,
+              80
+            ]
+          ],
+          [
+            "B6",
+            [
+              null,
+              null,
+              null,
+              40,
+              null,
+              50,
+              60,
+              90
+            ]
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "A company has two production plants ...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Each user can purchase goods ...",
+        "flow-conservation at each warehouse: inbound = outbound"
+      ],
+      [
+        "3",
+        "The required transportation costs ...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Note: ‘—’ in the table ...",
+        "Route-availability constraints: variables on forbidden arcs = 0"
+      ],
+      [
+        "5",
+        "Some users want to get supply ...",
+        "Preference constraints: shipments for specified users only from specified origin(s)"
+      ],
+      [
+        "6",
+        "It is known that the maximum monthly supply ...",
+        "Supply-capacity at plants and throughput-capacity at original warehouses"
+      ],
+      [
+        "7",
+        "The users’ minimum monthly demand ...",
+        "Demand-satisfaction constraints"
+      ],
+      [
+        "8",
+        "Some people have proposed to open ...",
+        "Introduces decision variables u5,u6,e2 (no direct constraints)"
+      ],
+      [
+        "9",
+        "Assuming that a maximum of 4 warehouses ...",
+        "Cardinality constraint on open warehouses"
+      ],
+      [
+        "10",
+        "Build a new warehouse and expand B₂ ...",
+        "Capacity-definition constraints for B2,B5,B6 and facility-investment parameters"
+      ],
+      [
+        "11",
+        "Closing the original warehouse can bring ...",
+        "Closure-savings enter objective (no structural constraint)"
+      ],
+      [
+        "12",
+        "The transportation costs ...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Table C-17 ...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "It is required to determine ...",
+        "Objective function definition"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "w_{i,j}",
+        "Meaning": "shipment from plant i to warehouse j (t/month)",
+        "Type": "continuous",
+        "Range ": "[0,∞)"
+      },
+      {
+        "symbol": "z_{i,k}",
+        "Meaning": "shipment from plant i to user k (t/month)",
+        "Type": "continuous",
+        "Range ": "[0,∞)"
+      },
+      {
+        "symbol": "y_{j,k}",
+        "Meaning": "shipment from warehouse j to user k (t/month)",
+        "Type": "continuous",
+        "Range ": "[0,∞)"
+      },
+      {
+        "symbol": "u_j",
+        "Meaning": "1 if warehouse j is open or built",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "e_2",
+        "Meaning": "1 if B2 capacity is expanded",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Flow Conservation",
+        "∀ j=1…6: Σ_{i=1}^2 w_{i,j} = Σ_{k=1}^6 y_{j,k}",
+        "sentence numbers:2"
+      ],
+      [
+        "Route Availability",
+        "w_{i,j}=0, z_{i,k}=0, y_{j,k}=0 for forbidden arcs",
+        "sentence numbers:4"
+      ],
+      [
+        "User-Origin Preference",
+        "C1 only from A1; C2 only from B1; C5 only from B2; C6 only from B3 or B4",
+        "sentence numbers:5"
+      ],
+      [
+        "Plant Capacity",
+        "∀ i=1,2: Σ_{j=1}^6 w_{i,j} + Σ_{k=1}^6 z_{i,k} ≤ S_i (S1=150000, S2=200000)",
+        "sentence numbers:6"
+      ],
+      [
+        "Warehouse Throughput Capacity",
+        "∀ j=1…6: Σ_{i=1}^2 w_{i,j} + Σ_{k=1}^6 y_{j,k} ≤ T_j",
+        "sentence numbers:6,10"
+      ],
+      [
+        "Demand Satisfaction",
+        "∀ k=1…6: Σ_{i=1}^2 z_{i,k} + Σ_{j=1}^6 y_{j,k} = D_k (D={50000,10000,40000,35000,60000,20000})",
+        "sentence numbers:7"
+      ],
+      [
+        "Max Warehouses",
+        "Σ_{j=1}^6 u_j ≤ 4",
+        "sentence numbers:9"
+      ],
+      [
+        "Capacity Definitions",
+        "T1=70000·u1; T2=50000+20000·e2; T3=100000; T4=40000·u4; T5=30000·u5; T6=25000·u6",
+        "sentence numbers:10"
+      ],
+      [
+        "Domain Constraints",
+        "w,z,y ≥0; u_j,e2 ∈{0,1}",
+        "sentence numbers:8"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "It is required to determine ... minimize the total transportation cost",
+      "Mathematical_expressions": "min Σ_{i,j} c^{orig}_{i,j} w_{i,j} + Σ_{i,k} c^{dir}_{i,k} z_{i,k} + Σ_{j,k} c^{wh}_{j,k} y_{j,k} +1200000 u5 +400000 u6 +300000 e2 -100000(1-u1) -50000(1-u4)"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 68.22059979999904,
+    "total_tokens": 36292
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 19550000.0
+  }
+}

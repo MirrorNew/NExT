@@ -1,0 +1,140 @@
+{
+  "entry": {
+    "index": 14,
+    "question": "Minghui Electronic Manufacturing Co., Ltd., located in Kazdale, is facing a difficult decision-making problem in upgrading its production line. As a high-tech enterprise specializing in the production of smart home controllers, the factory currently has two production lines with different degrees of automation, each of which requires different proportions of skilled workers and smart devices. Production Director Wang Wei pointed out at the weekly meeting that according to the production data analysis report provided by the engineering department, the current production system presents typical factor substitution characteristics: as the investment in automation equipment increases, the marginal output of each device will gradually decrease; and the training cycle and cost of skilled workers restrict the speed of manpower expansion. \n\nA factory needs to optimize the input combination of labor and capital under budget constraints, and the output obeys the law of diminishing marginal returns to maximize the output of the Cobb-Douglas production function. The production function is known to be $Q(L,K)=A_t L^{\\alpha} K^{\\beta}\\mu$, assuming that the elasticity coefficient of labor output $\\alpha$ is 0.5, and the elasticity coefficient of capital output $\\beta$ is 0.7, $\\mu=1$, $A_t=20$. The unit cost of labor input $L$ is $w$, the unit cost of capital input $K$ is $r$, and the total budget cap is 1000 yuan. It is required to determine the cost constraint so that the output $Q(L,K)$ reaches the maximum. Given the labor cost $w=50$ and the capital cost $r=100$ yuan, give the calculated output.",
+    "answer": 198.418027,
+    "Parameters_List": [
+      {
+        "Name": "α",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "β",
+        "Type": "float",
+        "Value": 0.7
+      },
+      {
+        "Name": "μ",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "A_t",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "total_budget",
+        "Type": "integer",
+        "Value": 1000
+      },
+      {
+        "Name": "w",
+        "Type": "integer",
+        "Value": 50
+      },
+      {
+        "Name": "r",
+        "Type": "integer",
+        "Value": 100
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Minghui Electronic Manufacturing Co., Ltd....",
+        "No constraints"
+      ],
+      [
+        "2",
+        "As a high-tech enterprise specializing...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Production Director Wang Wei pointed...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "A factory needs to optimize...",
+        "Introduces decision variables L,K, objective (maximize output), and budget constraint"
+      ],
+      [
+        "5",
+        "The production function is known...",
+        "Defines parameters; no new constraints"
+      ],
+      [
+        "6",
+        "The unit cost of labor input...",
+        "Budget constraint: 50 L + 100 K ≤ 1000"
+      ],
+      [
+        "7",
+        "It is required to determine...",
+        "Restates objective; no new constraints"
+      ],
+      [
+        "8",
+        "Given the labor cost w=50 and...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "L",
+        "Meaning": "quantity of labor employed",
+        "Type": "continuous",
+        "Range ": "L ≥ 0"
+      },
+      {
+        "symbol": "K",
+        "Meaning": "quantity of capital (automation equipment) employed",
+        "Type": "continuous",
+        "Range ": "K ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Budget constraint",
+        "50 L + 100 K ≤ 1000",
+        "sentence numbers:4,6"
+      ],
+      [
+        "Non-negativity of L",
+        "L ≥ 0",
+        "sentence numbers:implicit"
+      ],
+      [
+        "Non-negativity of K",
+        "K ≥ 0",
+        "sentence numbers:implicit"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "maximize the output of the Cobb-Douglas production function",
+      "Mathematical_expressions": "max Q(L,K) = 20 L^{0.5} K^{0.7}"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "198.4180277164",
+      "198.418"
+    ],
+    "time_seconds": 32.285056100001384,
+    "total_tokens": 4422
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "198.4180277164",
+      "198.418"
+    ],
+    "ground_truth": 198.418027
+  }
+}

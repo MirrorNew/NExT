@@ -1,0 +1,210 @@
+{
+  "entry": {
+    "index": 15,
+    "question": "In the retail industry, consumer decision-making models are important tools for market analysis and business strategy formulation. Taking the large supermarket chain PRTSLove as an example, its data analysis team used the Cobb-Douglas utility function to study customers' consumption preferences for fresh food and daily necessities. Recently, supermarkets have launched a \"bulk purchase discount\" policy: when the total amount of a single purchase exceeds a certain number of pieces, the system will automatically match a full-time stockist to provide delivery and loading services, but a small service fee will be charged. This strategy not only improves the service experience of high-unit-price orders, but also maintains operational efficiency through a refined cost-shifting mechanism. Instant retail platforms such as JD.com also use similar algorithms to simulate the real-time utility of different product combinations on the user shopping interface and provide consumers with personalized recommendation solutions. The application of such models significantly reduces the cost of customer decision-making. According to a McKinsey research report, the smart shopping cart system can effectively increase the unit price of supermarket customers. \n\nA consumer allocates expenditures on two products, with the goal of maximizing utility under budget constraints. The utility function takes the form of Cobb-Douglas $U(x,y) = x^{0.3} y^{0.8}$, where $x, y$ are the consumption quantities of two commodities. The commodity prices are $p_x=4$ yuan/unit and $p_y=2$ yuan/unit, respectively, and the total budget is 100 yuan. If the number of all commodities purchased by the consumer is greater than 30 pieces, one-tenth of the total price of the commodities will be paid as a tip for the waiter to carry the goods. Find the optimal purchase plan for the consumer and give the result of the maximum benefit function. Item quantity must be an integer.",
+    "answer": 28.0709,
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 0.3
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "p_x",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "p_y",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "M",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "N_threshold",
+        "Type": "integer",
+        "Value": 30
+      },
+      {
+        "Name": "tip_rate",
+        "Type": "float",
+        "Value": 0.1
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the retail industry...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the large supermarket chain...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Recently, supermarkets have launched...",
+        "Defines service-fee trigger condition: if total items > threshold then a service fee applies"
+      ],
+      [
+        "4",
+        "This strategy not only improves the service...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Instant retail platforms such as...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The application of such models...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "According to a McKinsey research report...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "A consumer allocates expenditures on...",
+        "Introduces decision variables x, y and the optimization goal"
+      ],
+      [
+        "9",
+        "The utility function takes the form...",
+        "Defines the (nonlinear) objective function"
+      ],
+      [
+        "10",
+        "The commodity prices are p_x=4 yuan/unit...",
+        "Budget constraint: 4 x + 2 y ≤ 100"
+      ],
+      [
+        "11",
+        "If the number of all commodities purchased by the consumer...",
+        "Piecewise budget: for x+y>30 add tip = 0.1*(4x+2y); introduce binary z and auxiliary u to linearize"
+      ],
+      [
+        "12",
+        "Find the optimal purchase plan for the consumer...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Item quantity must be an integer...",
+        "Integrality constraint on x, y"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x",
+        "Meaning": "total units of commodity x purchased",
+        "Type": "integer",
+        "Range ": "0 ≤ x ≤ 25"
+      },
+      {
+        "symbol": "y",
+        "Meaning": "total units of commodity y purchased",
+        "Type": "integer",
+        "Range ": "0 ≤ y ≤ 50"
+      },
+      {
+        "symbol": "z",
+        "Meaning": "indicator of service-fee application (1 if x+y ≥ 31)",
+        "Type": "binary",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "u",
+        "Meaning": "auxiliary fee-base = z·(4x+2y)",
+        "Type": "continuous",
+        "Range ": "0 ≤ u ≤ 100"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Budget_NoFee",
+        "4 x + 2 y ≤ 100",
+        "sentence numbers:10"
+      ],
+      [
+        "ServiceFee_Trigger_UB",
+        "x + y ≤ 30 + 20 z",
+        "sentence numbers:11"
+      ],
+      [
+        "ServiceFee_Trigger_LB",
+        "x + y ≥ 31 z",
+        "sentence numbers:11"
+      ],
+      [
+        "Aux_u_Upper_xy",
+        "u ≤ 4 x + 2 y",
+        "sentence numbers:11"
+      ],
+      [
+        "Aux_u_Upper_Mz",
+        "u ≤ 100 z",
+        "sentence numbers:11"
+      ],
+      [
+        "Aux_u_Lower",
+        "u ≥ 4 x + 2 y – 100*(1–z)",
+        "sentence numbers:11"
+      ],
+      [
+        "Budget_WithFee",
+        "4 x + 2 y + 0.1 u ≤ 100",
+        "sentence numbers:11"
+      ],
+      [
+        "Integrality",
+        "x, y ∈ ℤ",
+        "sentence numbers:13"
+      ],
+      [
+        "Binary_z",
+        "z ∈ {0,1}",
+        "sentence numbers:11"
+      ],
+      [
+        "Nonnegativity_u",
+        "u ≥ 0",
+        "sentence numbers:11"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "A consumer allocates expenditures on two products, with the goal of maximizing utility under budget constraints.",
+      "Mathematical_expressions": "max U(x,y) = x^0.3 y^0.8"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "28.07091227769"
+    ],
+    "time_seconds": 151.85338559999946,
+    "total_tokens": 28416
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "28.07091227769"
+    ],
+    "ground_truth": 28.0709
+  }
+}

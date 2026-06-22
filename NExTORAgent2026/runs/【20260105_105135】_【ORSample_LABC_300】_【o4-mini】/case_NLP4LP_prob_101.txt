@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A science show performs two different experiments: Experiment 1 and Experiment 2.  \n\nIn Experiment 1, 10 units of mint and 20 units of active ingredient are used to produce 25 units of mint foam.  \n\nIn Experiment 2, 12 units of mint and 15 units of active ingredient are used to produce 18 units of mint foam.  \n\nIn addition, Experiment 1 generates 5 units of black tar, while Experiment 2 generates 3 units of black tar.  \n\nThe resources available for the show are: 120 units of mint and 100 units of active ingredient.  \n\nNow consider a new effect: as the number of experiments increases, the difficulty of handling black tar grows exponentially. Specifically, when the total number of experiments is $n$ (i.e., the sum of the numbers of Experiment 1 and Experiment 2 is $n$), the “equivalent total amount” of black tar is no longer a linear sum, but is multiplied, based on the original total amount of black tar, by a coefficient whose value grows exponentially with the number of experiments, namely $1.03$ to the $n$-th power. That is, the equivalent total black tar amount $=(5\\times \\text{number of Experiment 1} + 3\\times \\text{number of Experiment 2})\\times 1.03^n$, where $n$ is the sum of the numbers of Experiment 1 and Experiment 2.  \n\nIf the equivalent black tar can be at most 50 units, how many times should Experiment 1 and Experiment 2 be performed, respectively, in order to maximize the amount of mint foam produced? What is the maximum?",
+    "answer": 122.0,
+    "index": "NLP4LP_prob_101",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 如果最多只能产生50单位的黑色焦油，应分别进行多少次实验1和实验2，才能使产生的薄荷泡沫数量最大化？, 修改后相关描述: 现在考虑一个新的效果：随着实验次数增加，黑色焦油的处理难度呈指数增长。具体来说，当总实验次数为 n（即实验1和实验2次数之和为 n）时，黑色焦油的“等效总量”不再是线性相加，而是在原有黑色焦油总量的基础上乘以一个随实验次数指数增长的系数 1.3 的 n 次方。也就是说，等效黑色焦油总量 =（5×实验1次数 + 3×实验2次数）× 1.3ⁿ，其中 n 为实验1次数与实验2次数之和。如果等效黑色焦油最多只能达到50单位，应分别进行多少次实验1和实验2，才能使产生的薄荷泡沫数量最大化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_101\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_056.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "125.0"
+    ],
+    "time_seconds": 38.68140570000105,
+    "total_tokens": 2827
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "125.0"
+    ],
+    "ground_truth": 122.0
+  }
+}

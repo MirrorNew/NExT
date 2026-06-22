@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "Tom and Jerry have just purchased a farm in Sunny Valley, and they are considering using it to plant corn, wheat, soybeans, and sorghum. The profit per acre for planting corn is \\$1500, for planting wheat is \\$1200, for planting soybeans is \\$1800, and for planting sorghum is \\$1600. Tom and Jerry wish to maximize total profit by appropriately allocating the planting area of each crop. Let the land areas used to plant corn, wheat, soybeans, and sorghum be $C$, $W$, $S$, and $M$ (units: acres), respectively.\n\nConsidering practical conditions, the total profit is not merely a linear sum; rather, taking into account that integrated cultivation of these four crops on the farm generates a synergy effect, after investigation they decide to add an additional term—on top of the original sum of profits—to capture this synergistic profit in the form of a multivariate product: namely, $10$ times the total product of the areas of corn, wheat, and soybeans.\n\nMaximize the total profit subject to all of the following constraints:\n\nThe total area of Tom and Jerry’s farm is 100 acres; therefore, the sum of the planting areas of the four crops $C$, $W$, $S$, and $M$ must not exceed 100 acres.\n\nThe land area used to plant corn must be at least twice the land area used to plant wheat.\n\nThe land area used to plant soybeans must be at least half of the land area used to plant sorghum.\n\nThe land area used to plant wheat must be three times the land area used to plant sorghum.\n\nUnder the above conditions, how many acres of land should they allocate to each crop?",
+    "answer": 421536.0577958246,
+    "index": "IndustryOR_prob_012",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: \"种植玉米的每英亩利润为 1500 美元，种植小麦的每英亩利润为 1200 美元，种植大豆的每英亩利润为 1800 美元，种植高粱的每英亩利润为 1600 美元。为了使他们的利润最大化，他们应当为每种作物分配多少英亩的土地？\" 总利润隐含为各作物面积与对应单位利润的线性加总。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_012\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_002.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 51.96639120001055,
+    "total_tokens": 4687
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 421536.0577958246
+  }
+}

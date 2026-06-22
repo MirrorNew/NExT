@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A snow removal company uses small trucks and large trucks to clear snow from various communities. Each small truck requires 2 workers for shoveling and can carry 30 units of snow. Each large truck requires 4 workers for shoveling and can carry 50 units of snow. The company has a total of 30 workers available. In addition, because some communities do not allow large trucks to enter, at least 10 trucks must be small trucks. At the same time, at least 3 large trucks are required, and the ratio of the number of small trucks to the number of large trucks must be equal to 2. How many trucks of each type should be used to maximize the total amount of snow that can be transported?",
+    "answer": "None",
+    "index": "NLP4LP_prob_183",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 同时，至少需要 3 辆大型卡车，并且小型卡车的数量必须是大型卡车数量的两倍。, 修改后相关描述: 同时，至少需要 3 辆大型卡车，并且小型卡车数量与大型卡车数量的比值必须等于 2。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_183\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_080.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 36.227799900007085,
+    "total_tokens": 1733
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": "None"
+  }
+}

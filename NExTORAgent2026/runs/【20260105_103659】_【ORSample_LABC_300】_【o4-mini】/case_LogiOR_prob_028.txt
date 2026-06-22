@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A small bakery operates in four towns: Greenville, Springfield, Riverside, and Hilltop. The bakery produces fresh bread and then distributes it to local stores located in Maplewood, Oakdale, Pineville, Cedarhurst, and Brookside. The number of loaves each bakery can supply is shown in Table 1. The number of loaves each store requires to meet daily customer demand is shown in Table 2. The distances (in kilometers) between bakeries and stores are shown in Table 3.\n\nRegarding distribution cost, assume the following nonlinear growth characteristic: for the number of loaves shipped from any bakery to each store, as the shipment batch size increases, the unit transportation difficulty increases slightly. Specifically, let the actual number of loaves delivered on a given route be $x$. Then the delivery cost per loaf on that route (in dollars) equals “the square root of the distance between the origin and destination towns” multiplied by an exponentially increasing coefficient $1.3$ raised to the power $x$, i.e., the unit cost is: $\\sqrt{\\text{distance}} \\times 1.3^{x}$. Therefore, if $x$ loaves are shipped on that route, the total transportation cost on that route is $\\sqrt{\\text{distance}} \\times 1.3^{x} \\times x$. Here, the exponential growth coefficient takes the specific value $1.3$.\n\nUnder the above assumptions, determine an optimal distribution plan such that, while satisfying all stores’ demands, the total transportation cost is minimized.\n\nTable 1: Bread supply available at each bakery  \n| Bakery       | Available loaves |\n|--------------|------------------|\n| Greenville   | 200              |\n| Springfield  | 150              |\n| Riverside    | 250              |\n| Hilltop      | 180              |\n\nTable 2: Bread demand required by each store  \n| Store        | Required loaves |\n|--------------|-----------------|\n| Maplewood    | 120             |\n| Oakdale      | 100             |\n| Pineville    | 130             |\n| Cedarhurst   | 90              |\n| Brookside    | 80              |\n\nTable 3: Distances between bakeries and stores (km)  \n| Origin / Destination | Maplewood | Oakdale | Pineville | Cedarhurst | Brookside |\n|----------------------|-----------|---------|-----------|------------|-----------|\n| Greenville           | 10        | 15      | 20        | 25         | 30        |\n| Springfield          | 12        | 8       | 18        | 22         | 28        |\n| Riverside            | 14        | 10      | 16        | 20         | 26        |\n| Hilltop              | 16        | 12      | 14        | 18         | 24        |",
+    "answer": "None",
+    "index": "LogiOR_prob_028",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 假设每条面包的配送成本（以美元计）等于起点和终点城镇之间距离的平方根，确定一种最优配送方案，使在满足所有商店需求的前提下，总运输成本最小。 修改后相关描述: 在配送成本方面，假设存在如下非线性增长特征：对于从任一面包房运送到各商店的面包数量，随着运输批量的增加，单位运输难度会略有提高。具体地，记某一条线路上实配送的面包条数为 x，则该线路上每条面包的配送成本（以美元计）等于“起点和终点城镇之间距离的平方根”再乘以一个指数性增长系数 1.3 的若干次方，即该单位成本为：距离的平方根 × 1.3 的 x 次方。因此，在该线路上如果运送 x 条面包，该线路的总运输成本为“距离的平方根 × 1.3 的 x 次方 × x”。这里指数增长系数取具体数值 1.3。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_028\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_036.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 36.7052709999989,
+    "total_tokens": 3714
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": "None"
+  }
+}

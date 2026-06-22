@@ -1,0 +1,537 @@
+{
+  "entry": {
+    "index": 7,
+    "question": "Morning Light Retail Supply Chain Co., Ltd. is a chain retail enterprise with a central warehouse, regional warehouses and multiple stores. Relying on the transportation network covering the southern region, the company implements the four-level inventory and distribution management of \"factory-central warehouse-regional warehouse-retail store\". In order to cope with market fluctuations and cost pressures, the company's logistics and operations team hopes to optimize ordering and transportation decisions through periodic review strategies, and minimize ordering costs, holding costs and transportation costs within a total of 15 cycles while ensuring that each store is constantly stocked, and reasonably utilize inventory resources.\n\nOn the supply side, in each cycle, regional warehouses can choose to place orders separately to request replenishment and replenishment quantities from the central warehouse. At the same time, regional warehouses can redistribute inventory to various retail stores. The ordering cost must be fixed and the replenishment quantity must be received immediately after a single order is placed. If an order is not placed with the central warehouse, the regional warehouse cannot obtain the new inventory. In addition, the central warehouse does not need to increase inventory. \n\nIn terms of demand, the four retail stores have certain sales needs in each cycle. If the inventory cannot meet the demand, there will be a risk of out-of-stock. It is necessary to ensure that the inventory level of each store in each period is non-negative, and It is necessary to ensure that each store maintains a safety stock of more than 30% of demand at the end of each period to cope with sudden increases in demand. \n\nIn terms of transportation, the transportation volume from the central warehouse to the regional warehouse and from the regional warehouse to the retail store is limited by the vehicle capacity. Each route has a maximum loading capacity limit in each period and the transportation cost is charged per unit of cargo. In terms of additional or priority constraints, in order to encourage centralized replenishment, the company requires that the number of orders from the central warehouse to warehouse 1 must not be less than 10 times during the entire planning period to maintain a stable supply, otherwise an additional service fee must be paid. Minimize costs and give the minimum total cost. \n\nInventory and demand table\n\n| Entity | Initial Stock (Units) | Demand per Period (Units) |\n| --------- | --------------- | --------------- |\n| Central Warehouse | 1200 | — |\n| Regional Warehouse 1 | 500 | — |\n| Regional Warehouse 2 | 400 | — |\n| Retail Store 1 | 350 | 50 |\n| Retail Store 2 | 450 | 60 |\n| Retail Store 3 | 500 | 70 |\n| Retail Store 4 | 600 | 80 |\n\nTransport Route Costs\n\n| Transport Route | Transport Costs (Euro/Unit) | Maximum Transport Capacity per Period (Units) |\n| -------------------- | -------------------- | ------------------- |\n| Central Warehouse → Regional Warehouse 1 | 0.55 | 1000 |\n| Central Warehouse → Regional Warehouse 2 | 0.22 | 1000 |\n| Regional warehouse 1 → Retail store 1 | 0.22 | 500 |\n| Regional warehouse 1 → Retail store 2 | 0.20 | 500 |\n| Regional warehouse 1 → Retail store 3 | 0.32 | 500 |\n| Regional warehouse 1 → Retail store 4 | 0.38 | 500 |\n| Regional warehouse 2 → Retail store 1 | 0.68 | 500 |\n| Regional warehouse 2 → Retail store 2 | 0.52 | 500 |\n| Regional warehouse 2 → Retail store 3 | 0.34 | 500 |\n| Regional warehouse 2 → Retail store 4 | 0.10 | 500 |\n\nCost\n\n| Cost type | Value |\n| -------------- | ---------------- |\n| Ordering cost | 30 EUR/time |\n| Warehouse holding cost | 0.2 EUR/period Unit |\n| Retail store holding costs | 0.6 EUR/period Unit |",
+    "answer": 9582.94,
+    "Parameters_List": [
+      {
+        "Name": "planning_horizon_periods",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "safety_stock_ratio",
+        "Type": "float",
+        "Value": 0.3
+      },
+      {
+        "Name": "entities",
+        "Type": "list",
+        "Value": [
+          "Central Warehouse",
+          "Regional Warehouse 1",
+          "Regional Warehouse 2",
+          "Retail Store 1",
+          "Retail Store 2",
+          "Retail Store 3",
+          "Retail Store 4"
+        ]
+      },
+      {
+        "Name": "stores",
+        "Type": "list",
+        "Value": [
+          "Retail Store 1",
+          "Retail Store 2",
+          "Retail Store 3",
+          "Retail Store 4"
+        ]
+      },
+      {
+        "Name": "regional_warehouses",
+        "Type": "list",
+        "Value": [
+          "Regional Warehouse 1",
+          "Regional Warehouse 2"
+        ]
+      },
+      {
+        "Name": "initial_stock",
+        "Type": "tuple",
+        "Value": {
+          "Central Warehouse": 1200,
+          "Regional Warehouse 1": 500,
+          "Regional Warehouse 2": 400,
+          "Retail Store 1": 350,
+          "Retail Store 2": 450,
+          "Retail Store 3": 500,
+          "Retail Store 4": 600
+        }
+      },
+      {
+        "Name": "demand_per_period",
+        "Type": "tuple",
+        "Value": {
+          "Central Warehouse": null,
+          "Regional Warehouse 1": null,
+          "Regional Warehouse 2": null,
+          "Retail Store 1": 50,
+          "Retail Store 2": 60,
+          "Retail Store 3": 70,
+          "Retail Store 4": 80
+        }
+      },
+      {
+        "Name": "total_demand_per_period_all_stores",
+        "Type": "integer",
+        "Value": 260
+      },
+      {
+        "Name": "total_demand_over_horizon_all_stores",
+        "Type": "integer",
+        "Value": 3900
+      },
+      {
+        "Name": "safety_stock_per_period_store",
+        "Type": "tuple",
+        "Value": {
+          "Retail Store 1": 15,
+          "Retail Store 2": 18,
+          "Retail Store 3": 21,
+          "Retail Store 4": 24
+        }
+      },
+      {
+        "Name": "total_initial_stock_system",
+        "Type": "integer",
+        "Value": 4000
+      },
+      {
+        "Name": "ordering_cost_per_order",
+        "Type": "float",
+        "Value": 30.0
+      },
+      {
+        "Name": "warehouse_holding_cost_per_unit_period",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "retail_holding_cost_per_unit_period",
+        "Type": "float",
+        "Value": 0.6
+      },
+      {
+        "Name": "min_orders_central_to_R1",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "Table_1_Inventory_and_Demand",
+        "Type": "list",
+        "Value": [
+          {
+            "Entity": "Central Warehouse",
+            "Initial Stock (Units)": 1200,
+            "Demand per Period (Units)": null
+          },
+          {
+            "Entity": "Regional Warehouse 1",
+            "Initial Stock (Units)": 500,
+            "Demand per Period (Units)": null
+          },
+          {
+            "Entity": "Regional Warehouse 2",
+            "Initial Stock (Units)": 400,
+            "Demand per Period (Units)": null
+          },
+          {
+            "Entity": "Retail Store 1",
+            "Initial Stock (Units)": 350,
+            "Demand per Period (Units)": 50
+          },
+          {
+            "Entity": "Retail Store 2",
+            "Initial Stock (Units)": 450,
+            "Demand per Period (Units)": 60
+          },
+          {
+            "Entity": "Retail Store 3",
+            "Initial Stock (Units)": 500,
+            "Demand per Period (Units)": 70
+          },
+          {
+            "Entity": "Retail Store 4",
+            "Initial Stock (Units)": 600,
+            "Demand per Period (Units)": 80
+          }
+        ]
+      },
+      {
+        "Name": "Table_2_Transport_Route_Costs",
+        "Type": "list",
+        "Value": [
+          {
+            "Transport Route": "Central Warehouse → Regional Warehouse 1",
+            "Transport Costs (Euro/Unit)": 0.55,
+            "Maximum Transport Capacity per Period (Units)": 1000
+          },
+          {
+            "Transport Route": "Central Warehouse → Regional Warehouse 2",
+            "Transport Costs (Euro/Unit)": 0.22,
+            "Maximum Transport Capacity per Period (Units)": 1000
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 1",
+            "Transport Costs (Euro/Unit)": 0.22,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 2",
+            "Transport Costs (Euro/Unit)": 0.2,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 3",
+            "Transport Costs (Euro/Unit)": 0.32,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 1 → Retail store 4",
+            "Transport Costs (Euro/Unit)": 0.38,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 1",
+            "Transport Costs (Euro/Unit)": 0.68,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 2",
+            "Transport Costs (Euro/Unit)": 0.52,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 3",
+            "Transport Costs (Euro/Unit)": 0.34,
+            "Maximum Transport Capacity per Period (Units)": 500
+          },
+          {
+            "Transport Route": "Regional warehouse 2 → Retail store 4",
+            "Transport Costs (Euro/Unit)": 0.1,
+            "Maximum Transport Capacity per Period (Units)": 500
+          }
+        ]
+      },
+      {
+        "Name": "Table_3_Cost",
+        "Type": "list",
+        "Value": [
+          {
+            "Cost type": "Ordering cost",
+            "Value": 30
+          },
+          {
+            "Cost type": "Warehouse holding cost",
+            "Value": 0.2
+          },
+          {
+            "Cost type": "Retail store holding costs",
+            "Value": 0.6
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Morning Light Retail Supply...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Relying on the transportation...",
+        "No explicit constraints; defines 4‑level network structure"
+      ],
+      [
+        "3",
+        "In order to cope with...",
+        "Planning horizon is 15 periods; minimize total ordering, holding, and transportation costs while keeping stores stocked (no stockouts)"
+      ],
+      [
+        "4",
+        "On the supply side, in...",
+        "Each period and regional warehouse decides whether to place an order and how much to replenish from central warehouse"
+      ],
+      [
+        "5",
+        "At the same time, regional...",
+        "Regional warehouses ship inventory to retail stores each period; flows limited by warehouse inventory"
+      ],
+      [
+        "6",
+        "The ordering cost must be...",
+        "Fixed cost per order; zero lead time; order quantity in a period can be positive only if an order is placed"
+      ],
+      [
+        "7",
+        "If an order is not...",
+        "If no order is placed, no new inventory can flow from central to that regional warehouse in that period"
+      ],
+      [
+        "8",
+        "In addition, the central...",
+        "Central warehouse has no replenishment; its inventory only decreases via shipments and cannot increase"
+      ],
+      [
+        "9",
+        "In terms of demand, the...",
+        "Each retail store has given, constant demand per period"
+      ],
+      [
+        "10",
+        "If the inventory cannot meet...",
+        "Describes risk of stock-out; actual hard constraints are in the next sentence"
+      ],
+      [
+        "11",
+        "It is necessary to ensure...",
+        "Store inventory must be non-negative and ending inventory at each store in each period must be at least 30% of demand (safety stock)"
+      ],
+      [
+        "12",
+        "In terms of transportation, the...",
+        "Shipment volumes on each route and period are limited by vehicle capacity"
+      ],
+      [
+        "13",
+        "Each route has a maximum...",
+        "Each route has a per-period capacity and linear per-unit transport cost"
+      ],
+      [
+        "14",
+        "In terms of additional or...",
+        "Number of orders from central to regional warehouse 1 over entire horizon should be at least 10; otherwise an additional service fee applies"
+      ],
+      [
+        "15",
+        "Minimize costs and give...",
+        "Minimize total cost including ordering, holding, transport, and possible service fee"
+      ],
+      [
+        "16",
+        "Inventory and demand table",
+        "No constraints (header introducing data)"
+      ],
+      [
+        "17",
+        "Initial Stock (Units) Central...",
+        "Provides initial inventories and per-period demands at stores (parameters)"
+      ],
+      [
+        "18",
+        "Transport Route Costs",
+        "No constraints (header introducing route data)"
+      ],
+      [
+        "19",
+        "Transport Route | Transport...",
+        "Provides per-unit transport costs and per-period capacity on each route (parameters and capacity bounds)"
+      ],
+      [
+        "20",
+        "Cost type | Value",
+        "No constraints (header introducing cost parameters)"
+      ],
+      [
+        "21",
+        "Ordering cost | 30 EUR/time...",
+        "Defines fixed ordering cost and per-unit, per-period holding cost in warehouses and stores"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "I^C_t",
+        "Meaning": "Inventory level at central warehouse at end of period t",
+        "Type": "continuous",
+        "Range ": "I^C_t >= 0 for t = 1,...,15"
+      },
+      {
+        "symbol": "I^R_{r,t}",
+        "Meaning": "Inventory level at regional warehouse r at end of period t",
+        "Type": "continuous",
+        "Range ": "I^R_{r,t} >= 0 for r in {1,2}, t = 1,...,15"
+      },
+      {
+        "symbol": "I^S_{s,t}",
+        "Meaning": "Inventory level at retail store s at end of period t",
+        "Type": "continuous",
+        "Range ": "I^S_{s,t} >= 0 for s in {1,2,3,4}, t = 1,...,15"
+      },
+      {
+        "symbol": "Q_{C,r,t}",
+        "Meaning": "Quantity shipped from central warehouse to regional warehouse r in period t",
+        "Type": "continuous",
+        "Range ": "Q_{C,r,t} >= 0 and Q_{C,r,t} <= Cap_{C,r} for r in {1,2}, t = 1,...,15"
+      },
+      {
+        "symbol": "Q_{r,s,t}",
+        "Meaning": "Quantity shipped from regional warehouse r to retail store s in period t",
+        "Type": "continuous",
+        "Range ": "Q_{r,s,t} >= 0 and Q_{r,s,t} <= Cap_{r,s} for r in {1,2}, s in {1,2,3,4}, t = 1,...,15"
+      },
+      {
+        "symbol": "y_{r,t}",
+        "Meaning": "Binary decision: 1 if regional warehouse r places an order to central warehouse in period t, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "y_{r,t} in {0,1} for r in {1,2}, t = 1,...,15"
+      },
+      {
+        "symbol": "Q^{ord}_{r,t}",
+        "Meaning": "Replenishment order quantity from central warehouse requested by regional warehouse r in period t",
+        "Type": "continuous",
+        "Range ": "Q^{ord}_{r,t} >= 0 and Q^{ord}_{r,t} <= M_{C,r} * y_{r,t} for r in {1,2}, t = 1,...,15"
+      },
+      {
+        "symbol": "z",
+        "Meaning": "Binary penalty indicator: 1 if total number of orders from central to RW1 is less than 10 and service fee applies, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "z in {0,1}"
+      },
+      {
+        "symbol": "C^{pen}",
+        "Meaning": "Additional service fee cost incurred if the number of orders from central to RW1 is less than 10",
+        "Type": "continuous",
+        "Range ": "C^{pen} >= 0 and C^{pen} = c_{pen} * z"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Planning horizon length",
+        "t = 1,...,15",
+        "sentence numbers:3"
+      ],
+      [
+        "Central warehouse inventory balance",
+        "I^C_t = I^C_{t-1} - sum_r Q_{C,r,t},  for t = 1,...,15",
+        "sentence numbers:2,8,12,13,17,19"
+      ],
+      [
+        "Central warehouse non-negativity",
+        "I^C_t >= 0,  for t = 1,...,15",
+        "sentence numbers:3,8"
+      ],
+      [
+        "RW inventory balance",
+        "I^R_{r,t} = I^R_{r,t-1} + Q^{ord}_{r,t} - sum_s Q_{r,s,t},  for r in {1,2}, t = 1,...,15",
+        "sentence numbers:4,5,6,7,17"
+      ],
+      [
+        "RW inventory non-negativity",
+        "I^R_{r,t} >= 0,  for r in {1,2}, t = 1,...,15",
+        "sentence numbers:3,11"
+      ],
+      [
+        "Store inventory balance",
+        "I^S_{s,t} = I^S_{s,t-1} + sum_r Q_{r,s,t} - D_s,  for s in {1,2,3,4}, t = 1,...,15",
+        "sentence numbers:5,9,17"
+      ],
+      [
+        "Store inventory non-negativity",
+        "I^S_{s,t} >= 0,  for s in {1,2,3,4}, t = 1,...,15",
+        "sentence numbers:3,11"
+      ],
+      [
+        "Store safety stock requirement",
+        "I^S_{s,t} >= 0.3 * D_s,  for s in {1,2,3,4}, t = 1,...,15",
+        "sentence numbers:11"
+      ],
+      [
+        "Transport capacity C→RW",
+        "Q_{C,r,t} <= Cap_{C,r},  for r in {1,2}, t = 1,...,15",
+        "sentence numbers:12,13,19"
+      ],
+      [
+        "Transport capacity RW→Store",
+        "Q_{r,s,t} <= Cap_{r,s},  for r in {1,2}, s in {1,2,3,4}, t = 1,...,15",
+        "sentence numbers:12,13,19"
+      ],
+      [
+        "Non-negativity of shipment quantities",
+        "Q_{C,r,t} >= 0 and Q_{r,s,t} >= 0,  for all r,s,t",
+        "sentence numbers:12,13"
+      ],
+      [
+        "Order binary definition",
+        "y_{r,t} in {0,1},  for r in {1,2}, t = 1,...,15",
+        "sentence numbers:4,6,7,14"
+      ],
+      [
+        "Order quantity non-negativity",
+        "Q^{ord}_{r,t} >= 0,  for r in {1,2}, t = 1,...,15",
+        "sentence numbers:4,6"
+      ],
+      [
+        "Order-quantity–binary linking",
+        "Q^{ord}_{r,t} <= M_{C,r} * y_{r,t},  for r in {1,2}, t = 1,...,15",
+        "sentence numbers:6,7"
+      ],
+      [
+        "No inventory inflow without order",
+        "if y_{r,t} = 0 then Q^{ord}_{r,t} = 0 (enforced via Q^{ord}_{r,t} <= M_{C,r} * y_{r,t})",
+        "sentence numbers:7"
+      ],
+      [
+        "Zero lead time receipt",
+        "Q^{ord}_{r,t} enters I^R_{r,t} in the same period t",
+        "sentence numbers:6"
+      ],
+      [
+        "Order count requirement for RW1 with penalty",
+        "sum_{t=1}^{15} y_{1,t} >= 10 - M_{pen} * z",
+        "sentence numbers:14"
+      ],
+      [
+        "Penalty variable binary",
+        "z in {0,1}",
+        "sentence numbers:14"
+      ],
+      [
+        "Penalty cost linking",
+        "C^{pen} = c_{pen} * z and C^{pen} >= 0",
+        "sentence numbers:14"
+      ],
+      [
+        "Initial inventory central warehouse",
+        "I^C_0 = 1200",
+        "sentence numbers:17"
+      ],
+      [
+        "Initial inventory regional warehouses",
+        "I^R_{1,0} = 500; I^R_{2,0} = 400",
+        "sentence numbers:17"
+      ],
+      [
+        "Initial inventory retail stores",
+        "I^S_{1,0} = 350; I^S_{2,0} = 450; I^S_{3,0} = 500; I^S_{4,0} = 600",
+        "sentence numbers:17"
+      ],
+      [
+        "Demand parameters at stores",
+        "D_1 = 50; D_2 = 60; D_3 = 70; D_4 = 80 (per period)",
+        "sentence numbers:9,17"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize ordering, holding and transportation costs over 15 periods (plus any additional service fee) while keeping all stores properly stocked.",
+      "Mathematical_expressions": "Min Z = sum_{t=1}^{15} sum_{r=1}^{2} (30 * y_{r,t}) + sum_{t=1}^{15} (0.2 * I^C_t + sum_{r=1}^{2} 0.2 * I^R_{r,t} + sum_{s=1}^{4} 0.6 * I^S_{s,t}) + sum_{t=1}^{15} (sum_{r=1}^{2} c^{trans}_{C,r} * Q_{C,r,t} + sum_{r=1}^{2} sum_{s=1}^{4} c^{trans}_{r,s} * Q_{r,s,t}) + C^{pen}"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "9311.16"
+    ],
+    "time_seconds": 99.30197320000298,
+    "total_tokens": 64025
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "9311.16"
+    ],
+    "ground_truth": 9582.94
+  }
+}

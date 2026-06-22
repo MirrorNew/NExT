@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Ayse produces a plant growth compound by blending two fertilizers, C and Y. The compound must contain at least 5 units of nitrous oxide and 8 units of vitamin mixture. Meanwhile, in order to ensure a balanced nutrient structure, the ratio of the total units of nitrous oxide to the total units of vitamin mixture in the final blend must not exceed 2; that is, (total units of nitrous oxide)/(total units of vitamin mixture) must be less than or equal to 2. The costs of fertilizers C and Y are \\$2 per kilogram and \\$3 per kilogram, respectively. Fertilizer C contains 1.5 units of nitrous oxide and 3 units of vitamin mixture per kilogram. Fertilizer Y contains 5 units of nitrous oxide and 1 unit of vitamin mixture per kilogram. Determine the minimum cost of Ayse’s compound.",
+    "answer": 5.851851851851852,
+    "index": "NLP4LP_prob_023",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 该生长化合物必须至少含有 5 个单位的一氧化二氮和 8 个单位的维生素混合物。, 修改后相关描述: 该生长化合物必须至少含有 5 个单位的一氧化二氮和 8 个单位的维生素混合物。同时，为了保证营养结构的均衡，要求最终混合物中一氧化二氮总单位数与维生素混合物总单位数的比率不得超过 2，也就是说，一氧化二氮总单位数除以维生素混合物总单位数必须小于或等于 2。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_023\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_058.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "5.851851852"
+    ],
+    "time_seconds": 23.20337339999969,
+    "total_tokens": 2170
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "5.851851852"
+    ],
+    "ground_truth": 5.851851851851852
+  }
+}

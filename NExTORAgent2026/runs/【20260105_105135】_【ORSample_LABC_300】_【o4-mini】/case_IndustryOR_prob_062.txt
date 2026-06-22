@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A farmer needs to transport 1000 units of fresh agricultural products from the farm to a nearby market. The farmer has three transportation modes to choose from: horse, bicycle, and handcart. Since both the bicycle and the handcart are very labor-intensive, the farmer wishes to choose and use only one of these two modes. Each trip by horse generates 80 units of pollution; each trip by bicycle generates 0 units of pollution; each trip by handcart generates 0 units of pollution. The total pollution generated over all transportation trips must not exceed 1000 units. The number of trips using the horse must be at least 8. Per trip, the horse, bicycle, and handcart can transport 55 units, 30 units, and 40 units of agricultural products, respectively. To better reflect practical conditions, considering that the horse’s transportation efficiency may exhibit a slight nonlinear improvement under high-intensity consecutive transportation, the total transported amount by horse is modified from the original “55 times the number of horse trips” to “55 times the number of horse trips, and then taking the overall $0.8$-th power,” that is, the horse’s total transported amount is $(55 \\times \\text{number of horse trips})^{1.2}$. The farmer must ensure that the total amount of agricultural products transported is at least 1000 units.",
+    "answer": 640.0,
+    "index": "IndustryOR_prob_062",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 马、自行车和手推车每次分别可以运送 55 单位、30 单位和 40 单位的农产品。农民需要确保运送的农产品总量至少为 1000 单位。, 修改后相关描述: 马、自行车和手推车每次分别可以运送 55 单位、30 单位和 40 单位的农产品。为了更贴近实际情况，考虑到马在高强度连续运输时运输效率会略有非线性提升，规定使用马进行的总运输量由原来的“55 乘以马的运输次数”修改为“55 乘以马的运输次数再整体取 1.2 次幂”，即马的总运输量为 (55 × 马的运输次数)^1.2。农民需要确保运送的农产品总量至少为 1000 单位。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_062\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_014.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 58.726130800001556,
+    "total_tokens": 6202
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 640.0
+  }
+}

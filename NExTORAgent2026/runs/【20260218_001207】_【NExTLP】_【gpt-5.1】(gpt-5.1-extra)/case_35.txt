@@ -1,0 +1,570 @@
+{
+  "entry": {
+    "index": 35,
+    "question": "Dongfang City is a regional transportation hub city. Its core urban area presents a typical radial road network structure, and the main public facilities are distributed along the historical axis. According to the annual report on urban transportation development, the regional bus system undertakes more than 45% of the city's commuting travel needs, but there are structural problems such as overlapping routes and uneven resource allocation. In the latest plan, the Municipal Transportation Commission proposed a \"public transportation priority\" strategy, requiring the optimization of backbone routes connecting transportation hubs, educational and medical facilities and commercial areas. The 12 currently operating bus routes were formed in different historical periods. Some routes still retain the characteristics of commuting in industrial areas 20 years ago, which is not well matched with the current passenger flow distribution. This route optimization is a key link in the implementation of the \"Public Transportation Service Efficiency Improvement Plan\", which directly affects citizens' travel experience and urban carbon emission indicators. Scientific route adjustments can not only improve vehicle utilization efficiency, but also alleviate congestion on trunk roads during peak hours, and lay the foundation for the subsequent construction of smart bus systems. The project results will serve as a model for dynamic optimization of bus lines and provide a replicable decision-making model for similar cities. \n\nThe street map of Dongfang City is shown in Figure C-15. In the figure, ①, ②, …, ⑨ are the locations of the railway station, long-distance bus station, government, university, municipal hospital, commercial center, etc. There are 17 main streets in total. Due to the difference in pedestrian density of each street, the passing interval time (once in each direction) of the street map of Dongfang City is required to be shown in Table C-36. \n\n| Street | Required bus interval (min) |\n| ---- | ----------------------- |\n| ①② | 10 |\n| ①④ | 10 |\n| ①⑦ | 15 |\n| ②③ | 10 |\n| ②④ | 10 |\n| ③④ | 15 |\n| ③⑤ | 15 |\n| ③⑥ | 15 |\n| ④⑤ | 10 |\n| ④⑦ | 15 |\n| ④⑧ | 10 |\n| ⑤⑥ | 10 |\n| ⑤⑧ | 15 |\n| ⑥⑧ | 20 |\n| ⑦⑧ | 20 |\n| ⑦⑨ | 20 |\n| ⑧⑨ | 20 |\n\nThe city's original planned design of 12 bus routes is shown in Table C-37\n\nTable C-37\n\n| Route Code | Route |\n| -------- | ----------------- |\n| 1 | ① ⇄ ② ⇄ ③ ⇄ ⑥ |\n| 2 | ① ⇄ ④ ⇄ ⑤ ⇄ ⑥ |\n| 3 | ① ⇄ ④ ⇄ ⑧ ⇄ ⑨ |\n| 4 | ① ⇄ ② ⇄ ④ ⇄ ⑦ ⇄ ⑨ |\n| 5 | ① ⇄ ② ⇄ ③ ⇄ ⑤ ⇄ ⑧ |\n| 6 | ① ⇄ ⑦ ⇄ ⑨ ⇄ ⑧ ⇄ ⑥ |\n| 7 | ③ ⇄ ④ ⇄ ⑧ ⇄ ⑥ |\n| 8 | ② ⇄ ④ ⇄ ⑦ ⇄ ⑧ |\n| 9 | ⑦ ⇄ ④ ⇄ ③ ⇄ ⑥ |\n| 10 | ② ⇄ ③ ⇄ ⑤ ⇄ ⑥ |\n| 11 | ③ ⇄ ④ ⇄ ⑤ ⇄ ⑧ ⇄ ⑨ |\n| 12 | ① ⇄ ⑦ ⇄ ⑧ ⇄ ⑤ ⇄ ⑥ |\n\nFigure C-15 Street map of Dongfang City \n\n```mermaid\ngraph TD\n 1 --- 2\n 1 --- 4\n 1 --- 7\n 2 --- 3\n 2 --- 4\n 3 --- 5\n 3 --- 6\n 4 --- 3\n 4 --- 5\n 4 --- 8\n 5 --- 6\n 7 --- 4\n 7 --- 8\n 7 --- 9\n 8 --- 5\n 8 --- 6\n 9 --- 8\n```\n\nIt is known that the travel time of each route is 25 minutes, and it takes 5 minutes to rest at each terminal before returning, that is, one round trip per hour. It is required to determine which routes should be opened in the end. Suppose the number of vehicles equipped for each of the 12 routes is $x_1,x_2,...,x_{12}$, and how many buses should be configured for each route to meet the traffic density requirements of each street? After solving, give the total number of vehicles as the answer.",
+    "answer": 30.0,
+    "Parameters_List": [
+      {
+        "Name": "bus_commute_share_min",
+        "Type": "float",
+        "Value": 45.0
+      },
+      {
+        "Name": "num_original_routes",
+        "Type": "integer",
+        "Value": 12
+      },
+      {
+        "Name": "num_nodes",
+        "Type": "integer",
+        "Value": 9
+      },
+      {
+        "Name": "num_main_streets",
+        "Type": "integer",
+        "Value": 17
+      },
+      {
+        "Name": "Table_1_RequiredInterval",
+        "Type": "list",
+        "Value": [
+          [
+            "①②",
+            10
+          ],
+          [
+            "①④",
+            10
+          ],
+          [
+            "①⑦",
+            15
+          ],
+          [
+            "②③",
+            10
+          ],
+          [
+            "②④",
+            10
+          ],
+          [
+            "③④",
+            15
+          ],
+          [
+            "③⑤",
+            15
+          ],
+          [
+            "③⑥",
+            15
+          ],
+          [
+            "④⑤",
+            10
+          ],
+          [
+            "④⑦",
+            15
+          ],
+          [
+            "④⑧",
+            10
+          ],
+          [
+            "⑤⑥",
+            10
+          ],
+          [
+            "⑤⑧",
+            15
+          ],
+          [
+            "⑥⑧",
+            20
+          ],
+          [
+            "⑦⑧",
+            20
+          ],
+          [
+            "⑦⑨",
+            20
+          ],
+          [
+            "⑧⑨",
+            20
+          ]
+        ]
+      },
+      {
+        "Name": "Table_2_Routes",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            [
+              "①",
+              "②",
+              "③",
+              "⑥"
+            ]
+          ],
+          [
+            2,
+            [
+              "①",
+              "④",
+              "⑤",
+              "⑥"
+            ]
+          ],
+          [
+            3,
+            [
+              "①",
+              "④",
+              "⑧",
+              "⑨"
+            ]
+          ],
+          [
+            4,
+            [
+              "①",
+              "②",
+              "④",
+              "⑦",
+              "⑨"
+            ]
+          ],
+          [
+            5,
+            [
+              "①",
+              "②",
+              "③",
+              "⑤",
+              "⑧"
+            ]
+          ],
+          [
+            6,
+            [
+              "①",
+              "⑦",
+              "⑨",
+              "⑧",
+              "⑥"
+            ]
+          ],
+          [
+            7,
+            [
+              "③",
+              "④",
+              "⑧",
+              "⑥"
+            ]
+          ],
+          [
+            8,
+            [
+              "②",
+              "④",
+              "⑦",
+              "⑧"
+            ]
+          ],
+          [
+            9,
+            [
+              "⑦",
+              "④",
+              "③",
+              "⑥"
+            ]
+          ],
+          [
+            10,
+            [
+              "②",
+              "③",
+              "⑤",
+              "⑥"
+            ]
+          ],
+          [
+            11,
+            [
+              "③",
+              "④",
+              "⑤",
+              "⑧",
+              "⑨"
+            ]
+          ],
+          [
+            12,
+            [
+              "①",
+              "⑦",
+              "⑧",
+              "⑤",
+              "⑥"
+            ]
+          ]
+        ]
+      },
+      {
+        "Name": "Street_Nodes",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "Name": "Street_Edges",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            8,
+            5
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            8
+          ]
+        ]
+      },
+      {
+        "Name": "route_travel_time_one_way_min",
+        "Type": "integer",
+        "Value": 25
+      },
+      {
+        "Name": "terminal_rest_time_min",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "route_round_trip_cycle_time_min",
+        "Type": "integer",
+        "Value": 60
+      },
+      {
+        "Name": "route_round_trips_per_hour",
+        "Type": "integer",
+        "Value": 1
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Dongfang City has 9 important...",
+        "Defines network nodes and streets with required headways; provides basic data for constraints."
+      ],
+      [
+        "2",
+        "There are 12 candidate bus routes...",
+        "Defines route set and paths, used to map which routes cover which streets in constraints."
+      ],
+      [
+        "3",
+        "Each route has a cycle (round-trip)...",
+        "Implied 1 round trip per hour per bus; establishes that each bus gives frequency 1 veh/hour on that route."
+      ],
+      [
+        "4",
+        "One bus assigned to a route thus generates...",
+        "Links number of buses on a route to frequency contribution in constraints."
+      ],
+      [
+        "5",
+        "Required bus interval for a street is...",
+        "Converts headways (min) to minimum required frequencies (veh/hour) for each street."
+      ],
+      [
+        "6",
+        "For each street, the sum of frequencies...",
+        "Core coverage constraints: sum of route frequencies on each street ≥ required frequency."
+      ],
+      [
+        "7",
+        "Decision variables x1, x2, …, x12 denote...",
+        "Defines decision variables (bus counts per route) and their non-negativity/integrality."
+      ],
+      [
+        "8",
+        "Objective is to minimize the total number...",
+        "Defines the objective: minimize total number of buses across all routes."
+      ],
+      [
+        "9",
+        "The problem is a deterministic, linear...",
+        "Classifies the model as an integer linear programming (MILP/ILP) problem; no new constraints."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "Number of buses assigned to route 1 (①–②–③–⑥)",
+        "Type": "integer",
+        "Range ": "x1 ≥ 0"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "Number of buses assigned to route 2 (①–④–⑤–⑥)",
+        "Type": "integer",
+        "Range ": "x2 ≥ 0"
+      },
+      {
+        "symbol": "x3",
+        "Meaning": "Number of buses assigned to route 3 (①–④–⑧–⑨)",
+        "Type": "integer",
+        "Range ": "x3 ≥ 0"
+      },
+      {
+        "symbol": "x4",
+        "Meaning": "Number of buses assigned to route 4 (①–②–④–⑦–⑨)",
+        "Type": "integer",
+        "Range ": "x4 ≥ 0"
+      },
+      {
+        "symbol": "x5",
+        "Meaning": "Number of buses assigned to route 5 (①–②–③–⑤–⑧)",
+        "Type": "integer",
+        "Range ": "x5 ≥ 0"
+      },
+      {
+        "symbol": "x6",
+        "Meaning": "Number of buses assigned to route 6 (①–⑦–⑨–⑧–⑥)",
+        "Type": "integer",
+        "Range ": "x6 ≥ 0"
+      },
+      {
+        "symbol": "x7",
+        "Meaning": "Number of buses assigned to route 7 (③–④–⑧–⑥)",
+        "Type": "integer",
+        "Range ": "x7 ≥ 0"
+      },
+      {
+        "symbol": "x8",
+        "Meaning": "Number of buses assigned to route 8 (②–④–⑦–⑧)",
+        "Type": "integer",
+        "Range ": "x8 ≥ 0"
+      },
+      {
+        "symbol": "x9",
+        "Meaning": "Number of buses assigned to route 9 (⑦–④–③–⑥)",
+        "Type": "integer",
+        "Range ": "x9 ≥ 0"
+      },
+      {
+        "symbol": "x10",
+        "Meaning": "Number of buses assigned to route 10 (②–③–⑤–⑥)",
+        "Type": "integer",
+        "Range ": "x10 ≥ 0"
+      },
+      {
+        "symbol": "x11",
+        "Meaning": "Number of buses assigned to route 11 (③–④–⑤–⑧–⑨)",
+        "Type": "integer",
+        "Range ": "x11 ≥ 0"
+      },
+      {
+        "symbol": "x12",
+        "Meaning": "Number of buses assigned to route 12 (①–⑦–⑧–⑤–⑥)",
+        "Type": "integer",
+        "Range ": "x12 ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Street_1-2",
+        "x1 + x4 + x5 >= 6",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_1-4",
+        "x2 + x3 >= 6",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_1-7",
+        "x6 + x12 >= 4",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_2-3",
+        "x1 + x5 + x10 >= 6",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_2-4",
+        "x2 + x4 + x8 >= 6",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_3-4",
+        "x7 + x9 + x11 >= 4",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_3-5",
+        "x5 + x10 + x11 >= 4",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_3-6",
+        "x1 + x9 >= 4",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_4-5",
+        "x2 + x11 >= 6",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_4-7",
+        "x4 + x8 + x9 >= 4",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_4-8",
+        "x3 + x7 >= 6",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_5-6",
+        "x2 + x10 + x12 >= 6",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_5-8",
+        "x5 + x11 + x12 >= 4",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_6-8",
+        "x6 + x7 >= 3",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_7-8",
+        "x8 + x12 >= 3",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_7-9",
+        "x4 + x6 >= 3",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Street_8-9",
+        "x3 + x6 + x11 >= 3",
+        "sentence numbers:1 2 4 5 6"
+      ],
+      [
+        "Nonnegativity_xi",
+        "x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12 >= 0",
+        "sentence numbers:7"
+      ],
+      [
+        "Integrality_xi",
+        "x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12 are integers",
+        "sentence numbers:7"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the total number of buses assigned to all routes.",
+      "Mathematical_expressions": "Min Z = x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "26.0"
+    ],
+    "time_seconds": 23.62098710000282,
+    "total_tokens": 15364
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "26.0"
+    ],
+    "ground_truth": 30.0
+  }
+}

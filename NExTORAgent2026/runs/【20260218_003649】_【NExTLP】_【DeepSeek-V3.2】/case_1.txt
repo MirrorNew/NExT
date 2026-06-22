@@ -1,0 +1,224 @@
+{
+  "entry": {
+    "index": 1,
+    "question": "Located under the shade of sycamore trees in the old city, Changning District People's Hospital has been a trusted medical center for surrounding residents for decades. With the aging of the population and the opening of the two-child policy, the number of outpatient visits and hospitalization needs have increased year by year, especially in the pediatric and emergency departments, which are often overcrowded. Head nurse Lin Mei has worked in this hospital for 15 years. She arrives at work at five in the morning every day to check the shift schedule and coordinate emergencies - for example, Xiao Li, who worked the night shift yesterday, suddenly had a fever, and twins were born in the obstetrics department in the early morning. She knows that scheduling is not just a table, but also about patient safety and the morale of the nursing team: newcomers need to be mentored by old staff, pregnant women cannot work night shifts, and nurses who work around the clock are prone to mistakes... But the hospital budget is limited, and human resource costs must be carefully calculated. Under the premise of meeting the demand for nurses in each time period, design an efficient and humane scheduling plan to avoid overwork or waste of manpower, and reserve flexible space for emergencies. \n\nPeople's Hospital is a district-level hospital in Changning District. The number of nurses on duty required in each time period of the hospital every day is shown in Table C-2. \n\nTable C-2\n\n| Time period | 6:00-10:00 | 10:00-14:00 | 14:00-18:00 | 18:00-22:00 | 22:00-6:00 (next day) |\n| -------- | ---------- | ----------- | ----------- | ----------- | ---------------- |\n| Number of nurses required | 18 | 20 | 19 | 17 | 12 |\n\nThe nurses in this hospital work in five shifts, each 8 hours. The specific working hours are 2:00-10:00 for the first shift, 6:00-14:00 for the second shift, 10:00-18:00 for the third shift, 14:00-22:00 for the fourth shift, and 18:00-2:00 (next day). Each nurse works 5 shifts per week and is assigned to different days. There is a chief nurse who is responsible for the nurses' duty arrangements and duty plans, which should be relatively economical in terms of personnel or economy, and as reasonable as possible. It is the duty plan:\n\n**Plan**: Each nurse works for 5 consecutive days, rests for 2 days, and is arranged from the first shift to the fifth shift from the first day of work. For example, if a nurse starts working on Monday, she will work the first shift on Monday, the second shift on Tuesday... the fifth shift on Friday; if another nurse starts working on Wednesday, she will work the first shift on Wednesday, the second shift on Thursday... the fifth shift on Sunday, and so on.\n\nEstablish a linear programming model to minimize the number of nurses on duty. You only need to give the minimum number of nurses. ",
+    "answer": 70.0,
+    "Parameters_List": [
+      {
+        "Name": "HeadNurseExperienceYears",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "ArrivalHour",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "NumShifts",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "ShiftLengthHours",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "ShiftTimes",
+        "Type": "list",
+        "Value": [
+          "2:00-10:00",
+          "6:00-14:00",
+          "10:00-18:00",
+          "14:00-22:00",
+          "18:00-2:00 (next day)"
+        ]
+      },
+      {
+        "Name": "ShiftsPerWeek",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "ConsecutiveWorkDays",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "RestDays",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "NursesRequired",
+        "Type": "tuple",
+        "Value": {
+          "6:00-10:00": 18,
+          "10:00-14:00": 20,
+          "14:00-18:00": 19,
+          "18:00-22:00": 17,
+          "22:00-6:00 (next day)": 12
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Located under the shade of...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "With the aging of the population and...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Head nurse Lin Mei has worked...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "She arrives at work at five...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "She knows that scheduling is not...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "But the hospital budget is limited...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Under the premise of meeting the demand...",
+        "Coverage constraints: the number of nurses on duty in each time‐period must be ≥ the required demand"
+      ],
+      [
+        "8",
+        "People's Hospital is a district-level hospital...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The number of nurses on duty required...",
+        "Defines parameter r_p (required nurses per period per day)"
+      ],
+      [
+        "10",
+        "Table C-2",
+        "Data for r_p"
+      ],
+      [
+        "11",
+        "The nurses in this hospital work in five shifts...",
+        "Definition of shift set S={1,…,5}, each of length 8 h"
+      ],
+      [
+        "12",
+        "The specific working hours are 2:00–10:00 for...",
+        "Specifies for each shift which time-periods it covers"
+      ],
+      [
+        "13",
+        "Each nurse works 5 shifts per week...",
+        "Implicit: each nurse works exactly 5 days/week"
+      ],
+      [
+        "14",
+        "There is a chief nurse who is responsible...",
+        "Objective hint: economy of personnel"
+      ],
+      [
+        "15",
+        "It is the duty plan:",
+        "No constraints"
+      ],
+      [
+        "16",
+        "Plan: Each nurse works for 5 consecutive days...",
+        "Scheduling pattern constraint: 5 work days → 2 off days, shifts 1→5 in order"
+      ],
+      [
+        "17",
+        "For example, if a nurse starts working on...",
+        "Illustration of the 5-day-consecutive pattern"
+      ],
+      [
+        "18",
+        "Establish a linear programming model to minimize...",
+        "Objective: minimize total nurses"
+      ],
+      [
+        "19",
+        "You only need to give the minimum...",
+        "Objective clarification"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_d",
+        "Meaning": "number of nurses whose first working day of the week is day d",
+        "Type": "integer",
+        "Range ": "x_d ≥ 0, d=1…7"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Coverage 6:00–10:00 (day t)",
+        "x_t + x_{t-1 mod 7} ≥ 18",
+        "sentence numbers:7,9,12,16"
+      ],
+      [
+        "Coverage 10:00–14:00 (day t)",
+        "x_{t-1 mod 7} + x_{t-2 mod 7} ≥ 20",
+        "sentence numbers:7,9,12,16"
+      ],
+      [
+        "Coverage 14:00–18:00 (day t)",
+        "x_{t-2 mod 7} + x_{t-3 mod 7} ≥ 19",
+        "sentence numbers:7,9,12,16"
+      ],
+      [
+        "Coverage 18:00–22:00 (day t)",
+        "x_{t-3 mod 7} + x_{t-4 mod 7} ≥ 17",
+        "sentence numbers:7,9,12,16"
+      ],
+      [
+        "Coverage 22:00–06:00 (day t)",
+        "x_{t-4 mod 7} + x_{t+1 mod 7} ≥ 12",
+        "sentence numbers:7,9,12,16"
+      ],
+      [
+        "Domain (nonnegativity & integrality)",
+        "x_d ∈ ℤ_≥0 for d=1…7",
+        "sentence numbers:13,16"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Establish a linear programming model to minimize the number of nurses on duty.",
+      "Mathematical_expressions": "minimize Z = ∑_{d=1}^7 x_d"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "70.0"
+    ],
+    "time_seconds": 57.637839300005,
+    "total_tokens": 5249
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "70.0"
+    ],
+    "ground_truth": 70.0
+  }
+}

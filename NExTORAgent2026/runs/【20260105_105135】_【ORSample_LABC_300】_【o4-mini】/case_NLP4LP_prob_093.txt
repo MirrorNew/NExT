@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A scientist in the Arctic needs to obtain sufficient vitamin D and vitamin C in his diet by drinking orange juice and apple juice. Each carton of orange juice contains 10 units of vitamin D and 8 units of vitamin C. Each carton of apple juice contains 12 units of vitamin D and 6 units of vitamin C. Because the scientist prefers apple juice, the number of cartons of apple juice he drinks must be at least three times the number of cartons of orange juice. However, he must also drink at least 3 cartons of orange juice. To avoid excessive vitamin C intake, the scientist can consume at most 300 units of vitamin C.\n\nNote that the scientist’s absorption of vitamin D exhibits a nonlinear amplification effect: the total effective vitamin D intake obtained from apple juice is no longer computed by linear addition as “12 units per carton,” but is computed in the form “the total vitamin D from apple juice equals 12 multiplied by the number of apple-juice cartons, and then raised as a whole to the power of 1.02,” i.e., the total effective vitamin D intake from the apple-juice portion equals $(12\\times\\text{(number of apple-juice cartons)})^{1.02}$. How many cartons of each type of juice should he drink, respectively, in order to maximize his total vitamin D intake?",
+    "answer": 656.2934349519251,
+    "index": "NLP4LP_prob_093",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每盒苹果汁含有12单位的维生素D，且总维生素D摄入量按线性方式相加（即苹果汁部分为“12×苹果汁盒数”）。, 修改后相关描述: 科学家对维生素D的吸收存在非线性增强效应：苹果汁部分的维生素D总有效摄入量由原来的“12×苹果汁盒数”改为“(12×苹果汁盒数) 的 1.02 次方”，即先计算 12 乘以苹果汁盒数，再整体取 1.02次幂。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_093\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_076.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 23.58881059999112,
+    "total_tokens": 2639
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 656.2934349519251
+  }
+}

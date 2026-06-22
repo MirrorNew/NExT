@@ -1,0 +1,340 @@
+{
+  "entry": {
+    "index": 26,
+    "question": "Manager Zhang, who is in charge of production at Hailong Auto Parts Factory, is considering how to train and reasonably arrange workers to reduce production costs. The factory produces three different types of auto parts, A, B, and C, and has six workers of different levels. Each worker works 40 hours per week. Due to the different complexity of parts, workers with different skills are required to complete them. For example, the production line of type A parts is the most complex, requiring workers of levels 1 to 3 to operate, the production line of type B parts is second, and the production line of type C parts has the lowest requirement for worker level. The current number of workers of different levels, hourly wages, and weekly time spent on each production line are shown in Table C-7.\n\nTable C-7\n\n| Worker level | Number of people | Wage (yuan/h) | A (h) | B (h) | C (h) |\n| :------: | :--: | :----------: | :---: | :---: | :---: |\n| 1 | 4 | 15.0 | 160 | — | — |\n| 2 | 9 | 14.5 | 360 | — | — |\n| 3 | 20 | 13.0 | 600 | 200 | — |\n| 4 | 54 | 12.0 | — | 160 | 2000 |\n| 5 | 102 | 10.5 | — | 80 | 4000 |\n| 6 | 40 | 9.75 | — | — | 1600 |\n\nConsidering the changes in production tasks, Manager Zhang is training workers so that workers of different levels can work on the production lines of three types of accessories, A and B. \n\nWhether to train different workers to other production lines, training people requires different costs (the underlined part in Table 7 requires a one-time fee, and the more difficult and the lower the worker level, the higher the average training cost per person). The training cost table is as follows, and the part that does not need to be trained is replaced by 0. \n\n| Worker level | Training cost of line A (yuan/person) | Training cost of line B (yuan/person) | Training cost of line C (yuan/person) |\n| :------: | :------------------: | :------------------: | :------------------: |\n| 1 | 0 | 10 | 5 |\n| 2 | 0 | 20 | 5 |\n| 3 | 0 | 0 | 10 |\n| 4 | 15 | 0 | 0 |\n| 5 | 20 | 0 | 0 |\n| 6 | 25 | 20 | 0 |\n\n\n\nOf course, due to the differences in spare parts of A, B, and C, and the expertise of workers at different levels, the work efficiency of workers at different levels on different production lines is different. Table C-8 shows the work efficiency of workers at different levels on production lines A, B, and C. \n\nTable C-8\n\n| Worker level | A (pieces/h) | B (pieces/h) | C (items/h) |\n| :------: | :------: | :------: | :------: |\n| 1 | 2.00 | 1.20 | 2.00 |\n| 2 | 1.80 | 1.08 | 1.80 |\n| 3 | 1.62 | 2.50 | 1.62 |\n| 4 | 1.80 | 2.16 | 1.45 |\n| 5 | 1.62 | 1.93 | 1.31 |\n| 6 | 1.30 | 1.74 | 1.20 |\n\nIt is known that the demand for spare parts A, B, and C in each week of the next quarter is 1940, 1000, and 10060 pieces respectively. Manager Zhang preliminarily estimates that according to the current work schedule given in Table C-7 and the work efficiency given in Table C-8, the factory can be competent for the tasks of the next quarter, but the result of such an arrangement is that there is no flexible free time, and the salary expenditure is not economical. Therefore, a better weekly work schedule for workers is needed (specifically, at which level the workers of each level work), so as to minimize the salary expenditure for the tasks of the next quarter, and give the calculated total salary expenditure. ",
+    "answer": 100227.23,
+    "Parameters_List": [
+      {
+        "Name": "part_types",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "Name": "worker_levels",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "Name": "hours_per_week",
+        "Type": "integer",
+        "Value": 40
+      },
+      {
+        "Name": "required_levels_A",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "Name": "weekly_demand",
+        "Type": "tuple",
+        "Value": {
+          "A": 1940,
+          "B": 1000,
+          "C": 10060
+        }
+      },
+      {
+        "Name": "Table_1_C7",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            4,
+            15.0,
+            160,
+            0,
+            0
+          ],
+          [
+            2,
+            9,
+            14.5,
+            360,
+            0,
+            0
+          ],
+          [
+            3,
+            20,
+            13.0,
+            600,
+            200,
+            0
+          ],
+          [
+            4,
+            54,
+            12.0,
+            0,
+            160,
+            2000
+          ],
+          [
+            5,
+            102,
+            10.5,
+            0,
+            80,
+            4000
+          ],
+          [
+            6,
+            40,
+            9.75,
+            0,
+            0,
+            1600
+          ]
+        ]
+      },
+      {
+        "Name": "Table_2_TrainingCost",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            0,
+            10,
+            5
+          ],
+          [
+            2,
+            0,
+            20,
+            5
+          ],
+          [
+            3,
+            0,
+            0,
+            10
+          ],
+          [
+            4,
+            15,
+            0,
+            0
+          ],
+          [
+            5,
+            20,
+            0,
+            0
+          ],
+          [
+            6,
+            25,
+            20,
+            0
+          ]
+        ]
+      },
+      {
+        "Name": "Table_3_C8",
+        "Type": "list",
+        "Value": [
+          [
+            1,
+            2.0,
+            1.2,
+            2.0
+          ],
+          [
+            2,
+            1.8,
+            1.08,
+            1.8
+          ],
+          [
+            3,
+            1.62,
+            2.5,
+            1.62
+          ],
+          [
+            4,
+            1.8,
+            2.16,
+            1.45
+          ],
+          [
+            5,
+            1.62,
+            1.93,
+            1.31
+          ],
+          [
+            6,
+            1.3,
+            1.74,
+            1.2
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Manager Zhang, who is...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The factory produces three...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Each worker works 40...",
+        "∑_{j∈{A,B,C}} h_{i j} ≤ 40·N_i"
+      ],
+      [
+        "4",
+        "Due to the different...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "For example, the production...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The current number of...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "(Table C-7)",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Considering the changes in...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Whether to train different...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The training cost table...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "(Training cost table)",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Of course, due to...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Table C-8 shows...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "(Table C-8)",
+        "No constraints"
+      ],
+      [
+        "15",
+        "It is known that...",
+        "∑_{i=1}^6 r_{i j}·h_{i j} ≥ D_j"
+      ],
+      [
+        "16",
+        "Manager Zhang preliminarily...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "Therefore, a better weekly...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "h_{ij}",
+        "Meaning": "weekly working hours of level i workers on line j",
+        "Type": "continuous",
+        "Range ": "0 ≤ h_{ij} ≤ 40·N_i"
+      },
+      {
+        "symbol": "k_{ij}",
+        "Meaning": "number of level i workers trained for line j",
+        "Type": "integer",
+        "Range ": "0 ≤ k_{ij} ≤ N_i"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Time_capacity_per_level",
+        "∑_{j∈{A,B,C}} h_{ij} ≤ 40·N_i",
+        "sentence numbers:3"
+      ],
+      [
+        "Demand_satisfaction",
+        "∑_{i=1}^6 r_{ij}·h_{ij} ≥ D_j",
+        "sentence numbers:15"
+      ],
+      [
+        "Training_capacity_link",
+        "h_{ij} ≤ 40·k_{ij}",
+        "sentence numbers:8"
+      ],
+      [
+        "Training_upper_bound",
+        "k_{ij} ≤ N_i",
+        "sentence numbers:6"
+      ],
+      [
+        "Nonnegativity_integrality",
+        "h_{ij} ≥ 0; k_{ij} ∈ ℤ_{≥0}",
+        "sentence numbers:3,8"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Therefore, a better weekly work schedule for workers is needed (specifically, at which level the workers of each level work), so as to minimize the salary expenditure for the tasks of the next quarter, and give the calculated total salary expenditure.",
+      "Mathematical_expressions": "Minimize Z = ∑_{i=1}^6 ∑_{j∈{A,B,C}} (w_i·h_{ij} + c_{ij}·k_{ij})"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "99722.22988506"
+    ],
+    "time_seconds": 282.92609169999923,
+    "total_tokens": 23446
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "99722.22988506"
+    ],
+    "ground_truth": 100227.23
+  }
+}

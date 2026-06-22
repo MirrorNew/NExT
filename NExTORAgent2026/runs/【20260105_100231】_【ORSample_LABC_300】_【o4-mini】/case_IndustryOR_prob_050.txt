@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "IndustryOR_prob_050",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_050\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_050\\code.py",
+    "NLtype": "Linear",
+    "question": "The number of nurses required in each time period over 24 hours at a certain hospital is as follows: 2:00-6:00 - 10 people, 6:00-10:00 - 15 people, 10:00-14:00 - 25 people, 14:00-18:00 - 20 people, 18:00-22:00 - 18 people, 22:00-2:00 - 12 people. Nurses start shifts in 6 batches at 2:00, 6:00, 10:00, 14:00, 18:00, and 22:00 and work continuously for 8 hours. Please determine: If the hospital can hire contract nurses with the same working hours as regular nurses, and if the pay for regular nurses is 10 yuan/hour and for contract nurses is 15 yuan/hour, should the hospital hire contract nurses and if so, how many?",
+    "answer": 4240.0,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4240.0"
+    ],
+    "time_seconds": 37.04378199999337,
+    "total_tokens": 1524
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4240.0"
+    ],
+    "ground_truth": 4240.0
+  }
+}

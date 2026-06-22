@@ -1,0 +1,34 @@
+{
+  "entry": {
+    "question": "A company uses steel and aluminum as raw materials to produce two products (A and B). Producing 1 unit of product A requires 6 kg of steel, 8 kg of aluminum, and 11 labor-hours, and yields a profit of 5000 RMB (excluding workers’ overtime pay). Producing 1 unit of product B requires 12 kg of steel, 20 kg of aluminum, and 24 labor-hours, and yields a profit of 11000 RMB (excluding workers’ overtime pay). The company currently has 200 kg of steel, 300 kg of aluminum, and 300 labor-hours available. If workers must work overtime, the overtime wage is 100 RMB per hour. Introduce the following additional rule: if the company’s total production quantity (the output of product A plus the output of product B) exceeds 15 units, then an additional fixed equipment accelerated-depreciation cost of 2000 RMB must be paid; if the total production quantity does not exceed 15 units, then this additional cost does not need to be paid. Based on all the factors above, formulate a production plan that maximizes the company’s profit and minimizes workers’ overtime hours.",
+    "answer": 163900.0,
+    "index": "IndustryOR_prob_097",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 公司目前拥有 200 千克钢材、300 千克铝材和 300 小时的劳动时间。如果工人需要加班，加班费为每小时 100 元。请制定一个生产计划，使公司的利润最大化并使工人加班时间最少。 修改后相关描述: 公司目前拥有 200 千克钢材、300 千克铝材和 300 小时的劳动时间。如果工人需要加班，加班费为每小时 100 元。引入如下额外规定：如果公司总共生产的产品数量（产品 A 的产量加上产品 B 的产量）超过 15 单位，则必须额外支付一笔 2000 元的固定设备加速折旧费用；如果总生产数量不超过 15 单位，则不需要支付这笔额外费用。请在考虑上述所有因素的基础上制定一个生产计划，使公司的利润最大化并使工人加班时间最少。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_097\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_006.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "163900.0",
+      "-81.0"
+    ],
+    "time_seconds": 34.81044669999392,
+    "total_tokens": 2008
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "163900.0",
+      "-81.0"
+    ],
+    "ground_truth": 163900.0
+  }
+}

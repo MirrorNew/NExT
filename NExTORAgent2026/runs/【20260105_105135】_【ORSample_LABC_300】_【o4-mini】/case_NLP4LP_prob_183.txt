@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A snow-removal company uses small trucks and large trucks to clear snow from various neighborhoods. Each small truck requires 2 workers for shoveling and can carry 30 units of snow. Each large truck requires 4 workers for shoveling and can carry 50 units of snow. The company has a total of 50 workers available. In addition, because some neighborhoods do not allow large trucks to enter, at least 10 trucks must be small trucks. Meanwhile, at least 3 large trucks are required, and the number of small trucks must be twice the number of large trucks.\n\nWhen computing the total amount of snow that can be transported, the company finds that there is a synergistic loading effect between different truck types: when the number of small trucks is denoted by $x$, the number of large trucks is denoted by $y$, and the company also chooses to activate a class of auxiliary loading devices (denoted by $z$ units), then under the combined action of the small trucks, large trucks, and the auxiliary loading devices, an additional joint loading capacity is created. This joint loading amount equals $2$ times the number of small trucks times the number of large trucks times the number of auxiliary loading devices, i.e., $2\\cdot x\\cdot y\\cdot z$ units of snow. For computational convenience, assume that the number of auxiliary loading devices satisfies $z\\le 3$. Therefore, the total transportable snow equals “small-truck capacity $30x$” plus “large-truck capacity $50y$” plus “joint loading $2\\cdot x\\cdot y\\cdot z$,” i.e., on the original basis it increases by a nonlinear joint-loading term $2\\cdot x\\cdot y$.\n\nHow many trucks of each type should be used to maximize the total amount of snow that can be transported under the above synergistic loading mechanism?",
+    "answer": 876.0,
+    "index": "NLP4LP_prob_183",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “应使用多少辆每种类型的卡车，才能使可运输的积雪总量最大化？”，隐含的目标函数为总运输量 = 30×小型卡车数量 + 50×大型卡车数量。 修改后相关描述: 在目标函数中加入小型卡车数量、大型卡车数量和辅助装载设备数量三者相乘形成的联合装载量项，具体为：设小型卡车数量为 x、大型卡车数量为 y、辅助装载设备数量为 z（设定 z=1），总可运输积雪量从原先的“30x + 50y”修改为“30x + 50y + 2·x·y·z”，即“30x + 50y + 2·x·y·1”，并在题目中以自然语言表述为：在辅助装载设备的作用下，小型卡车与大型卡车之间产生协同装载效应，额外增加的联合装载量等于 2 乘以小型卡车数量乘以大型卡车数量乘以辅助装载设备数量，因此总可运输量中新增 2·x·y 这一非线性联合装载部分。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_183\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_080.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 22.281612699996913,
+    "total_tokens": 2433
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 876.0
+  }
+}

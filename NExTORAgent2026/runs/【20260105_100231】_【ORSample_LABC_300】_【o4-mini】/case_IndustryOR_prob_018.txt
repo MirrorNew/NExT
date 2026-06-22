@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "IndustryOR_prob_018",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_018\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_018\\code.py",
+    "NLtype": "Linear",
+    "question": "A furniture store can choose to order chairs from three different manufacturers: A, B, and C. The cost of ordering each chair from manufacturer A is $50, from manufacturer B is $45, and from manufacturer C is $40. The store needs to minimize the total cost of the order.\n\nAdditionally, each order from manufacturer A will include 15 chairs, while each order from manufacturers B and C will include 10 chairs. The number of orders must be an integer. The store needs to order at least 100 chairs.\n\nEach order from manufacturer A will include 15 chairs, while each order from manufacturers B and C will include 10 chairs. The store needs to order at most 500 chairs.\n\nIf the store decides to order chairs from manufacturer A, it must also order at least 10 chairs from manufacturer B.\n\nFurthermore, if the store decides to order chairs from manufacturer B, it must also order chairs from manufacturer C.",
+    "answer": 4000,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4000.0"
+    ],
+    "time_seconds": 37.79244309999922,
+    "total_tokens": 2326
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4000.0"
+    ],
+    "ground_truth": 4000
+  }
+}

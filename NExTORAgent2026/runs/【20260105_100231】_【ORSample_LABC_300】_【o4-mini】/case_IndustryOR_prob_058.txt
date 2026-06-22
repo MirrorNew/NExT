@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A candy factory uses raw materials A, B, and C to process and produce three different brands of candies A, B, and C. The contents (composition) of the three raw materials A, B, and C in each candy brand, the raw material costs, the monthly upper bounds on the supply of each raw material, and the unit processing costs and selling unit prices of the three candy brands are given in Table 1-7.\n\nTable 1-7\n\n| Item                     | A               | B               | C               | Raw material cost (yuan/kg) | Monthly supply upper bound (kg) |\n|:-------------------------|:----------------|:----------------|:----------------|:----------------------------|:--------------------------------|\n| A                        | ≥ 60%           | ≥ 15%           |                 | 2.00                        | 2000                            |\n| B                        |                 |                 |                 | 1.50                        | 2500                            |\n| C                        | ≤ 20%           | ≤ 60%           | ≤ 50%           | 1.00                        | 1200                            |\n| Processing cost (yuan/kg)| 0.50            | 0.40            | 0.30            |                             |                                 |\n| Selling unit price (yuan/kg) | 3.40        | 2.85            | 2.25            |                             |                                 |\n\nConsidering that monthly market demand has certain seasonal fluctuations, the factory estimates that in some month $t$ (with time measured in months and counted starting from $t = 1$), the effective demand upper bound for candy A will fluctuate around the planned production quantity according to a small-amplitude cosine cycle. Suppose that during planning the factory originally set the planned monthly output of candy A to be $x_A$ kilograms. Then in month $t$, the actually allowed effective demand upper bound for candy A can be approximately described as follows: based on the planned output $x_A$, it is multiplied by a periodic fluctuation factor of “$1$ plus $0.1$ times a cosine function,” where the argument of the cosine function is proportional to time $t$, and the fluctuation period is 6 months, i.e., $\\cos(\\pi\\cdot t/6)$. This means that in a given month $t$, the upper bound on the saleable quantity of candy A is approximately $x_A \\times [1 + 0.1 \\times \\cos(\\pi\\cdot t/6)]$, where $0.1$ is a fixed coefficient representing a maximum fluctuation of $\\pm 10\\%$ around the planned value, and $6$ is a fixed constant indicating that demand completes one full up-and-down fluctuation cycle every 6 months.\n\nUnder this assumption, in which month of a year should the factory produce how many kilograms of each of the three candy brands, so that, subject to the above constraints on raw material composition, raw material supply upper bounds, and the periodic demand upper bound for candy A in that month, the profit in that month (within the year) is maximized? Provide that month; in the output, you must use `print(f\"month t = {t.X}\")`.",
+    "answer": "None",
+    "index": "IndustryOR_prob_058",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 问：该厂每月应生产三种牌号糖果各多少千克，才能使利润最大？, 修改后相关描述: 考虑到每月市场需求存在一定的季节性波动，厂方估计某个月份 t（以月为时间单位，从 t = 1 开始计数）中糖果 A 的有效需求上限会围绕计划产量按一个小幅度的余弦周期变化。设该厂在规划时原本计划糖果 A 的月产量为 x_A 千克，则在第 t 个月，糖果 A 实际允许的有效需求上限可近似描述为：在计划产量 x_A 的基础上，乘以一个“1 加上 0.1 倍余弦函数”的周期性浮动因子，其中余弦函数的自变量与时间 t 成正比，并以 6 个月为一个波动周期，即采用 cos(π·t/6)。这意味着在任何一个给定月份 t，糖果 A 的可售量上限约为 x_A × [1 + 0.1 × cos(π·t/6)]，其中 0.1 为固定系数，表示最大为计划值的 ±10% 波动，6 为固定常数，表示需求每 6 个月完成一个完整的上下波动周期。在此假设下，问：在哪个一个月，该厂应该生产三种牌号糖果各多少千克，才能在满足上述原料含量、原料供应上限以及糖果 A 在该月份的周期性需求上限约束的前提下，使在一年内的该月利润最大？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_058\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_012.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 52.03492330000154,
+    "total_tokens": 7288
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": "None"
+  }
+}

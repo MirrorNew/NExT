@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "LogiFlow Solutions is responsible for delivering two types of parcels: Standard and Express. Each parcel must be transported entirely by air freight or entirely by ground freight. A total of 150 cubic meters of air-freight capacity and 210 cubic meters of ground-freight capacity are available. One Standard parcel requires either 17 cubic meters of air capacity or 30 cubic meters of ground capacity; one Express parcel requires either 5 cubic meters of air capacity or 13 cubic meters of ground capacity. Each Standard parcel generates revenue of 40 dollars.\n\nFor the revenue from Express parcels, introduce a nonlinear revenue structure: suppose the number of Express parcels shipped by air is $a$ (with $a \\ge 1$), the number of Express parcels shipped by ground is $b$ (with $b \\ge 2$), and the operational intensity level invested in the Express business during a certain period is $c$ (with $c \\le 1$). Then the total revenue from all Express parcels is no longer computed linearly as 15 dollars per parcel; instead, it is computed as $0.2$ times the product of these three decision variables, where the coefficient $0.2$ is a known constant. Under the air and ground capacity constraints, how should one decide the transportation mode for Standard and Express parcels and the operational intensity level for the Express business, in order to maximize LogiFlow Solutions’ total revenue from parcel delivery?",
+    "answer": 560.8,
+    "index": "LogiOR_prob_042",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每个标准件包裹可获得 40 美元收入，每个快件包裹可获得 15 美元收入。, 修改后相关描述: 每个标准件包裹可获得 40 美元收入。对于快件包裹的收入，引入一个非线性收益结构：假设通过空运运输的快件数量为 a，通过地运运输的快件数量为 b，某一时段内投入于快件业务的运营强度水平为 c，则所有快件包裹的总收入为 0.02 × a × b × c，其中 0.02 为给定常数，不再按每个快件包裹 15 美元线性计算。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_042\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_034.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "560.8"
+    ],
+    "time_seconds": 71.17574580000655,
+    "total_tokens": 6368
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "560.8"
+    ],
+    "ground_truth": 560.8
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "The factory produces three products: I, II, and III. Each product must go through two processing stages: A and B. Assume the factory has two types of machines that can perform stage A, denoted by A1 and A2; and two types of machines that can perform stage B, denoted by B1 and B2. Product I can be processed on either type of A-machine in stage A, but in stage B it can only be processed on machine B1; product III can only be processed on machines A2 and B2. The unit processing times of each product, raw material costs, selling prices, the available machine-hours of each machine type, and the full-capacity operating costs of the machines are shown in Table 1-18. The objective is to determine the optimal production plan that maximizes the factory’s profit.\n\nOn this basis, introduce the following nonlinear conditions: if the total production quantity of product II exceeds 5000 units, then starting from the 5001st unit, for each additional 1 unit of product II produced, an extra overtime labor cost of 0.10 yuan must be paid; meanwhile, if the sum of the total production quantities of products I and III exceeds 8000 units, then once it exceeds 8000 units, it is necessary to additionally activate a temporary production line, and this temporary line requires a one-time fixed cost of 1000 yuan, which does not vary with the amount by which the total exceeds 8000. The above additional costs are all included in cost, thereby affecting the factory’s total profit.\n\nTable 1-18  \n| Machine                   | Product I | Product II | Product III | Available machine-hours | Full-capacity operating cost (yuan) |\n|--------------------------|-----------|------------|-------------|-------------------------|-------------------------------------|\n| A1                       | 5         | 10         |             | 10000                   | 321                                 |\n| A2                       | 7         | 9          | 12          | 4000                    | 250                                 |\n| B1                       | 6         | 8          |             | 7000                    | 783                                 |\n| B2                       | 4         |            | 11          | 4000                    | 200                                 |\n| B3                       | 7         |            |             |                         |                                     |\n| Raw material cost (yuan/unit) | 0.25  | 0.35       | 0.50        |                         |                                     |\n| Unit price (yuan/unit)   | 1.25      | 2.00       | 2.80        |                         |                                     |",
+    "answer": 712.875,
+    "index": "IndustryOR_prob_030",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: “各产品的单位加工时间、原材料成本、销售价格，各类设备的有效机时以及设备满负荷运转成本如表 1‑18 所示。要求安排最优生产计划，使工厂利润最大。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_030\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_005.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "889.75"
+    ],
+    "time_seconds": 57.335671999986516,
+    "total_tokens": 5453
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "889.75"
+    ],
+    "ground_truth": 712.875
+  }
+}

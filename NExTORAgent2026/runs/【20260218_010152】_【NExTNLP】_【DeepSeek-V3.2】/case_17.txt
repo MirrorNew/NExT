@@ -1,0 +1,204 @@
+{
+  "entry": {
+    "index": 17,
+    "question": "At the dispatch center of Theresia Municipality of Kazdel State Power Grid, engineers are dealing with the problem of power load distribution during the evening peak period. With the surge in air conditioning load in summer and the increased volatility of renewable energy power generation, the optimization and dispatch of traditional thermal power units faces greater challenges. The regional power grid is connected to multiple coal-fired units with different technical parameters. Unit 1 is the main unit that has been in service for many years, Unit 2 uses a new combustion technology, and Unit 3 is a flexible unit with rapid peak-shaving capabilities. The power generation efficiency curve of each unit is significantly different due to the age of the equipment, fuel type and maintenance status. \n\nAt the same time, the provincial energy regulatory department requires the dispatch center to strictly implement environmental emission standards and economic dispatch principles while meeting the reliability of power supply. The fluctuation of the day-ahead clearing price in the power trading market also makes fuel cost optimization a key factor affecting the profits of power generation companies. The dispatch algorithm needs to comprehensively consider the engineering constraints such as the minimum stable operating load of the unit, the ramp rate limit, and the coal consumption characteristic curves corresponding to different load ranges. This complex optimization problem requires the use of operations research methods to find the global optimal solution under hundreds of constraints. \n\nThe power system needs to dispatch the output of three generating units to meet the total grid load demand of 800 MW at the lowest fuel cost. The fuel cost curve of each unit is a quadratic function $C_i(P_i) = a_i + b_i P_i + c_i P_i^2$, where the parameter set $a=[5000,3000,1000]$ yuan, $b=[5,3,8]$ yuan/MW, $c=[0.01,0.02,0.005]$ yuan/MW². The output of each unit must meet the technical restrictions: Unit 1 $100\\leq P_1\\leq500$ MW, Unit 2 $50\\leq P_2\\leq300$ MW, Unit 3 $50\\leq P_3\\leq300$ MW. Reasonable dispatch minimizes the total fuel cost.",
+    "answer": 15650.0,
+    "Parameters_List": [
+      {
+        "Name": "load_demand",
+        "Type": "integer",
+        "Value": 800
+      },
+      {
+        "Name": "a",
+        "Type": "list",
+        "Value": [
+          5000,
+          3000,
+          1000
+        ]
+      },
+      {
+        "Name": "b",
+        "Type": "list",
+        "Value": [
+          5,
+          3,
+          8
+        ]
+      },
+      {
+        "Name": "c",
+        "Type": "list",
+        "Value": [
+          0.01,
+          0.02,
+          0.005
+        ]
+      },
+      {
+        "Name": "P_min",
+        "Type": "list",
+        "Value": [
+          100,
+          50,
+          50
+        ]
+      },
+      {
+        "Name": "P_max",
+        "Type": "list",
+        "Value": [
+          500,
+          300,
+          300
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "At the dispatch center...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "With the surge in...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The regional power grid...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Unit 1 is the main...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The power generation...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "At the same time...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The fluctuation of...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The dispatch algorithm needs...",
+        "Constraint types mentioned (minimum stable load, ramp-rate limits, coal-consumption curves) but no numerical values"
+      ],
+      [
+        "9",
+        "This complex optimization...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The power system needs...",
+        "Load-balance constraint P1 + P2 + P3 = 800 and objective to minimize fuel cost"
+      ],
+      [
+        "11",
+        "The fuel cost curve...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "The output of each...",
+        "Unit output bounds for P1, P2, P3"
+      ],
+      [
+        "13",
+        "Reasonable dispatch minimizes...",
+        "Restates objective"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "P1",
+        "Meaning": "Output power of Unit 1",
+        "Type": "continuous",
+        "Range ": "100 to 500 MW"
+      },
+      {
+        "symbol": "P2",
+        "Meaning": "Output power of Unit 2",
+        "Type": "continuous",
+        "Range ": "50 to 300 MW"
+      },
+      {
+        "symbol": "P3",
+        "Meaning": "Output power of Unit 3",
+        "Type": "continuous",
+        "Range ": "50 to 300 MW"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Load balance",
+        "P1 + P2 + P3 = 800",
+        "sentence numbers: 10"
+      ],
+      [
+        "Unit 1 lower bound",
+        "P1 ≥ 100",
+        "sentence numbers: 12"
+      ],
+      [
+        "Unit 1 upper bound",
+        "P1 ≤ 500",
+        "sentence numbers: 12"
+      ],
+      [
+        "Unit 2 lower bound",
+        "P2 ≥ 50",
+        "sentence numbers: 12"
+      ],
+      [
+        "Unit 2 upper bound",
+        "P2 ≤ 300",
+        "sentence numbers: 12"
+      ],
+      [
+        "Unit 3 lower bound",
+        "P3 ≥ 50",
+        "sentence numbers: 12"
+      ],
+      [
+        "Unit 3 upper bound",
+        "P3 ≤ 300",
+        "sentence numbers: 12"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Reasonable dispatch minimizes the total fuel cost.",
+      "Mathematical_expressions": "minimize F = ∑_{i=1}^3 (a_i + b_i P_i + c_i P_i^2)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "15650.0"
+    ],
+    "time_seconds": 55.56647420000081,
+    "total_tokens": 6042
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "15650.0"
+    ],
+    "ground_truth": 15650.0
+  }
+}

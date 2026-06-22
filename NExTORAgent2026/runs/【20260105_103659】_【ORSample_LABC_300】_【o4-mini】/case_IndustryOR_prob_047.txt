@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A factory produces two models of microcomputers, Model A and Model B. Each model must undergo the same two processes. The processing time of each model on each process, the sales profit, and the factory’s maximum weekly processing capacities are shown in Table 3.1.\n\nTable 3.1\n\n| Process | Model |  | Maximum weekly processing capacity |\n| :---: | :---: | :---: | :---: |\n|  | A | B |  |\n| I (hours/unit) | 4 | 6 | 150 |\n| II (hours/unit) | 3 | 2 | 70 |\n| Profit (yuan/unit) | 300 | 450 |  |\n\nGiven the factory’s operating goals:\n\np1: The total weekly profit must not be less than 10,000 yuan;\n\np2: Due to contract requirements, at least 10 units of Model A and at least 15 units of Model B must be produced each week;\n\np3: The processing time of Process I each week must be exactly 150 hours; the processing time of Process II is preferably fully utilized, and appropriate overtime is allowed;\n\np4: If overtime production is scheduled in Process II, then the unit profits of Models A and B decrease by 20 yuan and 25 yuan, respectively, and Process II allows at most 30 hours of overtime per week.\n\nWhen formulating the mathematical model, let the weekly production quantity of Model A be $x$ units, that of Model B be $y$ units, and the weekly overtime scheduled for Process II be $z$ hours. Introduce a nonlinear operating strategy: considering that overtime makes production organization more complex, the enterprise attaches a “synergistic input coefficient” to the overtime arrangement of Process II, stipulating that when $x$, $y$, and $z$ are all large simultaneously, additional synergistic profit can be generated, in the form: the additional weekly synergistic profit equals $0.2\\times x\\times y\\times z$ yuan, where the coefficient $0.2$ is a given constant and $x$, $y$, and $z$ are the three decision variables defined above. That is, on the basis of the original linear profit calculated by units produced, this nonlinear synergistic profit term $0.2\\times x\\times y\\times z$ is added. All other conditions and constraints remain unchanged. Based on this, please formulate the mathematical model of the problem.",
+    "answer": 12274.0,
+    "index": "IndustryOR_prob_047",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 题目中利润部分仅为线性形式，即总利润只等于 A 型与 B 型产品的单位利润（在有无加班时作相应线性调整）乘以各自产量之和，没有额外的与多变量相乘相关的利润项。修改后相关描述: 在建立数学模型时增加了一个非线性协同利润项：设每周生产 A 型产品数量为 x，B 型产品数量为 y，II 工序加班时间为 z，引入额外协同利润为0.2×x×y×z 元，其中0.2 为具体给定常数，x、y、z 都为决策变量，并规定总利润在原有线性利润基础上再加上该非线性协同利润0.2×x×y×z，其余叙述与约束保持不变。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_047\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_027.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 24.750017200000002,
+    "total_tokens": 3027
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 12274.0
+  }
+}

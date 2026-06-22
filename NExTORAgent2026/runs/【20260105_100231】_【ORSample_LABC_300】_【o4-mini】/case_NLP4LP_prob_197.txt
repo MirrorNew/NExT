@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Calcium and magnesium are contained in two supplements, Supplement A and Supplement B. One serving of Supplement A contains 30 grams of calcium and 50 grams of magnesium. One serving of Supplement B contains 60 grams of calcium and 10 grams of magnesium. The cost per serving of Supplement A is 14 dollars, and the cost per serving of Supplement B is 25 dollars. A patient must take these two supplements every day to ensure an intake of at least 400 grams of calcium and 50 grams of magnesium. In addition, it is required that the ratio of the total number of servings of Supplement A taken per day to the total number of servings of Supplement B taken per day does not exceed 3; that is, the number of servings of Supplement A divided by the number of servings of Supplement B should be less than or equal to 3. Determine how many servings of each supplement the patient should take each day so as to minimize the daily cost.",
+    "answer": 167.11111,
+    "index": "NLP4LP_prob_197",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50克镁。确定该患者每天应服用多少份每种保健品，以使其每日成本最小。, 修改后相关描述: 某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50克镁。此外，还要求患者每天服用的保健品A总份数与保健品B总份数的比值不超过3，也就是说，保健品A的份数除以保健品B的份数应当小于或等于3。确定该患者每天应服用多少份每种保健品，以使其每日成本最小。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_052.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "166.6666667"
+    ],
+    "time_seconds": 36.35684530000435,
+    "total_tokens": 2145
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "166.6666667"
+    ],
+    "ground_truth": 167.11111
+  }
+}

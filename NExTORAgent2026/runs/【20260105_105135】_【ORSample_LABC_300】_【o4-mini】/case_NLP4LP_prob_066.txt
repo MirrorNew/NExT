@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "The post office is purchasing stamping machines. They can buy either dual-type stamping machines or single-type stamping machines. A dual-type stamping machine can stamp 50 letters per minute, while a single-type stamping machine can stamp 30 letters per minute. A dual-type stamping machine requires 20 units of glue per minute, while a single-type stamping machine requires 15 units of glue per minute. However, empirical measurement shows that as the number of single-type stamping machines increases, due to additional losses in the glue delivery pipelines among multiple machines, the total glue consumption of the single-type machines is no longer a simple linear relationship, but instead increases slightly in the form of a $1.2$-th power. Specifically, let the number of single-type stamping machines be denoted by $S$. Then the total glue usage per minute for the single-type machines is adjusted to “the $1.002$-th power of $(15\\times S)$,” i.e., the glue usage of the single-type machines is $(15S)^{1.002}$ units. Because single-type stamping machines are quieter, the number of single-type stamping machines must be greater than the number of dual-type stamping machines. In addition, the post office wants to ensure that they can stamp at least 300 letters per minute, and that they use at most 150 units of glue per minute (the total glue usage equals the glue usage of the dual-type stamping machines plus the glue usage of the single-type stamping machines computed as $(15S)^{1.002}$). How many machines of each type should they purchase to minimize the total number of stamping machines?",
+    "answer": 8.0,
+    "index": "NLP4LP_prob_066",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “单型号盖章机每分钟需要 15 个单位的胶水。” 修改后相关描述: “双型号盖章机每分钟需要 20 个单位的胶水，而单型号盖章机每分钟需要 15 个单位的胶水。不过，经实际测量发现，当单型号盖章机数量增加时，由于多台机器之间的胶水输送管路会产生额外损耗，单型号盖章机的胶水总消耗不再是简单的线性关系，而是以 1.2 次幂的形式略微增加。具体来说，若单型号盖章机的数量记为 S，则单型号盖章机每分钟的胶水总用量被修正为 “(15 × S) 的 1.2 次幂”，即单型号盖章机的胶水使用量为 (15S)^1.2 个单位。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_066\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_051.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 29.399738000007346,
+    "total_tokens": 2720
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 8.0
+  }
+}

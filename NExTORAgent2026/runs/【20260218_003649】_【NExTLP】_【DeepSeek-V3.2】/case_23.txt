@@ -1,0 +1,354 @@
+{
+  "entry": {
+    "index": 23,
+    "question": "The Jinling factory under the Donghai Trading Group currently produces four types of core components (A, B, C, D), and supplies products to major regional distribution centers through a multi-level transportation network throughout the country. The factory has a flexible multi-product mixed production line. The production department needs to formulate a monthly production plan based on market orders, and the finance department is responsible for calculating regular and overtime production costs and inventory holding costs, and providing decision-makers with low-cost, high-service production-inventory planning solutions. The group takes \"precise production and coordinated distribution\" as its overall strategic goal, and strives to optimize the allocation of production and inventory resources while meeting market demand. Now it is planning to customize a six-month plan. production plan. \n\nIn terms of supply, the regular production capacity of the Jinling factory for the four products is limited by product as shown in the following table. Overtime production can only be used when the total production of the item reaches the maximum. \n\nIn terms of demand, the monthly demand for the four products will be different in the next six months, but the sum of the demand for the four products in any month must be equal to the total market demand, and no product should be backordered at the end of the month. \n\nIn terms of inventory balance, a separate inventory account must be established for each product. The inventory at the end of the month is equal to the inventory of the previous month plus the sum of the regular production and overtime production of the current month minus the demand for the product in the current month, and all inventory at the end of the month must be non-negative. \n\n In terms of additional or priority constraints, after the regular production of product A is completed, the by-product can be recycled, and two additional products B can be produced for free; at the same time, since products AB are similar, the number of AB products produced is usually the same. However, if the actual production of product B exceeds the production of product A due to excessive demand for product B in a certain month, the excess will be regarded as a separate increase in production. When calculating the price of this part of product B, it is necessary to add 1 yuan per piece to the regular unit price of product B (in order to simplify calculations and encourage not to work overtime, regardless of whether the product B is produced during overtime, it is calculated based on the regular unit price of product B). \n\nIf the regular unit price of products C and D in a certain month is If the sum of the production volume and overtime production volume exceeds 40 pieces, starting from the next month, the regular monthly production capacity of both products C and D will be expanded to 36 pieces and all unit prices will be reduced by 1 yuan (overtime cost is also calculated by multiplying the unit price by 1.5 and then minus 1). \n\nAll production volumes and inventory volumes are integers greater than or equal to zero, and the initial inventory of each product is zero. The objective function is to minimize the sum of the regular production cost, overtime production cost, expansion cost and month-end inventory holding cost of each product within six months under the premise of satisfying the above constraints. \n\nPlease give the calculated total cost based on the above scenario and description. \n\nMonthly demand\n\n| Product \\ Month | January | February | March | April | May | June |\n| :---------: | :--: | :--: | :--: | :--: | :--: | :--: |\n| A | 20 | 22 | 25 | 18 | 15 | 10 |\n| B | 30 | 28 | 35 | 32 | 25 | 20 |\n| C | 15 | 20 | 30 | 40 | 20 | 20 |\n| D | 15 | 20 | 30 | 20 | 10 | 10 |\n| **Total Dₜ** | 80 | 90 | 120 | 110 | 70 | 60 |\n\nMonthly production capacity\n\n| Parameter / Product or month | A | B | C | D |\n| :-------------------: | :--: | :--: | :--: | :--: |\n| Regular production capacity limit (pieces/month) | 30 | 30 | 20 | 20 |\n| Overtime production capacity limit (pieces/month) | 6 | 6 | 4 | 4 |\n| Regular production unit price (Yuan/piece) | 9 | 11 | 13 | 10 |\n| Overtime production unit price (Yuan/piece) | 13.5 | 16.5 | 19.5 | 15 |",
+    "answer": 5709.0,
+    "Parameters_List": [
+      {
+        "Name": "num_products",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "product_types",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "Name": "planning_horizon",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "free_B_per_A",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "markup_unit_price_B",
+        "Type": "float",
+        "Value": 1
+      },
+      {
+        "Name": "threshold_CD",
+        "Type": "integer",
+        "Value": 40
+      },
+      {
+        "Name": "expanded_capacity_CD",
+        "Type": "integer",
+        "Value": 36
+      },
+      {
+        "Name": "price_reduction_CD",
+        "Type": "float",
+        "Value": 1
+      },
+      {
+        "Name": "overtime_price_multiplier",
+        "Type": "float",
+        "Value": 1.5
+      },
+      {
+        "Name": "overtime_price_reduction",
+        "Type": "float",
+        "Value": 1
+      },
+      {
+        "Name": "initial_inventory",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "Table_1_monthly_demand",
+        "Type": "tuple",
+        "Value": {
+          "A": [
+            20,
+            22,
+            25,
+            18,
+            15,
+            10
+          ],
+          "B": [
+            30,
+            28,
+            35,
+            32,
+            25,
+            20
+          ],
+          "C": [
+            15,
+            20,
+            30,
+            40,
+            20,
+            20
+          ],
+          "D": [
+            15,
+            20,
+            30,
+            20,
+            10,
+            10
+          ],
+          "D_t": [
+            80,
+            90,
+            120,
+            110,
+            70,
+            60
+          ]
+        }
+      },
+      {
+        "Name": "Table_2_monthly_production_capacity",
+        "Type": "tuple",
+        "Value": {
+          "regular_capacity": {
+            "A": 30,
+            "B": 30,
+            "C": 20,
+            "D": 20
+          },
+          "overtime_capacity": {
+            "A": 6,
+            "B": 6,
+            "C": 4,
+            "D": 4
+          },
+          "regular_unit_price": {
+            "A": 9,
+            "B": 11,
+            "C": 13,
+            "D": 10
+          },
+          "overtime_unit_price": {
+            "A": 13.5,
+            "B": 16.5,
+            "C": 19.5,
+            "D": 15
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The Jinling factory under the Donghai...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The factory has a flexible multi-product...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The production department needs to formulate...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The group takes ‘precise production and...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Now it is planning to customize a six-month...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "In terms of supply, the regular production...",
+        "Regular-capacity limit constraints"
+      ],
+      [
+        "7",
+        "Overtime production can only be used when the...",
+        "Overtime-usage condition (linking reg-max and OT)"
+      ],
+      [
+        "8",
+        "In terms of demand, the monthly demand for...",
+        "Demand-must-be-met & no backorder"
+      ],
+      [
+        "9",
+        "In terms of inventory balance, a separate inventory...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The inventory at the end of the month is equal to...",
+        "Inventory-balance equations + nonnegativity"
+      ],
+      [
+        "11",
+        "In terms of additional or priority constraints, after the...",
+        "Free B by-product and AB-pairing constraint"
+      ],
+      [
+        "12",
+        "However, if the actual production of product B exceeds...",
+        "Definition of excess B production variable"
+      ],
+      [
+        "13",
+        "When calculating the price of this part of product B,...",
+        "No constraints (cost calculation)"
+      ],
+      [
+        "14",
+        "If the regular unit price of products C and D in a certain...",
+        "Expansion trigger and dynamic capacity & price adjustment"
+      ],
+      [
+        "15",
+        "All production volumes and inventory volumes are integers...",
+        "Integrality and nonnegativity + initial inventory initialization"
+      ],
+      [
+        "16",
+        "The objective function is to minimize the sum of the...",
+        "Optimization objective"
+      ],
+      [
+        "17",
+        "Please give the calculated total cost based on the above...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x^r_{i,t}",
+        "Meaning": "Regular production volume of product i in month t",
+        "Type": "integer",
+        "Range ": "0 ≤ x^r_{i,t} ≤ RCap_i"
+      },
+      {
+        "symbol": "x^o_{i,t}",
+        "Meaning": "Overtime production volume of product i in month t",
+        "Type": "integer",
+        "Range ": "0 ≤ x^o_{i,t} ≤ OCap_i"
+      },
+      {
+        "symbol": "b_{i,t}",
+        "Meaning": "Indicator if regular production of i in t is at capacity",
+        "Type": "BINARY",
+        "Range ": "b_{i,t} ∈ {0,1}"
+      },
+      {
+        "symbol": "I_{i,t}",
+        "Meaning": "Ending inventory of product i at end of month t",
+        "Type": "integer",
+        "Range ": "I_{i,t} ≥ 0; I_{i,0}=0"
+      },
+      {
+        "symbol": "f_t",
+        "Meaning": "Free by-product B units from A in month t",
+        "Type": "integer",
+        "Range ": "f_t ≥ 0"
+      },
+      {
+        "symbol": "e_{B,t}",
+        "Meaning": "Excess B production above A pairing in month t",
+        "Type": "integer",
+        "Range ": "e_{B,t} ≥ 0"
+      },
+      {
+        "symbol": "u_t",
+        "Meaning": "Indicator if combined C+D production exceeds 40 in month t",
+        "Type": "BINARY",
+        "Range ": "u_t ∈ {0,1}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Regular production capacity",
+        "x^r_{i,t} ≤ RCap_i ∀i∈{A,B,C,D},t=1…6",
+        "sentence numbers:6"
+      ],
+      [
+        "Overtime capacity & usage condition",
+        "x^o_{i,t} ≤ OCap_i·b_{i,t}; x^r_{i,t} ≥ RCap_i·b_{i,t}; b_{i,t} ∈ {0,1}",
+        "sentence numbers:7"
+      ],
+      [
+        "Demand satisfaction (no backorder)",
+        "I_{i,t-1}+x^r_{i,t}+x^o_{i,t} + (f_t if i=B) ≥ D_{i,t}+I_{i,t}",
+        "sentence numbers:8"
+      ],
+      [
+        "Inventory balance",
+        "I_{i,t} = I_{i,t-1} + x^r_{i,t} + x^o_{i,t} + (f_t if i=B) – D_{i,t}",
+        "sentence numbers:10"
+      ],
+      [
+        "Inventory nonnegativity",
+        "I_{i,t} ≥ 0 ∀i,t",
+        "sentence numbers:10"
+      ],
+      [
+        "Free B by-product",
+        "f_t = 2·x^r_{A,t} ∀t",
+        "sentence numbers:11"
+      ],
+      [
+        "Excess B production",
+        "e_{B,t} ≥ (x^r_{B,t}+x^o_{B,t}) – (x^r_{A,t}+x^o_{A,t}); e_{B,t} ≥ 0",
+        "sentence numbers:12"
+      ],
+      [
+        "B production decomposition",
+        "x^r_{B,t}+x^o_{B,t}=f_t + (x^r_{B,t}+x^o_{B,t} – x^r_{A,t}–x^o_{A,t}) + min(x^r_{B,t}+x^o_{B,t},x^r_{A,t}+x^o_{A,t})",
+        "sentence numbers:11-12"
+      ],
+      [
+        "Expansion trigger (C+D)",
+        "x^r_{C,t}+x^o_{C,t}+x^r_{D,t}+x^o_{D,t} ≤ 40+M·u_t; x^r_{C,t}+x^o_{C,t}+x^r_{D,t}+x^o_{D,t} ≥ 41·u_t; u_t ∈ {0,1}",
+        "sentence numbers:14"
+      ],
+      [
+        "Expanded capacity C,D",
+        "x^r_{i,t} ≤ 20+16·u_{t-1} ∀i∈{C,D},t=2…6",
+        "sentence numbers:14"
+      ],
+      [
+        "Integrality & nonnegativity",
+        "x^r_{i,t},x^o_{i,t},I_{i,t},f_t,e_{B,t} ∈ ℤ₊; b_{i,t},u_t ∈ {0,1}",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The objective function is to minimize the sum of the regular production cost, overtime production cost, expansion cost and month-end inventory holding cost of each product within six months under the premise of satisfying the above constraints.",
+      "Mathematical_expressions": "Min Σ_{t=1}^6 [ Σ_{i∈{A,B,C,D}} (p^r_i x^r_{i,t} + p^o_i x^o_{i,t}) + (p^r_B+1)e_{B,t} + Σ_{i∈{A,B,C,D}} h_i I_{i,t} + C_exp u_t ]"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0"
+    ],
+    "time_seconds": 129.53371960000368,
+    "total_tokens": 10127
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "0.0"
+    ],
+    "ground_truth": 5709.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "In an urban planning context, it is necessary to choose locations for public transit stops to serve a set of 15 passenger demand points, with 5 candidate stop locations available. The distance from each demand point to each candidate stop is known, and a demand point is considered “covered” by a stop if and only if the distance between the demand point and the stop does not exceed 300 meters. In addition, the city plan introduces a piecewise additional administrative cost: if the number of selected stops exceeds 3 (i.e., 4 or 5 stops are selected), then an additional fixed administrative cost of 500,000 yuan must be paid; if the number of selected stops does not exceed 3 (i.e., 1, 2, or 3 stops are selected), then this additional administrative cost is not incurred. Question: under the above coverage constraints and the piecewise additional administrative cost, what is the minimum number of stop locations that must be selected to ensure that all demand points are covered?\n\nThe distance matrix between each demand point and each candidate stop is given as follows:\n\n| Demand node \\ Stop | 1    | 2    | 3    | 4    | 5    |\n|-----------|------|------|------|------|------|\n| 1         | 389  | 515  | 170  | 143  | 617  |\n| 2         | 562  | 678  | 265  | 640  | 629  |\n| 3         | 206  | 594  | 180  | 564  | 683  |\n| 4         | 574  | 105  | 311  | 99   | 550  |\n| 5         | 616  | 490  | 99   | 473  | 682  |\n| 6         | 571  | 258  | 494  | 749  | 61   |\n| 7         | 573  | 234  | 207  | 635  | 318  |\n| 8         | 70   | 53   | 399  | 740  | 494  |\n| 9         | 229  | 190  | 550  | 654  | 394  |\n| 10        | 50   | 56   | 459  | 143  | 478  |\n| 11        | 95   | 378  | 507  | 647  | 135  |\n| 12        | 767  | 200  | 569  | 689  | 621  |\n| 13        | 729  | 333  | 91   | 86   | 386  |\n| 14        | 633  | 163  | 562  | 184  | 384  |\n| 15        | 67   | 515  | 224  | 502  | 345  |",
+    "answer": 3.0,
+    "index": "LogiOR_prob_009",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 问：至少需要选择多少个站点位置，才能保证所有需求点都被覆盖？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_009\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_042.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3.0"
+    ],
+    "time_seconds": 38.070893600001,
+    "total_tokens": 2978
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "3.0"
+    ],
+    "ground_truth": 3.0
+  }
+}

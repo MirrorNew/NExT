@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A convenience supermarket plans to open several chain stores in a newly built residential area in the northwestern suburbs of the city. To facilitate residents’ shopping, the distance from any residential area to at least one chain store must not exceed 800 m. Table 5-1 provides each newly built residential area and the residential areas contained within a radius of 800 m. In addition, introduce the following nonlinear condition: if the final number of selected chain stores exceeds 4, then, because an additional unified information management and cold-chain distribution system must be deployed, a one-time extra fixed cost of 50,000 yuan will be incurred; if the number of chain stores is no more than 4, then this extra fixed cost will not be incurred.  \n\nProblem: Under the above extra fixed-cost condition, what is the minimum number of chain stores that the supermarket must build among these residential areas? Which residential areas should be selected for construction?\n\n| Area Code | Residential areas covered within an 800 m radius |\n|----------|--------------------------------------------------|\n| A        | A, C, E, G, H, I                                |\n| B        | B, H, I                                         |\n| C        | A, C, G, H, I                                   |\n| D        | D, J                                            |\n| E        | A, E, G                                         |\n| F        | F, J, K                                         |\n| G        | A, C, E, G                                      |\n| H        | A, B, C, H, I                                   |\n| I        | A, B, C, H, I                                   |\n| J        | D, F, J, K, L                                   |\n| K        | F, J, K, L                                      |\n| L        | J, K, L                                         |",
+    "answer": 3.0,
+    "index": "IndustryOR_prob_009",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: “表 5-1 给出了各个新建住宅区及其半径 800 m 范围内所包含的住宅区。问题：超市最少需要在这些住宅区中建设多少个连锁店？应选择在哪些住宅区建设？”, 修改后相关描述: “表 5-1 给出了各个新建住宅区及其半径 800 m 范围内所包含的住宅区。除此之外，引入如下非线性条件：如果最终选择建设的连锁店数量超过 4 家，则由于需要额外配置一套统一的信息管理与冷链配送系统，会产生一笔一次性的额外固定成本 50000 元；如果建设的连锁店数量不超过 4 家，则不产生这笔额外固定成本。问题：在考虑上述额外固定成本条件的情况下，超市最少需要在这些住宅区中建设多少个连锁店？应选择在哪些住宅区建设？”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_009\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_016.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3.0"
+    ],
+    "time_seconds": 33.132434500003,
+    "total_tokens": 3436
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "3.0"
+    ],
+    "ground_truth": 3.0
+  }
+}

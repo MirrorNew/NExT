@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "IndustryOR_prob_021",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_021\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_021\\code.py",
+    "NLtype": "Linear",
+    "question": "A company plans to produce 3 types of products $A_{1}, A_{2}, A_{3}$. It can produce for 22 days in a month. The following table gives the maximum demand (unit $=100 \\mathrm{~kg}$), price ($\\$ / 100 \\mathrm{Kg}$), production cost (per 100Kg product), and production quota (the maximum number of 100kg units that can be produced in one day if all production lines are devoted to this product).\n\n| Product | $A_{1}$ | $A_{2}$ | $A_{3}$ |\n| :---: | :---: | :---: | :---: |\n| Maximum Demand | 5300 | 4500 | 5400 |\n| Selling Price | $124$ | $109$ | $115$ |\n| Production Cost | $73.30$ | $52.90$ | $65.40$ |\n| Production Quota | 500 | 450 | 550 |\n\nThe fixed activation cost of the production line is as follows:\n\n| Product | $A_{1}$ | $A_{2}$ | $A_{3}$ |\n| :---: | :---: | :---: | :---: |\n| Activation Cost | $170000$ | $150000$ | $100000$ |\n\nMinimum production batch:\n\n$$\n\\begin{array}{c|ccc}\nProduct & A_{1} & A_{2} & A_{3} \\\\\n\\hline\nMinimum Batch & 20 & 20 & 16\n\\end{array}\n$$\n\nPlease formulate an operations research model to determine a production plan that maximizes total revenue while accommodating fixed activation costs and minimum production batch constraints.",
+    "answer": 270290.0,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "369000.0"
+    ],
+    "time_seconds": 41.6056865999999,
+    "total_tokens": 2756
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "369000.0"
+    ],
+    "ground_truth": 270290.0
+  }
+}

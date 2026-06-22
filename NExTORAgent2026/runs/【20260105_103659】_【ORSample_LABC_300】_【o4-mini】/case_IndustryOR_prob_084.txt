@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A company produces two products (X and Y). The resources required to produce X and Y consist of two parts: machine time for automated processing and craftsman time for manual finishing. The table below gives the number of minutes required for each product:\n\n| Item | Machine time (minutes) | Craftsman time (minutes) |\n| :---: | :---: | :---: |\n| X | 13 | 20 |\n| Y | 19 | 29 |\n\nThe machine time available in the next working week is 40 hours, but craftsman time is only 35 hours. The cost of machine time is £10 per hour, and the cost of craftsman time is £2 per hour. Idle time of machines and craftsmen incurs no cost. For each unit produced (all units produced can be sold), the revenue of product X is £20 and the revenue of product Y is £30. The company has a specific contract requiring that product X must be produced each week for a particular customer, and the contract stipulates that: when the planned production quantity of product X exceeds 10 units, starting from the 11th unit, the required minimum supply quantity of product X increases progressively according to an exponential growth factor of 1.3; that is, when the planned production quantity of product X is $n$ units (and $n>10$), the contract-required lower bound on the supply of product X is $10\\times 1.3^{(n-10)}$, and the actual production quantity of product X must be greater than or equal to this lower bound obtained via exponential growth with factor 1.3. Formulate a model for this problem.",
+    "answer": 1853.0,
+    "index": "IndustryOR_prob_084",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 公司有一项特定合同，要求每周必须为某客户生产 10 件产品 X。 修改后相关描述: 公司有一项特定合同，要求每周必须为某客户生产产品 X，且该合同规定：当计划生产的产品 X 数量大于 10 件时，从第 11 件起，所要求的产品 X 的最低供货数量将按 1.3 的指数增长系数逐步提高，也就是说，当计划生产的产品 X 数量为 n 件（且 n 大于 10 件）时，合同要求的产品 X 供货下限为 10 乘以 1.3 的（n−10）次方，并且实际生产的产品 X 数量必须大于或等于这一按 1.3 指数增长得到的供货下限。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_084\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_018.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 25.592026999991504,
+    "total_tokens": 2598
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 1853.0
+  }
+}

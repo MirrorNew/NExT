@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A company blends two crude oils (A and B) to produce two types of gasoline (Type I and Type II). In Type I and Type II gasoline, the minimum blending ratios of crude oil A are 50% and 60%, respectively. The selling prices of the two gasolines are 4800 yuan/ton and 5600 yuan/ton, respectively. The company currently has inventories of 500 tons of crude oil A and 1000 tons of crude oil B, and it can additionally purchase at most 1500 tons of crude oil A from the market.\n\nThe market price of crude oil A is as follows: the portion purchased within 500 tons is 10000 yuan/ton; the portion exceeding 500 tons but not exceeding 1000 tons is 8000 yuan/ton; the portion exceeding 1000 tons is 6000 yuan/ton.\n\nIn addition, if the company’s final total gasoline output (the sum of Type I and Type II gasoline outputs) exceeds 1200 tons, an additional refining production line must be activated to meet the processing requirements for the extra output. Once activated, this refining line incurs a one-time fixed cost of 300000 yuan (i.e., as long as the total output exceeds 1200 tons, regardless of how many tons it exceeds by, the additional fixed cost of 300000 yuan must be paid; if the total output does not exceed 1200 tons, this fixed cost does not occur).\n\nHow should the company arrange crude oil procurement and processing?",
+    "answer": 4800000.0,
+    "index": "IndustryOR_prob_093",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 市场上原油 A 的价格为：购买数量在 500 吨以内的部分为 10000 元/吨；超过 500 吨但不超过 1000 吨的部分为 8000 元/吨；超过 1000 吨的部分为 6000 元/吨。问公司应如何安排原油的采购与加工？, 修改后相关描述: 市场上原油 A 的价格为：购买数量在 500 吨以内的部分为 10000 元/吨；超过 500 吨但不超过 1000 吨的部分为 8000 元/吨；超过 1000 吨的部分为 6000 元/吨。此外，若公司最终生产的汽油总产量（Ⅰ 型与 Ⅱ 型汽油产量之和）超过 1200 吨，则需要额外启动一条精制生产线，用于满足额外产量的加工要求。该精制生产线一旦启动，将产生一次性固定成本 300000 元（即只要总产量超过 1200 吨，无论超过多少吨，都需要支付这 300000 元的额外固定成本；若总产量不超过 1200 吨，则不发生该项固定成本）。问公司应如何安排原油的采购与加工？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_093\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_030.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6700000.0"
+    ],
+    "time_seconds": 30.399283499995363,
+    "total_tokens": 2738
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "6700000.0"
+    ],
+    "ground_truth": 4800000.0
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "entry": {
+    "index": 21,
+    "question": "In the fast-moving consumer goods retail industry, inventory optimization is a key challenge to balance supply and demand. Large supermarket chains such as Carrefour and Walmart usually use the economic order quantity (EOQ) model to manage the replenishment strategy of tens of thousands of products. Taking fresh food as an example, due to its short shelf life and large demand fluctuations, frequent small-batch orders can reduce inventory losses, but will lead to higher logistics and procurement costs; while large-batch orders can reduce the cost of a single purchase, but may increase storage pressure and expiration risks. Storage space restrictions further exacerbate this contradiction, especially for larger products such as beverages or toilet paper, whose storage space occupancy will significantly affect the overall inventory strategy. Modern retail companies usually use dynamic optimization algorithms to calculate the optimal replenishment cycle and batch size for different categories while meeting shelf space constraints. \n\nAccording to this, Rhode Island Warehouse Convenience Store reconstructed the inventory management model through real-time sales data (POS) and AI prediction systems. Its distribution center needs to formulate replenishment plans for more than thousands of products every day. Among them, high-frequency products such as bento and rice balls involve similar space constraints - the capacity of refrigerators is limited, and the space occupied by different products varies significantly (for example, beverages take up 50% more space than rice balls). \n\nNow, the Rhode Island warehouse retailer sells 2 products and needs to determine the order quantity of each product to minimize the total annual cost. For product $i$, each order has a fixed cost of $K_i$, an annual demand of $D_i$, and a unit annual holding cost of $h_i$. The number of orders per year is $D_i/Q_i$ ($Q_i$ is the order quantity), and the average inventory is $Q_i/2$. The total annual cost includes the sum of the ordering cost and the inventory holding cost. There is also a storage space restriction: the sum of the average inventory space occupied by the two products does not exceed 300 (product 1 takes up 1 unit of space per unit of inventory, and product 2 takes up 2). Parameters: $D=[800,400]$, $K=[50,50]$ (yuan), $h=[1,1]$ (yuan/unit/year). Determine the order quantities $Q_1, Q_2$ to minimize the total annual cost.",
+    "answer": 486.49,
+    "Parameters_List": [
+      {
+        "Name": "number_of_products",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "capacity",
+        "Type": "integer",
+        "Value": 300
+      },
+      {
+        "Name": "space_per_unit",
+        "Type": "list",
+        "Value": [
+          null,
+          1,
+          2
+        ]
+      },
+      {
+        "Name": "D",
+        "Type": "list",
+        "Value": [
+          800,
+          400
+        ]
+      },
+      {
+        "Name": "K",
+        "Type": "list",
+        "Value": [
+          50,
+          50
+        ]
+      },
+      {
+        "Name": "h",
+        "Type": "list",
+        "Value": [
+          1,
+          1
+        ]
+      },
+      {
+        "Name": "beverage_space_ratio",
+        "Type": "float",
+        "Value": 1.5
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the fast-moving consumer...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Large supermarket chains such...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Taking fresh food as an example...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Storage space restrictions further...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Modern retail companies usually...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "According to this, Rhode Island...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Its distribution center needs...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Among them, high-frequency products...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Now, the Rhode Island warehouse...",
+        "Defines decision variables Q1,Q2 and optimization goal"
+      ],
+      [
+        "10",
+        "For product i, each order has...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The number of orders per year...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "The total annual cost includes...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "There is also a storage space...",
+        "Storage-space constraint extracted"
+      ],
+      [
+        "14",
+        "Parameters: D=[800,400], K=[50,50]...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Determine the order quantities Q1, Q2...",
+        "Reiterates decision variables and objective"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "Q1",
+        "Meaning": "order quantity of product 1",
+        "Type": "continuous",
+        "Range ": "Q1 ≥ 0"
+      },
+      {
+        "symbol": "Q2",
+        "Meaning": "order quantity of product 2",
+        "Type": "continuous",
+        "Range ": "Q2 ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Storage space capacity",
+        "(1*(Q1/2) + 2*(Q2/2)) ≤ 300",
+        "sentence numbers:13"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Determine the order quantities Q1, Q2 to minimize the total annual cost.",
+      "Mathematical_expressions": "Z = 50*(800/Q1) + Q1/2 + 50*(400/Q2) + Q2/2"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "486.4918076517"
+    ],
+    "time_seconds": 42.518221799997264,
+    "total_tokens": 5309
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "486.4918076517"
+    ],
+    "ground_truth": 486.49
+  }
+}

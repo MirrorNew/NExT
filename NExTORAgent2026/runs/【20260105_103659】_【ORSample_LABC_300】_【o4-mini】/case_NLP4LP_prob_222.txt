@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An oil and natural gas company has two types of pipelines: high-flow pipelines and low-flow pipelines. Each day, a high-flow pipeline can transport 10,000 U.S. gallons, and it is recommended that 12 technicians closely monitor this pipeline to ensure proper operation. Each day, a low-flow pipeline can transport 5,000 U.S. gallons, and for safety reasons, it should be closely monitored by 5 technicians. Each day, the company must meet a natural gas demand of at least 150,000 U.S. gallons, and they have 160 employed technicians. Because high-flow pipelines pose a higher risk of environmental damage, high-flow pipelines may account for at most 35% of all pipelines. In addition, considering that the effective number of low-flow pipelines under different pressure and temperature conditions will be slightly amplified, in the actual safety assessment the number of low-flow pipelines is computed using a nonlinear amplification factor given by the exponent $0.65$; that is, when satisfying the quantity lower bound, it is measured by “the $0.65$th power of the number of low-flow pipelines.” Therefore, under the safety regulations, the number of low-flow pipelines must satisfy that the $0.65$th power of the number of low-flow pipelines is no less than 8. How many pipelines of each type should be used to minimize the total number of required pipelines?",
+    "answer": 28.0,
+    "index": "NLP4LP_prob_222",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 此外，低流量管道的数量至少为 8 根。, 修改后相关描述: 此外，考虑到低流量管道在不同压力和温度条件下的有效数量会略有放大，实际安全评估中将低流量管道的数量按一个非线性放大系数 1.2 的幂来计算，即在满足数量下限时，以“低流量管道数量的 1.2 次幂”来衡量，因此在安全规定下，低流量管道的数量至少需满足其数量的 1.2 次幂不小于 8。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_222\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_064.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "28.0"
+    ],
+    "time_seconds": 31.82572849999997,
+    "total_tokens": 2539
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "28.0"
+    ],
+    "ground_truth": 28.0
+  }
+}

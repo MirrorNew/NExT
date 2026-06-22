@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "LogiFlow Solutions is responsible for delivering two types of parcels: Standard and Express. Each parcel must be transported entirely either by air freight or entirely by ground transportation. There are 150 cubic meters of air-freight capacity and 210 cubic meters of ground-transportation capacity available. A Standard parcel requires either 17 cubic meters of air-freight capacity or 30 cubic meters of ground-transportation capacity; an Express parcel requires either 5 cubic meters of air-freight capacity or 13 cubic meters of ground-transportation capacity. To ensure a balanced transportation structure, the ratio of the total number of Standard parcels shipped by air to the total number of Express parcels shipped by ground may not exceed 2; that is, the ratio “number of air-shipped Standard parcels divided by number of ground-shipped Express parcels” must be less than or equal to 2. Each Standard parcel yields \\$40 in revenue, and each Express parcel yields \\$15 in revenue. How can LogiFlow Solutions maximize its total revenue from parcel delivery?",
+    "answer": 730.0,
+    "index": "LogiOR_prob_042",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 共有 150 立方米的空运容量和 210 立方米的地运容量可用。修改后相关描述: 共有 150 立方米的空运容量和 210 立方米的地运容量可用。为了保证运输结构的均衡，要求通过空运运输的标准件包裹总数量与通过地运运输的快件包裹总数量的比值不得超过 2，也就是说，空运标准件包裹数量除以地运快件包裹数量的比率必须小于或等于 2。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_042\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_034.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "730.0"
+    ],
+    "time_seconds": 15.506511999992654,
+    "total_tokens": 1286
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "730.0"
+    ],
+    "ground_truth": 730.0
+  }
+}

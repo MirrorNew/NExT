@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_020",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_020\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_020\\code.py",
+    "NLtype": "Linear",
+    "question": "A electronics store sells premium desktops with more power as well as regular desktops for everyday use. Each premium desktop costs the store $2000 to make and yields a profit of $500. Each regular desktop costs the store $1000 to make and yields a profit of $300. The store sells at most 200 desktops each month and wants to spend at most $300000 on making the desktops. How many of each should be made and sold to maximize profit?",
+    "answer": 80000,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "80000.0"
+    ],
+    "time_seconds": 12.875309399998514,
+    "total_tokens": 828
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "80000.0"
+    ],
+    "ground_truth": 80000
+  }
+}

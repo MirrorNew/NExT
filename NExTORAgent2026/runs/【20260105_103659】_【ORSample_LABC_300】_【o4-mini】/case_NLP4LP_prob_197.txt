@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "Calcium and magnesium are contained in two dietary supplements, Supplement A and Supplement B. One serving of Supplement A contains 30 grams of calcium and 50 grams of magnesium. One serving of Supplement B contains 60 grams of calcium and 10 grams of magnesium. The cost per serving of Supplement A is 14 dollars, and the cost per serving of Supplement B is 25 dollars. A patient must take these two supplements every day to ensure an intake of at least 400 grams of calcium and 50 grams of magnesium. In one day, at most 10 servings of Supplement A may be taken, and at most 6 servings of Supplement B may be taken.\n\nWhen considering the effect of long-term use on the body’s absorption efficiency, assume that the patient’s daily total cost depends not only on the numbers of servings of Supplement A and Supplement B, but also on the scheduling of the number of days taken. Let the number of consecutive days the patient plans to take the supplements be a decision variable $T$ (measured in days; at least 7 days of use are required to be effective), and assume $T$ is positive. The patient’s daily total cost is now approximated in the following nonlinear manner: the daily total cost equals 14 times the daily number of servings of Supplement A, multiplied by the daily number of servings of Supplement B, multiplied by $T$ (i.e., $14 \\times (\\text{A servings}) \\times (\\text{B servings}) \\times T$), plus 25 times the daily number of servings of Supplement B. Here, the coefficients 14 and 25 are the labeled base per-serving costs of the two supplements, and $T$ is the decision variable representing the number of consecutive days the patient plans to take them.\n\nThe task is, subject to the two nutritional requirement constraints that the patient must intake at least 400 grams of calcium and 50 grams of magnesium each day, to choose the daily numbers of servings of Supplement A and Supplement B, as well as the consecutive number of days $T$, so as to minimize the per-day cost under this nonlinear formulation over $T$ days (i.e., with objective function $14 * x * y * T + 25 * y$). Determine how many servings of each supplement the patient should take per day and how many consecutive days $T$ to take them in order to minimize the daily cost.",
+    "answer": 933.9999999999999,
+    "index": "NLP4LP_prob_197",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “保健品A每份的成本是14美元，保健品B每份的成本是25美元。某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50克镁。确定该患者每天应服用多少份每种保健品，以使其每日成本最小。” 修改后相关描述: “保健品A每份的成本是14美元，保健品B每份的成本是25美元。某患者必须每天服用这两种保健品，以保证至少摄入400克钙和50镁。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_197\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_052.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 23.895084300005692,
+    "total_tokens": 1815
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 933.9999999999999
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A handmade sports equipment manufacturing company produces basketballs and soccer balls. Producing one basketball requires 5 units of raw materials and 1 hour of processing time, while producing one soccer ball requires 3 units of raw materials and 2 hours of processing time. The company has a total of 1500 units of raw materials available, and workers can work at most 750 hours when operating at full capacity. Because basketballs sell better, the company requires that the number of basketballs and the number of soccer balls satisfy the following nonlinear relationship: the number of basketballs is no less than “three times the number of soccer balls, raised as a whole to the power of 1.002,” i.e., the number of basketballs must be at least $(3 \\times \\text{number of soccer balls})^{1.002}$; however, the company also wants to produce at least 50 soccer balls. How many basketballs and soccer balls should the company produce, respectively, in order to maximize the total number of sports equipment produced?",
+    "answer": 327.0,
+    "index": "NLP4LP_prob_256",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 由于篮球的销售情况更好，生产的篮球数量必须至少是足球数量的三倍，但公司又希望至少生产 50 个足球。, 修改后相关描述: 由于篮球的销售情况更好，公司要求生产的篮球数量与足球数量之间满足这样一个非线性关系：篮球数量不少于“足球数量的 3 倍再整体取 1.002 次幂”的结果，即篮球数量必须至少达到 (3 × 足球数量)^1.002；但公司又希望至少生产 50 个足球。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_256\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_062.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "333.5182380818"
+    ],
+    "time_seconds": 34.80477489999612,
+    "total_tokens": 1863
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "333.5182380818"
+    ],
+    "ground_truth": 327.0
+  }
+}

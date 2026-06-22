@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "The factory produces three products: I, II, and III. Each product must undergo two processing stages: A and B. Suppose the factory has two types of machines that can perform stage A, denoted by A1 and A2; and two types of machines that can perform stage B, denoted by B1 and B2. Product I can be processed on either type of A-machine in stage A, but in stage B it can only be processed on machine B1; product III can only be processed on machines A2 and B2. The unit processing times of each product, raw-material costs, selling prices, as well as the available machine-hours of each machine type and the cost of operating each machine at full load are shown in Table 1-18. To better reflect practical conditions, considering that when multiple machines operate simultaneously under high load, their energy consumption and maintenance costs increase in a nonlinear manner, we assume that in computing profit, the final actual profit is the $0.98$-th power of the original theoretical profit. Determine an optimal production plan to maximize the factory’s actual profit.\n\nTable 1-18  \n| Machine                   | Product I | Product II | Product III | Available machine-hours | Full-load operating cost (yuan) |\n|--------------------------|----------:|-----------:|------------:|------------------------:|--------------------------------:|\n| A1                       | 5         | 10         |             | 10000                   | 321                             |\n| A2                       | 7         | 9          | 12          | 4000                    | 250                             |\n| B1                       | 6         | 8          |             | 7000                    | 783                             |\n| B2                       | 4         |            | 11          | 4000                    | 200                             |\n| B3                       | 7         |            |             |                         |                                 |\n| Raw-material cost (yuan/unit) | 0.25  | 0.35       | 0.50        |                         |                                 |\n| Unit selling price (yuan/unit) | 1.25 | 2.00       | 2.80        |                         |                                 |",
+    "answer": 369.583,
+    "index": "IndustryOR_prob_030",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “A1 设备满负荷运转成本（元）”为 321。修改后相关描述: 为体现非线性成本，假定当 A1 设备满负荷运转时，其综合运转成本按 (321)^1.2 元计，表中对应项改为“满负荷运转成本按 (321)^1.2 元计”。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_030\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_005.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "713.2083333"
+    ],
+    "time_seconds": 45.41035799999372,
+    "total_tokens": 4632
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "713.2083333"
+    ],
+    "ground_truth": 369.583
+  }
+}

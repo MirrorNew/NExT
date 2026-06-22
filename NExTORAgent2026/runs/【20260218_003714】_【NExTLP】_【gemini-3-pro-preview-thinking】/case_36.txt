@@ -1,0 +1,263 @@
+{
+  "entry": {
+    "index": 36,
+    "question": "Tianxin Concentration Area is located in a newly emerging large residential community in the city. There are 12 residential communities and 3 schools within a radius of 500 meters. According to the market research report of a business consulting agency, the family structure in this area is mainly young families and retirees, and daily consumption presents the characteristics of \"high frequency and small batch\". The building where the supermarket is located was originally converted from a community activity center. Its unique four-zone structure not only brings flexibility in space utilization, but also puts higher requirements on the scientific layout of goods. Retail industry research shows that reasonable commodity zoning can significantly increase customer stay time and associated purchase rate, but improper layout may lead to chaotic traffic flow and reduced shopping experience. The supermarket planning is an important measure to improve the community's \"15-minute living circle\", which directly affects the daily life convenience of surrounding residents. A scientific commodity zoning plan can not only optimize customer shopping paths and improve store operation efficiency, but also promote cross-selling of different categories of goods through reasonable consumer traffic line design. The implementation effect of this project will provide a valuable reference case for the planning and layout of community commercial facilities of the same type, and will have a demonstrative significance for promoting the standardized development of community retail industry. \n\nA convenience supermarket is planned to be opened in this residential area, selling the following four categories of goods\n\n(1) Tobacco, alcohol and food (referred to as the tobacco and alcohol group); (2) Vegetables and fruits (referred to as the vegetable and fruit group); (3) Rice, noodles and non-staple food (referred to as the grain and non-staple food group); (4) Daily necessities (referred to as the general merchandise group). \n\nThe supermarket is located on the first floor of the building, with two doors near the street and two walkways in the middle, dividing the first floor into four blocks of similar size, $I, II, III, IV$, as shown in the simplified diagram Figure C-16. \n\nFigure C-16 \n\n```\n+--------+ \t+--------+\n| I |-----\t| II |\n+--------+ \t+--------+\n | \t|\n+--------+ \t+--------+\n| III |-----\t| IV |\n+--------+ \t+--------+\n```\n\nThe customer flow (predicted value) between each block and the average distance (m) moved by customers are shown in Table C-39 and Table C-40 respectively. \n\nTable C-39 Customer flow (thousand people/day)\n\n| | (1) | (2) | (3) | (4) |\n| ---------- | ---- | ---- | ---- | ---- |\n| (1) Tobacco and alcohol group | — | 5 | 2 | 7 |\n| (2) Fruit and vegetable group | 5 | — | 3 | 8 |\n| (3) Sugar and side dishes group | 2 | 3 | — | 3 |\n| (4) General merchandise group | 7 | 8 | 3 | — |\n\nTable C-40 Average distance customers move between blocks (m)\n\n| | I | II | III | IV |\n| ---- | ---- | ---- | ---- | ---- |\n| I | — | 20 | 37.5 | 42.5 |\n| II | 20 | — | 32.5 | 25 |\n| III | 37.5 | 32.5 | — | 30 |\n| IV | 42.5 | 25 | 30 | — |\n\nRequirement: Determine which of the following blocks (I, II, III, and IV) the four categories of goods, tobacco, alcohol, vegetables, and fruits, are placed in, so that the distance that customers have to walk in the supermarket is the shortest. What is the distance? (Calculate the total round trip distance)",
+    "answer": 1630.0,
+    "Parameters_List": [
+      {
+        "Name": "residential_communities_count",
+        "Type": "integer",
+        "Value": 12
+      },
+      {
+        "Name": "schools_count",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "radius_m",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "zones_count",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "living_circle_time_min",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "goods_categories",
+        "Type": "list",
+        "Value": [
+          null,
+          "tobacco_and_alcohol",
+          "vegetables_and_fruits",
+          "grain_and_non_staple_food",
+          "daily_necessities"
+        ]
+      },
+      {
+        "Name": "floor_level",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "number_doors",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "number_walkways",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "block_names",
+        "Type": "list",
+        "Value": [
+          "I",
+          "II",
+          "III",
+          "IV"
+        ]
+      },
+      {
+        "Name": "Table_1_C_39",
+        "Type": "list",
+        "Value": [
+          [
+            0,
+            5,
+            2,
+            7
+          ],
+          [
+            5,
+            0,
+            3,
+            8
+          ],
+          [
+            2,
+            3,
+            0,
+            3
+          ],
+          [
+            7,
+            8,
+            3,
+            0
+          ]
+        ]
+      },
+      {
+        "Name": "Table_2_C_40",
+        "Type": "list",
+        "Value": [
+          [
+            0,
+            20,
+            37.5,
+            42.5
+          ],
+          [
+            20,
+            0,
+            32.5,
+            25
+          ],
+          [
+            37.5,
+            32.5,
+            0,
+            30
+          ],
+          [
+            42.5,
+            25,
+            30,
+            0
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Tianxin Concentration Area is located...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "There are 12 residential communities...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "According to the market research report...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "The building where the supermarket is located...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Its unique four-zone structure...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Retail industry research shows...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The supermarket planning is an important measure...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "A scientific commodity zoning plan can not only optimize...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The implementation effect of this project will provide...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "A convenience supermarket is planned to be opened...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The supermarket is located on the first floor...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Figure C-16...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "The customer flow (predicted value) between...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "Table C-39 Customer flow...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Table C-40 Average distance...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "Requirement: Determine which of the following blocks...",
+        "Introduces decision variables and assignment constraints"
+      ],
+      [
+        "17",
+        "What is the distance? (Calculate...",
+        "Specifies objective measure"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{ik}",
+        "Meaning": "=1 if commodity category i is assigned to block k; =0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1} for i=1..4, k∈{I,II,III,IV}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Category assignment (each good ⇒ one block)",
+        "∑ₖ x_{ik} = 1, ∀i=1…4",
+        "sentence numbers:16"
+      ],
+      [
+        "Block occupancy (each block ⇒ one good)",
+        "∑ᵢ x_{ik} = 1, ∀k∈{I,II,III,IV}",
+        "sentence numbers:16"
+      ],
+      [
+        "Binary domain",
+        "x_{ik} ∈ {0,1}, ∀i=1…4, k∈{I,II,III,IV}",
+        "sentence numbers:16"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "What is the distance? (Calculate the total round trip distance)",
+      "Mathematical_expressions": "Min Z = 2 · ∑_{i=1..4} ∑_{j=1..4} ∑_{k∈{I…IV}} ∑_{l∈{I…IV}} c_{ij} · d_{kl} · x_{ik} · x_{jl}"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3260.0"
+    ],
+    "time_seconds": 246.5665263999981,
+    "total_tokens": 23565
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "3260.0"
+    ],
+    "ground_truth": 1630.0
+  }
+}

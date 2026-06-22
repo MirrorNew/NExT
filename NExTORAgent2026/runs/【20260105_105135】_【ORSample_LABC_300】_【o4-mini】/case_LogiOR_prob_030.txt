@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "LogiTrans operates two distribution centers to manage the shipment of three types of goods to regional hubs. Each distribution center can be staffed with at most seven logistics coordinators at the same time. A coordinator’s weekly wage is \\$500 at distribution center 1 and \\$900 at distribution center 2. Operating (activating) a distribution center for one week incurs a fixed cost: \\$1{,}000 for distribution center 1 and \\$2{,}000 for distribution center 2. Over one week at a distribution center, the number of shipments of each type that one coordinator can process is as shown in the table:\n\n| Cargo type \\\\ Distribution center | Center 1 | Center 2 |\n|-------------------------------|----------|----------|\n| Type 1                        | 20       | 25       |\n| Type 2                        | 18       | 22       |\n| Type 3                        | 15       | 20       |\n\nEach week, LogiTrans must ensure that it processes at least 120 units of type 1 cargo, at least 150 units of type 2 cargo, and at least 200 units of type 3 cargo. To reflect increasing returns to efficiency as the number of coordinators increases, assume that at distribution center 1, the total processable quantity of type 1 cargo grows exponentially with the actual number of coordinators staffed at that center: specifically, if $x$ coordinators are staffed at distribution center 1, then its weekly processing capacity for type 1 cargo is no longer simply $20\\times x$ units; instead, a growth factor of $1.3$ is introduced so that the total processing capacity for type 1 cargo at distribution center 1 is $20\\times x\\times 1.3^x$ (the growth factor takes the specific value $1.3$). Under this setting, how can the total cost be minimized while meeting the weekly shipment requirements?",
+    "answer": 11000.0,
+    "index": "LogiOR_prob_030",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每周，LogiTrans 必须保证至少处理 120 件类型 1 货物、至少 150 件类型 2 货物以及至少 200 件类型 3 货物。修改后相关描述: 每周，LogiTrans 必须保证至少处理 120 件类型 1 货物、至少 150 件类型 2 货物以及至少 200 件类型 3 货物。为了反映随着协调员数量增加而带来的效率递增效应，假设在配送中心 1，类型 1 货物的可处理总数量会随着该中心实际配备的协调员人数呈指数增长：具体地，如果在配送中心 1 配备 x 名协调员，则其一周内对类型 1 货物的处理能力不再是简单的 20×x 件，而是在此基础上引入增长系数 1.3，即类型 1 货物在配送中心 1 的总处理能力为 20×x×1.3 的 x 次方（这里的增长系数取具体数值 1.3）。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_030\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_032.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "11000.0"
+    ],
+    "time_seconds": 46.632924899997306,
+    "total_tokens": 3261
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "11000.0"
+    ],
+    "ground_truth": 11000.0
+  }
+}

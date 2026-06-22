@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A corn farmer transports corn to the city using tractors or cars. Each tractor can carry 40 kg of corn, and each car can carry 20 kg of corn. Since tractors are very slow, the number of cars used must be at least twice the number of tractors used. If at least 500 kg of corn must be transported to the city, then, when computing the total amount of corn transported, a modified nonlinear form is adopted for the tractor transportation amount: assume that the total tractor transportation volume is no longer computed linearly as $40\\times(\\text{number of tractors})$, but instead is computed as $(40\\times(\\text{number of tractors}))^{1.02}$ (the exponent $1.02$ is a given constant), while the car transportation volume is still computed linearly as $20\\times(\\text{number of cars})$. Determine, subject to these conditions, the minimum total number of tractors and cars required.",
+    "answer": 18.0,
+    "index": "NLP4LP_prob_166",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: \"每辆拖拉机可以运送 40 千克玉米\"，整体隐含的总运量为 40×拖拉机数量 的线性形式; 修改后相关描述: 将拖拉机的总运量改为按 (40×拖拉机数量)^1.02 的非线性形式来计算，其中幂指数取具体数值 1.02，汽车部分保持 20×汽车数量 的线性计算不变。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_166\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_071.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 23.48463440001069,
+    "total_tokens": 2349
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 18.0
+  }
+}

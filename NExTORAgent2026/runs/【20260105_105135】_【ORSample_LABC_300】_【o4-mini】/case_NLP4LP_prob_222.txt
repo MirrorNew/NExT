@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_222",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_222\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_222\\code.py",
+    "NLtype": "Linear",
+    "question": "An oil and gas company has two types of pipes, a high-volume and a low-volume one. Every day, the high-volume pipe allows 10000 US gallons and it is recommended that 12 technicians closely monitor the pipes to ensure that it is functioning properly. Each day, the low-volume pipe allows 5000 US gallons and 5 technicians should closely monitor for safety reasons. Every day, the oil and gas company needs to meet the demands of at least 150000 US gallons of gas and they have 160 technicians that are on their staff. Since the high-volume pipe has a higher risk of environmental damage, at most 35 percent of the pipes can be high-volume ones. Additionally, there must be a minimum of 8 low-volume pipes. How many of each pipe types should be used to reduce the total number of pipes required?",
+    "answer": 25,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "25.0"
+    ],
+    "time_seconds": 25.426023799998802,
+    "total_tokens": 2032
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "25.0"
+    ],
+    "ground_truth": 25
+  }
+}

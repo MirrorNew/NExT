@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An international cargo exporter uses ships and airplanes to transport goods. Each ship can carry cargo equivalent to 40 containers per trip and consumes 500 liters of fuel per voyage. Each airplane can carry cargo equivalent to 20 containers per trip and consumes 300 liters of fuel per flight. The company needs to transport at least cargo equivalent to 500 containers. In addition, the number of airplane flights is at most 10, and at least 50% of the trips must be undertaken by ships.\n\nFurther, consider the impact of seasonality and monthly scheduling on ship voyage planning: assume time is measured in months. Over a 12-month planning horizon, due to seasonal port congestion and changes in sea conditions, the actual executable number of ship voyages will exhibit a small periodic fluctuation around the planned number. Specifically, if the originally planned number of ship voyages is $x$, then in month $t$ (where $t$ is an integer from 1 to 12), the actual equivalent number of ship voyages is taken to be $x$ multiplied by a time-varying adjustment factor given by $1 + 0.1\\cos(\\pi x t/24)$, where $0.1$ is the fluctuation amplitude and $24$ is a constant. Thus, over the entire 12 months, the actual share of voyages undertaken by ships will vary slightly due to this sinusoid-like periodic adjustment, but the company still requires that, after accounting for this periodic fluctuation, in terms of the average result aggregated over 12 months, at least 50% of the equivalent total trips must be undertaken by ships.\n\nHow many ship voyages and airplane flights should be scheduled (denoted by the planned number of ship voyages $x$ and the number of airplane flights $y$) to minimize total fuel consumption?",
+    "answer": "None",
+    "index": "NLP4LP_prob_140",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 此外，飞机航程次数最多为 10 次，并且至少有 50% 的航程必须由轮船承担。应安排多少次轮船航程和飞机航程才能使总燃料消耗量最小？, 修改后相关描述: 此外，飞机航程次数最多为 10 次，并且至少有 50% 的航程必须由轮船承担。这里进一步考虑季节性和月度调度对轮船航程安排的影响：假设以月为时间单位，在 12 个月的计划期内，由于港口季节性拥堵和海况变化，轮船的实际可执行航程次数会围绕原计划次数发生小幅周期性波动。具体而言，如果原计划安排轮船航程次数为 x 次，则在第 t 个月（t 取值为 1 到 12 的整数）中，实际等效轮船航程次数视为 x 乘以一个随时间变化的调整系数，这个调整系数为「1 加上 0.1 乘以 cos(π 乘以 x 乘以 t 再除以 24)」，其中 0.1 为波动幅度，24 为常数。这样，在整个 12 个月期间，轮船承担的实际航程占比会因为该类似正弦函数的周期性调整而略有变化，但公司仍然要求：在考虑这一周期性波动之后，综合 12 个月的平均结果来看，至少有 50% 的等效总航程必须由轮船承担。应安排多少次轮船航程和飞机航程（以计划次数 x 和飞机航程次数 y 表示）才能使总燃料消耗量最小？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_140\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_087.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6300.0"
+    ],
+    "time_seconds": 56.787565599996014,
+    "total_tokens": 4784
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "6300.0"
+    ],
+    "ground_truth": "None"
+  }
+}

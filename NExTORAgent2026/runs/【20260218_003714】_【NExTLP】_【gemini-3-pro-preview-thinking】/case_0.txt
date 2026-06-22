@@ -1,0 +1,855 @@
+{
+  "entry": {
+    "index": 0,
+    "question": "Refinery Process Production Flow\n\n```mermaid\nflowchart LR\n A1((Crude oil 1)) --> B[Distillation]\n A2((Crude oil 2)) --> B\n\n B --> C((Naphtha))\n B --> D((Light oil))\n B --> F((Heavy oil))\n B --> G((Residue oil))\n\n C --> H[Reforming]\n H --> I((Reforming gasoline))\n\n D --> J[Cracking]\n F --> J\n J --> K((Cracking gasoline))\n J --> T((Cracking oil))\n\n I --> L[Engine oil blend]\n C --> L\n K --> L\n L --> M((Premium engine oil))\n L --> N((Ordinary engine oil))\n \n\n P --> O((Fuel oil))\n D --> P[Kerosene/Fuel Oil Mixture]\n F --> P\n T --> P\n G --> P\n P --> Q((Kerosene))\n\n G --> R[Residue Treatment]\n R --> S((Lubricating Oil))\n\n```\n\nThe refinery inputs two types of crude oil (Crude Oil 1 and Crude Oil 2). The crude oil first enters the distillation unit. The products and proportions of each barrel of crude oil after distillation are shown in Table C-1. The octane numbers of light, medium and heavy naphtha are 90, 80 and 70 respectively. \n\n| | Light naphtha | Medium naphtha | Heavy naphtha | Light oil | Heavy oil | Residue |\n| ----- | -------- | -------- | -------- | ---- | ---- | ---- |\n| Crude oil 1 | 0.1 | 0.2 | 0.2 | 0.12 | 0.2 | 0.13 |\n| Crude oil 2 | 0.15 | 0.25 | 0.18 | 0.08 | 0.19 | 0.12 |\n\nPart of the naphtha is directly used for engine oil mixing, and part is input into the reforming unit to obtain reformed gasoline with an octane number of 115. One barrel of light, medium and heavy naphtha can obtain 0.6, 0.52 and 0.45 barrels of reformed gasoline respectively. \n\nPart of the light oil and heavy oil obtained by distillation is directly used for mixing with kerosene and fuel oil, and part is passed through the cracking unit to obtain cracking gasoline and cracking oil. The octane number of pyrolysis gasoline is 105. After pyrolysis of 1 barrel of light oil, 0.68 barrels of pyrolysis oil and 0.28 barrels of pyrolysis gasoline are obtained; after pyrolysis of 1 barrel of heavy oil, 0.75 barrels of pyrolysis oil and 0.2 barrels of pyrolysis gasoline are obtained. Pyrolysis gasoline is used for engine oil mixing, and pyrolysis oil is used for kerosene and fuel oil mixing. \n\nResidual oil can be directly used for kerosene and fuel oil mixing, or for the production of lubricating oil. After treatment, 1 barrel of residual oil can produce 0.5 barrels of lubricating oil. \nThe octane number of the high-grade engine oil mixed should not be less than 94, and the octane number of the ordinary one should not be less than 84. The octane number of the mixture is calculated by linear weighting according to the octane number and proportion of each oil before mixing. \n\nIt is stipulated that the gas pressure of kerosene shall not exceed 1$kg/cm^2$, while the gas pressures of light oil, heavy oil, pyrolysis oil and residual oil are 1.0, 0.6, 1.5 and 0.05$kg/cm^2$ respectively. The calculation of gas pressure is based on the linear weighted calculation of the gas pressure and proportion of each mixed component.\n\nIn fuel oil, the ratio of light oil, heavy oil, cracking oil and residual oil should be 10:3:4:1. \n\nIt is known that 20,000 barrels of crude oil 1 and 30,000 barrels of crude oil 2 are available every day. The maximum capacity of the distillation unit is 45,000 barrels per day, the reforming unit can reform up to 10,000 barrels of naphtha per day, and the maximum capacity of the cracking unit is 8,000 barrels per day. The daily output of lubricating oil should be between 500 and 1,000 barrels, and the output of high-end engine oil should not be less than 40% of ordinary engine oil. \n\nIt is also known that the profits of the final products (yuan/barrel) are: high-end engine oil 700, ordinary engine oil 600, kerosene 400, fuel oil 350, lubricating oil 150. Try to formulate a plan for the refinery to maximize the total profit\n\nOnly the maximum value of the total profit needs to be given.",
+    "answer": 21136513.48,
+    "Parameters_List": [
+      {
+        "Name": "octane_naphtha",
+        "Type": "tuple",
+        "Value": {
+          "light": 90,
+          "medium": 80,
+          "heavy": 70
+        }
+      },
+      {
+        "Name": "octane_reformed_gasoline",
+        "Type": "integer",
+        "Value": 115
+      },
+      {
+        "Name": "yield_reform_gas_light_naphtha",
+        "Type": "float",
+        "Value": 0.6
+      },
+      {
+        "Name": "yield_reform_gas_medium_naphtha",
+        "Type": "float",
+        "Value": 0.52
+      },
+      {
+        "Name": "yield_reform_gas_heavy_naphtha",
+        "Type": "float",
+        "Value": 0.45
+      },
+      {
+        "Name": "octane_cracking_gasoline",
+        "Type": "integer",
+        "Value": 105
+      },
+      {
+        "Name": "yield_pyrolysis_oil_light",
+        "Type": "float",
+        "Value": 0.68
+      },
+      {
+        "Name": "yield_pyrolysis_gasoline_light",
+        "Type": "float",
+        "Value": 0.28
+      },
+      {
+        "Name": "yield_pyrolysis_oil_heavy",
+        "Type": "float",
+        "Value": 0.75
+      },
+      {
+        "Name": "yield_pyrolysis_gasoline_heavy",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "yield_lubricating_from_residual",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "min_octane_premium_engine_oil",
+        "Type": "integer",
+        "Value": 94
+      },
+      {
+        "Name": "min_octane_ordinary_engine_oil",
+        "Type": "integer",
+        "Value": 84
+      },
+      {
+        "Name": "max_pressure_kerosene",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "pressure_light_oil",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "pressure_heavy_oil",
+        "Type": "float",
+        "Value": 0.6
+      },
+      {
+        "Name": "pressure_pyrolysis_oil",
+        "Type": "float",
+        "Value": 1.5
+      },
+      {
+        "Name": "pressure_residual_oil",
+        "Type": "float",
+        "Value": 0.05
+      },
+      {
+        "Name": "ratio_fuel_oil",
+        "Type": "tuple",
+        "Value": {
+          "light_oil": 10,
+          "heavy_oil": 3,
+          "cracking_oil": 4,
+          "residual_oil": 1
+        }
+      },
+      {
+        "Name": "avail_crude_oil_1",
+        "Type": "integer",
+        "Value": 20000
+      },
+      {
+        "Name": "avail_crude_oil_2",
+        "Type": "integer",
+        "Value": 30000
+      },
+      {
+        "Name": "cap_distillation",
+        "Type": "integer",
+        "Value": 45000
+      },
+      {
+        "Name": "cap_reforming",
+        "Type": "integer",
+        "Value": 10000
+      },
+      {
+        "Name": "cap_cracking",
+        "Type": "integer",
+        "Value": 8000
+      },
+      {
+        "Name": "lubricating_oil_min",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "lubricating_oil_max",
+        "Type": "integer",
+        "Value": 1000
+      },
+      {
+        "Name": "min_ratio_premium_to_ordinary",
+        "Type": "float",
+        "Value": 0.4
+      },
+      {
+        "Name": "profit_premium_engine_oil",
+        "Type": "integer",
+        "Value": 700
+      },
+      {
+        "Name": "profit_ordinary_engine_oil",
+        "Type": "integer",
+        "Value": 600
+      },
+      {
+        "Name": "profit_kerosene",
+        "Type": "integer",
+        "Value": 400
+      },
+      {
+        "Name": "profit_fuel_oil",
+        "Type": "integer",
+        "Value": 350
+      },
+      {
+        "Name": "profit_lubricating_oil",
+        "Type": "integer",
+        "Value": 150
+      },
+      {
+        "Name": "Table_1_C_1",
+        "Type": "tuple",
+        "Value": {
+          "Crude oil 1": {
+            "Light naphtha": 0.1,
+            "Medium naphtha": 0.2,
+            "Heavy naphtha": 0.2,
+            "Light oil": 0.12,
+            "Heavy oil": 0.2,
+            "Residue": 0.13
+          },
+          "Crude oil 2": {
+            "Light naphtha": 0.15,
+            "Medium naphtha": 0.25,
+            "Heavy naphtha": 0.18,
+            "Light oil": 0.08,
+            "Heavy oil": 0.19,
+            "Residue": 0.12
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The refinery inputs two types of crude...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The crude oil first enters...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The products and proportions of each barrel...",
+        "Distillation‐yield constraints for N_L, N_M, N_H, LO, HO, R"
+      ],
+      [
+        "4",
+        "The octane numbers of light, medium and...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Part of the naphtha is directly used for engine...",
+        "Split constraints: N_L_to_mix+N_L_to_reform=N_L, N_M_to_mix+N_M_to_reform=N_M, N_H_to_mix+N_H_to_reform=N_H"
+      ],
+      [
+        "6",
+        "One barrel of light, medium and heavy...",
+        "Reforming‐yield constraints: RG_L=0.6·N_L_to_reform, RG_M=0.52·N_M_to_reform, RG_H=0.45·N_H_to_reform"
+      ],
+      [
+        "7",
+        "Part of the light oil and heavy oil...",
+        "Split constraints: LO_to_mix+LO_to_crack=LO, HO_to_mix+HO_to_crack=HO"
+      ],
+      [
+        "8",
+        "The octane number of pyrolysis gasoline...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "After pyrolysis of 1 barrel of light oil...",
+        "Cracking‐yield from light oil: CO_LO=0.68·LO_to_crack, CG_LO=0.28·LO_to_crack"
+      ],
+      [
+        "10",
+        "after pyrolysis of 1 barrel of heavy oil...",
+        "Cracking‐yield from heavy oil: CO_HO=0.75·HO_to_crack, CG_HO=0.2·HO_to_crack"
+      ],
+      [
+        "11",
+        "Pyrolysis gasoline is used for engine oil...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Residual oil can be directly used for kerosene...",
+        "Split constraint: R_to_mix+R_to_lub=R"
+      ],
+      [
+        "13",
+        "After treatment, 1 barrel of residual oil...",
+        "Lubricating‐oil yield: Lub=0.5·R_to_lub"
+      ],
+      [
+        "14",
+        "The octane number of the high-grade engine...",
+        "Engine‐mix splits & quality constraints: splits of components to high-end vs ordinary; quality inequalities"
+      ],
+      [
+        "15",
+        "The octane number of the mixture is...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "It is stipulated that the gas pressure of...",
+        "Gas-pressure constraint: weighted average ≤1"
+      ],
+      [
+        "17",
+        "The calculation of gas pressure is based...",
+        "No constraints"
+      ],
+      [
+        "18",
+        "In fuel oil, the ratio of light oil, heavy oil...",
+        "Ratio constraints: LO_to_mix:HO_to_mix:CO:R_to_mix=10:3:4:1"
+      ],
+      [
+        "19",
+        "It is known that 20,000 barrels of crude oil...",
+        "Availability: D1≤20000, D2≤30000"
+      ],
+      [
+        "20",
+        "The maximum capacity of the distillation unit...",
+        "Capacities: D1+D2≤45000; N_L_to_reform+N_M_to_reform+N_H_to_reform≤10000; LO_to_crack+HO_to_crack≤8000"
+      ],
+      [
+        "21",
+        "The daily output of lubricating oil...",
+        "Bounds & ratio: 500≤Lub≤1000; HE≥0.4·OE"
+      ],
+      [
+        "22",
+        "It is also known that the profits of the...",
+        "No constraints"
+      ],
+      [
+        "23",
+        "Try to formulate a plan for the refinery...",
+        "Objective: maximize total profit"
+      ],
+      [
+        "24",
+        "Only the maximum value of the total profit...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "D1",
+        "Meaning": "barrels of Crude Oil 1 processed",
+        "Type": "continuous",
+        "Range ": "[0, 20000]"
+      },
+      {
+        "symbol": "D2",
+        "Meaning": "barrels of Crude Oil 2 processed",
+        "Type": "continuous",
+        "Range ": "[0, 30000]"
+      },
+      {
+        "symbol": "N_L",
+        "Meaning": "barrels of light naphtha produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_M",
+        "Meaning": "barrels of medium naphtha produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_H",
+        "Meaning": "barrels of heavy naphtha produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "LO",
+        "Meaning": "barrels of light oil produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "HO",
+        "Meaning": "barrels of heavy oil produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "R",
+        "Meaning": "barrels of residue produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_L_to_mix",
+        "Meaning": "barrels of light naphtha to engine mix",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_L_to_reform",
+        "Meaning": "barrels of light naphtha to reforming",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_M_to_mix",
+        "Meaning": "barrels of medium naphtha to engine mix",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_M_to_reform",
+        "Meaning": "barrels of medium naphtha to reforming",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_H_to_mix",
+        "Meaning": "barrels of heavy naphtha to engine mix",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_H_to_reform",
+        "Meaning": "barrels of heavy naphtha to reforming",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_L",
+        "Meaning": "barrels of reformed gasoline from light naphtha",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_M",
+        "Meaning": "barrels of reformed gasoline from medium naphtha",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_H",
+        "Meaning": "barrels of reformed gasoline from heavy naphtha",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "LO_to_mix",
+        "Meaning": "barrels of light oil to fuel mix",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "LO_to_crack",
+        "Meaning": "barrels of light oil to cracking",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "HO_to_mix",
+        "Meaning": "barrels of heavy oil to fuel mix",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "HO_to_crack",
+        "Meaning": "barrels of heavy oil to cracking",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CO_LO",
+        "Meaning": "barrels of pyrolysis oil from light oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CG_LO",
+        "Meaning": "barrels of pyrolysis gasoline from light oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CO_HO",
+        "Meaning": "barrels of pyrolysis oil from heavy oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CG_HO",
+        "Meaning": "barrels of pyrolysis gasoline from heavy oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CO",
+        "Meaning": "total barrels of pyrolysis oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CG",
+        "Meaning": "total barrels of pyrolysis gasoline",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "R_to_mix",
+        "Meaning": "barrels of residue to fuel mix",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "R_to_lub",
+        "Meaning": "barrels of residue to lube oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "Lub",
+        "Meaning": "barrels of lubricating oil produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_L^H",
+        "Meaning": "barrels of light naphtha to high-end engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_M^H",
+        "Meaning": "barrels of medium naphtha to high-end engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_H^H",
+        "Meaning": "barrels of heavy naphtha to high-end engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_L^H",
+        "Meaning": "barrels of reformed gasoline to high-end engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_M^H",
+        "Meaning": "barrels of reformed gasoline to high-end engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_H^H",
+        "Meaning": "barrels of reformed gasoline to high-end engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CG^H",
+        "Meaning": "barrels of pyrolysis gasoline to high-end engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_L^O",
+        "Meaning": "barrels of light naphtha to ordinary engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_M^O",
+        "Meaning": "barrels of medium naphtha to ordinary engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "N_H^O",
+        "Meaning": "barrels of heavy naphtha to ordinary engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_L^O",
+        "Meaning": "barrels of reformed gasoline to ordinary engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_M^O",
+        "Meaning": "barrels of reformed gasoline to ordinary engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "RG_H^O",
+        "Meaning": "barrels of reformed gasoline to ordinary engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "CG^O",
+        "Meaning": "barrels of pyrolysis gasoline to ordinary engine oil",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "HE",
+        "Meaning": "barrels of high-end engine oil produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "OE",
+        "Meaning": "barrels of ordinary engine oil produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "K",
+        "Meaning": "barrels of kerosene produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      },
+      {
+        "symbol": "FO",
+        "Meaning": "barrels of fuel oil produced",
+        "Type": "continuous",
+        "Range ": "[0, ∞)"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "C1",
+        "N_L = 0.1·D1 + 0.15·D2",
+        "sentence numbers:3"
+      ],
+      [
+        "C2",
+        "N_M = 0.2·D1 + 0.25·D2",
+        "sentence numbers:3"
+      ],
+      [
+        "C3",
+        "N_H = 0.2·D1 + 0.18·D2",
+        "sentence numbers:3"
+      ],
+      [
+        "C4",
+        "LO = 0.12·D1 + 0.08·D2",
+        "sentence numbers:3"
+      ],
+      [
+        "C5",
+        "HO = 0.2·D1 + 0.19·D2",
+        "sentence numbers:3"
+      ],
+      [
+        "C6",
+        "R = 0.13·D1 + 0.12·D2",
+        "sentence numbers:3"
+      ],
+      [
+        "C7",
+        "N_L_to_mix + N_L_to_reform = N_L",
+        "sentence numbers:5"
+      ],
+      [
+        "C8",
+        "N_M_to_mix + N_M_to_reform = N_M",
+        "sentence numbers:5"
+      ],
+      [
+        "C9",
+        "N_H_to_mix + N_H_to_reform = N_H",
+        "sentence numbers:5"
+      ],
+      [
+        "C10",
+        "RG_L = 0.6·N_L_to_reform",
+        "sentence numbers:6"
+      ],
+      [
+        "C11",
+        "RG_M = 0.52·N_M_to_reform",
+        "sentence numbers:6"
+      ],
+      [
+        "C12",
+        "RG_H = 0.45·N_H_to_reform",
+        "sentence numbers:6"
+      ],
+      [
+        "C13",
+        "LO_to_mix + LO_to_crack = LO",
+        "sentence numbers:7"
+      ],
+      [
+        "C14",
+        "HO_to_mix + HO_to_crack = HO",
+        "sentence numbers:7"
+      ],
+      [
+        "C15",
+        "CO_LO = 0.68·LO_to_crack",
+        "sentence numbers:9"
+      ],
+      [
+        "C16",
+        "CG_LO = 0.28·LO_to_crack",
+        "sentence numbers:9"
+      ],
+      [
+        "C17",
+        "CO_HO = 0.75·HO_to_crack",
+        "sentence numbers:10"
+      ],
+      [
+        "C18",
+        "CG_HO = 0.2·HO_to_crack",
+        "sentence numbers:10"
+      ],
+      [
+        "C19",
+        "CO = CO_LO + CO_HO",
+        "sentence numbers:9-10"
+      ],
+      [
+        "C20",
+        "CG = CG_LO + CG_HO",
+        "sentence numbers:9-10"
+      ],
+      [
+        "C21",
+        "R_to_mix + R_to_lub = R",
+        "sentence numbers:12"
+      ],
+      [
+        "C22",
+        "Lub = 0.5·R_to_lub",
+        "sentence numbers:13"
+      ],
+      [
+        "C23",
+        "N_L^H + N_L^O = N_L_to_mix",
+        "sentence numbers:14"
+      ],
+      [
+        "C24",
+        "N_M^H + N_M^O = N_M_to_mix",
+        "sentence numbers:14"
+      ],
+      [
+        "C25",
+        "N_H^H + N_H^O = N_H_to_mix",
+        "sentence numbers:14"
+      ],
+      [
+        "C26",
+        "RG_L^H + RG_L^O = RG_L",
+        "sentence numbers:14"
+      ],
+      [
+        "C27",
+        "RG_M^H + RG_M^O = RG_M",
+        "sentence numbers:14"
+      ],
+      [
+        "C28",
+        "RG_H^H + RG_H^O = RG_H",
+        "sentence numbers:14"
+      ],
+      [
+        "C29",
+        "CG^H + CG^O = CG",
+        "sentence numbers:14"
+      ],
+      [
+        "C30",
+        "HE = N_L^H+N_M^H+N_H^H+RG_L^H+RG_M^H+RG_H^H+CG^H",
+        "sentence numbers:14"
+      ],
+      [
+        "C31",
+        "OE = N_L^O+N_M^O+N_H^O+RG_L^O+RG_M^O+RG_H^O+CG^O",
+        "sentence numbers:14"
+      ],
+      [
+        "C32",
+        "90·N_L^H+80·N_M^H+70·N_H^H+115·(RG_L^H+RG_M^H+RG_H^H)+105·CG^H ≥ 94·HE",
+        "sentence numbers:14"
+      ],
+      [
+        "C33",
+        "90·N_L^O+80·N_M^O+70·N_H^O+115·(RG_L^O+RG_M^O+RG_H^O)+105·CG^O ≥ 84·OE",
+        "sentence numbers:14"
+      ],
+      [
+        "C34",
+        "1·LO_to_mix +0.6·HO_to_mix +1.5·CO +0.05·R_to_mix ≤ LO_to_mix+HO_to_mix+CO+R_to_mix",
+        "sentence numbers:16"
+      ],
+      [
+        "C35",
+        "3·LO_to_mix = 10·HO_to_mix",
+        "sentence numbers:18"
+      ],
+      [
+        "C36",
+        "4·HO_to_mix = 3·CO",
+        "sentence numbers:18"
+      ],
+      [
+        "C37",
+        "LO_to_mix = 10·R_to_mix",
+        "sentence numbers:18"
+      ],
+      [
+        "C38",
+        "D1 ≤ 20000",
+        "sentence numbers:19"
+      ],
+      [
+        "C39",
+        "D2 ≤ 30000",
+        "sentence numbers:19"
+      ],
+      [
+        "C40",
+        "D1 + D2 ≤ 45000",
+        "sentence numbers:20"
+      ],
+      [
+        "C41",
+        "N_L_to_reform+N_M_to_reform+N_H_to_reform ≤ 10000",
+        "sentence numbers:20"
+      ],
+      [
+        "C42",
+        "LO_to_crack+HO_to_crack ≤ 8000",
+        "sentence numbers:20"
+      ],
+      [
+        "C43",
+        "500 ≤ Lub ≤ 1000",
+        "sentence numbers:21"
+      ],
+      [
+        "C44",
+        "HE ≥ 0.4·OE",
+        "sentence numbers:21"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Try to formulate a plan for the refinery to maximize the total profit.",
+      "Mathematical_expressions": "Max Z = 700·HE + 600·OE + 400·K + 350·FO + 150·Lub"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 311.46232739999687,
+    "total_tokens": 61639
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 21136513.48
+  }
+}

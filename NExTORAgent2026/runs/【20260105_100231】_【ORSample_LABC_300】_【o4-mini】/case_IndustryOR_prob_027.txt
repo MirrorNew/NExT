@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "IndustryOR_prob_027",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_027\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_027\\code.py",
+    "NLtype": "Linear",
+    "question": "Someone has a fund of 300,000 yuan and has the following investment projects in the next three years:\n(1) Investment can be made at the beginning of each year within three years, with an annual profit of 20% of the investment amount, and the principal and interest can be used for investment in the following year;\n(2) Investment is only allowed at the beginning of the first year, and it can be recovered at the end of the second year, with the total principal and interest amounting to 150% of the investment amount, but the investment limit is no more than 150,000 yuan;\n(3) Investment is allowed at the beginning of the second year within three years, and it can be recovered at the end of the third year, with the total principal and interest amounting to 160% of the investment amount, and the investment limit is 200,000 yuan;\n(4) Investment is allowed at the beginning of the third year within three years, and it can be recovered in one year with a profit of 40%, and the investment limit is 100,000 yuan.\nChapter One: Linear Programming and Simplex Method\nTry to determine an investment plan for this person that maximizes the principal and interest at the end of the third year.",
+    "answer": 580000,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "280000.0"
+    ],
+    "time_seconds": 37.941380500007654,
+    "total_tokens": 3565
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "280000.0"
+    ],
+    "ground_truth": 580000
+  }
+}

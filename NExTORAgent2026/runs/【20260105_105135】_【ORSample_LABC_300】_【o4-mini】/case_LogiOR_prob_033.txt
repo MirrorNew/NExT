@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A fruit processing company, NatureBounty, specializes in producing two product lines: packaged fresh apples and bottled apple juice. NatureBounty grades apples on a scale from 1 (poor) to 10 (excellent). The company currently has in inventory 90,000 pounds of grade-7 apples and 110,000 pounds of grade-4 apples. To maintain product quality, apples sold as packaged fresh fruit must have an average grade of at least 5, while apples used for juice production must have an average grade of at least 6.\n\nIn addition, the company faces a processing-capacity constraint: due to equipment limitations, at most 150,000 pounds of apples can be processed in total. Each pound of apples used for juice generates \\$1.10 in revenue and incurs \\$0.80 in variable cost; each pound of apples sold in packaged form generates \\$0.35 in revenue and incurs \\$0.12 in variable cost. The company is also subject to a marketing constraint: to satisfy market demand, at least 20% of the total processed apples must be sold in packaged form. Furthermore, the marketing department has found that packaged fresh fruit has a nonlinear amplification effect on brand image: as the total quantity of apples allocated to packaged fresh fruit increases, market preference for packaged fresh fruit increases exponentially. Specifically, suppose the total quantity of apples allocated to packaged fresh fruit is $x$ pounds; then the required packaged-fresh-fruit proportion is no longer the fixed 20%, but must be at least the value obtained by multiplying 0.2 by $1.3^{x/10000}$, i.e., the proportion of packaged fresh fruit in the total processed apples must be at least $0.2 \\times 1.3^{(x/10000)}$.\n\nHow can NatureBounty maximize profit while satisfying all constraints?",
+    "answer": 14109.0373192,
+    "index": "LogiOR_prob_033",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 公司还受到一项营销约束：为满足市场需求，总加工苹果中至少有 20% 必须以包装形式销售。 修改后相关描述: 公司还受到一项营销约束：为满足市场需求，总加工苹果中至少有 20% 必须以包装形式销售。进一步地，市场部门发现包装鲜果对品牌形象有非线性放大效应：当用于包装鲜果的苹果总量增加时，市场对包装鲜果的偏好会呈指数式提升。具体来说，假设用于包装鲜果的苹果总量为 x 磅，则营销部门要求的包装鲜果比例不再是固定的 20%，而是必须至少达到 0.2 乘以 1.3 的 x 除以 100,000 次方后的值，即要求包装鲜果所占总加工苹果的比例至少为 0.2 × 1.3^(x/100000)。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_033\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_037.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 30.00151599998935,
+    "total_tokens": 3712
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 14109.0373192
+  }
+}

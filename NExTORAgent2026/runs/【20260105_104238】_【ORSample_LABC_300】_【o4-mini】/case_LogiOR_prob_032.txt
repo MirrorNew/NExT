@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "LogiOR_prob_032",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_032\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_032\\code.py",
+    "NLtype": "Linear",
+    "question": "A manufacturing company operates three production facilities (1, 2, and 3) that produce two types of components (X and Y). Each facility generates waste during production, which can be treated to reduce environmental impact. Treating the waste incurs a cost and reduces the amount of pollutants emitted. It costs $12 to treat a ton of waste from facility 1, and each ton treated reduces the amount of pollutant X by 0.15 ton and the amount of pollutant Y by 0.35 ton. It costs $8 to treat a ton of waste from facility 2, and each ton treated reduces the amount of pollutant X by 0.25 ton and the amount of pollutant Y by 0.20 ton. It costs $18 to treat a ton of waste from facility 3, and each ton treated reduces the amount of pollutant X by 0.30 ton and the amount of pollutant Y by 0.40 ton. The company aims to reduce the amount of pollutant X by at least 25 tons and the amount of pollutant Y by at least 35 tons. How to minimize the total cost of treating waste while meeting the pollution reduction targets?",
+    "answer": 1269.5652173913045,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1269.565217"
+    ],
+    "time_seconds": 13.243431800001417,
+    "total_tokens": 1029
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1269.565217"
+    ],
+    "ground_truth": 1269.5652173913045
+  }
+}

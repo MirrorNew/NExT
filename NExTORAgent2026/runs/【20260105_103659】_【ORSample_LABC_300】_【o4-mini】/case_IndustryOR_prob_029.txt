@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Assume that a certain animal requires at least 700 g of protein, 30 g of minerals, and 100 mg of vitamins per day. There are 5 types of feed available. The nutrient contents and the price per kilogram of each feed are shown in Table 1-6.\n\nUnder the premise of satisfying the animal’s growth requirements, minimize the cost of the selected feeds. In addition, introduce the following additional condition to form a nonlinear cost structure: if the total daily amount used of the 5 feeds exceeds 10 kg, then an additional fixed cost of 20 yuan must be paid (e.g., for extra storage and management expenses); if the total amount does not exceed 10 kg, then this 20-yuan fixed cost is not required. Let this fixed cost be $F$, and specify $F=20$ yuan.\n\nTable 1-6\n\n| Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) | Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) |\n|------|-------------|--------------|---------------|--------------|------|-------------|--------------|---------------|--------------|\n| 1    | 3           | 1            | 0.5           | 0.2          | 4    | 6           | 2            | 2             | 0.3          |\n| 2    | 2           | 0.5          | 1             | 0.7          | 5    | 18          | 0.5          | 0.8           | 0.8          |\n| 3    | 1           | 0.2          | 0.2           | 0.4          |      |             |              |               |              |",
+    "answer": 32.43589743589744,
+    "index": "IndustryOR_prob_029",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 试建立线性规划模型，在满足该动物生长需求的前提下，使所选饲料的成本最低。 修改后相关描述: 试建立规划模型，在满足该动物生长需求的前提下，使所选饲料的总成本最低。其中引入如下条件判断形成非线性成本：如果每天所使用的 5 种饲料的总用量超过 10 kg，则在原有饲料成本的基础上，额外产生一笔 20 元的固定成本（设该固定成本为 F，且 F=20 元）；如果总用量不超过 10 kg，则不产生这笔固定成本。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_029\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_001.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "52.4358974359"
+    ],
+    "time_seconds": 17.59987770000589,
+    "total_tokens": 2191
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "52.4358974359"
+    ],
+    "ground_truth": 32.43589743589744
+  }
+}

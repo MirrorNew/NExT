@@ -1,0 +1,196 @@
+{
+  "entry": {
+    "index": 23,
+    "question": "In the deployment of 5G networks, base station power allocation is a key technology to improve spectrum efficiency. In the optimization of 5G networks in the Hangzhou Asian Games venues, Yanguo Mobile faced a similar power allocation problem: three frequency bands (2.6GHz, 3.5GHz and 4.9GHz) need to share the total transmission power of the base station. Due to the differences in propagation characteristics of different frequency bands, the 3.5GHz band has a smaller coverage range but can provide higher data rates at the same power; while the 2.6GHz band has a wider coverage but relatively low spectrum efficiency. This difference is similar to the gain coefficient of different channels in the title. \n\nThe Massive MIMO solution provided by Rhode Island Information Company uses a similar Shannon capacity formula for power optimization. By real-time monitoring of the channel state information (CSI) of each frequency band, the system dynamically adjusts the power allocation to ensure that the network throughput is maximized under the total power limit. In actual deployment, it is found that due to the time-varying nature of user distribution and interference, the theoretical optimal solution needs to be dynamically adjusted in combination with machine learning algorithms. This technology increased the peak rate of the venue area by 35% during the Asian Games while ensuring the experience of edge users. \n\nThis power allocation problem is actually an application scenario of the classic \"water-filling algorithm\" in the field of communications. In the 4G era, Alcatel-Lucent first applied this theory to the resource allocation of LTE base stations. With the evolution of 5G technology, the algorithm needs to be combined with more complex constraints, such as user fairness and energy efficiency optimization, which has promoted the formation of the core framework of modern radio resource management (RRM) systems. \n\nAt present, the wireless communication system provided by Tokushima Information has three channels available (2.6GHz, 3.5GHz and 4.9GHz), and the total transmission power does not exceed 20 W. It is hoped that the power of each channel will be allocated to maximize the total data rate. The capacity formula of channel $i$ is $R_i = \\log_2(1 + g_i P_i)$, where the gain coefficient $g=[0.5,1.2,0.9]$ is known. The design variables are the channel power allocation $P_1, P_2, P_3$ (unit: W). The objective function is the total rate $R_{total} = \\sum_{i=1}^3 \\log_2(1+ g_i P_i)$, which needs to be maximized. The constraints are that the power is non-negative and the total power does not exceed 20 W.",
+    "answer": 8.101,
+    "Parameters_List": [
+      {
+        "Name": "frequency_bands_count",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "frequency_bands",
+        "Type": "list",
+        "Value": [
+          2.6,
+          3.5,
+          4.9
+        ]
+      },
+      {
+        "Name": "channels_count",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "channels",
+        "Type": "list",
+        "Value": [
+          2.6,
+          3.5,
+          4.9
+        ]
+      },
+      {
+        "Name": "P_total_max",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "g",
+        "Type": "list",
+        "Value": [
+          0.5,
+          1.2,
+          0.9
+        ]
+      },
+      {
+        "Name": "P_i_min",
+        "Type": "integer",
+        "Value": 0
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the deployment of 5G networks...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "In the optimization of 5G networks...",
+        "Constraint: P₁ + P₂ + P₃ ≤ P_total"
+      ],
+      [
+        "3",
+        "Due to the differences in propagation...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "This difference is similar to the gain coefficient...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The Massive MIMO solution provided by...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "By real-time monitoring of the channel state...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "In actual deployment, it is found that...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "This technology increased the peak rate...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "This power allocation problem is actually...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "In the 4G era, Alcatel-Lucent first...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "With the evolution of 5G technology, the algorithm needs...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "At present, the wireless communication system...",
+        "Constraint: P₁ + P₂ + P₃ ≤ 20"
+      ],
+      [
+        "13",
+        "It is hoped that the power of...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "The capacity formula of channel i is R_i...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "The design variables are the channel power...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "The objective function is the total rate...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "The constraints are that the power is...",
+        "Constraint: P_i ≥ 0 for i=1,2,3; P₁ + P₂ + P₃ ≤ 20"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "P₁",
+        "Meaning": "Power allocated to channel 1 (2.6 GHz)",
+        "Type": "continuous",
+        "Range ": "[0,20]"
+      },
+      {
+        "symbol": "P₂",
+        "Meaning": "Power allocated to channel 2 (3.5 GHz)",
+        "Type": "continuous",
+        "Range ": "[0,20]"
+      },
+      {
+        "symbol": "P₃",
+        "Meaning": "Power allocated to channel 3 (4.9 GHz)",
+        "Type": "continuous",
+        "Range ": "[0,20]"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Non-negativity",
+        "P₁ ≥ 0, P₂ ≥ 0, P₃ ≥ 0",
+        "sentence numbers:17"
+      ],
+      [
+        "Total power limit",
+        "P₁ + P₂ + P₃ ≤ 20",
+        "sentence numbers:12,17"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The objective function is the total rate R_total = ∑_{i=1}^3 log₂(1 + g_i P_i), which needs to be maximized.",
+      "Mathematical_expressions": "Maximize R_total = ∑_{i=1}^3 log₂(1 + g_i P_i)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "8.101000981515"
+    ],
+    "time_seconds": 80.00047989999439,
+    "total_tokens": 13329
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "8.101000981515"
+    ],
+    "ground_truth": 8.101
+  }
+}

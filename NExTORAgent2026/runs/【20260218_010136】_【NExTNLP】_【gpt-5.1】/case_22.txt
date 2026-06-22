@@ -1,0 +1,254 @@
+{
+  "entry": {
+    "index": 22,
+    "question": "In the smart transportation system of the Theresia Municipal Transportation Commission, engineers are faced with a classic road network optimization problem: during the morning rush hour, the two parallel main roads, the North Fourth Ring Road and the Beijing-Tong Expressway, connecting Zhongguancun and Guomao, need to reasonably allocate 100,000 commuter vehicles. Historical data show that when the traffic volume on a road exceeds the design capacity, the actual travel time will show a superlinear growth due to vehicle interaction - this is highly consistent with the modified form of the BPR function of the Federal Highway Administration of Colombia. Actual measured data in the winter of 2023 showed that the 35-minute journey predicted by the navigation software often takes an additional 7% of time in actual travel. This difference is mainly due to ramp merging conflicts and driving behavior variations. \n\nBased on this phenomenon, Amap upgraded its dynamic path recommendation engine in 2024. The new system no longer simply guides users to the instantaneous \"fastest path\", but adopts the Wardrop equilibrium principle to calculate the optimal vehicle ratio of each path through a distributed algorithm. In the parallel section test of Shenzhen Nanping Expressway and Meiguan Expressway, the system successfully shortened the average travel time during the morning rush hour by 12%. It is worth noting that the actual savings are 2 percentage points lower than the theoretical prediction, which reveals the random disturbance factors that are difficult to quantify in the real road network. At present, this technology has been included in the recommended solution of the \"Technical Guidelines for the Construction of Urban Traffic Brain\" of the Ministry of Transport. \n\nCurrently, on the main road of Kazidong Road, there are two parallel roads between a starting point and an end point. 100 vehicles need to be distributed between the two roads to minimize the total travel time. Let $x$ be the number of vehicles taking a certain route, then the travel time for a vehicle taking route 1 is $T_1(x) = 10 + 0.1x^2$ (minutes), and the travel time for a vehicle taking route 2 is $T_2(x) = 12 + 0.05(x)^2$. Assume that all vehicles on a certain road have the same travel time, but the actual travel time is about the expected travel time to the power of 1.05 . Now, it is necessary to determine the value of the number of vehicles on route 1 to minimize the total actual travel time.",
+    "answer": 23716.82,
+    "Parameters_List": [
+      {
+        "Name": "num_parallel_main_roads",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "total_commuter_vehicles",
+        "Type": "integer",
+        "Value": 100000
+      },
+      {
+        "Name": "predicted_journey_time",
+        "Type": "integer",
+        "Value": 35
+      },
+      {
+        "Name": "actual_time_increase",
+        "Type": "float",
+        "Value": 0.07
+      },
+      {
+        "Name": "upgrade_year",
+        "Type": "integer",
+        "Value": 2024
+      },
+      {
+        "Name": "travel_time_reduction",
+        "Type": "float",
+        "Value": 0.12
+      },
+      {
+        "Name": "difference_from_theoretical",
+        "Type": "float",
+        "Value": 0.02
+      },
+      {
+        "Name": "num_parallel_roads",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "total_vehicles",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "T1_constant_term",
+        "Type": "float",
+        "Value": 10.0
+      },
+      {
+        "Name": "T1_quadratic_coefficient",
+        "Type": "float",
+        "Value": 0.1
+      },
+      {
+        "Name": "T2_constant_term",
+        "Type": "float",
+        "Value": 12.0
+      },
+      {
+        "Name": "T2_quadratic_coefficient",
+        "Type": "float",
+        "Value": 0.05
+      },
+      {
+        "Name": "actual_travel_time_exponent",
+        "Type": "float",
+        "Value": 1.05
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the smart transportation system...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "during the morning rush hour...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Historical data show that...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Actual measured data in the winter...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "This difference is mainly due...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Based on this phenomenon, Amap...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The new system no longer simply...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "In the parallel section test of...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "It is worth noting that the actual...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "At present, this technology has...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Currently, on the main road of Kazidong...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "100 vehicles need to be distributed...",
+        "Constraint: x + y = 100; x, y ≥ 0; x, y ∈ ℤ"
+      ],
+      [
+        "13",
+        "Let x be the number of vehicles taking...",
+        "Constraints: T1 = 10 + 0.1 x²; T2 = 12 + 0.05 y²"
+      ],
+      [
+        "14",
+        "Assume that all vehicles on a certain...",
+        "Constraints: T1_act = T1^1.05; T2_act = T2^1.05"
+      ],
+      [
+        "15",
+        "Now, it is necessary to determine the...",
+        "Objective: minimize total actual travel time"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x",
+        "Meaning": "number of vehicles on route 1",
+        "Type": "integer",
+        "Range ": "[0,100]"
+      },
+      {
+        "symbol": "y",
+        "Meaning": "number of vehicles on route 2",
+        "Type": "integer",
+        "Range ": "[0,100]"
+      },
+      {
+        "symbol": "T1",
+        "Meaning": "expected travel time per vehicle on route 1 (minutes)",
+        "Type": "continuous",
+        "Range ": "[10,∞)"
+      },
+      {
+        "symbol": "T2",
+        "Meaning": "expected travel time per vehicle on route 2 (minutes)",
+        "Type": "continuous",
+        "Range ": "[12,∞)"
+      },
+      {
+        "symbol": "T1_act",
+        "Meaning": "actual travel time per vehicle on route 1 (minutes)",
+        "Type": "continuous",
+        "Range ": "[0,∞)"
+      },
+      {
+        "symbol": "T2_act",
+        "Meaning": "actual travel time per vehicle on route 2 (minutes)",
+        "Type": "continuous",
+        "Range ": "[0,∞)"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Vehicle distribution",
+        "x + y = 100",
+        "sentence numbers:12"
+      ],
+      [
+        "Nonnegativity",
+        "x ≥ 0, y ≥ 0",
+        "sentence numbers:12"
+      ],
+      [
+        "Integrality",
+        "x, y ∈ ℤ",
+        "sentence numbers:12"
+      ],
+      [
+        "Route 1 time definition",
+        "T1 = 10 + 0.1·x²",
+        "sentence numbers:13"
+      ],
+      [
+        "Route 2 time definition",
+        "T2 = 12 + 0.05·y²",
+        "sentence numbers:13"
+      ],
+      [
+        "Actual time route 1",
+        "T1_act = T1^1.05",
+        "sentence numbers:14"
+      ],
+      [
+        "Actual time route 2",
+        "T2_act = T2^1.05",
+        "sentence numbers:14"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Now, it is necessary to determine the value of the number of vehicles on route 1 to minimize the total actual travel time.",
+      "Mathematical_expressions": "Z = x·T1_act + y·T2_act = x·(10 + 0.1·x²)^1.05 + y·(12 + 0.05·y²)^1.05"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "23716.82404845",
+      "41.0"
+    ],
+    "time_seconds": 31.5676678000018,
+    "total_tokens": 8757
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "23716.82404845",
+      "41.0"
+    ],
+    "ground_truth": 23716.82
+  }
+}

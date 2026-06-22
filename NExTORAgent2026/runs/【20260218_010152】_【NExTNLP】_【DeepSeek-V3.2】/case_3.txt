@@ -1,0 +1,188 @@
+{
+  "entry": {
+    "index": 3,
+    "question": "In the heavy machinery manufacturing industry, the production and delivery plan of engines directly affects the company's operating costs and customer satisfaction. Huaqiang Power Equipment Manufacturing Plant recently took on an order for quarterly delivery, facing the dual challenges of production scheduling and inventory management. Since there is an upper limit to the factory's production capacity and the production capacity is nonlinearly related to production costs, the production department needs to accurately plan the output of each quarter. The warehousing department pointed out that cross-quarter inventory not only occupies working capital, but also generates additional warehousing management costs, including warehouse maintenance, insurance costs and capital opportunity costs. \n\nThis problem reflects the supply chain optimization needs commonly faced by modern manufacturing companies. In the field of equipment manufacturing, production plan optimization can significantly reduce the company's operating costs while ensuring on-time delivery and maintaining the company's business reputation. Industry research shows that a reasonable production-inventory strategy can reduce the total cost of a manufacturing company by a considerable proportion. The finance department pays special attention to the impact of the model on cash flow, because the inventory level at the end of the quarter is directly related to the working capital demand and warehousing rental costs. At present, the plant is considering introducing a dynamic programming algorithm to assist production decision-making. This method has mature application cases in the fields of automobile manufacturing and aircraft engines. \n\nCurrently, the factory provides engines to users. According to the contract, the delivery quantity and date are: 40 units at the end of the first quarter, 60 units at the end of the second quarter, and 80 units at the end of the third quarter. The maximum production capacity of the factory is 100 units per quarter, and the production cost per quarter is $f(x_i)=50{x_i}+0.002{x_i}^{2.9}$(yuan), where x is the number of engines produced in the quarter. If the factory produces more, the excess engines can be moved to the next quarter for delivery to users. In this way, the factory needs to pay storage fees, and the storage fee for each engine per quarter is 4 yuan. How many engines should the factory produce per quarter to meet the delivery contract and minimize the cost of the factory (assuming that there is no engine inventory at the beginning of the first quarter). It is required to establish a mathematical model and calculate the cost.",
+    "answer": 9984.227,
+    "Parameters_List": [
+      {
+        "Name": "delivery_quantities",
+        "Type": "list",
+        "Value": [
+          40,
+          60,
+          80
+        ]
+      },
+      {
+        "Name": "max_capacity",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "cost_function_coeffs",
+        "Type": "tuple",
+        "Value": {
+          "a": 50,
+          "b": 0.002,
+          "exp": 2.9
+        }
+      },
+      {
+        "Name": "storage_cost",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "initial_inventory",
+        "Type": "integer",
+        "Value": 0
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the heavy machinery manufacturing...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Huaqiang Power Equipment...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Since there is an upper limit...",
+        "Constraint: production capacity upper bound (x_t ≤ 100)"
+      ],
+      [
+        "4",
+        "The warehousing department pointed...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "This problem reflects the...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "In the field of equipment...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Industry research shows...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The finance department pays...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "At present, the plant...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "This method has mature...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Currently, the factory provides...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "According to the contract, the...",
+        "Constraints: D₁=40, D₂=60, D₃=80; inventory-balance I_t = I_{t-1} + x_t − D_t; I_t ≥ 0"
+      ],
+      [
+        "13",
+        "The maximum production capacity...",
+        "Constraints: 0 ≤ x_t ≤ 100; cost function f(x_t)=50x_t+0.002x_t^2.9"
+      ],
+      [
+        "14",
+        "If the factory produces more...",
+        "Implicit: use of inventory variables"
+      ],
+      [
+        "15",
+        "In this way, the factory needs...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "How many engines should the...",
+        "Constraint: I₀ = 0; defines objective"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_t",
+        "Meaning": "Number of engines produced in quarter t",
+        "Type": "integer",
+        "Range ": "0 ≤ x_t ≤ 100"
+      },
+      {
+        "symbol": "I_t",
+        "Meaning": "Inventory at end of quarter t",
+        "Type": "integer",
+        "Range ": "I_t ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Initial inventory",
+        "I₀ = 0",
+        "sentence numbers:16"
+      ],
+      [
+        "Inventory balance",
+        "I_t = I_{t-1} + x_t - D_t",
+        "sentence numbers:12"
+      ],
+      [
+        "Inventory nonnegativity",
+        "I_t ≥ 0",
+        "sentence numbers:12"
+      ],
+      [
+        "Production capacity upper bound",
+        "x_t ≤ 100",
+        "sentence numbers:3,13"
+      ],
+      [
+        "Production nonnegativity",
+        "x_t ≥ 0",
+        "sentence numbers:13"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "How many engines should the factory produce per quarter... ",
+      "Mathematical_expressions": "Minimize total cost = Σ_{t=1}^3 [50·x_t + 0.002·x_t^2.9] + 4·Σ_{t=1}^3 I_t"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "9984.134625064",
+      "9984.13"
+    ],
+    "time_seconds": 64.04750059999787,
+    "total_tokens": 6580
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "9984.134625064",
+      "9984.13"
+    ],
+    "ground_truth": 9984.227
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A benevolent fisherman fishes in a 250-acre lake and can catch fish using either nets or fishing lines. For each acre of the lake, using nets can catch 8 fish, requires 4 units of bait, but also imposes 2 units of pain on the fisherman. For each acre of the lake, using fishing lines can catch 5 fish, requires 3 units of bait, but also imposes 1 unit of pain on the fisherman. The fisherman has a total of 800 units of bait available and can tolerate at most 350 units of pain.\n\nNow further consider that as the number of acres fished using nets increases, the fisherman’s mental and physical fatigue grows exponentially: specifically, assume that the total pain caused by net fishing is not simply accumulated linearly as 2 units per acre, but is computed as $2\\times(1.3^n)$, where $n$ is the number of acres on which nets are used, and the constant 1.3 is the exponential growth factor of pain.\n\nUnder these conditions, on how many acres should the fisherman use each of the two fishing methods in order to maximize the number of fish he can catch?",
+    "answer": 1296.3345624061496,
+    "index": "NLP4LP_prob_074",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “渔夫共有 800 个单位的鱼饵可用，并且最多只能忍受 350 个单位的痛苦。” 以及隐含的线性理解是使用渔网捕鱼每英亩带来 2 个单位痛苦，总痛苦为 2×（使用渔网的英亩数）加上使用鱼线的痛苦。 修改后相关描述: “渔夫共有 800 个单位的鱼饵可用，并且最多只能忍受 350 个单位的痛苦。现在进一步考虑到随着使用渔网捕鱼的英亩数增加，渔夫在心理和体力上的疲劳会呈指数级上升：具体地，假设使用渔网捕鱼带来的总痛苦并不是简单地按每英亩 2 个单位线性累加，而是按 2×(1.3 的 n 次方) 来计算，其中 n 为使用渔网捕鱼的英亩数，常数 1.3 为痛苦的指数增长系数。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_074\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_069.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1296.375570889"
+    ],
+    "time_seconds": 24.659162700001616,
+    "total_tokens": 1877
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1296.375570889"
+    ],
+    "ground_truth": 1296.3345624061496
+  }
+}

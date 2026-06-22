@@ -1,0 +1,475 @@
+{
+  "entry": {
+    "index": 3,
+    "question": "Ethiopian Adama Chemical Company (hereinafter referred to as **EAC**) was established in 1998. It was originally just a small ammonium nitrate workshop. Now it has developed into a regional leading enterprise integrating R&D, production, warehousing and international trade. The company's plant is close to the Addis Ababa-Djibouti railway trunk line and is only 72 kilometers away from the nearest inland port **Modjo Dry Port**; this logistics advantage is said to be one of the decisive factors in the board of directors' decision to build the plant. EAC's corporate vision is written on a blue plaque with white letters at the gate: \"**Better Chemistry, Better Future**\". According to internal communications, the company also plans to put into operation a 5 MW photovoltaic power station in 2026 to offset the pressure of carbon tax, but this project is not directly related to this question.\n\nThe Ethiopian Chemical Company is located in Adama and produces a variety of chemical products such as fertilizers, coatings and industrial chemicals. In 2025, the chemical company plans to formulate a production plan for the next two quarters. The company operates three core products: fertilizers (Product F), coatings (Product P) and industrial chemicals (Product C). Affected by the fluctuations in the international raw material market, local labor regulations, and equipment energy consumption tax policies, the company's management requires that the production schedule of the three main production lines be re-optimized while ensuring continuous supply and profitability. \n\nIn recent years, the local rainy season (June-September) has been advanced or extended many times, resulting in delays in the land transportation of ore raw materials; in addition, the Ethiopian Central Bank has implemented stricter approval for foreign exchange allocations, which has also lengthened the supply cycle of imported additives. At the same time, the gradual implementation of the African Continental Free Trade Area (AfCFTA) has opened up new markets in East Africa and Southern Africa for the company, which can be said to be both an opportunity and a challenge. At the mid-term review meeting for fiscal year 2025, management decided that it was necessary to review internal production scheduling to ensure that the two core goals of **continuous supply** and **maximum profitability** remain resilient in the \"changing external environment.\" \n\nIn terms of time, within the plan, the company has locked in ten suppliers, each of which can supply up to 500 Tons of a certain nitrogen-phosphorus-potassium composite raw material, the excess cannot be effectively produced. In terms of equipment, historical safety records show that each main reactor is only allowed to be started up for a total of 125 days within the planned time; this quarter is operated at full capacity in double shifts (40 hours per shift), and no more than 3,000 tons of each product is allowed to avoid overproduction. In terms of manpower, there are 80 front-line operators, and the net working hours that each person can arrange on the production line in this plan shall not exceed 100 hours, and the rest of the time must be used for maintenance, training and rotation. In terms of the market, based on the sales department's tracking of domestic and foreign orders, the potential demand for fertilizers, coatings, and chemicals shall not exceed 2,000 tons, 1,500 tons, and 1,800 tons, respectively. The excess cannot be digested within the quarter. Upon investigation, during the planned time, the company's contract with customers requires that fertilizers must account for at least 25% of the total output (to ensure basic agricultural orders). At the same time, due to the signing of a framework agreement with a large customer, at least 1,000 tons must be provided. Tons of paint. In actual production, due to the high cost of switching the coolant of the device, the production volume of chemicals cannot exceed 0.8 times that of fertilizers (otherwise the equipment is overloaded), and nitrogen plays a dominant role in the raw materials. It is stipulated that the average raw material consumption per ton of product in production cannot exceed 0.65 tons. In order to enhance the brand image, all exported fertilizers must be packaged in newly designed biodegradable bags, but the packaging workshop has sufficient production capacity and does not constitute a bottleneck for the time being. In addition, the company will donate 1% of its profits to the local community fund every month to support vocational schools. Currently, this expenditure has been deducted from the profit coefficient. The cost data after deduction is shown in the following table, \n\n| Product | Profit/ton (US dollars) | Raw materials/ton (tons) | Machine time/ton (hours) | Labor/ton (hours) |\n| ------ | -------------- | -------------- | ------------------ | ---------------- |\n| Fertilizer | 200 | 0.5 | 0.8 | 0.6 |\n| Paint | 300 | 0.7 | 1.0 | 0.8 |\n| Chemicals | 250 | 0.6 | 0.9 | 0.7 |\n\nIn summary, choose the appropriate output of fertilizers, paints, and chemicals to maximize the total profit while satisfying the constraints. Only the maximum total profit needs to be given. ",
+    "answer": 1250000.0,
+    "Parameters_List": [
+      {
+        "Name": "Company_Name",
+        "Type": "string",
+        "Value": "Ethiopian Adama Chemical Company"
+      },
+      {
+        "Name": "Company_Abbreviation",
+        "Type": "string",
+        "Value": "EAC"
+      },
+      {
+        "Name": "Establishment_Year",
+        "Type": "integer",
+        "Value": 1998
+      },
+      {
+        "Name": "Distance_to_Modjo_Dry_Port_km",
+        "Type": "integer",
+        "Value": 72
+      },
+      {
+        "Name": "Planned_PV_Capacity_MW",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "Planned_PV_Operation_Year",
+        "Type": "integer",
+        "Value": 2026
+      },
+      {
+        "Name": "Planning_Year",
+        "Type": "integer",
+        "Value": 2025
+      },
+      {
+        "Name": "Planning_Horizon_Quarters",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "Rainy_Season_Months",
+        "Type": "list",
+        "Value": [
+          "June",
+          "July",
+          "August",
+          "September"
+        ]
+      },
+      {
+        "Name": "Products",
+        "Type": "list",
+        "Value": [
+          "Fertilizer",
+          "Paint",
+          "Chemicals"
+        ]
+      },
+      {
+        "Name": "Product_Codes",
+        "Type": "object",
+        "Value": {
+          "Fertilizer": "F",
+          "Paint": "P",
+          "Chemicals": "C"
+        }
+      },
+      {
+        "Name": "Number_of_Suppliers",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "Max_Supply_per_Supplier_tons",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "Total_Max_Raw_Material_Supply_tons",
+        "Type": "integer",
+        "Value": 5000
+      },
+      {
+        "Name": "Max_Average_Raw_Material_per_ton_tons",
+        "Type": "float",
+        "Value": 0.65
+      },
+      {
+        "Name": "Max_Reactor_Operating_Days",
+        "Type": "integer",
+        "Value": 125
+      },
+      {
+        "Name": "Shifts_per_Day",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "Hours_per_Shift",
+        "Type": "integer",
+        "Value": 40
+      },
+      {
+        "Name": "Max_Production_per_Product_tons",
+        "Type": "integer",
+        "Value": 3000
+      },
+      {
+        "Name": "Number_of_Operators",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "Max_Net_Working_Hours_per_Operator",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "Total_Available_Labor_Hours",
+        "Type": "integer",
+        "Value": 8000
+      },
+      {
+        "Name": "Max_Demand_Fertilizer_tons",
+        "Type": "integer",
+        "Value": 2000
+      },
+      {
+        "Name": "Max_Demand_Paint_tons",
+        "Type": "integer",
+        "Value": 1500
+      },
+      {
+        "Name": "Max_Demand_Chemicals_tons",
+        "Type": "integer",
+        "Value": 1800
+      },
+      {
+        "Name": "Min_Fertilizer_Share",
+        "Type": "float",
+        "Value": 0.25
+      },
+      {
+        "Name": "Min_Paint_Production_tons",
+        "Type": "integer",
+        "Value": 1000
+      },
+      {
+        "Name": "Chemicals_to_Fertilizer_Ratio_Max",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "Donation_Ratio",
+        "Type": "float",
+        "Value": 0.01
+      },
+      {
+        "Name": "Profit_Coefficients_Already_Net_of_Donation",
+        "Type": "boolean",
+        "Value": true
+      },
+      {
+        "Name": "Profit_per_ton_USD",
+        "Type": "object",
+        "Value": {
+          "Fertilizer": 200,
+          "Paint": 300,
+          "Chemicals": 250
+        }
+      },
+      {
+        "Name": "Raw_materials_per_ton_tons",
+        "Type": "object",
+        "Value": {
+          "Fertilizer": 0.5,
+          "Paint": 0.7,
+          "Chemicals": 0.6
+        }
+      },
+      {
+        "Name": "Machine_time_per_ton_hours",
+        "Type": "object",
+        "Value": {
+          "Fertilizer": 0.8,
+          "Paint": 1.0,
+          "Chemicals": 0.9
+        }
+      },
+      {
+        "Name": "Labor_per_ton_hours",
+        "Type": "object",
+        "Value": {
+          "Fertilizer": 0.6,
+          "Paint": 0.8,
+          "Chemicals": 0.7
+        }
+      },
+      {
+        "Name": "Table_1_CostData",
+        "Type": "list",
+        "Value": [
+          {
+            "Product": "Fertilizer",
+            "Profit_per_ton_USD": 200,
+            "Raw_materials_per_ton_tons": 0.5,
+            "Machine_time_per_ton_hours": 0.8,
+            "Labor_per_ton_hours": 0.6
+          },
+          {
+            "Product": "Paint",
+            "Profit_per_ton_USD": 300,
+            "Raw_materials_per_ton_tons": 0.7,
+            "Machine_time_per_ton_hours": 1.0,
+            "Labor_per_ton_hours": 0.8
+          },
+          {
+            "Product": "Chemicals",
+            "Profit_per_ton_USD": 250,
+            "Raw_materials_per_ton_tons": 0.6,
+            "Machine_time_per_ton_hours": 0.9,
+            "Labor_per_ton_hours": 0.7
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Ethiopian Adama Chemical Company (hereinafter...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company's plant is close to the Addis Ababa-Djibouti...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "EAC's corporate vision is written on a blue plaque...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "According to internal communications, the company also plans...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The Ethiopian Chemical Company is located in Adama and produces...",
+        "Defines decision context: three core products (fertilizers F, coatings/paint P, chemicals C) whose production quantities in the next two quarters are decision variables."
+      ],
+      [
+        "6",
+        "Affected by the fluctuations in the international raw material market...",
+        "No quantitative constraints; explains need for re-optimization."
+      ],
+      [
+        "7",
+        "In recent years, the local rainy season (June-September)...",
+        "No constraints directly; explains uncertainty in raw material transportation and additive supply cycles."
+      ],
+      [
+        "8",
+        "At the same time, the gradual implementation of the African Continental Free Trade Area...",
+        "No constraints; describes market environment."
+      ],
+      [
+        "9",
+        "At the mid-term review meeting for fiscal year 2025, management decided...",
+        "States goals: continuous supply and maximum profitability; translates into objective to maximize total profit subject to constraints."
+      ],
+      [
+        "10",
+        "In terms of time, within the plan, the company has locked in ten suppliers...",
+        "Raw material availability: each of 10 suppliers can supply up to 500 tons of a composite raw material → total supply ≤ 5000 tons. Combined with per-ton raw material use from table, gives constraint 0.5 x_F + 0.7 x_P + 0.6 x_C ≤ 5000."
+      ],
+      [
+        "11",
+        "In terms of equipment, historical safety records show that each main reactor is only allowed...",
+        "Machine time capacity: double shifts, 40 hours per shift, 125 days → total machine hours ≤ 125×2×40 = 10000. With per-ton machine time from table: 0.8 x_F + 1.0 x_P + 0.9 x_C ≤ 10000. Also, product capacity: no more than 3,000 tons of each product → x_F ≤ 3000, x_P ≤ 3000, x_C ≤ 3000."
+      ],
+      [
+        "12",
+        "In terms of manpower, there are 80 front-line operators...",
+        "Labor time capacity: 80 operators × 100 hours per operator = 8000 hours. With per-ton labor from table: 0.6 x_F + 0.8 x_P + 0.7 x_C ≤ 8000."
+      ],
+      [
+        "13",
+        "In terms of the market, based on the sales department's tracking...",
+        "Market demand upper bounds: fertilizer x_F ≤ 2000, paint x_P ≤ 1500, chemicals x_C ≤ 1800 (excess cannot be sold in the quarter)."
+      ],
+      [
+        "14",
+        "Upon investigation, during the planned time, the company's contract with customers requires that fertilizers must account...",
+        "Fertilizer share constraint: fertilizers must be at least 25% of total output: x_F ≥ 0.25 (x_F + x_P + x_C) which simplifies to 3 x_F ≥ x_P + x_C."
+      ],
+      [
+        "15",
+        "At the same time, due to the signing of a framework agreement with a large customer, at least 1,000 tons must be provided...",
+        "Minimum paint output: x_P ≥ 1000."
+      ],
+      [
+        "16",
+        "In actual production, due to the high cost of switching the coolant of the device, the production volume of chemicals...",
+        "Technology constraint: chemical output cannot exceed 0.8 times fertilizer output: x_C ≤ 0.8 x_F (equipment overloading concern)."
+      ],
+      [
+        "17",
+        "and nitrogen plays a dominant role in the raw materials. It is stipulated that the average raw material consumption...",
+        "Average raw material consumption per ton cannot exceed 0.65 tons: (0.5 x_F + 0.7 x_P + 0.6 x_C) / (x_F + x_P + x_C) ≤ 0.65, for total output > 0. Linearized form: 0.7 x_P + 0.6 x_C - 0.15 x_F ≤ 0."
+      ],
+      [
+        "18",
+        "In order to enhance the brand image, all exported fertilizers must be packaged in newly designed biodegradable bags...",
+        "No binding production constraint; packaging has sufficient capacity and is not a bottleneck."
+      ],
+      [
+        "19",
+        "In addition, the company will donate 1% of its profits to the local community fund every month...",
+        "Donation already deducted from profit coefficient; no extra constraint. Profit per ton data in table are net profits used in objective."
+      ],
+      [
+        "20",
+        "Currently, this expenditure has been deducted from the profit coefficient...",
+        "No new constraint; clarifies profit coefficients."
+      ],
+      [
+        "21",
+        "The cost data after deduction is shown in the following table...",
+        "Provides parameters: profit, raw material consumption, machine time, and labor time per ton for each product, used in objective and resource constraints."
+      ],
+      [
+        "22",
+        "In summary, choose the appropriate output of fertilizers, paints, and chemicals to maximize the total profit...",
+        "Defines optimization goal: choose x_F, x_P, x_C to maximize total profit subject to listed constraints; also implies non-negativity x_F, x_P, x_C ≥ 0."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_F",
+        "Meaning": "Production quantity of fertilizers (Product F) in the planning horizon, measured in tons",
+        "Type": "continuous",
+        "Range ": "x_F ≥ 0, additionally bounded above by both capacity and demand constraints"
+      },
+      {
+        "symbol": "x_P",
+        "Meaning": "Production quantity of paints/coatings (Product P) in the planning horizon, measured in tons",
+        "Type": "continuous",
+        "Range ": "x_P ≥ 0, with x_P ≥ 1000 and upper bounds from capacity and demand constraints"
+      },
+      {
+        "symbol": "x_C",
+        "Meaning": "Production quantity of industrial chemicals (Product C) in the planning horizon, measured in tons",
+        "Type": "continuous",
+        "Range ": "x_C ≥ 0, additionally bounded above by capacity, demand, and x_C ≤ 0.8 x_F"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Raw material availability",
+        "0.5 x_F + 0.7 x_P + 0.6 x_C ≤ 5000",
+        "sentence numbers:10,21"
+      ],
+      [
+        "Machine time capacity",
+        "0.8 x_F + 1.0 x_P + 0.9 x_C ≤ 10000",
+        "sentence numbers:11,21"
+      ],
+      [
+        "Labor time capacity",
+        "0.6 x_F + 0.8 x_P + 0.7 x_C ≤ 8000",
+        "sentence numbers:12,21"
+      ],
+      [
+        "Per-product production capacity (fertilizer)",
+        "x_F ≤ 3000",
+        "sentence numbers:11"
+      ],
+      [
+        "Per-product production capacity (paint)",
+        "x_P ≤ 3000",
+        "sentence numbers:11"
+      ],
+      [
+        "Per-product production capacity (chemicals)",
+        "x_C ≤ 3000",
+        "sentence numbers:11"
+      ],
+      [
+        "Market demand upper bound (fertilizer)",
+        "x_F ≤ 2000",
+        "sentence numbers:13"
+      ],
+      [
+        "Market demand upper bound (paint)",
+        "x_P ≤ 1500",
+        "sentence numbers:13"
+      ],
+      [
+        "Market demand upper bound (chemicals)",
+        "x_C ≤ 1800",
+        "sentence numbers:13"
+      ],
+      [
+        "Fertilizer minimum share of total output",
+        "x_F ≥ 0.25 (x_F + x_P + x_C)    ⇔    3 x_F ≥ x_P + x_C",
+        "sentence numbers:14"
+      ],
+      [
+        "Minimum paint output",
+        "x_P ≥ 1000",
+        "sentence numbers:15"
+      ],
+      [
+        "Chemicals limited by fertilizer output",
+        "x_C ≤ 0.8 x_F",
+        "sentence numbers:16"
+      ],
+      [
+        "Average raw material consumption per ton (nonlinear form)",
+        "(0.5 x_F + 0.7 x_P + 0.6 x_C) / (x_F + x_P + x_C) ≤ 0.65",
+        "sentence numbers:17,21"
+      ],
+      [
+        "Average raw material consumption per ton (linearized inequality)",
+        "0.5 x_F + 0.7 x_P + 0.6 x_C ≤ 0.65 (x_F + x_P + x_C)    ⇔    0.7 x_P + 0.6 x_C - 0.15 x_F ≤ 0",
+        "sentence numbers:17,21"
+      ],
+      [
+        "Non-negativity (fertilizer)",
+        "x_F ≥ 0",
+        "sentence numbers:22"
+      ],
+      [
+        "Non-negativity (paint)",
+        "x_P ≥ 0",
+        "sentence numbers:22"
+      ],
+      [
+        "Non-negativity (chemicals)",
+        "x_C ≥ 0",
+        "sentence numbers:22"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "In summary, choose the appropriate output of fertilizers, paints, and chemicals to maximize the total profit while satisfying the constraints.",
+      "Mathematical_expressions": "Maximize Z = 200 x_F + 300 x_P + 250 x_C"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 40.424689400002535,
+    "total_tokens": 32547
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 1250000.0
+  }
+}

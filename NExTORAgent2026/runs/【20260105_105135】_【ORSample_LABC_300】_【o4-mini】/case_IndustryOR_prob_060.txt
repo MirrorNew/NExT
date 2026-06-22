@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A product can be processed on any one of four machines: A, B, C, or D. When each machine is put into operation, its setup cost, the unit production cost of the product, and the maximum processing capacity of each machine are shown in Table 5-7. If 2000 units of this product must be produced, how can the total cost be minimized? Formulate a mathematical model.\n\nBased on the original conditions, consider that the unit production cost on machine A exhibits an “economies of scale” effect with respect to production volume: as the quantity assigned to machine A increases, the unit production cost of machine A decreases stepwise by a fixed proportion. Specifically, for every additional 100 units of product assigned to machine A, the actual unit production cost for that additional block will be multiplied by 0.9 relative to the unit cost in the previous stage, i.e., it decreases exponentially. For example, if 100 units are assigned to machine A, then the unit production cost of machine A is still calculated as 20 yuan/unit; if 200 units are assigned to machine A, then the unit cost for the second block of 100 units is $20\\times 0.9=18$ yuan/unit; if 300 units are assigned to machine A, then the unit cost for the third block of 100 units is $18\\times 0.9=16.2$ yuan/unit; and so on. In general, whenever a new block of 100 units of output is added on machine A, the corresponding unit cost is multiplied by 0.9 again. For the other machines B, C, and D, the cost and capacity settings remain the same linear settings as shown in Table 5-7.\n\nTable 5-7  \n| Machine | Setup cost (yuan) | Unit production cost (yuan/unit) | Maximum processing capacity (units) |\n|---------|--------------------|----------------------------------|-------------------------------------|\n| A       | 1000               | 20                               | 900                                 |\n| B       | 920                | 24                               | 1000                                |\n| C       | 800                | 16                               | 1200                                |\n| D       | 700                | 28                               | 1600                                |",
+    "answer": 31251.590220000002,
+    "index": "IndustryOR_prob_060",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 当每台设备投入使用时，其准备完成费用、该产品的单位生产成本以及每台设备的最大加工能力如表 5-7 所示。若需要生产 2000 件该产品，如何使总成本最小？试建立数学模型。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_060\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_024.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "31251.59022"
+    ],
+    "time_seconds": 26.761357200011844,
+    "total_tokens": 2566
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "31251.59022"
+    ],
+    "ground_truth": 31251.590220000002
+  }
+}

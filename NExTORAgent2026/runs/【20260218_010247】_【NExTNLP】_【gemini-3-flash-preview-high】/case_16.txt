@@ -1,0 +1,163 @@
+{
+  "entry": {
+    "index": 16,
+    "question": "In the highly competitive pharmaceutical industry, Rhode Island Pharmaceuticals is evaluating the pricing strategy for a blood pressure drug that is about to expire. As a market leader, the company needs to balance the dual goals of maximizing short-term profits and maintaining long-term market share. The drug currently faces potential competition from generic drugs, while health insurance companies continue to put pressure on lower drug prices. Market research shows that the demand elasticity of the drug is nonlinear, and the impact of price changes on sales varies significantly in different intervals. \n\nAt the same time, the National Healthcare Security Administration is closely monitoring the pricing behavior of such patented drugs and is preparing to introduce a pharmacoeconomics-based price evaluation mechanism in the next round of medical insurance negotiations. Industry analysts point out that the pricing decisions of pharmaceutical companies not only affect the current financial statements, but also determine the sustainability of subsequent R&D investment. This complex market environment requires companies to accurately calculate the optimal pricing point, taking into account both production costs and demand curves, as well as regulatory policies and the evolution of the competitive landscape. \n\nCurrently, Rhode Island Pharmaceuticals sells mineral complication blockers, and market demand depends on the price $p$. Assume that the demand function is $D(p) = 100 - 5p$. The unit production cost of the product is 10 yuan. The manufacturer's profit is $\\Pi(p) = (p^{0.9} - 10) D(p)$. Maximize profit by choosing price $p$. Assume that the allowed pricing range is $0 \\le p \\le 20$ (yuan). Give the maximum profit.",
+    "answer": 43.172785,
+    "Parameters_List": [
+      {
+        "Name": "demand_intercept",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "demand_slope",
+        "Type": "integer",
+        "Value": -5
+      },
+      {
+        "Name": "unit_production_cost",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "price_exponent",
+        "Type": "float",
+        "Value": 0.9
+      },
+      {
+        "Name": "price_lower_bound",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "price_upper_bound",
+        "Type": "integer",
+        "Value": 20
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In the highly competitive pharmaceutical...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "As a market leader, the company...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The drug currently faces potential...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Market research shows that the...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "At the same time, the...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Industry analysts point out that...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "This complex market environment requires...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Currently, Rhode Island Pharmaceuticals sells...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Assume that the demand function...",
+        "Constraint: D = 100 - 5p"
+      ],
+      [
+        "10",
+        "The unit production cost...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The manufacturer's profit is Π(p)...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "Maximize profit by choosing...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Assume that the allowed pricing...",
+        "Constraint: p ≥ 0 and p ≤ 20"
+      ],
+      [
+        "14",
+        "Give the maximum profit.",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "p",
+        "Meaning": "unit price of the drug (yuan)",
+        "Type": "continuous",
+        "Range ": "[0, 20]"
+      },
+      {
+        "symbol": "D",
+        "Meaning": "market demand (units)",
+        "Type": "continuous",
+        "Range ": "[0, 100]"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Demand Function",
+        "D = 100 - 5 p",
+        "sentence numbers:9"
+      ],
+      [
+        "Price Lower Bound",
+        "p ≥ 0",
+        "sentence numbers:13"
+      ],
+      [
+        "Price Upper Bound",
+        "p ≤ 20",
+        "sentence numbers:13"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Maximize profit by choosing price p.",
+      "Mathematical_expressions": "Π(p) = (p^0.9 - 10)*(100 - 5p)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "43.17278506795"
+    ],
+    "time_seconds": 96.59716889999982,
+    "total_tokens": 13719
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "43.17278506795"
+    ],
+    "ground_truth": 43.172785
+  }
+}

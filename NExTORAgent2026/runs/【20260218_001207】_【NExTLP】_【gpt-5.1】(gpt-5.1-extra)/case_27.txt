@@ -1,0 +1,540 @@
+{
+  "entry": {
+    "index": 27,
+    "question": "Vice Chairman Song asked the finance, sales and production managers to come to his office to discuss the production quantity of tomato products in this production season. The tomatoes purchased according to the procurement plan this year have arrived at the processing plant and will start processing and production next Monday. Hong Mudan Canned Food Company is a medium-sized enterprise that produces and sells various canned fruits and vegetables. It has its own brand trademark in the Northeast. Financial Manager Qian Yuan and Sales Manager Xiao arrived at the office first.\n\nProduction Manager Liu arrived a few minutes late. He got the latest evaluation of the quality of the arrived tomatoes from the production inspector. According to the latest inspection report, according to the inspection report, about 20% of the 300,000 kg tomatoes are grade A, 70% are grade B, and the rest are grade C (score 1), and grade C can only be used to make tomato sauce. Tomato sauce can be produced from grade B and grade C tomatoes. At the same time, although grade C tomatoes are of lower quality , but it can be used to sell to the research department at 0.001 yuan/kg. How to improve the quality of C-grade tomatoes by research and development? If the sales volume is greater than 20,000 kg, there is an 80% chance of successful research and development, so that the remaining C-grade tomatoes that have not been sold to the research and development department can reach a C-grade quality of 4 points when making tomato sauce. If more than 10,000 kg of tomatoes are not sold (the same research and development is carried out when the sales volume is 0), then there is only a 20% probability of success. When we calculate, we take the average of the scores as the C-grade quality after research and development. \n\nVice President Song asked Xiao about the market demand for canned tomatoes next year. Xiao replied that according to the actual demand estimate, all the canned tomatoes produced by the company can be sold, but the demand for tomato juice and tomato sauce is limited and shown in Table C-10. He said that the sales price is set according to the company's long-term market strategy, and the potential sales demand is predicted based on these prices. \n\nTable C-10 Demand forecast and raw material usage\n\n| Product | Sales price (yuan/can) | Raw material usage (kg/can) | Demand forecast (can) ≤ |\n| :------- | :---------------: | :---------------: | :-------------: |\n| Whole tomatoes | 4.00 | 1.8 | 800000 |\n| Tomato juice | 4.50 | 2.0 | 50000 |\n| Tomato sauce | 3.80 | 2.5 | 80000 |\n\nAfter reading Xiao's demand forecast, Qian Yuan put forward his opinion. He believes that the company \"should use all tomatoes as much as possible for the production of whole canned tomatoes, and the production situation this year is quite good.\" With the help of the newly established accounting system, he can calculate the contribution of each product. According to his analysis, the profit of whole canned tomatoes is much higher than that of other tomato products. In May this year, Hong Mudan Company signed a tomato contract with professional growers at an average price of 0.6 yuan/kg. He also calculated the profit contribution of tomato products (see Table C-11). \n\nTable C-11 Product Profit Analysis Table (Unit: Yuan/Can)\n\n| Cost Category | Whole Tomatoes | Tomato Juice | Tomato Sauce |\n| :------------: | :------: | :------: | :------: |\n| Sales Price | 4.00 | 4.50 | 3.80 |\n| Direct Labor | 1.18 | 1.32 | 0.54 |\n| Variable Management Costs | 0.24 | 0.36 | 0.26 |\n| Variable Cost of Sales | 0.40 | 0.85 | 0.38 |\n| Packaging Materials | 0.70 | 0.65 | 0.77 |\n| Raw Materials | 1.08 | 1.20 | 1.50 |\n| Subtotal Variable Costs | 3.60 | 4.38 | 3.45 |\n| **Net Profit Per Can** | 0.40 | 0.12 | 0.35 |\n\nAt this time, Manager Liu reminded that although the company has sufficient production capacity, it is impossible to use all tomatoes to produce whole canned tomatoes because the proportion of tomatoes that reach Grade A quality is too small. Red Mudan Company uses numerical scores to evaluate the quality of tomatoes. According to the company's standards, the average score per kg of Grade A tomatoes is 9 points, and the average score of Grade B is 5 points. Liu Hua pointed out: The average score of the minimum feed for whole canned tomatoes is 8 points, tomato juice is 6 points, and tomato sauce is 4 points. Tomato sauce can be produced entirely from Grade B tomatoes. This means that whole canned tomatoes will be limited to less than 44,500 cans. Song Chiping believes that this is not a real constraint. He was asked to buy 80,000 kg of Grade A tomatoes at a price of 0.85 yuan/kg, and he rejected the bid request. However, he believes that those tomatoes are still available. \n\nWithout considering the purchase opportunity of 80,000 kg of Grade A tomatoes provided by the vice chairman, construct a linear programming model to help Red Mudan Company find the optimal production plan and give the maximum profit. ",
+    "answer": 45797.78,
+    "Parameters_List": [
+      {
+        "Name": "total_tomatoes_kg",
+        "Type": "integer",
+        "Value": 300000
+      },
+      {
+        "Name": "grade_A_fraction",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "grade_B_fraction",
+        "Type": "float",
+        "Value": 0.7
+      },
+      {
+        "Name": "grade_C_fraction",
+        "Type": "float",
+        "Value": 0.1
+      },
+      {
+        "Name": "grade_C_score_initial",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "grade_C_RnD_sale_price_yuan_per_kg",
+        "Type": "float",
+        "Value": 0.001
+      },
+      {
+        "Name": "RnD_success_prob_high",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "RnD_success_prob_low",
+        "Type": "float",
+        "Value": 0.2
+      },
+      {
+        "Name": "RnD_sales_threshold_high_kg",
+        "Type": "integer",
+        "Value": 20000
+      },
+      {
+        "Name": "RnD_unsold_threshold_low_kg",
+        "Type": "integer",
+        "Value": 10000
+      },
+      {
+        "Name": "grade_C_score_after_RnD_success",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "tomato_purchase_price_yuan_per_kg",
+        "Type": "float",
+        "Value": 0.6
+      },
+      {
+        "Name": "extra_grade_A_available_kg",
+        "Type": "integer",
+        "Value": 80000
+      },
+      {
+        "Name": "extra_grade_A_price_yuan_per_kg",
+        "Type": "float",
+        "Value": 0.85
+      },
+      {
+        "Name": "grade_A_score",
+        "Type": "integer",
+        "Value": 9
+      },
+      {
+        "Name": "grade_B_score",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "min_quality_whole_tomatoes",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "min_quality_tomato_juice",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "min_quality_tomato_sauce",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "max_whole_tomatoes_cans_approx",
+        "Type": "integer",
+        "Value": 44500
+      },
+      {
+        "Name": "products",
+        "Type": "list",
+        "Value": [
+          "Whole tomatoes",
+          "Tomato juice",
+          "Tomato sauce"
+        ]
+      },
+      {
+        "Name": "sales_price_yuan_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 4.0,
+          "Tomato juice": 4.5,
+          "Tomato sauce": 3.8
+        }
+      },
+      {
+        "Name": "raw_material_usage_kg_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 1.8,
+          "Tomato juice": 2.0,
+          "Tomato sauce": 2.5
+        }
+      },
+      {
+        "Name": "demand_forecast_can_max",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 800000,
+          "Tomato juice": 50000,
+          "Tomato sauce": 80000
+        }
+      },
+      {
+        "Name": "direct_labor_yuan_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 1.18,
+          "Tomato juice": 1.32,
+          "Tomato sauce": 0.54
+        }
+      },
+      {
+        "Name": "variable_management_costs_yuan_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 0.24,
+          "Tomato juice": 0.36,
+          "Tomato sauce": 0.26
+        }
+      },
+      {
+        "Name": "variable_selling_cost_yuan_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 0.4,
+          "Tomato juice": 0.85,
+          "Tomato sauce": 0.38
+        }
+      },
+      {
+        "Name": "packaging_materials_yuan_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 0.7,
+          "Tomato juice": 0.65,
+          "Tomato sauce": 0.77
+        }
+      },
+      {
+        "Name": "raw_material_cost_yuan_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 1.08,
+          "Tomato juice": 1.2,
+          "Tomato sauce": 1.5
+        }
+      },
+      {
+        "Name": "subtotal_variable_costs_yuan_per_can",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 3.6,
+          "Tomato juice": 4.38,
+          "Tomato sauce": 3.45
+        }
+      },
+      {
+        "Name": "net_profit_per_can_yuan",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": 0.4,
+          "Tomato juice": 0.12,
+          "Tomato sauce": 0.35
+        }
+      },
+      {
+        "Name": "Table_1_Demand_Forecast_and_Raw_Material_Usage",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": {
+            "sales_price_yuan_per_can": 4.0,
+            "raw_material_usage_kg_per_can": 1.8,
+            "demand_forecast_can_max": 800000
+          },
+          "Tomato juice": {
+            "sales_price_yuan_per_can": 4.5,
+            "raw_material_usage_kg_per_can": 2.0,
+            "demand_forecast_can_max": 50000
+          },
+          "Tomato sauce": {
+            "sales_price_yuan_per_can": 3.8,
+            "raw_material_usage_kg_per_can": 2.5,
+            "demand_forecast_can_max": 80000
+          }
+        }
+      },
+      {
+        "Name": "Table_2_Product_Profit_Analysis",
+        "Type": "tuple",
+        "Value": {
+          "Whole tomatoes": {
+            "Sales Price": 4.0,
+            "Direct Labor": 1.18,
+            "Variable Management Costs": 0.24,
+            "Variable Cost of Sales": 0.4,
+            "Packaging Materials": 0.7,
+            "Raw Materials": 1.08,
+            "Subtotal Variable Costs": 3.6,
+            "Net Profit Per Can": 0.4
+          },
+          "Tomato juice": {
+            "Sales Price": 4.5,
+            "Direct Labor": 1.32,
+            "Variable Management Costs": 0.36,
+            "Variable Cost of Sales": 0.85,
+            "Packaging Materials": 0.65,
+            "Raw Materials": 1.2,
+            "Subtotal Variable Costs": 4.38,
+            "Net Profit Per Can": 0.12
+          },
+          "Tomato sauce": {
+            "Sales Price": 3.8,
+            "Direct Labor": 0.54,
+            "Variable Management Costs": 0.26,
+            "Variable Cost of Sales": 0.38,
+            "Packaging Materials": 0.77,
+            "Raw Materials": 1.5,
+            "Subtotal Variable Costs": 3.45,
+            "Net Profit Per Can": 0.35
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "According to the latest inspection...",
+        "Total tomatoes 300,000 kg; 20% grade A, 70% grade B, 10% grade C; grade C can only be used to make tomato sauce (not in whole or juice)."
+      ],
+      [
+        "2",
+        "Tomato sauce can be produced...",
+        "Tomato sauce may use only grade B and grade C tomatoes as raw materials."
+      ],
+      [
+        "3",
+        "At the same time, although grade C...",
+        "Grade C tomatoes can be sold to the research department at 0.001 yuan/kg, defining an alternative use and revenue term."
+      ],
+      [
+        "4",
+        "How to improve the quality of C-grade...",
+        "R&D changes effective quality of C for sauce; in the LP we treat C used in sauce as meeting the sauce quality requirement; no separate linear constraints beyond feasibility of C in sauce."
+      ],
+      [
+        "5",
+        "If more than 10,000 kg of tomatoes...",
+        "Describes probabilities and expected quality of C after R&D; used conceptually to justify that C used in sauce achieves score 4; no additional explicit linear constraints."
+      ],
+      [
+        "6",
+        "Xiao replied that according to the actual demand...",
+        "Demand for whole cans is up to 800,000 cans, juice up to 50,000 cans, sauce up to 80,000 cans (upper bounds on production/sales)."
+      ],
+      [
+        "7",
+        "He said that the sales price is set...",
+        "Fixes sales prices as parameters for the objective; no additional constraints."
+      ],
+      [
+        "8",
+        "Table C-10 Demand forecast and raw...",
+        "Raw-material usage per can: whole 1.8 kg, juice 2.0 kg, sauce 2.5 kg; demand upper bounds: whole 800,000, juice 50,000, sauce 80,000; induces material-balance and demand constraints."
+      ],
+      [
+        "9",
+        "According to his analysis, the profit of whole...",
+        "Explains cost basis and relative profitability; purchase price 0.6 yuan/kg is already embedded in net profits; no new constraints."
+      ],
+      [
+        "10",
+        "Table C-11 Product Profit Analysis...",
+        "Net profit per can: whole 0.40, juice 0.12, sauce 0.35; provides coefficients for objective; no constraints."
+      ],
+      [
+        "11",
+        "At this time, Manager Liu reminded that although...",
+        "States that capacity is sufficient; limitation is quality/grade composition; motivates but does not add new explicit constraints beyond grade supplies and quality requirements."
+      ],
+      [
+        "12",
+        "Red Mudan Company uses numerical scores...",
+        "Quality scores: grade A = 9 points/kg, grade B = 5 points/kg; parameters for quality constraints."
+      ],
+      [
+        "13",
+        "Liu Hua pointed out: The average score...",
+        "Minimum average feed scores: whole ≥ 8, juice ≥ 6, sauce ≥ 4; yields quality constraints on mixtures of grades by product."
+      ],
+      [
+        "14",
+        "Tomato sauce can be produced entirely...",
+        "Confirms feasibility of sauce from B only (score 5 ≥ 4); no extra constraint beyond those already implied."
+      ],
+      [
+        "15",
+        "This means that whole canned tomatoes...",
+        "Explicit upper bound on whole canned tomatoes production: x_W ≤ 44,500 cans."
+      ],
+      [
+        "16",
+        "Without considering the purchase opportunity...",
+        "Ignore extra 80,000 kg A; construct linear programming model; objective is to maximize total profit."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_W",
+        "Meaning": "Number of cans of whole tomatoes produced and sold",
+        "Type": "continuous type",
+        "Range ": "0 ≤ x_W ≤ 44,500 (and also ≤ 800,000 demand, thus effective upper bound 44,500)"
+      },
+      {
+        "symbol": "x_J",
+        "Meaning": "Number of cans of tomato juice produced and sold",
+        "Type": "continuous type",
+        "Range ": "0 ≤ x_J ≤ 50,000"
+      },
+      {
+        "symbol": "x_S",
+        "Meaning": "Number of cans of tomato sauce produced and sold",
+        "Type": "continuous type",
+        "Range ": "0 ≤ x_S ≤ 80,000"
+      },
+      {
+        "symbol": "y_A^W",
+        "Meaning": "Kilograms of grade A tomatoes used in whole tomato cans",
+        "Type": "continuous type",
+        "Range ": "y_A^W ≥ 0"
+      },
+      {
+        "symbol": "y_B^W",
+        "Meaning": "Kilograms of grade B tomatoes used in whole tomato cans",
+        "Type": "continuous type",
+        "Range ": "y_B^W ≥ 0"
+      },
+      {
+        "symbol": "y_A^J",
+        "Meaning": "Kilograms of grade A tomatoes used in tomato juice",
+        "Type": "continuous type",
+        "Range ": "y_A^J ≥ 0"
+      },
+      {
+        "symbol": "y_B^J",
+        "Meaning": "Kilograms of grade B tomatoes used in tomato juice",
+        "Type": "continuous type",
+        "Range ": "y_B^J ≥ 0"
+      },
+      {
+        "symbol": "y_B^S",
+        "Meaning": "Kilograms of grade B tomatoes used in tomato sauce",
+        "Type": "continuous type",
+        "Range ": "y_B^S ≥ 0"
+      },
+      {
+        "symbol": "y_C^S",
+        "Meaning": "Kilograms of grade C tomatoes used in tomato sauce (after R&D as needed)",
+        "Type": "continuous type",
+        "Range ": "y_C^S ≥ 0"
+      },
+      {
+        "symbol": "z_C",
+        "Meaning": "Kilograms of grade C tomatoes sold to the research department",
+        "Type": "continuous type",
+        "Range ": "z_C ≥ 0"
+      },
+      {
+        "symbol": "u_A",
+        "Meaning": "Unused kilograms of grade A tomatoes",
+        "Type": "continuous type",
+        "Range ": "u_A ≥ 0"
+      },
+      {
+        "symbol": "u_B",
+        "Meaning": "Unused kilograms of grade B tomatoes",
+        "Type": "continuous type",
+        "Range ": "u_B ≥ 0"
+      },
+      {
+        "symbol": "u_C",
+        "Meaning": "Unused kilograms of grade C tomatoes not processed or sold",
+        "Type": "continuous type",
+        "Range ": "u_C ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Total A supply",
+        "y_A^W + y_A^J + u_A = 60,000",
+        "sentence numbers:1,12,11"
+      ],
+      [
+        "Total B supply",
+        "y_B^W + y_B^J + y_B^S + u_B = 210,000",
+        "sentence numbers:1,12,11"
+      ],
+      [
+        "Total C supply",
+        "y_C^S + z_C + u_C = 30,000",
+        "sentence numbers:1,3,2"
+      ],
+      [
+        "Grade C usage restriction",
+        "Grade C used only in sauce or sold/remainder: y_C^S, z_C, u_C ≥ 0; no C terms in whole or juice balances",
+        "sentence numbers:1,2"
+      ],
+      [
+        "Whole product raw-material balance",
+        "y_A^W + y_B^W = 1.8 · x_W",
+        "sentence numbers:8"
+      ],
+      [
+        "Juice raw-material balance",
+        "y_A^J + y_B^J = 2.0 · x_J",
+        "sentence numbers:8"
+      ],
+      [
+        "Sauce raw-material balance",
+        "y_B^S + y_C^S = 2.5 · x_S",
+        "sentence numbers:2,8"
+      ],
+      [
+        "Whole demand upper bound",
+        "x_W ≤ 800,000",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Juice demand upper bound",
+        "x_J ≤ 50,000",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Sauce demand upper bound",
+        "x_S ≤ 80,000",
+        "sentence numbers:6,8"
+      ],
+      [
+        "Whole production quality constraint",
+        "9·y_A^W + 5·y_B^W ≥ 8·(y_A^W + y_B^W)",
+        "sentence numbers:12,13"
+      ],
+      [
+        "Juice production quality constraint",
+        "9·y_A^J + 5·y_B^J ≥ 6·(y_A^J + y_B^J)",
+        "sentence numbers:12,13"
+      ],
+      [
+        "Sauce production quality (implicit)",
+        "Any combination of B (score 5) and C (effective score 4) meets required average ≥ 4; enforced via allowed materials and supply balances",
+        "sentence numbers:1,2,4,5,13"
+      ],
+      [
+        "Whole cans max from quality/grades",
+        "x_W ≤ 44,500",
+        "sentence numbers:15"
+      ],
+      [
+        "Nonnegativity of production variables",
+        "x_W ≥ 0, x_J ≥ 0, x_S ≥ 0",
+        "sentence numbers:16"
+      ],
+      [
+        "Nonnegativity of allocation variables",
+        "y_A^W, y_B^W, y_A^J, y_B^J, y_B^S, y_C^S ≥ 0",
+        "sentence numbers:1,12,13"
+      ],
+      [
+        "Nonnegativity of unused/sale variables",
+        "z_C, u_A, u_B, u_C ≥ 0",
+        "sentence numbers:3,1"
+      ],
+      [
+        "Ignore additional A purchase",
+        "No extra term for 80,000 kg A; total A supply fixed at 60,000 kg",
+        "sentence numbers:16"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Construct a linear programming model to find the optimal production plan and give the maximum profit.",
+      "Mathematical_expressions": "max Z = 0.40·x_W + 0.12·x_J + 0.35·x_S + 0.001·z_C"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "45797.77778"
+    ],
+    "time_seconds": 27.148467800005164,
+    "total_tokens": 12155
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "45797.77778"
+    ],
+    "ground_truth": 45797.78
+  }
+}

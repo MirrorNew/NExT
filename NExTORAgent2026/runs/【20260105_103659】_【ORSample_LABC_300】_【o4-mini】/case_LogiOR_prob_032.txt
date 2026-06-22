@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A manufacturing company operates three production facilities (1, 2, and 3) that produce two types of components (X and Y). Each facility generates waste during production, and this waste can be treated to reduce environmental impact. Waste treatment incurs costs and reduces the quantity of emitted pollutants.\n\nLet the decision variables be:\n- $x_1$: the tons of waste treated at facility 1;\n- $x_2$: the tons of waste treated at facility 2;\n- $x_3$: the tons of waste treated at facility 3; due to policy, it is required that the waste treated using $x_3$ must exceed 1 ton (i.e., $x_3>1$).\n\nIn the original linear model, the cost of treating waste at facility 1 is \\$12 per ton; that is, the treatment cost at facility 1 equals $12x_1$. The company now finds that process synergies arise when the three facilities treat waste: only when all three facilities perform treatment simultaneously is a nonlinear integrated management cost term triggered, which couples the treatment amounts at the three facilities. To reflect this, assume that when facilities 1, 2, and 3 all conduct waste treatment, an additional nonlinear synergistic management cost is incurred, equal to $0.01$ times the product of $x_1$, $x_2$, and $x_3$, i.e., $0.01\\times x_1\\times x_2\\times x_3$ (the coefficient $0.01$ is a given constant).\n\nTherefore, the total cost consists of the linear treatment costs at each facility plus this nonlinear synergistic management cost term.\n\nThe emissions-reduction effects remain unchanged:\n- Treating 1 ton of waste at facility 1 reduces pollutant X by 0.15 tons and pollutant Y by 0.35 tons;\n- Treating 1 ton of waste at facility 2 reduces pollutant X by 0.25 tons and pollutant Y by 0.20 tons;\n- Treating 1 ton of waste at facility 3 reduces pollutant X by 0.30 tons and pollutant Y by 0.40 tons.\n\nThe company wants to reduce emissions of pollutant X by at least 25 tons and pollutant Y by at least 35 tons. Subject to meeting these emissions-reduction targets, and considering the above base treatment costs and the additional nonlinear synergistic management cost ($0.01\\times x_1\\times x_2\\times x_3$), how should the waste-treatment tons $x_1$, $x_2$, and $x_3$ be determined so as to minimize the total waste-treatment cost?",
+    "answer": 1311.7256710824804,
+    "index": "LogiOR_prob_032",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 对设施 1 的废料进行处理的成本是每吨 12 美元，对设施 2 的废料进行处理的成本是每吨 8 美元，对设施 3 的废料进行处理的成本是每吨 18 美元，总成本为各设施处理吨数与对应单位成本的线性加总。, 修改后相关描述: 对设施 1 的废料进行处理的基础成本仍为每吨 12 美元，对设施 2 的基础处理成本仍为每吨 8 美元，对设施 3 的基础处理成本仍为每吨 18 美元，但在此基础上增加一项非线性的协同管理成本，该成本等于 0.01 乘以设施 1、2、3 的处理量的乘积，即0.01 × x1 × x2 × x3，因此总成本由三个设施的线性处理成本与这一非线性乘积项共同构成。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_032\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_043.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "875.0"
+    ],
+    "time_seconds": 33.97666050000407,
+    "total_tokens": 3542
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "875.0"
+    ],
+    "ground_truth": 1311.7256710824804
+  }
+}

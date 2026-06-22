@@ -1,0 +1,386 @@
+{
+  "entry": {
+    "index": 24,
+    "question": "Realm is a multinational company with a well-developed transportation network. The company has many raw material suppliers and distribution centers in Europe, the Middle East and Africa, and is committed to providing high-quality panel solutions for the furniture manufacturing industry. The company's core factory is mainly responsible for cutting standard 100-unit length panels into various furniture components. In order to reduce production costs and save resources, it is necessary to manage the cutting plan in a refined manner to ensure that the panel waste is minimized and the delivery time is met. The overall goal is to minimize the use of panels while meeting customer order requirements, thereby reducing procurement and warehousing costs.\n\nABC Factory has built its own transportation network covering the whole country. The cut parts will be distributed to stores or end customers in various places through the logistics center. Before large-scale loading and distribution, the cutting plan must be optimized at the production end to ensure the efficient operation of the entire supply chain.\n\n**Detailed description of the problem**\n In terms of supply, the raw materials of the factory are sent to the factory by the company's suppliers on demand. The supply of boards is sufficient and the unit price is the same. In order to effectively control costs and resource utilization, it is necessary to reasonably plan the number of board uses for each cutting mode. The number of board uses cannot be negative to ensure physical feasibility. Factory 1 is responsible for modes 1, 2, and 3, and factory 2 is responsible for modes 4 and 5. Factory 2 must have at least one processing, and any factory must process any mode of wood three times before it can cut mode 6. \n\nIn terms of demand, according to market orders, 8 pieces of 25-unit length parts, 6 pieces of 40-unit length parts, and 4 pieces of 50-unit length parts need to be produced. The total number of parts of each length cut must at least match the order requirements to ensure customer delivery. \n\nIn terms of additional or priority constraints, in order to avoid employee fatigue due to excessive single-mode operation, each cutting mode can only be used for a maximum of three boards in the entire production process, and the number of boards in the selected cutting mode must be an integer because half a board cannot be cut and used. \n\n| Mode number $p$ | Cutting combination | Waste (unit) |\n| ------------ | ----------------- | ------------ |\n| 1 | 40 + 25 + 25 | 10 |\n| 2 | 40 + 40 | 20 |\n| 3 | 50 + 40 | 10 |\n| 4 | 50 + 25 + 25 | 0 |\n| 5 | 25 + 25 + 25 + 25 | 0 |\n| 6 | 50 + 50 | 0 |\n\n| Component length (unit) | Required quantity (pieces) | Profit (yuan) |\n| ---------------- | -------------- | ---------- |\n| 25 | 8 | 22 |\n| 40 | 6 | 31 |\n| 50 | 4 | 46 |\n\nFactory 1 can also break waste into synthetic wood, and synthetic wood can be used to make synthetic wood furniture. The requirements are as follows. The single cost of breaking synthetic wood and processing it into a certain synthetic wood furniture is 0.1 yuan per meter\n\n| Synthetic Wood Furniture | Consumed Boards (meters) | Maximum Required Quantity (pieces) | Profit (yuan) |\n| ---------- | -------------- | ------------------ | ---------- |\n| Bench | 20 | 12 | 3 |\n| Chair | 40 | 7 | 8 |\n| Table | 50 | 4 | 11 |\n\nIf there are 20 pieces of 100-meter standard boards in a shipment, it is necessary to meet the customer's minimum demand while not exceeding the maximum demand for synthetic wood furniture, and consider profit maximization\n\nBased on the above scenario and description, give the calculated total profit. ",
+    "answer": 1751.0,
+    "Parameters_List": [
+      {
+        "Name": "standard_panel_length",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "factory1_modes",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "Name": "factory2_modes",
+        "Type": "list",
+        "Value": [
+          4,
+          5
+        ]
+      },
+      {
+        "Name": "demand_25",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "demand_40",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "demand_50",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "Table_1_CuttingCombination",
+        "Type": "list",
+        "Value": [
+          {
+            "mode": 1,
+            "cutting_combination": [
+              40,
+              25,
+              25
+            ],
+            "waste": 10
+          },
+          {
+            "mode": 2,
+            "cutting_combination": [
+              40,
+              40
+            ],
+            "waste": 20
+          },
+          {
+            "mode": 3,
+            "cutting_combination": [
+              50,
+              40
+            ],
+            "waste": 10
+          },
+          {
+            "mode": 4,
+            "cutting_combination": [
+              50,
+              25,
+              25
+            ],
+            "waste": 0
+          },
+          {
+            "mode": 5,
+            "cutting_combination": [
+              25,
+              25,
+              25,
+              25
+            ],
+            "waste": 0
+          },
+          {
+            "mode": 6,
+            "cutting_combination": [
+              50,
+              50
+            ],
+            "waste": 0
+          }
+        ]
+      },
+      {
+        "Name": "Table_2_Component",
+        "Type": "list",
+        "Value": [
+          {
+            "length": 25,
+            "required_quantity": 8,
+            "profit": 22
+          },
+          {
+            "length": 40,
+            "required_quantity": 6,
+            "profit": 31
+          },
+          {
+            "length": 50,
+            "required_quantity": 4,
+            "profit": 46
+          }
+        ]
+      },
+      {
+        "Name": "Table_3_SyntheticWoodFurniture",
+        "Type": "list",
+        "Value": [
+          {
+            "furniture": "Bench",
+            "consumed_meters": 20,
+            "max_required_quantity": 12,
+            "profit": 3
+          },
+          {
+            "furniture": "Chair",
+            "consumed_meters": 40,
+            "max_required_quantity": 7,
+            "profit": 8
+          },
+          {
+            "furniture": "Table",
+            "consumed_meters": 50,
+            "max_required_quantity": 4,
+            "profit": 11
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Realm is a multinational...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company has many raw...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The company's core factory...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In order to reduce production...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The overall goal is to minimize...",
+        "Defines the high-level objective (minimize number of boards)"
+      ],
+      [
+        "6",
+        "ABC Factory has built its own...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The cut parts will be distributed...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Before large-scale loading...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "In terms of supply, the raw...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The supply of boards is sufficient...",
+        "Implies unlimited board availability (no explicit decision-variable constraint)"
+      ],
+      [
+        "11",
+        "In order to effectively control costs...",
+        "Introduces decision variables x₁…x₆"
+      ],
+      [
+        "12",
+        "The number of board uses cannot...",
+        "Constraint: xₚ ≥ 0 for p=1…6"
+      ],
+      [
+        "13",
+        "Factory 1 is responsible for modes...",
+        "Domain split of xₚ by factory (x₁,x₂,x₃ in F1; x₄,x₅ in F2)"
+      ],
+      [
+        "14",
+        "Factory 2 must have at least one...",
+        "Constraints: x₄ + x₅ ≥ 1; prerequisite: x₆ ≤ (x₁+x₂+x₃)/3 + (x₄+x₅)/3"
+      ],
+      [
+        "15",
+        "In terms of demand, according to...",
+        "Demand parameters for 25/40/50"
+      ],
+      [
+        "16",
+        "The total number of parts of...",
+        "Constraints: production ≥ demand for each length"
+      ],
+      [
+        "17",
+        "In terms of additional or priority...",
+        "Constraint: xₚ ≤ 3 for p=1…6"
+      ],
+      [
+        "18",
+        "and the number of boards in the...",
+        "Constraint: xₚ ∈ ℤ≥0"
+      ],
+      [
+        "19",
+        "| Mode number p | Cutting combination...",
+        "Parameter table (no new constraints)"
+      ],
+      [
+        "20",
+        "| Component length (unit) | Required...",
+        "Parameter table (no new constraints)"
+      ],
+      [
+        "21",
+        "Factory 1 can also break waste...",
+        "Introduces decision variable W and y_j"
+      ],
+      [
+        "22",
+        "The requirements are as follows...",
+        "Parameter: cost-per-meter c = 0.1"
+      ],
+      [
+        "23",
+        "| Synthetic Wood Furniture | Consumed...",
+        "Parameters for y_bench, y_chair, y_table (max quantities, per-unit profit)"
+      ],
+      [
+        "24",
+        "If there are 20 pieces of 100-meter...",
+        "Constraints: ∑ₚ xₚ ≤ 20; y_j ≤ max_j; objective: maximize total profit"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_p (p=1..6)",
+        "Meaning": "Number of 100-unit boards cut by mode p",
+        "Type": "integer",
+        "Range ": "0 ≤ x_p ≤ 3"
+      },
+      {
+        "symbol": "y_bench",
+        "Meaning": "Pieces of synthetic-wood benches produced",
+        "Type": "integer",
+        "Range ": "0 ≤ y_bench ≤ 12"
+      },
+      {
+        "symbol": "y_chair",
+        "Meaning": "Pieces of synthetic-wood chairs produced",
+        "Type": "integer",
+        "Range ": "0 ≤ y_chair ≤ 7"
+      },
+      {
+        "symbol": "y_table",
+        "Meaning": "Pieces of synthetic-wood tables produced",
+        "Type": "integer",
+        "Range ": "0 ≤ y_table ≤ 4"
+      },
+      {
+        "symbol": "W",
+        "Meaning": "Total waste (meters) from Factory 1 boards usable for synthetic wood",
+        "Type": "continuous",
+        "Range ": "W ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Non-negativity",
+        "x_p ≥ 0 ∀p",
+        "sentence numbers:12"
+      ],
+      [
+        "Upper bound on mode usage",
+        "x_p ≤ 3 ∀p",
+        "sentence numbers:17"
+      ],
+      [
+        "Integrality",
+        "x_p, y_j ∈ ℤ",
+        "sentence numbers:18"
+      ],
+      [
+        "Factory 2 minimum processing",
+        "x_4 + x_5 ≥ 1",
+        "sentence numbers:14"
+      ],
+      [
+        "Prerequisite for mode 6",
+        "x_6 ≤ (x_1+x_2+x_3)/3 + (x_4+x_5)/3",
+        "sentence numbers:14"
+      ],
+      [
+        "Demand: 25-unit parts",
+        "2x_1 + 2x_4 + 4x_5 ≥ 8",
+        "sentence numbers:15,16"
+      ],
+      [
+        "Demand: 40-unit parts",
+        "x_1 + 2x_2 + x_3 ≥ 6",
+        "sentence numbers:15,16"
+      ],
+      [
+        "Demand: 50-unit parts",
+        "x_3 + x_4 + 2x_6 ≥ 4",
+        "sentence numbers:15,16"
+      ],
+      [
+        "Board supply limit",
+        "∑_{p=1..6} x_p ≤ 20",
+        "sentence numbers:24"
+      ],
+      [
+        "Waste balance (Factory 1)",
+        "W = 10x_1 + 20x_2 + 10x_3",
+        "sentence numbers:19,21"
+      ],
+      [
+        "Synthetic-wood usage",
+        "W ≥ 20y_bench + 40y_chair + 50y_table",
+        "sentence numbers:21-23"
+      ],
+      [
+        "Max synthetic-wood furniture demand",
+        "y_bench ≤ 12; y_chair ≤ 7; y_table ≤ 4",
+        "sentence numbers:23,24"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Maximize total profit",
+      "Mathematical_expressions": "Max Z = 75x_1 + 62x_2 + 77x_3 + 90x_4 + 88x_5 + 92x_6 + 1y_bench + 4y_chair + 6y_table"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1465.0"
+    ],
+    "time_seconds": 110.06122390000382,
+    "total_tokens": 15337
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "1465.0"
+    ],
+    "ground_truth": 1751.0
+  }
+}

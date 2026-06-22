@@ -1,0 +1,229 @@
+{
+  "entry": {
+    "index": 36,
+    "question": "Similar water energy optimization issues are crucial in the daily operation of the Three Gorges Hydropower Station on the Yangtze River. The power station dispatching center needs to balance the relationship between power generation benefits and the ecological water level of the reservoir: the ideal power generation condition during the flood season should be about 100 meters of head, and the head loss caused by the drop in water level will reduce the subsequent power generation efficiency. Actual operation data show that when the reservoir water level drops below 90 meters, the turbine efficiency curve has an inflection point-at this time, not only does the power generation decrease, but also additional energy is required to maintain the unit vibration within a safe range. The 2023 flood season dispatching records show that at that time, this nonlinear characteristic made the optimal water release decision often require careful calculation to obtain the maximum power generation benefits and meet the minimum water depth requirement of 10 meters for downstream shipping. \n\nThe intelligent hydropower dispatching system developed by the State Grid handles this type of optimization problem through mixed integer nonlinear programming. The system will comprehensively consider the head-flow characteristic curve, the unit efficiency map and the grid load demand to calculate the optimal water release strategy that meets multiple constraints. The application practice of Huaneng Lancangjiang Company shows that compared with the traditional empirical scheduling method, this optimization model can effectively improve the overall power generation efficiency of cascade hydropower stations. In particular, when it is predicted that the water level will drop to the critical value, the system will automatically adjust the output plan to avoid entering a high-loss condition. The latest digital twin technology can also simulate the impact of different water release strategies on the downstream ecological environment, and achieve the coordinated optimization of power generation benefits and ecological protection. \n\nThe current water storage capacity of a reservoir is 100 million cubic meters, and the water release volume needs to be determined to obtain the maximum water energy benefit. Assuming that the power generation power is related to the water release volume and the head height, given an initial head height of 100 meters, the head decreases with the water release, and the water head decreases by about 1.25 meters for every 1 million cubic meters of water reduction. The formula for calculating unit water power generation is five times the average of the highest water head and the current water head. When the head height is below 90, the excess square power will be consumed additionally, and the consumption coefficient of this part is 0.5. Considering the water demand of residents, the head cannot be less than 10 meters. Find the water release decision that maximizes the power generation revenue and gives the maximum power generation.",
+    "answer": 16760.0,
+    "Parameters_List": [
+      {
+        "Name": "h_ideal",
+        "Type": "float",
+        "Value": 100.0
+      },
+      {
+        "Name": "h_threshold",
+        "Type": "float",
+        "Value": 90.0
+      },
+      {
+        "Name": "h_min_downstream",
+        "Type": "float",
+        "Value": 10.0
+      },
+      {
+        "Name": "V_storage",
+        "Type": "float",
+        "Value": 100000000.0
+      },
+      {
+        "Name": "h_initial",
+        "Type": "float",
+        "Value": 100.0
+      },
+      {
+        "Name": "drop_rate",
+        "Type": "float",
+        "Value": 1.25
+      },
+      {
+        "Name": "gen_coefficient",
+        "Type": "float",
+        "Value": 5.0
+      },
+      {
+        "Name": "consumption_coeff",
+        "Type": "float",
+        "Value": 0.5
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Similar water energy optimization issues...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The power station dispatching center...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Actual operation data show that...",
+        "Introduce auxiliary variable Δ⁺=max{0,90–h} and C=0.5·(Δ⁺)² when h<90"
+      ],
+      [
+        "4",
+        "The 2023 flood season dispatching records...",
+        "Constraint: h ≥ 10"
+      ],
+      [
+        "5",
+        "The intelligent hydropower dispatching system...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The system will comprehensively consider...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The application practice of Huaneng...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "In particular, when it is...",
+        "No constraints beyond those already captured"
+      ],
+      [
+        "9",
+        "The latest digital twin technology...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The current water storage capacity...",
+        "Decision variable V: 0 ≤ V ≤ 100"
+      ],
+      [
+        "11",
+        "Assuming that the power generation power...",
+        "Constraint: h = 100 – 1.25·V"
+      ],
+      [
+        "12",
+        "The formula for calculating unit...",
+        "Constraint: P_u = 5·(100 + h)/2; P = P_u·V"
+      ],
+      [
+        "13",
+        "When the head height is below...",
+        "Constraints: Δ⁺ ≥ 0; Δ⁺ ≥ 90 – h; C = 0.5·(Δ⁺)²"
+      ],
+      [
+        "14",
+        "Considering the water demand of...",
+        "Constraint: h ≥ 10"
+      ],
+      [
+        "15",
+        "Find the water release decision...",
+        "Objective: maximize Z = P – C"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "V",
+        "Meaning": "water release volume",
+        "Type": "continuous",
+        "Range ": "0 ≤ V ≤ 100"
+      },
+      {
+        "symbol": "h",
+        "Meaning": "reservoir head height after release",
+        "Type": "continuous",
+        "Range ": "10 ≤ h ≤ 100"
+      },
+      {
+        "symbol": "P_u",
+        "Meaning": "unit water power generation",
+        "Type": "continuous",
+        "Range ": "275 ≤ P_u ≤ 500"
+      },
+      {
+        "symbol": "P",
+        "Meaning": "total power generation",
+        "Type": "continuous",
+        "Range ": "0 ≤ P ≤ 50000"
+      },
+      {
+        "symbol": "Δ⁺",
+        "Meaning": "auxiliary variable for (90–h)⁺",
+        "Type": "continuous",
+        "Range ": "0 ≤ Δ⁺ ≤ 80"
+      },
+      {
+        "symbol": "C",
+        "Meaning": "additional energy consumption penalty",
+        "Type": "continuous",
+        "Range ": "0 ≤ C ≤ 3200"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Volume capacity",
+        "0 ≤ V ≤ 100",
+        "sentence numbers:10"
+      ],
+      [
+        "Head–volume relation",
+        "h = 100 – 1.25·V",
+        "sentence numbers:11"
+      ],
+      [
+        "Minimum head requirement",
+        "h ≥ 10",
+        "sentence numbers:4,14"
+      ],
+      [
+        "Unit power generation definition",
+        "P_u = 5·(100 + h)/2",
+        "sentence numbers:12"
+      ],
+      [
+        "Total power generation",
+        "P = P_u·V",
+        "sentence numbers:12"
+      ],
+      [
+        "Penalty auxiliary nonnegativity",
+        "Δ⁺ ≥ 0",
+        "sentence numbers:13"
+      ],
+      [
+        "Penalty auxiliary threshold",
+        "Δ⁺ ≥ 90 – h",
+        "sentence numbers:13"
+      ],
+      [
+        "Additional consumption definition",
+        "C = 0.5·(Δ⁺)²",
+        "sentence numbers:13"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Find the water release decision that maximizes the power generation revenue and gives the maximum power generation.",
+      "Mathematical_expressions": "maximize Z = P – C"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "16760.0",
+      "19352.0"
+    ],
+    "time_seconds": 61.501686799994786,
+    "total_tokens": 7161
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "16760.0",
+      "19352.0"
+    ],
+    "ground_truth": 16760.0
+  }
+}

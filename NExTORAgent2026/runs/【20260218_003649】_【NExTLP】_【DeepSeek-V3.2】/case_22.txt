@@ -1,0 +1,327 @@
+{
+  "entry": {
+    "index": 22,
+    "question": "Xinyuan Hydropower Co., Ltd. is promoting the \"smart watershed\" construction project. As one of the demonstration projects, Chenxi Reservoir has introduced a zoned water transfer scheduling system for the first time. Different downstream areas will directly receive the water released from the reservoir. At the same time, in the new round of green energy transformation, the power generation efficiency of Chenxi Reservoir has been raised to the main assessment indicator, and water supply demand has become a basic premise that must be guaranteed.\n\nThe company has set up a new power generation reward mechanism: due to the high initial head and good power generation efficiency, the power generation in the first two periods is calculated as twice the water release; and the head decreases in the later period, the third and fourth periods are calculated as twice the water release. The power generation in a period is equal to the water release itself. In order to cope with the diversified regional water supply needs, Chenxi Reservoir needs to reasonably allocate the total water release according to the maximum demand limits of different regions, and avoid the system burden caused by excessive water supply in various regions. \n\nThe company hopes to formulate a scientific and reasonable four-period scheduling plan this time to **maximize the total power generation** and ensure that the water supply demand in the downstream area is not affected. \n\n**In terms of supply**, the current water volume of Chenxi Reservoir is 1 million cubic meters, with a fixed natural inflow in each period, and all the inflow enters the reservoir capacity. There is no natural loss during the dispatch period, and it can be dispatched freely, but it cannot be discarded or artificially increased. **In terms of demand**, downstream demand is divided into two areas, area A and area B, and each period has a corresponding maximum water supply demand limit. The sum of the actual water supply in each area should be equal to the current water release, and each shall not exceed the corresponding maximum demand limit. \n\n**In terms of transportation**, the total water release of the reservoir in each period shall not exceed 1 million cubic meters, and the water release must be greater than or equal to 0. The final inventory of the reservoir in each period is maintained between 0 and 2 million cubic meters. At the end of each period, The change in water volume must satisfy the water balance: that is, the reservoir storage is equal to the previous period's storage plus the current period's inflow minus the current total water release. \n\n**In terms of power generation**, the power generation of Chenxi Reservoir is directly related to the water release. In the first and second periods, the power generation is twice the water release, and in the third and fourth periods, the power generation is 1 times the water release. In addition, in order to maintain overall operational safety, the company requires that after the end of the 4 periods, the Chenxi Reservoir's storage volume must not be less than 200,000 cubic meters in preparation for the next period of scheduling. Based on the above scenario and description, please give the calculated total power generation. \n\n| Period $t$ | Inflow $I_t$ | Maximum water supply in region A | Maximum water supply in region B | Minimum water supply in region A | Minimum water supply in region B | Power generation rate |\n| :------: | :----------: | :---------------: | :---------------: | ----------------- | ----------------- | -------- |\n| 1 | 80 | 20 | 10 | 10 | 8 | 0.31 |\n| 2 | 50 | 40 | 30 | 20 | 20 | 1.55 |\n| 3 | 20 | 55 | 40 | 30 | 30 | 2.05 |\n| 4 | 0 | 50 | 40 | 20 | 34 | 0.65 |",
+    "answer": 333.08,
+    "Parameters_List": [
+      {
+        "Name": "T",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "initial_storage",
+        "Type": "float",
+        "Value": 1000000.0
+      },
+      {
+        "Name": "natural_loss",
+        "Type": "float",
+        "Value": 0.0
+      },
+      {
+        "Name": "regions",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "Name": "x_max",
+        "Type": "float",
+        "Value": 1000000.0
+      },
+      {
+        "Name": "x_min",
+        "Type": "float",
+        "Value": 0.0
+      },
+      {
+        "Name": "S_min",
+        "Type": "float",
+        "Value": 0.0
+      },
+      {
+        "Name": "S_max",
+        "Type": "float",
+        "Value": 2000000.0
+      },
+      {
+        "Name": "gen_multiplier",
+        "Type": "list",
+        "Value": [
+          2,
+          2,
+          1,
+          1
+        ]
+      },
+      {
+        "Name": "final_storage_min",
+        "Type": "float",
+        "Value": 200000.0
+      },
+      {
+        "Name": "Table_1_Period_Data",
+        "Type": "tuple",
+        "Value": {
+          "Period": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "Inflow": [
+            80,
+            50,
+            20,
+            0
+          ],
+          "MaxSupplyA": [
+            20,
+            40,
+            55,
+            50
+          ],
+          "MaxSupplyB": [
+            10,
+            30,
+            40,
+            40
+          ],
+          "MinSupplyA": [
+            10,
+            20,
+            30,
+            20
+          ],
+          "MinSupplyB": [
+            8,
+            20,
+            30,
+            34
+          ],
+          "GenRate": [
+            0.31,
+            1.55,
+            2.05,
+            0.65
+          ]
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Xinyuan Hydropower Co., Ltd. is promoting...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "As one of the demonstration projects,...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Different downstream areas will directly...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "At the same time, in the new round...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The company has set up a new power...",
+        "Defines a piecewise linear relation between P_t and R_t: for t=1,2 P_t=2R_t; for t=3,4 P_t=2R_t"
+      ],
+      [
+        "6",
+        "The power generation in a period...",
+        "Defines P_t = R_t ∀ t"
+      ],
+      [
+        "7",
+        "In order to cope with the diversified...",
+        "Introduces allocation among regions A and B with upper-bounds"
+      ],
+      [
+        "8",
+        "The company hopes to formulate a scientific...",
+        "Defines objective: maximize total power generation subject to meeting downstream demand"
+      ],
+      [
+        "9",
+        "In terms of supply, the current water volume...",
+        "Sets initial storage S_0 = 1 and defines inflows I_t"
+      ],
+      [
+        "10",
+        "There is no natural loss during the dispatch period...",
+        "R_t ≤ S_{t-1} + I_t"
+      ],
+      [
+        "11",
+        "In terms of demand, downstream demand is divided...",
+        "R_{A,t} ≤ MaxA_t; R_{B,t} ≤ MaxB_t"
+      ],
+      [
+        "12",
+        "The sum of the actual water supply...",
+        "R_{A,t} + R_{B,t} = R_t"
+      ],
+      [
+        "13",
+        "In terms of transportation, the total water release...",
+        "0 ≤ R_t ≤ 1"
+      ],
+      [
+        "14",
+        "The final inventory of the reservoir...",
+        "0 ≤ S_t ≤ 2"
+      ],
+      [
+        "15",
+        "At the end of each period, The change in water volume...",
+        "S_t = S_{t-1} + I_t - R_t"
+      ],
+      [
+        "16",
+        "In terms of power generation, the power generation of...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "In the first and second periods, the power generation is twice...",
+        "P_1 = 2R_1, P_2 = 2R_2, P_3 = 1R_3, P_4 = 1R_4"
+      ],
+      [
+        "18",
+        "In addition, in order to maintain overall operational safety...",
+        "S_4 ≥ 0.2"
+      ],
+      [
+        "19",
+        "Based on the above scenario and description...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "R_t",
+        "Meaning": "total water release in period t",
+        "Type": "continuous",
+        "Range ": "0 ≤ R_t ≤ 1"
+      },
+      {
+        "symbol": "R_{A,t}",
+        "Meaning": "water supplied to region A in period t",
+        "Type": "continuous",
+        "Range ": "0 ≤ R_{A,t} ≤ MaxA_t"
+      },
+      {
+        "symbol": "R_{B,t}",
+        "Meaning": "water supplied to region B in period t",
+        "Type": "continuous",
+        "Range ": "0 ≤ R_{B,t} ≤ MaxB_t"
+      },
+      {
+        "symbol": "S_t",
+        "Meaning": "storage at end of period t",
+        "Type": "continuous",
+        "Range ": "0 ≤ S_t ≤ 2; S_4 ≥ 0.2"
+      },
+      {
+        "symbol": "P_t",
+        "Meaning": "power generation in period t",
+        "Type": "continuous",
+        "Range ": "P_t ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Initial_Storage",
+        "S_0 = 1",
+        "sentence numbers:9"
+      ],
+      [
+        "Release_Availability",
+        "R_t ≤ S_{t-1} + I_t ∀ t",
+        "sentence numbers:10"
+      ],
+      [
+        "Demand_Max_A",
+        "R_{A,t} ≤ MaxA_t ∀ t",
+        "sentence numbers:11"
+      ],
+      [
+        "Demand_Max_B",
+        "R_{B,t} ≤ MaxB_t ∀ t",
+        "sentence numbers:11"
+      ],
+      [
+        "Supply_Equality",
+        "R_{A,t} + R_{B,t} = R_t ∀ t",
+        "sentence numbers:12"
+      ],
+      [
+        "Release_Bounds",
+        "0 ≤ R_t ≤ 1 ∀ t",
+        "sentence numbers:13"
+      ],
+      [
+        "Storage_Bounds",
+        "0 ≤ S_t ≤ 2 ∀ t",
+        "sentence numbers:14"
+      ],
+      [
+        "Water_Balance",
+        "S_t = S_{t-1} + I_t - R_t ∀ t",
+        "sentence numbers:15"
+      ],
+      [
+        "Power_Relation_Simple",
+        "P_t = R_t ∀ t",
+        "sentence numbers:6"
+      ],
+      [
+        "Power_Relation_Reward1",
+        "P_1 = 2R_1, P_2 = 2R_2, P_3 = 2R_3, P_4 = 2R_4",
+        "sentence numbers:5"
+      ],
+      [
+        "Power_Relation_Reward2",
+        "P_1 = 2R_1, P_2 = 2R_2, P_3 = 1R_3, P_4 = 1R_4",
+        "sentence numbers:17"
+      ],
+      [
+        "Final_Storage",
+        "S_4 ≥ 0.2",
+        "sentence numbers:18"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "The company hopes to formulate a scientific and reasonable four-period scheduling plan this time to maximize the total power generation and ensure that the water supply demand in the downstream area is not affected.",
+      "Mathematical_expressions": "max Z = ∑_{t=1}^4 P_t"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0003849999999999"
+    ],
+    "time_seconds": 101.76393269999971,
+    "total_tokens": 7252
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "0.0003849999999999"
+    ],
+    "ground_truth": 333.08
+  }
+}

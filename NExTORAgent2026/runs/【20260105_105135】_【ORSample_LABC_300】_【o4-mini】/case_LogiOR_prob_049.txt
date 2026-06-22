@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "LogiTech’s main distribution center consists of two key areas: a packing area located at coordinates (0, 0) and a loading dock located at coordinates (800, 600) (distance units are meters). The company must determine the locations of a sorting facility and a storage facility so as to minimize the daily cost of moving goods within the center. All movements within the distribution center are restricted to travel along the east–west or north–south directions.\n\nThe daily number of round trips between areas is as follows:\n\n| Origin/Destination | Packing Area | Loading Dock | Sorting Facility | Storage Facility |\n|-------------------|--------------|--------------|------------------|------------------|\n| Packing Area      | -            | 20           | 15               | 10               |\n| Loading Dock      | 20           | -            | 25               | 30               |\n| Sorting Facility  | 15           | 25           | -                | 40               |\n| Storage Facility  | 10           | 30           | 40               | -                |\n\nThe cost of moving goods is 0.50 yuan per meter per trip. The sorting facility and the storage facility must be located within the boundary of the distribution center, which spans from (0, 0) to (1000, 1000). Moreover, the distance between any two of the four areas must be at least 100 units.\n\nOn this basis, introduce the following nonlinear cost rules: if the Manhattan distance between the sorting facility and the packing area exceeds 500 meters, then due to the need to add an automated conveyor line, the company incurs an additional fixed operating cost of 3,000 yuan per day; if the Manhattan distance between the sorting facility and the packing area is no more than 500 meters, then this additional fixed cost is not incurred. Meanwhile, if the Manhattan distance between the storage facility and the loading dock is less than 250 meters, then to ensure safe loading and unloading, a special safety operating mode must be adopted, and the cost of moving goods between these two increases to 0.80 yuan per meter per trip; when the Manhattan distance between the storage facility and the loading dock is greater than or equal to 250 meters, the goods-moving cost between them remains 0.50 yuan per meter per trip.\n\nSubject to all the above conditions and cost rules, how should LogiTech place the sorting facility and the storage facility to minimize the total daily transportation and operating cost?",
+    "answer": 74800.0,
+    "index": "LogiOR_prob_049",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: “货物移动的成本为每米每次 $0.50。分拣设施和存储设施必须位于配送中心边界之内，该中心的范围为从 (0, 0) 到 (1000, 1000)。并且四个区域中任意两个区域之间的距离至少为 100 个单位。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_049\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_033.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "146600.0"
+    ],
+    "time_seconds": 68.813696600002,
+    "total_tokens": 7883
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "146600.0"
+    ],
+    "ground_truth": 74800.0
+  }
+}

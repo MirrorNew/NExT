@@ -1,0 +1,265 @@
+{
+  "entry": {
+    "index": 29,
+    "question": "Zhenhua Manufacturing Enterprise was established in 1998. It initially set up a production base in **City** to meet the rapidly expanding market demand. With the development of the city, the cost of industrial land in the city has been rising year by year, and environmental protection policies have become increasingly stringent. At the same time, **Satellite Towns A and B** were included in the provincial industrial transfer plan, and the infrastructure was gradually improved, and tax incentives were provided. The company currently has five workshops, A, B, C, D, and E. Among them, Workshop A (precision processing) and Workshop D (electroplating) have old equipment and high relocation and transformation costs; while Workshop C (assembly) and Workshop E (warehousing) are highly dependent on transportation efficiency. \n\n**Goal:** Under the constraint that there are no more than 3 workshops in a single location, select the optimal relocation combination, quantify the annual cost savings and transportation cost increment, and minimize the overall cost. It is necessary to consider the collaborative relationship between workshops (such as workshop B provides semi-finished products for workshop A), the maturity of the satellite town industrial chain (Town A already has a third-party sewage treatment plant), and the one-time investment in equipment relocation. \n\n\n\nA factory plans to relocate part of its production workshops in the ** urban area to the ** satellite town** of the city. The advantage is that the land, rent and sewage treatment costs are cheaper, but this will increase the transportation costs between workshops. \nSuppose the factory originally has five workshops in the ** urban area, A, B, C, D, and E, and plans to relocate to two satellite towns, A and B. It is stipulated that no more than 3 workshops shall be left in the urban area or in the two satellite towns of A and B. \nThe **annual cost savings table** brought by moving from the urban area to the satellite town is shown in Table C-18\n\n| Workshop | Move to A | Move to B | Do not move |\n| ---- | ------ | ------ | ------ |\n| A | 100 | 100 | 0 |\n| B | 150 | 200 | 0 |\n| C | 100 | 150 | 0 |\n| D | 200 | 150 | 0 |\n| E | 50 | 150 | 0 |\n\nHowever, the increase in transportation costs after relocation is determined by the values ​​of $C_{ik}$ and $D_{jl}$. $C_{ik}$ is the annual transportation volume between workshops $i$ and $k$, and $D_{jl}$ is the unit transportation cost between urban areas and satellite towns. The specific data are shown in Table C-19 and Table C-20. \n\nTable C-19 $C_{ik}$ value, unit: tons/year (i to k area, at this time i<k, $C_{ik}=0$ means the annual transportation volume between workshops $i$ and $k$ is 0)\n\n| | B | C | D | E |\n| ---- | ---- | ---- | ---- | ---- |\n| A | 0 | 1000 | 1500 | 0 |\n| B | 0 | 1400 | 1200 | 0 |\n| C | 0 | 0 | 0 | 2000 |\n| D | 0 | 0 | 0 | 700 |\n\nTable C-20 $D_{jl}$ value, unit: yuan/ton (j to l, of course, different factories can be in the same city. When calculating, for convenience, the price from City B to City A and from City A to City B is equal.)\n\n| | A | B | Urban area |\n| ---- | ---- | ---- | ---- |\n| A | 500 | 1400 | 1300 |\n| B | 1400 | 500 | 900 |\n| Urban area | 1300 | 900 | 1000 |\n\nTry to determine the best workshop relocation plan for the factory and give the total cost minus the transportation cost. ",
+    "answer": 5809500.0,
+    "Parameters_List": [
+      {
+        "Name": "Workshops",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ]
+      },
+      {
+        "Name": "Locations",
+        "Type": "list",
+        "Value": [
+          "Urban area",
+          "A",
+          "B"
+        ]
+      },
+      {
+        "Name": "MaxWorkshopsPerLocation",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "AnnualCostSavings",
+        "Type": "tuple",
+        "Value": {
+          "A": {
+            "Move to A": 100,
+            "Move to B": 100,
+            "Do not move": 0
+          },
+          "B": {
+            "Move to A": 150,
+            "Move to B": 200,
+            "Do not move": 0
+          },
+          "C": {
+            "Move to A": 100,
+            "Move to B": 150,
+            "Do not move": 0
+          },
+          "D": {
+            "Move to A": 200,
+            "Move to B": 150,
+            "Do not move": 0
+          },
+          "E": {
+            "Move to A": 50,
+            "Move to B": 150,
+            "Do not move": 0
+          }
+        }
+      },
+      {
+        "Name": "C_ik",
+        "Type": "tuple",
+        "Value": {
+          "A": {
+            "B": 0,
+            "C": 1000,
+            "D": 1500,
+            "E": 0
+          },
+          "B": {
+            "B": 0,
+            "C": 1400,
+            "D": 1200,
+            "E": 0
+          },
+          "C": {
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 2000
+          },
+          "D": {
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 700
+          }
+        }
+      },
+      {
+        "Name": "D_jl",
+        "Type": "tuple",
+        "Value": {
+          "A": {
+            "A": 500,
+            "B": 1400,
+            "Urban area": 1300
+          },
+          "B": {
+            "A": 1400,
+            "B": 500,
+            "Urban area": 900
+          },
+          "Urban area": {
+            "A": 1300,
+            "B": 900,
+            "Urban area": 1000
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Zhenhua Manufacturing Enterprise was established...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "It initially set up a production base...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "With the development of the city...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "At the same time, Satellite Towns A and B were included...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The company currently has five workshops, A, B, C, D, and E.",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Among them, Workshop A (precision processing) and Workshop D (electroplating) have old equipment...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Goal: Under the constraint that there are no more than 3 workshops in a single location...",
+        "Assignment: each workshop to one location; Capacity: ≤3 workshops per location; Objective: minimize overall cost"
+      ],
+      [
+        "8",
+        "It is necessary to consider the collaborative relationship...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "A factory plans to relocate part of its production workshops...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "The advantage is that the land, rent and sewage treatment costs are cheaper...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Suppose the factory originally has five workshops in the urban area...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "It is stipulated that no more than 3 workshops shall be left in the urban area...",
+        "Capacity: ≤3 workshops per location"
+      ],
+      [
+        "13",
+        "The annual cost savings table... is shown in Table C-18.",
+        "No constraints"
+      ],
+      [
+        "14",
+        "However, the increase in transportation costs after relocation is determined by the values of Cik and Djl.",
+        "No constraints"
+      ],
+      [
+        "15",
+        "Cik is the annual transportation volume between workshops i and k...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "The specific data are shown in Table C-19 and Table C-20.",
+        "No constraints"
+      ],
+      [
+        "17",
+        "Try to determine the best workshop relocation plan for the factory and give the total cost minus the transportation cost.",
+        "Objective: minimize (transport cost – savings)"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x[i][j]",
+        "Meaning": "1 if workshop i is assigned to location j",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y[i][k][j][l]",
+        "Meaning": "1 if workshop i at j and workshop k at l",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "AssignmentConstraint",
+        "∑_{j∈L} x[i][j] = 1 ∀ i∈I",
+        "sentence numbers:7"
+      ],
+      [
+        "LocationCapacityConstraint",
+        "∑_{i∈I} x[i][j] ≤ 3 ∀ j∈L",
+        "sentence numbers:7,12"
+      ],
+      [
+        "LinearizationUpper1",
+        "y[i][k][j][l] ≤ x[i][j] ∀ i<k, j,l",
+        "sentence numbers:14"
+      ],
+      [
+        "LinearizationUpper2",
+        "y[i][k][j][l] ≤ x[k][l] ∀ i<k, j,l",
+        "sentence numbers:14"
+      ],
+      [
+        "LinearizationLower",
+        "y[i][k][j][l] ≥ x[i][j] + x[k][l] – 1 ∀ i<k, j,l",
+        "sentence numbers:14"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "minimize overall cost (transport increment minus savings)",
+      "Mathematical_expressions": "Min Z = ∑_{i<k}∑_{j∈L}∑_{l∈L} C[i][k]·D[j][l]·y[i][k][j][l] – ∑_{i∈I}∑_{j∈L} s[i][j]·x[i][j]"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "5809500.0"
+    ],
+    "time_seconds": 106.25208749999729,
+    "total_tokens": 14309
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "5809500.0"
+    ],
+    "ground_truth": 5809500.0
+  }
+}

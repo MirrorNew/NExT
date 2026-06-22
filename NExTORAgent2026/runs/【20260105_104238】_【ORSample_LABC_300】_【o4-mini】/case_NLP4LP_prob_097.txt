@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_097",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_097\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_097\\code.py",
+    "NLtype": "Linear",
+    "question": "A pharmaceutical company makes skin cream in batches, a regular batch and premium batch, to sell to hospitals. The regular batch requires 50 units of medicinal ingredients and 40 units of rehydration product. A premium batch requires 40 units of medicinal ingredients and 60 units of rehydration product. The company has available 3000 units of medicinal ingredients and 3500 units of rehydration product. Since the premium batch sells better, the number of regular batches must be less than the number of premium batches. In addition, the company must make at least 10 regular batches. If a regular batch can treat 50 people and a premium batch can treat 30 people, how many of each batch should be made to maximize the number of people that can be treated?",
+    "answer": 2650,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "2650.0"
+    ],
+    "time_seconds": 15.921442499995464,
+    "total_tokens": 924
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "2650.0"
+    ],
+    "ground_truth": 2650
+  }
+}

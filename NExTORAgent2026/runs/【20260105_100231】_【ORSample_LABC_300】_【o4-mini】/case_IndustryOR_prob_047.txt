@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A factory produces two models of microcomputers, Model A and Model B. Each model must go through the same two operations. The processing time of each model on each operation, the sales profit, and the factory’s maximum weekly processing capacity are shown in Table 3.1.\n\nTable 3.1\n\n| Operation | Model |  | Maximum weekly processing capacity |\n| :---: | :---: | :---: | :---: |\n|  | A | B |  |\n| I (hours/unit) | 4 | 6 | 150 |\n| II (hours/unit) | 3 | 2 | 70 |\n| Profit (yuan/unit) | 300 | 450 |  |\n\nGiven the factory’s operational goals:\n\np1: The total weekly profit must not be less than 10,000 yuan;\n\np2: Due to contractual requirements, at least 10 units of Model A and at least 15 units of Model B must be produced each week;\n\np3: The processing time of Operation I per week must be exactly 150 hours, and in that week’s production, the ratio of the total processing hours of Operation I used for Model A to the total processing hours of Operation I used for Model B must not exceed 2; that is, the ratio of “total hours on Operation I for Model A” divided by “total hours on Operation I for Model B” must be less than or equal to 2. The processing time of Operation II is preferably fully utilized, and appropriate overtime is allowed;\n\np4: If overtime production is scheduled in Operation II, then the unit profits of Models A and B decrease by 20 yuan and 25 yuan, respectively, and Operation II allows at most 30 hours of overtime per week. Formulate the mathematical model of this problem.",
+    "answer": 11250.0,
+    "index": "IndustryOR_prob_047",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述:p3：I 工序的加工时间每周必须恰好为 150 小时，II 工序的加工时间最好能被充分利用，并且可以适当加班；, 修改后相关描述:p3：I 工序的加工时间每周必须恰好为 150 小时，且在这一周的生产中，I 工序用于加工 A 型产品的总工时与用于加工 B 型产品的总工时的比率不得大于 2，也就是说，I 工序上加工 A 型产品的总工时除以加工 B 型产品的总工时的比值要小于或等于 2；II 工序的加工时间最好能被充分利用，并且可以适当加班；",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_047\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_027.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 37.539047199999914,
+    "total_tokens": 2741
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 11250.0
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "Green Energy Solutions specializes in producing two renewable fuels: bioethanol and biodiesel. The company has 8,000 liters of feedstock A and 12,000 liters of feedstock B in inventory. The quality ratings of the feedstocks are as follows: feedstock A—12; feedstock B—6. The average quality rating of bioethanol must be at least 10, and the average quality rating of biodiesel must be at least 8.\n\nThe demand generated per $1$ spent on marketing for bioethanol is no longer assumed to be a simple linear function of the expenditure; instead, it exhibits a slightly diminishing marginal effect: when the marketing expenditure on bioethanol is $x$ dollars, the demand generated is $(8x)^{1.2}$ liters; each $1$ spent on marketing for biodiesel still generates $15$ liters of demand. The selling price of bioethanol is $30$ dollars per liter, and the selling price of biodiesel is $25$ dollars per liter. Help Green Energy Solutions maximize its profit. Assume the company cannot purchase any additional amount of either feedstock.",
+    "answer": 518807.83826122247,
+    "index": "LogiOR_prob_034",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 每花 1 美元用于生物乙醇的营销可产生 8 升的需求, 修改后相关描述: 每花 1 美元用于生物乙醇的营销可产生的需求量不再是线性关系，而是：当对生物乙醇的营销投入为 x 美元时，其可产生的需求量为 (8x)^1.2 升。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_034\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_050.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 37.81366980000166,
+    "total_tokens": 3371
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 518807.83826122247
+  }
+}

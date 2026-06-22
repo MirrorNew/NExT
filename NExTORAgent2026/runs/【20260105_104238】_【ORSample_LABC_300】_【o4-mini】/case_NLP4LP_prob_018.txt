@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_018",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_018\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_018\\code.py",
+    "NLtype": "Linear",
+    "question": "A candy store mixes regular candy and sour candy to prepare two products, regular mix and sour surprise mix. Each kilogram of the regular mix contains 0.8 kg of regular candy and 0.2 kg of sour candy. The profit per kilogram of the regular mix is $3. Each kilogram of the sour surprise mix contains 0.1 kg of regular candy and 0.9 kg of sour candy. The profit per kilogram of the sour surprise mix is $5. The candy store has 80 kg of regular candy and 60 kg of sour candy available. How many kilograms of each type of candy mix should be created to maximize profits?",
+    "answer": 511.4285714285714,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "511.4285714"
+    ],
+    "time_seconds": 6.785611899991636,
+    "total_tokens": 902
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "511.4285714"
+    ],
+    "ground_truth": 511.4285714285714
+  }
+}

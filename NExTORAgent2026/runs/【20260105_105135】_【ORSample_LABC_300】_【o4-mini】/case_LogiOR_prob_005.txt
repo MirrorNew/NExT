@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A company has three factories located at different sites and needs to deliver goods to five stores located at different sites. The unit transportation costs from Factory 1 to each store are 4, 9, 2, 6, and 5, respectively, and its storage capacity is 60. The unit transportation costs from Factory 2 to each store are 2, 6, 1, 7, and 9, respectively, and its storage capacity is 30. The unit transportation costs from Factory 3 to each store are 2, 4, 9, 8, and 3, respectively, and its storage capacity is 45. The demands of the five stores are 15, 35, 20, 5, and 40, respectively.\n\nIn addition, introduce the following nonlinear condition on transportation cost: if a factory’s total shipment quantity in this transportation plan exceeds 50 units, then the factory must pay an additional fixed operating cost of 1000 yuan in this plan; if the factory’s total shipment quantity does not exceed 50 units, then this additional fixed cost is not required. How should the shipments be arranged to minimize the total transportation cost (including any additional fixed operating cost that may arise)?",
+    "answer": 405.0,
+    "index": "LogiOR_prob_005",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 五家商店的需求量分别为 15、35、20、5 和 40。应如何安排货物运输以使总运送成本最小？, 修改后相关描述: 五家商店的需求量分别为 15、35、20、5 和 40。此外，引入如下运输成本的非线性条件：如果某家工厂在本次运输计划中的总发货量超过 50 单位，则该工厂在本次计划中需要额外支付一笔 1000 元的固定运营成本；若该工厂的总发货量不超过 50 单位，则无需支付这笔额外固定成本。应如何安排货物运输以使总运送成本（包括可能产生的额外固定运营成本）最小？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_005\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_049.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "405.0"
+    ],
+    "time_seconds": 24.884886700005154,
+    "total_tokens": 2345
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "405.0"
+    ],
+    "ground_truth": 405.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A hot dog company can build two types of butcher shops: small butcher shops and large butcher shops. A small butcher shop can produce 30 hot dogs per day and requires 2 workers. A large butcher shop can produce 70 hot dogs per day and requires 4 workers. The company must produce at least 500 hot dogs per day, and the ratio of the total number of hot dogs produced per day to the total number of workers used must be at least 16 hot dogs per worker. However, they have only 30 workers available. How many butcher shops of each type should the company build in order to minimize the total number of butcher shops?",
+    "answer": 8.0,
+    "index": "NLP4LP_prob_071",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 公司每天必须至少生产500根热狗，但他们只有30名工人可用。 修改后相关描述: 公司每天必须至少生产500根热狗，并且要求每天总生产的热狗数量与所使用工人总数的比率至少为每名工人16根热狗。但他们只有30名工人可用。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_071\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_079.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "8.0"
+    ],
+    "time_seconds": 37.277267700002994,
+    "total_tokens": 1690
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "8.0"
+    ],
+    "ground_truth": 8.0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A manufacturing company operates three production facilities (1, 2, and 3) that produce two types of components (X and Y). Each facility generates scrap during production; this scrap can be treated to reduce environmental impact. Scrap treatment incurs costs and reduces the amount of pollutants emitted. The cost to treat scrap at facility 1 is \\$12 per ton; treating 1 ton of scrap reduces pollutants X by 0.15 tons and pollutants Y by 0.35 tons. The cost to treat scrap at facility 2 is \\$8 per ton; treating 1 ton of scrap reduces pollutants X by 0.25 tons and pollutants Y by 0.20 tons. The cost to treat scrap at facility 3 is \\$18 per ton; treating 1 ton of scrap reduces pollutants X by 0.30 tons and pollutants Y by 0.40 tons. The company wants to reduce emissions of pollutant X by at least 25 tons and emissions of pollutant Y by at least 35 tons.\n\nThere is also an operational rule: if the amount of scrap treated at facility 2 exceeds 40 tons, then the company must activate additional safety and monitoring measures, which incur a one-time fixed cost of \\$5,000; if the treated amount does not exceed 40 tons, then this fixed cost is not incurred. How should the company minimize the total scrap-treatment cost while meeting the pollutant reduction targets?",
+    "answer": 1360.0,
+    "index": "LogiOR_prob_032",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 公司希望将污染物 X 的排放量至少减少 25 吨，并将污染物 Y 的排放量至少减少 35 吨。如何在满足污染物减排目标的前提下，使废料处理的总成本最小化？, 修改后相关描述: 公司希望将污染物 X 的排放量至少减少 25 吨，并将污染物 Y 的排放量至少减少 35 吨。另有一项运营规则：如果对设施 2 的废料处理量超过 40 吨，则公司必须启动额外的安全与监测措施，这会带来一次性固定成本 5 000 美元；如果处理量不超过 40 吨，则不发生这笔固定成本。如何在满足污染物减排目标的前提下，使废料处理的总成本最小化？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_032\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_043.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1360.0"
+    ],
+    "time_seconds": 37.00878440000815,
+    "total_tokens": 2210
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1360.0"
+    ],
+    "ground_truth": 1360.0
+  }
+}

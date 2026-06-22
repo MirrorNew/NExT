@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Suppose a certain animal requires at least 700 g of protein, 30 g of minerals, and 100 mg of vitamins per day. There are 5 types of feed available. The nutrient contents and the price per kilogram of each feed are shown in Table 1-6.\n\nFormulate an optimization model that minimizes the cost of the selected feeds while satisfying the animal’s growth requirements. To better reflect the periodic variation over time of feed digestion and absorption rates in actual production, assume that the *effective supply* of protein exhibits a slight sinusoidal fluctuation over a 30-day cycle.\n\nSpecifically, let the feeding amount of feed type $i$ on day $t$ (where $t$ is the day index and $t$ takes integer values from 1 to 30) be $x_i(t)$ kilograms. The total “effective protein” obtained by the animal from all feeds on a given day is no longer a simple linear sum; instead, based on the protein contents given in the table, it is multiplied by a time-periodic adjustment factor. This factor is defined as $1 + 0.1\\times\\cos(\\pi\\cdot t/15)$. That is, the actual protein contribution of each feed is scaled up or down by the same periodic factor, producing a repeating fluctuation that rises and then falls within a 30-day cycle. Hence, the effective protein intake on day $t$ equals the “linear sum of protein from all feeds” multiplied by $1 + 0.1\\times\\cos(\\pi\\cdot t/15)$.\n\nTherefore, the protein requirement constraint changes from “the linear total amount of protein supplied by all feeds is at least 700 g per day” to “for any day $t$ ($t=1,2,\\ldots,30$), the total effective protein after accounting for the periodic fluctuation is at least 700 g,” where the total effective protein equals the linear combination of the feeds’ protein amounts multiplied by the periodic factor $1 + 0.1\\times\\cos(\\pi\\cdot t/15)$. The mineral and vitamin requirements remain in their original linear forms: the total minerals obtained from all feeds per day are at least 30 g, and the total vitamins per day are at least 100 mg, unaffected by this periodic factor. The objective remains to minimize the total cost of feed over the entire 30-day cycle while satisfying the daily nutritional requirements.\n\nTable 1-6\n\n| Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) | Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) |\n|------|-------------|--------------|---------------|--------------|------|-------------|--------------|---------------|--------------|\n| 1    | 3           | 1            | 0.5           | 0.2          | 4    | 6           | 2            | 2             | 0.3          |\n| 2    | 2           | 0.5          | 1             | 0.7          | 5    | 18          | 0.5          | 0.8           | 0.8          |\n| 3    | 1           | 0.2          | 0.2           | 0.4          |      |             |              |               |              |",
+    "answer": 977.69,
+    "index": "IndustryOR_prob_029",
+    "NLtype": "A",
+    "NLChange": "原题 目相关描述: “试建立线性规划模型，在满足该动物生长需求的前提下，使所选饲料的成本最低。” 蛋白质需求约束为简单的线性形式，即所有饲料提供的蛋白质线性总和每天至少为 700 g。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_029\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_001.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "977.6884617"
+    ],
+    "time_seconds": 36.096675900000264,
+    "total_tokens": 2348
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "977.6884617"
+    ],
+    "ground_truth": 977.69
+  }
+}

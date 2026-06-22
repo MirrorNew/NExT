@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A school is preparing a trip for 400 students. The transportation company has 10 coaches with 50 seats each and 8 minibuses with 40 seats each, but only 9 drivers are available. The rental cost of one coach is £800, and the rental cost of one minibus is £600. In addition, if the final plan uses more than 6 coaches (i.e., at least 7 coaches), then, due to the need to additionally deploy parking and management staff, an extra fixed cost of £2000 will be incurred; if the final plan uses 5 or more minibuses (i.e., at least 5 minibuses), then, on top of the original £600 per minibus, an additional congestion-management surcharge of £100 per minibus must be paid. Determine how many buses of each type should be used to achieve the minimum cost.\n\nTry to formulate a model for this problem.",
+    "answer": 6400.0,
+    "index": "IndustryOR_prob_091",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述:『一辆大巴士的租金是800英镑，一辆中巴士的租金是600英镑。』, 修改后相关描述:『一辆大巴士的租金是800英镑，一辆中巴士的租金是600英镑。此外，如果最终安排使用的大巴士数量超过6辆（即至少7辆大巴士），则由于需要额外调配停车和管理人员，将产生一笔额外的固定费用2000英镑；如果最终安排使用的中巴士数量达到5辆或更多（即至少5辆中巴士），则每辆中巴士的租金在原有600英镑的基础上，每辆需要额外支付100英镑的拥堵管理附加费。』",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_091\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_020.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6400.0"
+    ],
+    "time_seconds": 27.560914600006072,
+    "total_tokens": 2062
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "6400.0"
+    ],
+    "ground_truth": 6400.0
+  }
+}

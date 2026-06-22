@@ -1,0 +1,258 @@
+{
+  "entry": {
+    "index": 1,
+    "question": "Huaxin Electronics is a medium-sized enterprise focusing on smart TV manufacturing. Its products are mainly supplied to domestic chain home appliance stores and e-commerce platforms. As the demand fluctuations in the consumer market intensify, the production department faces the problem of optimizing the quarterly production plan. Due to the long adjustment cycle of the factory production line and limited storage space, management needs to balance capacity utilization and inventory costs. Supply chain analysts pointed out that overproduction will lead to a surge in storage costs, while insufficient production capacity may trigger the risk of contract breach and affect long-term cooperation with business partners. \n\nThis problem reflects the common production-inventory collaborative optimization challenges in the manufacturing industry. In the smart home appliance industry, the accelerated product iteration speed has increased the risk of inventory depreciation. Reasonable production plans can not only reduce operating costs, but also improve capital turnover efficiency. Huaxin Electronics is evaluating the introduction of dynamic programming algorithms to assist decision-making. This method has been successfully applied in the fields of automobile manufacturing and consumer electronics. The finance department is particularly concerned about the impact of this model on cash flow, because the requirement of zero inventory at the end of the quarter is directly related to the renewal conditions of the storage lease contract. \n\nThe TV factory needs to formulate a production plan for the next quarter. Due to the limitations of the factory's production capacity and warehouse size, its monthly production cannot exceed b units, and the storage volume cannot be greater than c units. According to the contract, the number of television sets that the factory needs to deliver to the commercial sector at the end of the i-th month is $d_i$. Now let $x_i$ and $y_i$ represent the number of television sets produced and stored by the factory in the i-th month, respectively. Its monthly production cost and storage cost are $f_i(x_i)$ and $g_i(y_i)$ respectively. Assuming that the storage volume at the end of this quarter is zero, try to determine the production plan (i.e. determine the monthly production volume) that minimizes the cost (including production cost and storage cost) of the next quarter, and give the calculated answer. \n\n**Input values:**\n\n- Production limit: $ b = 200 $ units/month\n- Storage limit: $ c = 100 $ units\n- Initial storage: $ y_0 = 0 $\n- Demand: $ d_1 = 150 $, $ d_2 = 200 $, $ d_3 = 212 $\n- Production cost function: $ f_1(x_1) = 100 x_1^{0.9} $, $ f_2(x_2) = 100x_2^{0.8} $, $ f_3(x_3) = 150x_3^{0.5} $\n- Storage cost function: g(y) = 20y",
+    "answer": 19272.87,
+    "Parameters_List": [
+      {
+        "Name": "b",
+        "Type": "integer",
+        "Value": 200
+      },
+      {
+        "Name": "c",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "y_0",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "y_3",
+        "Type": "integer",
+        "Value": 0
+      },
+      {
+        "Name": "d_1",
+        "Type": "integer",
+        "Value": 150
+      },
+      {
+        "Name": "d_2",
+        "Type": "integer",
+        "Value": 200
+      },
+      {
+        "Name": "d_3",
+        "Type": "integer",
+        "Value": 212
+      },
+      {
+        "Name": "f_1_coeff",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "f_1_power",
+        "Type": "float",
+        "Value": 0.9
+      },
+      {
+        "Name": "f_2_coeff",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "f_2_power",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "f_3_coeff",
+        "Type": "integer",
+        "Value": 150
+      },
+      {
+        "Name": "f_3_power",
+        "Type": "float",
+        "Value": 0.5
+      },
+      {
+        "Name": "g_coeff",
+        "Type": "integer",
+        "Value": 20
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Huaxin Electronics is...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Its products are mainly...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "As the demand fluctuations...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "Due to the long adjustment...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Supply chain analysts pointed...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "This problem reflects...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "In the smart home appliance...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Reasonable production plans...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Huaxin Electronics is evaluating...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "This method has been...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The finance department is...",
+        "ending-quarter inventory = 0 (y_3 = 0)"
+      ],
+      [
+        "12",
+        "The TV factory needs...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "Due to the limitations of...",
+        "x_i ≤ b and y_i ≤ c for i=1..3"
+      ],
+      [
+        "14",
+        "According to the contract, the number...",
+        "y_{i-1} + x_i - d_i = y_i for i=1..3"
+      ],
+      [
+        "15",
+        "Now let x_i and y_i...",
+        "x_i ≥ 0, y_i ≥ 0 for i=1..3"
+      ],
+      [
+        "16",
+        "Its monthly production cost...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "Assuming that the storage...",
+        "Objective: minimize total cost = ∑_{i=1}^3 [f_i(x_i)+g(y_i)]"
+      ],
+      [
+        "18",
+        "Production limit: b...",
+        "No constraints"
+      ],
+      [
+        "19",
+        "Storage limit: c...",
+        "No constraints"
+      ],
+      [
+        "20",
+        "Initial storage: y_0...",
+        "No constraints"
+      ],
+      [
+        "21",
+        "Demand: d_1...",
+        "No constraints"
+      ],
+      [
+        "22",
+        "Production cost function: f_1(x_1)...",
+        "No constraints"
+      ],
+      [
+        "23",
+        "Storage cost function: g(y)...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_i",
+        "Meaning": "number of TV sets produced in month i",
+        "Type": "continuous",
+        "Range ": "0 ≤ x_i ≤ b (0 ≤ x_i ≤ 200), for i=1..3"
+      },
+      {
+        "symbol": "y_i",
+        "Meaning": "number of TV sets in inventory at end of month i",
+        "Type": "continuous",
+        "Range ": "0 ≤ y_i ≤ c (0 ≤ y_i ≤ 100), for i=1..3"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Production Capacity Constraint",
+        "x_i ≤ b for all i=1..3",
+        "sentence numbers:13"
+      ],
+      [
+        "Storage Capacity Constraint",
+        "y_i ≤ c for all i=1..3",
+        "sentence numbers:13"
+      ],
+      [
+        "Inventory Balance Constraint",
+        "y_{i-1} + x_i - d_i = y_i for all i=1..3",
+        "sentence numbers:14"
+      ],
+      [
+        "Ending Inventory Constraint",
+        "y_3 = 0",
+        "sentence numbers:11,17"
+      ],
+      [
+        "Nonnegativity Constraints",
+        "x_i ≥ 0, y_i ≥ 0 for all i=1..3",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Assuming that the storage volume at the end of this quarter is zero, try to determine the production plan (i.e. determine the monthly production volume) that minimizes the cost (including production cost and storage cost) of the next quarter, and give the calculated answer.",
+      "Mathematical_expressions": "Minimize Z = 100 x_1^0.9 + 100 x_2^0.8 + 150 x_3^0.5 + 20 (y_1 + y_2 + y_3)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "19272.87095859"
+    ],
+    "time_seconds": 50.999748800000816,
+    "total_tokens": 7086
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "19272.87095859"
+    ],
+    "ground_truth": 19272.87
+  }
+}

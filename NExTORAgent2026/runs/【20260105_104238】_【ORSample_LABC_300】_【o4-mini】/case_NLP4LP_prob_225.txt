@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_225",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_225\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_225\\code.py",
+    "NLtype": "Linear",
+    "question": "A food delivery person can either have shifts on bikes or scooters. A shift on a bike can deliver 10 orders, takes 5 units of energy, and brings in $50 on tips because it is faster. A shift on a scooter can deliver 7 orders, takes 6 units of energy, and brings in $43 on tips.  The delivery person has available 40 shifts a month and has 230 units of energy and must bring at least 320 orders. He must have at least 5 shifts on a scooter because bikes are harder to get. How many shifts on each type of transportation should the delivery person schedule to maximize tips received?",
+    "answer": 1965,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1965.0"
+    ],
+    "time_seconds": 13.084596900007455,
+    "total_tokens": 887
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1965.0"
+    ],
+    "ground_truth": 1965
+  }
+}

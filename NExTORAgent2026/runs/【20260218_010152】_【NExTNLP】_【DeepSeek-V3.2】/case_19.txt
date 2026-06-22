@@ -1,0 +1,126 @@
+{
+  "entry": {
+    "index": 19,
+    "question": "Rhode Island Oasis Agricultural Technology Company in Kazdale is testing an intelligent irrigation optimization system to restore the original sea of ​​flowers. The company manages 3,000 acres of wolfberry planting base using drip irrigation technology, facing the dual challenges of reduced Yellow River water quota and soil salinization. The agronomist team found that the water utilization efficiency of different plots showed nonlinear changes due to differences in soil moisture, sunshine duration and crop growth stage, which prompted them to develop a precision irrigation model based on marginal benefit analysis. \n\nIn a joint study between Rhode Island Oasis Agricultural Technology Company and Rhine Life Research Institute, researchers observed a similar phenomenon: the water-fertilizer coupling effect in the tomato greenhouse showed that when the irrigation volume exceeded a certain critical point, the yield increase effect per unit of water would be significantly reduced. This discovery was applied by Rhode Island in its latest smart agriculture system, which monitors the crop root environment in real time through a soil sensor network and dynamically adjusts the irrigation plan for each block. This water resource allocation method based on the law of diminishing marginal benefits has helped many farms in the Kazdale area increase production while reducing water consumption. \n\nAn irrigation system has 100 units of water resources, which need to be allocated to 3 farms to maximize the total yield. The relationship between the yield of field $j$ and the amount of irrigation water $w_j$ can be approximated as a function of diminishing marginal returns, $Y_j(w_j) = a_j w_j^{j/4}$, where $a = [5,3,4]$. The total irrigation amount cannot exceed 100, the sum of the squares of irrigation water volume cannot exceed 3500，and the water allocation to each field is determined to maximize the total yield.",
+    "answer": 102.9208,
+    "Parameters_List": [
+      {
+        "Name": "total_water_resources",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "number_of_farms",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "a",
+        "Type": "list",
+        "Value": [
+          5,
+          3,
+          4
+        ]
+      },
+      {
+        "Name": "total_irrigation_amount_limit",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "sum_of_squares_of_irrigation_water_limit",
+        "Type": "integer",
+        "Value": 3500
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Rhode Island Oasis Agricultural...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company manages 3,000 acres...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The agronomist team found that...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In a joint study between...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "This discovery was applied by...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "This water resource allocation...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "An irrigation system has 100...",
+        "Constraint introduced: total supply of water ≤ 100; indexing j=1,2,3"
+      ],
+      [
+        "8",
+        "The relationship between the yield...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "The total irrigation amount...",
+        "Constraints: ∑_{j=1}^3 w_j ≤ 100 and ∑_{j=1}^3 w_j² ≤ 3500"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "w_j",
+        "Meaning": "irrigation water allocated to farm j",
+        "Type": "continuous",
+        "Range ": "w_j ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Total water availability",
+        "∑_{j=1}^3 w_j ≤ 100",
+        "sentence numbers:7,9"
+      ],
+      [
+        "Quadratic water-usage limit",
+        "∑_{j=1}^3 w_j² ≤ 3500",
+        "sentence numbers:9"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "An irrigation system has 100 units of water resources, which need to be allocated to 3 farms to maximize the total yield.",
+      "Mathematical_expressions": "Maximize Z = ∑_{j=1}^3 a_j w_j^{j/4}, with a=[5,3,4]"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "102.9208021739"
+    ],
+    "time_seconds": 49.75851019999391,
+    "total_tokens": 5448
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "102.9208021739"
+    ],
+    "ground_truth": 102.9208
+  }
+}

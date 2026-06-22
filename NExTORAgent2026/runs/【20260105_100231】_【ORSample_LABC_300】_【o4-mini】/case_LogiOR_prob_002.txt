@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "LogiOR_prob_002",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_002\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_002\\code.py",
+    "NLtype": "Linear",
+    "question": "An airport has two available gates (G1, G2) and needs to assign three flights (F1: 10:00-11:00, F2: 10:30-11:30, F3: 11:15-12:30, F4: 10:45-11:45) to these gates. Flights assigned to the same gate must have non-overlapping time intervals, and the goal is to minimize flight delays, where each 1-minute delay beyond the scheduled departure time incurs a cost of 1 unit. How should the flights be assigned to the gates to achieve this objective?",
+    "answer": 30.0,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "30.0"
+    ],
+    "time_seconds": 42.453091999996104,
+    "total_tokens": 5136
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "30.0"
+    ],
+    "ground_truth": 30.0
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "entry": {
+    "index": 30,
+    "question": "The Hongwei Gymnastics Team is affiliated to the Professional Gymnastics Training Center under the Provincial Sports Bureau. It was established in 1985 and has won the top three team positions in the national championships many times. The team currently has 15 male players aged between 18 and 25, with an average training period of 8 years. Many of them have been selected for national team training. According to the current rules of the International Gymnastics Federation (FIG), the team coaching staff uses a data management system to record the training results of each player in the past 12 months.\n\nThe Hongwei Gymnastics Team will select from the current 15 male players to form a team to participate in the National Men's Gymnastics Competition. The men's gymnastics competition includes six events: horizontal bar, parallel bars, vaulting horse, pommel horse, rings and floor exercise. It is stipulated that each team can have 6 players in each event. Each participant performs two movements in each event. , the score is between 0 and 18. The competition stipulates that each contestant must sign up for at least 3 competitions, and at least 2 people from each team must participate in all 6 competitions to compete for the all-around championship. The scores of all 6 competitions of a team's contestants are accumulated as the team's group score. In order to encourage more players to compete in the all-around competition, it is stipulated that if there are more than 2 people participating in the all-around competition in each team, the team's group score will increase by 2 points for each additional person. It is known that the score of the $i$th player $(i=1,…,15)$ in the $j$th skill $(j=1,…,6)$ of the Hongwei Gymnastics Team is $S_{ij}$ (normal performance during the competition). If we analyze it according to the current score, how should we select players so that the participating team can expect to get the best team score? Give the best expected score. \n\n| Athlete | Horizontal Bar | Parallel Bars | Vault | Pommel Horse | Rings | Floor Exercise |\n| ------ | ---- | ---- | ---- | ---- | ---- | -------- |\n| 1 | 16.0 | 14.9 | 10.5 | 8.4 | 11.6 | 10.3 |\n| 2 | 15.2 | 8.9 | 11.2 | 12.6 | 16.8 | 11.6 |\n| 3 | 8.7 | 14.8 | 13.0 | 8.3 | 16.8 | 17.8 |\n| 4 | 15.5 | 16.7 | 9.0 | 14.5 | 16.7 | 13.9 |\n| 5 | 11.1 | 6.3 | 10.6 | 12.9 | 16.9 | 17.6 |\n| 6 | 11.2 | 16.2 | 8.4 | 15.5 | 12.1 | 5.2 |\n| 7 | 14.4 | 10.2 | 15.7 | 13.7 | 5.0 | 11.4 |\n| 8 | 16.3 | 8.2 | 9.2 | 16.3 | 7.5 | 12.4 |\n| 9 | 8.1 | 17.6 | 15.4 | 10.8 | 6.0 | 9.2 |\n| 10 | 11.6 | 17.1 | 6.4 | 12.2 | 14.2 | 12.1 |\n| 11 | 15.6 | 12.0 | 17.5 | 12.8 | 12.6 | 10.8 |\n| 12 | 12.8 | 10.0 | 12.5 | 8.8 | 7.5 | 7.4 |\n| 13 | 13.0 | 13.5 | 11.2 | 6.2 | 14.8 | 16.4 |\n| 14 | 17.0 | 16.0 | 16.7 | 17.0 | 12.0 | 10.1 |\n| 15 | 14.2 | 8.6 | 15.6 | 16.0 | 16.6 | 12.7 |",
+    "answer": 540.7,
+    "Parameters_List": [
+      {
+        "Name": "num_gymnasts",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "num_events",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "scores_S_ij",
+        "Type": "list",
+        "Value": [
+          [
+            16.0,
+            14.9,
+            10.5,
+            8.4,
+            11.6,
+            10.3
+          ],
+          [
+            15.2,
+            8.9,
+            11.2,
+            12.6,
+            16.8,
+            11.6
+          ],
+          [
+            8.7,
+            14.8,
+            13.0,
+            8.3,
+            16.8,
+            17.8
+          ],
+          [
+            15.5,
+            16.7,
+            9.0,
+            14.5,
+            16.7,
+            13.9
+          ],
+          [
+            11.1,
+            6.3,
+            10.6,
+            12.9,
+            16.9,
+            17.6
+          ],
+          [
+            11.2,
+            16.2,
+            8.4,
+            15.5,
+            12.1,
+            5.2
+          ],
+          [
+            14.4,
+            10.2,
+            15.7,
+            13.7,
+            5.0,
+            11.4
+          ],
+          [
+            16.3,
+            8.2,
+            9.2,
+            16.3,
+            7.5,
+            12.4
+          ],
+          [
+            8.1,
+            17.6,
+            15.4,
+            10.8,
+            6.0,
+            9.2
+          ],
+          [
+            11.6,
+            17.1,
+            6.4,
+            12.2,
+            14.2,
+            12.1
+          ],
+          [
+            15.6,
+            12.0,
+            17.5,
+            12.8,
+            12.6,
+            10.8
+          ],
+          [
+            12.8,
+            10.0,
+            12.5,
+            8.8,
+            7.5,
+            7.4
+          ],
+          [
+            13.0,
+            13.5,
+            11.2,
+            6.2,
+            14.8,
+            16.4
+          ],
+          [
+            17.0,
+            16.0,
+            16.7,
+            17.0,
+            12.0,
+            10.1
+          ],
+          [
+            14.2,
+            8.6,
+            15.6,
+            16.0,
+            16.6,
+            12.7
+          ]
+        ]
+      },
+      {
+        "Name": "max_gymnasts_per_event",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "min_events_per_gymnast",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "min_all_around_gymnasts",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "bonus_per_additional_all_around",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "decision_variables_x_shape",
+        "Type": "tuple",
+        "Value": [
+          15,
+          6
+        ]
+      },
+      {
+        "Name": "decision_variables_y_length",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "objective_function_structure",
+        "Type": "string",
+        "Value": "maximize sum_{i=1..15} sum_{j=1..6} S[i][j]*x[i,j] + 2*(sum_{i=1..15} y[i] - 2)"
+      },
+      {
+        "Name": "constraint_event_capacity",
+        "Type": "string",
+        "Value": "for each event j: sum_{i=1..15} x[i,j] <= 6"
+      },
+      {
+        "Name": "constraint_min_events_per_gymnast",
+        "Type": "string",
+        "Value": "for each gymnast i: sum_{j=1..6} x[i,j] >= 3"
+      },
+      {
+        "Name": "constraint_all_around_link_1",
+        "Type": "string",
+        "Value": "for each i,j: x[i,j] >= y[i]"
+      },
+      {
+        "Name": "constraint_all_around_link_2",
+        "Type": "string",
+        "Value": "for each i: sum_{j=1..6} x[i,j] <= 6*y[i]"
+      },
+      {
+        "Name": "constraint_min_all_around",
+        "Type": "string",
+        "Value": "sum_{i=1..15} y[i] >= 2"
+      },
+      {
+        "Name": "optimal_team_score",
+        "Type": "float",
+        "Value": 562.5
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "The Hongwei Gymnastics Team will...",
+        "Need to decide which players to select and which events they enter."
+      ],
+      [
+        "2",
+        "The men's gymnastics competition includes...",
+        "Defines 6 events (horizontal bar, parallel bars, vault, pommel horse, rings, floor)."
+      ],
+      [
+        "3",
+        "It is stipulated that each team can...",
+        "For each event, the team may have up to (or exactly) 6 gymnasts participating."
+      ],
+      [
+        "4",
+        "Each participant performs two movements...",
+        "Scores S_ij are given expected scores between 0 and 18."
+      ],
+      [
+        "5",
+        "The competition stipulates that each contestant...",
+        "Each gymnast must register for at least 3 events."
+      ],
+      [
+        "6",
+        "and at least 2 people from each team...",
+        "At least 2 gymnasts must participate in all 6 events (all‑around)."
+      ],
+      [
+        "7",
+        "The scores of all 6 competitions...",
+        "Team score is sum of all event scores of all participating gymnasts."
+      ],
+      [
+        "8",
+        "In order to encourage more players...",
+        "If more than 2 all‑around gymnasts, team gets +2 points for each additional all‑around gymnast."
+      ],
+      [
+        "9",
+        "It is known that the score of the i-th...",
+        "S_ij is known; choose assignments to maximize expected team score."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{ij}",
+        "Meaning": "1 if gymnast i participates in event j, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "0 or 1; i = 1,…,15; j = 1,…,6"
+      },
+      {
+        "symbol": "y_i",
+        "Meaning": "1 if gymnast i is an all-around competitor (participates in all 6 events), 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "0 or 1; i = 1,…,15"
+      },
+      {
+        "symbol": "S_{ij}",
+        "Meaning": "Expected score of gymnast i on event j",
+        "Type": "continuous parameter",
+        "Range ": "Given nonnegative real values from the table"
+      },
+      {
+        "symbol": "b",
+        "Meaning": "Number of all-around gymnasts in excess of the required 2 (for bonus calculation)",
+        "Type": "integer",
+        "Range ": "b ≥ 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Event capacity",
+        "∑_{i=1}^{15} x_{ij} ≤ 6,  ∀ j = 1,…,6",
+        "sentence numbers:3"
+      ],
+      [
+        "Minimum events per gymnast",
+        "∑_{j=1}^{6} x_{ij} ≥ 3,  ∀ i = 1,…,15",
+        "sentence numbers:5"
+      ],
+      [
+        "All-around definition (lower bound)",
+        "∑_{j=1}^{6} x_{ij} ≥ 6 y_i,  ∀ i = 1,…,15",
+        "sentence numbers:6"
+      ],
+      [
+        "Minimum number of all-around gymnasts",
+        "∑_{i=1}^{15} y_i ≥ 2",
+        "sentence numbers:6"
+      ],
+      [
+        "Bonus variable lower bound",
+        "b ≥ ∑_{i=1}^{15} y_i − 2",
+        "sentence numbers:8"
+      ],
+      [
+        "Bonus variable nonnegativity",
+        "b ≥ 0",
+        "sentence numbers:8"
+      ],
+      [
+        "Binary domains",
+        "x_{ij} ∈ {0,1},  ∀ i,j;   y_i ∈ {0,1},  ∀ i",
+        "sentence numbers:3,5,6"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "How should we select players so that the participating team can expect to get the best team score?",
+      "Mathematical_expressions": "Maximize  Z = ∑_{i=1}^{15} ∑_{j=1}^{6} S_{ij} x_{ij} + 2 b"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "None"
+    ],
+    "time_seconds": 26.082664099994872,
+    "total_tokens": 21493
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "None"
+    ],
+    "ground_truth": 540.7
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A sailor, when dining, may choose to eat crab cakes or lobster rolls. He must ensure an intake of at least 80 units of vitamin A and 100 units of vitamin C. Each crab cake contains 5 units of vitamin A and 7 units of vitamin C. Each lobster roll contains 8 units of vitamin A and 4 units of vitamin C. In addition, since lobster is more expensive, at most 40% of his meal can consist of lobster rolls. If each crab cake contains 4 units of unsaturated fat and each lobster roll contains 6 units of unsaturated fat, he also finds that, as the number of crab cakes he eats per day increases, his body’s effective absorption of vitamin A exhibits exponential growth: when he eats $x$ crab cakes, the actual effective intake of vitamin A obtained from crab cakes is $5 \\times x^{1.3}$ units (here the growth exponent takes the specific value $1.3$), while the vitamin A obtained from lobster rolls is still computed linearly as 8 units per roll. Question: how many crab cakes and lobster rolls should he eat, respectively, so as to minimize his total intake of unsaturated fat, subject to meeting the requirements of at least 80 units of vitamin A and 100 units of vitamin C and the condition that the proportion of lobster rolls does not exceed 40%?",
+    "answer": 60.0,
+    "index": "NLP4LP_prob_100",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 他需要确保至少摄入 80 个单位的维生素 A …… 每个蟹饼含有 5 个单位的维生素 A … 每个龙虾卷含有 8 个单位的维生素 A。修改后相关描述: 他需要确保至少摄入 80 个单位的维生素 A…… 他还发现，随着自己每天吃蟹饼数量的增加，身体对维生素 A 的有效吸收会呈指数增长：当他吃 x 个蟹饼时，从蟹饼中获得的维生素 A 实际有效摄入量为 5 × x 的 1.3  次方 个单位（这里增长系数取具体数值 1.3），同时从龙虾卷中获得的维生素 A 仍按每个 8 个单位线性计算。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_100\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_068.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "60.0"
+    ],
+    "time_seconds": 22.346130999998422,
+    "total_tokens": 2124
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "60.0"
+    ],
+    "ground_truth": 60.0
+  }
+}

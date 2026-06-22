@@ -1,0 +1,404 @@
+{
+  "entry": {
+    "index": 34,
+    "question": "As a typical mixed-function area, the transportation planning of Binhai Harbor Area has long faced the contradiction between terrain constraints and development needs. The area was formed by land reclamation in the 1990s. Due to the obstruction of surrounding mountains and artificial lakes, the road network layout presents atypical characteristics. According to the \"White Paper on Commuter Transportation in the Harbor Area\" released by the Municipal Transportation Research Institute in 2023, there is an obvious tidal commuting phenomenon in the area: a large number of commuters flock from residential areas to employment centers during the morning rush hour, and the existing 4-5 main roads are too long. In order to alleviate congestion, the municipal government included the construction of lake ferries in the \"Three-Year Action Plan for Comprehensive Transportation Improvement\". The project needs to evaluate the diversion effect of ferry routes on existing land transportation. \n\n**Social significance: **\nThis transportation optimization plan directly affects the regional economic vitality and the quality of life of residents, involving core indicators such as improved commuting efficiency and reduced transportation costs. Decisions need to balance the benefits of infrastructure investment and the demands of different interest groups. For example, ferry operations may weaken the passenger flow of existing bus routes, but can provide alternative routes for residents along the lake to directly reach the commercial area. The project results will provide empirical reference for urban transportation planning under similar terrain constraints. \n\nThere are industrial areas (points $3$ and $7$), commercial areas (points $2$ and $6$) and residential areas (points $1$, $4$ and $5$) distributed at the mouth of a port in Binhai City. \n\nWe use this table as a map, and each grid is similar to a plot to represent the area, that is, as shown below, mountains and lakes are impassable, and there are distances and roads between the other adjacent plots, and there are roads between 4 and 5 and 5 and 6\n\n| Mountain | Mountain | Mountain | Mountain |\n| ---- | ------------------ | ------- | ------- |\n| Mountain | Mountain | Mountain | Mountain |\n| 1 | 2 | 3 | 4 |\n| Lake | Lake (to build a ferry) | Lake | Road 4-5 |\n| Lake | Lake (to build a ferry) | Lake | Road 4-5 |\n| 7 | 6 | Road 5-6 | 5 |\n| Mountain | Mountain | Mountain | Mountain |\n\nThe distances between each point are shown below, and adjacent points can be traveled back and forth. Non-adjacent points are impassable. \n\n| 1-2 | 2-3 | 3-4 | 4-5 | 5-6 | 6-7 | 2-6 |\n| ---- | ---- | ---- | ---- | ---- | ---- | ------ |\n| 3.5 | 3 | 5 | 25 | 4 | 2.5 | To be established |\n\nThe pedestrian (vehicle) flow in the early morning every day, that is, from residential areas $1$, $4$, $5$ to commercial areas $2$, $6$, industrial areas $3$, $7$ and other residential areas, is shown in Table C-35. \n\nTable C-35\\Unit: Person-time\n\n| Departure Place \\ Arrival Place | 1 | 2 | 3 | 4 | 5 | 6 | 7 | Total |\n| --------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ----- |\n| 1 | — | 900 | 750 | 40 | 10 | 600 | 550 | 2850 |\n| 4 | 100 | 2000 | 1100 | — | 150 | 1400 | 1250 | 6000 |\n| 5 | 110 | 4000 | 2200 | 200 | — | 3300 | 2440 | 12250 |\n\nThe total number of persons is $21100$ and the total mileage is $399250$ km. Due to geographical restrictions, all trips must travel along the arc of the harbor. \n\nIn order to facilitate travel and reduce air pollution caused by driving, it is proposed to open a round-trip ferry between $2 \\leftrightarrow 6$ (see the dotted line in the figure), which can transport $2000$ cars in both directions during the morning rush hour. Ask how much the total mileage of people (vehicles) in the early morning will be reduced after the ferry is opened (assuming that each car only carries $1$ people). (Minimum cost multi-source-multi-sink network flow model)\n\nConsider the establishment of the model, let $x_{qij}$ be the superposition of the people (vehicles) flow starting from the $q$th residential area on the arc $(i,j)$. For convenience, let the people (vehicles) flow starting from the $1$, $4$, and $5$ residential areas be $q$ values, and let $q=1,2,3$. \n\n$C_{qij}$ is the mileage of arc $(i,j)$, $u_{ij}$ is the capacity of the shared arc, and $b_{qk}$ is the number of people (vehicles) that should arrive at point $k$. In summary, how much can the total travel mileage be reduced?",
+    "answer": 280770.0,
+    "Parameters_List": [
+      {
+        "Name": "year_report",
+        "Type": "integer",
+        "Value": 2023
+      },
+      {
+        "Name": "num_main_roads",
+        "Type": "list",
+        "Value": [
+          4,
+          5
+        ]
+      },
+      {
+        "Name": "action_plan_years",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "industrial_areas",
+        "Type": "list",
+        "Value": [
+          3,
+          7
+        ]
+      },
+      {
+        "Name": "commercial_areas",
+        "Type": "list",
+        "Value": [
+          2,
+          6
+        ]
+      },
+      {
+        "Name": "residential_areas",
+        "Type": "list",
+        "Value": [
+          1,
+          4,
+          5
+        ]
+      },
+      {
+        "Name": "roads_exist",
+        "Type": "list",
+        "Value": [
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "Name": "total_persons",
+        "Type": "integer",
+        "Value": 21100
+      },
+      {
+        "Name": "total_mileage",
+        "Type": "integer",
+        "Value": 399250
+      },
+      {
+        "Name": "ferry_arc",
+        "Type": "tuple",
+        "Value": [
+          2,
+          6
+        ]
+      },
+      {
+        "Name": "ferry_capacity",
+        "Type": "integer",
+        "Value": 2000
+      },
+      {
+        "Name": "car_occupancy",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "q_values",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "Name": "Table_1_map",
+        "Type": "list",
+        "Value": [
+          [
+            "Mountain",
+            "Mountain",
+            "Mountain",
+            "Mountain"
+          ],
+          [
+            "Mountain",
+            "Mountain",
+            "Mountain",
+            "Mountain"
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            "Lake",
+            "Lake (to build a ferry)",
+            "Lake",
+            "Road 4-5"
+          ],
+          [
+            "Lake",
+            "Lake (to build a ferry)",
+            "Lake",
+            "Road 4-5"
+          ],
+          [
+            7,
+            6,
+            "Road 5-6",
+            5
+          ],
+          [
+            "Mountain",
+            "Mountain",
+            "Mountain",
+            "Mountain"
+          ]
+        ]
+      },
+      {
+        "Name": "Table_2_distances",
+        "Type": "object",
+        "Value": {
+          "1-2": 3.5,
+          "2-3": 3.0,
+          "3-4": 5.0,
+          "4-5": 25.0,
+          "5-6": 4.0,
+          "6-7": 2.5,
+          "2-6": "To be established"
+        }
+      },
+      {
+        "Name": "Table_3_C35",
+        "Type": "object",
+        "Value": {
+          "1": {
+            "1": 0,
+            "2": 900,
+            "3": 750,
+            "4": 40,
+            "5": 10,
+            "6": 600,
+            "7": 550,
+            "total": 2850
+          },
+          "4": {
+            "1": 100,
+            "2": 2000,
+            "3": 1100,
+            "4": 0,
+            "5": 150,
+            "6": 1400,
+            "7": 1250,
+            "total": 6000
+          },
+          "5": {
+            "1": 110,
+            "2": 4000,
+            "3": 2200,
+            "4": 200,
+            "5": 0,
+            "6": 3300,
+            "7": 2440,
+            "total": 12250
+          }
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "As a typical mixed-function area,...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The area was formed by land reclamation in the 1990s...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Due to the obstruction of surrounding mountains and artificial lakes,...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "According to the 'White Paper on Commuter Transportation in the Harbor Area' released by the Municipal Transportation Research Institute in 2023,...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "In order to alleviate congestion, the municipal government included the construction of lake ferries in the 'Three-Year Action Plan for Comprehensive Transportation Improvement'...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "The project needs to evaluate the diversion effect of ferry routes on existing land transportation...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Social significance:...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "This transportation optimization plan directly affects the regional economic vitality and the quality of life of residents,...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Decisions need to balance the benefits of infrastructure investment and the demands of different interest groups...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "For example, ferry operations may weaken the passenger flow of existing bus routes,...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The project results will provide empirical reference for urban transportation planning under similar terrain constraints...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "There are industrial areas (points 3 and 7), commercial areas (points 2 and 6) and residential areas (points 1, 4 and 5) distributed at the mouth of a port in Binhai City...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "We use this table as a map, and each grid is similar to a plot to represent the area,...",
+        "Defines underlying graph (set of admissible arcs)"
+      ],
+      [
+        "14",
+        "The distances between each point are shown below, and adjacent points can be traveled back and forth...",
+        "Defines cost parameters C_{ij} and symmetry C_{ij}=C_{ji}"
+      ],
+      [
+        "15",
+        "Non-adjacent points are impassable...",
+        "Reinforces graph definition (no arcs between non-adjacent nodes)"
+      ],
+      [
+        "16",
+        "The pedestrian (vehicle) flow in the early morning every day, that is, from residential areas 1, 4, 5 to commercial areas 2, 6, industrial areas 3, 7 and other residential areas, is shown in Table C-35...",
+        "Defines demand parameters b_{qk}"
+      ],
+      [
+        "17",
+        "The total number of persons is 21100 and the total mileage is 399250 km...",
+        "Provides initial total-cost constant (399250)"
+      ],
+      [
+        "18",
+        "Due to geographical restrictions, all trips must travel along the arc of the harbor...",
+        "Confirms flow only on defined arcs"
+      ],
+      [
+        "19",
+        "In order to facilitate travel and reduce air pollution caused by driving, it is proposed to open a round-trip ferry between 2 ↔ 6 (see the dotted line in the figure)...",
+        "Capacity parameters u_{2,6}=u_{6,2}=2000"
+      ],
+      [
+        "20",
+        "Ask how much the total mileage of people (vehicles) in the early morning will be reduced after the ferry is opened...",
+        "Specifies optimization target (mileage reduction)"
+      ],
+      [
+        "21",
+        "Minimum cost multi-source-multi-sink network flow model...",
+        "Model structure hint"
+      ],
+      [
+        "22",
+        "Consider the establishment of the model, let x_{qij} be the superposition of the people (vehicles) flow starting from the qth residential area on the arc (i,j)...",
+        "Decision variable definition x_{qij}"
+      ],
+      [
+        "23",
+        "For convenience, let the people (vehicles) flow starting from the 1, 4, and 5 residential areas be q values, and let q=1,2,3...",
+        "Defines index set Q={1,2,3}"
+      ],
+      [
+        "24",
+        "C_{qij} is the mileage of arc (i,j), u_{ij} is the capacity of the shared arc, and b_{qk} is the number of people (vehicles) that should arrive at point k...",
+        "Names of parameters C_{ij}, u_{ij}, b_{qk}"
+      ],
+      [
+        "25",
+        "In summary, how much can the total travel mileage be reduced?...",
+        "Restates optimization goal"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{qij}",
+        "Meaning": "flow on arc (i,j) for origin q",
+        "Type": "continuous",
+        "Range ": "0 ≤ x_{qij} ≤ u_{ij} for arcs (2,6),(6,2); 0 ≤ x_{qij} < ∞ for other arcs"
+      },
+      {
+        "symbol": "R",
+        "Meaning": "total mileage reduction after ferry opens",
+        "Type": "continuous",
+        "Range ": "0 ≤ R ≤ 399250"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Graph definition E",
+        "E = {(1,2),(2,1),(2,3),(3,2),(3,4),(4,3),(4,5),(5,4),(5,6),(6,5),(6,7),(7,6),(2,6),(6,2)}",
+        "sentence numbers:13,14,15,19"
+      ],
+      [
+        "Cost symmetry",
+        "C_{ij} = C_{ji} ∀(i,j)∈E; values given in table",
+        "sentence numbers:14"
+      ],
+      [
+        "Demand parameters b_{qk}",
+        "b_{1,2}=900, b_{1,3}=750, …, b_{3,7}=2440",
+        "sentence numbers:16"
+      ],
+      [
+        "Flow conservation",
+        "∀q∈Q, ∀i∈V: ∑_{j:(i,j)∈E} x_{qij} − ∑_{j:(j,i)∈E} x_{qji} = s_{qi}",
+        "sentence numbers:22-24"
+      ],
+      [
+        "Supply/demand s_{qi}",
+        "s_{q,origin(q)} = ∑_{k} b_{qk}; s_{q,k} = −b_{qk} for k≠origin(q)",
+        "sentence numbers:16"
+      ],
+      [
+        "Ferry capacity",
+        "∑_{q∈Q} x_{q,2,6} ≤ 2000; ∑_{q∈Q} x_{q,6,2} ≤ 2000",
+        "sentence numbers:19"
+      ],
+      [
+        "Nonnegativity",
+        "x_{qij} ≥ 0 ∀q,(i,j)∈E",
+        "sentence numbers:22"
+      ],
+      [
+        "Reduction relation",
+        "R + ∑_{q∈Q}∑_{(i,j)∈E} C_{ij} x_{qij} = 399250",
+        "sentence numbers:17,20,25"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Ask how much the total mileage of people (vehicles) in the early morning will be reduced after the ferry is opened",
+      "Mathematical_expressions": "Maximize R subject to R + ∑_{q∈Q}∑_{(i,j)∈E} C_{ij} x_{qij} = 399250"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "110480.0"
+    ],
+    "time_seconds": 26.375608200003626,
+    "total_tokens": 9982
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "110480.0"
+    ],
+    "ground_truth": 280770.0
+  }
+}

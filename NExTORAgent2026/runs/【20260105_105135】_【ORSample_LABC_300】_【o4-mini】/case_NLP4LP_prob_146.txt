@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An oil and natural gas company uses containers and trucks to transport oil to the port. Each container can carry 30 units of oil, and each truck can carry 40 units of oil. Due to government restrictions, the number of trucks used must be at most one half of the number of containers used. However, as the transportation scale expands, the regulatory authority’s restriction on the number of trucks becomes more stringent: as the number of containers increases, the upper limit on allowable trucks tightens gradually in an exponential form. Specifically, the maximum allowable number of trucks equals “one half of the number of containers multiplied by $1.3$ raised to the power of the number of containers,” i.e., when $x$ containers are used, the number of trucks $T$ must satisfy $T \\le 0.5 \\times x \\times (1.3^x)$. For example, when $x = 20$, the number of trucks $T$ must not exceed $0.5 \\times 20 \\times (1.3^{20})$. If at least 2000 units of oil must be transported to the port, and at least 15 containers must be used, find the minimum total number of containers and trucks required subject to the above conditions.",
+    "answer": 54.0,
+    "index": "NLP4LP_prob_146",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “由于政府限制，所使用的卡车数量必须至多为所使用集装箱数量的一半。” 修改后相关描述: “由于政府限制，所使用的卡车数量必须至多为所使用集装箱数量的一半。但是，随着运输规模的扩大，监管部门对卡车数量的限制会变得更加严格：当集装箱数量增加时，允许使用的卡车数量上限会以指数形式逐渐收紧。具体来说，允许使用的卡车最大数量等于‘集装箱数量的一半乘以1.3 的集装箱数量次方’，即：当使用 x 个集装箱时，卡车数量 T 必须满足 T 不超过 0.5×x×(1.3 的 x 次方。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_146\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_096.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "54.0"
+    ],
+    "time_seconds": 31.533605099990382,
+    "total_tokens": 3027
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "54.0"
+    ],
+    "ground_truth": 54.0
+  }
+}

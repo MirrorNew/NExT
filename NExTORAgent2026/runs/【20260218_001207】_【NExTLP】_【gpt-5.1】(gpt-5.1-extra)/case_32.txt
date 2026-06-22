@@ -1,0 +1,520 @@
+{
+  "entry": {
+    "index": 32,
+    "question": "Founded in 2010, Dongfeng Express is a leading integrated logistics service provider in China, handling more than 2 million express parcels per day. Its large sorting center in East China uses an automated sorting system and is equipped with 11 high-speed cross-belt sorters, each with a theoretical processing capacity of 500 pieces per hour. According to the 2023 operating data, the sorting center handles an average of about 35,000 express parcels per day, of which e-commerce parcels account for 78%, showing obvious time period fluctuations: the main arrivals are trunk line goods in the morning, and the peak of intra-city parcels is in the afternoon.\n\nA parcel sorting department of Dongfeng Express handles the arriving outbound express parcels every day. According to statistics, the number of express parcels delivered in each time period every day is shown in Table C-33.\n\nTable C-33\n\n| Time period | Number of arriving express parcels | Time period | Number of arriving express parcels |\n| ------------ | ---------- | ------------ | ---------- |\n| Before 10:00 | 5000 | 14:00～15:00 | 3000 |\n| 10:00～11:00 | 4000 | 15:00～16:00 | 4000 |\n| 11:00～12:00 | 3000 | 16:00～17:00 | 4500 |\n| 12:00～13:00 | 4000 | 17:00～18:00 | 3500 |\n| 13:00～14:00 | 2500 | 18:00～19:00 | 2500 |\n\nExpress mail sorting is operated by machines (one employee per machine), with a total of $11$ sorting machines. Each sorting machine can sort $500$ per hour Express mail. Some of the employees are full-time, working in three shifts: 10:00-18:00, 11:00-19:00, 12:00-20:00, and each person is paid $150$ per day; the other part is part-time, working $5$ hours a day, 13:00-18:00, 14:00-19:00, 15:00-20:00, and each person is paid $80$ per day. \n\nThe express mail processing rule is: all express mails arriving before the hour can be processed from every hour. Due to the time requirements of express mail, all express mails arriving before $12:00$ must be processed before $14:00$; those arriving before $15:00$ must be processed before $17:00$; all express mails arriving on the same day must be processed before $20:00$ every day. Pre-processing is completed. \n\nBuild a model. How many full-time and part-time employees should be equipped in the express sorting department to complete the specified tasks and minimize the total expenditure? \n\nFigure C-12 can be used to represent the start and end time of each work. \n\nFigure C-12 (Employee Work Time Chart)\n\n| Employee | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 |\n| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| $x_1$ | █ | █ | █ | █ | █ | █ | █ | █ | | |\n| $x_2$ | | █ | █ | █ | █ | █ | █ | █ | █ | █ | |\n| $x_3$ | | | █ | █ | █ | █ | █ | █ |",
+    "answer": 1350.0,
+    "Parameters_List": [
+      {
+        "Name": "founding_year",
+        "Type": "integer",
+        "Value": 2010
+      },
+      {
+        "Name": "daily_parcels_overall",
+        "Type": "integer",
+        "Value": 2000000
+      },
+      {
+        "Name": "avg_daily_parcels_sorting_center",
+        "Type": "integer",
+        "Value": 35000
+      },
+      {
+        "Name": "ecommerce_share",
+        "Type": "float",
+        "Value": 0.78
+      },
+      {
+        "Name": "num_sorters",
+        "Type": "integer",
+        "Value": 11
+      },
+      {
+        "Name": "capacity_per_sorter_per_hour",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "num_sorting_machines_department",
+        "Type": "integer",
+        "Value": 11
+      },
+      {
+        "Name": "employee_per_machine",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "machine_capacity_per_hour",
+        "Type": "integer",
+        "Value": 500
+      },
+      {
+        "Name": "full_time_shift_start_end",
+        "Type": "list",
+        "Value": [
+          [
+            "10:00",
+            "18:00"
+          ],
+          [
+            "11:00",
+            "19:00"
+          ],
+          [
+            "12:00",
+            "20:00"
+          ]
+        ]
+      },
+      {
+        "Name": "full_time_daily_wage",
+        "Type": "integer",
+        "Value": 150
+      },
+      {
+        "Name": "part_time_shift_length_hours",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "part_time_shift_start_end",
+        "Type": "list",
+        "Value": [
+          [
+            "13:00",
+            "18:00"
+          ],
+          [
+            "14:00",
+            "19:00"
+          ],
+          [
+            "15:00",
+            "20:00"
+          ]
+        ]
+      },
+      {
+        "Name": "part_time_daily_wage",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "deadline_before_12",
+        "Type": "string",
+        "Value": "14:00"
+      },
+      {
+        "Name": "deadline_before_15",
+        "Type": "string",
+        "Value": "17:00"
+      },
+      {
+        "Name": "deadline_same_day",
+        "Type": "string",
+        "Value": "20:00"
+      },
+      {
+        "Name": "Table_1_C33_Arrivals",
+        "Type": "list",
+        "Value": [
+          {
+            "time_period": "Before 10:00",
+            "arriving_parcels": 5000
+          },
+          {
+            "time_period": "10:00-11:00",
+            "arriving_parcels": 4000
+          },
+          {
+            "time_period": "11:00-12:00",
+            "arriving_parcels": 3000
+          },
+          {
+            "time_period": "12:00-13:00",
+            "arriving_parcels": 4000
+          },
+          {
+            "time_period": "13:00-14:00",
+            "arriving_parcels": 2500
+          },
+          {
+            "time_period": "14:00-15:00",
+            "arriving_parcels": 3000
+          },
+          {
+            "time_period": "15:00-16:00",
+            "arriving_parcels": 4000
+          },
+          {
+            "time_period": "16:00-17:00",
+            "arriving_parcels": 4500
+          },
+          {
+            "time_period": "17:00-18:00",
+            "arriving_parcels": 3500
+          },
+          {
+            "time_period": "18:00-19:00",
+            "arriving_parcels": 2500
+          }
+        ]
+      },
+      {
+        "Name": "Table_2_C12_WorkTimeChart_hours",
+        "Type": "list",
+        "Value": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      },
+      {
+        "Name": "Table_2_C12_WorkTimeChart_x1",
+        "Type": "list",
+        "Value": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "Name": "Table_2_C12_WorkTimeChart_x2",
+        "Type": "list",
+        "Value": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "Name": "Table_2_C12_WorkTimeChart_x3",
+        "Type": "list",
+        "Value": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Founded in 2010, Dongfeng...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Its large sorting center in...",
+        "Defines 11 machines, each 500 parcels/hour; implies maximum hourly capacity 11×500 = 5500 parcels/hour to be respected."
+      ],
+      [
+        "3",
+        "According to the 2023 operating...",
+        "No constraints (descriptive averages, not binding)."
+      ],
+      [
+        "4",
+        "A parcel sorting department of...",
+        "No constraints (context only)."
+      ],
+      [
+        "5",
+        "According to statistics, the number...",
+        "Defines time-period arrival quantities as data (demands) for each period; used for demand satisfaction and deadline constraints."
+      ],
+      [
+        "6",
+        "Express mail sorting is operated...",
+        "At any hour, number of employees on duty ≤ 11 (one per machine); machines used = employees on duty."
+      ],
+      [
+        "7",
+        "Each sorting machine can sort...",
+        "Per-hour processing capacity per machine is 500; together with sentence 6 gives P_h ≤ 500 × (employees at hour h)."
+      ],
+      [
+        "8",
+        "Some of the employees are full-time...",
+        "Defines 3 full-time shift types (10–18, 11–19, 12–20) and wage 150/day; introduces integer decision variables for numbers in each full-time shift and their hour coverage."
+      ],
+      [
+        "9",
+        "the other part is part-time...",
+        "Defines 3 part-time shift types (13–18, 14–19, 15–20) and wage 80/day; introduces integer decision variables for numbers in each part-time shift and their hour coverage."
+      ],
+      [
+        "10",
+        "The express mail processing rule...",
+        "Processing cannot occur before arrival; at each time, cumulative processed ≤ cumulative arrivals; processing can be delayed to later hours subject to deadlines."
+      ],
+      [
+        "11",
+        "Due to the time requirements...",
+        "All parcels arriving before 12:00 (before 10, 10–11, 11–12) must be fully processed by 14:00; cumulative processing by 14:00 ≥ total arrivals before 12:00."
+      ],
+      [
+        "12",
+        "those arriving before 15:00 must...",
+        "All parcels arriving before 15:00 (up to 14–15) must be fully processed by 17:00; cumulative processing by 17:00 ≥ total arrivals before 15:00."
+      ],
+      [
+        "13",
+        "all express mails arriving on...",
+        "All parcels of the day must be processed by 20:00; cumulative processed by 20:00 equals total daily arrivals (no end-of-day backlog)."
+      ],
+      [
+        "14",
+        "Pre-processing is completed...",
+        "Initial backlog is zero; cumulative processed before 10:00 equals 0."
+      ],
+      [
+        "15",
+        "Build a model. How many full-time...",
+        "Defines decision problem: choose numbers of full-time and part-time employees per shift to satisfy all processing and capacity constraints while minimizing total wage cost."
+      ],
+      [
+        "16",
+        "Figure C-12 can be used...",
+        "Clarifies shift start/end times and which hours each shift covers; used to define the employee–hour coverage matrix."
+      ],
+      [
+        "17",
+        "Figure C-12 (Employee Work...",
+        "Gives coverage pattern: x1 covers 10–17, x2 covers 11–19, x3 covers 12–20 (and similarly for part-time); used to form equalities for E_h as sums of shift variables per hour."
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Number of full-time employees assigned to shift 1 (10:00–18:00; working hours 10,11,12,13,14,15,16,17).",
+        "Type": "integer",
+        "Range ": "x_1 ≥ 0, integer"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Number of full-time employees assigned to shift 2 (11:00–19:00; working hours 11–19).",
+        "Type": "integer",
+        "Range ": "x_2 ≥ 0, integer"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Number of full-time employees assigned to shift 3 (12:00–20:00; working hours 12–20).",
+        "Type": "integer",
+        "Range ": "x_3 ≥ 0, integer"
+      },
+      {
+        "symbol": "y_4",
+        "Meaning": "Number of part-time employees assigned to shift 4 (13:00–18:00; working hours 13–18).",
+        "Type": "integer",
+        "Range ": "y_4 ≥ 0, integer"
+      },
+      {
+        "symbol": "y_5",
+        "Meaning": "Number of part-time employees assigned to shift 5 (14:00–19:00; working hours 14–19).",
+        "Type": "integer",
+        "Range ": "y_5 ≥ 0, integer"
+      },
+      {
+        "symbol": "y_6",
+        "Meaning": "Number of part-time employees assigned to shift 6 (15:00–20:00; working hours 15–20).",
+        "Type": "integer",
+        "Range ": "y_6 ≥ 0, integer"
+      },
+      {
+        "symbol": "E_h",
+        "Meaning": "Total number of employees working at hour h (h ∈ {10,…,20}); defined by sums of relevant shift variables.",
+        "Type": "integer",
+        "Range ": "E_h ≥ 0, integer, for h = 10,…,20"
+      },
+      {
+        "symbol": "P_h",
+        "Meaning": "Number of parcels processed during hour h (h ∈ {10,…,20}).",
+        "Type": "continuous",
+        "Range ": "P_h ≥ 0, for h = 10,…,20"
+      },
+      {
+        "symbol": "C_h",
+        "Meaning": "Cumulative number of parcels processed up to and including hour h (h ∈ {10,…,20}).",
+        "Type": "continuous",
+        "Range ": "C_h ≥ 0, for h = 10,…,20"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Machine_Count_and_Employee_Limit",
+        "E_h ≤ 11,   ∀ h ∈ {10,…,20}",
+        "sentence numbers:2,6"
+      ],
+      [
+        "Per_Machine_Processing_Capacity",
+        "P_h ≤ 500 · E_h,   ∀ h ∈ {10,…,20}",
+        "sentence numbers:2,7"
+      ],
+      [
+        "Employee_Hour_Definition_10",
+        "E_10 = x_1",
+        "sentence numbers:8,17"
+      ],
+      [
+        "Employee_Hour_Definition_11",
+        "E_11 = x_1 + x_2",
+        "sentence numbers:8,17"
+      ],
+      [
+        "Employee_Hour_Definition_12",
+        "E_12 = x_1 + x_2 + x_3",
+        "sentence numbers:8,17"
+      ],
+      [
+        "Employee_Hour_Definition_13",
+        "E_13 = x_1 + x_2 + x_3 + y_4",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Employee_Hour_Definition_14",
+        "E_14 = x_1 + x_2 + x_3 + y_4 + y_5",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Employee_Hour_Definition_15",
+        "E_15 = x_1 + x_2 + x_3 + y_4 + y_5 + y_6",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Employee_Hour_Definition_16",
+        "E_16 = x_1 + x_2 + x_3 + y_4 + y_5 + y_6",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Employee_Hour_Definition_17",
+        "E_17 = x_1 + x_2 + x_3 + y_4 + y_5 + y_6",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Employee_Hour_Definition_18",
+        "E_18 = x_2 + x_3 + y_4 + y_5",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Employee_Hour_Definition_19",
+        "E_19 = x_2 + x_3 + y_5",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Employee_Hour_Definition_20",
+        "E_20 = x_3 + y_6",
+        "sentence numbers:8,9,17"
+      ],
+      [
+        "Nonnegativity_and_Integrality_FullTime",
+        "x_i ≥ 0, integer,   i = 1,2,3",
+        "sentence numbers:8,15"
+      ],
+      [
+        "Nonnegativity_and_Integrality_PartTime",
+        "y_j ≥ 0, integer,   j = 4,5,6",
+        "sentence numbers:9,15"
+      ],
+      [
+        "Processing_Nonnegativity",
+        "P_h ≥ 0,   ∀ h ∈ {10,…,20}",
+        "sentence numbers:10"
+      ],
+      [
+        "Processing_Cumulative_Definition",
+        "C_h = C_{h-1} + P_h,   h = 10,…,20, with C_9 = 0",
+        "sentence numbers:10,14"
+      ],
+      [
+        "Cumulative_Processing_≤_Cumulative_Arrivals",
+        "C_h ≤ A_h,   ∀ h ∈ {10,…,20} (A_h are given cumulative arrivals)",
+        "sentence numbers:10"
+      ],
+      [
+        "Deadline_12_to_14",
+        "C_14 ≥ A_{<12},   where A_{<12} = 5000 + 4000 + 3000 = 12000",
+        "sentence numbers:11"
+      ],
+      [
+        "Deadline_15_to_17",
+        "C_17 ≥ A_{<15},   where A_{<15} = 5000 + 4000 + 3000 + 4000 + 2500 + 3000 = 21500",
+        "sentence numbers:12"
+      ],
+      [
+        "End_of_Day_Completion",
+        "C_20 = A_{total},   where A_{total} = 35000",
+        "sentence numbers:13"
+      ],
+      [
+        "No_Backlog_Start",
+        "C_9 = 0",
+        "sentence numbers:14"
+      ],
+      [
+        "Employees_Only_Operate_Machines",
+        "E_h integer and E_h ≤ 11; capacity only via machines: P_h ≤ 500 · E_h",
+        "sentence numbers:6,7"
+      ],
+      [
+        "All_Tasks_Must_Be_Completed",
+        "All above capacity, arrival, and deadline constraints must hold (feasibility condition)",
+        "sentence numbers:10,11,12,13,15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the total expenditure for full-time and part-time employees while completing all required processing within capacity and deadline constraints.",
+      "Mathematical_expressions": "min Z = 150 · (x_1 + x_2 + x_3) + 80 · (y_4 + y_5 + y_6)"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1020.0"
+    ],
+    "time_seconds": 84.1705077000006,
+    "total_tokens": 52474
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "1020.0"
+    ],
+    "ground_truth": 1350.0
+  }
+}

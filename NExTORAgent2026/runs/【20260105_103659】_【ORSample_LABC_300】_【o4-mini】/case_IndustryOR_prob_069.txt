@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "The well-known Operations Research problem—the Traveling Salesman Problem (TSP)—can be described as follows: A traveling salesperson departs from a certain city, visits the other cities to sell products, and, before returning to the original departure city, must ensure that each city is visited exactly once. The distances between the cities are given in the table below.\n\n| City | 1 | 2 | 3 | 4 |\n| ---- | --- | --- | --- | --- |\n| 1 | 0 | 10 | 20 | 12 |\n| 2 | 10 | 0 | 5 | 10 |\n| 3 | 20 | 5 | 0 | 8 |\n| 4 | 15 | 12 | 8 | 0 |\n\nWhat route should the salesperson choose to minimize the total travel distance? When formulating an integer programming model, in addition to requiring that each city is visited exactly once, one must also add a nonlinear constraint: after departing from city 1, the ratio of the sum of the distances of the two directly consecutive legs to the total length of the entire tour must not exceed $0.4$, i.e., the sum of these two directly consecutive legs accounts for at most $40\\%$ of the total travel distance. Attempt to formulate an integer programming model for this problem.",
+    "answer": 38.0,
+    "index": "IndustryOR_prob_069",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 推销员应选择怎样的路线才能使总行程距离最短？尝试为该问题建立一个整数规划模型。, 修改后相关描述: 推销员应选择怎样的路线才能使总行程距离最短？在建立整数规划模型时，除了考虑每个城市恰好被访问一次以外，还需增加一个非线性的约束：从城市1出发后，直接相连的两条路程的距离之和与整个旅行路线总距离的比值不得超过0.4，即这两段直接相连的路程之和占总行程距离的比例不超过40%。尝试为该问题建立一个整数规划模型。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_069\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_010.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "38.0"
+    ],
+    "time_seconds": 46.6074668999936,
+    "total_tokens": 4594
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "38.0"
+    ],
+    "ground_truth": 38.0
+  }
+}

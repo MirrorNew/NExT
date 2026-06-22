@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "NLP4LP_prob_042",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_042\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_042\\code.py",
+    "NLtype": "Linear",
+    "question": "There are two processes, process A and process B, to plate a coin with gold. Process A requires 3 units of gold, 2 wires, and can plate 5 coins. Process B requires 5 units of gold, 3 wires, and can plate 7 coins. There are 500 units of gold and 300 wires available. How many processes of each type should be run to maximize the total number of coins that can be plated?",
+    "answer": 750,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "750.0"
+    ],
+    "time_seconds": 14.614146699997946,
+    "total_tokens": 1019
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "750.0"
+    ],
+    "ground_truth": 750
+  }
+}

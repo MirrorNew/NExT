@@ -1,0 +1,354 @@
+{
+  "entry": {
+    "index": 6,
+    "question": " Nanshan District Nonglian Agricultural Technology Co., Ltd. is a modern agricultural enterprise integrating breeding, planting and food processing. The company operates several intelligent greenhouse factories and cooperates deeply with the local transportation network to realize the closed-loop supply chain management of \"field-factory-market\". The company is careful in the input of resources such as land, irrigation, and labor, and predicts market demand and cost fluctuations through big data. In order to maximize profits and meet sustainable development goals, it is exploring a land allocation optimization solution based on linear programming. The overall goal is to scientifically allocate the planting area of ​​seven major crops on the premise of ensuring the rational use of resources and rigid market demand to maximize total profits. Nonglian tried to introduce drone sprinkler technology in 2019, which can increase water resource utilization to 150%, but it was eventually abandoned due to unstable rainy season.\n\n In terms of resources, the total available farmland area is 7 hectares, of which block A is 5 hectares and block B is 2 hectares, and green corn, cabbage and tomatoes can only be planted in block A. The irrigation water source is limited to 5,000 cubic meters, and the total labor force is 400 people, with an average of 10 hours of work per person. These three types of resources need to be reasonably allocated among the seven crops to avoid idle or overloaded resources. In terms of the market, the maximum sales demand for each crop is different. If this upper limit is exceeded, there will be a risk of unsalable products. Therefore, the planting area of ​​each crop should not exceed its maximum demand. In terms of operating costs, the cultivation costs and per hectare of different crops are different. Profits vary from hectare to hectare, and it is necessary to take into account cost consumption while pursuing high profits to prevent excessive cost investment. In terms of diversity, the company hopes to plant at least 6 or more crops (if planted, the crops must be planted on at least 0.8 hectares) to diversify market risks. At the same time, it is required that the planting area of ​​melons (pumpkins) and roots (sweet potatoes) be balanced to optimize product structure. In terms of additional or priority constraints, in order to support the supply of raw materials to deep processing factories, the total planting area of ​​green corn and pumpkin must be no less than 3 hectares to ensure the stable procurement needs of the factory throughout the year. Only the maximum total profit needs to be given. \n\n**Data table**\n\n| Crop | Profit/ha (USD) | Water/ha (m3) | Labor/ha (hours) | Maximum requirement (ha) |\n| ------ | ---------------- | ---------------- | ------------------ | -------------- |\n| Green corn | 10000 | 800 | 600 | 2 |\n| Cabbage | 12000 | 700 | 500 | 3 |\n| Tomato | 15000 | 900 | 700 | 1.5 |\n| Spinach | 8000 | 600 | 400 | 1 |\n| Mustard | 9000 | 650 | 450 | 1.5 |\n| Pumpkin | 11000 | 750 | 550 | 1 |\n| Sweet potato | 10000 | 700 | 500 | 1 |",
+    "answer": 72371.4286,
+    "Parameters_List": [
+      {
+        "Name": "total_area",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "block_A_area",
+        "Type": "integer",
+        "Value": 5
+      },
+      {
+        "Name": "block_B_area",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "crops_in_block_A",
+        "Type": "list",
+        "Value": [
+          "Green corn",
+          "Cabbage",
+          "Tomato"
+        ]
+      },
+      {
+        "Name": "water_limit",
+        "Type": "integer",
+        "Value": 5000
+      },
+      {
+        "Name": "labor_people",
+        "Type": "integer",
+        "Value": 400
+      },
+      {
+        "Name": "hours_per_person",
+        "Type": "integer",
+        "Value": 10
+      },
+      {
+        "Name": "min_number_of_crops",
+        "Type": "integer",
+        "Value": 6
+      },
+      {
+        "Name": "min_area_if_planted",
+        "Type": "float",
+        "Value": 0.8
+      },
+      {
+        "Name": "Table_1_CropData",
+        "Type": "list",
+        "Value": [
+          {
+            "crop": "Green corn",
+            "profit_per_ha": 10000,
+            "water_per_ha": 800,
+            "labor_per_ha": 600,
+            "max_requirement_ha": 2
+          },
+          {
+            "crop": "Cabbage",
+            "profit_per_ha": 12000,
+            "water_per_ha": 700,
+            "labor_per_ha": 500,
+            "max_requirement_ha": 3
+          },
+          {
+            "crop": "Tomato",
+            "profit_per_ha": 15000,
+            "water_per_ha": 900,
+            "labor_per_ha": 700,
+            "max_requirement_ha": 1.5
+          },
+          {
+            "crop": "Spinach",
+            "profit_per_ha": 8000,
+            "water_per_ha": 600,
+            "labor_per_ha": 400,
+            "max_requirement_ha": 1
+          },
+          {
+            "crop": "Mustard",
+            "profit_per_ha": 9000,
+            "water_per_ha": 650,
+            "labor_per_ha": 450,
+            "max_requirement_ha": 1.5
+          },
+          {
+            "crop": "Pumpkin",
+            "profit_per_ha": 11000,
+            "water_per_ha": 750,
+            "labor_per_ha": 550,
+            "max_requirement_ha": 1
+          },
+          {
+            "crop": "Sweet potato",
+            "profit_per_ha": 10000,
+            "water_per_ha": 700,
+            "labor_per_ha": 500,
+            "max_requirement_ha": 1
+          }
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Nanshan District Nonglian Agricultural...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "The company operates several intelligent...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "The company is careful in the input...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In order to maximize profits and...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "The overall goal is to scientifically...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Nonglian tried to introduce drone...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "In terms of resources, the total...",
+        "Constraints on land: (1) total area across all crops ≤ 7; (2) sum of areas of green corn, cabbage, tomato ≤ 5."
+      ],
+      [
+        "8",
+        "The irrigation water source is limited...",
+        "Water constraint (total ≤ 5000 m³) and labor constraint (total hours ≤ 4000 h)."
+      ],
+      [
+        "9",
+        "These three types of resources need...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "In terms of the market, the maximum...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "Therefore, the planting area of each...",
+        "x_i ≤ maximum_demand_i for each crop."
+      ],
+      [
+        "12",
+        "In terms of operating costs, the cultivation...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "In terms of diversity, the company hopes...",
+        "Diversity constraints: x_i ≥ 0.8 y_i; x_i ≤ maximum_demand_i·y_i; ∑y_i ≥ 6."
+      ],
+      [
+        "14",
+        "At the same time, it is required that...",
+        "Balance constraint: x_Pu = x_Sw."
+      ],
+      [
+        "15",
+        "In terms of additional or priority constraints...",
+        "x_GC + x_Pu ≥ 3."
+      ],
+      [
+        "16",
+        "Only the maximum total profit needs...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_GC",
+        "Meaning": "planting area of green corn (ha)",
+        "Type": "continuous",
+        "Range ": "[0,2]"
+      },
+      {
+        "symbol": "x_Ca",
+        "Meaning": "planting area of cabbage (ha)",
+        "Type": "continuous",
+        "Range ": "[0,3]"
+      },
+      {
+        "symbol": "x_To",
+        "Meaning": "planting area of tomato (ha)",
+        "Type": "continuous",
+        "Range ": "[0,1.5]"
+      },
+      {
+        "symbol": "x_Sp",
+        "Meaning": "planting area of spinach (ha)",
+        "Type": "continuous",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "x_Mu",
+        "Meaning": "planting area of mustard (ha)",
+        "Type": "continuous",
+        "Range ": "[0,1.5]"
+      },
+      {
+        "symbol": "x_Pu",
+        "Meaning": "planting area of pumpkin (ha)",
+        "Type": "continuous",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "x_Sw",
+        "Meaning": "planting area of sweet potato (ha)",
+        "Type": "continuous",
+        "Range ": "[0,1]"
+      },
+      {
+        "symbol": "y_GC",
+        "Meaning": "1 if green corn is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y_Ca",
+        "Meaning": "1 if cabbage is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y_To",
+        "Meaning": "1 if tomato is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y_Sp",
+        "Meaning": "1 if spinach is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y_Mu",
+        "Meaning": "1 if mustard is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y_Pu",
+        "Meaning": "1 if pumpkin is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      },
+      {
+        "symbol": "y_Sw",
+        "Meaning": "1 if sweet potato is planted, 0 otherwise",
+        "Type": "BINARY",
+        "Range ": "{0,1}"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Total land constraint",
+        "x_GC + x_Ca + x_To + x_Sp + x_Mu + x_Pu + x_Sw ≤ 7",
+        "sentence numbers:7"
+      ],
+      [
+        "Block A land constraint",
+        "x_GC + x_Ca + x_To ≤ 5",
+        "sentence numbers:7"
+      ],
+      [
+        "Water limit",
+        "800 x_GC + 700 x_Ca + 900 x_To + 600 x_Sp + 650 x_Mu + 750 x_Pu + 700 x_Sw ≤ 5000",
+        "sentence numbers:8"
+      ],
+      [
+        "Labor limit",
+        "600 x_GC + 500 x_Ca + 700 x_To + 400 x_Sp + 450 x_Mu + 550 x_Pu + 500 x_Sw ≤ 4000",
+        "sentence numbers:8"
+      ],
+      [
+        "Maximum demand per crop",
+        "x_GC ≤ 2; x_Ca ≤ 3; x_To ≤ 1.5; x_Sp ≤ 1; x_Mu ≤ 1.5; x_Pu ≤ 1; x_Sw ≤ 1",
+        "sentence numbers:11"
+      ],
+      [
+        "Minimum-area-if-planted",
+        "x_i ≥ 0.8 y_i for all i",
+        "sentence numbers:13"
+      ],
+      [
+        "Kill-zero linkage",
+        "x_i ≤ maximum_demand_i·y_i for all i",
+        "sentence numbers:13"
+      ],
+      [
+        "Diversity count",
+        "y_GC + y_Ca + y_To + y_Sp + y_Mu + y_Pu + y_Sw ≥ 6",
+        "sentence numbers:13"
+      ],
+      [
+        "Pumpkin–sweet potato balance",
+        "x_Pu − x_Sw = 0",
+        "sentence numbers:14"
+      ],
+      [
+        "Green corn & pumpkin minimum",
+        "x_GC + x_Pu ≥ 3",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Only the maximum total profit needs to be given.",
+      "Mathematical_expressions": "Maximize 10000 x_GC + 12000 x_Ca + 15000 x_To + 8000 x_Sp + 9000 x_Mu + 11000 x_Pu + 10000 x_Sw"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "72371.42857143"
+    ],
+    "time_seconds": 20.194458199999644,
+    "total_tokens": 8560
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "72371.42857143"
+    ],
+    "ground_truth": 72371.4286
+  }
+}

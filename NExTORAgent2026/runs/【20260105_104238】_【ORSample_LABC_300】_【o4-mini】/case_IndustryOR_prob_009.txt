@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "IndustryOR_prob_009",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_009\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_009\\code.py",
+    "NLtype": "Linear",
+    "question": "A convenience supermarket is planning to open several chain stores in a newly built residential area in the northwest suburb of the city. For shopping convenience, the distance from any residential area to one of the chain stores should not exceed $800 \\mathrm{~m}$. Table 5-1 shows the new residential areas and the residential areas within a radius of $800 \\mathrm{~m}$ from each of them. Question: What is the minimum number of chain stores the supermarket needs to build among the mentioned residential areas, and in which residential areas should they be built?\n\n| Area Code | Residential Areas within $800 \\mathrm{~m}$ Radius |\n|-----------|---------------------------------------------------|\n| A         | A, C, E, G, H, I                                  |\n| B         | B, H, I                                           |\n| C         | A, C, G, H, I                                     |\n| D         | D, J                                              |\n| E         | A, E, G                                           |\n| F         | F, J, K                                           |\n| G         | A, C, E, G                                        |\n| H         | A, B, C, H, I                                     |\n| I         | A, B, C, H, I                                     |\n| J         | D, F, J, K, L                                     |\n| K         | F, J, K, L                                        |\n| L         | J, K, L                                           |",
+    "answer": 3,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "3.0"
+    ],
+    "time_seconds": 15.501393200000166,
+    "total_tokens": 1486
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "3.0"
+    ],
+    "ground_truth": 3
+  }
+}

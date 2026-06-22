@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "A snack exporter ships snacks to customers using small and large suitcases. A small suitcase can hold 50 portions of snacks, while a large suitcase can hold 80 portions. Most customers prefer small suitcases; therefore, the number of small suitcases used must be at least twice the number of large suitcases. The exporter has at most 70 small suitcases and 50 large suitcases available. If he must ship at least 15 large suitcases, and the ratio of the number of small suitcases to the number of large suitcases can be at most 3 (i.e., the number of small suitcases divided by the number of large suitcases does not exceed 3), then how many small and large suitcases should he ship, respectively, in order to maximize the total number of snack portions that can be transported?",
+    "answer": 6300.0,
+    "index": "NLP4LP_prob_159",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 并且总共最多只能发送 70 个行李箱, 修改后相关描述: 并且小号行李箱数量与大号行李箱数量的比值最多只能为 3（即小号行李箱数量除以大号行李箱数量不超过 3）",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_159\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_084.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "6300.0"
+    ],
+    "time_seconds": 14.996803799993359,
+    "total_tokens": 1376
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "6300.0"
+    ],
+    "ground_truth": 6300.0
+  }
+}

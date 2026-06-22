@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "Assume that a certain animal requires at least 700 g of protein, 30 g of minerals, and 100 mg of vitamins per day. There are 5 types of feed available. The nutrient contents of each feed and the price per kilogram are shown in Table 1-6:\n\nSubject to meeting the animal’s growth requirements, it is required that the ratio of the total protein content to the total mineral content of the selected feed does not exceed 20 (i.e., the total protein content divided by the total mineral content should be less than or equal to 20), and the cost of the selected feed is minimized.\n\nTable 1-6\n\n| Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) | Feed | Protein (g) | Minerals (g) | Vitamins (mg) | Price (¥/kg) |\n|------|-------------|--------------|---------------|--------------|------|-------------|--------------|---------------|--------------|\n| 1    | 3           | 1            | 0.5           | 0.2          | 4    | 6           | 2            | 2             | 0.3          |\n| 2    | 2           | 0.5          | 1             | 0.7          | 5    | 18          | 0.5          | 0.8           | 0.8          |\n| 3    | 1           | 0.2          | 0.2           | 0.4          |      |             |              |               |              |",
+    "answer": 32.44,
+    "index": "IndustryOR_prob_029",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 试建立线性规划模型，在满足该动物生长需求的前提下，使所选饲料的成本最低。 修改后相关描述: 在满足该动物生长需求的前提下，要求所选饲料的总蛋白质含量与总矿物质含量的比值不超过 20（即总蛋白质含量除以总矿物质含量应小于或等于 20），并使所选饲料的成本最低。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_029\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_001.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "32.43589744"
+    ],
+    "time_seconds": 39.35182359999453,
+    "total_tokens": 1456
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "32.43589744"
+    ],
+    "ground_truth": 32.44
+  }
+}

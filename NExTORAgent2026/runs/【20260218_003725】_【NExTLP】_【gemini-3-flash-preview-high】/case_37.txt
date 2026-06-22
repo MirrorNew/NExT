@@ -1,0 +1,263 @@
+{
+  "entry": {
+    "index": 37,
+    "question": "Magic Square is an ancient mathematical game that can be traced back to the records of the Luoshu in China in 1900 BC. This arrangement of filling consecutive natural numbers into a square matrix so that the sum of each row, column and diagonal is equal not only has mathematical aesthetic value, but also has a profound impact in cryptography, statistics and art design. Modern research shows that there are 8 basic solutions to the 3×3 magic square, and many variants can be derived through rotation and mirroring. In computer science, magic square generation algorithms are often used as benchmark cases for testing combinatorial optimization methods, and their constraint satisfaction characteristics are isomorphic to practical applications such as scheduling problems and resource allocation. This problem is essentially a typical constraint satisfaction problem (CSP), and its modeling ideas can be extended to engineering fields such as production scheduling and traffic flow balancing. Solving magic squares through integer programming can not only verify the inherent laws of mathematical symmetry, but also provide a method reference for dealing with more complex discrete optimization problems. Magic square research is still a classic case in the teaching of combinatorial mathematics and discrete optimization, reflecting the close connection between mathematical theory and applied practice. \n\nFill the numbers 1, 2, ..., 9 into the 9 cells A, B, ..., H, I in Figure C-17, so that the sum of the numbers in each row, column and two main diagonals is 15. Try to establish an integer programming model and solve it. If the number in block A is 4, what is the number in block I? \n\nFigure C-17\n\n```\n+---+---+---+\n| A | B | C |\n+---+---+---+\n| D | E | F |\n+---+---+---+\n| G | H | I |\n+---+---+---+\n```",
+    "answer": 6.0,
+    "Parameters_List": [
+      {
+        "Name": "Numbers",
+        "Type": "list",
+        "Value": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "Name": "Cells",
+        "Type": "list",
+        "Value": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I"
+        ]
+      },
+      {
+        "Name": "MagicSum",
+        "Type": "integer",
+        "Value": 15
+      },
+      {
+        "Name": "A",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "Table_1_Figure_C_17",
+        "Type": "list",
+        "Value": [
+          [
+            "A",
+            "B",
+            "C"
+          ],
+          [
+            "D",
+            "E",
+            "F"
+          ],
+          [
+            "G",
+            "H",
+            "I"
+          ]
+        ]
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Magic Square is an ancient...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "This arrangement of filling consecutive...",
+        "Constraint: sums of every row, column and both main diagonals must be equal."
+      ],
+      [
+        "3",
+        "Modern research shows that there...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In computer science, magic square generation...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "This problem is essentially a typical...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Solving magic squares through integer...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "Magic square research is still...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "Fill the numbers 1, 2, ..., 9...",
+        "Domain and all-different constraints for A-I ∈ {1..9}; row, column and diagonal sums = 15"
+      ],
+      [
+        "9",
+        "Try to establish an integer...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "If the number in block A...",
+        "Constraint: A = 4"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "A",
+        "Meaning": "value in cell A",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "B",
+        "Meaning": "value in cell B",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "C",
+        "Meaning": "value in cell C",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "D",
+        "Meaning": "value in cell D",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "E",
+        "Meaning": "value in cell E",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "F",
+        "Meaning": "value in cell F",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "G",
+        "Meaning": "value in cell G",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "H",
+        "Meaning": "value in cell H",
+        "Type": "integer",
+        "Range ": "1..9"
+      },
+      {
+        "symbol": "I",
+        "Meaning": "value in cell I",
+        "Type": "integer",
+        "Range ": "1..9"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "MagicSumCommon",
+        "A+B+C=D+E+F=G+H+I=A+D+G=B+E+H=C+F+I=A+E+I=C+E+G",
+        "sentence numbers:2"
+      ],
+      [
+        "Row1Sum",
+        "A+B+C=15",
+        "sentence numbers:8"
+      ],
+      [
+        "Row2Sum",
+        "D+E+F=15",
+        "sentence numbers:8"
+      ],
+      [
+        "Row3Sum",
+        "G+H+I=15",
+        "sentence numbers:8"
+      ],
+      [
+        "Col1Sum",
+        "A+D+G=15",
+        "sentence numbers:8"
+      ],
+      [
+        "Col2Sum",
+        "B+E+H=15",
+        "sentence numbers:8"
+      ],
+      [
+        "Col3Sum",
+        "C+F+I=15",
+        "sentence numbers:8"
+      ],
+      [
+        "Diag1Sum",
+        "A+E+I=15",
+        "sentence numbers:8"
+      ],
+      [
+        "Diag2Sum",
+        "C+E+G=15",
+        "sentence numbers:8"
+      ],
+      [
+        "AllDifferent",
+        "A,...,I are pairwise distinct",
+        "sentence numbers:8"
+      ],
+      [
+        "Domain",
+        "A,...,I in {1..9}, integer",
+        "sentence numbers:8"
+      ],
+      [
+        "BlockAValue",
+        "A=4",
+        "sentence numbers:10"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Pure feasibility problem, no explicit objective function.",
+      "Mathematical_expressions": "Minimize 0"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "0.0",
+      "6.0"
+    ],
+    "time_seconds": 212.75462490000064,
+    "total_tokens": 45903
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "0.0",
+      "6.0"
+    ],
+    "ground_truth": 6.0
+  }
+}

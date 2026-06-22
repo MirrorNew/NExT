@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An airport has two available gates (G1, G2), and four flights must be assigned to these two gates (F1: 10:00–11:00, F2: 10:30–11:30, F3: 11:15–12:30, F4: 10:45–11:45). For flights assigned to the same gate, their gate-usage time intervals must not overlap. The objective is to minimize flight delay, where each minute of delay beyond the scheduled departure time incurs a cost of 1 unit. Additionally, if the total number of flights assigned to the same gate during the time horizon 10:00–12:30 exceeds 2, then the delay costs of all flights departing from that gate are multiplied by a factor of $1.5$. For example, if a gate is assigned 3 flights and the total delay is 20 minutes, then the delay cost corresponding to that gate is $20\\times 1.5 = 30$ units. How should these flights be assigned to the gates to achieve this objective?",
+    "answer": 30.0,
+    "index": "LogiOR_prob_002",
+    "NLtype": "C",
+    "NLChange": "原题目相关描述: 目标是最小化航班延误，其中每超过计划起飞时间 1 分钟的延误产生 1 个单位的成本。应如何将这些航班分配到各登机口以实现这一目标？, 修改后相关描述: 目标是最小化航班延误，其中每超过计划起飞时间 1 分钟的延误产生 1 个单位的成本。额外地，如果同一登机口在 10:00-12:30 这一时间段内被分配的航班总数超过 2 个，则从该登机口起飞的所有航班的延误成本在原有基础上整体乘以 1.5 倍，例如某登机口分配了 3 个航班且总延误为 20 分钟，则该登机口对应的延误成本为 20×1.5=30 个单位。应如何将这些航班分配到各登机口以实现这一目标？",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_002\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_C\\prob_031.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "30.0"
+    ],
+    "time_seconds": 54.62367470000754,
+    "total_tokens": 7545
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "30.0"
+    ],
+    "ground_truth": 30.0
+  }
+}

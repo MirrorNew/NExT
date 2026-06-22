@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "LogiOR_prob_057",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_057\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\LogiOR\\prob_057\\code.py",
+    "NLtype": "Linear",
+    "question": "A logistics company needs to optimize its warehouse storage by selecting a subset of products to store that maximizes profit while considering space constraints and product compatibility. The warehouse has a total capacity of 500 cubic meters. There are 8 products available, each with a specific volume, profit, and compatibility restrictions (some products cannot be stored together due to safety or regulatory reasons). The products and their attributes are as follows:\n\n| Product ID | Volume (m³) | Profit ($) | Incompatible Products |\n|------------|-------------|------------|------------------------|\n| 1          | 80          | 1200       | 3, 5                   |\n| 2          | 60          | 900        | 4                      |\n| 3          | 40          | 700        | 1, 6                   |\n| 4          | 70          | 1100       | 2, 7                   |\n| 5          | 50          | 800        | 1                      |\n| 6          | 30          | 500        | 3                      |\n| 7          | 90          | 1300       | 4                      |\n| 8          | 20          | 300        | None                   |",
+    "answer": 4200.0,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "4200.0"
+    ],
+    "time_seconds": 13.137915999992401,
+    "total_tokens": 1028
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "4200.0"
+    ],
+    "ground_truth": 4200.0
+  }
+}

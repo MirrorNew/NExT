@@ -1,0 +1,184 @@
+{
+  "entry": {
+    "index": 25,
+    "question": "Similar investment allocation issues are very common in the R&D management of the pharmaceutical industry. Taking the new drug R&D pipeline of Rhode Island Pharmaceuticals as an example, the company needs to allocate the annual R&D budget to multiple candidate drug projects at different stages. Early clinical stage projects (such as Project 1) usually have higher potential market value (larger A value), but due to the low success rate, the return on investment shows a significant marginal diminishing effect (smaller k value); while late clinical stage projects (such as Project 2) have relatively small market potential, but due to the high probability of success, the marginal diminishing rate of return on investment is faster (larger k value). \n\nCurrently, Rhode Island Pharmaceuticals faces similar trade-offs in the allocation of its R&D budget in 2023. Its anti-tumor drug R&D project (similar to Project 1) is expected to have peak sales of US$5 billion, but requires continuous investment; while the vaccine improvement project (similar to Project 2) has a market space of approximately US$3 billion, but can generate returns in a relatively short period of time. By establishing a profit function model, the company's financial team can quantitatively evaluate the expected value of different investment portfolios to ensure that R&D output is maximized under annual budget constraints. \nThis R&D investment optimization model is also widely used in the field of venture capital. Investment institutions such as Sequoia Capital often use similar frameworks to balance the investment ratio of \"disruptive innovation\" and \"incremental improvement\" projects. In practice, it is also necessary to consider the synergy and risk correlation between projects, which prompts modern investment decision-making models to add more complex constraints on the basis of traditional benefit functions. \n\nFor the above two R&D projects, the upper limit of the budget is 20 (million). The expected return function of the project can be approximated as $U(x)=A[1-e^{-kx}]$ (return unit: million), reflecting the marginal effect of diminishing returns on investment. Now the investment allocation goal for the two projects is to maximize the total return. Assuming that the total investment does not exceed 20, please give the best solution. \", Assume that the coefficients of the two R&D projects are $A=[50,30], k=[0.3,0.6]$.",
+    "answer": 78.5402,
+    "Parameters_List": [
+      {
+        "Name": "budget_upper_limit",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "total_investment_bound",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "A",
+        "Type": "list",
+        "Value": [
+          50,
+          30
+        ]
+      },
+      {
+        "Name": "k",
+        "Type": "list",
+        "Value": [
+          0.3,
+          0.6
+        ]
+      },
+      {
+        "Name": "peak_sales_project1",
+        "Type": "float",
+        "Value": 5.0
+      },
+      {
+        "Name": "market_space_project2",
+        "Type": "float",
+        "Value": 3.0
+      },
+      {
+        "Name": "year",
+        "Type": "integer",
+        "Value": 2023
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "Similar investment allocation issues...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the new drug R&D pipeline...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Early clinical stage projects...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "while late clinical stage projects...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Currently, Rhode Island Pharmaceuticals faces...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Its anti-tumor drug R&D project...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "while the vaccine improvement project...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "By establishing a profit function model...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "This R&D investment optimization model is also widely used...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Investment institutions such as Sequoia Capital...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "In practice, it is also necessary to consider...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "For the above two R&D projects...",
+        "Budget constraint: x1 + x2 ≤ 20"
+      ],
+      [
+        "13",
+        "The expected return function of the project...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "Now the investment allocation goal for the two projects...",
+        "Objective definition: maximize total return"
+      ],
+      [
+        "15",
+        "Assuming that the total investment does not exceed 20...",
+        "Budget constraint: x1 + x2 ≤ 20"
+      ],
+      [
+        "16",
+        "Assume that the coefficients of the two R&D projects...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x1",
+        "Meaning": "investment in Project 1 (anti-tumor drug), in million USD",
+        "Type": "continuous",
+        "Range": "0 ≤ x1 ≤ 20"
+      },
+      {
+        "symbol": "x2",
+        "Meaning": "investment in Project 2 (vaccine improvement), in million USD",
+        "Type": "continuous",
+        "Range": "0 ≤ x2 ≤ 20"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Budget constraint",
+        "x1 + x2 ≤ 20",
+        "sentence numbers:12,15"
+      ],
+      [
+        "Non-negativity constraint (Project 1)",
+        "x1 ≥ 0",
+        "sentence numbers:implicit"
+      ],
+      [
+        "Non-negativity constraint (Project 2)",
+        "x2 ≥ 0",
+        "sentence numbers:implicit"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Now the investment allocation goal for the two projects is to maximize the total return.",
+      "Mathematical_expressions": "Maximize Z = 50*(1 - exp(-0.3*x1)) + 30*(1 - exp(-0.6*x2))"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "78.54025470221"
+    ],
+    "time_seconds": 82.61327270000038,
+    "total_tokens": 9938
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "78.54025470221"
+    ],
+    "ground_truth": 78.5402
+  }
+}

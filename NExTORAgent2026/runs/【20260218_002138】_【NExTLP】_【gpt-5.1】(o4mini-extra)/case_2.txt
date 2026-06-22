@@ -1,0 +1,528 @@
+{
+  "entry": {
+    "index": 2,
+    "question": "**Scenario background:** \n\nSunshine Machinery Factory is a medium-sized manufacturing enterprise with a history of 30 years. It is located between the mottled factory buildings in the old industrial area and specializes in the OEM and R&D of precision parts. In recent years, with the explosive growth of new energy vehicles and automation equipment, the factory's orders have surged, but the problem of equipment aging has become increasingly prominent, and it is necessary to rely on existing resources to \"squeeze\" the maximum production capacity. Under the hard constraint of monthly equipment maintenance, the optimal production plan for January to June is formulated to reasonably allocate the production volume of 7 products to ensure balanced equipment load, timely delivery of orders, and maximize total profits. During the process, production scheduling needs to be adjusted dynamically. For example, when the horizontal drill is repaired in February, products that do not rely on the equipment (such as Type II) are given priority, and the relationship between high-profit products and equipment occupancy rate is weighed.\n\nThe factory has 4 grinders, 2 vertical drills, 3 horizontal drills, 1 boring machine and 1 planer, which are used to produce 7 products. The relevant equipment hours required for various products of the production unit and their profits are shown in Table C-3\n\nTable C-3 Unit Required Equipment\n\n| Equipment\\(Unit hours required)\\Product | I | II | III | IV | V | VI | VII |\n| ------------------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| Grinding machine | 0.5 | 0.7 | — | — | 0.3 | 0.2 | 0.5 |\n| Vertical drill | 0.1 | 0.2 | — | 0.3 | — | 0.6 | — |\n| Horizontal drill | 0.2 | — | 0.8 | — | — | — | 0.6 |\n| Boring machine | 0.05 | 0.03 | — | 0.07 | 0.1 | — | 0.08 |\n| Planer | — | — | 0.01 | — | 0.05 | — | 0.05 |\n| **Profit per piece/yuan** | 100 | 60 | 80 | 40 | 110 | 90 | 30 |\n\nFrom January to June, the following equipment needs to be repaired: January - 1 grinder, February - 2 horizontal drills, March - 1 boring machine, April - 1 vertical drill, May - 1 grinder and 1 vertical drill, June - 1 planer and 1 horizontal drill. The repaired equipment cannot be arranged for production within the month\n\nIt is also known that the maximum market demand for the above 7 products from January to June is shown in Table C-4\n\nTable C-4\n\n| Month | I | II | III | IV | V | VI | VII |\n| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| January | 500 | 1000 | 300 | 300 | 800 | 200 | 100 |\n| January | 600 | 500 | 200 | 0 | 400 | 300 | 150 |\n| March | 300 | 600 | 0 | 0 | 500 | 400 | 100 |\n| April | 200 | 300 | 400 | 500 | 200 | 0 | 100 |\n| May | 0 | 100 | 500 | 100 | 1000 | 300 | 0 |\n| June | 500 | 500 | 100 | 300 | 1100 | 500 | 60 |\n\nThe monthly storage fee for each product that cannot be sold in the month is 5 yuan, but the storage volume of each product shall not exceed 100 pieces at any time. There is no inventory at the beginning of January, and it is required to store 50 pieces of each product at the end of June. If the factory works 24 days a month, two shifts a day, and each shift is 8 hours, assuming that the processing order of the products on various equipment is not considered, how should the factory arrange the plan to maximize the total profit? Shift1(2–10) covers period 1,5; etc. Assume that no storage fee is required for storage at the end of June, only the maximum total profit needs to be given. ",
+    "answer": 938865.0,
+    "Parameters_List": [
+      {
+        "Name": "T",
+        "Type": "list",
+        "Value": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June"
+        ]
+      },
+      {
+        "Name": "J",
+        "Type": "integer",
+        "Value": 7
+      },
+      {
+        "Name": "num_grinders",
+        "Type": "integer",
+        "Value": 4
+      },
+      {
+        "Name": "num_vertical_drills",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "num_horizontal_drills",
+        "Type": "integer",
+        "Value": 3
+      },
+      {
+        "Name": "num_boring_machines",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "num_planers",
+        "Type": "integer",
+        "Value": 1
+      },
+      {
+        "Name": "repair_schedule",
+        "Type": "object",
+        "Value": {
+          "January": {
+            "grinder": 1
+          },
+          "February": {
+            "horizontal drill": 2
+          },
+          "March": {
+            "boring machine": 1
+          },
+          "April": {
+            "vertical drill": 1
+          },
+          "May": {
+            "grinder": 1,
+            "vertical drill": 1
+          },
+          "June": {
+            "planer": 1,
+            "horizontal drill": 1
+          }
+        }
+      },
+      {
+        "Name": "storage_fee_per_unit",
+        "Type": "float",
+        "Value": 5
+      },
+      {
+        "Name": "storage_capacity_per_product",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "initial_inventory",
+        "Type": "list",
+        "Value": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "Name": "final_inventory_requirement",
+        "Type": "list",
+        "Value": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ]
+      },
+      {
+        "Name": "days_per_month",
+        "Type": "integer",
+        "Value": 24
+      },
+      {
+        "Name": "shifts_per_day",
+        "Type": "integer",
+        "Value": 2
+      },
+      {
+        "Name": "hours_per_shift",
+        "Type": "integer",
+        "Value": 8
+      },
+      {
+        "Name": "storage_fee_end_of_June",
+        "Type": "float",
+        "Value": 0
+      },
+      {
+        "Name": "Table_1_C3",
+        "Type": "object",
+        "Value": {
+          "Grinding machine": [
+            0.5,
+            0.7,
+            null,
+            null,
+            0.3,
+            0.2,
+            0.5
+          ],
+          "Vertical drill": [
+            0.1,
+            0.2,
+            null,
+            0.3,
+            null,
+            0.6,
+            null
+          ],
+          "Horizontal drill": [
+            0.2,
+            null,
+            0.8,
+            null,
+            null,
+            null,
+            0.6
+          ],
+          "Boring machine": [
+            0.05,
+            0.03,
+            null,
+            0.07,
+            0.1,
+            null,
+            0.08
+          ],
+          "Planer": [
+            null,
+            null,
+            0.01,
+            null,
+            0.05,
+            null,
+            0.05
+          ],
+          "Profit per piece": [
+            100,
+            60,
+            80,
+            40,
+            110,
+            90,
+            30
+          ]
+        }
+      },
+      {
+        "Name": "Table_2_C4",
+        "Type": "object",
+        "Value": {
+          "January": [
+            500,
+            1000,
+            300,
+            300,
+            800,
+            200,
+            100
+          ],
+          "February": [
+            600,
+            500,
+            200,
+            0,
+            400,
+            300,
+            150
+          ],
+          "March": [
+            300,
+            600,
+            0,
+            0,
+            500,
+            400,
+            100
+          ],
+          "April": [
+            200,
+            300,
+            400,
+            500,
+            200,
+            0,
+            100
+          ],
+          "May": [
+            0,
+            100,
+            500,
+            100,
+            1000,
+            300,
+            0
+          ],
+          "June": [
+            500,
+            500,
+            100,
+            300,
+            1100,
+            500,
+            60
+          ]
+        }
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "**Scenario background:** ...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Sunshine Machinery Factory is ...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "It is located between ...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "In recent years, with ...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "Under the hard constraint of ...",
+        "Defines index sets t=1..6, j=1..7; decision var x_{t,j}; capacity constraints & objective"
+      ],
+      [
+        "6",
+        "During the process, production ...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "For example, when the horizontal drill ...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "The factory has 4 grinders, ...",
+        "Machine-count parameters for capacity constraints"
+      ],
+      [
+        "9",
+        "The relevant equipment hours required ...",
+        "No constraints"
+      ],
+      [
+        "10",
+        "Table C-3 Unit Required Equipment ...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "| Equipment(Unit hours required)Product ...",
+        "No constraints"
+      ],
+      [
+        "12",
+        "| ------------------------- | ---- ...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "| Grinding machine | 0.5 ...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "| Vertical drill | 0.1 ...",
+        "No constraints"
+      ],
+      [
+        "15",
+        "| Horizontal drill | 0.2 ...",
+        "No constraints"
+      ],
+      [
+        "16",
+        "| Boring machine | 0.05 ...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "| Planer | — | — ...",
+        "No constraints"
+      ],
+      [
+        "18",
+        "| **Profit per piece/yuan** | ...",
+        "No constraints"
+      ],
+      [
+        "19",
+        "From January to June, the following equipment needs ...",
+        "Maintenance schedule: capacity reduction by month"
+      ],
+      [
+        "20",
+        "The repaired equipment cannot be arranged ...",
+        "Repaired machines unavailable: capacity = 0"
+      ],
+      [
+        "21",
+        "It is also known that the maximum market demand ...",
+        "Demand upper bound: s_{t,j} ≤ d_{t,j}"
+      ],
+      [
+        "22",
+        "Table C-4 ...",
+        "No constraints"
+      ],
+      [
+        "23",
+        "| Month | I | II ...",
+        "No constraints"
+      ],
+      [
+        "24",
+        "| ---- | ---- | ---- ...",
+        "No constraints"
+      ],
+      [
+        "25",
+        "| January | 500 | 1000 ...",
+        "No constraints"
+      ],
+      [
+        "26",
+        "| January | 600 | 500 ...",
+        "No constraints"
+      ],
+      [
+        "27",
+        "| March | 300 | 600 ...",
+        "No constraints"
+      ],
+      [
+        "28",
+        "| April | 200 | 300 ...",
+        "No constraints"
+      ],
+      [
+        "29",
+        "| May | 0 | 100 ...",
+        "No constraints"
+      ],
+      [
+        "30",
+        "| June | 500 | 500 ...",
+        "No constraints"
+      ],
+      [
+        "31",
+        "The monthly storage fee for each product that cannot be sold ...",
+        "Storage cost 5 per unit; inventory cap I_{t,j} ≤ 100"
+      ],
+      [
+        "32",
+        "There is no inventory at the beginning of January ...",
+        "I_{0,j} = 0; I_{6,j} = 50"
+      ],
+      [
+        "33",
+        "If the factory works 24 days a month, ...",
+        "Monthly hours per machine = 384"
+      ],
+      [
+        "34",
+        "Shift1(2–10) covers period 1,5; etc.",
+        "No constraints"
+      ],
+      [
+        "35",
+        "Assume that no storage fee is required ...",
+        "Storage fee applies only to t=1..5; objective unaffected"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "x_{t,j}",
+        "Meaning": "number of units of product j produced in month t",
+        "Type": "continuous",
+        "Range ": "t=1..6, j=1..7"
+      },
+      {
+        "symbol": "s_{t,j}",
+        "Meaning": "number of units of product j sold in month t",
+        "Type": "continuous",
+        "Range ": "t=1..6, j=1..7"
+      },
+      {
+        "symbol": "I_{t,j}",
+        "Meaning": "inventory of product j at end of month t",
+        "Type": "continuous",
+        "Range ": "t=1..6, j=1..7"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Grinding_Capacity",
+        "∀ t=1..6: 0.5*x_{t,1}+0.7*x_{t,2}+0.3*x_{t,5}+0.2*x_{t,6}+0.5*x_{t,7} ≤ (4 - repair_grinder_t)*384",
+        "sentence numbers:8,19,20,33"
+      ],
+      [
+        "Vertical_Drill_Capacity",
+        "∀ t=1..6: 0.1*x_{t,1}+0.2*x_{t,2}+0.3*x_{t,4}+0.6*x_{t,6} ≤ (2 - repair_vert_t)*384",
+        "sentence numbers:8,19,20,33"
+      ],
+      [
+        "Horizontal_Drill_Capacity",
+        "∀ t=1..6: 0.2*x_{t,1}+0.8*x_{t,3}+0.6*x_{t,7} ≤ (3 - repair_horz_t)*384",
+        "sentence numbers:8,19,20,33"
+      ],
+      [
+        "Boring_Machine_Capacity",
+        "∀ t=1..6: 0.05*x_{t,1}+0.03*x_{t,2}+0.07*x_{t,4}+0.1*x_{t,5}+0.08*x_{t,7} ≤ (1 - repair_boring_t)*384",
+        "sentence numbers:8,19,20,33"
+      ],
+      [
+        "Planer_Capacity",
+        "∀ t=1..6: 0.01*x_{t,3}+0.05*x_{t,5}+0.05*x_{t,7} ≤ (1 - repair_planer_t)*384",
+        "sentence numbers:8,19,20,33"
+      ],
+      [
+        "Demand_Limit",
+        "∀ t=1..6, j=1..7: s_{t,j} ≤ d_{t,j}",
+        "sentence numbers:21"
+      ],
+      [
+        "Supply_vs_Sales",
+        "∀ t=1..6, j=1..7: s_{t,j} ≤ x_{t,j} + I_{t-1,j}",
+        "sentence numbers:31"
+      ],
+      [
+        "Inventory_Balance",
+        "∀ t=1..6, j=1..7: I_{t,j} = I_{t-1,j} + x_{t,j} - s_{t,j}",
+        "sentence numbers:31,32"
+      ],
+      [
+        "Inventory_Capacity",
+        "∀ t=1..6, j=1..7: I_{t,j} ≤ 100",
+        "sentence numbers:31"
+      ],
+      [
+        "Initial_Inventory",
+        "∀ j=1..7: I_{0,j} = 0",
+        "sentence numbers:32"
+      ],
+      [
+        "Final_Inventory_Requirement",
+        "∀ j=1..7: I_{6,j} = 50",
+        "sentence numbers:32"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Under the hard constraint of monthly equipment maintenance, the optimal production plan for January to June is formulated to reasonably allocate the production volume of 7 products to ensure balanced equipment load, timely delivery of orders, and maximize total profits.",
+      "Mathematical_expressions": "Maximize ∑_{t=1..6}∑_{j=1..7} p_j*s_{t,j} - 5*∑_{t=1..5}∑_{j=1..7} I_{t,j}"
+    },
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "938901.7857"
+    ],
+    "time_seconds": 27.933318000003055,
+    "total_tokens": 11512
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "938901.7857"
+    ],
+    "ground_truth": 938865.0
+  }
+}

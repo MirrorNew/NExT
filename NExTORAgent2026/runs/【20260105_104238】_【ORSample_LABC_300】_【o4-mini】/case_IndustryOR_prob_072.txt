@@ -1,0 +1,31 @@
+{
+  "entry": {
+    "index": "IndustryOR_prob_072",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_072\\model.txt",
+    "code_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_072\\code.py",
+    "NLtype": "Linear",
+    "question": "The Li family has 5 children: Alice, Bob, Charlie, Diana, and Ella. The cost to take Alice is $1000, Bob is $900, Charlie is $600, Diana is $500, and Ella is $700. Which children should the couple take to minimize the total cost of taking the children?\n\nThey can take up to 3 children on the upcoming trip.\n\nBob is the youngest, so the Li family will definitely take him.\n\nIf the couple takes Alice, they will not take Diana because Alice does not get along with her.\n\nIf the couple takes Bob, they will not take Charlie because Bob does not get along with him.\n\nIf they take Charlie, they must also take Diana.\n\nIf they take Diana, they must also take Ella.\n\nDespite the cost, the Li family has decided to take at least two children.",
+    "answer": 1600.0,
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "1600.0"
+    ],
+    "time_seconds": 13.67426090000663,
+    "total_tokens": 1953
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "1600.0"
+    ],
+    "ground_truth": 1600.0
+  }
+}

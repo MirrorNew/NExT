@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A beverage plant produces a certain drink to meet market demand. Based on market forecasts, the factory’s sales department has determined the demand for this drink over the next 4 weeks. The planning department, according to the plant’s actual conditions, has provided the production capacities and unit production costs for the next 4 weeks, as shown in Table 1. After meeting demand each week, if any beverage remains, an inventory holding cost must be paid at the rate of 0.2 thousand yuan per week for each 1000 cases of beverage.\n\nTo more realistically reflect the complex relationship between inventory cost and the coupling among production and inventory levels, assume that the plant’s inventory cost is no longer a simple linear function of the inventory quantity, but is affected by the coupled influence of multiple factors:\n\n- Let the ending inventory at the end of Week 1 be $I_1$ (unit: 1000 cases), and the ending inventories at the end of Weeks 2, 3, and 4 be $I_2$, $I_3$, and $I_4$, respectively (also in 1000 cases). These inventory levels are all decision variables.\n- Let the production quantities in Weeks 1, 2, 3, and 4 be $P_1$, $P_2$, $P_3$, and $P_4$ (unit: 1000 cases). These production quantities are also decision variables.\n- To introduce a nonlinear coupling relationship, the weekly inventory cost is no longer the linear cost of 0.2 thousand yuan per week per 1000 cases. Instead, the inventory cost in a given week is defined as coefficient 0.2 multiplied by the product of three decision variables: the inventory level of that week, the production quantity of that week, and the inventory level of the next week. That is, for Week 1, the inventory cost is $0.2 \\times I_1 \\times P_1 \\times I_2$; for Week 2, the inventory cost is $0.2 \\times I_2 \\times P_2 \\times I_3$; for Week 3, the inventory cost is $0.2 \\times I_3 \\times P_3 \\times I_4$; for Week 4, since one month consists of 4 weeks, to keep the form consistent, the Week 4 inventory cost is defined as $0.2 \\times I_4 \\times P_4 \\times I_1$, where $I_1$ is also a decision variable. Thus, the total inventory cost over the 4 weeks equals the sum of the above four weekly inventory costs, i.e., a nonlinear total inventory cost composed of 0.2 and product terms involving multiple (no fewer than 3) decision variables.\n\nUnder this new cost structure, the problem remains: how should the 4-week production plan be arranged so that, while satisfying the market demand in each week, the total cost over the 4 weeks (the sum of production cost and the new nonlinear inventory cost) is minimized? All other conditions and data are exactly the same as in the following table.\n\n**Table 1. Beverage production and demand data:**\n\n| Week | Demand / 1000 cases | Production capacity / 1000 cases | Unit production cost / (1000 cases·thousand yuan) |\n| :--: | :-----------------: | :------------------------------: | :----------------------------------------------: |\n|  1   |         15          |                30                |                       5.0                        |\n|  2   |         25          |                40                |                       5.1                        |\n|  3   |         35          |                45                |                       5.4                        |\n|  4   |         25          |                20                |                       5.5                        |\n| Total |        100         |               135                |                                                  |",
+    "answer": 526.5,
+    "index": "IndustryOR_prob_094",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: “每周在满足需求后，如有饮料剩余，则需按每 1000 箱饮料每周 0.2 千元的标准支付库存成本。” 为线性库存成本，即库存成本按库存数量成正比计算。修改后相关描述: “每周在满足需求后，如有饮料剩余，为了引入非线性耦合关系，规定某一周的库存成本等于系数 0.2 乘以该周的库存量、该周的生产量以及下一周的库存量这三个决策变量的乘积：第 1 周库存成本为 0.2 × I1 × P1 × I2，第 2 周为 0.2 × I2 × P2 × I3，第 3 周为 0.2 × I3 × P3 × I4，第 4 周为 0.2 × I4 × P4 × I1，从而 4 周总库存成本成为由 0.2 与多个决策变量相乘构成的非线性成本项。”",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_094\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_008.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 34.89552159998857,
+    "total_tokens": 4588
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 526.5
+  }
+}

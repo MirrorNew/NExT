@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A bakery produces bagels and croissants. Producing one batch of bagels requires 2 hours of oven time and 0.25 hours of pastry-chef time. Producing one batch of croissants is more complex: although it requires only 1 hour of oven time, it requires 2 hours of pastry-chef time. In one day, the bakery has at most 70 hours of available oven time and 32 hours of available pastry-chef time. However, under high-load production, the total oven time for croissants exhibits a slight nonlinear increase: the bakery’s actual required croissant oven time is no longer the simple linear relation of “1 hour per batch,” but is calculated as “total croissant oven time equals the number of croissant batches raised to the power $1.2$ (in hours).” That is, if $x$ batches of croissants are produced, then the total oven time is $x^{1.2}$ hours. If all available capacity is used, and the profit per batch of bagels and per batch of croissants is $20$ and $40$, respectively, what is the maximum profit the bakery can obtain?",
+    "answer": 1002.46,
+    "index": "NLP4LP_prob_036",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 制作一批牛角面包更为复杂，虽然只需要 1 小时的烤箱时间，但需要 2 小时的糕点师时间。修改后相关描述: 制作一批牛角面包更为复杂，仍然视为单批工艺上只需要 1 小时的烤箱时间，但在高负荷生产时，总烤箱时间不再按每批 1 小时线性累加，而是按牛角面包批次数的 1.2 次幂来计算：如果生产 x 批牛角面包，则其总烤箱时间为 x 的 1.2 次幂小时。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_036\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_057.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 33.967708900003345,
+    "total_tokens": 2787
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 1002.46
+  }
+}

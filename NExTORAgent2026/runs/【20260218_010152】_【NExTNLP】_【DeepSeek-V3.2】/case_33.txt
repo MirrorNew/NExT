@@ -1,0 +1,271 @@
+{
+  "entry": {
+    "index": 33,
+    "question": "In fine chemical production, the optimization of reaction conditions often involves multiple mutually restrictive factors. Taking the antibiotic synthesis process of Rhode Island Pharmaceuticals as an example, small changes in reaction temperature and reactant concentration will significantly affect the yield. Experimental data show that at 80°C and 50% concentration, the yield reaches the theoretical peak of 100 kg/batch, but when it deviates from the optimal conditions, the yield will decrease as a quadratic function. However, in actual operation, temperature control is not a linear problem - when the temperature approaches 100°C, the heat exchange efficiency of the reactor decreases and the difficulty of operation increases sharply (in line with the parabolic model). In addition, the combination of high concentration (>60%) and high temperature (>85°C) will significantly increase the generation of volatile by-products, leading to increased safety risks. \n\nModern chemical process control systems (such as Aspen Plus) can adjust parameters in real time and dynamically balance yield, energy consumption and safety. The introduction of deep learning models further improves the prediction accuracy of nonlinear interactions, making the optimization results closer to actual production needs. \n\n In a chemical reaction process, it is necessary to increase the yield by adjusting the reaction temperature and reactant concentration. Assuming other conditions are fixed, the reaction yield $Y$ can be approximately expressed as a function of temperature $T$ and concentration $C$: $Y(T,C)=100 - 0.01\\,(T-80)^2 - 0.02\\,(C-50)^2$ (unit: kg/batch). Among them, when $T=80^\\circ$C, $C=50\\%$, the yield reaches the theoretical maximum of 100. The temperature and concentration are limited to the range of $50\\le T\\le 100$ and $20\\le C\\le 80$ respectively. It is hoped to find the optimal temperature $T$ and concentration $C$ settings to maximize the yield. However, in actual industrial operations, the difficulty of controlling the temperature from 50 degrees to 100 degrees has a certain marginal effect. If the highest difficulty is 100, the relationship between the difficulty and temperature can be approximately expressed as a parabola with a mean of 75 and a coefficient of 0.05. The higher the concentration and the higher the temperature, the easier it is for the product to volatilize, so the risk factor will be higher, which is approximately $H=0.001(T-50)^2+0.0431C$. Assume that the weight of the difficulty is 0.1 and the weight of the risk factor is 0.5. Considering the maximum reaction yield, the difficulty of operation and the risk factor at the same time, we hope to find the best temperature $T$ and concentration $C$ settings as much as possible to make the yield as high as possible.",
+    "answer": 98.46,
+    "Parameters_List": [
+      {
+        "Name": "T_opt",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "C_opt",
+        "Type": "integer",
+        "Value": 50
+      },
+      {
+        "Name": "Y_max",
+        "Type": "float",
+        "Value": 100.0
+      },
+      {
+        "Name": "a_T",
+        "Type": "float",
+        "Value": 0.01
+      },
+      {
+        "Name": "a_C",
+        "Type": "float",
+        "Value": 0.02
+      },
+      {
+        "Name": "T_min",
+        "Type": "integer",
+        "Value": 50
+      },
+      {
+        "Name": "T_max",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "C_min",
+        "Type": "integer",
+        "Value": 20
+      },
+      {
+        "Name": "C_max",
+        "Type": "integer",
+        "Value": 80
+      },
+      {
+        "Name": "T_parabolic_threshold",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "difficulty_max",
+        "Type": "integer",
+        "Value": 100
+      },
+      {
+        "Name": "difficulty_mean",
+        "Type": "integer",
+        "Value": 75
+      },
+      {
+        "Name": "difficulty_coefficient",
+        "Type": "float",
+        "Value": 0.05
+      },
+      {
+        "Name": "C_risk_threshold",
+        "Type": "integer",
+        "Value": 60
+      },
+      {
+        "Name": "T_risk_threshold",
+        "Type": "integer",
+        "Value": 85
+      },
+      {
+        "Name": "risk_coeff_T",
+        "Type": "float",
+        "Value": 0.001
+      },
+      {
+        "Name": "risk_coeff_C",
+        "Type": "float",
+        "Value": 0.0431
+      },
+      {
+        "Name": "w_difficulty",
+        "Type": "float",
+        "Value": 0.1
+      },
+      {
+        "Name": "w_risk",
+        "Type": "float",
+        "Value": 0.5
+      }
+    ],
+    "Sentence_Scanning": [
+      [
+        "1",
+        "In fine chemical production,...",
+        "No constraints"
+      ],
+      [
+        "2",
+        "Taking the antibiotic synthesis...",
+        "No constraints"
+      ],
+      [
+        "3",
+        "Experimental data show that at...",
+        "No constraints"
+      ],
+      [
+        "4",
+        "However, in actual operation,...",
+        "No constraints"
+      ],
+      [
+        "5",
+        "In addition, the combination of...",
+        "No constraints"
+      ],
+      [
+        "6",
+        "Modern chemical process control...",
+        "No constraints"
+      ],
+      [
+        "7",
+        "The introduction of deep learning...",
+        "No constraints"
+      ],
+      [
+        "8",
+        "In a chemical reaction process,...",
+        "No constraints"
+      ],
+      [
+        "9",
+        "Assuming other conditions are fixed,...",
+        "Constraint: definition of Y(T,C)"
+      ],
+      [
+        "10",
+        "Among them, when T=80°C,...",
+        "No constraints"
+      ],
+      [
+        "11",
+        "The temperature and concentration...",
+        "Constraints: 50 <= T <= 100; 20 <= C <= 80"
+      ],
+      [
+        "12",
+        "It is hoped to find the optimal...",
+        "No constraints"
+      ],
+      [
+        "13",
+        "However, in actual industrial operations,...",
+        "No constraints"
+      ],
+      [
+        "14",
+        "If the highest difficulty is 100,...",
+        "Constraint: definition of D(T)"
+      ],
+      [
+        "15",
+        "The higher the concentration and...",
+        "Constraint: definition of H(T,C)"
+      ],
+      [
+        "16",
+        "Assume that the weight of the...",
+        "No constraints"
+      ],
+      [
+        "17",
+        "Considering the maximum reaction yield,...",
+        "No constraints"
+      ]
+    ],
+    "Variables_List": [
+      {
+        "symbol": "T",
+        "Meaning": "reaction temperature (°C)",
+        "Type": "continuous",
+        "Range ": "50 <= T <= 100"
+      },
+      {
+        "symbol": "C",
+        "Meaning": "reactant concentration (%)",
+        "Type": "continuous",
+        "Range ": "20 <= C <= 80"
+      },
+      {
+        "symbol": "Y",
+        "Meaning": "reaction yield (kg/batch)",
+        "Type": "continuous",
+        "Range ": "0 <= Y <= 100"
+      },
+      {
+        "symbol": "D",
+        "Meaning": "operation difficulty (dimensionless)",
+        "Type": "continuous",
+        "Range ": "D >= 0"
+      },
+      {
+        "symbol": "H",
+        "Meaning": "safety risk factor (dimensionless)",
+        "Type": "continuous",
+        "Range ": "H >= 0"
+      }
+    ],
+    "Constraint_Table": [
+      [
+        "Yield definition",
+        "Y = 100 - 0.01*(T-80)^2 - 0.02*(C-50)^2",
+        "sentence numbers:9"
+      ],
+      [
+        "Temperature bounds",
+        "50 <= T <= 100",
+        "sentence numbers:11"
+      ],
+      [
+        "Concentration bounds",
+        "20 <= C <= 80",
+        "sentence numbers:11"
+      ],
+      [
+        "Difficulty definition",
+        "D = 0.05*(T-75)^2",
+        "sentence numbers:14"
+      ],
+      [
+        "Risk factor definition",
+        "H = 0.001*(T-50)^2 + 0.0431*C",
+        "sentence numbers:15"
+      ]
+    ],
+    "Objective": {
+      "Objective_sentence": "Considering the maximum reaction yield, the difficulty of operation and the risk factor at the same time,...",
+      "Mathematical_expressions": "maximize Z(T,C) = Y(T,C) - 0.1*D(T) - 0.5*H(T,C)"
+    },
+    "Problem_Type": "NLP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "98.4565308"
+    ],
+    "time_seconds": 66.47284260000015,
+    "total_tokens": 7592
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": true,
+    "run_result": [
+      "98.4565308"
+    ],
+    "ground_truth": 98.46
+  }
+}

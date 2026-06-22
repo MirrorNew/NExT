@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "A company uses steel and aluminum as raw materials to produce two products (A and B). Producing 1 unit of product A requires 6 kg of steel, 8 kg of aluminum, and 11 labor-hours, and yields a profit of 5000 RMB (excluding workers’ overtime cost). Producing 1 unit of product B requires 12 kg of steel, 20 kg of aluminum, and 24 labor-hours, and yields a profit of 11000 RMB (excluding workers’ overtime cost). The company currently has 200 kg of steel, 300 kg of aluminum, and 300 labor-hours available. If workers need to work overtime, the overtime cost is no longer linear in the number of overtime hours; instead, it increases nonlinearly with the length of overtime: let the total overtime hours be $H$, then the overtime cost is $100 \\times H^{1.2}$ (i.e., the overtime cost is $100 \\times H^{1.2}$). Please formulate a production plan that maximizes the company’s profit and minimizes workers’ overtime hours.",
+    "answer": 154493.38,
+    "index": "IndustryOR_prob_097",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 如果工人需要加班，加班费为每小时 100 元。修改后相关描述: 如果工人需要加班，加班费不再是与加班小时数成线性关系，而是根据加班时间长度呈非线性上升：设加班总小时数为 H，则加班费为 100 × H 的 1.2 次幂（即加班费为 100 × H^1.2）。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\IndustryOR\\prob_097\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_006.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 23.44540070000221,
+    "total_tokens": 2095
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 154493.38
+  }
+}

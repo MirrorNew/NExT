@@ -1,0 +1,28 @@
+{
+  "entry": {
+    "question": "An auto body repair shop needs to purchase two types of jacks: one type is an automatic electric jack, and the other type is a gas-powered jack. Each automatic electric jack can service 5 cars per hour and consumes 6 units of electricity; each gas-powered jack can service 4 cars per hour and consumes 7 units of gas. Due to a limited number of power outlets, the number of automatic electric jacks must be less than 15. The shop faces a nonlinear effect in its electricity constraint: as the number of automatic electric jacks increases, power-system losses slightly increase, so the total electricity consumption of the automatic electric jacks is no longer simply computed as 6 times the quantity, but is measured as $(6 \\times \\text{(number of automatic electric jacks)})^{1.2}$, and this nonlinear electricity consumption must not exceed 50 units of electricity. The gas consumption of the gas-powered jacks remains 7 units of gas per jack per hour, and the total gas usage is at most 80 units. How many jacks of each type should the shop purchase to maximize the number of cars serviced per hour?",
+    "answer": 64.0,
+    "index": "NLP4LP_prob_244",
+    "NLtype": "A",
+    "NLChange": "原题目相关描述: 该修理厂最多可以使用 50 个单位的电力和 80 个单位的燃气。, 修改后相关描述: 该修理厂在电力约束方面存在一个非线性影响：随着自动电动千斤顶数量的增加，电力系统损耗会略微上升，因此自动电动千斤顶的电力总消耗不再简单按 6 乘以数量计算，而是按“(6 × 自动电动千斤顶数量) 的 1.2 次方”来衡量，并且这一非线性电力消耗在数值上不能超过 50 个单位电力；燃气驱动千斤顶的燃气消耗仍为每台每小时 7 个单位燃气，总燃气使用量最多为 80 个单位。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_244\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_A\\prob_090.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "failed",
+    "result": null,
+    "time_seconds": 28.090746000001673,
+    "total_tokens": 2699
+  },
+  "evaluation": {
+    "pass_flag": false,
+    "correct_flag": false,
+    "run_result": null,
+    "ground_truth": 64.0
+  }
+}

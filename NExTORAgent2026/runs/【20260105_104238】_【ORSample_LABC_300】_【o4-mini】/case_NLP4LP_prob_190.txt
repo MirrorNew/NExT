@@ -1,0 +1,32 @@
+{
+  "entry": {
+    "question": "An appliance company sells and installs refrigerators and stoves. Each refrigerator requires 60 minutes of moving time and 20 minutes of installation time. Each stove requires 45 minutes of moving time and 25 minutes of installation time. The company has a total of 20000 minutes of moving time and 13000 minutes of installation time available. In addition, the company stipulates that the average moving time per appliance (including both refrigerators and stoves) must not exceed 55 minutes; that is, the ratio of total moving time to the total number of appliances sold and installed (number of refrigerators plus number of stoves) must be less than or equal to 55. If the profit per refrigerator is 400 dollars and the profit per stove is 260 dollars, how many refrigerators and how many stoves should they sell to maximize profit?",
+    "answer": 212000.0,
+    "index": "NLP4LP_prob_190",
+    "NLtype": "B",
+    "NLChange": "原题目相关描述: 该公司共有 20000 分钟的搬运时间和 13000 分钟的安装时间可用。 修改后相关描述: 该公司共有 20000 分钟的搬运时间和 13000 分钟的安装时间可用。此外，公司规定用于搬运每台电器（包括冰箱和炉灶在内）的平均时间不得超过 55 分钟，也就是说，总搬运时间与销售并安装的电器总数量（冰箱数量加上炉灶数量）之比必须小于或等于 55。",
+    "model_path": "data\\20251129_ORThought_datasets\\processed\\NLP4LP\\prob_190\\model.txt",
+    "code_path": "data\\processed\\sample_LP_100_Chinese_B\\prob_088.py",
+    "Parameters_List": [],
+    "Sentence_Scanning": [],
+    "Variables_List": [],
+    "Constraint_Table": [],
+    "Problem_Type": "MILP"
+  },
+  "execution": {
+    "status": "success",
+    "result": [
+      "128380.0"
+    ],
+    "time_seconds": 15.397421599991503,
+    "total_tokens": 1267
+  },
+  "evaluation": {
+    "pass_flag": true,
+    "correct_flag": false,
+    "run_result": [
+      "128380.0"
+    ],
+    "ground_truth": 212000.0
+  }
+}
