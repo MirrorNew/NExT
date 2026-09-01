@@ -1,0 +1,728 @@
+{
+  "c01": {
+    "index": "c01",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=1, x_2=2, x_3=3. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 1"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 2"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 3"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 7.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "x_1 * x_2 * x_3 <= alpha",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "x_1 * x_2 * x_3 <= alpha"
+    },
+    "Constraint_String_Gold": {
+      "relation": "<=",
+      "domain_conditions": []
+    },
+    "answer": 6.0
+  },
+  "c02": {
+    "index": "c02",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=4, x_2=0, x_3=0. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 4"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 0"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 0"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 7.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "x_1^(3/2) >= beta",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "x_1^(3/2) >= beta"
+    },
+    "Constraint_String_Gold": {
+      "relation": ">=",
+      "domain_conditions": [
+        "x_1 >= 0"
+      ]
+    },
+    "answer": 4.0
+  },
+  "c03": {
+    "index": "c03",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=2, x_2=2, x_3=0. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 2"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 2"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 0"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 2.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "x_1/x_2 + x_2^-1 <= gamma",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "x_1/x_2 + x_2^-1 <= gamma"
+    },
+    "Constraint_String_Gold": {
+      "relation": "<=",
+      "domain_conditions": [
+        "x_2 != 0"
+      ]
+    },
+    "answer": 4.0
+  },
+  "c04": {
+    "index": "c04",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=2.71828182845905, x_2=0, x_3=0. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 2.71828182845905"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 0"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 0"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 0.9
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "log(x_1) >= alpha",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "log(x_1) >= alpha"
+    },
+    "Constraint_String_Gold": {
+      "relation": ">=",
+      "domain_conditions": [
+        "x_1 > 0"
+      ]
+    },
+    "answer": 2.718281828459045
+  },
+  "c05": {
+    "index": "c05",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=4, x_2=0, x_3=0. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 4"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 0"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 0"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 3.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "sqrt(x_1) <= beta",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "sqrt(x_1) <= beta"
+    },
+    "Constraint_String_Gold": {
+      "relation": "<=",
+      "domain_conditions": [
+        "x_1 >= 0"
+      ]
+    },
+    "answer": 4.0
+  },
+  "c06": {
+    "index": "c06",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=1, x_2=1, x_3=2. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 1"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 1"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 2"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 3.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "cos(log(x_1*x_2)) + exp(x_3^-1) <= gamma",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "cos(log(x_1*x_2)) + exp(x_3^-1) <= gamma"
+    },
+    "Constraint_String_Gold": {
+      "relation": "<=",
+      "domain_conditions": [
+        "x_1*x_2 > 0",
+        "x_3 != 0"
+      ]
+    },
+    "answer": 4.0
+  },
+  "c07": {
+    "index": "c07",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=1, x_2=0, x_3=1. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 1"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 0"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 1"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "alpha + beta * x_1**3 * exp(2*x_2 + x_1**2) + gamma * cos(log(x_3)) > 0",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "alpha + beta * x_1**3 * exp(2*x_2 + x_1**2) + gamma * cos(log(x_3)) > 0"
+    },
+    "Constraint_String_Gold": {
+      "relation": ">",
+      "domain_conditions": [
+        "x_3 > 0"
+      ]
+    },
+    "answer": 2.0
+  },
+  "c08": {
+    "index": "c08",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=0, x_2=0, x_3=0. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 0"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 0"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 0"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "exp(x_1 + x_2) + sin(x_3) = alpha",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "exp(x_1 + x_2) + sin(x_3) = alpha"
+    },
+    "Constraint_String_Gold": {
+      "relation": "=",
+      "domain_conditions": []
+    },
+    "answer": 0.0
+  },
+  "c09": {
+    "index": "c09",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=1, x_2=2, x_3=4. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 1"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 2"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 4"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 3.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "\\frac{x_1}{x_2} + \\sqrt{x_3} \\le beta",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "\\frac{x_1}{x_2} + \\sqrt{x_3} \\le beta"
+    },
+    "Constraint_String_Gold": {
+      "relation": "<=",
+      "domain_conditions": [
+        "x_2 != 0",
+        "x_3 >= 0"
+      ]
+    },
+    "answer": 7.0
+  },
+  "c10": {
+    "index": "c10",
+    "question": "Construct the supplied nonlinear constraint exactly in Gurobi 12.0.2 with continuous variables fixed at x_1=1, x_2=0, x_3=0. Minimize Z = x_1 + x_2 + x_3 and report the solved objective. Preserve the supplied relation and every domain condition.",
+    "Problem_Type": "NLP",
+    "Variables_List": [
+      {
+        "symbol": "x_1",
+        "Meaning": "Fixed diagnostic variable x_1",
+        "Type": "continuous",
+        "Range ": "x_1 = 1"
+      },
+      {
+        "symbol": "x_2",
+        "Meaning": "Fixed diagnostic variable x_2",
+        "Type": "continuous",
+        "Range ": "x_2 = 0"
+      },
+      {
+        "symbol": "x_3",
+        "Meaning": "Fixed diagnostic variable x_3",
+        "Type": "continuous",
+        "Range ": "x_3 = 0"
+      }
+    ],
+    "Parameters_List": [
+      {
+        "Name": "alpha",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "beta",
+        "Type": "float",
+        "Value": 1.0
+      },
+      {
+        "Name": "gamma",
+        "Type": "float",
+        "Value": 1.0
+      }
+    ],
+    "Objective": {
+      "Objective_sentence": "Minimize the sum of the fixed diagnostic variables.",
+      "Mathematical_expressions": "Minimize Z = x_1 + x_2 + x_3"
+    },
+    "Constraint_Table": [
+      [
+        "direct_constraint",
+        "alpha + x_1**2 >= beta * exp(x_2)",
+        "direct string input"
+      ]
+    ],
+    "Direct_Constraint_Input": {
+      "params": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "vars_list": [
+        "x_1",
+        "x_2",
+        "x_3"
+      ],
+      "expr_str": "alpha + x_1**2 >= beta * exp(x_2)"
+    },
+    "Constraint_String_Gold": {
+      "relation": ">=",
+      "domain_conditions": []
+    },
+    "answer": 1.0
+  }
+}

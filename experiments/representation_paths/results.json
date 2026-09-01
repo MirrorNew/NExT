@@ -1,0 +1,51 @@
+{
+  "protocol": {
+    "paired_cases": 10,
+    "representation_paths": 3,
+    "generated_programs": 30,
+    "model": "gpt-5.1",
+    "completions_per_cell": 1,
+    "maximum_executions_per_cell": 1,
+    "repair": false,
+    "temperature": "provider default",
+    "fixed_variable_values": true
+  },
+  "results": {
+    "native": {
+      "constraint_preserved": 10,
+      "program_run": 10,
+      "type_ii_errors": 0,
+      "treatment_adherence": 10,
+      "median_api_seconds": 7.10,
+      "median_total_tokens": 1684.5
+    },
+    "direct_ast": {
+      "constraint_preserved": 10,
+      "program_run": 9,
+      "type_ii_errors": 1,
+      "treatment_adherence": 10,
+      "median_api_seconds": 6.24,
+      "median_total_tokens": 1670.0
+    },
+    "ned_tree": {
+      "constraint_preserved": 10,
+      "program_run": 10,
+      "type_ii_errors": 0,
+      "treatment_adherence": 10,
+      "median_api_seconds": 8.16,
+      "median_total_tokens": 1926.5
+    }
+  },
+  "observed_failure": {
+    "case_id": "c02",
+    "path": "direct_ast",
+    "constraint": "x_1^(3/2) >= beta",
+    "cause": "The generated program preserved the expression but used an unsupported direct NLExpr >= constant interface.",
+    "interpretation": "NED-Tree avoided the observed Direct-AST mapping error; it did not outperform Native on these ten cases."
+  },
+  "limitations": [
+    "This is a fixed-value mechanism diagnostic rather than an optimization benchmark.",
+    "Prompt lengths are not matched.",
+    "Latency and token values are descriptive one-shot overhead statistics."
+  ]
+}
