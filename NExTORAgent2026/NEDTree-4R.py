@@ -1,17 +1,27 @@
+import ast
+import math
+import re
+
 import sympy
 from sympy import Symbol, Add, Mul, Pow, exp, log, sin, cos
-from sympy.parsing.sympy_parser import (
-    implicit_multiplication_application,
-    parse_expr,
-    standard_transformations,
-)
+
+
+class NEDTreeError(ValueError):
+    """Base exception for declared NED-Tree input-contract failures."""
+
+
+class UnsupportedExpressionError(NEDTreeError):
+    """Raised when an expression falls outside the supported scalar grammar."""
+
+
+class DefinitionValidationError(NEDTreeError):
+    """Raised when generated auxiliary definitions are not closed or acyclic."""
 
 
 class TopDownNEDTree:
     def __init__(self, params, vars_list):
         self.params = {Symbol(p) for p in params}
         self.vars = {Symbol(v) for v in vars_list}
-        self.transformations = standard_transformations + (implicit_multiplication_application,)
         self._reset_state()
 
     def _reset_state(self):
@@ -80,11 +90,62 @@ class TopDownNEDTree:
                 break
 
             inner = expr_str[cursor + 1:i - 1]
-            expr_str = expr_str[:idx] + f"(({inner})**(0.5))" + expr_str[i:]
+            expr_str = expr_str[:idx] + f"(({inner})**(1/2))" + expr_str[i:]
+        return expr_str
+
+    @staticmethod
+    def _replace_latex_subscripts(expr_str):
+        return re.sub(
+            r"([^\W\d]\w*)_\{([A-Za-z0-9]+)\}",
+            r"\1_\2",
+            expr_str,
+        )
+
+    def _insert_implicit_multiplication(self, expr_str):
+        """Expand only unambiguous products involving declared symbols."""
+
+        names = sorted(
+            (str(symbol) for symbol in self.params.union(self.vars)),
+            key=len,
+            reverse=True,
+        )
+        tokens = [rf"(?<!\w){re.escape(name)}(?!\w)" for name in names]
+        right_tokens = [rf"{re.escape(name)}(?!\w)" for name in names]
+
+        # Numeric coefficients and adjacent parenthesized factors.
+        for right_token in right_tokens:
+            expr_str = re.sub(
+                rf"(?<![\w.])(\d+(?:\.\d+)?)\s*(?={right_token})",
+                r"\1*",
+                expr_str,
+            )
+            expr_str = re.sub(rf"\)\s*(?={right_token})", ")*", expr_str)
+        expr_str = re.sub(
+            r"(?<![\w.])(\d+(?:\.\d+)?)\s*(?=\()",
+            r"\1*",
+            expr_str,
+        )
+        expr_str = re.sub(r"\)\s*(?=\()", ")*", expr_str)
+
+        # A declared scalar followed by a parenthesized factor or another
+        # declared scalar is multiplication, never a free-form function call.
+        for left_token in tokens:
+            expr_str = re.sub(
+                rf"({left_token})\s*(?=\()",
+                rf"\1*",
+                expr_str,
+            )
+            for right_token in right_tokens:
+                expr_str = re.sub(
+                    rf"({left_token})\s+(?={right_token})",
+                    rf"\1*",
+                    expr_str,
+                )
         return expr_str
 
     def _preprocess_expr(self, expr_str):
         expr_str = str(expr_str)
+        expr_str = self._replace_latex_subscripts(expr_str)
         expr_str = self._replace_frac(expr_str)
         expr_str = self._replace_sqrt(expr_str)
         replacements = {
@@ -101,6 +162,7 @@ class TopDownNEDTree:
         expr_str = expr_str.replace('^', '**')
         expr_str = expr_str.replace('{', '(').replace('}', ')')
         expr_str = expr_str.replace('\\', '')
+        expr_str = self._insert_implicit_multiplication(expr_str)
         return expr_str
 
     def _get_new_var(self):
@@ -113,6 +175,267 @@ class TopDownNEDTree:
         if expr.is_number:
             return True
         return all(sym in self.params for sym in expr.free_symbols)
+
+    @staticmethod
+    def _symbol_sort_key(symbol):
+        name = str(symbol)
+        try:
+            return int(name.rsplit('_', 1)[-1])
+        except ValueError:
+            return name
+
+    def _add_domain_constraint(self, constraint):
+        if constraint not in self.domain_constraints:
+            self.domain_constraints.append(constraint)
+
+    @staticmethod
+    def _reject_nonreal(expr):
+        invalid_atoms = (sympy.zoo, sympy.oo, -sympy.oo, sympy.nan, sympy.I)
+        if expr.has(*invalid_atoms) or expr.is_real is False:
+            raise UnsupportedExpressionError("NONREAL_OR_NONFINITE_EXPRESSION")
+
+    def _record_division_domain(self, denominator):
+        if denominator.is_zero is True:
+            raise UnsupportedExpressionError("ZERO_DENOMINATOR")
+        if denominator.is_zero is not False:
+            self._add_domain_constraint(f"{denominator} != 0")
+
+    def _record_power_domain(self, base, exponent):
+        variable_exponent = bool(exponent.free_symbols.intersection(self.vars))
+        if variable_exponent:
+            if not (base.is_number and base.is_positive is True):
+                raise UnsupportedExpressionError(
+                    "VARIABLE_EXPONENT_REQUIRES_POSITIVE_NUMERIC_BASE"
+                )
+            return
+
+        if exponent.is_number:
+            if exponent.is_integer is True:
+                if exponent.is_negative is True:
+                    self._record_division_domain(base)
+                return
+
+            if exponent.is_Rational:
+                if exponent.q % 2 == 0:
+                    if base.is_negative is True:
+                        raise UnsupportedExpressionError(
+                            "NONREAL_OR_NONFINITE_EXPRESSION"
+                        )
+                    if exponent.is_negative is True:
+                        if base.is_zero is True:
+                            raise UnsupportedExpressionError("ZERO_DENOMINATOR")
+                        if base.is_positive is not True:
+                            self._add_domain_constraint(f"{base} > 0")
+                    elif base.is_nonnegative is not True:
+                        self._add_domain_constraint(f"{base} >= 0")
+                elif exponent.is_negative is True:
+                    self._record_division_domain(base)
+                return
+
+            if base.is_negative is True:
+                raise UnsupportedExpressionError(
+                    "NONREAL_OR_NONFINITE_EXPRESSION"
+                )
+            if exponent.is_negative is True:
+                if base.is_zero is True:
+                    raise UnsupportedExpressionError("ZERO_DENOMINATOR")
+                if base.is_positive is not True:
+                    self._add_domain_constraint(f"{base} > 0")
+            elif base.is_nonnegative is not True:
+                self._add_domain_constraint(f"{base} >= 0")
+            return
+
+        if self.is_constant(exponent):
+            self._add_domain_constraint(f"real_power_domain({base}, {exponent})")
+            return
+
+        raise UnsupportedExpressionError("UNSUPPORTED_POWER_EXPONENT")
+
+    def _record_function_domain(self, function, argument):
+        if function != log:
+            return
+        if argument.is_positive is True:
+            return
+        if argument.is_nonpositive is True:
+            raise UnsupportedExpressionError("INVALID_LOG_DOMAIN")
+        self._add_domain_constraint(f"{argument} > 0")
+
+    def _build_sympy_from_ast(self, node, declared_symbols):
+        if isinstance(node, ast.Expression):
+            return self._build_sympy_from_ast(node.body, declared_symbols)
+
+        if isinstance(node, ast.Constant):
+            if isinstance(node.value, bool) or not isinstance(node.value, (int, float)):
+                raise UnsupportedExpressionError("UNSUPPORTED_LITERAL")
+            if isinstance(node.value, float) and not math.isfinite(node.value):
+                raise UnsupportedExpressionError("NONREAL_OR_NONFINITE_EXPRESSION")
+            return sympy.Integer(node.value) if isinstance(node.value, int) else sympy.Float(node.value)
+
+        if isinstance(node, ast.Name):
+            if node.id in {"zoo", "oo", "nan", "I"}:
+                raise UnsupportedExpressionError(
+                    f"NONREAL_OR_NONFINITE_EXPRESSION: {node.id}"
+                )
+            if node.id == "pi":
+                return sympy.pi
+            if node.id not in declared_symbols:
+                raise UnsupportedExpressionError(f"UNDECLARED_SYMBOL: {node.id}")
+            return declared_symbols[node.id]
+
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+            operand = self._build_sympy_from_ast(node.operand, declared_symbols)
+            result = operand if isinstance(node.op, ast.UAdd) else Mul(-1, operand)
+            self._reject_nonreal(result)
+            return result
+
+        if isinstance(node, ast.BinOp):
+            left = self._build_sympy_from_ast(node.left, declared_symbols)
+            right = self._build_sympy_from_ast(node.right, declared_symbols)
+            if isinstance(node.op, ast.Add):
+                result = Add(left, right)
+            elif isinstance(node.op, ast.Sub):
+                result = Add(left, Mul(-1, right))
+            elif isinstance(node.op, ast.Mult):
+                result = Mul(left, right)
+            elif isinstance(node.op, ast.Div):
+                self._record_division_domain(right)
+                result = Mul(left, Pow(right, -1))
+            elif isinstance(node.op, ast.Pow):
+                self._record_power_domain(left, right)
+                result = Pow(left, right)
+            else:
+                raise UnsupportedExpressionError(
+                    f"UNSUPPORTED_OPERATOR: {node.op.__class__.__name__}"
+                )
+            self._reject_nonreal(result)
+            return result
+
+        if isinstance(node, ast.Call):
+            if not isinstance(node.func, ast.Name):
+                raise UnsupportedExpressionError("UNSUPPORTED_OPERATOR: function_call")
+            functions = {"exp": exp, "log": log, "sin": sin, "cos": cos}
+            special_functions = {"sqrt", "log2", "pow"}
+            if node.func.id not in functions and node.func.id not in special_functions:
+                raise UnsupportedExpressionError(
+                    f"UNSUPPORTED_OPERATOR: {node.func.id}"
+                )
+            if node.func.id == "pow":
+                if len(node.args) != 2 or node.keywords:
+                    raise UnsupportedExpressionError(
+                        "UNSUPPORTED_FUNCTION_ARITY: pow"
+                    )
+                base = self._build_sympy_from_ast(node.args[0], declared_symbols)
+                exponent = self._build_sympy_from_ast(node.args[1], declared_symbols)
+                self._record_power_domain(base, exponent)
+                result = Pow(base, exponent)
+                self._reject_nonreal(result)
+                return result
+            if len(node.args) != 1 or node.keywords:
+                raise UnsupportedExpressionError(
+                    f"UNSUPPORTED_FUNCTION_ARITY: {node.func.id}"
+                )
+            argument = self._build_sympy_from_ast(node.args[0], declared_symbols)
+            if node.func.id == "sqrt":
+                exponent = sympy.Rational(1, 2)
+                self._record_power_domain(argument, exponent)
+                result = Pow(argument, exponent)
+                self._reject_nonreal(result)
+                return result
+            if node.func.id == "log2":
+                self._record_function_domain(log, argument)
+                result = Mul(log(argument), Pow(log(2), -1))
+                self._reject_nonreal(result)
+                return result
+            function = functions[node.func.id]
+            self._record_function_domain(function, argument)
+            result = function(argument)
+            self._reject_nonreal(result)
+            return result
+
+        raise UnsupportedExpressionError(
+            f"UNSUPPORTED_OPERATOR: {node.__class__.__name__}"
+        )
+
+    def _parse_expression(self, expr_str):
+        expr_str = expr_str.strip()
+        if not expr_str:
+            raise UnsupportedExpressionError("INVALID_EXPRESSION_SYNTAX")
+        try:
+            parsed = ast.parse(expr_str, mode="eval")
+        except (SyntaxError, ValueError) as exc:
+            raise UnsupportedExpressionError("INVALID_EXPRESSION_SYNTAX") from exc
+
+        nodes = list(ast.walk(parsed))
+        if len(nodes) > 512:
+            raise UnsupportedExpressionError("EXPRESSION_TOO_COMPLEX")
+
+        declared_symbols = {
+            str(symbol): symbol for symbol in self.params.union(self.vars)
+        }
+        return self._build_sympy_from_ast(parsed, declared_symbols)
+
+    def _validate_expression(self, expr):
+        declared_symbols = self.params.union(self.vars)
+        unknown_symbols = expr.free_symbols - declared_symbols
+        if unknown_symbols:
+            names = ', '.join(sorted(str(symbol) for symbol in unknown_symbols))
+            raise UnsupportedExpressionError(f"UNDECLARED_SYMBOL: {names}")
+
+        for node in sympy.preorder_traversal(expr):
+            if node.is_Atom:
+                continue
+
+            if node.is_Add or node.is_Mul:
+                continue
+
+            if node.is_Pow:
+                base, exponent = node.args
+                continue
+
+            if node.func in [exp, log, sin, cos]:
+                continue
+
+            raise UnsupportedExpressionError(
+                f"UNSUPPORTED_OPERATOR: {getattr(node.func, '__name__', str(node.func))}"
+            )
+
+    def _validate_and_order_definitions(self):
+        definition_symbols = set(self.D_new)
+        referenced_by_root = self.L_f.free_symbols.intersection(self.y_vars)
+        referenced_by_definitions = set().union(
+            *(expr.free_symbols.intersection(self.y_vars) for expr in self.D_new.values())
+        ) if self.D_new else set()
+        undefined = (referenced_by_root | referenced_by_definitions) - definition_symbols
+        if undefined:
+            names = ', '.join(sorted(str(symbol) for symbol in undefined))
+            raise DefinitionValidationError(f"UNCLOSED_DEFINITIONS: {names}")
+
+        dependencies = {
+            symbol: expr.free_symbols.intersection(self.y_vars)
+            for symbol, expr in self.D_new.items()
+        }
+        state = {}
+        ordered = []
+
+        def visit(symbol):
+            marker = state.get(symbol, 0)
+            if marker == 1:
+                raise DefinitionValidationError(f"CYCLIC_DEFINITIONS: {symbol}")
+            if marker == 2:
+                return
+
+            state[symbol] = 1
+            for dependency in sorted(
+                dependencies[symbol], key=self._symbol_sort_key
+            ):
+                visit(dependency)
+            state[symbol] = 2
+            ordered.append(symbol)
+
+        for symbol in sorted(definition_symbols, key=self._symbol_sort_key):
+            visit(symbol)
+
+        self.D_new = {symbol: self.D_new[symbol] for symbol in ordered}
 
     def extract_linear(self, expr):
         if self.is_constant(expr) or expr in self.vars or expr in self.y_vars:
@@ -151,6 +474,11 @@ class TopDownNEDTree:
         expr_str = self._preprocess_expr(expr_str)
         operators = ['>=', '<=', '>', '<', '==', '=']
 
+        if '!=' in expr_str:
+            raise UnsupportedExpressionError(
+                "UNSUPPORTED_RELATION: != is not a solver constraint in this grammar"
+            )
+
         lhs_str, rhs_str = expr_str, "0"
         for op in operators:
             if op in expr_str:
@@ -159,11 +487,10 @@ class TopDownNEDTree:
                 lhs_str, rhs_str = parts[0], parts[1]
                 break
 
-        env = {str(s): s for s in self.params.union(self.vars)}
-        env.update({'exp': exp, 'log': log, 'sin': sin, 'cos': cos, 'pow': Pow, 'pi': sympy.pi})
-
-        lhs_expr = parse_expr(lhs_str, local_dict=env, transformations=self.transformations)
-        rhs_expr = parse_expr(rhs_str, local_dict=env, transformations=self.transformations)
+        lhs_expr = self._parse_expression(lhs_str)
+        rhs_expr = self._parse_expression(rhs_str)
+        self._validate_expression(lhs_expr)
+        self._validate_expression(rhs_expr)
         root_expr = lhs_expr - rhs_expr
 
         self.L_f = self.extract_linear(root_expr)
@@ -198,8 +525,6 @@ class TopDownNEDTree:
 
             elif current_expr.is_Pow:
                 base, exponent = current_expr.args
-                if self.is_constant(exponent) and exponent.is_number and exponent < 0:
-                    self.domain_constraints.append(f"{base} != 0")
                 if self.is_constant(base) and not self.is_constant(exponent):
                     c = log(base)
                     inner = Mul(exponent, c)
@@ -216,13 +541,22 @@ class TopDownNEDTree:
                 self.D_new[y_sym] = current_expr.func(v_arg)
 
             else:
-                self.D_new[y_sym] = current_expr
+                raise UnsupportedExpressionError(
+                    f"UNSUPPORTED_OPERATOR: {current_expr.func.__name__}"
+                )
+
+        self._validate_and_order_definitions()
 
         return {
             "linear_expr": self.L_f,
             "relation": self.relation or "expression",
             "definitions": self.D_new,
             "domain_constraints": self.domain_constraints,
+            "validation": {
+                "closed": True,
+                "acyclic": True,
+                "topological": True,
+            },
         }
 
     # ==========================================
