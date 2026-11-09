@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "dataset": "math_smoke",
+  "dataset_version": "analytic-log-bound-v1",
+  "cases": [{
+    "case_id": "math_smoke:log_bound",
+    "source_id": "analytic_log_bound",
+    "question": "Minimize x for 1 <= x <= 4 subject to log(x) >= log(2). Return the optimal x. This is a mathematical coding smoke test, not a benchmark instance.",
+    "math_input": {
+      "Parameters_List": [],
+      "Variables_List": [{"symbol": "x", "Meaning": "decision variable", "Type": "continuous", "Range": "[1,4]"}],
+      "Constraint_Table": [{"name": "log_bound", "Mathematical_expressions": "log(x) >= log(2)"}],
+      "Objective": {"Objective_sentence": "Minimize x", "Mathematical_expressions": "min x"},
+      "Problem_Type": "NLP"
+    },
+    "reference": 2.0,
+    "answer_spec": {"kind": "scalar", "fields": ["x"], "order": ["x"]},
+    "scoring": {"name": "nextor_relative", "tolerance": 0.01},
+    "review_status": "verified"
+  }]
+}
