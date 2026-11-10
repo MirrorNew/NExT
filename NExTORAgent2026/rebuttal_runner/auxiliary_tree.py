@@ -27,6 +27,9 @@ def _normalise_expression(value: str) -> str:
     result = value.strip()
     for old, new in replacements.items():
         result = result.replace(old, new)
+    # Treat ln(...) as the common natural-log alias for log(...), while callers
+    # retain the exact source text in the returned tree for provenance.
+    result = re.sub(r"\bln\s*(?=\()", "log", result)
     return re.sub(r"\s+", "", result)
 
 
@@ -113,7 +116,8 @@ def _names_from_ast(parsed: ast.AST, location: str) -> set[str]:
 def _names_in_expression(expression: str, location: str) -> set[str]:
     """Parse a restricted arithmetic expression without evaluating it."""
     try:
-        parsed = ast.parse(expression.replace("^", "**"), mode="eval")
+        canonical = re.sub(r"\bln\s*(?=\()", "log", expression)
+        parsed = ast.parse(canonical.replace("^", "**"), mode="eval")
     except SyntaxError as exc:
         raise ValueError(f"{location} is not a supported arithmetic expression") from exc
     allowed_nodes = (
@@ -125,7 +129,7 @@ def _names_in_expression(expression: str, location: str) -> set[str]:
         if not isinstance(node, allowed_nodes):
             raise ValueError(f"{location} contains unsupported syntax: {type(node).__name__}")
         if isinstance(node, ast.Call):
-            if not isinstance(node.func, ast.Name) or node.func.id not in {"exp", "log", "sin", "cos", "sqrt"}:
+            if not isinstance(node.func, ast.Name) or node.func.id not in {"exp", "log", "ln", "sin", "cos", "sqrt"}:
                 raise ValueError(f"{location} contains an unsupported function call")
             if node.keywords:
                 raise ValueError(f"{location} function calls cannot use keyword arguments")
@@ -273,6 +277,12 @@ def parse_auxiliary_response(content: str, math_input: dict[str, Any]) -> dict[s
                               if not _reference_is_declared(reference, available)}
         if unknown_form_names:
             raise ValueError(f"{location}.linearized_form has undeclared dependencies: {', '.join(sorted(unknown_form_names))}")
+        defined_symbols = {definition["symbol"] for definition in ordered_definitions}
+        used_auxiliary_symbols = defined_symbols.intersection(form_references)
+        if defined_symbols and not used_auxiliary_symbols:
+            raise ValueError(
+                f"{location}.linearized_form does not use any declared auxiliary definition"
+            )
         domains = _validate_domains(candidate.get("domain_conditions", []), available,
                                     f"{location}.domain_conditions")
         normalized_candidates.append({

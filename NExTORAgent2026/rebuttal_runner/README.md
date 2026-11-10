@@ -1,6 +1,6 @@
 # Rebuttal 统一实验入口
 
-在 `NExTORAgent2026` 目录执行 `python -m rebuttal_runner`。当前协议为 `nedtree-integrated-v2`；准备、执行、汇总、重评分共用一个入口。本文档给出使用方法；本轮整合没有运行正式补实验或调用模型 API。
+在 `NExTORAgent2026` 目录执行 `python -m rebuttal_runner`。当前协议为 `nedtree-integrated-v2`；准备、执行、汇总、重评分共用一个入口。已用一个人工解析可解的 log 约束样例进行真实 API/Gurobi 连通检查，没有运行正式数据集补实验。
 
 ## 实验层次必须显式指定
 
@@ -33,13 +33,13 @@ Native 不接收辅助意见，允许合法顶层结果变量以及自行引入�
 ## 模型、基线来源与统一限制
 
 - GPT-5 配置：`rebuttal_runner/examples/model.example.json`，密钥变量 `OPENAI_API_KEY`。
-- DeepSeek Flash 配置：`rebuttal_runner/examples/model.deepseek-flash.json`，官方 ID `deepseek-flash`，Base URL `https://api.deepseek.com`，密钥变量 `DEEPSEEK_API_KEY`。ID 根据[官方接口文档](https://api-docs.deepseek.com/api/list-models/)核对；此配置尚未在线检查。
+- DeepSeek Flash 配置：`rebuttal_runner/examples/model.deepseek-flash.json`，官方 ID `deepseek-flash`，Base URL `https://api.deepseek.com`，密钥变量 `DEEPSEEK_API_KEY`。ID 根据[官方接口文档](https://api-docs.deepseek.com/api/list-models/)核对，并已在线返回同名模型。
 - Kimi 不在本轮计划中。密钥不写入配置，不自动更换模型，不隐藏重试；允许的返回模型 ID 明确列在配置内。
-- 配置的 4096 输出 token 是当前显式上限，不能当作实际消耗或已经验证足够；正式运行前可统一调整并冻结。使用供应商返回的 usage，不估造美元费用。
+- 两份示例配置使用连通检查中的 16384 输出 token 上限、300 秒请求超时；DeepSeek 保留 `reasoning_effort=high`。旧 4096 上限曾使其抽取阶段耗尽推理预算并返回空内容。截断现在明确记为 `MODEL_OUTPUT_TRUNCATED`，不隐藏重试。上限不是实际消耗，也不保证复杂题足够；正式运行前仍须冻结预算。使用供应商返回的 usage，不估造美元费用。
 
 外部基线使用 `--baseline-root D:\LLMProject`，分别读取 `Chain-of-Experts-main`、`OptiMUS-main`、`or_llm_agent-main`。适配器仅加载实际所需函数、类和提示，不执行含旧密钥/客户端的模块顶层代码，不改原始基线项目。来源按实际 Python 文件 SHA256 固定；没有 Git 元数据的目录不捏造 commit。
 
-适配的公共改动：调用均经过同一模型配置和日志；生成程序均经过同一执行器；使用目标值输出规范和合法非线性接口提示。CoE 保留当前源快照的 3 轮专家协作、单次 trial、关闭 reflection 的有效行为；其内部旧 `max_tokens`/temperature 不覆盖统一模型配置。OptiMUS 使用源代码现有无检索分支，保留代码片段/组装协议；OR-LLM-Agent 的重试受统一上限约束。详细执行阶段、路径和失败原因保存在 `baseline_trace`。
+适配的公共改动：调用均经过同一模型配置和日志；生成程序均经过同一执行器；使用目标值输出规范和合法非线性接口提示，完整程序必须实际调用自己定义的入口函数。CoE 保留当前源快照的 3 轮专家协作、单次 trial、关闭 reflection 的有效行为；其内部旧 `max_tokens`/temperature 不覆盖统一模型配置。OptiMUS 使用源代码现有无检索分支和 `main.py` 的错误检查设置，保留代码片段/组装协议及 `=====` 修复响应格式；OR-LLM-Agent 的重试受统一上限约束。详细执行阶段、路径和失败原因保存在 `baseline_trace`。
 
 OptiMUS 固定输入适配支持明确的标量 binary/integer/continuous 类型、数值上下界和明确无界域，兼容旧 `Range ` 字段；只在 coding/math 的原变量生成器中显式传入 lb/ub，避免原默认下界 0 改变数学模型。数组形状、有限开边界、复合或无法确认的范围返回 `unsupported_coding_input`，保留在分母，且在 Auxiliary 之前拒绝，不自动补造条件。端到端使用其原建模结构。
 
@@ -87,6 +87,12 @@ python -m rebuttal_runner extract --manifest <清单.json> --model-config <配�
 上游输出立即保存，并逐题更新 `.partial.json`。中断后先检查已落盘记录，通过 `attach-inputs` 复用完成输入；不自动重新收费。不支持旧 `--no-refine` 省略 ModelingAgent 的模式。
 
 ## 执行、恢复与记录
+
+一个独立于正式数据集的端到端连通样例保存在 `examples/end_to_end_smoke.json`，其解析最优值为 2。设置模型配置指定的密钥环境变量后，可用下列命令检查完整方法。原始基线换为对应 `--framework`，加 `--arms native --baseline-root D:\LLMProject`；每次使用新的输出目录。单题成功仅表示接口和流程可执行。
+
+```powershell
+python -m rebuttal_runner run --manifest rebuttal_runner/examples/end_to_end_smoke.json --model-config rebuttal_runner/examples/model.example.json --level end_to_end --framework ours --arms native ned --output <新的smoke目录> --repairs 1 --max-calls 32 --max-upstream-calls 8 --solver-time-limit 30 --process-timeout 60 --solver-threads 1
+```
 
 以下为后续正式实验的命令模板，本轮没有执行：
 

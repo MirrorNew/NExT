@@ -32,7 +32,7 @@ Do not call another model or request another decomposition. Return exactly:
       {{
         "source_id": "objective or constraint:<zero-based index>",
         "source_expression": "copy the exact corresponding expression from Context",
-        "relation": "objective for the objective, or the exact source relation",
+        "relation": "exactly 'objective' for the objective; otherwise ONLY one operator token: '=', '==', '<=', '>=', '<', or '>'",
         "linearized_form": "objective expression, or for a constraint the lhs-rhs residual (without relation)",
         "definitions": [
           {{"symbol": "auxiliary_name", "rhs": "arithmetic expression", "domain_conditions": []}}
@@ -45,8 +45,13 @@ Do not call another model or request another decomposition. Return exactly:
 For each constraint keep its original relation; linearized_form must be lhs-rhs, so
 the represented relation is linearized_form <relation> 0. For an objective, use its
 objective expression without the Maximize/Minimize label or result-variable assignment.
+When a candidate introduces auxiliary definitions to replace a nonlinear term, use
+those defined symbols in linearized_form (for example, if y = ln(x), write y - ln(2),
+not ln(x) - ln(2)). Do not include definitions that the candidate relation does not use.
 The structured Context is authoritative for source expressions. The free-text Math model
 is explanatory only and must not change or replace any expression in Context.
+The relation field must contain only the operator token (for example, ">=") and must
+never contain either side of the constraint or the complete relation expression.
 Use an empty candidates list if the existing advice proposes no auxiliary decomposition.
 List definitions in dependency order; each rhs may use only declared source symbols and
 earlier definitions. Preserve every required domain condition. Do not claim equivalence

@@ -132,6 +132,36 @@ class AuxiliaryTreeTests(unittest.TestCase):
         tree = parse_auxiliary_response(response([candidate]), MATH_INPUT)
         self.assertEqual(tree["status"], "validated")
 
+    def test_ln_is_accepted_as_natural_log_and_source_text_is_preserved(self):
+        math_input = {
+            **MATH_INPUT,
+            "Constraint_Table": [{"name": "log_limit", "Mathematical_expressions": "ln(x) >= ln(2)"}],
+        }
+        candidate = {
+            "source_id": "constraint:0", "source_expression": "ln(x) >= ln(2)",
+            "relation": ">=", "linearized_form": "y_ln - ln(2)",
+            "definitions": [{"symbol": "y_ln", "rhs": "ln(x)", "domain_conditions": ["x > 0"]}],
+            "domain_conditions": ["x > 0"],
+        }
+        tree = parse_auxiliary_response(response([candidate]), math_input)
+        self.assertEqual(tree["status"], "validated")
+        self.assertEqual(tree["candidates"][0]["source_expression"], "ln(x) >= ln(2)")
+        self.assertEqual(tree["candidates"][0]["definitions"][0]["rhs"], "ln(x)")
+
+    def test_auxiliary_definition_not_used_in_relation_is_rejected(self):
+        math_input = {
+            **MATH_INPUT,
+            "Constraint_Table": [{"name": "log_limit", "Mathematical_expressions": "ln(x) >= ln(2)"}],
+        }
+        candidate = {
+            "source_id": "constraint:0", "source_expression": "ln(x) >= ln(2)",
+            "relation": ">=", "linearized_form": "ln(x) - ln(2)",
+            "definitions": [{"symbol": "y_ln", "rhs": "ln(x)", "domain_conditions": ["x > 0"]}],
+            "domain_conditions": [],
+        }
+        with self.assertRaisesRegex(ValueError, "does not use any declared auxiliary definition"):
+            parse_auxiliary_response(response([candidate]), math_input)
+
     def test_definition_domain_may_bound_its_own_auxiliary_symbol(self):
         candidate = {
             "source_id": "objective", "source_expression": "Minimize f = x**2 + z",

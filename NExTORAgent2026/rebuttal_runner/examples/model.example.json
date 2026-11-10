@@ -2,7 +2,7 @@
   "model": "gpt-5",
   "base_url": "https://api.shubiaobiao.cn/v1",
   "api_key_env": "OPENAI_API_KEY",
-  "request_parameters": {"max_completion_tokens": 4096, "stream": false},
-  "timeout_seconds": 120,
+  "request_parameters": {"max_completion_tokens": 16384, "stream": false},
+  "timeout_seconds": 300,
   "allowed_returned_models": ["gpt-5"]
 }

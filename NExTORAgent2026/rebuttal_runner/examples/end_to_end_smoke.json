@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "dataset": "connectivity_smoke",
+  "dataset_version": "analytic-log-bound-v1",
+  "purpose": "one-case live integration check; not a formal supplementary experiment",
+  "cases": [
+    {
+      "case_id": "connectivity_smoke:log_bound",
+      "source_id": "analytic_log_bound",
+      "question": "Minimize x, where x is a real continuous scalar, 1 <= x <= 4, subject to ln(x) >= ln(2). Return the optimized objective value. This is a one-case toolchain connectivity check, not a benchmark instance.",
+      "math_input": null,
+      "reference": 2.0,
+      "answer_spec": {"kind": "scalar", "fields": ["objective_value"], "order": ["objective_value"]},
+      "scoring": {"name": "objective_relative", "tolerance": 0.01},
+      "review_status": "verified"
+    }
+  ]
+}
