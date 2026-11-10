@@ -27,12 +27,16 @@ _PROTOCOL_ALIASES = {
 }
 _PROTOCOL_NAMES = {
     "nextor_relative",
+    "objective_relative",
+    "nextor_spring_legacy",
     "optibench_absolute",
     "optmath_normalized",
     "exact",
 }
 _DEFAULT_TOLERANCES = {
     "nextor_relative": Decimal("0.01"),
+    "objective_relative": Decimal("0.01"),
+    "nextor_spring_legacy": Decimal("0.01"),
     "optibench_absolute": Decimal("0.0001"),
     "optmath_normalized": Decimal("0.000001"),
 }
@@ -177,6 +181,7 @@ def _compare(
     protocol_name: str,
     tolerance: Decimal | None,
     path: str = "$",
+    zero_absolute_tolerance: Decimal = Decimal(0),
 ) -> list[dict[str, Any]]:
     """Return leaf/shape mismatches. Empty list means the complete value passed."""
     prediction_is_number = isinstance(prediction, (int, float)) and not isinstance(prediction, bool)
@@ -197,8 +202,8 @@ def _compare(
 
             if protocol_name == "exact":
                 passed = prediction == reference
-            elif protocol_name == "nextor_relative":
-                passed = absolute == 0 if ref_decimal == 0 else absolute <= tolerance * abs(ref_decimal)
+            elif protocol_name in {"nextor_relative", "objective_relative", "nextor_spring_legacy"}:
+                passed = absolute <= zero_absolute_tolerance if ref_decimal == 0 else absolute <= tolerance * abs(ref_decimal)
             elif protocol_name == "optibench_absolute":
                 passed = absolute < tolerance
             else:  # optmath_normalized
@@ -261,7 +266,9 @@ def _compare(
     }]
 
 
-def score_answer(prediction: Any, reference: Any, protocol: dict[str, Any]) -> dict[str, Any]:
+def score_answer(
+    prediction: Any, reference: Any, protocol: dict[str, Any], *, case_id: str | None = None,
+) -> dict[str, Any]:
     """Score a numeric answer under one explicit protocol.
 
     Canonical names are ``nextor_relative`` (<= relative tolerance, exact at
@@ -269,8 +276,21 @@ def score_answer(prediction: Any, reference: Any, protocol: dict[str, Any]) -> d
     ``optmath_normalized`` (< abs-difference/(abs(reference)+1)), and ``exact``.
     Short aliases ``nextor``, ``optibench``, and ``optmath`` map to their
     corresponding canonical protocols; ``exact`` is its own name.
+
+    The approved supplement uses ``objective_relative``: a scalar objective,
+    relative error <= tolerance, and absolute error <= 1e-5 only at zero.
+    ``nextor_spring_legacy`` permits either reference item for NEXTOR:11 only;
+    it records the matched attribute instead of implying objective correctness.
+    Historical protocols above keep their original behavior.
     """
     protocol_name, tolerance = _protocol_settings(protocol)
+    if protocol_name == "nextor_spring_legacy":
+        if case_id != "NEXTOR:11":
+            raise ValueError("nextor_spring_legacy is restricted to NEXTOR:11")
+        if (not isinstance(reference, list) or len(reference) != 2
+                or not all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in reference)
+                or reference[1] != 9.0):
+            raise ValueError("spring reference must be [objective_value, 9.0]")
     try:
         _valid_json_value(prediction)
         _valid_json_value(reference)
@@ -286,7 +306,37 @@ def score_answer(prediction: Any, reference: Any, protocol: dict[str, Any]) -> d
             }],
         }
 
-    errors = _compare(prediction, reference, protocol_name, tolerance)
+    if protocol_name == "nextor_spring_legacy":
+        predictions = prediction if isinstance(prediction, list) else [prediction]
+        matches = []
+        for pred_index, value in enumerate(predictions):
+            if not isinstance(value, (int, float)):
+                continue
+            for ref_index, target in enumerate(reference):
+                if not _compare(value, target, protocol_name, tolerance,
+                                zero_absolute_tolerance=Decimal("0.00001")):
+                    matches.append({
+                        "prediction_index": pred_index,
+                        "reference_index": ref_index,
+                        "reference_kind": "objective_value" if ref_index == 0 else "effective_coils",
+                        "prediction": value,
+                        "reference": target,
+                    })
+        return {
+            "correct": bool(matches),
+            "reason": "spring_legacy_match" if matches else "spring_legacy_mismatch",
+            "matched_references": matches,
+            "errors": [] if matches else [{"path": "$", "kind": "no_allowed_reference_match"}],
+        }
+
+    if protocol_name == "objective_relative" and (
+        not isinstance(prediction, (int, float)) or not isinstance(reference, (int, float))
+    ):
+        return {"correct": False, "reason": "scalar_objective_required",
+                "errors": [{"path": "$", "kind": "shape_or_type_mismatch"}]}
+    zero_tolerance = Decimal("0.00001") if protocol_name == "objective_relative" else Decimal(0)
+    errors = _compare(prediction, reference, protocol_name, tolerance,
+                      zero_absolute_tolerance=zero_tolerance)
     return {
         "correct": not errors,
         "reason": "match" if not errors else "mismatch",

@@ -71,7 +71,11 @@ python -m rebuttal_runner summary --run-dir <输出目录> --output <新汇总.j
 python -m rebuttal_runner rescore --run-dir <输出目录> --thresholds 0.01,0.001,0.0001 --output <新重评分.jsonl>
 ```
 
-重评分只读取固定预测，不调用模型或求解器，不改变原始结果。当前支持 NEXTOR 相对误差协议的阈值变化：非零参考值采用 `abs(pred-ref)/abs(ref) <= tolerance`，零参考值要求精确为零。OptiBench 绝对误差及 OptMATH 归一化误差为独立协议，不把 NEXTOR 阈值直接套入。列表/具名答案须形状相同、各分量均满足规则。是否采用这些协议，应以最终冻结的原始评测定义为准。
+重评分只读取固定预测，不调用模型或求解器，不改变原始结果。本轮确认后的工作副本统一使用 `objective_relative`：只比较标量目标值，非零参考采用 `abs(pred-ref)/abs(ref) <= tolerance`，仅零参考采用绝对容差 `1e-5`。三档为 `0.01/0.001/0.0001`；内部保持完整数值精度，展示舍入不参与评分。标量 `answer_spec.fields` 设为 `["objective_value"]` 时，公共编码提示明确要求返回优化目标，不改变原题数学条件。
+
+NEXTOR 弹簧仅使用 `nextor_spring_legacy`，限定 `case_id == "NEXTOR:11"`、参考结构 `[目标值, 9.0]`；目标值或圈数任一命中均可通过，并在 `matched_references` 记录命中属性。它不推广到其他列表题。重评分保留清单中每题的协议及特例。
+
+历史 `nextor_relative`（零值精确匹配）、`optibench_absolute`、`optmath_normalized` 与完整结构比较仍保留原行为；旧清单不会被静默转换成新协议。历史代码中的末位绝对容差或任意项匹配也不等于本轮的三档相对误差。
 
 `--exclude-case <case_id>` 生成明确标记的排除分析；原结果不删除。原全集和排除后结果应同时报告。参考值舍入或单位有疑问时，先解决对应问题，再解释严格阈值结果。
 

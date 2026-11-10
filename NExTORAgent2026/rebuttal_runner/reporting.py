@@ -477,12 +477,18 @@ def _manifest_references(manifest: dict[str, Any]) -> dict[tuple[str, str, str],
         if not isinstance(item, dict) or not all(key in item for key in ("case_id", "reference", "scoring")):
             raise ValueError(f"manifest.cases[{index}] requires case_id, reference, and scoring")
         scoring = item.get("scoring")
-        if not isinstance(scoring, dict) or scoring.get("name") != "nextor_relative":
-            raise ValueError(f"manifest.cases[{index}].scoring.name must be nextor_relative")
+        if not isinstance(scoring, dict) or scoring.get("name") not in {
+            "nextor_relative", "objective_relative", "nextor_spring_legacy",
+        }:
+            raise ValueError(f"manifest.cases[{index}].scoring.name must use a relative protocol")
+        reference_check = score_answer(item["reference"], item["reference"], scoring,
+                                       case_id=item["case_id"])
+        if not reference_check["correct"]:
+            raise ValueError(f"invalid reference/scoring contract for {item['case_id']}")
         key = tuple(_freeze(value) for value in (dataset, dataset_version, item["case_id"]))
         if key in result:
             raise ValueError(f"duplicate manifest case_id at index {index}")
-        result[key] = item["reference"]
+        result[key] = (item["reference"], copy.deepcopy(scoring))
     return result
 
 
@@ -496,7 +502,7 @@ def rescore_records(
 
     Manifest shape follows ``data.py``: top-level ``schema_version``,
     ``dataset``, ``dataset_version``, and ``cases``; each case supplies
-    ``case_id``, ``reference``, and ``scoring.name == "nextor_relative"``.
+    ``case_id``, ``reference``, and an explicit supported relative protocol.
     One clone is returned per input and threshold. Excluded case IDs are
     marked and left out of later summaries.
     """
@@ -535,11 +541,14 @@ def rescore_records(
                     "errors": [{"path": "$", "message": "prediction is missing"}],
                 }
             else:
+                reference, scoring = references[reference_key]
                 cloned["score"] = score_answer(
                     record["prediction"],
-                    references[reference_key],
-                    {"name": "nextor_relative", "tolerance": threshold},
+                    reference,
+                    {**scoring, "tolerance": threshold},
+                    case_id=record["case_id"],
                 )
+                cloned["scoring"] = {**scoring, "tolerance": threshold}
             result.append(cloned)
     return result
 

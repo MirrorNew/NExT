@@ -149,6 +149,21 @@ class PairingTests(unittest.TestCase):
 
 
 class RescoreTests(unittest.TestCase):
+    def test_rescore_preserves_approved_zero_and_spring_protocols(self):
+        manifest = {"schema_version": 1, "dataset": "NEXTOR", "dataset_version": "v1", "cases": [
+            {"case_id": "zero", "reference": 0, "scoring": {"name": "objective_relative"}},
+            {"case_id": "NEXTOR:11", "reference": [1.96564, 9.0],
+             "scoring": {"name": "nextor_spring_legacy"}},
+        ]}
+        rows = [make_record("zero", prediction=1e-5), make_record("NEXTOR:11", prediction=9.0)]
+        before = copy.deepcopy((rows, manifest))
+        rescored = rescore_records(rows, manifest)
+        self.assertEqual(len(rescored), 6)
+        self.assertTrue(all(row["score"]["correct"] for row in rescored))
+        self.assertEqual(rescored[3]["score"]["matched_references"][0]["reference_kind"], "effective_coils")
+        self.assertEqual(rescored[3]["scoring"]["name"], "nextor_spring_legacy")
+        self.assertEqual((rows, manifest), before)
+
     def setUp(self):
         self.manifest = {
             "schema_version": 1,

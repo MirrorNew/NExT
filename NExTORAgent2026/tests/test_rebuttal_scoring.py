@@ -41,6 +41,43 @@ class ParseAnswerTests(unittest.TestCase):
 
 
 class ScoreAnswerTests(unittest.TestCase):
+    def test_approved_objective_relative_uses_zero_tolerance_only_at_zero(self):
+        protocol = {"name": "objective_relative", "tolerance": 0.0001}
+        self.assertTrue(score_answer(1e-5, 0, protocol)["correct"])
+        self.assertTrue(score_answer(-1e-5, 0, protocol)["correct"])
+        self.assertFalse(score_answer(1.00001e-5, 0, protocol)["correct"])
+        self.assertFalse(score_answer(0, 1e-8, protocol)["correct"])
+        self.assertTrue(score_answer(-100.01, -100, protocol)["correct"])
+        self.assertFalse(score_answer(-100.010001, -100, protocol)["correct"])
+        # Display rounding must not become a scoring tolerance.
+        self.assertFalse(score_answer(0.00221, 0.002212121, protocol)["correct"])
+        self.assertFalse(score_answer(100.05, 100, protocol)["correct"])
+        self.assertFalse(score_answer(1, 1000, protocol)["correct"])
+
+    def test_objective_protocol_does_not_accept_arbitrary_output_fields(self):
+        protocol = {"name": "objective_relative"}
+        for prediction in ([2], {"objective": 2}, True, float("nan"), float("inf")):
+            with self.subTest(prediction=prediction):
+                self.assertFalse(score_answer(prediction, 2, protocol)["correct"])
+        self.assertFalse(score_answer(2, [2, 9], protocol)["correct"])
+
+    def test_spring_exception_is_scoped_and_records_which_attribute_matched(self):
+        protocol = {"name": "nextor_spring_legacy", "tolerance": 0.0001}
+        reference = [1.96564, 9.0]
+        coils = score_answer(9.0, reference, protocol, case_id="NEXTOR:11")
+        self.assertTrue(coils["correct"])
+        self.assertEqual(coils["matched_references"][0]["reference_kind"], "effective_coils")
+        objective = score_answer(1.96564, reference, protocol, case_id="NEXTOR:11")
+        self.assertEqual(objective["matched_references"][0]["reference_kind"], "objective_value")
+        self.assertFalse(score_answer(10, reference, protocol, case_id="NEXTOR:11")["correct"])
+        self.assertTrue(score_answer([100, 9], reference, protocol, case_id="NEXTOR:11")["correct"])
+        self.assertFalse(score_answer([float("nan"), 9], reference, protocol, case_id="NEXTOR:11")["correct"])
+        for case_id in (None, "OptMATH:11", "NEXTOR:10"):
+            with self.subTest(case_id=case_id), self.assertRaises(ValueError):
+                score_answer(9, reference, protocol, case_id=case_id)
+        with self.assertRaises(ValueError):
+            score_answer(8, [1.96564, 8], protocol, case_id="NEXTOR:11")
+
     def test_nextor_relative_sign_zero_and_inclusive_boundary(self):
         protocol = {"name": "nextor_relative", "tolerance": 0.01}
         self.assertTrue(score_answer(101, 100, protocol)["correct"])

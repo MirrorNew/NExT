@@ -40,6 +40,8 @@ reading a solution. The harness applies the stated solver limits.
 Print exactly one final line FinalAnswer=【<JSON>】. Its JSON structure and names
 must match answer_spec; output the asked quantity, not an arbitrary objective.
 For kind='scalar', emit only a JSON number (for example 2.0), not an object.
+When its fields are ['objective_value'], the evaluation requests the optimized
+objective value even if the narrative also asks for a plan. Keep the model unchanged.
 For kind='numeric_list', emit a JSON array in the requested order.
 For kind='named_numeric', emit an object with exactly the requested field names.
 Do not print a final answer without a solution. Return one Python fenced block.
@@ -202,7 +204,8 @@ async def run_arm(case: dict, math_input: dict | None, arm: str, framework: str,
                         raise ValueError("No recorded solver solution; an answer alone is insufficient")
                     prediction = parse_answer(execution["stdout"])
                     observation["prediction"] = prediction
-                    observation["score"] = score_answer(prediction, case["reference"], case["scoring"])
+                    observation["score"] = score_answer(prediction, case["reference"], case["scoring"],
+                                                        case_id=case["case_id"])
                     observation["status"] = "answer_obtained"
                 else:
                     observation["status"] = "execution_failed"
@@ -273,7 +276,8 @@ async def run_paired(manifest: dict, model: LoggedModel, output: Path, *, framew
         if "question_may_include_answer_material" in case.get("review_reasons", []):
             raise ValueError(f"Resolve possible answer material in question {case['case_id']} before model calls")
         # Validate the scoring/reference contract before any paid call.
-        check = score_answer(case["reference"], case["reference"], case["scoring"])
+        check = score_answer(case["reference"], case["reference"], case["scoring"],
+                             case_id=case["case_id"])
         if not check["correct"]:
             raise ValueError(f"Invalid reference/scoring contract for {case['case_id']}: {check}")
     protocol = {"protocol_version": PROTOCOL_VERSION, "dataset": manifest["dataset"],
