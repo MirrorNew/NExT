@@ -1,0 +1,4 @@
+# Optional CoE bridge dependencies, matching the locally verified environment.
+# Core runner dependencies remain in ../requirements.txt.
+langchain==0.3.25
+langchain-core==0.3.60
