@@ -128,6 +128,34 @@ class OursIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("not valid JSON", result["error"])
         self.assertEqual(result["tree"]["status"], "fallback")
 
+    async def test_source_map_keeps_objective_label_and_shortened_source_is_rejected(self):
+        full_source = "minimize f(x,y) = exp(x^2) + exp(y^2)"
+        math_input = {
+            "Parameters_List": [], "Variables_List": [{"symbol": "x"}, {"symbol": "y"}],
+            "Constraint_Table": [{"name": "product", "Mathematical_expressions": "x*y >= 1"}],
+            "Objective": {"Mathematical_expressions": full_source}, "Problem_Type": "NLP",
+        }
+        for source, expected_status in ((full_source, "validated"), ("exp(x^2) + exp(y^2)", "invalid_decomposition")):
+            with self.subTest(source=source):
+                reply = {"math_model_advice": [], "decomposition": {
+                    "schema_version": AUXILIARY_SCHEMA_VERSION,
+                    "candidates": [{"source_id": "objective", "source_expression": source,
+                        "relation": "objective", "linearized_form": "ex + ey",
+                        "definitions": [{"symbol": "ex", "rhs": "exp(x^2)", "domain_conditions": []},
+                                        {"symbol": "ey", "rhs": "exp(y^2)", "domain_conditions": []}],
+                        "domain_conditions": []}]}}
+                model = FakeModel([json.dumps(reply)])
+                with tempfile.TemporaryDirectory() as directory:
+                    result = await prepare_auxiliary(
+                        {"case_id": "source-map", "question": "minimize the specified exponential sum"},
+                        math_input, model, directory, "run-source-map")
+                self.assertEqual(result["status"], expected_status)
+                self.assertEqual(len(model.calls), 1)
+                user_prompt = model.calls[0]["messages"][1]["content"]
+                context = json.loads(user_prompt.split("\nContext: ", 1)[1].split("\nMath model:", 1)[0])
+                self.assertEqual(context["source_expressions"], {"objective": full_source, "constraint:0": "x*y >= 1"})
+                self.assertEqual(result["raw_response"], json.dumps(reply))
+
     async def test_auxiliary_tree_is_built_from_same_response_without_reference_leak(self):
         reply = {
             "math_model_advice": [{"variables": ["t=x**2"], "constraints": [], "objective": "t"}],

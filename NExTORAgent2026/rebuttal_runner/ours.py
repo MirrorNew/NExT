@@ -18,7 +18,7 @@ from agents.coding_agents import CodingAgent
 from agents.repair_agents import RepairAgent
 
 from .data import validate_math_input
-from .auxiliary_tree import AUXILIARY_SCHEMA_VERSION, parse_auxiliary_response
+from .auxiliary_tree import AUXILIARY_SCHEMA_VERSION, _source_expressions, parse_auxiliary_response
 
 
 AUXILIARY_RESPONSE_FORMAT = {"type": "json_object"}
@@ -34,7 +34,7 @@ the following structure. Do not call another model or request another decomposit
     "candidates": [
       {{
         "source_id": "objective or constraint:<zero-based index>",
-        "source_expression": "copy the exact corresponding expression from Context",
+        "source_expression": "copy Context.source_expressions[source_id] verbatim",
         "relation": "exactly 'objective' for the objective; otherwise ONLY one operator token: '=', '==', '<=', '>=', '<', or '>'",
         "linearized_form": "objective expression, or for a constraint the lhs-rhs residual (without relation)",
         "definitions": [
@@ -53,11 +53,19 @@ those defined symbols in linearized_form (for example, if y = ln(x), write y - l
 not ln(x) - ln(2)). Do not include definitions that the candidate relation does not use.
 The structured Context is authoritative for source expressions. The free-text Math model
 is explanatory only and must not change or replace any expression in Context.
+Copy source_expression from Context.source_expressions for the chosen source_id, including
+any objective label, function name, assignment, and original punctuation. For example,
+if that value is "Minimize f(x) = exp(x^2)", source_expression must be that whole string;
+do not shorten it to "exp(x^2)". Only linearized_form omits the objective label/assignment.
 The relation field must contain only the operator token (for example, ">=") and must
 never contain either side of the constraint or the complete relation expression.
 Use an empty candidates list if the existing advice proposes no auxiliary decomposition.
+Each source_id must exactly match a Context.source_expressions key and occur at most once;
+omit sources for which you propose no auxiliary decomposition. Use fresh simple auxiliary
+identifiers, unique across all candidates and distinct from source variables/parameters.
 List definitions in dependency order; each rhs may use only declared source symbols and
-earlier definitions. Preserve every required domain condition. Do not claim equivalence
+earlier definitions from the same candidate, never definitions from another candidate.
+Preserve every required domain condition. Do not claim equivalence
 has been machine-verified. No prose or markdown outside the JSON object.
 """.strip()
 
@@ -205,6 +213,7 @@ async def prepare_auxiliary(case_public: dict[str, Any], math_input: dict[str, A
         "constraints": normalized.get("Constraint_Table", []),
         "objective": normalized.get("Objective", {}),
         "problem_type": normalized.get("Problem_Type", ""),
+        "source_expressions": _source_expressions(normalized),
     }, ensure_ascii=False)
     math_model = case_public.get("math_model")
     if not isinstance(math_model, str) or not math_model.strip():
