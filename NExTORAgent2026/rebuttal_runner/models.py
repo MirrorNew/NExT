@@ -257,15 +257,19 @@ class LoggedModel:
         stage: str,
         case_id: str,
         run_id: str,
+        response_format: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         call_id = str(uuid.uuid4())
         started = time.monotonic()
         started_at = datetime.now(timezone.utc).isoformat()
         message_list = [dict(message) for message in messages]
+        parameters = dict(self.config.request_parameters)
+        if response_format is not None:
+            parameters["response_format"] = dict(response_format)
         request = {
             "model": self.config.model,
             "messages": message_list,
-            **self.config.request_parameters,
+            **parameters,
         }
         api_key = os.getenv(self.config.api_key_env)
         secrets = (api_key,) if api_key else ()
@@ -277,7 +281,7 @@ class LoggedModel:
             "started_at": started_at,
             "request": {
                 "model": self.config.model,
-                "parameters": _safe_metadata(self.config.request_parameters, secrets),
+                "parameters": _safe_metadata(parameters, secrets),
                 "message_count": len(message_list),
                 "message_roles": [message.get("role") for message in message_list],
             },

@@ -4,7 +4,7 @@ import tempfile
 import unittest
 
 from rebuttal_runner.ours import generate_ours_code, prepare_auxiliary, prepare_ours_input
-from rebuttal_runner.models import ModelConfig
+from rebuttal_runner.models import BudgetedModel, CallBudgetExceeded, ModelCallError, ModelConfig
 from rebuttal_runner.auxiliary_tree import AUXILIARY_SCHEMA_VERSION
 
 
@@ -95,8 +95,38 @@ class OursIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("refusing raw-expression redecomposition", result["error"])
         self.assertNotIn("GOLD_SECRET_741852", json.dumps(model.calls, ensure_ascii=False))
         self.assertEqual(model.replies, [])
-        self.assertIn("structured Context is authoritative", model.calls[0]["messages"][0]["content"])
+        system_prompt = model.calls[0]["messages"][0]["content"]
+        self.assertIn("structured Context is authoritative", system_prompt)
+        self.assertIn('"type": "json_object"', json.dumps(model.calls[0]["response_format"]))
+        self.assertNotIn("Output ONLY a JSON object with the following structure", system_prompt)
+        self.assertIn("ensure the subsequent coding agent can implement it without errors", system_prompt)
+        self.assertIn('"math_model_advice"', system_prompt)
+        self.assertEqual(system_prompt.count('"math_model_advice"'), 1)
+        self.assertEqual(system_prompt.count('"decomposition"'), 1)
         self.assertGreaterEqual(result["stage_costs"][0]["elapsed_seconds"], 0)
+
+    async def test_invalid_json_is_preserved_without_silent_repair_or_second_call(self):
+        # A JSON-mode provider may still fail its contract; preserve the original
+        # mismatched bracket instead of repairing or requesting a second output.
+        raw = '{"math_model_advice": [], "decomposition": {"candidates": [{"source_id": "objective"]}}'
+        model = FakeModel([raw])
+        math_input = {
+            "Parameters_List": [], "Variables_List": [{"symbol": "x"}],
+            "Constraint_Table": [], "Objective": {"Mathematical_expressions": "Maximize x"},
+            "Problem_Type": "NLP",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            result = await prepare_auxiliary(
+                {"case_id": "bad-bracket", "question": "maximize x"},
+                math_input, model, directory, "run-bad-bracket",
+            )
+            saved = json.loads((Path(directory) / "auxiliary" / "response.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(model.calls), 1)
+        self.assertEqual(saved["content"], raw)
+        self.assertEqual(result["raw_response"], raw)
+        self.assertEqual(result["status"], "invalid_decomposition")
+        self.assertIn("not valid JSON", result["error"])
+        self.assertEqual(result["tree"]["status"], "fallback")
 
     async def test_auxiliary_tree_is_built_from_same_response_without_reference_leak(self):
         reply = {
@@ -185,15 +215,17 @@ class OursIntegrationTests(unittest.IsolatedAsyncioTestCase):
         class FailingModel(FakeModel):
             async def complete(self, messages, **identity):
                 self.calls.append({"messages": [dict(message) for message in messages], **identity})
-                raise RuntimeError("aux request failed")
+                raise ModelCallError("aux request failed", {"call_id": "aux-failed-call"})
 
-        model = FailingModel([])
+        underlying = FailingModel([])
         math_input = {
             "Parameters_List": [], "Variables_List": [{"symbol": "x"}],
             "Constraint_Table": [], "Objective": {"Mathematical_expressions": "Maximize x"},
             "Problem_Type": "NLP",
         }
         with tempfile.TemporaryDirectory() as directory:
+            underlying.ledger_path = Path(directory) / "calls.jsonl"
+            model = BudgetedModel(underlying, max_calls=1)
             with self.assertRaisesRegex(RuntimeError, "aux request failed"):
                 await prepare_auxiliary(
                     {"case_id": "case-fail", "question": "maximize x"},
@@ -203,7 +235,13 @@ class OursIntegrationTests(unittest.IsolatedAsyncioTestCase):
             self.assertTrue((stage / "prompt.json").is_file())
             self.assertTrue((stage / "error.json").is_file())
             self.assertFalse((stage / "response.json").exists())
-            self.assertEqual(len(model.calls), 1)
+            self.assertEqual(len(underlying.calls), 1)
+            self.assertEqual(model.attempted_calls, 1)
+            self.assertEqual(model.call_ids, ["aux-failed-call"])
+            self.assertEqual(underlying.calls[0]["response_format"], {"type": "json_object"})
+            with self.assertRaises(CallBudgetExceeded):
+                await model.complete([], stage="auxiliary", case_id="case-fail", run_id="run-fail")
+            self.assertEqual(len(underlying.calls), 1)
 
 
 if __name__ == "__main__":

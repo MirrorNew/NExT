@@ -132,7 +132,7 @@ async def extract_inputs(manifest: dict, model: LoggedModel, output: Path,
 async def _extract_inputs(manifest: dict, model: LoggedModel, output: Path,
                           *, refine: bool = True, max_calls: int = 64) -> dict:
     """Freeze the actual ours upstream and its single Auxiliary completion."""
-    from .ours import prepare_auxiliary, prepare_ours_input
+    from .ours import AUXILIARY_RESPONSE_FORMAT, prepare_auxiliary, prepare_ours_input
     if not refine:
         raise ValueError("The integrated upstream preserves ModelingAgent; --no-refine is no longer a pipeline mode")
     if output.exists():
@@ -151,6 +151,7 @@ async def _extract_inputs(manifest: dict, model: LoggedModel, output: Path,
                                   "model": asdict(model.config),
                                   "upstream": "ours_parameter_factor_modeling",
                                   "auxiliary_calls_per_successful_input": 1,
+                                  "auxiliary_response_format": AUXILIARY_RESPONSE_FORMAT,
                                   "repeat_scope": "coding repeats reuse this frozen input and auxiliary output"}
     cache = output.parent / (output.stem + "_upstream")
     for case in result["cases"]:
@@ -373,7 +374,7 @@ async def run_paired(manifest, model, output, *, framework="ours", level="coding
                      python_executable, timeout_seconds=180, solver_time_limit=60,
                      solver_threads=1, allow_unreviewed=False, resume=False,
                      source_root=None, max_calls=64, max_upstream_calls=32):
-    from .ours import prepare_auxiliary, prepare_ours_input
+    from .ours import AUXILIARY_RESPONSE_FORMAT, prepare_auxiliary, prepare_ours_input
     if min(repeats, concurrency, solver_threads, max_calls, max_upstream_calls) < 1 or max_repairs < 0:
         raise ValueError("Repeat/concurrency/thread/call limits must be positive; repairs nonnegative")
     if min(timeout_seconds, solver_time_limit) <= 0:
@@ -402,7 +403,9 @@ async def run_paired(manifest, model, output, *, framework="ours", level="coding
                 "solver_threads": solver_threads, "allow_unreviewed": allow_unreviewed,
                 "repeat_scope": ("fresh automatic upstream per repeat; ours arms share that upstream"
                                  if level == "end_to_end" else "coding conditioned on frozen mathematical input"),
-                "representation_source": "one AuxiliaryModelAgent completion; no second decomposition"}
+                "representation_source": "one AuxiliaryModelAgent completion; no second decomposition",
+                "stage_request_parameters": ({"auxiliary": {"response_format": AUXILIARY_RESPONSE_FORMAT}}
+                                             if "ned" in arms else {})}
     protocol = json.loads(json.dumps(protocol, allow_nan=False))
     protocol_hash = digest(protocol)
     protocol_path = output / "protocol.json"

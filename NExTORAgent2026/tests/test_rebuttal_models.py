@@ -121,6 +121,28 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("content", record["request"])
         self.assertNotIn("secret-value", self.ledger.read_text(encoding="utf-8"))
 
+    async def test_response_format_is_call_scoped_and_logged_as_effective_parameters(self):
+        create = mock.AsyncMock(side_effect=[fake_response(), fake_response()])
+        wrapper = LoggedModel(self.config, self.ledger, client=fake_client(create))
+
+        with mock.patch.dict("os.environ", {"TEST_MODEL_API_KEY": "secret-value"}):
+            await wrapper.complete(
+                [{"role": "user", "content": "auxiliary"}],
+                stage="auxiliary", case_id="case-1", run_id="run-1",
+                response_format={"type": "json_object"},
+            )
+            await wrapper.complete(
+                [{"role": "user", "content": "code"}],
+                stage="coding", case_id="case-1", run_id="run-1",
+            )
+
+        self.assertEqual(create.await_args_list[0].kwargs["response_format"], {"type": "json_object"})
+        self.assertNotIn("response_format", create.await_args_list[1].kwargs)
+        records = self.read_records()
+        self.assertEqual(records[0]["request"]["parameters"]["response_format"], {"type": "json_object"})
+        self.assertNotIn("response_format", records[1]["request"]["parameters"])
+        self.assertNotIn("response_format", self.config.request_parameters)
+
     async def test_model_mismatch_is_logged_with_usage_before_error(self):
         usage = {"prompt_tokens": 5, "completion_tokens": 2, "total_tokens": 7}
         create = mock.AsyncMock(return_value=fake_response(model="provider-alias", usage=usage))

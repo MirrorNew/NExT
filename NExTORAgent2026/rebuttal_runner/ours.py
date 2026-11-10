@@ -21,9 +21,12 @@ from .data import validate_math_input
 from .auxiliary_tree import AUXILIARY_SCHEMA_VERSION, parse_auxiliary_response
 
 
+AUXILIARY_RESPONSE_FORMAT = {"type": "json_object"}
+
+
 _DECOMPOSITION_PROMPT = f"""
-Keep the existing math_model_advice array and add a top-level decomposition object.
-Do not call another model or request another decomposition. Return exactly:
+Return only one JSON object containing math_model_advice and decomposition, with
+the following structure. Do not call another model or request another decomposition:
 {{
   "math_model_advice": [{{"variables": [], "constraints": [], "objective": "..."}}],
   "decomposition": {{
@@ -189,10 +192,14 @@ async def prepare_auxiliary(case_public: dict[str, Any], math_input: dict[str, A
     if not isinstance(question, str) or not question.strip():
         raise ValueError("case_public.question must be non-empty")
     normalized = validate_math_input(math_input)
-    # Reuse the project's exact auxiliary system and user prompt; only extend the
-    # required output schema within the same completion.
+    # Preserve the agent's modeling instructions, but replace its old output-only
+    # example so this single completion has exactly one JSON output contract.
     agent = AuxiliaryModelAgent(None, model_name=model.config.model)
-    agent.messages[0]["content"] += "\n\n" + _DECOMPOSITION_PROMPT
+    old_output_marker = "Output ONLY a JSON object with the following structure (no extra text):"
+    instructions, marker, _ = agent.messages[0]["content"].partition(old_output_marker)
+    if not marker:
+        raise ValueError("AuxiliaryModelAgent output contract changed; review the adapter")
+    agent.messages[0]["content"] = instructions.rstrip() + "\n\n" + _DECOMPOSITION_PROMPT
     context = json.dumps({
         "variables": normalized.get("Variables_List", []),
         "constraints": normalized.get("Constraint_Table", []),
@@ -211,7 +218,10 @@ async def prepare_auxiliary(case_public: dict[str, Any], math_input: dict[str, A
     _persist(auxiliary_folder, "prompt.json", prompt)
     started = time.perf_counter()
     try:
-        response = await model.complete(prompt, stage="auxiliary", case_id=case_id, run_id=run_id)
+        response = await model.complete(
+            prompt, stage="auxiliary", case_id=case_id, run_id=run_id,
+            response_format=AUXILIARY_RESPONSE_FORMAT,
+        )
     except BaseException as exc:
         elapsed = time.perf_counter() - started
         error = _safe_error(exc, model)

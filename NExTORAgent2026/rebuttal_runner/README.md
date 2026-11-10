@@ -24,6 +24,8 @@
 
 `ours` 的上游是 **5 次真实 completion**：参数分析/格式化、要素分析/格式化、ModelingAgent。NED 保留 **AuxiliaryModelAgent 原有的一次 completion**，在同一次响应内增加结构字段，再组织为树的辅助定义、依赖、外层关系和定义域；没有第二次 LLM 分解，也不再调用独立确定性分解器重新生成方案。首次编码一次；ours 每次修复包含原 RepairAgent 的分析和代码两次 completion。
 
+Auxiliary 的这一次请求单独设置 `response_format={"type":"json_object"}`；其他阶段不继承该调用级设置。适配层保留原 Agent 的建模要求，将旧输出格式替换为唯一的合并 JSON 格式。有效请求参数写入调用账本，协议的 `stage_request_parameters` 记录阶段参数约定（复用缓存时不代表本次实际发出该请求）。JSON 模式不替代结构、来源、关系和依赖校验；服务端拒绝参数、截断、无效 JSON 或无效结构均保留失败，不增加一次格式修复或重新分解调用。
+
 Native 不接收辅助意见，允许合法顶层结果变量以及自行引入辅助变量。NED 接收该一次 Auxiliary 输出。两臂共享题面、数学输入、输出对象、合法 NLExpr/resultant API 指导、模型参数和求解限制。格式不合法、来源表达式或依赖检查失败的 Auxiliary 输出留作审计，编码退回原数学输入；失败题不删除。结构验证不等于数学等价性证明。
 
 固定的结构化 `math_input` 是本入口的数学输入依据，ModelingAgent 的原始 `math_model` 文本作为解释另行保存；提示不允许它或辅助意见覆盖既定条件。这是当前实现的明确接口约定，不声称两份表示已自动证明一致。
@@ -93,6 +95,8 @@ python -m rebuttal_runner extract --manifest <清单.json> --model-config <配�
 ```powershell
 python -m rebuttal_runner run --manifest rebuttal_runner/examples/end_to_end_smoke.json --model-config rebuttal_runner/examples/model.example.json --level end_to_end --framework ours --arms native ned --output <新的smoke目录> --repairs 1 --max-calls 32 --max-upstream-calls 8 --solver-time-limit 30 --process-timeout 60 --solver-threads 1
 ```
+
+验证非空树可改用 `examples/nonempty_tree_smoke.json`：最小化 `exp(x^2)+exp(y^2)`，`x,y∈[0.5,2]`、`x*y>=1`，解析目标为 `2e`。清单不含数学输入或 Auxiliary 缓存；沿用 `--level end_to_end`，每次从题面执行全流程。验收应同时要求本次 Auxiliary 调用恰为一次、树非空且校验通过、生成代码实际使用定义并保留乘积约束，不能仅凭目标值正确判定树路径成功。
 
 以下为后续正式实验的命令模板，本轮没有执行：
 

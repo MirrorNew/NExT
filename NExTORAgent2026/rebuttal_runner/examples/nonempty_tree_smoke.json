@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "dataset": "connectivity_smoke",
+  "dataset_version": "exp-squares-product-v1",
+  "purpose": "one-case fresh end-to-end nonempty-tree integration check; not a benchmark experiment",
+  "cases": [
+    {
+      "case_id": "connectivity_smoke:exp_squares_product",
+      "source_id": "analytic_exp_squares_product",
+      "question": "Choose two real continuous decision variables x and y, each between 0.5 and 2 inclusive. Minimize exp(x^2) + exp(y^2), subject to x*y >= 1. Here exp is the natural exponential function and ^ denotes exponentiation. Return the optimized objective value as a single scalar.",
+      "math_input": null,
+      "reference": 5.43656365691809,
+      "answer_spec": {"kind": "scalar", "fields": ["objective_value"], "order": ["objective_value"]},
+      "scoring": {"name": "objective_relative", "tolerance": 0.01},
+      "review_status": "verified"
+    }
+  ]
+}
