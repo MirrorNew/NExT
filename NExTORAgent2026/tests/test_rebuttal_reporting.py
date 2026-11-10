@@ -86,6 +86,49 @@ class SummaryTests(unittest.TestCase):
         self.assertEqual(complete["attributed"]["full_total_tokens"], 25)
         self.assertEqual(complete["unique_execution"]["full_total_tokens"], 18)
 
+    def test_real_nested_ledger_usage_flows_through_reports_and_shared_attribution(self):
+        records = [
+            make_record("c1", "native", call_ids=["own-1", "shared"],
+                        upstream_call_ids=["shared"]),
+            make_record("c1", "ned", call_ids=["own-2"],
+                        upstream_call_ids=["shared"]),
+        ]
+        events = [
+            {"call_id": "shared", "usage": {"total_tokens": 7}},
+            {"call_id": "own-1", "usage": {"total_tokens": 5}},
+            {"call_id": "own-2", "usage": {"total_tokens": 6}},
+            {"call_id": "orphan", "usage": {"total_tokens": 3}},
+        ]
+
+        report = summarize_records(records, call_events=events)
+        overall = report["overall"]["usage"]
+        self.assertEqual(overall["attributed"]["full_total_tokens"], 25)
+        self.assertEqual(overall["unique_execution"]["full_total_tokens"], 18)
+        groups = {group["arm"]: group["usage"] for group in report["groups"]}
+        self.assertEqual(groups["native"]["attributed"]["full_total_tokens"], 12)
+        self.assertEqual(groups["native"]["unique_execution"]["full_total_tokens"], 12)
+        self.assertEqual(groups["ned"]["attributed"]["full_total_tokens"], 13)
+        self.assertEqual(groups["ned"]["unique_execution"]["full_total_tokens"], 13)
+
+        ledger = summarize_ledger(events, records)
+        self.assertEqual(ledger["recorded_call_count"], 4)
+        self.assertEqual(ledger["known_total_tokens"], 21)
+        self.assertEqual(ledger["full_total_tokens"], 21)
+        self.assertEqual(ledger["unattributed_call_ids"], ["orphan"])
+
+    def test_nested_and_legacy_usage_conflict_is_missing_not_silently_counted(self):
+        events = [{"call_id": "conflict", "total_tokens": 5,
+                   "usage": {"total_tokens": 6}}]
+        record = make_record("c1", call_ids=["conflict"])
+
+        usage = summarize_records([record], call_events=events)["overall"]["usage"]
+        self.assertIsNone(usage["attributed"]["full_total_tokens"])
+        self.assertEqual(usage["attributed"]["known_total_tokens"], 0)
+        self.assertEqual(usage["attributed"]["missing"][0]["call_id"], "conflict")
+        ledger = summarize_ledger(events, [record])
+        self.assertIsNone(ledger["full_total_tokens"])
+        self.assertEqual(ledger["missing_usage_call_ids"], ["conflict"])
+
     def test_missing_prediction_and_failed_score_stay_in_denominator(self):
         no_prediction = make_record("c1", prediction=..., correct=True)
         failed_score = make_record("c2", prediction=10, correct=False, status="failed")

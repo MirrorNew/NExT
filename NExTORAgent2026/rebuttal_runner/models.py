@@ -312,6 +312,8 @@ class LoggedModel:
                     f"MODEL_ID_MISMATCH: requested {self.config.model!r}, "
                     f"returned {returned_model!r}"
                 )
+            if record["finish_reason"] == "length":
+                raise RuntimeError("MODEL_OUTPUT_TRUNCATED: completion token limit reached; inspect usage before changing the budget")
             if not isinstance(content, str) or not content.strip():
                 raise RuntimeError("EMPTY_MODEL_RESPONSE")
 

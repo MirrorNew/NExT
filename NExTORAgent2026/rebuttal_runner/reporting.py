@@ -85,7 +85,15 @@ def _event_index(call_events: Iterable[dict[str, Any]]) -> tuple[dict[str, Any],
 def _token_value(call_id: str, indexed: dict[str, Any], duplicates: set[str]) -> int | float | None:
     if call_id in duplicates or call_id not in indexed:
         return None
-    value = indexed[call_id].get("total_tokens")
+    event = indexed[call_id]
+    usage = event.get("usage")
+    has_nested = isinstance(usage, dict) and "total_tokens" in usage
+    has_legacy = "total_tokens" in event
+    nested_value = usage.get("total_tokens") if has_nested else None
+    legacy_value = event.get("total_tokens") if has_legacy else None
+    if has_nested and has_legacy and nested_value != legacy_value:
+        return None
+    value = nested_value if has_nested else legacy_value
     if not _is_number(value) or value < 0:
         return None
     return value

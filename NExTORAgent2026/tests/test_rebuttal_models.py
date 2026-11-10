@@ -185,6 +185,22 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertIn("EMPTY_MODEL_RESPONSE", self.read_records()[0]["error"])
 
+    async def test_truncation_is_explicit_and_preserves_provider_usage(self):
+        usage = {"completion_tokens": 4096, "total_tokens": 4600,
+                 "completion_tokens_details": {"reasoning_tokens": 4096}}
+        for content in ("", "partially returned code"):
+            with self.subTest(content=content):
+                create = mock.AsyncMock(return_value=fake_response(
+                    content=content, usage=usage, finish_reason="length"))
+                wrapper = LoggedModel(self.config, self.ledger, client=fake_client(create))
+                with mock.patch.dict("os.environ", {"TEST_MODEL_API_KEY": "secret-value"}):
+                    with self.assertRaisesRegex(ModelCallError, "MODEL_OUTPUT_TRUNCATED"):
+                        await wrapper.complete([], stage="coding", case_id="truncated", run_id="r")
+                record = self.read_records()[-1]
+                self.assertEqual(record["finish_reason"], "length")
+                self.assertEqual(record["usage"], usage)
+                create.assert_awaited_once()
+
 
 if __name__ == "__main__":
     unittest.main()
