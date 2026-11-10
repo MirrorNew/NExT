@@ -11,8 +11,8 @@ from typing import Any, Iterable
 from .scoring import score_answer
 
 
-_GROUP_FIELDS = ("dataset", "dataset_version", "model", "framework", "arm", "rescore_threshold")
-_PAIR_SCOPE_FIELDS = ("dataset", "dataset_version", "model", "framework", "rescore_threshold")
+_GROUP_FIELDS = ("dataset", "dataset_version", "model", "framework", "level", "arm", "rescore_threshold")
+_PAIR_SCOPE_FIELDS = ("dataset", "dataset_version", "model", "framework", "level", "rescore_threshold")
 _ARMS = {"native", "ned"}
 _BOOTSTRAP_SEED = 0
 _BOOTSTRAP_SAMPLES = 500
@@ -91,6 +91,20 @@ def _token_value(call_id: str, indexed: dict[str, Any], duplicates: set[str]) ->
     return value
 
 
+def summarize_ledger(events, records):
+    """Account for the run's entire saved ledger, even before a trial is saved."""
+    indexed, duplicates = _event_index(events)
+    referenced = {call_id for record in records for call_id in _call_ids(record)}
+    tokens = {call_id: _token_value(call_id, indexed, duplicates) for call_id in indexed}
+    missing = sorted(call_id for call_id, value in tokens.items() if value is None)
+    known = sum(value for value in tokens.values() if value is not None)
+    return {"recorded_call_count": len(indexed), "known_total_tokens": known,
+            "full_total_tokens": known if not missing else None,
+            "missing_usage_call_ids": missing,
+            "unattributed_call_ids": sorted(set(indexed) - referenced),
+            "scope": "Current run ledger only, including recorded calls without a saved arm result; excludes external cached ledgers"}
+
+
 def _usage_for_records(
     records: list[dict[str, Any]],
     indexed_events: dict[str, Any],
@@ -147,17 +161,43 @@ def _execution_for_records(records: list[dict[str, Any]]) -> dict[str, Any]:
     known_total: int | float = 0
     missing_runs = 0
     for record in records:
-        execution = record.get("execution")
-        elapsed = execution.get("elapsed_seconds") if isinstance(execution, dict) else None
-        if _is_number(elapsed) and elapsed >= 0:
-            known_total += elapsed
-        else:
+        attempts = record.get("attempts")
+        executions = [a.get("execution") for a in attempts] if attempts else [record.get("execution")]
+        missing = False
+        for execution in executions:
+            elapsed = execution.get("elapsed_seconds") if isinstance(execution, dict) else None
+            if _is_number(elapsed) and elapsed >= 0:
+                known_total += elapsed
+            else:
+                missing = True
+        if missing:
             missing_runs += 1
     return {
         "known_total_seconds": known_total,
         "missing_runs": missing_runs,
         "full_total_seconds": known_total if records and missing_runs == 0 else None,
+        "scope": "all recorded execution attempts; legacy records without attempts use their saved final execution",
     }
+
+
+def _request_latency(records, indexed_events, duplicate_event_ids):
+    attributed = 0.0
+    unique = {}
+    missing = []
+    for record in records:
+        for call_id in _call_ids(record):
+            event = indexed_events.get(call_id) or {}
+            elapsed = event.get("elapsed_seconds")
+            if call_id in duplicate_event_ids or not _is_number(elapsed) or elapsed < 0:
+                missing.append(call_id)
+                continue
+            attributed += elapsed
+            unique[call_id] = elapsed
+    return {"known_attributed_seconds": attributed,
+            "full_attributed_seconds": attributed if not missing else None,
+            "known_unique_seconds": sum(unique.values()),
+            "missing_call_ids": sorted(set(missing)),
+            "scope": "provider-request latency; shared upstream charged once per path, not batch wall time"}
 
 
 def _group_summary(records: list[dict[str, Any]], indexed_events: dict[str, Any], duplicate_event_ids: set[str]) -> dict[str, Any]:
@@ -178,6 +218,7 @@ def _group_summary(records: list[dict[str, Any]], indexed_events: dict[str, Any]
         ).items())),
         "execution": _execution_for_records(records),
         "usage": _usage_for_records(records, indexed_events, duplicate_event_ids),
+        "model_request_latency": _request_latency(records, indexed_events, duplicate_event_ids),
         "ned_trace_summaries": [
             record.get("ned_trace", {}).get("summary")
             for record in records
@@ -474,6 +515,8 @@ def _manifest_references(manifest: dict[str, Any]) -> dict[tuple[str, str, str],
         raise ValueError("manifest.cases must be a list")
     result: dict[tuple[str, str, str], Any] = {}
     for index, item in enumerate(cases):
+        if isinstance(item, dict) and str(item.get("review_status", "")).startswith("excluded_"):
+            continue
         if not isinstance(item, dict) or not all(key in item for key in ("case_id", "reference", "scoring")):
             raise ValueError(f"manifest.cases[{index}] requires case_id, reference, and scoring")
         scoring = item.get("scoring")

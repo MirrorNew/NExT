@@ -1,92 +1,121 @@
-# Rebuttal 实验入口
+# Rebuttal 统一实验入口
 
-从 `NExTORAgent2026` 目录运行 `python -m rebuttal_runner`。使用同一个入口准备数据、生成共享数学输入、运行 Native/NED 成对实验、汇总和重评分。
+在 `NExTORAgent2026` 目录执行 `python -m rebuttal_runner`。当前协议为 `nedtree-integrated-v2`；准备、执行、汇总、重评分共用一个入口。本文档给出使用方法；本轮整合没有运行正式补实验或调用模型 API。
 
-## 适用范围
+## 实验层次必须显式指定
 
-这是新的受控编码实验协议 `nedtree-paired-v1`，用于检验相同数学输入下 NED 结构信息的额外作用。它不自动复现投稿时的端到端配置，也不把历史输出改写为新实验。
+| `--level` | 输入及执行边界 | 重复次数含义 |
+| --- | --- | --- |
+| `math` | 作者构造并检查的数学实例；固定 `math_input` 后比较编码路径 | 重复编码，不能解释成端到端重复 |
+| `coding` | 数据集题面及已冻结的抽取/数学输入；可复用逐题对齐后的历史缓存 | 重复编码，上游输入保持不变 |
+| `end_to_end` | 从题面自动开始；忽略清单中的历史数学缓存 | 每次重新执行整个自动工作流 |
 
-- 两臂共享题面、数学输入、定义域、合法 API 提示、模型参数、求解时间和修复上限。Native 可合法使用顶层结果变量，也可自行分解。
-- NED 使用已有确定性转换器；不支持或转换失败的题保留，并记录回退。不得事后只统计支持或成功的题。
-- `--framework ours` 在编码失败后增加一次错误分析调用；`standard` 直接根据执行反馈修复。这里的名称是本入口的两种修复路径，不能直接作为原论文同名方法的复现。`--repairs 0` 时两者首次编码提示相同，不应重复运行并当成两种独立方法。
-- `extract` 可记录一次抽取和一次建模检查；随后两臂复用该输入。`--repeats` 只重复冻结输入后的编码过程，不代表整条 pipeline 的独立重跑。
-- CoE、OptiMUS、外部 OR-LLM-Agent 尚未接入。不能用自有管线重命名代替这些对照。
+`math` 与 `coding` 共用执行器，但在协议、记录和汇总中分开。`ours` 的端到端 Native/NED 两臂在同一题同一重复内共享上游抽取和建模；下一重复重新生成。跨层次、不同输入 hash 或不同数据版本不会组成有效配对。
 
-## 环境与模型
+## 方法与 NED 的边界
 
-需要 Python 3.10+、OpenAI Python SDK、SymPy，以及执行端的 Gurobi Python 接口与可用许可证。当前本机验证环境为 Python 3.12.9、OpenAI SDK 1.78.0、Gurobi 12.0.2。API 密钥只从模型配置指定的环境变量读取，不写入配置。
+| `--framework` | 端到端入口 | 固定输入的编码入口 |
+| --- | --- | --- |
+| `ours` | 原 Parameter/Factor 抽取器、ModelingAgent、CodingAgent、RepairAgent | 原 CodingAgent；失败后原 RepairAgent |
+| `standard` | 题面直接生成程序 | 固定数学模型直接生成程序；按执行反馈修复 |
+| `coe` | 本地 CoE 的 conductor→experts→reducer | 原 ProgrammingExpert，以冻结数学输入作为已给定建模意见 |
+| `optimus` | 本地 OptiMUS 的抽取、建模、代码片段和程序组装 | 冻结输入映射到其代码阶段；不能无损映射时明确失败 |
+| `or_llm_agent` | 本地 OR-LLM-Agent 的建模、编码及修复流程 | 将原建模返回点替换为冻结输入，保留原编码及修复流程 |
 
-`examples/model.example.json` 说明模型 ID、Base URL、超时及生成参数。接口必须显式指定；不自动更换模型、不做隐藏重试。返回模型 ID 必须在允许清单内，失败、空响应、token 和耗时都进入 `calls.jsonl`。供应商返回的模型名不是对上游身份的独立认证。记录供应商实际返回的 token，不伪造美元成本。
+`ours` 的上游是 **5 次真实 completion**：参数分析/格式化、要素分析/格式化、ModelingAgent。NED 保留 **AuxiliaryModelAgent 原有的一次 completion**，在同一次响应内增加结构字段，再组织为树的辅助定义、依赖、外层关系和定义域；没有第二次 LLM 分解，也不再调用独立确定性分解器重新生成方案。首次编码一次；ours 每次修复包含原 RepairAgent 的分析和代码两次 completion。
 
-本轮模型安排：GPT-5 已通过最小接口检查；Kimi 已移出计划；DeepSeek 等待单独渠道，暂不填替代模型。
+Native 不接收辅助意见，允许合法顶层结果变量以及自行引入辅助变量。NED 接收该一次 Auxiliary 输出。两臂共享题面、数学输入、输出对象、合法 NLExpr/resultant API 指导、模型参数和求解限制。格式不合法、来源表达式或依赖检查失败的 Auxiliary 输出留作审计，编码退回原数学输入；失败题不删除。结构验证不等于数学等价性证明。
 
-## 数据准备
+固定的结构化 `math_input` 是本入口的数学输入依据，ModelingAgent 的原始 `math_model` 文本作为解释另行保存；提示不允许它或辅助意见覆盖既定条件。这是当前实现的明确接口约定，不声称两份表示已自动证明一致。
 
-```powershell
-python -m rebuttal_runner prepare --source <原始文件.json> --dataset NEXTOR --format nora --scoring nextor_relative --output <候选清单.json>
-python -m rebuttal_runner prepare --source <OptiBench.json> --dataset OptiBench --format optibench --scoring optibench_absolute --nonlinear-only --output <候选清单.json>
-python -m rebuttal_runner inspect --manifest <候选清单.json>
-```
+外部基线端到端仅允许 `--arms native`，保留各自上游流程。它们的 Native/NED 迁移对照使用 `coding` 或 `math` 层次，不把我们的上游套在基线前面并称作原基线端到端。不同方法的原生调用次数可以不同；统一限制和真实成本都记录。
 
-准备过程保留原始题面、source_id、参考答案结构和来源信息，生成版本号；不会覆盖源文件。OptiBench 可依据源数据标签列出非线性候选，但这不是人工核验完成的名单。NORA 的模型预测类型不用于静默筛题。
+## 模型、基线来源与统一限制
 
-正式运行前逐题确认：题面版本；所问变量及单位；答案是否为标量、列表或具名多输出；数学输入是否忠实；参考值精度；评分协议。核对后将 `review_status` 设为 `verified`，并在外部核对表保留依据。`ready/approved` 也是显式放行状态，不能由准备脚本自动赋予。
+- GPT-5 配置：`rebuttal_runner/examples/model.example.json`，密钥变量 `OPENAI_API_KEY`。
+- DeepSeek Flash 配置：`rebuttal_runner/examples/model.deepseek-flash.json`，官方 ID `deepseek-flash`，Base URL `https://api.deepseek.com`，密钥变量 `DEEPSEEK_API_KEY`。ID 根据[官方接口文档](https://api-docs.deepseek.com/api/list-models/)核对；此配置尚未在线检查。
+- Kimi 不在本轮计划中。密钥不写入配置，不自动更换模型，不隐藏重试；允许的返回模型 ID 明确列在配置内。
+- 配置的 4096 输出 token 是当前显式上限，不能当作实际消耗或已经验证足够；正式运行前可统一调整并冻结。使用供应商返回的 usage，不估造美元费用。
 
-`--allow-unreviewed` 仅用于探索，结果带 `exploratory=true`。题面疑似含外部答案材料时，即使探索模式也先停止该题的模型调用；人工核实题内数据后再处理标记，不能直接删除真实题面信息。
+外部基线使用 `--baseline-root D:\LLMProject`，分别读取 `Chain-of-Experts-main`、`OptiMUS-main`、`or_llm_agent-main`。适配器仅加载实际所需函数、类和提示，不执行含旧密钥/客户端的模块顶层代码，不改原始基线项目。来源按实际 Python 文件 SHA256 固定；没有 Git 元数据的目录不捏造 commit。
 
-清单的 `math_input` 只保留五个字段：`Parameters_List`、`Variables_List`、`Constraint_Table`、`Objective`、`Problem_Type`。`reference/scoring` 留在评分侧；模型只看到 `question/math_input/answer_spec`。字段隔离不能代替人工检查数学输入内是否混入参考解。
+适配的公共改动：调用均经过同一模型配置和日志；生成程序均经过同一执行器；使用目标值输出规范和合法非线性接口提示。CoE 保留当前源快照的 3 轮专家协作、单次 trial、关闭 reflection 的有效行为；其内部旧 `max_tokens`/temperature 不覆盖统一模型配置。OptiMUS 使用源代码现有无检索分支，保留代码片段/组装协议；OR-LLM-Agent 的重试受统一上限约束。详细执行阶段、路径和失败原因保存在 `baseline_trace`。
 
-缺少数学输入时可运行：
+OptiMUS 固定输入适配支持明确的标量 binary/integer/continuous 类型、数值上下界和明确无界域，兼容旧 `Range ` 字段；只在 coding/math 的原变量生成器中显式传入 lb/ub，避免原默认下界 0 改变数学模型。数组形状、有限开边界、复合或无法确认的范围返回 `unsupported_coding_input`，保留在分母，且在 Auxiliary 之前拒绝，不自动补造条件。端到端使用其原建模结构。
 
-```powershell
-python -m rebuttal_runner extract --manifest <候选清单.json> --model-config <模型配置.json> --output <带数学输入清单.json>
-```
+需要 Python 3.10+、OpenAI SDK、SymPy、NumPy、gurobipy；CoE 还需其 LangChain 依赖，已在 `rebuttal_runner/requirements-baselines.txt` 单独列出本机验证版本，没有改现有根依赖文件。本机验证解释器为 `E:\my_evns\py312_torch28\python.exe`。正式求解仍需合适的 Gurobi 许可证和版本。
 
-默认抽取后再检查一次，`--no-refine` 只抽取。上游失败保留为失败题，不从分母删除。人工修正后的数学输入只能用于明确标注的编码诊断，不应冒充自动端到端结果。
+## 数据准备与离线检查
 
-## 成对运行与续跑
+当前工作副本在 `D:\LLM-CodexProject\NEDTree-for-ICLR\rebuttal\20261110\dataset_repair_v1`：
 
-先用附带的一题解析数学例子验证接口、求解器与落盘：
+| 数据集 | 入口 | 可运行题数 |
+| --- | --- | ---: |
+| NEXTOR | `nextor/manifest.json` | 38 |
+| OptiBench | `optibench/manifest.json` | 183 |
+| OptMATH | `optmath/manifest_runnable.json` | 34，明确排除 137 |
+| ABC | `observation/manifest.json` | 300，包含 ABC110 统一输入说明 |
 
-```powershell
-python -m rebuttal_runner run --manifest rebuttal_runner/examples/math_smoke.json --model-config rebuttal_runner/examples/model.example.json --output <新的输出目录> --repairs 0 --concurrency 1
-```
-
-正式实验显式固定参数：
-
-```powershell
-python -m rebuttal_runner run --manifest <已核对清单.json> --model-config <模型配置.json> --output <新的输出目录> --framework ours --repeats 1 --repairs 0 --concurrency 2 --solver-time-limit 60 --process-timeout 180 --solver-threads 1
-```
-
-`--repairs N` 最多执行 N+1 次生成程序。只有程序执行或答案解析失败才触发修复；得到可解析的答案就停止，不用参考答案是否正确来决定重试。错误分析与额外生成均单独计费和记录。
-
-生成程序在独立子进程运行；直接 `optimize()` 调用会注入 TimeLimit/Threads 并记录求解状态。程序级超时另行控制。答案匹配分数不等价于模型语义正确性；无解、跳过求解或错误建模等仍需结合 `solver_status`、代码及人工检查分析。
-
-续跑使用完全相同的命令并添加 `--resume`。已落盘的成功和失败均保留。协议、清单或参数改变时拒绝复用目录。已开始但未完整落盘的单元不会自动再次收费，需先核查后另建输出目录。
-
-## 汇总与阈值敏感性
+原始数据不覆盖。`approved` 表示按作者确认策略完成入口准备，不意味着全部来源答案都被独立证明。原始审计清单和排除理由保留；只有 `excluded_*` 数据状态离开计划分母，方法不支持、生成/求解失败仍计入。
 
 ```powershell
-python -m rebuttal_runner summary --run-dir <输出目录> --output <新汇总.json>
-python -m rebuttal_runner rescore --run-dir <输出目录> --thresholds 0.01,0.001,0.0001 --output <新重评分.jsonl>
+python -m rebuttal_runner inspect --manifest <清单.json>
+python -m rebuttal_runner plan --manifest <清单.json> --model-config rebuttal_runner/examples/model.deepseek-flash.json --level end_to_end --framework ours --output <新的计划.json>
+python -m rebuttal_runner plan --manifest <清单.json> --model-config rebuttal_runner/examples/model.example.json --level end_to_end --framework coe --baseline-root D:\LLMProject --output <新的计划.json>
 ```
 
-重评分只读取固定预测，不调用模型或求解器，不改变原始结果。本轮确认后的工作副本统一使用 `objective_relative`：只比较标量目标值，非零参考采用 `abs(pred-ref)/abs(ref) <= tolerance`，仅零参考采用绝对容差 `1e-5`。三档为 `0.01/0.001/0.0001`；内部保持完整数值精度，展示舍入不参与评分。标量 `answer_spec.fields` 设为 `["objective_value"]` 时，公共编码提示明确要求返回优化目标，不改变原题数学条件。
+`plan` 不调用模型或求解器，检查数据、层次、源码、依赖、密钥变量是否存在以及调用硬上限；这不是线上可用性保证。`hard_call_ceiling` 是停止上限，不是预计费用。`--max-calls` 限制每臂全部请求，包括 NED 的 Auxiliary 和修复；`--max-upstream-calls` 单独限制 ours 的共享上游。失败请求也占用预算。
 
-NEXTOR 弹簧仅使用 `nextor_spring_legacy`，限定 `case_id == "NEXTOR:11"`、参考结构 `[目标值, 9.0]`；目标值或圈数任一命中均可通过，并在 `matched_references` 记录命中属性。它不推广到其他列表题。重评分保留清单中每题的协议及特例。
+因此 `max-calls` 是总调用预算，NED 的一次 Auxiliary 也占额度；不是两臂拥有相同数量的纯编码调用。主要公平性控制还包括相同初始生成次数和 `repairs` 上限；正式实验应给足预算，若预算触顶必须单列报告。
 
-历史 `nextor_relative`（零值精确匹配）、`optibench_absolute`、`optmath_normalized` 与完整结构比较仍保留原行为；旧清单不会被静默转换成新协议。历史代码中的末位绝对容差或任意项匹配也不等于本轮的三档相对误差。
+模型可见字段仅为题面、数学输入/建模文本和 `answer_spec`，参考答案、评分和审计字段留在执行之后。隔离字段不能替代对输入内容的语义检查。
 
-`--exclude-case <case_id>` 生成明确标记的排除分析；原结果不删除。原全集和排除后结果应同时报告。参考值舍入或单位有疑问时，先解决对应问题，再解释严格阈值结果。
+如需重用缓存，先将历史记录映射为清单，再做严格对齐：
 
-汇总区分计划数、完成数、缺失数、失败与正确答案；配对必须满足相同题、重复编号、输入 hash 和版本。按 source_id 做聚类 bootstrap，题目极少时区间不宜作为稳健性证据。费用分为实际唯一 API 调用和各方法归因成本；缺少 usage 时标为未知。历史输出需先核对来源并映射到当前记录格式，不能直接拼接进统计。
+```powershell
+python -m rebuttal_runner attach-inputs --manifest <当前清单.json> --cache-manifest <历史输入清单.json> --output <新的合并清单.json>
+```
 
-每次运行保留 `protocol.json`、`manifest.json`、`calls.jsonl`、逐臂 `result.json`、输入、提示、模型响应、原始/执行代码、stdout/stderr，以及可重建的 `summary.json`。日志可能包含研究题面，按项目的数据权限保存。
+仅同数据集、唯一 source_id、完全相同题面的合法数学输入可复用；不复制参考答案、评分和放行状态，旧 Auxiliary 必须匹配输入和题面 hash。历史模型的抽取仍标为历史缓存，不能成为新模型端到端成绩。
 
-## 验证
+需要新生成输入时，使用 `extract`，它运行原上游 5 次调用和一次 Auxiliary；本轮未执行该命令：
+
+```powershell
+python -m rebuttal_runner extract --manifest <清单.json> --model-config <配置.json> --output <新的冻结输入清单.json>
+```
+
+上游输出立即保存，并逐题更新 `.partial.json`。中断后先检查已落盘记录，通过 `attach-inputs` 复用完成输入；不自动重新收费。不支持旧 `--no-refine` 省略 ModelingAgent 的模式。
+
+## 执行、恢复与记录
+
+以下为后续正式实验的命令模板，本轮没有执行：
+
+```powershell
+python -m rebuttal_runner run --manifest <冻结输入清单.json> --model-config <配置.json> --level coding --framework ours --output <新的输出目录> --repairs 0 --repeats 1 --concurrency 1
+python -m rebuttal_runner run --manifest <数据清单.json> --model-config <配置.json> --level end_to_end --framework or_llm_agent --baseline-root D:\LLMProject --output <新的输出目录> --repairs 1 --max-calls 64
+```
+
+`--repairs N` 最多允许初始执行之后 N 次修复；只根据程序执行和输出解析失败触发，不根据参考答案决定是否重试。原方法无对应修复环节时不额外伪造。直接 `optimize()` 调用注入 TimeLimit/Threads，另外限制进程时间；读取答案前要求求解限制成功注入、`SolCount > 0`。代码和求解状态保存，答案匹配不等于建模语义正确。
+
+续跑使用完全相同命令加 `--resume`。已完成的成功/失败均保留；协议、数据、代码或配置变化拒绝复用目录。开始但未完整落盘的单元停止并要求检查已有记录，不自动重新请求。每次调用保存提示、响应/错误、模型 ID、usage 和耗时；每次执行保存原代码、执行代码、stdout/stderr。汇总只读取 Native/NED 结果，不把 Auxiliary 日志算为实验题。
+
+输出目录同时仅允许一个进程持有 `.run.lock`。正常退出释放锁；硬中断遗留锁不自动抢占，先核查 PID 和账本再恢复，避免并行 resume 重复请求。
+
+## 汇总及 1% / 0.1% / 0.01% 重评分
+
+```powershell
+python -m rebuttal_runner summary --run-dir <输出目录> --output <新的汇总.json>
+python -m rebuttal_runner rescore --run-dir <输出目录> --thresholds 0.01,0.001,0.0001 --output <新的重评分.jsonl>
+```
+
+重新评分保留：同一批固定预测，不调用模型或求解器，不改原结果。本轮 `objective_relative` 仅比较标量目标值，非零参考用 `abs(pred-ref)/abs(ref) <= tolerance`；零参考使用 `1e-5` 绝对容差。内部完整精度参与评分，显示舍入不参与。NEXTOR:11 单独保留作者确认的 `nextor_spring_legacy`（目标值或圈数命中），不推广至其他列表题。历史其他协议行为不被静默替换。
+
+汇总列出计划/完成/缺失、失败及准确率，按源题聚类 bootstrap。共享上游成本可分别归因给两臂，同时单列唯一调用量；执行耗时包含所有修复尝试。`current_run_ledger` 另外统计本次账本中尚未落盘为实验结果的调用，避免漏报已记录费用。缺失 usage 标为未知；调用时延之和不是并发批次墙钟时间。
+
+## 离线验证
 
 ```powershell
 python -m unittest discover -s tests -p 'test_rebuttal_*.py' -v
 ```
 
-离线测试覆盖评分边界、输出结构、数据隔离、模型失败记账、真实子进程行为、成对输入、修复上限和续跑。小样例运行只证明工具链连通，不是补实验结论。
+离线测试使用假模型回复，覆盖真实 agent 提示和本地基线代码路径、单次 Auxiliary、字段隔离、调用/修复预算、异常和恢复、配对分母、阈值及执行器；不能替代后续真实 API、生成质量和目标求解规模检查。

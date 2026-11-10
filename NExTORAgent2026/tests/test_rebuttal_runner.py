@@ -23,7 +23,11 @@ class FakeModel:
 
     async def complete(self, messages, **identity):
         self.calls.append({"messages": copy.deepcopy(messages), **identity})
-        return {"content": '```python\nprint("FinalAnswer=【2】")\n```',
+        content = '```python\nprint("FinalAnswer=【2】")\n```'
+        if identity["stage"] == "auxiliary":
+            content = json.dumps({"math_model_advice": [], "decomposition": {
+                "schema_version": "nextor-aux-tree-v1", "candidates": []}})
+        return {"content": content,
                 "call_id": f"call-{len(self.calls)}", "usage": {"total_tokens": 10},
                 "returned_model": "test-model", "elapsed_seconds": 0.01}
 
@@ -83,16 +87,17 @@ class PairedRunnerTests(unittest.IsolatedAsyncioTestCase):
                 records = await run_paired(manifest, model, directory / "run", max_repairs=3,
                                            python_executable=sys.executable)
             self.assertEqual(manifest, original)
-            self.assertEqual(len(model.calls), 2)
+            self.assertEqual(len(model.calls), 3)
             self.assertTrue(all(not r["score"]["correct"] for r in records))
             self.assertEqual(records[0]["input_hash"], records[1]["input_hash"])
             self.assertNotIn("987654321", json.dumps(model.calls))
-            native = json.loads(model.calls[0]["messages"][1]["content"])
-            ned = json.loads(model.calls[1]["messages"][1]["content"])
-            self.assertNotIn("ned_advice", native)
-            self.assertIn("ned_advice", ned)
-            self.assertEqual(ned["ned_advice"]["status"], "applied")
-            self.assertEqual(native["math_input"], ned["math_input"])
+            native = json.dumps(model.calls[0]["messages"])
+            ned = json.dumps(model.calls[2]["messages"])
+            self.assertNotIn("nedtree_auxiliary_advice", native)
+            self.assertIn("nedtree_auxiliary_advice", ned)
+            self.assertEqual(sum(c["stage"] == "auxiliary" for c in model.calls), 1)
+            self.assertEqual(records[0]["representation_call_ids"], [])
+            self.assertEqual(records[1]["representation_call_ids"], ["call-2"])
 
     async def test_zero_repairs_stops_after_one_execution_per_arm(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -102,7 +107,7 @@ class PairedRunnerTests(unittest.IsolatedAsyncioTestCase):
             with patch("rebuttal_runner.runner.execute_code", new=AsyncMock(return_value=failed)):
                 records = await run_paired(load_manifest(EXAMPLE), model, directory / "run",
                                            max_repairs=0, python_executable=sys.executable)
-            self.assertEqual(len(model.calls), 2)
+            self.assertEqual(len(model.calls), 3)
             self.assertTrue(all(len(r["attempts"]) == 1 and r["repair_count"] == 0 for r in records))
 
     async def test_missing_input_counts_both_arms_without_paid_calls(self):
@@ -126,7 +131,7 @@ class PairedRunnerTests(unittest.IsolatedAsyncioTestCase):
                 await run_paired(manifest, model, directory / "run", python_executable=sys.executable)
                 records = await run_paired(manifest, model, directory / "run", python_executable=sys.executable,
                                            resume=True)
-            self.assertEqual(len(model.calls), 2)
+            self.assertEqual(len(model.calls), 3)
             self.assertEqual(len(records), 2)
             with self.assertRaisesRegex(ValueError, "protocol differs"):
                 await run_paired(manifest, model, directory / "run", python_executable=sys.executable,

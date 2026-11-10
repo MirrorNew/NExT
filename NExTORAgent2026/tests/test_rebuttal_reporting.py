@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from rebuttal_runner.reporting import rescore_records, summarize_records
+from rebuttal_runner.reporting import rescore_records, summarize_ledger, summarize_records
 
 
 def make_record(
@@ -52,6 +52,14 @@ def find_comparison(report, **scope):
 
 
 class SummaryTests(unittest.TestCase):
+    def test_ledger_retains_recorded_calls_without_finished_arm(self):
+        ledger = summarize_ledger([{"call_id": "orphan", "total_tokens": 12},
+                                   {"call_id": "failed", "total_tokens": None}], [])
+        self.assertEqual(ledger["recorded_call_count"], 2)
+        self.assertEqual(ledger["known_total_tokens"], 12)
+        self.assertIsNone(ledger["full_total_tokens"])
+        self.assertEqual(ledger["unattributed_call_ids"], ["failed", "orphan"])
+
     def test_missing_usage_is_not_zero_and_shared_calls_are_separated(self):
         records = [
             make_record("c1", "native", call_ids=["own-1", "shared"], upstream_call_ids=["shared"]),
@@ -149,6 +157,13 @@ class PairingTests(unittest.TestCase):
 
 
 class RescoreTests(unittest.TestCase):
+    def test_explicit_data_exclusion_with_missing_reference_does_not_block_rescore(self):
+        manifest = {"schema_version": 1, "dataset": "NEXTOR", "dataset_version": "v1", "cases": [
+            {"case_id": "ok", "reference": 1, "scoring": {"name": "objective_relative"}},
+            {"case_id": "excluded", "reference": None, "scoring": {},
+             "review_status": "excluded_missing_critical_definition"}]}
+        self.assertEqual(len(rescore_records([make_record("ok")], manifest)), 3)
+
     def test_rescore_preserves_approved_zero_and_spring_protocols(self):
         manifest = {"schema_version": 1, "dataset": "NEXTOR", "dataset_version": "v1", "cases": [
             {"case_id": "zero", "reference": 0, "scoring": {"name": "objective_relative"}},
