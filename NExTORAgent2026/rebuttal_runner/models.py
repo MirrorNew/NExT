@@ -28,6 +28,36 @@ class ModelCallError(RuntimeError):
         self.record = record
 
 
+class CallBudgetExceeded(RuntimeError):
+    """The declared call budget was exhausted before another provider request."""
+
+
+class BudgetedModel:
+    """Per-run view of the same provider; failures consume one attempted call."""
+
+    def __init__(self, model, max_calls: int):
+        if isinstance(max_calls, bool) or not isinstance(max_calls, int) or max_calls < 1:
+            raise ValueError("max_calls must be a positive integer")
+        self.model = model
+        self.config = model.config
+        self.ledger_path = model.ledger_path
+        self.max_calls = max_calls
+        self.attempted_calls = 0
+        self.call_ids = []
+
+    async def complete(self, messages, **identity):
+        if self.attempted_calls >= self.max_calls:
+            raise CallBudgetExceeded(f"Call budget {self.max_calls} exhausted")
+        self.attempted_calls += 1
+        try:
+            response = await self.model.complete(messages, **identity)
+        except ModelCallError as exc:
+            self.call_ids.append(exc.record["call_id"])
+            raise
+        self.call_ids.append(response["call_id"])
+        return response
+
+
 @dataclass(frozen=True)
 class ModelConfig:
     model: str
