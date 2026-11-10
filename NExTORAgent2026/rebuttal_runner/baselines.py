@@ -410,6 +410,16 @@ def _parse_execution(execution: dict[str, Any], answer_spec: dict[str, Any]) -> 
     return None
 
 
+def _extract_optimus_repair_code(response: str,
+                                 original_extract_code: Callable[[str], str] | None) -> str:
+    """Unwrap OptiMUS's ===== repair format, then validate via the shared parser."""
+    lines = response.splitlines()
+    delimiters = [index for index, line in enumerate(lines) if line.strip() == "====="]
+    if len(delimiters) == 2 and original_extract_code is not None:
+        response = original_extract_code(response)
+    return extract_code(response)
+
+
 def _solver_execution_valid(execution: dict[str, Any]) -> bool:
     solver = execution.get("solver_status") or {}
     return (execution.get("status") == "executed" and execution.get("returncode") == 0
@@ -660,12 +670,12 @@ def _load_optimus(root: Path, get_response: Callable):
     specs = {
         "parameters": ({"get_params", "extract_score"}, {"prompt_params", "prompt_params_q", "qs"}),
         "objective": ({"get_objective", "extract_objective"}, {"prompt_objective"}),
-        "constraint": ({"get_constraints", "extract_score_constraint", "logic_check"}, {"prompt_constraints", "prompt_constraints_q", "prompt_constraints_redundant", "prompt_constraints_complete", "qs"}),
-        "constraint_model": ({"get_constraint_formulations", "extract_formulation_from_end", "logic_check", "extract_score_constraint_model"}, {"qs"}),
+        "constraint": ({"get_constraints", "extract_score_constraint", "logic_check"}, {"prompt_constraints", "prompt_constraints_q", "prompt_constraints_redundant", "prompt_constraints_complete", "prompt_constraint_feedback", "qs"}),
+        "constraint_model": ({"get_constraint_formulations", "extract_formulation_from_end", "logic_check", "extract_score_constraint_model"}, {"prompt_constraints_model", "prompt_constraints_q", "qs"}),
         "objective_model": ({"get_objective_formulation"}, {"prompt_objective_model"}),
         "target_code": ({"get_codes", "extract_code_from_end"}, {"directions", "prompt_constraints_code", "prompt_objective_code", "qs"}),
         "generate_code": ({"generate_code", "get_var_code", "get_param_code"}, None),
-        "execute_code": ({"execute_and_debug"}, {"debug_template"}),
+        "execute_code": ({"execute_and_debug", "extract_code"}, {"debug_template"}),
     }
     for module_name, (functions, constants) in specs.items():
         ns = dict(common)
@@ -956,7 +966,8 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
             response = await recorder.complete([{"role": "user", "content": prompt}],
                                                "baseline_optimus_repair")
             try:
-                code = extract_code(response)
+                original_extract_code = stages["execute_code"].get("extract_code")
+                code = _extract_optimus_repair_code(response, original_extract_code)
             except ValueError:
                 code = response
         prediction = _parse_execution(execution or {}, answer_spec)

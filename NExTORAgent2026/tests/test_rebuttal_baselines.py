@@ -263,6 +263,76 @@ class BaselineAdapterTests(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         self.assertEqual(result["baseline_trace"]["algorithm"], "OptiMUS_staged_pipeline")
 
+    def test_optimus_low_confidence_constraint_feedback_prompt_is_loaded(self):
+        source = Path(r"D:\LLMProject\OptiMUS-main")
+        available = baselines.baseline_availability("optimus", source)
+        if not available["available"]:
+            self.skipTest(f"OptiMUS snapshot/dependencies unavailable: {available}")
+
+        feedback_prompts = []
+
+        def fake_response(prompt, model=None):
+            feedback_prompts.append(prompt)
+            return '{"action": "yes", "updatedConstraint": null}'
+
+        stages = baselines._load_optimus(source, fake_response)
+        constraints = ["x >= 0"]
+        valid, result = stages["constraint"]["extract_score_constraint"](
+            "Maximize x.", "1 OUT OF 5", {}, {}, constraints, "x >= 0", None
+        )
+
+        self.assertTrue(valid)
+        self.assertIs(result, constraints)
+        self.assertEqual(len(feedback_prompts), 1)
+        self.assertIn("Do you want to keep this constraint?", feedback_prompts[0])
+
+    def test_optimus_constraint_model_prompts_are_loaded(self):
+        source = Path(r"D:\LLMProject\OptiMUS-main")
+        available = baselines.baseline_availability("optimus", source)
+        if not available["available"]:
+            self.skipTest(f"OptiMUS snapshot/dependencies unavailable: {available}")
+
+        prompts = []
+
+        def fake_response(prompt, model=None):
+            prompts.append(prompt)
+            return "not valid formulation output"
+
+        stages = baselines._load_optimus(source, fake_response)
+        constraints = [{"description": "x >= 2", "formulation": None, "code": None}]
+        with patch("builtins.print"):
+            result, variables = stages["constraint_model"]["get_constraint_formulations"](
+                "Minimize x.", {}, constraints, "fake-model", True
+            )
+
+        self.assertEqual(len(prompts), 3)
+        self.assertIn("model the following constraint mathematically", prompts[0])
+        self.assertIn("Does this constraint logically make sense?", prompts[2])
+        self.assertEqual(len(result), 1)
+        self.assertEqual(variables, {})
+
+    def test_optimus_repair_delimiters_are_unwrapped_and_validated(self):
+        source = Path(r"D:\LLMProject\OptiMUS-main")
+        available = baselines.baseline_availability("optimus", source)
+        if not available["available"]:
+            self.skipTest(f"OptiMUS snapshot/dependencies unavailable: {available}")
+        stages = baselines._load_optimus(source, lambda prompt, model=None: "")
+        original_extract_code = stages["execute_code"]["extract_code"]
+
+        response = "=====\nprint('FinalAnswer=【2.0】')\n====="
+        self.assertEqual(
+            baselines._extract_optimus_repair_code(response, original_extract_code),
+            "print('FinalAnswer=【2.0】')",
+        )
+        with self.assertRaisesRegex(ValueError, "parseable Python code"):
+            baselines._extract_optimus_repair_code(
+                "=====\nif True print('bad')\n=====", original_extract_code
+            )
+        with self.assertRaisesRegex(ValueError, "parseable Python code"):
+            baselines._extract_optimus_repair_code(
+                "=====\nprint('unclosed')", original_extract_code
+            )
+
     def test_conditioned_coding_uses_frozen_input_and_supplied_advice(self):
         model = FakeModel([
             "```python\nimport gurobipy as gp\nm=gp.Model()\nx=m.addVar()\nm.setObjective(x, gp.GRB.MAXIMIZE)\nm.addConstr(x <= 5)\nm.optimize()\nprint('FinalAnswer=【5】')\n```",

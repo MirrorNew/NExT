@@ -36,6 +36,8 @@ objective value even if the narrative also asks for a plan. Keep the model uncha
 For kind='numeric_list', emit a JSON array in the requested order.
 For kind='named_numeric', emit an object with exactly the requested field names.
 Do not print a final answer without a solution. Return one Python fenced block.
+The returned program must execute when launched as a script. If you define a
+solve() or main() function, invoke it (for example in an if __name__ == '__main__' guard).
 """
 
 
