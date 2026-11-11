@@ -133,6 +133,8 @@ python -m rebuttal_runner rescore --run-dir <输出目录> --thresholds 0.01,0.0
 
 求解时间单独从每次 `optimize()` 返回后的 Gurobi `Runtime` 采集，保存于 `solver_status.optimize_calls`，并累计已知值和缺失次数；程序执行的 `elapsed_seconds` 保持原含义。汇总中的 `execution.solver_runtime` 与程序执行时间分开。求解异常不沿用先前 Runtime；进程被强制终止、旧日志没有 Runtime 或历史成功记录缺执行证据时，完整求解时间为未知，不填零。明确未进入求解的上游失败保留零次求解。
 
+执行器允许直接的字面量标准库数学调用，例如 `__import__("math").exp(...)`，以支持原目标值的数值重算；变量模块名、导入别名、额外导入参数和其他动态导入仍拒绝。该兼容处理不改变生成代码的数学模型、求解限制或基线流程。
+
 ## 离线验证
 
 ```powershell

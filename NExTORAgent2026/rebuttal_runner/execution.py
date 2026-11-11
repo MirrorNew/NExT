@@ -160,6 +160,29 @@ class _OptimizeCallCollector(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_Call(self, node: ast.Call) -> None:
+        # A direct, literal standard-library math call cannot hide a solver import.
+        # Keep aliases, variable module names and all other dynamic imports rejected.
+        if (
+            isinstance(node.func, ast.Attribute)
+            and node.func.attr in {
+                "exp", "expm1", "log", "log1p", "log2", "log10", "sqrt",
+                "sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh",
+                "tanh", "fabs", "pow", "hypot", "ceil", "floor", "fsum", "prod",
+                "isfinite", "isnan", "isinf",
+            }
+            and isinstance(node.func.value, ast.Call)
+            and isinstance(node.func.value.func, ast.Name)
+            and node.func.value.func.id == "__import__"
+            and len(node.func.value.args) == 1
+            and isinstance(node.func.value.args[0], ast.Constant)
+            and node.func.value.args[0].value == "math"
+            and not node.func.value.keywords
+        ):
+            for arg in node.args:
+                self.visit(arg)
+            for keyword in node.keywords:
+                self.visit(keyword.value)
+            return
         if isinstance(node.func, ast.Attribute):
             if node.func.attr == "optimize":
                 self.calls.append(node)

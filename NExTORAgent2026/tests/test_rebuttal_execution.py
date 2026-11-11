@@ -153,6 +153,39 @@ model.optimize()
         self.assertEqual([call["runtime_seconds"] for call in solver["optimize_calls"]], [0.1, 0.2])
         self.assertAlmostEqual(solver["solver_runtime_seconds"], 0.3)
 
+    async def test_literal_math_import_call_preserves_solver_instrumentation(self):
+        source = '''class Params:
+    pass
+class FakeModel:
+    def __init__(self):
+        self.Params = Params()
+        self.Status = 2
+        self.SolCount = 1
+        self.Runtime = 0.125
+    def optimize(self):
+        assert self.Params.TimeLimit == 1
+        assert self.Params.Threads == 1
+model = FakeModel()
+model.optimize()
+print(__import__("math").exp(0))
+'''
+        result = await execute_code(source, self.case_dir("literal_math"), PYTHON, 3, 1)
+        self.assertEqual(result["status"], "executed")
+        self.assertTrue(result["solver_limits_applied"])
+        self.assertEqual(result["solver_status"]["solver_runtime_seconds"], 0.125)
+        self.assertIn("1.0", result["stdout"])
+        for index, unsafe in enumerate((
+            '__import__("gurobipy").exp(0)',
+            '__import__(module_name).exp(0)',
+            '__import__("math", globals()).exp(0)',
+            '__import__("math").__dict__["exp"](0)',
+        )):
+            with self.subTest(import_expression=unsafe):
+                invalid = source.replace('__import__("math").exp(0)', unsafe)
+                rejected = await execute_code(invalid, self.case_dir(f"dynamic_math_{index}"), PYTHON, 3, 1)
+                self.assertEqual(rejected["status"], "invalid_program")
+                self.assertFalse(rejected["solver_limits_applied"])
+
     async def test_missing_runtime_is_null_and_does_not_become_zero(self):
         folder = self.case_dir("missing_runtime")
         source = '''class Params:
