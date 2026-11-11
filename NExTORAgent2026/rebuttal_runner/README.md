@@ -131,6 +131,8 @@ python -m rebuttal_runner rescore --run-dir <输出目录> --thresholds 0.01,0.0
 
 汇总列出计划/完成/缺失、失败及准确率，按源题聚类 bootstrap。共享上游成本可分别归因给两臂，同时单列唯一调用量；执行耗时包含所有修复尝试。`current_run_ledger` 另外统计本次账本中尚未落盘为实验结果的调用，避免漏报已记录费用。缺失 usage 标为未知；调用时延之和不是并发批次墙钟时间。
 
+求解时间单独从每次 `optimize()` 返回后的 Gurobi `Runtime` 采集，保存于 `solver_status.optimize_calls`，并累计已知值和缺失次数；程序执行的 `elapsed_seconds` 保持原含义。汇总中的 `execution.solver_runtime` 与程序执行时间分开。求解异常不沿用先前 Runtime；进程被强制终止、旧日志没有 Runtime 或历史成功记录缺执行证据时，完整求解时间为未知，不填零。明确未进入求解的上游失败保留零次求解。
+
 ## 离线验证
 
 ```powershell

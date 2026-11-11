@@ -52,6 +52,61 @@ def find_comparison(report, **scope):
 
 
 class SummaryTests(unittest.TestCase):
+    def test_solver_runtime_is_aggregated_separately_and_missing_legacy_stays_missing(self):
+        measured = make_record("measured", elapsed=5.0)
+        measured["execution"] = {
+            "elapsed_seconds": 5.0,
+            "solver_limits_applied": True,
+            "solver_status": {
+                "status": 2,
+                "sol_count": 1,
+                "optimize_call_count": 2,
+                "optimize_calls": [
+                    {"runtime_seconds": 0.2},
+                    {"runtime_seconds": 0.3},
+                ],
+            },
+        }
+        legacy = make_record("legacy", elapsed=2.0)
+        report = summarize_records([measured, legacy])["overall"]["execution"]
+        self.assertEqual(report["known_total_seconds"], 7.0)
+        self.assertEqual(report["solver_runtime"]["optimize_call_count"], 2)
+        self.assertAlmostEqual(report["solver_runtime"]["known_total_seconds"], 0.5)
+        self.assertIsNone(report["solver_runtime"]["full_total_seconds"])
+        self.assertEqual(report["solver_runtime"]["missing_runtime_runs"], 1)
+
+    def test_missing_runtime_in_new_log_counts_call_and_keeps_partial_total(self):
+        record = make_record("partial")
+        record["execution"] = {
+            "elapsed_seconds": 3.0,
+            "solver_status": {
+                "optimize_call_count": 2,
+                "optimize_calls": [
+                    {"runtime_seconds": 0.4},
+                    {"runtime_seconds": None},
+                ],
+            },
+        }
+        runtime = summarize_records([record])["overall"]["execution"]["solver_runtime"]
+        self.assertEqual(runtime["optimize_call_count"], 2)
+        self.assertEqual(runtime["known_total_seconds"], 0.4)
+        self.assertEqual(runtime["missing_runtime_count"], 1)
+        self.assertIsNone(runtime["full_total_seconds"])
+
+    def test_missing_execution_distinguishes_explicit_upstream_failure_from_success(self):
+        upstream_failure = make_record("upstream", status="upstream_failed")
+        upstream_failure["execution"] = None
+        success_without_execution = make_record("success", status="completed")
+        success_without_execution["execution"] = None
+
+        failed_runtime = summarize_records([upstream_failure])["overall"]["execution"]["solver_runtime"]
+        self.assertEqual(failed_runtime["missing_runtime_runs"], 0)
+        self.assertEqual(failed_runtime["full_total_seconds"], 0)
+
+        success_runtime = summarize_records([success_without_execution])["overall"]["execution"]["solver_runtime"]
+        self.assertEqual(success_runtime["missing_runtime_runs"], 1)
+        self.assertIsNone(success_runtime["full_total_seconds"])
+
     def test_ledger_retains_recorded_calls_without_finished_arm(self):
         ledger = summarize_ledger([{"call_id": "orphan", "total_tokens": 12},
                                    {"call_id": "failed", "total_tokens": None}], [])

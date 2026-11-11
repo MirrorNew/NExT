@@ -19,9 +19,11 @@ _PYTHON_BLOCK = re.compile(r"```python[ \t]*\r?\n(.*?)```", re.IGNORECASE | re.D
 _SOLVER_STATUS_PREFIX = "SolverStatus=JSON"
 _HELPER_NAMES = {
     "__rebuttal_optimize__",
+    "__rebuttal_optimize_calls",
     "__rebuttal_solver_status",
     "__rebuttal_emit_solver_status",
     "__rebuttal_json",
+    "__rebuttal_math",
     "__rebuttal_atexit",
 }
 
@@ -247,18 +249,54 @@ def _rewrite_optimize_calls(
 
     prelude = f'''import atexit as __rebuttal_atexit
 import json as __rebuttal_json
+import math as __rebuttal_math
 
 __rebuttal_solver_status = None
+__rebuttal_optimize_calls = []
 
 def __rebuttal_optimize__(model, *args, **kwargs):
     global __rebuttal_solver_status
     model.Params.TimeLimit = {solver_time_limit!r}
     model.Params.Threads = {solver_threads!r}
-    result = model.optimize(*args, **kwargs)
-    __rebuttal_solver_status = {{
-        "status": model.Status,
-        "sol_count": model.SolCount,
-    }}
+    result = None
+    optimize_completed = False
+    try:
+        result = model.optimize(*args, **kwargs)
+        optimize_completed = True
+    finally:
+        runtime = None
+        if optimize_completed:
+            try:
+                candidate = float(model.Runtime)
+                if __rebuttal_math.isfinite(candidate) and candidate >= 0:
+                    runtime = candidate
+            except Exception:
+                pass
+        try:
+            status = model.Status
+        except Exception:
+            status = None
+        try:
+            sol_count = model.SolCount
+        except Exception:
+            sol_count = None
+        __rebuttal_optimize_calls.append({{
+            "runtime_seconds": runtime,
+            "status": status,
+            "sol_count": sol_count,
+        }})
+        known_runtime = [call["runtime_seconds"] for call in __rebuttal_optimize_calls
+                         if call["runtime_seconds"] is not None]
+        missing_runtime_count = len(__rebuttal_optimize_calls) - len(known_runtime)
+        __rebuttal_solver_status = {{
+            "status": status,
+            "sol_count": sol_count,
+            "optimize_calls": __rebuttal_optimize_calls,
+            "optimize_call_count": len(__rebuttal_optimize_calls),
+            "known_solver_runtime_seconds": sum(known_runtime),
+            "solver_runtime_seconds": sum(known_runtime) if not missing_runtime_count else None,
+            "missing_runtime_count": missing_runtime_count,
+        }}
     return result
 
 def __rebuttal_emit_solver_status():

@@ -97,6 +97,7 @@ class FakeModel:
         self.Params = Params()
         self.Status = 2
         self.SolCount = 1
+        self.Runtime = 0.125
     def optimize(self):
         assert self.Params.TimeLimit == 1.25
         assert self.Params.Threads == 3
@@ -114,7 +115,11 @@ model.optimize()
         )
 
         self.assertEqual(result["status"], "executed")
-        self.assertEqual(result["solver_status"], {"status": 2, "sol_count": 1})
+        self.assertEqual(result["solver_status"]["status"], 2)
+        self.assertEqual(result["solver_status"]["sol_count"], 1)
+        self.assertEqual(result["solver_status"]["optimize_call_count"], 1)
+        self.assertEqual(result["solver_status"]["optimize_calls"][0]["runtime_seconds"], 0.125)
+        self.assertEqual(result["solver_status"]["solver_runtime_seconds"], 0.125)
         self.assertTrue(result["solver_limits_applied"])
         self.assertEqual((folder / "generated.py").read_text(encoding="utf-8"), source)
         executed = (folder / "executed.py").read_text(encoding="utf-8")
@@ -122,6 +127,75 @@ model.optimize()
         self.assertIn("model.Params.Threads = 3", executed)
         self.assertIn("__rebuttal_optimize__(model)", executed)
         self.assertEqual(result["stdout"].count("SolverStatus=JSON"), 1)
+
+    async def test_multiple_optimize_calls_keep_each_runtime_and_total(self):
+        folder = self.case_dir("multiple_optimize")
+        source = '''class Params:
+    pass
+class FakeModel:
+    def __init__(self):
+        self.Params = Params()
+        self.Status = 2
+        self.SolCount = 1
+        self.Runtime = 0.0
+        self.calls = 0
+    def optimize(self):
+        self.calls += 1
+        self.Runtime = self.calls / 10
+model = FakeModel()
+model.optimize()
+model.optimize()
+'''
+        result = await execute_code(source, folder, PYTHON, 3, 1)
+        solver = result["solver_status"]
+        self.assertEqual(result["status"], "executed")
+        self.assertEqual(solver["optimize_call_count"], 2)
+        self.assertEqual([call["runtime_seconds"] for call in solver["optimize_calls"]], [0.1, 0.2])
+        self.assertAlmostEqual(solver["solver_runtime_seconds"], 0.3)
+
+    async def test_missing_runtime_is_null_and_does_not_become_zero(self):
+        folder = self.case_dir("missing_runtime")
+        source = '''class Params:
+    pass
+class FakeModel:
+    def __init__(self):
+        self.Params = Params()
+        self.Status = 2
+        self.SolCount = 1
+    def optimize(self):
+        pass
+model = FakeModel()
+model.optimize()
+'''
+        result = await execute_code(source, folder, PYTHON, 3, 1)
+        solver = result["solver_status"]
+        self.assertEqual(result["status"], "executed")
+        self.assertIsNone(solver["optimize_calls"][0]["runtime_seconds"])
+        self.assertEqual(solver["known_solver_runtime_seconds"], 0)
+        self.assertIsNone(solver["solver_runtime_seconds"])
+        self.assertEqual(solver["missing_runtime_count"], 1)
+
+    async def test_optimize_exception_keeps_failure_and_records_runtime(self):
+        folder = self.case_dir("optimize_failure")
+        source = '''class Params:
+    pass
+class FakeModel:
+    def __init__(self):
+        self.Params = Params()
+        self.Status = 3
+        self.SolCount = 0
+        self.Runtime = 0.25
+    def optimize(self):
+        raise RuntimeError("solver failure")
+model = FakeModel()
+model.optimize()
+'''
+        result = await execute_code(source, folder, PYTHON, 3, 1)
+        self.assertEqual(result["status"], "invalid_program")
+        self.assertEqual(result["solver_status"]["optimize_call_count"], 1)
+        self.assertIsNone(result["solver_status"]["optimize_calls"][0]["runtime_seconds"])
+        self.assertEqual(result["solver_status"]["missing_runtime_count"], 1)
+        self.assertEqual(result["solver_status"]["sol_count"], 0)
 
     async def test_helper_name_conflict_is_rejected(self):
         folder = self.case_dir("conflict")
@@ -141,6 +215,19 @@ model.optimize()
         self.assertEqual(result["status"], "invalid_program")
         self.assertFalse(result["solver_limits_applied"])
         self.assertIn("conflicts with injected helper", result["stderr"])
+
+    async def test_injected_math_alias_conflict_is_rejected(self):
+        folder = self.case_dir("math_alias_conflict")
+        result = await execute_code(
+            "__rebuttal_math = object()\nmodel.optimize()\n",
+            folder,
+            PYTHON,
+            timeout_seconds=2,
+            solver_time_limit=1,
+        )
+        self.assertEqual(result["status"], "invalid_program")
+        self.assertFalse(result["solver_limits_applied"])
+        self.assertIn("__rebuttal_math", result["stderr"])
 
     async def test_unbound_optimize_reference_is_rejected(self):
         folder = self.case_dir("alias")

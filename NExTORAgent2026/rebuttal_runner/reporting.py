@@ -168,16 +168,61 @@ def _usage_for_records(
 def _execution_for_records(records: list[dict[str, Any]]) -> dict[str, Any]:
     known_total: int | float = 0
     missing_runs = 0
+    solver_runtime_known_total = 0.0
+    optimize_call_count = 0
+    missing_runtime_count = 0
+    missing_runtime_runs = 0
     for record in records:
         attempts = record.get("attempts")
-        executions = [a.get("execution") for a in attempts] if attempts else [record.get("execution")]
+        execution_rows = (
+            [(a.get("execution"), a.get("status")) for a in attempts]
+            if attempts
+            else [(record.get("execution"), record.get("status"))]
+        )
         missing = False
-        for execution in executions:
+        for execution, run_status in execution_rows:
             elapsed = execution.get("elapsed_seconds") if isinstance(execution, dict) else None
             if _is_number(elapsed) and elapsed >= 0:
                 known_total += elapsed
             else:
                 missing = True
+            if not isinstance(execution, dict):
+                upstream = record.get("upstream")
+                upstream_failed = (
+                    run_status == "upstream_failed"
+                    or (isinstance(upstream, dict) and upstream.get("status") == "failed")
+                )
+                if not upstream_failed:
+                    # Missing execution on a successful or otherwise unknown record
+                    # is not evidence that no solver ran.
+                    missing_runtime_runs += 1
+                continue
+            solver = execution.get("solver_status")
+            calls = solver.get("optimize_calls") if isinstance(solver, dict) else None
+            solver_was_used = (
+                execution.get("solver_limits_applied") is True
+                or isinstance(solver, dict)
+                or (solver is not None and solver != "")
+            )
+            if isinstance(calls, list):
+                if not calls:
+                    if solver_was_used:
+                        missing_runtime_runs += 1
+                    continue
+                recorded_count = solver.get("optimize_call_count", len(calls))
+                optimize_call_count += len(calls)
+                if not (isinstance(recorded_count, int) and not isinstance(recorded_count, bool)
+                        and recorded_count == len(calls)):
+                    missing_runtime_runs += 1
+                for call in calls:
+                    runtime = call.get("runtime_seconds") if isinstance(call, dict) else None
+                    if _is_number(runtime) and runtime >= 0:
+                        solver_runtime_known_total += runtime
+                    else:
+                        missing_runtime_count += 1
+            elif solver_was_used:
+                # Legacy solver records have no per-optimize Runtime evidence.
+                missing_runtime_runs += 1
         if missing:
             missing_runs += 1
     return {
@@ -185,6 +230,18 @@ def _execution_for_records(records: list[dict[str, Any]]) -> dict[str, Any]:
         "missing_runs": missing_runs,
         "full_total_seconds": known_total if records and missing_runs == 0 else None,
         "scope": "all recorded execution attempts; legacy records without attempts use their saved final execution",
+        "solver_runtime": {
+            "optimize_call_count": optimize_call_count,
+            "known_total_seconds": solver_runtime_known_total,
+            "missing_runtime_count": missing_runtime_count,
+            "missing_runtime_runs": missing_runtime_runs,
+            "full_total_seconds": (
+                solver_runtime_known_total
+                if records and missing_runtime_count == 0 and missing_runtime_runs == 0
+                else None
+            ),
+            "scope": "sum of Gurobi Runtime for recorded optimize calls only; separate from subprocess elapsed time",
+        },
     }
 
 
