@@ -133,6 +133,8 @@ class ModelConfig:
 
 
 _LEDGER_LOCK = asyncio.Lock()
+_CAUSE_CHAIN_LIMIT = 8
+_CAUSE_MESSAGE_LIMIT = 512
 _SECRET_PATTERNS = (
     re.compile(r"(?i)(bearer\s+)[^\s,;]+"),
     re.compile(r"(?i)(api[_-]?key\s*[:=]\s*)[^\s,;]+"),
@@ -148,6 +150,70 @@ def _redact(value: Any, secrets: Sequence[str] = ()) -> str:
     for pattern in _SECRET_PATTERNS:
         text = pattern.sub(lambda match: (match.group(1) if match.lastindex else "") + "[REDACTED]", text)
     return text
+
+
+def _exception_chain(exc: BaseException) -> tuple[list[BaseException], bool]:
+    """Return a bounded cause/context chain, stopping safely on cycles."""
+    chain: list[BaseException] = []
+    seen: set[int] = set()
+    current: BaseException | None = exc
+    while current is not None and len(chain) < _CAUSE_CHAIN_LIMIT:
+        marker = id(current)
+        if marker in seen:
+            break
+        seen.add(marker)
+        chain.append(current)
+        cause = current.__cause__
+        if cause is None and not current.__suppress_context__:
+            cause = current.__context__
+        if cause is not None and id(cause) in seen:
+            break
+        current = cause
+    truncated = (current is not None and len(chain) == _CAUSE_CHAIN_LIMIT
+                 and id(current) not in seen)
+    return chain, truncated
+
+
+def _error_code(record: Mapping[str, Any], chain: Sequence[BaseException]) -> str:
+    message = str(record.get("error") or "")
+    normalized_message = message.casefold()
+    if record.get("finish_reason") == "length" or "MODEL_OUTPUT_TRUNCATED" in message:
+        return "truncated"
+    if "MODEL_ID_MISMATCH" in message:
+        return "model_id"
+    if "EMPTY_MODEL_RESPONSE" in message:
+        return "empty"
+    if "Missing required environment variable" in message:
+        return "configuration"
+
+    names = [type(item).__name__.casefold() for item in chain]
+    if (any(isinstance(item, (TimeoutError, asyncio.TimeoutError)) or
+            "timeout" in name or "timedout" in name for item, name in zip(chain, names)) or
+            "timeout" in normalized_message or "timed out" in normalized_message):
+        return "timeout"
+    if any(isinstance(getattr(item, "status_code", None), int) or
+           ("http" in name and "error" in name) or name == "apistatuserror"
+           for item, name in zip(chain, names)) or "http error" in normalized_message:
+        return "http"
+    if any(isinstance(item, OSError) or
+           name in {"apiconnectionerror", "connectionerror", "connecterror", "networkerror"}
+           or "connectionerror" in name for item, name in zip(chain, names)) or any(
+               phrase in normalized_message for phrase in
+               ("connection error", "connection failed", "connection refused", "failed to connect")):
+        return "connection"
+    return "unknown"
+
+
+def _cause_chain_record(chain: Sequence[BaseException], secrets: Sequence[str]) -> list[dict[str, str]]:
+    result = []
+    for item in chain:
+        try:
+            message = str(item)
+        except Exception:
+            message = "<exception message unavailable>"
+        result.append({"type": type(item).__name__,
+                       "message": _redact(message, secrets)[:_CAUSE_MESSAGE_LIMIT]})
+    return result
 
 
 def _safe_metadata(value: Any, secrets: Sequence[str] = ()) -> Any:
@@ -290,6 +356,10 @@ class LoggedModel:
             "finish_reason": None,
             "elapsed_seconds": None,
             "error": None,
+            "error_type": None,
+            "error_code": None,
+            "cause_chain": [],
+            "cause_chain_truncated": False,
         }
 
         try:
@@ -332,9 +402,19 @@ class LoggedModel:
             }
         except Exception as exc:
             record["elapsed_seconds"] = time.monotonic() - started
-            record["error"] = _redact(exc, secrets)
-            await self._append_record(_redact_values(record, secrets))
-            raise ModelCallError(record["error"], record) from None
+            chain, chain_truncated = _exception_chain(exc)
+            try:
+                error_message = str(exc)
+            except Exception:
+                error_message = "<exception message unavailable>"
+            record["error"] = _redact(error_message, secrets)
+            record["error_type"] = type(exc).__name__
+            record["error_code"] = _error_code(record, chain)
+            record["cause_chain"] = _cause_chain_record(chain, secrets)
+            record["cause_chain_truncated"] = chain_truncated
+            safe_record = _redact_values(record, secrets)
+            await self._append_record(safe_record)
+            raise ModelCallError(safe_record["error"], safe_record) from None
 
     async def close(self) -> None:
         if self._owns_client and self.client is not None:

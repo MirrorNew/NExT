@@ -44,6 +44,38 @@ class BaselineAdapterTests(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
+    def test_optimus_legacy_objective_log_is_not_parsed_as_answer(self):
+        execution = {"status": "executed", "returncode": 0,
+                     "stdout": "Optimal Objective Value: 5.0\n",
+                     "solver_status": {"status": 2, "sol_count": 1},
+                     "solver_limits_applied": True}
+        spec = {"kind": "scalar", "fields": ["objective_value"]}
+        self.assertIsNone(baselines._parse_execution(execution, spec))
+        self.assertEqual(baselines._execution_output_failure(execution, spec)["code"],
+                         "missing_final_answer")
+
+    def test_coe_model_call_failure_has_no_execution_output_failure(self):
+        model = FakeModel([])
+
+        def failing_programming_expert(_model_name):
+            def fail_forward(*_args):
+                raise RuntimeError("synthetic model call failure")
+            return SimpleNamespace(forward=fail_forward)
+
+        case = {"case_id": "coe-call-failure", "question": "Maximize x.",
+                "math_input": {"Objective": {"Mathematical_expressions": "maximize x"}},
+                "answer_spec": {"kind": "scalar", "fields": ["objective_value"]}}
+        with patch.object(baselines, "_coe_callable", return_value=(None, failing_programming_expert)):
+            result = asyncio.run(baselines._run_coe(
+                Path("unused"), case, model,
+                baselines._CallRecorder(model, case["case_id"], "run", 2, self.output),
+                self.output, level="coding", ned_advice=None, python_executable="python",
+                process_timeout=2, solver_time_limit=1, solver_threads=1, max_repairs=0))
+        self.assertEqual(result["status"], "baseline_failed")
+        self.assertIsNone(result["execution"])
+        self.assertNotIn("output_failure", result)
+        self.assertNotIn("output_failure", result["attempts"][0])
+
     def test_preflight_hashes_sources_without_importing_clients(self):
         report = baselines.baseline_availability("or_llm_agent", self.root)
         self.assertTrue(report["available"])
@@ -247,7 +279,7 @@ class BaselineAdapterTests(unittest.TestCase):
                                solver_time_limit, solver_threads=1):
             calls.append(code)
             return {"status": "executed", "returncode": 0,
-                    "stdout": "Optimal Objective Value: 7.0", "stderr": "",
+                    "stdout": "FinalAnswer=【7.0】", "stderr": "",
                     "solver_status": {"status": 2, "sol_count": 1},
                     "solver_limits_applied": True}
 
@@ -317,6 +349,12 @@ class BaselineAdapterTests(unittest.TestCase):
         if not available["available"]:
             self.skipTest(f"OptiMUS snapshot/dependencies unavailable: {available}")
         stages = baselines._load_optimus(source, lambda prompt, model=None: "")
+        repair_prompt = stages["execute_code"]["debug_template"]
+        self.assertIn("FinalAnswer=【<JSON>】", repair_prompt)
+        self.assertIn("original problem objective", repair_prompt)
+        self.assertIn("PWL approximation or McCormick relaxation", repair_prompt)
+        self.assertIn("addGenConstrPow(x, y, 3.0) means y = x**3", repair_prompt)
+        self.assertIn("=====", repair_prompt)
         original_extract_code = stages["execute_code"]["extract_code"]
 
         response = "=====\nprint('FinalAnswer=【2.0】')\n====="
@@ -415,7 +453,7 @@ class BaselineAdapterTests(unittest.TestCase):
                                solver_time_limit, solver_threads=1):
             executed.append(code)
             return {"status": "executed", "returncode": 0,
-                    "stdout": "Optimal Objective Value: 5.0", "stderr": "",
+                    "stdout": "FinalAnswer=【5.0】", "stderr": "",
                     "solver_status": {"status": 2, "sol_count": 1},
                     "solver_limits_applied": True}
 
@@ -460,7 +498,7 @@ class BaselineAdapterTests(unittest.TestCase):
                                solver_time_limit, solver_threads=1):
             executed.append(code)
             return {"status": "executed", "returncode": 0,
-                    "stdout": "Optimal Objective Value: 7.0", "stderr": "",
+                    "stdout": "FinalAnswer=【7.0】", "stderr": "",
                     "solver_status": {"status": 2, "sol_count": 1},
                     "solver_limits_applied": True}
 

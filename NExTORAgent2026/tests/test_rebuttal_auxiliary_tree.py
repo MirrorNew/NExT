@@ -148,6 +148,73 @@ class AuxiliaryTreeTests(unittest.TestCase):
         self.assertEqual(tree["candidates"][0]["source_expression"], "ln(x) >= ln(2)")
         self.assertEqual(tree["candidates"][0]["definitions"][0]["rhs"], "ln(x)")
 
+    def test_log2_log10_are_supported_with_single_argument_and_ascii_symbols(self):
+        math_input = {
+            **MATH_INPUT,
+            "Constraint_Table": [{"name": "log_limit", "Mathematical_expressions": "log2(x) + log10(z) >= 1"}],
+        }
+        candidate = {
+            "source_id": "constraint:0",
+            "source_expression": "log2(x) + log10(z) >= 1",
+            "relation": ">=",
+            "linearized_form": "u + v - 1",
+            "definitions": [
+                {"symbol": "u", "rhs": "log2(x)", "domain_conditions": ["x > 0"]},
+                {"symbol": "v", "rhs": "log10(z)", "domain_conditions": ["z > 0"]},
+            ],
+            "domain_conditions": ["x > 0", "z > 0"],
+        }
+        tree = parse_auxiliary_response(response([candidate]), math_input)
+        self.assertEqual(tree["status"], "validated")
+        self.assertEqual(tree["candidates"][0]["definitions"][0]["dependencies"], ["x"])
+
+        candidate["definitions"][0]["rhs"] = "log2(x, z)"
+        with self.assertRaisesRegex(ValueError, "exactly one argument"):
+            parse_auxiliary_response(response([candidate]), math_input)
+
+    def test_constraint_rows_and_domain_conditions_must_be_atomic(self):
+        chained_domain = {
+            "source_id": "objective", "source_expression": "Minimize f = x**2 + z",
+            "relation": "objective", "linearized_form": "x + z", "definitions": [],
+            "domain_conditions": ["x >= 0 <= z"],
+        }
+        with self.assertRaisesRegex(ValueError, "simple arithmetic relation"):
+            parse_auxiliary_response(response([chained_domain]), MATH_INPUT)
+
+        compound_input = {
+            **MATH_INPUT,
+            "Constraint_Table": [{"name": "combined", "Mathematical_expressions": "x + z <= 10, z >= 0"}],
+        }
+        compound = {
+            "source_id": "constraint:0", "source_expression": "x + z <= 10, z >= 0",
+            "relation": "<=", "linearized_form": "x + z - 10", "definitions": [],
+            "domain_conditions": [],
+        }
+        with self.assertRaisesRegex(ValueError, "unsupported chained relation"):
+            parse_auxiliary_response(response([compound]), compound_input)
+
+    def test_unicode_identifier_and_implicit_multiplication_are_rejected(self):
+        unicode_input = {
+            **MATH_INPUT,
+            "Variables_List": [{"symbol": "x₁"}],
+            "Objective": {"Mathematical_expressions": "Maximize x₁"},
+        }
+        unicode_candidate = {
+            "source_id": "objective", "source_expression": "Maximize x₁",
+            "relation": "objective", "linearized_form": "x₁", "definitions": [],
+            "domain_conditions": [],
+        }
+        with self.assertRaises(ValueError):
+            parse_auxiliary_response(response([unicode_candidate]), unicode_input)
+
+        implicit = {
+            "source_id": "objective", "source_expression": "Minimize f = x**2 + z",
+            "relation": "objective", "linearized_form": "0.5 x + z", "definitions": [],
+            "domain_conditions": [],
+        }
+        with self.assertRaises(ValueError):
+            parse_auxiliary_response(response([implicit]), MATH_INPUT)
+
     def test_auxiliary_definition_not_used_in_relation_is_rejected(self):
         math_input = {
             **MATH_INPUT,

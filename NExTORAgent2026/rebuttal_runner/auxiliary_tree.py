@@ -14,9 +14,11 @@ from typing import Any
 
 
 AUXILIARY_SCHEMA_VERSION = "nextor-aux-tree-v1"
-_IDENTIFIER = re.compile(r"^[A-Za-z_]\w*$", re.UNICODE)
+_IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+_INDEXED_IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*\[[0-9]+\]$")
 _RELATION = re.compile(r"<=|>=|==|(?<![<>!=])=(?!=)|<|>")
 _NONFINITE_NAMES = {"nan", "inf", "infinity"}
+_ALLOWED_FUNCTIONS = {"exp", "log", "ln", "log2", "log10", "sin", "cos", "sqrt"}
 
 
 def _normalise_expression(value: str) -> str:
@@ -31,6 +33,10 @@ def _normalise_expression(value: str) -> str:
     # retain the exact source text in the returned tree for provenance.
     result = re.sub(r"\bln\s*(?=\()", "log", result)
     return re.sub(r"\s+", "", result)
+
+
+def _canonical_relation(value: str) -> str:
+    return {"≤": "<=", "≥": ">=", "==": "="}.get(value, value)
 
 
 def _source_expressions(math_input: dict[str, Any]) -> dict[str, str]:
@@ -64,13 +70,13 @@ def _declared_symbols(math_input: dict[str, Any]) -> set[str]:
         value = item.get("symbol", item.get("Symbol")) if isinstance(item, dict) else item
         if isinstance(value, str):
             name = value.strip()
-            if _IDENTIFIER.fullmatch(name) or re.fullmatch(r"[A-Za-z_]\w*\[\d+\]", name, re.UNICODE):
+            if _IDENTIFIER.fullmatch(name) or _INDEXED_IDENTIFIER.fullmatch(name):
                 symbols.add(name)
     for item in math_input.get("Parameters_List", []):
         value = item.get("Name", item.get("name")) if isinstance(item, dict) else item
         if isinstance(value, str):
             name = value.strip()
-            if _IDENTIFIER.fullmatch(name) or re.fullmatch(r"[A-Za-z_]\w*\[\d+\]", name, re.UNICODE):
+            if _IDENTIFIER.fullmatch(name) or _INDEXED_IDENTIFIER.fullmatch(name):
                 symbols.add(name)
     return symbols
 
@@ -78,7 +84,7 @@ def _declared_symbols(math_input: dict[str, Any]) -> set[str]:
 def _reference_is_declared(reference: str, available: set[str]) -> bool:
     if reference in available:
         return True
-    indexed = re.fullmatch(r"([A-Za-z_]\w*)\[(\d+)\]", reference, re.UNICODE)
+    indexed = re.fullmatch(r"([A-Za-z_][A-Za-z0-9_]*)\[([0-9]+)\]", reference)
     return bool(indexed and indexed.group(1) in available)
 
 
@@ -129,10 +135,12 @@ def _names_in_expression(expression: str, location: str) -> set[str]:
         if not isinstance(node, allowed_nodes):
             raise ValueError(f"{location} contains unsupported syntax: {type(node).__name__}")
         if isinstance(node, ast.Call):
-            if not isinstance(node.func, ast.Name) or node.func.id not in {"exp", "log", "ln", "sin", "cos", "sqrt"}:
+            if not isinstance(node.func, ast.Name) or node.func.id not in _ALLOWED_FUNCTIONS:
                 raise ValueError(f"{location} contains an unsupported function call")
             if node.keywords:
                 raise ValueError(f"{location} function calls cannot use keyword arguments")
+            if len(node.args) != 1:
+                raise ValueError(f"{location} function calls must have exactly one argument")
         if isinstance(node, ast.Attribute):
             raise ValueError(f"{location} cannot use attribute access")
     return _names_from_ast(parsed, location)
@@ -152,7 +160,9 @@ def _validate_domains(values: list[Any], available: set[str], location: str) -> 
             parsed = ast.parse(condition.replace("^", "**"), mode="eval")
         except SyntaxError as exc:
             raise ValueError(f"{location}[{index}] is not a supported domain relation") from exc
-        if not isinstance(parsed.body, ast.Compare) or any(not isinstance(node, allowed) for node in ast.walk(parsed)):
+        if (not isinstance(parsed.body, ast.Compare)
+                or len(parsed.body.ops) != 1
+                or any(not isinstance(node, allowed) for node in ast.walk(parsed))):
             raise ValueError(f"{location}[{index}] must be a simple arithmetic relation")
         names = _names_from_ast(parsed, f"{location}[{index}]")
         unknown = {name for name in names if not _reference_is_declared(name, available)}
@@ -225,10 +235,12 @@ def parse_auxiliary_response(content: str, math_input: dict[str, Any]) -> dict[s
         relation = candidate.get("relation")
         if not isinstance(relation, str):
             raise ValueError(f"{location}.relation must be text")
-        relation_aliases = {"≤": "<=", "≥": ">=", "==": "="}
-        relation = relation_aliases.get(relation, relation)
+        relation = _canonical_relation(relation)
         normalized_source = _normalise_expression(sources[source_id])
-        expected_relations = [match.group() for match in _RELATION.finditer(normalized_source)]
+        expected_relations = [
+            _canonical_relation(match.group())
+            for match in _RELATION.finditer(normalized_source)
+        ]
         if source_id != "objective" and len(expected_relations) > 1:
             raise ValueError(f"{location} uses an unsupported chained relation")
         if source_id == "objective":

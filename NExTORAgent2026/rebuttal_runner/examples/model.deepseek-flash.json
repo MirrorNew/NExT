@@ -3,10 +3,10 @@
   "base_url": "https://api.deepseek.com",
   "api_key_env": "DEEPSEEK_API_KEY",
   "request_parameters": {
-    "max_tokens": 16384,
+    "max_tokens": 65536,
     "reasoning_effort": "high",
     "stream": false
   },
-  "timeout_seconds": 300,
+  "timeout_seconds": 600,
   "allowed_returned_models": ["deepseek-flash"]
 }

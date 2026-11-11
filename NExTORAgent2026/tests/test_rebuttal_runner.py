@@ -75,6 +75,30 @@ class PairedRunnerTests(unittest.IsolatedAsyncioTestCase):
                                                python_executable=sys.executable)
                 self.assertTrue(all(not record["score"]["correct"] for record in records))
                 self.assertTrue(all(record["status"] == "invalid_output" for record in records))
+                expected = "no_solver_solution" if solver_count == 0 else "solver_not_verified"
+                self.assertTrue(all(record["output_failure"]["code"] == expected for record in records))
+
+    async def test_missing_final_answer_is_structured_and_not_scored(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            result = executed()
+            result["stdout"] = "Optimal Objective Value: 2.0\n"
+            model = FakeModel(directory)
+            with patch("rebuttal_runner.runner.execute_code", new=AsyncMock(return_value=result)):
+                records = await run_paired(load_manifest(EXAMPLE), model, directory / "run",
+                                           python_executable=sys.executable)
+            self.assertTrue(all(record["status"] == "invalid_output" for record in records))
+            self.assertTrue(all(record["output_failure"]["code"] == "missing_final_answer"
+                                for record in records))
+            self.assertTrue(all(record["prediction"] is None for record in records))
+
+    async def test_public_coding_contract_covers_original_objective_and_exact_nonlinearity(self):
+        from rebuttal_runner.runner import CODE_SYSTEM, PROTOCOL_VERSION
+        self.assertEqual(PROTOCOL_VERSION, "nedtree-integrated-v3")
+        self.assertIn("original problem objective", CODE_SYSTEM)
+        self.assertIn("PWL approximations", CODE_SYSTEM)
+        self.assertIn("McCormick relaxations", CODE_SYSTEM)
+        self.assertIn("addGenConstrPow(x, y, 3.0) imposes y = x**3", CODE_SYSTEM)
 
     async def test_same_input_no_reference_leak_no_oracle_repair(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -109,6 +133,7 @@ class PairedRunnerTests(unittest.IsolatedAsyncioTestCase):
                                            max_repairs=0, python_executable=sys.executable)
             self.assertEqual(len(model.calls), 3)
             self.assertTrue(all(len(r["attempts"]) == 1 and r["repair_count"] == 0 for r in records))
+            self.assertTrue(all(r["status"] == "execution_failed" for r in records))
 
     async def test_missing_input_counts_both_arms_without_paid_calls(self):
         with tempfile.TemporaryDirectory() as temp:

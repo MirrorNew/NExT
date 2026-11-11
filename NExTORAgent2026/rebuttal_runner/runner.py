@@ -12,12 +12,12 @@ import time
 from typing import Any
 
 from .data import public_case, validate_math_input
-from .execution import execute_code, extract_code
+from .execution import execute_code, extract_code, parse_solver_answer
 from .models import BudgetedModel, CallBudgetExceeded, LoggedModel, ModelCallError
-from .scoring import AnswerParseError, parse_answer, score_answer
+from .scoring import AnswerParseError, score_answer
 
 
-PROTOCOL_VERSION = "nedtree-integrated-v2"
+PROTOCOL_VERSION = "nedtree-integrated-v3"
 CODE_SYSTEM = """You write complete Python programs using gurobipy.
 Implement the supplied mathematical model, domains and requested outputs faithfully.
 You may use Gurobi native nonlinear expressions, legal resultant variables, and
@@ -26,13 +26,22 @@ through legal resultant-variable equalities and bounds/linear relations; both
 sides may need resultants. Give resultants appropriate bounds, including negative
 values where required. Never silently change a relation, relax a constraint,
 replace a missing quantity, or import a reference answer. Keep original domains.
+Preserve nonlinear relation direction, power, coefficient signs, units, and
+variable domains, including free variables. For example,
+model.addGenConstrPow(x, y, 3.0) imposes y = x**3. Use an exact mathematically
+equivalent formulation. Do not replace nonlinear terms with PWL approximations
+or McCormick relaxations unless equivalence over the entire feasible domain is
+proved; an unverified approximation is not the original model.
 Use model = gp.Model(...), model.optimize(), and inspect model.SolCount before
 reading a solution. The harness applies the stated solver limits.
 Print exactly one final line FinalAnswer=【<JSON>】. Its JSON structure and names
 must match answer_spec; output the asked quantity, not an arbitrary objective.
 For kind='scalar', emit only a JSON number (for example 2.0), not an object.
 When its fields are ['objective_value'], the evaluation requests the optimized
-objective value even if the narrative also asks for a plan. Keep the model unchanged.
+objective value even if the narrative also asks for a plan. If the solver uses a
+monotone, scaled, shifted, or otherwise transformed objective, recompute and emit
+the original problem objective at the returned solution, in original units; do
+not report a transformed solver ObjVal as the answer. Keep the model unchanged.
 For kind='numeric_list', emit a JSON array in the requested order.
 For kind='named_numeric', emit an object with exactly the requested field names.
 Do not print a final answer without a solution. Return one Python fenced block.
@@ -243,7 +252,8 @@ async def run_arm(case, math_input, arm, framework, model, folder, identity, *,
               "upstream": case.get("upstream"), "scoring": case["scoring"],
               "elapsed_scope": "arm execution after shared upstream and Auxiliary preparation; request costs are accounted by call IDs",
               "representation_call_ids": list(auxiliary_ids),
-              "execution": None, "ned_trace": auxiliary.get("tree") if auxiliary and arm == "ned" else None}
+              "execution": None, "output_failure": None,
+              "ned_trace": auxiliary.get("tree") if auxiliary and arm == "ned" else None}
     write_json(folder / "started.json", result)
     try:
         level = identity["level"]
@@ -263,7 +273,8 @@ async def run_arm(case, math_input, arm, framework, model, folder, identity, *,
                 python_executable=python_executable, process_timeout=timeout_seconds,
                 solver_time_limit=solver_time_limit, solver_threads=solver_threads,
                 max_calls=max_calls, max_repairs=max_repairs)
-            for key in ("status", "prediction", "attempts", "execution", "baseline_trace", "error"):
+            for key in ("status", "prediction", "attempts", "execution", "baseline_trace", "error",
+                        "output_failure"):
                 if key in baseline_result:
                     result[key] = baseline_result[key]
             result["repair_count"] = max(0, len(result["attempts"]) - 1)
@@ -304,26 +315,33 @@ async def run_arm(case, math_input, arm, framework, model, folder, identity, *,
                 execution = await execute_code(code, attempt_dir, python_executable,
                                                timeout_seconds, solver_time_limit, solver_threads)
                 observation["execution"] = execution
-                if execution["status"] == "executed" and execution.get("returncode") == 0:
-                    solver = execution.get("solver_status") or {}
-                    if not execution.get("solver_limits_applied") or solver.get("sol_count", 0) < 1:
-                        raise ValueError("No recorded solver solution; an answer alone is insufficient")
-                    observation["prediction"] = parse_answer(execution["stdout"])
-                    observation["score"] = score_answer(observation["prediction"], case["reference"],
-                                                        case["scoring"], case_id=case["case_id"])
-                    observation["status"] = "answer_obtained"
+                if execution.get("status") != "executed" or execution.get("returncode") != 0:
+                    message = execution.get("message") or execution.get("stderr") or execution.get("status")
+                    observation.update(status="execution_failed", error=str(message))
                 else:
-                    observation["status"] = "execution_failed"
+                    prediction, output_failure = parse_solver_answer(execution, case["answer_spec"])
+                    if output_failure is None:
+                        observation["prediction"] = prediction
+                        observation["score"] = score_answer(observation["prediction"], case["reference"],
+                                                            case["scoring"], case_id=case["case_id"])
+                        observation["status"] = "answer_obtained"
+                    else:
+                        observation.update(status="invalid_output", error=output_failure["message"],
+                                           output_failure=output_failure)
             except (AnswerParseError, ValueError, SyntaxError) as exc:
-                observation.update(status="invalid_output", error=str(exc))
+                observation.update(status="invalid_output", error=str(exc),
+                                   output_failure={"code": "invalid_output", "message": str(exc)})
             result["attempts"].append(observation)
             result.update({k: observation[k] for k in ("prediction", "score", "execution", "status")})
+            result["output_failure"] = observation.get("output_failure")
             write_json(attempt_dir / "result.json", observation)
             if observation["status"] == "answer_obtained" or attempt == max_repairs:
                 break
             execution = observation.get("execution") or {}
             feedback = {"code": response["content"],
-                        "error": json.dumps({"status": observation["status"], "error": observation.get("error"),
+                        "error": json.dumps({"status": observation["status"],
+                                             "output_failure": observation.get("output_failure"),
+                                             "error": observation.get("error"),
                                              "stdout": execution.get("stdout", "")[-8000:],
                                              "stderr": execution.get("stderr", "")[-8000:]}, ensure_ascii=False)}
             messages.extend([{"role": "assistant", "content": response["content"]},

@@ -19,9 +19,8 @@ import re
 import threading
 from typing import Any, Callable
 
-from .execution import execute_code, extract_code
+from .execution import execute_code, extract_code, parse_solver_answer
 from .models import CallBudgetExceeded, LoggedModel, ModelCallError
-from .scoring import AnswerParseError, parse_answer
 
 
 _ROOT_NAMES = {
@@ -243,7 +242,8 @@ def solve():
     # Implement the optimization problem described above.
     model.optimize()
     if model.SolCount:
-        print(f\"FinalAnswer=【{model.ObjVal}】\")
+        original_objective_value = ...  # Evaluate the original objective at this solution.
+        print(f\"FinalAnswer=【{original_objective_value}】\")
 
 if __name__ == '__main__':
     solve()
@@ -257,8 +257,11 @@ def _fragment_code_contract(answer_spec: dict[str, Any]) -> str:
     return ("Use Gurobi's supported nonlinear modeling API. For NLExpr comparisons such as "
             "NLExpr >= constant, introduce legal resultant-variable equalities, bounds, and "
             "linear relations; give resultants appropriate bounds, including negative bounds "
-            "when required. Preserve the original domains and relations. The generated full "
-            "program reports the requested optimized scalar objective value. Answer format "
+            "when required. Preserve the original domains and relations, nonlinear signs, "
+            "units, and exactness. Do not treat unverified PWL approximations or McCormick "
+            "relaxations as exact; for example, addGenConstrPow(x, y, 3.0) means y = x**3. "
+            "The generated program reports the original problem "
+            "objective at the solution in original units, not a transformed solver ObjVal. Answer format "
             "for this run: " + json.dumps(answer_spec, ensure_ascii=False))
 
 
@@ -391,23 +394,25 @@ def _attempt_dir(base: Path, number: int) -> Path:
 
 
 def _parse_execution(execution: dict[str, Any], answer_spec: dict[str, Any]) -> Any:
-    if not _solver_execution_valid(execution):
-        return None
-    try:
-        return parse_answer(execution.get("stdout", ""))
-    except AnswerParseError:
-        pass
-    # OptiMUS's original code prints objective text without a FinalAnswer marker.
-    fields = answer_spec.get("fields", [])
-    if fields == ["objective_value"]:
-        stdout = execution.get("stdout", "")
-        matches = re.findall(r"(?im)^\s*(?:Optimal Objective Value|Optimal Revenue|Best objective|Optimal objective):\s*([-+]?\d+(?:\.\d+)?(?:e[-+]?\d+)?)", stdout)
-        if len(matches) == 1:
-            try:
-                return float(matches[0])
-            except ValueError:
-                return None
-    return None
+    prediction, _failure = parse_solver_answer(execution, answer_spec)
+    return prediction
+
+
+def _execution_output_failure(execution: dict[str, Any],
+                              answer_spec: dict[str, Any] | None = None) -> dict[str, str] | None:
+    _prediction, failure = parse_solver_answer(execution, answer_spec)
+    return failure
+
+
+_OPTIMUS_DEBUG_CONTRACT = """
+Shared solver and answer contract:
+- Use Gurobi and call model.optimize(); inspect model.SolCount before reading a solution.
+- Print exactly one standalone FinalAnswer=【<JSON>】 line matching answer_spec. For objective_value, recompute the original problem objective at the solution and report its original units; do not report a monotone/scaled/transformed solver objective or ObjVal unless it is the original objective value.
+- Preserve nonlinear relations, coefficient signs, argument direction, units, and variable domains, including free variables. For example, model.addGenConstrPow(x, y, 3.0) means y = x**3.
+- Use only exact equivalent nonlinear formulations. Do not treat an unverified PWL approximation or McCormick relaxation as the original model.
+- Do not print a final answer unless Gurobi reports a solution.
+Return corrected code between the original ===== delimiters, with no markdown fence and no text after the closing delimiter.
+"""
 
 
 def _extract_optimus_repair_code(response: str,
@@ -418,13 +423,6 @@ def _extract_optimus_repair_code(response: str,
     if len(delimiters) == 2 and original_extract_code is not None:
         response = original_extract_code(response)
     return extract_code(response)
-
-
-def _solver_execution_valid(execution: dict[str, Any]) -> bool:
-    solver = execution.get("solver_status") or {}
-    return (execution.get("status") == "executed" and execution.get("returncode") == 0
-            and execution.get("solver_limits_applied") is True
-            and isinstance(solver.get("sol_count"), int) and solver.get("sol_count", 0) > 0)
 
 
 async def _run_coe(root: Path, case: dict[str, Any], model: LoggedModel,
@@ -477,10 +475,16 @@ async def _run_coe(root: Path, case: dict[str, Any], model: LoggedModel,
     except Exception as exc:
         prediction, status = None, "baseline_failed"
         trace["error"] = f"{type(exc).__name__}: {exc}"
-    return {"status": status, "prediction": prediction, "attempts": [
-                {"attempt": 0, "response": response, "generated_code": code,
-                 "execution": execution}], "execution": execution,
-            "call_ids": recorder.call_ids, "baseline_trace": trace}
+    attempt = {"attempt": 0, "response": response, "generated_code": code,
+               "execution": execution}
+    result = {"status": status, "prediction": prediction, "attempts": [attempt],
+              "execution": execution, "call_ids": recorder.call_ids,
+              "baseline_trace": trace}
+    if execution is not None:
+        output_failure = _execution_output_failure(execution, answer_spec)
+        attempt["output_failure"] = output_failure
+        result["output_failure"] = output_failure
+    return result
 
 
 def _or_agent_functions(root: Path, namespace: dict[str, Any]) -> dict[str, Callable]:
@@ -501,12 +505,13 @@ def _or_attempt_records(generated: list[dict[str, Any]], answer_spec: dict[str, 
     for index, item in enumerate(code_items):
         execution = item.get("execution")
         prediction = _parse_execution(execution or {}, answer_spec)
+        output_failure = _execution_output_failure(execution or {}, answer_spec)
         attempts.append({"attempt": index, "prompt": item.get("messages"),
                          "response": item.get("response"),
                          "generated_code": item.get("generated_code"),
                          "execution": execution,
                          "baseline_result": item.get("baseline_result"),
-                         "prediction": prediction})
+                         "prediction": prediction, "output_failure": output_failure})
     return attempts
 
 
@@ -573,20 +578,17 @@ async def _run_or_agent(root: Path, case: dict[str, Any], recorder: _CallRecorde
         generated[-1]["generated_code"] = code
         generated[-1]["execution"] = result
         prediction = _parse_execution(result, answer_spec)
+        output_failure = _execution_output_failure(result, answer_spec)
         failed_execution_pending = prediction is None
-        best_objective = functions.get("extract_best_objective", lambda _text: None)(
-            result.get("stdout", "")) if _solver_execution_valid(result) else None
-        generated[-1]["baseline_result"] = (str(best_objective)
-                                             if best_objective is not None else
-                                             str(prediction) if isinstance(prediction, (int, float)) else None)
+        generated[-1]["baseline_result"] = (
+            str(prediction) if isinstance(prediction, (int, float)) else None)
+        generated[-1]["output_failure"] = output_failure
         if not failed_execution_pending:
             return True, generated[-1]["baseline_result"] or "None"
         error = result.get("stderr", "") or result.get("stdout", "")
-        if not _solver_execution_valid(result):
-            error = (error + "\nNo bounded solver solution was recorded. "
-                     "The code must call model.optimize() and report a solution.").strip()
-        elif prediction is None:
-            error = (error + "\nThe required FinalAnswer format is missing or invalid.").strip()
+        if output_failure:
+            error = (error + "\nOutput contract failure: "
+                     + json.dumps(output_failure, ensure_ascii=False)).strip()
         return False, error
 
     namespace: dict[str, Any] = {"asyncio": asyncio, "copy": copy,
@@ -606,6 +608,7 @@ async def _run_or_agent(root: Path, case: dict[str, Any], recorder: _CallRecorde
                            if a.get("prediction") is not None), None)
         status = "completed" if prediction is not None else (
             "execution_failed" if generated else "no_generation")
+        output_failure = attempts[-1].get("output_failure") if attempts else None
         trace = {"algorithm": "async_or_llm_agent", "level": level,
                  "stages": (["math_model_generation", "code_generation",
                              "execution_feedback_repairs", "no_solution_recovery"]
@@ -618,6 +621,7 @@ async def _run_or_agent(root: Path, case: dict[str, Any], recorder: _CallRecorde
                  "repair_limit": max_repairs,
                  "internal_execute_calls": current_attempt}
         return {"status": status, "prediction": prediction, "attempts": attempts,
+                "output_failure": output_failure,
                 "execution": attempts[-1].get("execution") if attempts else None,
                 "call_ids": recorder.call_ids, "baseline_trace": trace}
     except CallBudgetExceeded as exc:
@@ -688,6 +692,8 @@ def _load_optimus(root: Path, get_response: Callable):
         constant_names = constants or set()
         _compile_defs(root / f"{module_name}.py", functions, ns,
                       literal_names=constant_names)
+        if module_name == "execute_code" and isinstance(ns.get("debug_template"), str):
+            ns["debug_template"] += "\n" + _OPTIMUS_DEBUG_CONTRACT
         stages[module_name] = ns
     return stages
 
@@ -952,8 +958,10 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
             execution = await execute_code(code, attempt_dir, python_executable, process_timeout,
                                            solver_time_limit, solver_threads)
             prediction = _parse_execution(execution, answer_spec)
+            output_failure = _execution_output_failure(execution, answer_spec)
             attempts.append({"attempt": attempt, "generated_code": code,
-                             "execution": execution, "prediction": prediction})
+                             "execution": execution, "prediction": prediction,
+                             "output_failure": output_failure})
             if prediction is not None:
                 break
             if attempt >= max_repairs:
@@ -961,8 +969,11 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
             prompt_template = stages["execute_code"].get("debug_template")
             if not isinstance(prompt_template, str):
                 raise BaselineUnavailable("OptiMUS execute_code.py lacks a literal debug_template")
-            prompt = prompt_template.format(description=desc, code=code,
-                                            error=execution.get("stderr", "") or execution.get("stdout", ""))
+            repair_error = execution.get("stderr", "") or execution.get("stdout", "")
+            if output_failure:
+                repair_error += "\nOutput contract failure: " + json.dumps(output_failure, ensure_ascii=False)
+            prompt = prompt_template.format(description=desc, code=code, error=repair_error)
+            prompt += "\nAnswer format for this run: " + json.dumps(answer_spec, ensure_ascii=False)
             response = await recorder.complete([{"role": "user", "content": prompt}],
                                                "baseline_optimus_repair")
             try:
@@ -971,9 +982,11 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
             except ValueError:
                 code = response
         prediction = _parse_execution(execution or {}, answer_spec)
+        output_failure = _execution_output_failure(execution or {}, answer_spec)
         status = "completed" if prediction is not None else "execution_failed"
         return {"status": status, "prediction": prediction,
                 "attempts": attempts, "execution": execution,
+                "output_failure": output_failure,
                 "call_ids": recorder.call_ids,
                 "baseline_trace": {"algorithm": "OptiMUS_staged_pipeline", "level": level,
                                    "stages": stages_used,

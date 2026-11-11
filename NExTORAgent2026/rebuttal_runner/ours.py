@@ -24,6 +24,24 @@ from .auxiliary_tree import AUXILIARY_SCHEMA_VERSION, _source_expressions, parse
 AUXILIARY_RESPONSE_FORMAT = {"type": "json_object"}
 
 
+_MATH_INPUT_FORMAT_CONTRACT = """
+Machine-readable symbol and constraint format for the existing extraction steps:
+- Declare variable symbols and parameter names with simple ASCII identifiers only
+  (letters, digits, underscores; first character a letter or underscore), such as
+  x1, fc_prime, or phi. Use those exact declared names everywhere in formulas.
+- Write every Constraint_Table row as exactly one atomic relation with exactly one
+  comparison operator. Put each variable-domain condition in its own row.
+- Expand every known finite index set into concrete indexed instances and concrete
+  declared symbols; do not leave i=1,...,n, summation shorthand, or a free index in
+  an individual constraint row.
+- Put parameter values in Parameters_List. Do not append `where` assignments,
+  comma-separated additional relations, or `or`/equivalent alternate formulas to
+  Mathematical_expressions.
+- Use explicit multiplication (`2*x`, never `2 x`) and ASCII operators in formulas.
+Preserve the mathematical meaning and all stated bounds; do not infer missing data.
+""".strip()
+
+
 _DECOMPOSITION_PROMPT = f"""
 Return only one JSON object containing math_model_advice and decomposition, with
 the following structure. Do not call another model or request another decomposition:
@@ -48,6 +66,14 @@ the following structure. Do not call another model or request another decomposit
 For each constraint keep its original relation; linearized_form must be lhs-rhs, so
 the represented relation is linearized_form <relation> 0. For an objective, use its
 objective expression without the Maximize/Minimize label or result-variable assignment.
+Use explicit `*` for every multiplication; implicit products such as `0.5 x` are not
+valid in this arithmetic syntax. Use only simple ASCII identifiers declared in
+Context.variables or Context parameters, with exactly the same spelling. Do not use
+Unicode subscripts, Greek letters, primes, or undeclared aliases in rhs, linearized_form,
+or domain_conditions. Function calls supported by the validator are exp, log, ln, log2,
+log10, sin, cos, and sqrt; log2/log10 take one argument. Do not emit any other calls.
+For solver-facing expressions, prefer log2(x) = log(x)/log(2) and
+log10(x) = log(x)/log(10), preserving the argument domain.
 When a candidate introduces auxiliary definitions to replace a nonlinear term, use
 those defined symbols in linearized_form (for example, if y = ln(x), write y - ln(2),
 not ln(x) - ln(2)). Do not include definitions that the candidate relation does not use.
@@ -60,6 +86,13 @@ do not shorten it to "exp(x^2)". Only linearized_form omits the objective label/
 The relation field must contain only the operator token (for example, ">=") and must
 never contain either side of the constraint or the complete relation expression.
 Use an empty candidates list if the existing advice proposes no auxiliary decomposition.
+Each frozen Constraint_Table expression must be a single atomic relation. If a source
+row contains multiple relations, a comma-conjoined domain condition, an `or` alternative,
+an attached `where` assignment, or an indexed family that was not finitely expanded,
+do not rewrite source_expression or guess a relation: omit that candidate. Each finite
+index instance must already have its own frozen source_id. Keep all domain conditions
+in domain_conditions as separate single-relation strings; never chain relations in one
+condition. Do not silently drop a source conjunct to make a candidate parse.
 Each source_id must exactly match a Context.source_expressions key and occur at most once;
 omit sources for which you propose no auxiliary decomposition. Use fresh simple auxiliary
 identifiers, unique across all candidates and distinct from source variables/parameters.
@@ -157,6 +190,7 @@ async def prepare_ours_input(case_public: dict[str, Any], model, folder: str | P
     stage_costs: list[dict[str, Any]] = []
 
     parameter_agent = ExtractParameterFromLongTextAgent(None, model_name=model.config.model)
+    parameter_agent.messages[0]["content"] += "\n\n" + _MATH_INPUT_FORMAT_CONTRACT
     _logged_agent(parameter_agent, model, stage="extract_parameters", case_id=case_id,
                   run_id=run_id, call_ids=call_ids, stage_costs=stage_costs,
                   folder=folder,
@@ -166,6 +200,13 @@ async def prepare_ours_input(case_public: dict[str, Any], model, folder: str | P
     entry.update(_json_object(parameter_json_text, "parameter extraction"))
 
     factor_agent = ExtractFactorsFromLongTextAgent(None, model_name=model.config.model)
+    factor_agent.messages[0]["content"] += (
+        "\n\n" + _MATH_INPUT_FORMAT_CONTRACT
+        + "\n\nParameters_List extracted in the preceding existing step (authoritative names and values):\n"
+        + json.dumps(entry.get("Parameters_List", []), ensure_ascii=False)
+        + "\nReuse each parameter's Name with exactly the same spelling in all formulas and constraints; "
+          "do not rename, normalize, or invent aliases for these parameters."
+    )
     _logged_agent(factor_agent, model, stage="extract_factors", case_id=case_id,
                   run_id=run_id, call_ids=call_ids, stage_costs=stage_costs,
                   folder=folder,
@@ -210,6 +251,7 @@ async def prepare_auxiliary(case_public: dict[str, Any], math_input: dict[str, A
     agent.messages[0]["content"] = instructions.rstrip() + "\n\n" + _DECOMPOSITION_PROMPT
     context = json.dumps({
         "variables": normalized.get("Variables_List", []),
+        "parameters": normalized.get("Parameters_List", []),
         "constraints": normalized.get("Constraint_Table", []),
         "objective": normalized.get("Objective", {}),
         "problem_type": normalized.get("Problem_Type", ""),

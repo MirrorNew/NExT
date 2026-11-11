@@ -9,7 +9,7 @@ from unittest import mock
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from rebuttal_runner.execution import execute_code, extract_code
+from rebuttal_runner.execution import execute_code, extract_code, parse_solver_answer
 
 
 PYTHON = sys.executable
@@ -32,6 +32,26 @@ class ExtractCodeTests(unittest.TestCase):
     def test_rejects_non_code_response(self):
         with self.assertRaisesRegex(ValueError, "parseable Python code"):
             extract_code("Here is the code you requested.")
+
+
+class SolverAnswerContractTests(unittest.TestCase):
+    def test_distinguishes_unverified_solver_no_solution_and_missing_marker(self):
+        base = {"status": "executed", "returncode": 0, "stdout": "",
+                "solver_limits_applied": True,
+                "solver_status": {"status": 2, "sol_count": 1}}
+        self.assertEqual(parse_solver_answer({**base, "solver_limits_applied": False})[1]["code"],
+                         "solver_not_verified")
+        self.assertEqual(parse_solver_answer({**base, "solver_status": {"status": 3, "sol_count": 0}})[1]["code"],
+                         "no_solver_solution")
+        self.assertEqual(parse_solver_answer(base)[1]["code"], "missing_final_answer")
+
+    def test_accepts_only_finalanswer_after_verified_solution(self):
+        execution = {"status": "executed", "returncode": 0,
+                     "stdout": "FinalAnswer=【5】\n", "solver_limits_applied": True,
+                     "solver_status": {"status": 2, "sol_count": 1}}
+        self.assertEqual(parse_solver_answer(execution), (5, None))
+        legacy = {**execution, "stdout": "Optimal Objective Value: 5.0\n"}
+        self.assertEqual(parse_solver_answer(legacy)[1]["code"], "missing_final_answer")
 
 
 class ExecuteCodeTests(unittest.IsolatedAsyncioTestCase):

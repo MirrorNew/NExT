@@ -103,6 +103,11 @@ class OursIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn('"math_model_advice"', system_prompt)
         self.assertEqual(system_prompt.count('"math_model_advice"'), 1)
         self.assertEqual(system_prompt.count('"decomposition"'), 1)
+        self.assertIn("explicit `*`", system_prompt)
+        self.assertIn("log2", system_prompt)
+        self.assertIn("log2(x) = log(x)/log(2)", system_prompt)
+        self.assertIn("log10(x) = log(x)/log(10)", system_prompt)
+        self.assertIn("single atomic relation", system_prompt)
         self.assertGreaterEqual(result["stage_costs"][0]["elapsed_seconds"], 0)
 
     async def test_invalid_json_is_preserved_without_silent_repair_or_second_call(self):
@@ -187,7 +192,7 @@ class OursIntegrationTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_end_to_end_upstream_uses_logged_project_prompts_and_excludes_reference(self):
         replies = [
-            "parameter analysis", '{"Parameters_List": []}',
+            "parameter analysis", '{"Parameters_List": [{"Name": "p_rate", "Type": "float", "Value": 0.25}]}',
             "factor analysis", json.dumps({
                 "Variables_List": [{"symbol": "x", "Meaning": "decision", "Type": "continuous", "Range ": "x >= 0"}],
                 "Constraint_Table": [],
@@ -216,6 +221,16 @@ class OursIntegrationTests(unittest.IsolatedAsyncioTestCase):
             "extract_parameters_analysis", "extract_parameters_json",
             "extract_factors_analysis", "extract_factors_json", "modeling",
         ])
+        for call in model.calls[:4]:
+            self.assertIn("simple ASCII identifiers only", call["messages"][0]["content"])
+            self.assertIn("exactly one atomic relation", call["messages"][0]["content"])
+            self.assertIn("Expand every known finite index set", call["messages"][0]["content"])
+        for call in model.calls[2:4]:
+            self.assertIn('"Name": "p_rate"', call["messages"][0]["content"])
+            self.assertIn('"Value": 0.25', call["messages"][0]["content"])
+            self.assertIn("exactly the same spelling", call["messages"][0]["content"])
+        self.assertEqual(model.calls[4]["messages"][0]["content"].count("simple ASCII identifiers only"), 0)
+        self.assertEqual(len(model.calls), 5)
         self.assertTrue(all(cost["elapsed_seconds"] >= 0 for cost in result["stage_costs"]))
 
     async def test_failed_logged_call_saves_prompt_and_error_without_response(self):

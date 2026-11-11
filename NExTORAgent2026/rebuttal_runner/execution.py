@@ -12,6 +12,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+from .scoring import AnswerParseError, parse_answer
+
 
 _PYTHON_BLOCK = re.compile(r"```python[ \t]*\r?\n(.*?)```", re.IGNORECASE | re.DOTALL)
 _SOLVER_STATUS_PREFIX = "SolverStatus=JSON"
@@ -26,6 +28,41 @@ _HELPER_NAMES = {
 
 class _InvalidProgram(ValueError):
     pass
+
+
+def parse_solver_answer(execution: dict[str, Any], answer_spec: dict[str, Any] | None = None
+                        ) -> tuple[Any | None, dict[str, str] | None]:
+    """Parse FinalAnswer only after a bounded Gurobi run recorded a solution."""
+    if execution.get("status") != "executed" or execution.get("returncode") != 0:
+        return None, {"code": "execution_failed", "message": "program did not execute successfully"}
+    solver = execution.get("solver_status")
+    if execution.get("solver_limits_applied") is not True or not isinstance(solver, dict):
+        return None, {"code": "solver_not_verified",
+                      "message": "bounded Gurobi optimize status was not recorded; non-Gurobi execution or missing optimize call"}
+    sol_count = solver.get("sol_count")
+    if isinstance(sol_count, bool) or not isinstance(sol_count, int) or sol_count <= 0:
+        return None, {"code": "no_solver_solution",
+                      "message": f"solver recorded no incumbent solution (sol_count={sol_count!r})"}
+    try:
+        answer = parse_answer(execution.get("stdout", ""))
+    except AnswerParseError as exc:
+        code = "missing_final_answer" if "missing standalone FinalAnswer" in str(exc) else "invalid_final_answer"
+        return None, {"code": code, "message": str(exc), "path": exc.path}
+    if answer_spec:
+        kind = answer_spec.get("kind")
+        fields = answer_spec.get("fields")
+        valid = True
+        if kind == "scalar":
+            valid = isinstance(answer, (int, float)) and not isinstance(answer, bool)
+        elif kind == "numeric_list":
+            valid = isinstance(answer, list) and (not isinstance(fields, list) or len(answer) == len(fields))
+        elif kind == "named_numeric":
+            valid = isinstance(answer, dict) and (not isinstance(fields, list) or set(answer) == set(fields))
+        if not valid:
+            return None, {"code": "invalid_answer_shape",
+                          "message": f"FinalAnswer JSON shape does not match answer_spec kind={kind!r} and fields={fields!r}",
+                          "path": "$"}
+    return answer, None
 
 
 def _parse_source(source: str) -> ast.Module:

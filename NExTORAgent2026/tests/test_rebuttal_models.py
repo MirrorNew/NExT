@@ -117,6 +117,10 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(record["usage"], usage)
         self.assertEqual(record["request"]["parameters"]["max_completion_tokens"], 256)
         self.assertEqual(record["finish_reason"], "stop")
+        self.assertIsNone(record["error"])
+        self.assertIsNone(record["error_type"])
+        self.assertIsNone(record["error_code"])
+        self.assertEqual(record["cause_chain"], [])
         self.assertEqual(record["call_id"], result["call_id"])
         self.assertNotIn("content", record["request"])
         self.assertNotIn("secret-value", self.ledger.read_text(encoding="utf-8"))
@@ -157,6 +161,7 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(record["returned_model"], "provider-alias")
         self.assertEqual(record["usage"], usage)
         self.assertIn("MODEL_ID_MISMATCH", record["error"])
+        self.assertEqual(record["error_code"], "model_id")
 
     async def test_provider_error_is_logged_and_secret_is_redacted(self):
         secret = "private-api-secret"
@@ -182,6 +187,7 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
         record = self.read_records()[0]
         self.assertEqual(record["request"]["parameters"]["api_key"], "[REDACTED]")
         self.assertIn("[REDACTED]", record["error"])
+        self.assertEqual(record["error_code"], "unknown")
         self.assertIsNone(record["usage"])
 
     async def test_missing_key_is_logged_without_calling_provider(self):
@@ -195,6 +201,7 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
         create.assert_not_awaited()
         record = self.read_records()[0]
         self.assertIn("Missing required environment variable TEST_MODEL_API_KEY", record["error"])
+        self.assertEqual(record["error_code"], "configuration")
         self.assertIsNone(record["usage"])
 
     async def test_empty_response_is_logged_before_error(self):
@@ -205,7 +212,9 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
             with self.assertRaisesRegex(ModelCallError, "EMPTY_MODEL_RESPONSE"):
                 await wrapper.complete([], stage="coding", case_id="c5", run_id="r5")
 
-        self.assertIn("EMPTY_MODEL_RESPONSE", self.read_records()[0]["error"])
+        record = self.read_records()[0]
+        self.assertIn("EMPTY_MODEL_RESPONSE", record["error"])
+        self.assertEqual(record["error_code"], "empty")
 
     async def test_truncation_is_explicit_and_preserves_provider_usage(self):
         usage = {"completion_tokens": 4096, "total_tokens": 4600,
@@ -221,7 +230,76 @@ class LoggedModelTests(unittest.IsolatedAsyncioTestCase):
                 record = self.read_records()[-1]
                 self.assertEqual(record["finish_reason"], "length")
                 self.assertEqual(record["usage"], usage)
+                self.assertEqual(record["error_code"], "truncated")
+                self.assertEqual(record["error_type"], "RuntimeError")
                 create.assert_awaited_once()
+
+    async def test_nested_connection_error_records_bounded_redacted_cause_chain_once(self):
+        secret = "sk-test-secret-value-123456"
+
+        class APIConnectionError(RuntimeError):
+            pass
+
+        outer = APIConnectionError(f"provider connection failed with {secret}")
+        inner = OSError(f"socket unavailable with {secret}")
+        outer.__cause__ = inner
+        inner.__cause__ = outer  # Deliberately cyclic to exercise the guard.
+        create = mock.AsyncMock(side_effect=outer)
+        wrapper = LoggedModel(self.config, self.ledger, client=fake_client(create))
+
+        with mock.patch.dict("os.environ", {"TEST_MODEL_API_KEY": secret}):
+            with self.assertRaises(ModelCallError) as caught:
+                await wrapper.complete([], stage="coding", case_id="connection", run_id="r")
+
+        create.assert_awaited_once()
+        records = self.read_records()
+        self.assertEqual(len(records), 1)
+        record = records[0]
+        self.assertEqual(record["call_id"], caught.exception.record["call_id"])
+        self.assertEqual(record["error_type"], "APIConnectionError")
+        self.assertEqual(record["error_code"], "connection")
+        self.assertIsNone(record["usage"])
+        self.assertEqual([item["type"] for item in record["cause_chain"]],
+                         ["APIConnectionError", "OSError"])
+        self.assertFalse(record["cause_chain_truncated"])
+        serialized = json.dumps(record, ensure_ascii=False)
+        self.assertNotIn(secret, serialized)
+        self.assertNotIn(secret, str(caught.exception))
+        self.assertEqual(caught.exception.record, record)
+
+    async def test_timeout_and_http_errors_have_distinct_codes(self):
+        class APIStatusError(RuntimeError):
+            status_code = 503
+
+        for error, expected_code in (
+            (TimeoutError("request timed out"), "timeout"),
+            (APIStatusError("provider returned an error"), "http"),
+            (RuntimeError("Connection error."), "connection"),
+        ):
+            with self.subTest(expected_code=expected_code):
+                create = mock.AsyncMock(side_effect=error)
+                wrapper = LoggedModel(self.config, self.ledger, client=fake_client(create))
+                with mock.patch.dict("os.environ", {"TEST_MODEL_API_KEY": "secret-value"}):
+                    with self.assertRaises(ModelCallError):
+                        await wrapper.complete([], stage="coding", case_id=expected_code, run_id="r")
+                create.assert_awaited_once()
+                self.assertEqual(self.read_records()[-1]["error_code"], expected_code)
+
+    async def test_cause_chain_length_is_capped(self):
+        chain = [RuntimeError(f"layer-{index}") for index in range(12)]
+        for current, cause in zip(chain, chain[1:]):
+            current.__cause__ = cause
+        create = mock.AsyncMock(side_effect=chain[0])
+        wrapper = LoggedModel(self.config, self.ledger, client=fake_client(create))
+
+        with mock.patch.dict("os.environ", {"TEST_MODEL_API_KEY": "secret-value"}):
+            with self.assertRaises(ModelCallError):
+                await wrapper.complete([], stage="coding", case_id="long-chain", run_id="r")
+
+        create.assert_awaited_once()
+        record = self.read_records()[0]
+        self.assertEqual(len(record["cause_chain"]), 8)
+        self.assertTrue(record["cause_chain_truncated"])
 
 
 if __name__ == "__main__":

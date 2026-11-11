@@ -1,6 +1,6 @@
 # Rebuttal 统一实验入口
 
-在 `NExTORAgent2026` 目录执行 `python -m rebuttal_runner`。当前协议为 `nedtree-integrated-v2`；准备、执行、汇总、重评分共用一个入口。已用一个人工解析可解的 log 约束样例进行真实 API/Gurobi 连通检查，没有运行正式数据集补实验。
+在 `NExTORAgent2026` 目录执行 `python -m rebuttal_runner`。当前协议为 `nedtree-integrated-v3`；准备、执行、汇总、重评分共用一个入口。已完成最小样例和真实十题的工程预检；没有运行正式数据集补实验。v3 修复预检暴露的表示/输出契约问题，旧 v2 产物保留且不可混用目录。
 
 ## 实验层次必须显式指定
 
@@ -28,6 +28,8 @@ Auxiliary 的这一次请求单独设置 `response_format={"type":"json_object"}
 
 同一次输入的 `Context.source_expressions` 列出来源 ID 与完整原式，供 Auxiliary 逐字复制 `source_expression`，包括目标的方向、名称及赋值前缀；只有 `linearized_form` 去掉目标标签。该映射直接读取本次上游输入，不进行分解，不自动补写模型响应。来源不一致仍拒绝；辅助名称与候选内依赖规则保持原校验。
 
+现有参数/要素提取调用共同要求 ASCII 声明、显式乘法、有限索引展开和每行一个原子关系，参数值与域条件分开保存；要素提取复用本题已经提取的参数名称。Auxiliary 支持单参数 `log2`/`log10` 表达，并提示用自然对数换底进行编码。不会因格式要求增加提取或分解调用，也不会把不支持的多关系或未知依赖直接放行。
+
 Native 不接收辅助意见，允许合法顶层结果变量以及自行引入辅助变量。NED 接收该一次 Auxiliary 输出。两臂共享题面、数学输入、输出对象、合法 NLExpr/resultant API 指导、模型参数和求解限制。格式不合法、来源表达式或依赖检查失败的 Auxiliary 输出留作审计，编码退回原数学输入；失败题不删除。结构验证不等于数学等价性证明。
 
 固定的结构化 `math_input` 是本入口的数学输入依据，ModelingAgent 的原始 `math_model` 文本作为解释另行保存；提示不允许它或辅助意见覆盖既定条件。这是当前实现的明确接口约定，不声称两份表示已自动证明一致。
@@ -39,11 +41,14 @@ Native 不接收辅助意见，允许合法顶层结果变量以及自行引入�
 - GPT-5 配置：`rebuttal_runner/examples/model.example.json`，密钥变量 `OPENAI_API_KEY`。
 - DeepSeek Flash 配置：`rebuttal_runner/examples/model.deepseek-flash.json`，官方 ID `deepseek-flash`，Base URL `https://api.deepseek.com`，密钥变量 `DEEPSEEK_API_KEY`。ID 根据[官方接口文档](https://api-docs.deepseek.com/api/list-models/)核对，并已在线返回同名模型。
 - Kimi 不在本轮计划中。密钥不写入配置，不自动更换模型，不隐藏重试；允许的返回模型 ID 明确列在配置内。
-- 两份示例配置使用连通检查中的 16384 输出 token 上限、300 秒请求超时；DeepSeek 保留 `reasoning_effort=high`。旧 4096 上限曾使其抽取阶段耗尽推理预算并返回空内容。截断现在明确记为 `MODEL_OUTPUT_TRUNCATED`，不隐藏重试。上限不是实际消耗，也不保证复杂题足够；正式运行前仍须冻结预算。使用供应商返回的 usage，不估造美元费用。
+- GPT-5 示例保留 16384 输出 token 上限、300 秒请求超时。DeepSeek 的复杂题预检出现截断，示例上限改为 65536、超时 600 秒，保留 `reasoning_effort=high`；同一模型的所有框架使用同一配置。[官方参数文档](https://api-docs.deepseek.com/api/create-chat-completion/)列明 thinking/high 默认输出预算为 64K。上限不是实际消耗，也不保证复杂题足够；正式运行前仍须冻结预算。截断保留为 `MODEL_OUTPUT_TRUNCATED`，不隐藏重试；usage 缺失记为未知，不估造费用。
+- 请求失败保留原 error，同时记录脱敏的 error_type、error_code 与有限长度的 cause_chain，区分连接、超时、HTTP、截断等；SDK 重试仍关闭，每次 Auxiliary 最多一次请求。
 
 外部基线使用 `--baseline-root D:\LLMProject`，分别读取 `Chain-of-Experts-main`、`OptiMUS-main`、`or_llm_agent-main`。适配器仅加载实际所需函数、类和提示，不执行含旧密钥/客户端的模块顶层代码，不改原始基线项目。来源按实际 Python 文件 SHA256 固定；没有 Git 元数据的目录不捏造 commit。
 
 适配的公共改动：调用均经过同一模型配置和日志；生成程序均经过同一执行器；使用目标值输出规范和合法非线性接口提示，完整程序必须实际调用自己定义的入口函数。CoE 保留当前源快照的 3 轮专家协作、单次 trial、关闭 reflection 的有效行为；其内部旧 `max_tokens`/temperature 不覆盖统一模型配置。OptiMUS 使用源代码现有无检索分支和 `main.py` 的错误检查设置，保留代码片段/组装协议及 `=====` 修复响应格式；OR-LLM-Agent 的重试受统一上限约束。详细执行阶段、路径和失败原因保存在 `baseline_trace`。
+
+公共契约及 OptiMUS 修复提示明确保留符号、关系方向、自由变量域和原题目标单位；目标变换后须按原表达式重算答案，不能用未经等价验证的 PWL 或 McCormick 松弛替代精确模型。所有流程只解析唯一 `FinalAnswer` JSON，不再从普通 solver 日志猜测目标值。`output_failure` 区分执行失败、未验证 Gurobi、无解、缺少/非法标记和答案结构错误；数学数值评分规则不变。
 
 OptiMUS 固定输入适配支持明确的标量 binary/integer/continuous 类型、数值上下界和明确无界域，兼容旧 `Range ` 字段；只在 coding/math 的原变量生成器中显式传入 lb/ub，避免原默认下界 0 改变数学模型。数组形状、有限开边界、复合或无法确认的范围返回 `unsupported_coding_input`，保留在分母，且在 Auxiliary 之前拒绝，不自动补造条件。端到端使用其原建模结构。
 
