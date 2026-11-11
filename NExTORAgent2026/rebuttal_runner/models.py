@@ -407,7 +407,7 @@ class LoggedModel:
                 error_message = str(exc)
             except Exception:
                 error_message = "<exception message unavailable>"
-            record["error"] = _redact(error_message, secrets)
+            record["error"] = _redact(error_message, secrets) or type(exc).__name__
             record["error_type"] = type(exc).__name__
             record["error_code"] = _error_code(record, chain)
             record["cause_chain"] = _cause_chain_record(chain, secrets)

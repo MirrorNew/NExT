@@ -67,6 +67,20 @@ class AuxiliaryTreeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "differs from the frozen input"):
             parse_auxiliary_response(response([candidate]), MATH_INPUT)
 
+    def test_normalized_source_match_retains_the_frozen_source_text(self):
+        math_input = {
+            **MATH_INPUT,
+            "Objective": {"Mathematical_expressions": "Maximize x^2"},
+        }
+        candidate = {
+            "source_id": "objective", "source_expression": "Maximize x**2",
+            "relation": "objective", "linearized_form": "x**2", "definitions": [],
+            "domain_conditions": [],
+        }
+        tree = parse_auxiliary_response(response([candidate]), math_input)
+        self.assertEqual(tree["status"], "validated")
+        self.assertEqual(tree["candidates"][0]["source_expression"], "Maximize x^2")
+
     def test_forward_or_undeclared_definition_dependency_is_rejected(self):
         candidate = {
             "source_id": "objective", "source_expression": "Minimize f = x**2 + z",
@@ -77,7 +91,7 @@ class AuxiliaryTreeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "forward or undeclared dependencies"):
             parse_auxiliary_response(response([candidate]), MATH_INPUT)
 
-    def test_declared_array_base_allows_constant_index_without_evaluation(self):
+    def test_scalar_variable_declaration_does_not_authorize_indexing(self):
         math_input = {
             **MATH_INPUT,
             "Variables_List": [{"symbol": "x"}],
@@ -89,8 +103,67 @@ class AuxiliaryTreeTests(unittest.TestCase):
             "definitions": [{"symbol": "t", "rhs": "x[0]", "domain_conditions": []}],
             "domain_conditions": [],
         }
+        with self.assertRaisesRegex(ValueError, "forward or undeclared dependencies"):
+            parse_auxiliary_response(response([candidate]), math_input)
+
+    def test_explicit_indexed_variable_declaration_allows_only_that_instance(self):
+        math_input = {
+            **MATH_INPUT,
+            "Variables_List": [{"symbol": "x[0]"}],
+            "Objective": {"Mathematical_expressions": "Maximize x[0]"},
+        }
+        candidate = {
+            "source_id": "objective", "source_expression": "Maximize x[0]",
+            "relation": "objective", "linearized_form": "x[0]", "definitions": [],
+            "domain_conditions": [],
+        }
         tree = parse_auxiliary_response(response([candidate]), math_input)
-        self.assertEqual(tree["candidates"][0]["definitions"][0]["dependencies"], ["x[0]"])
+        self.assertEqual(tree["status"], "validated")
+
+    def test_list_parameter_indices_require_full_source_supported_extent(self):
+        for indices, values in (("A[0] + A[1]", [10, 20]), ("A[1] + A[2]", [10, 20])):
+            with self.subTest(indices=indices):
+                math_input = {
+                    **MATH_INPUT,
+                    "Parameters_List": [{"Name": "A", "Value": values}],
+                    "Objective": {"Mathematical_expressions": f"Maximize {indices}"},
+                }
+                candidate = {
+                    "source_id": "objective", "source_expression": f"Maximize {indices}",
+                    "relation": "objective", "linearized_form": indices,
+                    "definitions": [], "domain_conditions": [],
+                }
+                tree = parse_auxiliary_response(response([candidate]), math_input)
+                self.assertEqual(tree["status"], "validated")
+
+        for indices, values in (("A[0] + A[2]", [10, 20]), ("A[0] + A[1] + A[2]", [10, 20])):
+            with self.subTest(rejected_indices=indices):
+                math_input = {
+                    **MATH_INPUT,
+                    "Parameters_List": [{"Name": "A", "Value": values}],
+                    "Objective": {"Mathematical_expressions": f"Maximize {indices}"},
+                }
+                candidate = {
+                    "source_id": "objective", "source_expression": f"Maximize {indices}",
+                    "relation": "objective", "linearized_form": indices,
+                    "definitions": [], "domain_conditions": [],
+                }
+                with self.assertRaisesRegex(ValueError, "undeclared dependencies"):
+                    parse_auxiliary_response(response([candidate]), math_input)
+
+    def test_list_parameter_base_name_is_not_a_scalar(self):
+        math_input = {
+            **MATH_INPUT,
+            "Parameters_List": [{"Name": "A", "Value": [10, 20]}],
+            "Objective": {"Mathematical_expressions": "Maximize A"},
+        }
+        candidate = {
+            "source_id": "objective", "source_expression": "Maximize A",
+            "relation": "objective", "linearized_form": "A", "definitions": [],
+            "domain_conditions": [],
+        }
+        with self.assertRaisesRegex(ValueError, "undeclared dependencies"):
+            parse_auxiliary_response(response([candidate]), math_input)
 
     def test_exact_index_declaration_does_not_authorize_other_indices(self):
         math_input = {

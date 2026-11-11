@@ -16,6 +16,7 @@ from typing import Any
 AUXILIARY_SCHEMA_VERSION = "nextor-aux-tree-v1"
 _IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 _INDEXED_IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*\[[0-9]+\]$")
+_SOURCE_SUBSCRIPT = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\[([^\[\]]*)\]")
 _RELATION = re.compile(r"<=|>=|==|(?<![<>!=])=(?!=)|<|>")
 _NONFINITE_NAMES = {"nan", "inf", "infinity"}
 _ALLOWED_FUNCTIONS = {"exp", "log", "ln", "log2", "log10", "sin", "cos", "sqrt"}
@@ -64,7 +65,7 @@ def _source_expressions(math_input: dict[str, Any]) -> dict[str, str]:
     return sources
 
 
-def _declared_symbols(math_input: dict[str, Any]) -> set[str]:
+def _declared_symbols(math_input: dict[str, Any], sources: dict[str, str]) -> set[str]:
     symbols: set[str] = set()
     for item in math_input.get("Variables_List", []):
         value = item.get("symbol", item.get("Symbol")) if isinstance(item, dict) else item
@@ -72,20 +73,45 @@ def _declared_symbols(math_input: dict[str, Any]) -> set[str]:
             name = value.strip()
             if _IDENTIFIER.fullmatch(name) or _INDEXED_IDENTIFIER.fullmatch(name):
                 symbols.add(name)
+
+    source_indices: dict[str, set[int]] = {}
+    dynamic_source_indices: set[str] = set()
+    for expression in sources.values():
+        for match in _SOURCE_SUBSCRIPT.finditer(expression):
+            name, index = match.groups()
+            if re.fullmatch(r"[0-9]+", index):
+                source_indices.setdefault(name, set()).add(int(index))
+            else:
+                dynamic_source_indices.add(name)
+
     for item in math_input.get("Parameters_List", []):
         value = item.get("Name", item.get("name")) if isinstance(item, dict) else item
         if isinstance(value, str):
             name = value.strip()
-            if _IDENTIFIER.fullmatch(name) or _INDEXED_IDENTIFIER.fullmatch(name):
+            if _INDEXED_IDENTIFIER.fullmatch(name):
                 symbols.add(name)
+                continue
+            if _IDENTIFIER.fullmatch(name):
+                parameter_value = item.get("Value") if isinstance(item, dict) else None
+                if not isinstance(parameter_value, list):
+                    symbols.add(name)
+                    continue
+                if (name in dynamic_source_indices or not parameter_value
+                        or not all(type(entry) is int
+                                   or (type(entry) is float and math.isfinite(entry))
+                                   for entry in parameter_value)):
+                    continue
+                indices = source_indices.get(name, set())
+                size = len(parameter_value)
+                zero_based = set(range(size))
+                one_based = set(range(1, size + 1))
+                if indices == zero_based or indices == one_based:
+                    symbols.update(f"{name}[{index}]" for index in indices)
     return symbols
 
 
 def _reference_is_declared(reference: str, available: set[str]) -> bool:
-    if reference in available:
-        return True
-    indexed = re.fullmatch(r"([A-Za-z_][A-Za-z0-9_]*)\[([0-9]+)\]", reference)
-    return bool(indexed and indexed.group(1) in available)
+    return reference in available
 
 
 def _names_from_ast(parsed: ast.AST, location: str) -> set[str]:
@@ -214,7 +240,7 @@ def parse_auxiliary_response(content: str, math_input: dict[str, Any]) -> dict[s
         raise ValueError("decomposition.candidates must be a list")
 
     sources = _source_expressions(math_input)
-    declared = _declared_symbols(math_input)
+    declared = _declared_symbols(math_input, sources)
     seen_sources: set[str] = set()
     seen_auxiliary_symbols: set[str] = set()
     normalized_candidates = []
@@ -299,7 +325,7 @@ def parse_auxiliary_response(content: str, math_input: dict[str, Any]) -> dict[s
                                     f"{location}.domain_conditions")
         normalized_candidates.append({
             "source_id": source_id,
-            "source_expression": source_expression,
+            "source_expression": sources[source_id],
             "relation": relation,
             "linearized_form": linearized_form.strip(),
             "definitions": ordered_definitions,

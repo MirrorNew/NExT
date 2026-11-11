@@ -99,6 +99,8 @@ class PairedRunnerTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("PWL approximations", CODE_SYSTEM)
         self.assertIn("McCormick relaxations", CODE_SYSTEM)
         self.assertIn("addGenConstrPow(x, y, 3.0) imposes y = x**3", CODE_SYSTEM)
+        self.assertIn("model.addGenConstrNL(z, expr)", CODE_SYSTEM)
+        self.assertIn("has no sense argument", CODE_SYSTEM)
 
     async def test_same_input_no_reference_leak_no_oracle_repair(self):
         with tempfile.TemporaryDirectory() as temp:

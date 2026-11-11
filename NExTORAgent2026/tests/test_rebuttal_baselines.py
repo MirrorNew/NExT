@@ -5,6 +5,7 @@ import asyncio
 import json
 from pathlib import Path
 import shutil
+import sys
 import tempfile
 import unittest
 from types import SimpleNamespace
@@ -53,6 +54,92 @@ class BaselineAdapterTests(unittest.TestCase):
         self.assertIsNone(baselines._parse_execution(execution, spec))
         self.assertEqual(baselines._execution_output_failure(execution, spec)["code"],
                          "missing_final_answer")
+
+    def test_optimus_original_assembler_footer_adapts_only_exact_scalar_objective(self):
+        source = Path(r"D:\LLMProject\OptiMUS-main")
+        if not baselines.baseline_availability("optimus", source)["available"]:
+            self.skipTest("OptiMUS source/dependencies unavailable")
+        stages = baselines._load_optimus(source, lambda prompt, model=None: "")
+        state = {"parameters": {},
+                 "variables": {"x": {"shape": [], "type": "CONTINUOUS", "definition": ""}},
+                 "constraints": [{"code": "model.addConstr(x <= 2)"}],
+                 "objective": {"code": "model.setObjective(x, GRB.MAXIMIZE)"}}
+        assembled = stages["generate_code"]["generate_code"](state, ".", None)
+        self.assertEqual(assembled.count(baselines._OPTIMUS_OBJECTIVE_FOOTER), 1)
+        adapted = baselines._adapt_optimus_objective_footer(
+            assembled, {"kind": "scalar", "fields": ["objective_value"]})
+        self.assertEqual(adapted.split(baselines._OPTIMUS_FINAL_ANSWER_FOOTER)[0],
+                         assembled.split(baselines._OPTIMUS_OBJECTIVE_FOOTER)[0])
+        self.assertIn("model.SolCount > 0", adapted)
+        self.assertIn("json.dumps(float(model.ObjVal))", adapted)
+        self.assertNotIn("Optimal Objective Value", adapted)
+
+        (self.output / "optimus-footer").mkdir(parents=True)
+        (self.output / "optimus-footer" / "data.json").write_text(
+            '{"parameters": {}}', encoding="utf-8")
+        execution = asyncio.run(baselines.execute_code(
+            adapted, self.output / "optimus-footer", sys.executable,
+            timeout_seconds=10, solver_time_limit=5, solver_threads=1))
+        self.assertEqual(execution["status"], "executed", execution)
+        prediction, failure = baselines.parse_solver_answer(
+            execution, {"kind": "scalar", "fields": ["objective_value"]})
+        self.assertIsNone(failure, execution)
+        self.assertAlmostEqual(prediction, 2.0)
+
+    def test_optimus_footer_refuses_unknown_shapes_and_footer_edits(self):
+        scalar = {"kind": "scalar", "fields": ["objective_value"]}
+        for spec in ({"kind": "numeric_list", "fields": ["x", "y"]},
+                     {"kind": "named_numeric", "fields": ["x"]}):
+            with self.subTest(spec=spec), self.assertRaisesRegex(
+                    baselines.BaselineUnavailable, "supports only scalar objective_value"):
+                baselines._adapt_optimus_objective_footer(
+                    baselines._OPTIMUS_OBJECTIVE_FOOTER, spec)
+        with self.assertRaisesRegex(baselines.BaselineUnavailable, "footer mismatch"):
+            baselines._adapt_optimus_objective_footer("print(model.ObjVal)", scalar)
+        with self.assertRaisesRegex(baselines.BaselineUnavailable, "footer mismatch"):
+            baselines._adapt_optimus_objective_footer(
+                baselines._OPTIMUS_OBJECTIVE_FOOTER * 2, scalar)
+
+    def test_optimus_final_footer_emits_no_answer_without_incumbent(self):
+        folder = self.output / "optimus-no-solution"
+        folder.mkdir(parents=True)
+        source = '''import json
+class Params:
+    pass
+class Model:
+    def __init__(self):
+        self.Params = Params()
+        self.Status = 3
+        self.SolCount = 0
+        self.ObjVal = 0.0
+    def optimize(self):
+        pass
+model = Model()
+model.optimize()
+''' + baselines._OPTIMUS_FINAL_ANSWER_FOOTER
+        execution = asyncio.run(baselines.execute_code(
+            source, folder, sys.executable, timeout_seconds=5,
+            solver_time_limit=1, solver_threads=1))
+        self.assertEqual(execution["status"], "executed", execution)
+        self.assertNotIn("FinalAnswer=", execution["stdout"])
+        _prediction, failure = baselines.parse_solver_answer(
+            execution, {"kind": "scalar", "fields": ["objective_value"]})
+        self.assertEqual(failure["code"], "no_solver_solution")
+
+    def test_optimus_answer_kind_preflight_does_not_call_model_or_emit_objval(self):
+        source = Path(r"D:\LLMProject\OptiMUS-main")
+        if not baselines.baseline_availability("optimus", source)["available"]:
+            self.skipTest("OptiMUS source/dependencies unavailable")
+        model = FakeModel([])
+        case = {"case_id": "optimus-list-output", "question": "Return two values.",
+                "math_input": None, "answer_spec": {"kind": "numeric_list", "fields": ["x", "y"]}}
+        result = asyncio.run(baselines.run_baseline(
+            "optimus", case, model, self.output, "optimus-list-output", level="end_to_end",
+            source_root=source, python_executable=sys.executable, process_timeout=10,
+            solver_time_limit=5, solver_threads=1, max_calls=5, max_repairs=1))
+        self.assertEqual(result["status"], "unsupported_coding_input")
+        self.assertEqual(result["call_ids"], [])
+        self.assertEqual(model.calls, [])
 
     def test_coe_model_call_failure_has_no_execution_output_failure(self):
         model = FakeModel([])
@@ -351,9 +438,11 @@ class BaselineAdapterTests(unittest.TestCase):
         stages = baselines._load_optimus(source, lambda prompt, model=None: "")
         repair_prompt = stages["execute_code"]["debug_template"]
         self.assertIn("FinalAnswer=【<JSON>】", repair_prompt)
-        self.assertIn("original problem objective", repair_prompt)
+        self.assertIn("original objective in original units", repair_prompt)
         self.assertIn("PWL approximation or McCormick relaxation", repair_prompt)
         self.assertIn("addGenConstrPow(x, y, 3.0) means y = x**3", repair_prompt)
+        self.assertIn("model.addGenConstrNL(z, expr)", repair_prompt)
+        self.assertIn("has no sense argument", repair_prompt)
         self.assertIn("=====", repair_prompt)
         original_extract_code = stages["execute_code"]["extract_code"]
 

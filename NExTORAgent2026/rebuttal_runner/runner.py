@@ -32,6 +32,13 @@ model.addGenConstrPow(x, y, 3.0) imposes y = x**3. Use an exact mathematically
 equivalent formulation. Do not replace nonlinear terms with PWL approximations
 or McCormick relaxations unless equivalence over the entire feasible domain is
 proved; an unverified approximation is not the original model.
+For a nonlinear objective expression expr that cannot be passed directly,
+create z = model.addVar(lb=-GRB.INFINITY), then use
+model.addGenConstrNL(z, expr) and model.setObjective(z, sense). The NL equality
+is defined by addGenConstrNL(resultant, expression); it has no sense argument.
+For a nonlinear constraint, create its resultant the same way and impose the
+required comparison with a separate model.addConstr(resultant == rhs) or other
+linear comparison.
 Use model = gp.Model(...), model.optimize(), and inspect model.SolCount before
 reading a solution. The harness applies the stated solver limits.
 Print exactly one final line FinalAnswer=【<JSON>】. Its JSON structure and names

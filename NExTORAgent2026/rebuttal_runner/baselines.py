@@ -253,16 +253,36 @@ Shared solver and output requirements:
 """ + CODE_SYSTEM + "\nAnswer format for this run:\n" + json.dumps(answer_spec, ensure_ascii=False)
 
 
+def _answer_format_instruction(answer_spec: dict[str, Any]) -> str:
+    kind = answer_spec.get("kind")
+    fields = answer_spec.get("fields", [])
+    if kind == "scalar":
+        return ("Emit only one JSON number, for example FinalAnswer=【2.0】; do not wrap a scalar "
+                "in an object such as {\"objective_value\": 2.0}.")
+    if kind == "numeric_list":
+        return f"Emit one JSON numeric array in the requested field order: {json.dumps(fields, ensure_ascii=False)}."
+    if kind == "named_numeric":
+        return ("Emit one JSON object with exactly these requested keys and no others: "
+                + json.dumps(fields, ensure_ascii=False) + ".")
+    return f"Emit JSON matching this answer_spec exactly: {json.dumps(answer_spec, ensure_ascii=False)}."
+
+
 def _fragment_code_contract(answer_spec: dict[str, Any]) -> str:
+    answer_format = _answer_format_instruction(answer_spec)
     return ("Use Gurobi's supported nonlinear modeling API. For NLExpr comparisons such as "
             "NLExpr >= constant, introduce legal resultant-variable equalities, bounds, and "
             "linear relations; give resultants appropriate bounds, including negative bounds "
             "when required. Preserve the original domains and relations, nonlinear signs, "
             "units, and exactness. Do not treat unverified PWL approximations or McCormick "
             "relaxations as exact; for example, addGenConstrPow(x, y, 3.0) means y = x**3. "
-            "The generated program reports the original problem "
-            "objective at the solution in original units, not a transformed solver ObjVal. Answer format "
-            "for this run: " + json.dumps(answer_spec, ensure_ascii=False))
+            "For a nonlinear objective expression expr, create z = model.addVar(lb=-GRB.INFINITY), "
+            "then call model.addGenConstrNL(z, expr) and model.setObjective(z, sense). "
+            "addGenConstrNL(resultant, expression) defines equality and has no sense argument; "
+            "express nonlinear constraint comparisons with a separate model.addConstr on the "
+            "resultant. The OptiMUS code assembler prints model.ObjVal, so its objective must "
+            "be the original objective in original units; do not transform or scale it. "
+            + answer_format + " Answer format for this run: "
+            + json.dumps(answer_spec, ensure_ascii=False))
 
 
 @contextmanager
@@ -407,8 +427,9 @@ def _execution_output_failure(execution: dict[str, Any],
 _OPTIMUS_DEBUG_CONTRACT = """
 Shared solver and answer contract:
 - Use Gurobi and call model.optimize(); inspect model.SolCount before reading a solution.
-- Print exactly one standalone FinalAnswer=【<JSON>】 line matching answer_spec. For objective_value, recompute the original problem objective at the solution and report its original units; do not report a monotone/scaled/transformed solver objective or ObjVal unless it is the original objective value.
+- Print exactly one standalone FinalAnswer=【<JSON>】 line matching answer_spec. For the scalar objective_value answer, use a JSON number such as FinalAnswer=【2.0】; never wrap it in an object such as {{"objective_value": 2.0}}. For this adapter, the original code assembler prints model.ObjVal, so the modeled objective itself must be exactly the original objective in original units; do not transform, shift, or scale it.
 - Preserve nonlinear relations, coefficient signs, argument direction, units, and variable domains, including free variables. For example, model.addGenConstrPow(x, y, 3.0) means y = x**3.
+- For nonlinear objective expr, use z = model.addVar(lb=-GRB.INFINITY), model.addGenConstrNL(z, expr), and model.setObjective(z, sense). addGenConstrNL(resultant, expression) defines equality and has no sense argument; put any NL resultant comparison in a separate model.addConstr.
 - Use only exact equivalent nonlinear formulations. Do not treat an unverified PWL approximation or McCormick relaxation as the original model.
 - Do not print a final answer unless Gurobi reports a solution.
 Return corrected code between the original ===== delimiters, with no markdown fence and no text after the closing delimiter.
@@ -423,6 +444,32 @@ def _extract_optimus_repair_code(response: str,
     if len(delimiters) == 2 and original_extract_code is not None:
         response = original_extract_code(response)
     return extract_code(response)
+
+
+_OPTIMUS_OBJECTIVE_FOOTER = '''if model.status == GRB.OPTIMAL:
+    print("Optimal Objective Value: ", model.objVal)
+else:
+    print("NO Optimal.")'''
+
+_OPTIMUS_FINAL_ANSWER_FOOTER = '''if model.SolCount > 0:
+    print("FinalAnswer=【" + json.dumps(float(model.ObjVal)) + "】")
+else:
+    print("NO Optimal.")'''
+
+
+def _adapt_optimus_objective_footer(code: str, answer_spec: dict[str, Any]) -> str:
+    """Replace only OptiMUS's known complete assembler footer, without editing the model."""
+    if answer_spec.get("kind") != "scalar" or answer_spec.get("fields") != ["objective_value"]:
+        raise BaselineUnavailable(
+            "OptiMUS's deterministic assembler footer supports only scalar objective_value output"
+        )
+    occurrences = code.count(_OPTIMUS_OBJECTIVE_FOOTER)
+    if occurrences != 1:
+        raise BaselineUnavailable(
+            "OptiMUS generated-code footer mismatch: expected its unique complete objective-output footer; "
+            f"found {occurrences}"
+        )
+    return code.replace(_OPTIMUS_OBJECTIVE_FOOTER, _OPTIMUS_FINAL_ANSWER_FOOTER, 1)
 
 
 async def _run_coe(root: Path, case: dict[str, Any], model: LoggedModel,
@@ -877,6 +924,12 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
                        solver_time_limit: float, solver_threads: int,
                        max_repairs: int) -> dict[str, Any]:
     question, math_input, answer_spec = _public_inputs(case)
+    if answer_spec.get("kind") != "scalar" or answer_spec.get("fields") != ["objective_value"]:
+        reason = "OptiMUS's deterministic assembler supports only scalar objective_value output"
+        return {"status": "unsupported_coding_input", "prediction": None, "attempts": [],
+                "execution": None, "call_ids": [],
+                "baseline_trace": {"algorithm": "OptiMUS_staged_pipeline", "level": level,
+                                   "error": reason, "answer_spec": answer_spec}}
     loop = asyncio.get_running_loop()
     attempts: list[dict[str, Any]] = []
     execution = None
@@ -931,6 +984,7 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
             state.update(constraints=constraints, objective=objective)
             code = await asyncio.to_thread(
                 stages["generate_code"]["generate_code"], state, str(output), None)
+            code = _adapt_optimus_objective_footer(code, answer_spec)
             stages_used = ["code_generation"]
         else:
             stages_used = ["parameters", "objective", "constraints",
@@ -951,6 +1005,7 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
             state = {"description": question, "parameters": params, "variables": variables,
                      "constraints": constraints, "objective": objective}
             code = await asyncio.to_thread(stages["generate_code"]["generate_code"], state, str(output), None)
+            code = _adapt_optimus_objective_footer(code, answer_spec)
         execution = None
         for attempt in range(max_repairs + 1):
             attempt_dir = _attempt_dir(output, attempt)
@@ -974,6 +1029,7 @@ async def _run_optimus(root: Path, case: dict[str, Any], recorder: _CallRecorder
                 repair_error += "\nOutput contract failure: " + json.dumps(output_failure, ensure_ascii=False)
             prompt = prompt_template.format(description=desc, code=code, error=repair_error)
             prompt += "\nAnswer format for this run: " + json.dumps(answer_spec, ensure_ascii=False)
+            prompt += "\n" + _answer_format_instruction(answer_spec)
             response = await recorder.complete([{"role": "user", "content": prompt}],
                                                "baseline_optimus_repair")
             try:
